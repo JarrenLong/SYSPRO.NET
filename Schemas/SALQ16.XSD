@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Analysis Turnover by Product Class Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>All - (default)
+Select this to include sales for customers belonging to all branches.
+
+Single 
+Select this if you want to generate the report for sales for customers belonging to a single branch only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>All - (default)
+Select this to include sales for all customers in the report.
+
+Range 
+Select this to include sales for a range of customers.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this if you want to generate the report for sales for a single customer.
+
+You indicate this customer code in the FileterValue element
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>This option is only displayed if you selected the Order type required option (S/O Setup).
+
+All - (default) 
+Select this to include sales for all order types in the report.
+
+Single 
+Select this to include sales for a single order type in the report.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="InvoiceDate"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="GeographicArea"/>
+        <xsd:element ref="OrderType"/>
+        <xsd:element ref="CustomerClass"/>
+        <xsd:element ref="SalesPerson"/>
+        <xsd:element ref="Customer"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicArea">
+    <xsd:annotation>
+      <xsd:documentation>All - (default)
+Select this to include sales to customers in all geographic areas.
+
+Single 
+Select this if you want to generate the report for customer sales for a single geographic area.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="HighlightMissingInvoice" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This option is selected by default if the Report sequence is: Invoice number, regardless of whether you select to generate a Daily or Monthly report. Valid values are : 'Y' - Yes (default); 'N' - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvoiceDate">
+    <xsd:annotation>
+      <xsd:documentation>All - (default)
+Select this to print all unprinted invoices. 
+
+Single 
+Select this to include invoices for a specific date only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MonthToPrint">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the financial period (within the financial year entered), for which the report must be printed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPageAfterTotals" default="N">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are printing the report in Invoice number or Invoice within customer sequence.
+
+This option enables you to print the totals of each register, branch, salesperson or area on a separate page.
+
+If you do not select this option, then the totals of the register, branch, salesperson or area are printed on the same page. Valid values are : 'N' - No (default); 'Y' - Yes
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="MonthToPrint" minOccurs="0"/>
+        <xsd:element ref="YearToPrint" minOccurs="0"/>
+        <xsd:element ref="TurnoverOption" minOccurs="0"/>
+        <xsd:element ref="HighlightMissingInvoice" minOccurs="0"/>
+        <xsd:element ref="NewPageAfterTotals" minOccurs="0"/>
+        <xsd:element ref="PrintChargeLines" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>This option is only displayed if you selected the Order type required option (S/O Setup).
+
+All - (default) 
+Select this to include sales for all order types in the report.
+
+Single 
+Select this to include sales for a single order type in the report.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintChargeLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>You select this option if you want non-merchandise lines to be included in your report. Valid values are 'Y' - Yes (default) and 'N' - No.
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence" default="1">
+    <xsd:annotation>
+      <xsd:documentation>The report can be printed in one of the following sequences:
+
+1 - Invoice number (default)
+
+If you do not select this as your report sequence, then you will be unable to select the option: Highlight missing invoice numbers.
+
+2 -Invoice within register no. 
+3 - Invoice within branch 
+4 - Invoice within salesperson 
+5 - Invoice within customer 
+6 - Invoice within geographic area</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+        <xsd:enumeration value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>All - (default)
+Select this to include sales for customers belonging to all salespersons.
+
+Range 
+Select this to include sales for customers belonging to a range of salespersons.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this if you want to generate the report for customer sales for a single salesperson.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TurnoverOption" default="D">
+    <xsd:annotation>
+      <xsd:documentation>'D' - Daily (default) 
+Select this if you want to list all invoices not printed since this report was last run, using the invoice date as a selection criterion.
+
+'M' - Monthly 
+Select this if you want to list all invoices posted since the last time the Month End function of the A/R Period End program was run.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="M"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="YearToPrint" default="C">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the year for which the report must be printed.
+Valida values are 'C' - Current (default), 'P' - Previous or a 4-digit field indicating the current or previous AR financial year.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the GL Journal Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Option">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Type" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines what type of journal will be printed. (N - normal journals, S - Standard journals and R - recurring journals) If no value is supplied then the default of 'N' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;N=Normal;S=Standard;R=Recurring"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value="S"></xsd:enumeration>
+										<xsd:enumeration value="R"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Reprint" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether journals that have already been printed should be reprinted. ('N'- No - only journals that have not been printed will be printed, 'Y' -Yes - both journals that have and have not been printed will be printed, O - Only - only journals that have already been printed will be printed). If no value is supplied then a default value of 'N' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="O"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UpdatePrintedFlag" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether the update flag must be set to 'Y" for journals that are printed for the first time. (N - No, Y - Yes). If no value is supplied the the default value of 'N' will be used.  </xsd:documentation>
+									<xsd:appinfo source="screenItem=N"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Year" default=" " minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines the financial year for which journals should be printed. If no value is supplied the current financial year will be used as a default.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PeriodSelection" default="A" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation> Defines the period selection for journals to be printed. (A - All and S - Single). If no value is passed then the default value of 'A' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;A=all;S=Single"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="A"></xsd:enumeration>
+										<xsd:enumeration value="S"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LedgerPeriod" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines the period selection for journals to be printed. The period supplied cannot be higher than the number of GL financial periods + 2. If 'PeriodSelection' is 'A' then whatever is supplied in this element will be overwritten with zeroes. If 'PeriodSelection' = 'S' and no value is passed then the current financial period will be used as a default.</xsd:documentation>
+									<xsd:appinfo source="screenItem=N"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="JournalNumberSelection" default="A" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines the whether all journals or a range of journals should be printed. (A - all, S-Single,R - range). If no value is supplied then the default value of 'A' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;A=all;S=single;R=Range"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="A"></xsd:enumeration>
+										<xsd:enumeration value="R"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="FromJournalNumber" default="1" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines at what journal number the report should start printing. If no value is supplied a default value of 1 will be used. If 'JournalNumberSelection' is 'A' then whatever value is supplied will be overwritten with a value of 1. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;Browse=GenJournalCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ToJournalNumber" default="99999" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines at what journal number the report should stop printing. If no value is supplied a default value of 99999will be used. If 'JournalNumberSelection' is 'A' then whatever value is supplied will be overwritten with a value of 99999. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;Browse=GenJournalCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AuthorizedJournals" default="B" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether journals that have/havenot been authorized should be printed. You can also print a combination of both. (B- Both , I - include authorized journals, E - Exclude authorized journals). If no value has been passed then a default value of 'B' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;B=Both;I=Include;E=Exclude"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="B"></xsd:enumeration>
+										<xsd:enumeration value="I"></xsd:enumeration>
+										<xsd:enumeration value="E"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintNormalJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether normal journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintProvisionalJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether provisional journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintUserDefinedJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether user defined journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintInterCompanyJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether inter-company  journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintPeriodEndAdjustments" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether period end adjustments should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintAuditorsAdjustments" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether auditors adjustments  should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintStatisticalJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether statistical journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintAlternateCurrencyJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether alternate currency journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintJournalsNotPosted" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether journals that have not been posted should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintJournalsOnHold" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether journals that have not been put on hold should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintCancelledJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether journals that have not been cancelled should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintPostedJournals" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether journals that have been posted should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintApInvoiceJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether AP Invoice journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintApPaymentJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether AP Payment journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintArInvoiceJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether AR Invoice journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintArCashJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether AR Cash journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintAssetJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether Asset journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintCashbookJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether Cashbook journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintGrnJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether GRN journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintInventoryJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether Inventory journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintTpmJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether TPM journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintWipLaborJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether WIP Labor journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PrintWipPartBillingJournals" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether WIP Part Billing journals should be printed. (Y - Yes, N - No). If no value is supplied then the default value of 'Y' will be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="StandardJournalSelection" default="A" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines the whether all journals or a range of journals should be printed. (A - all,S-Single, R - range). If no value is supplied then the default value of 'A' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;A=all;S=single;R=Range"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="A"></xsd:enumeration>
+										<xsd:enumeration value="R"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StandardFrom" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines at what journal number the report should starts printing. If no value is supplied a default value of spaces will be used. If 'StandardJournalSelection' is 'A' then whatever value is supplied will be overwritten with a value of spaces. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;Browse=GenStdJnlCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StandardTo" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines at what journal number the report should stop printing. If no value is supplied a default value of zzzzz will be used. If 'StandardJournalSelection' is 'A' then whatever value is supplied will be overwritten with a value of zzzzz. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;Browse=GenStdJnlCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RecurringJournalSelection" default="A" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines the whether all journals or a range of journals should be printed. (A - all,S-Single, R - range). If no value is supplied then the default value of 'A' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;A=all;S=single;R=Range"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="A"></xsd:enumeration>
+										<xsd:enumeration value="R"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RecurringFrom" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines at what journal number the report should starts printing. If no value is supplied a default value of spaces will be used. If 'RecurringJournalSelection' is 'A' then whatever value is supplied will be overwritten with a value of spaces. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;Browse=GenRecJnlCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RecurringTo" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines at what journal number the report should stop printing. If no value is supplied a default value of zzzzz will be used. If 'RecurringJournalSelection' is 'A' then whatever value is supplied will be overwritten with a value of zzzzz. </xsd:documentation>
+									<xsd:appinfo source="screenItem=N;Browse=GenRecJnlCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RecurringAuthJournals" default="B" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether journals that have/havenot been authorized should be printed. You can also print a combination of both. (B- Both , I - include authorized journals, E - Exclude authorized journals). If no value has been passed then a default value of 'B' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;B=Both;I=Include;E=Exclude"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="B"></xsd:enumeration>
+										<xsd:enumeration value="I"></xsd:enumeration>
+										<xsd:enumeration value="E"></xsd:enumeration>
+										<xsd:enumeration value=""></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NewPagePerJournal" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether each journal should be printed on a new page. N - No or Y-Yes. If no value has been passed then the default value of 'N' would be used.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"></xsd:whiteSpace>
+										<xsd:enumeration value="N"></xsd:enumeration>
+										<xsd:enumeration value="Y"></xsd:enumeration>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeTemplateDetails" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whethertemplate details should be included. N - No or Y-Yes. If no value has been passed then the default value of 'N' would be used.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0"></xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="LedgerPeriod" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation> Defines the period selection for journals to be printed. (A - All and S - Single). Any value supplied here will overwrite the value for PeriodSelection and LedgerPeriod.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=all;S=Single"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"></xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"></xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="JournalNumber" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether all journals or a range of journals should be printed. (A - all, S - Single , R - range). Any value supplied will overwrite the value supplied for JournalNumberSelection, FromJournalNumber and ToJournalNumber.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=all;S=Single;R=Range;Browse=GenJournalCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"></xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"></xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StandardJournal" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether all journals or a range of journals should be printed. (A - all, S - Single,  R - range). Any value here will overwrite the value  supplied for StandardJournalSelection, StandardFrom and StandardTo.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=all;S=Single;R=Range;Browse=GenStdJnlCtl"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"></xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"></xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="RecurringJournal" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Defines whether all journals or a range of journals should be printed. (A - all, S - Single ,  R - range). Any value supplied here will overwrite the RecurringJournalSelection, RecurringFrom and RecurringTo.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=all;S=Single;R=Range;Browse=GenRecJnlCt"></xsd:appinfo>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"></xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"></xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

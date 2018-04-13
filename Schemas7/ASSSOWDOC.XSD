@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Owner Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AssetOwner">
+    <xsd:annotation>
+      <xsd:documentation>This is the key to the Asset Owner being maintained. This is mandatory. If this Asset Owner is being added, it must not pre-exist. If this Asset Owner is being changed or deleted, it must be a valid SYSPRO Asset Owner.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>This is the name of the Asset Owner and is used primarily to identify the Asset Owner.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Asset Owners.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Key"/>
+        <xsd:element name="Description">
+          <xsd:annotation>
+            <xsd:documentation>This is the name of the Asset Owner and is used primarily to identify the Asset Owner. </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain an Asset Owner.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="AssetOwner"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SetupAssetOwner">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for Asset Owner maintenance. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

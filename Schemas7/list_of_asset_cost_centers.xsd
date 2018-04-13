@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Assets List of Cost Centers Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Branch to be selected. A=All, S=Single, R=Range</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AssetBranch;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:anySimpleType" use="optional" default="S"/>
+          <xsd:attribute name="FilterValue" type="xsd:anySimpleType" use="optional" default="00"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CostCenter">
+    <xsd:annotation>
+      <xsd:documentation>CostCenter to be selected. A=All, S=Single, R=Range</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AssetCostCenter;browsefilter=Branch;browsefilterbrowse=AssetBranch;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:anySimpleType" use="optional" default="S"/>
+          <xsd:attribute name="FilterValue" type="xsd:anySimpleType" use="optional" default="SALES"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>The parent filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="CostCenter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

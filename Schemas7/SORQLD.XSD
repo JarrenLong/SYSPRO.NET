@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Order Load Planning Delivery Loads Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ApprovedConfirmed">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Approved confirmed in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Complete">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Complete in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryDate">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to be filtered by the delivery date. A = All (default), S = Single, R = Range. CCYY-MM-DD</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RouteCode" minOccurs="0"/>
+        <xsd:element ref="DeliveryDate" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LoadsInProcess">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Loads in Process in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LoadsInProcessPrinted">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Loads in Process printed in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LoadsInProcess" minOccurs="0"/>
+        <xsd:element ref="ApprovedConfirmed" minOccurs="0"/>
+        <xsd:element ref="Complete" minOccurs="0"/>
+        <xsd:element ref="LoadsInProcessPrinted" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the main root node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RouteCode">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to be filtered by the route code. A = All (default), S = Single, R = Range.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

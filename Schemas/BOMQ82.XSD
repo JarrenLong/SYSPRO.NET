@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the BOM Engineering Profile Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>The list of filters</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="StockCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>The list of options</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="RevisionRelease"/>
+				<xsd:element ref="Routing"/>
+				<xsd:element ref="QuantityToMake"/>
+				<xsd:element ref="PrintManufacturingUMQuantities"/>
+				<xsd:element ref="XslStylesheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PrintManufacturingUMQuantities" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default depends on your setup options.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="QuantityToMake" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the quantity to make, the report will calculate accordning to this amount. The default is 1.000</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the Root element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RevisionRelease" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to select a revision/release combination for a stock code. Valid entries are three digit revision/three digit release example: 000/000 or 001/000</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Routing" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This indicates which routing to run the report for. Default is 0.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=BomRoute"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Select the stock code preferred. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvMaster;S=Single;RevRel=Y"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="S">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

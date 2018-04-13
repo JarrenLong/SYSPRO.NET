@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--  
+     Schema for the SO Load Planning Sales Order Lines Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CompleteSalesOrderLine">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Complete sales order line in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrder" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NumberOfDaysAfterToday" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to include the number of days after today to search on. Default = 0</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="NumberOfDaysBeforeToday" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to include the number of days before today to search on. Default = 0</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NumberOfDaysBeforeToday" minOccurs="0"/>
+        <xsd:element ref="NumberOfDaysAfterToday" minOccurs="0"/>
+        <xsd:element ref="CompleteSalesOrderLine" minOccurs="0"/>
+        <xsd:element ref="SalesOrderInSuspense" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the main root.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to be filtered by the Sales order. A = All (default), S = Single, R = Range.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrderInSuspense">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Sales orders in suspense in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

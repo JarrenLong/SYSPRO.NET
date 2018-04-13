@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--  
+     Schema for the SO Load Planning Dispatch Notes Business Query Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DispatchNote">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to be filtered by the dispatch notes. A = All (default), S = Single, R = Range.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node filter.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RouteCode" minOccurs="0"/>
+        <xsd:element ref="DispatchNote" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeCompleteDispatchNotes">
+    <xsd:annotation>
+      <xsd:documentation>This element includes Complete dispatch notes in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:pattern value="Y"/>
+        <xsd:pattern value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDispatchNotesInSuspense">
+    <xsd:annotation>
+      <xsd:documentation>This element includes dispatch notes in suspense in its search. Y - Yes (default), N - No</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:pattern value="Y"/>
+        <xsd:pattern value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfDaysAfterToday" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to include the number of days after todays date to search on relating to detail line ship date or requested ship date. Default = 0</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="NumberOfDaysBeforeToday" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to include the number of days before todays date to search on relating to detail line ship date or requested ship date. Default = 0</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node option.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NumberOfDaysBeforeToday" minOccurs="0"/>
+        <xsd:element ref="NumberOfDaysAfterToday" minOccurs="0"/>
+        <xsd:element ref="IncludeCompleteDispatchNotes" minOccurs="0"/>
+        <xsd:element ref="IncludeDispatchNotesInSuspense" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the main root.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RouteCode">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to be filtered by the route code. A = All (default), S = Single, R = Range.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Material Allocations Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ComponentWhToUse" type="xsd:string" default="N">
+    <xsd:annotation>
+      <xsd:documentation>ComponentWhToUse specifies whether or not to use the warehouses of the components of exploded kit or phantom parts ( Y - yes, N - no)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PostMaterialAllocations">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ExplodeIfKitPart" type="xsd:string" default="N">
+    <xsd:annotation>
+      <xsd:documentation>ExplodeIfKitPart specifies whether to add the components of a kit type part 
+or not ( Y -add components of kit, N - add kit part) </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExplodeIfPhantomPart" type="xsd:string" default="N">
+    <xsd:annotation>
+      <xsd:documentation>ExplodeIfPhantomPart specifies whether to add the components of a phantom part or not ( Y -add components of phantom, N - add phantom part ) </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FixedQtyPer">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of parent parts to which the component quantity per applies.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FixedQtyPerFlag" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the quantity per is a one to one relationship between the component and the parent or the quantity per is for a grouping of parents (eg for every 10 parents apply the compoents qty per).  The format is 1 character alphanumeric (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Head">
+    <xsd:annotation>
+      <xsd:documentation>Head is part of a unique key to identify a hierarchy. Mandatory when the job is a hierarchical job. The format is 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HierarchyJob">
+    <xsd:annotation>
+      <xsd:documentation>This element contains part of the unique key for the hierarchy. The job number will be used to complete the key.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Head"/>
+        <xsd:element ref="Section1"/>
+        <xsd:element ref="Section2"/>
+        <xsd:element ref="Section3"/>
+        <xsd:element ref="Section4"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeinKitIssue" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>When set as "Y" the component will be included during kit issues.
+(Y-Include Component in Kit Issue, N - Exclude Component in Kit Issue)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain an allocation. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Job"/>
+        <xsd:element ref="NonStocked"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="NewWarehouse"/>
+        <xsd:element ref="Line"/>
+        <xsd:element ref="ExplodeIfPhantomPart"/>
+        <xsd:element ref="ExplodeIfKitPart"/>
+        <xsd:element ref="ComponentWhToUse"/>
+        <xsd:element ref="StockDescription"/>
+        <xsd:element ref="QtyReqdType"/>
+        <xsd:element ref="QtyReqd"/>
+        <xsd:element ref="FixedQtyPerFlag" minOccurs="0"/>
+        <xsd:element ref="FixedQtyPer" minOccurs="0"/>
+        <xsd:element ref="UnitCost"/>
+        <xsd:element ref="OperationOffset"/>
+        <xsd:element ref="OpOffsetFlag"/>
+        <xsd:element ref="Uom"/>
+        <xsd:element ref="SequenceNum"/>
+        <xsd:element ref="HierarchyJob"/>
+        <xsd:element ref="Version"/>
+        <xsd:element ref="Release"/>
+        <xsd:element ref="eSignature"/>
+        <xsd:element ref="IncludeinKitIssue"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>Job specifies the job for which the allocations are being maintained. The format
+is 8 characters alphanumeric or 8 chararcters numeric depending on the configuration option within Syspro.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Line">
+    <xsd:annotation>
+      <xsd:documentation>Line specifies the line number of allocations. When adding this line will be generated automatically - i.e. should not be supplied. When updating or deleting this number must be supplied. Format is 2 characters alphanumeric .</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>NewWarehouse specifies the new warehouse to be added to an existing allocation. Only used when updating and nothing has been issued for this allocation, consolidated warehouses are not being used, snapshot allocations are not being maintained and  the allocations are not for a hierachical job. Format is 2 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NonStocked" default="N">
+    <xsd:annotation>
+      <xsd:documentation>NonStocked specifies whether the allocation being maintained is non-stocked or not. (Y - non-stocked, N - Stocked)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OpOffsetFlag" default="O">
+    <xsd:annotation>
+      <xsd:documentation>OpOffsetFlag indicates whether offset days or operation offset is used. (D - Offset Days, O - Operation Offset)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OperationOffset">
+    <xsd:annotation>
+      <xsd:documentation>OperationOffset indicates either the operation number or the offset days for the allocation. If the operation flag has been set - this field may not be zero. If it is not 1 - the field will be validated against the job master operation number. Format is numeric 4.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QtyReqd">
+    <xsd:annotation>
+      <xsd:documentation>QtyReqd indicates either total quantity or the quantity per of the allocation. The value supplied in the QtyReqdType will allow you to either add the total quantity or the quantity per of the allocation.  For a non-stocked item this value may not be zero. The format is signed 6.6</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="14"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QtyReqdType" default="U">
+    <xsd:annotation>
+      <xsd:documentation>QtyReqdType indicates whether the total quantity or the quantity per will be used for the allocation. (U - Quantity per, T - Total quantity).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Release">
+    <xsd:annotation>
+      <xsd:documentation>Release indicates the ECC release number of the component part. Ignore if not an ECC controlled item, or if ECC controlled at a stocking/revision level. The format is 3 characters alphanumeric or 3 chararcters numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Section1">
+    <xsd:annotation>
+      <xsd:documentation>Section1 is part of a unique key to identify a hierarchy. Used when the job is a hierarchical job. The format is 3 characters alphanumeri</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Section2">
+    <xsd:annotation>
+      <xsd:documentation>Section2 is part of a unique key to identify a hierarchy. Used when the job is a hierarchical job. The format is 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Section3">
+    <xsd:annotation>
+      <xsd:documentation>Section3 is part of a unique key to identify a hierarchy. Used when the job is a hierarchical job. The format is 3 characters alphanumeric</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Section4">
+    <xsd:annotation>
+      <xsd:documentation>Section4 is part of a unique key to identify a hierarchy. Used when the job is a hierarchical job. The format is 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SequenceNum">
+    <xsd:annotation>
+      <xsd:documentation>SequenceNum is the seq number of the allocation. The format
+is 6 characters alphanumeric or 6 chararcters numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>The StockCode indicates the component for the job to be maintained. The format is 30 characters alphanumeric or 15 chararcters numeric depending on the configuration option within Syspro.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockDescription">
+    <xsd:annotation>
+      <xsd:documentation>StockDescription describes the stock code. The stock code description for a stocked item will be retrieved from the inventory master file but a description can be entered for a non-stocked item. The format is 30 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnitCost">
+    <xsd:annotation>
+      <xsd:documentation>UnitCost indicates the unit cost of the allocation. For a non-stocked item the cost must be entered and be greater than zero. For a stocked item the cost will be calculated and this field will be ignored. The format is signed 10.5.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="17"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Uom">
+    <xsd:annotation>
+      <xsd:documentation>Uom indicates the quantity unit of measure. For a non-stocked item this field must be supplied. The unit of measure will be retrieved from the inventory master for a stock item. The format is 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="38"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Version">
+    <xsd:annotation>
+      <xsd:documentation>Version indicates the ECC version number of the component part. Ignore if not an ECC controlled item, or if ECC controlled at a stocking level. The format is 3 characters alphanumeric or 3 chararcters numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouse specifies the warehouse to use of the allocation. If non-stocked this field will be ignored else the warehouse will be required for stocked items. When updating and consolidated warehouses are used - the warehouse supplied must be '--'. Format is 2 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

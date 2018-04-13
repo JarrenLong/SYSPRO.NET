@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Backflushing Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostInvBackflushing">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Parameters" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all minOccurs="0">
+              <xsd:element name="TransactionDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the date that the transaction took place. Must be supplied in a CCYY-MM-DD format. This element will default to the current system date if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PasswordForTransaction" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>A valid password must be supplied if a password has been defined for the Inventory Backflush transaction within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned, W - warnings will be returned as warnings in the XML returned.)</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateOnly" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApplyIfEntireDocumentValid" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied). NOTE it is not advised to set this on to process a single item as it causes the program to pass through the same routines twice.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BackflushLevel" default="A" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates whether components from all the levels of the bill of material should be issued or whether only components from the first level of the bill of material should be issued. Possible values: A (process all levels in the Bill of Material) or S (issue components only from the first level of the material, regardless of the quantity on hand). Default to A.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="S"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IssueFromComponentWarehouseToUse" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if you require the components to be issued from a specific warehouse or from the warehouse assigned to each component. Possible values: Y (component will be issued from the warehouse assigned to the component) or N (all components will be issued from the warehouse supplied in the Component Warehouse To Issue From parameter). Default to Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreBomWh" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates whether to use the warehouse defined against the structure record when issueing components.  Defaults to N, which means the warehouse on the structure record will be applied. If Y, then the warehouse to use will be applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ComponentWarehouseToIssueFrom" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All components will be issued from the warehouse supplied in this element if the parameter IssueFromComponentWarehouseToUse is set to N. This element will default to the default warehouse defined against the operator or company if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ExcludeComponentsIfBoughtOut" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates that components and operations attached to a bought out component are included or excluded from the transaction.  This only applies if you are processing all levels of the bill.  Default is N</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

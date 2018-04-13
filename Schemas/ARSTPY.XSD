@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+-->
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Post AR Payments and Adjustments Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ApplyIfEntireDocumentValid" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether the entire document must be validated prior to any posting taking place. If set to 'N', each item is validated and rejected if in error or posted if correct. This is the fastest option. If set to 'Y', all items in the document are first validated.If the entire document is valid then items are posted.Default  is 'Y'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplySpecificBranch" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This is only relevant for Unapplied Payments, Re-established Invoices and Miscellaneous receipts. If ‘N’ is supplied, then the Customer Branch is used for Unapplied Payments and Re-established Invoices.  In addition, the branch entered against 'MiscellaneousReceipt' will be used. 
+If ‘Y’ then the branch supplied in 'BranchToUse element is used when posting a Miscellaneous Receipts, Unapplied Payments and Re-established Invoices. The default value is 'N'. Valid values are 'N' and 'Y'.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AreaToUseForLedgerIntegration">
+    <xsd:annotation>
+      <xsd:documentation>This element is only used of SYSPRO G/L integration  is by both branch and geographic area, and you have selected 'Y' to 'ApplySpecificBranch'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoCalculateTax" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is only used if the SYSPRO A/R Setup 'Request tax portion for invoice adjustments/discounts' is set to 'Y'.  When processing a payment this element indicates whether the tax portion of the discount value is to be automatically calculated if the 'TaxPortionOfDiscount' element is not supplied.  When  processing an adjustment this element indicates whether the tax portion of the adjustment value is to be automatically calculated if the 'TaxPortionOfAdjustment' is not supplied. Valid values are 'N' and 'Y'. The default is 'N'. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoCorrectPaymentValue" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If a ‘N’ is supplied against this element , then the value supplied against 'PaymentValue' element must be fully distributed. If the value is not fully distributed, then the business object will reject the payment and give an error.
+If, however you do not want to get an error, you should supply ‘Y’ or 'U' against this element. If 'Y' is supplied,the payment value is then forced to be equal to the sum of the net values of each of the payments processed. If a 'U' is supplied then an 'unapplied' payment is automatically created for the undistributed value.If a ‘U’ is supplied then no error will be given and the undistributed  value will be created as an unapplied payment against the customer.The business object generates the invoice number to be allocated to the unapplied payment. The invoice numbers always starts ’_CRD’ and the ‘xx’ suffix is determined by getting the highest _CRD invoice number currently on file for the SYSPRO A/R customer, and incrementing this by one.  The default is 'N'. Valid values are 'N'  'Y' and 'U'.
+Please note that the value of this element is ignored if post dated checks have been selected for inclusion in the 'Item. The payment value + the value of the post dated checks must be fully distributed. If the value is not fully distributed you will get an error irrespective of the value supplied against this element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BranchToUse">
+    <xsd:annotation>
+      <xsd:documentation>This element is only relevant if 'ApplySpecificBranch' element is 'Y'. It is the branch to be applied when posting Miscellaneous receipts, Unapplied Payments and Re-established Invoices.  Historically a 'blank' branch was valid in SYSPRO. If the user does not supply this element, or spaces or nulls are supplied against this element (and the user has selected to 'ApplySpecificBranch' Y), then the business object will assume that the branch to be used for miscellaneous receipts is branch ‘blank’. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings .  Default is 'N'. Valid values are 'N' or 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IntegrateToCashBookInDetail" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is only used if in SYSPRO A/R Setup, payments are integrated to Cash Book by journal and the option ‘Allow operator override in A/R payments’ is selected( A/R setup/Integration tab).If the SYSPRO option is not selected, then the value of this element is completely ignored. A ‘Y’ against this element indicates that all payments processed will be integrated to Cash Book 'in detail' instead of ‘by journal’ as is defined in the SYSPRO A/R setup options. 
+If ‘N’ is supplied, then the SYSPRO A/R Setup options dictate the method by which payments are integrated to Cash Book. Valid values are 'N' and 'Y'. Default is 'N'. 
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This contains parameters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="PostingPeriod"/>
+        <xsd:element ref="IgnoreWarnings"/>
+        <xsd:element ref="ApplyIfEntireDocumentValid"/>
+        <xsd:element ref="ValidateOnly"/>
+        <xsd:element ref="AutoCorrectPaymentValue"/>
+        <xsd:element ref="ApplySpecificBranch"/>
+        <xsd:element ref="BranchToUse"/>
+        <xsd:element ref="AreaToUseForLedgerIntegration"/>
+        <xsd:element ref="IntegrateToCashBookInDetail"/>
+        <xsd:element ref="AutoCalculateTax"/>
+        <xsd:element name="IgnoreAnalysis" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>When adding or maintaining a journal you can specify whether the G/L analysis must be validated for the ledger code. Valid entires are 'Y' (Ingore G/L analysis) or 'N' (Validate G/L analysis). If no value is supplied then a default value of 'Y' will be used. If you are supplying your own AnalysisEntry number ensure that you have set this flag to "Y" else the program will still validate the analysis.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:minLength value="0"/>
+              <xsd:maxLength value="1"/>
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="NextJournal" minOccurs="0"/>
+        <xsd:element ref="ValidatePasswords" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostArPayment">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostingPeriod" default="C">
+    <xsd:annotation>
+      <xsd:documentation>Period to which transactions must be posted. Valid values are 'C' for current period, 'P' for previous period 1 and 'B' for before previous period 2.Default is 'C'</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No posting will take place. If set to 'N', each item is validated and posting is performed based on the value of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextJournal">
+    <xsd:annotation>
+      <xsd:documentation>This element is only valid if the BO was initiated by a SYSPRO ARSPAY(Payment and Adjustment program). If it is not Zeroes and the ValidateOnly field is set to "N" then it means that the ARSTPY should not create a Journal but use the provided number and append the current transactions into this Journal. Note that only one transaction type can be posted using the ARSPAY route at a time and therefore it is the reposibilty of ARSPAY to ensure that the Journal exist and it is valid.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ValidatePasswords">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether passwords should be validated when proccessing the business object. Valid values are Y - Yes and N - No. If no parateters is supplied then a default value of Y will be used. It is not recommended that you use the N option unless you have validated all your passwords before calling the business objects.
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

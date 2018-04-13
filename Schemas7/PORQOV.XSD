@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Purchase Order Valuation Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Currency" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This contains the purchase order currency. If the purchase order currency is different from the local currency then Foreign currency conversion is needed.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExchRateFixed" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Use the contents of ExchangeRate for the currency conversion or use the currency code against the customer code (Y - Use the value of ExchangeRate to calculate the order values, N - Use the currency code against the customer).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExchangeRate" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>The exchange rate conversion factor to be used if ExchRateFix is Y. This value is used to either multiply or divide the costs / prices depending on the contents of MulDiv. If ExchRateFix is Y this is a mandatory element and must be greater than 0.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FreightLine">
+    <xsd:annotation>
+      <xsd:documentation>This element contains elements relating to freight charges.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NMscChargePrint"/>
+        <xsd:element ref="NMscChargeValue"/>
+        <xsd:element ref="NMscChargeFor"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LineType" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This element specifies whether MStockCode contains a stock code for an item stocked with SYSPRO or a non-stocked item (1 - Stocked, 7 - Non-Stocked). This is a mandatory element.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MCompleteFlag" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element specifies whether PurchaseOrder is complete. (Y - The purchase order is complete,  N or blank the purchase order line is not complete).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MConvFactPrcUm" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the conversion factor to be used to convert the order quantity unit of measure to the price unit of measure. If the order quantity unit of measure and the price unit of measure are different and this element is not present, the conversion factor will be picked up from the stock code in SYSPRO. If there is no entry for this conversion against the stock code, or this is for a non-stocked item, the default will be 1.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MDiscPct1" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>The first discount percentage to be applied to the purchase order. This can be up to 100.00, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MDiscPct2" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>The second discount percentage to be applied to the purchase order. This can be up to 100.00, positive or negative. The negative sign can precede or follow the value</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MDiscPct3" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>The third discount percentage to be applied to the purchase order. This can be up to 100.00, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MDiscValFlag">
+    <xsd:annotation>
+      <xsd:documentation>This element specifies how to apply discounts to this detail line. (blank - Use the percentages in MDiscPct1 to 3, V - the value MDiscValue is applied to the value of the line, P - the discount percentages are applied to the unit price before extending it, U - the discount value is applied to the unit price before extending it).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="MDiscValue" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This is a discount value. If MDiscValFlag is either V or U, this must contain a value greater than zero.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MForeignPrice" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This is the foreign price to be used for this stock item. This is a mandatory element for foreign orders and the maximum size is 10.5. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MMulDivPrc" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether the contents of MOrderQty should be multiplied or divided by the value in MConvFactOrdUm before multiplying it by the price, to find the total price (M - Multiply, D - Divide). If MConvFactOrdUm contains a value and this element does not, the default is M.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MNonsUnitMass" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This is the unit mass for this item. If this is not supplied it defaults to the contents of the unit mass field against the stock code in SYSPRO for a stocked item. For a non-stocked items the default is 1 and the maximum size is 6.6.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MNonsUnitVol" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This is the unit volume for this item. If this is not supplied it defaults to the contents of the unit volume field against the stock code in SYSPRO for a stocked item. For a non-stocked items the default is 1 and the maximum size is 6.6</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MOrderQty" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This is the original purchase order quantity for this stock code. This is a mandatory field and must contain a value greater than zero. The maximum field size is 7.3.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MOrderUom" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This contains the unit of measure to be used for MOrderQty. If it is supplied it must be valid within SYSPRO. If this element is not present for a stocked item the stocking unit of measure against the stock code will be used. For a non-stocked item EA will be used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MPrice" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This is the price to be used for this stock item. This is a mandatory element and the maximum size is 10.5. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MPriceUom" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This contains the unit of measure to be used for MPrice. If it is supplied it must be valid within SYSPRO. If this element is not present for a stocked item the stocking unit of measure against the stock code will be used. For a non-stocked item EA will be used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MReceivedQty" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This contains the quantity that is already received from this order. The maximum field size is 7.3. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MStockCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Depending on whether LineType contains either a 1 or 7, this element will contain a stock code for a stocked or non-stocked item. If this is for a stocked item then this stock code must exist within SYSPRO. This is a mandatory element.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MWarehouse" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If LineType is 1 and MWarehouse contains a value, this value will be used as the warehouse to look up costs for the stock code. If this element does not exist the Warehouse to Use against the stock code will be used. This element is ignored if LineType is 7.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MerchandiseLine">
+    <xsd:annotation>
+      <xsd:documentation>This element contains elements relating to stocked and non-stocked details. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LineType"/>
+        <xsd:element ref="MStockCode"/>
+        <xsd:element ref="MWarehouse"/>
+        <xsd:element ref="MOrderQty"/>
+        <xsd:element ref="MReceivedQty"/>
+        <xsd:element ref="MOrderUom"/>
+        <xsd:element ref="MPrice"/>
+        <xsd:element ref="MPriceUom"/>
+        <xsd:element ref="MConvFactPrcUm"/>
+        <xsd:element ref="MMulDivPrc"/>
+        <xsd:element ref="MDiscPct1"/>
+        <xsd:element ref="MDiscPct2"/>
+        <xsd:element ref="MDiscPct3"/>
+        <xsd:element ref="MDiscValFlag"/>
+        <xsd:element ref="MDiscValue"/>
+        <xsd:element ref="MNonsUnitMass"/>
+        <xsd:element ref="MNonsUnitVol"/>
+        <xsd:element ref="MForeignPrice"/>
+        <xsd:element ref="MCompleteFlag"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MiscellaneousLine">
+    <xsd:annotation>
+      <xsd:documentation>This element contains elements relating to miscellaneous charge details.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NMscChargePrint"/>
+        <xsd:element ref="NMscChargeValue"/>
+        <xsd:element ref="NMscChargeFor"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MulDiv" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Multiply or divide the costs / prices by the ExchRateFix (M - Multiply, D - Divide). If ExchRateFix is Y then this is a mandatory element.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="NMscChargeFor">
+    <xsd:annotation>
+      <xsd:documentation>This is other charges amount, miscellaneous or freight, (in foreign currency) to be used for this stock item.The maximum size is 12.2.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:enumeration value="00.00"/>
+        <xsd:enumeration value="78.01"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NMscChargePrint" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains charges print flag. ( Y - has been printed and N - not yet printed )</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="NMscChargeValue" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the Miscellaneous charge value in local currency. The maximum size is 12.2.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option" nillable="0">
+    <xsd:annotation>
+      <xsd:documentation>There are two types of XMLs used to execute this busines object. In the first option the purchase order number is passed, and all other elements (if they exist) will be ignore. But if the purchase order number is not found then the second option (all the elements except for the purchase order will be validated and used to calculate purchase order values) is applied.   </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PurchaseOrder" minOccurs="0"/>
+        <xsd:element ref="OrderHeader" minOccurs="0"/>
+        <xsd:element ref="MerchandiseLine" minOccurs="0"/>
+        <xsd:element ref="MiscellaneousLine" minOccurs="0"/>
+        <xsd:element ref="FreightLine" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderHeader">
+    <xsd:annotation>
+      <xsd:documentation>This contains the information required for a purchase order header (this is mandatory and can only appear once per purchase order).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="ExchRateFixed"/>
+        <xsd:element ref="ExchangeRate"/>
+        <xsd:element ref="MulDiv"/>
+        <xsd:element ref="Currency"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrder" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is the purchase order number to be valued. In this option only the purchase order is passed for valuation, if any other element is in the XML it will be ignored.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" maxOccurs="unbounded"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier" type="xsd:byte">
+    <xsd:annotation>
+      <xsd:documentation>This contains a valid SYSPRO Accounts Payable supplier code. This is a mandatory element.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The XSL Stylesheet to be used to display the XML file.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Inventory  List of Stock Codes Available
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="StockCodeList">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The list of Options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="FilterOnCustomer" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element takes values Y or N, with the default of N. If you filter by customer (FilterOnCustomer is “Y”) and you have defined a list of customers an operator (in the Security setup) has access to, stock codes that belong to the first customer’s product classes will be returned.
+
+You can also supply a customer code in the Customer filter, and only stock codes that belong to the provided customer’s product class will be returned.
+ </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FilterOnOperatorWhse" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element takes values Y or N, with the default on N. If you filter by warehouse (FilterOnOperatorWhse is “Y”) a list of stock codes that are stocked in any warehouse that the operator has access to, will be returned.
+
+You can also supply a warehouse in the Warehouse Filter, and only stock codes that are stocked in this warehouse are returned. Note that the warehouse provided must be one of the warehouses that the operator has access to.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Sequence" default="S" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The stock code list can be returned in stock code, description or product class sequence. The element takes values S for stock code, D for description and P for product class, with the default of S.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value="P"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaxRowsToReturn" default="100" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The max number of rows to return default to 100 rows. This is the number of stock codes to return when executing the business object. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The list of Filters.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of stock code ( A - All, R - Range, S - Single).  If not provided the default is A.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Customer" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of customer ( A - All, S - Single).  If not provided the default is A.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="required">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="required">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of warehouses ( A - All, S - Single).  If not provided the default is A.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="required">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

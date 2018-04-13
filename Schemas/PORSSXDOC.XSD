@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Supplier/Stock Code Cross-reference Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupSupplierStockXref">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Key">
+                <xsd:annotation>
+                  <xsd:documentation>Unique key if adding a new cross-reference.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Supplier">
+                      <xsd:annotation>
+                        <xsd:documentation>Valid supplier code.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="7"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="StockCode">
+                      <xsd:annotation>
+                        <xsd:documentation>Valid stock code. Cannot be a notional part. It can be a non-stocked code if in maintenance mode.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="30"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SupCatalogueNum" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If supplier/stock code cross-reference required and this element is supplied, it must be valid.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DemoLeadTime" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Demonstrated lead time. 
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LastPricePaid" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Last price paid      
+(In currency of supplier).
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LastReceiptDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If maintaining an existing entry, this element will be ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LastReceiptQty" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If maintaining an existing entry, this element will be ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="11"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderQtyUom">
+                <xsd:annotation>
+                  <xsd:documentation>This element must be one of the valid units of measure for the entered stock code or it must exist in the purchasing price uom table.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupStockDesc" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Supplier stock description.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupLongDesc" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Supplier long description.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoText1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>First line of P/order text (Printed on p/order print).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoText2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Second line of P/order text (Printed on p/order print).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoText3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Third line of P/order text (Printed on p/order print).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoText4" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Fourth line of P/order text (Printed on p/order print).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LctmerchPrice" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Landed cost tracking merchandise price.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DefaultPrice" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Default price for p/order review in Requirements planning  
+(In currency of supplier).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockItemFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid values 'Y' or spaces for stocked item. 
+'N' for existing non-stocked item.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DefaultPrcUom" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>This element must be one of the valid units of measure for the entered stock code or it must exist in the purchasing price uom table.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="LastPrcUom" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>This element must be one of the valid units of measure for the entered stock code or it must exist in the purchasing price uom table.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="AltDocPrice" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element will be ignored if the option to use alternate document price is not set.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

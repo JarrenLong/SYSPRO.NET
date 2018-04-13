@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Job Valuation Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AsOfPeriod" minOccurs="0"/>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="IncludeJobsOnHold" minOccurs="0"/>
+        <xsd:element ref="IncludeJobsCompleted" minOccurs="0"/>
+        <xsd:element ref="IncludeJobsUnconfirmed" minOccurs="0"/>
+        <xsd:element ref="IncludeSubJobs" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroWIPValueJobs" minOccurs="0"/>
+        <xsd:element ref="ValuesBy" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AsOfPeriod">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the period from which to return data (C - transactions from the current WIP period backwards, P - transactions from the previous WIP period backwards, B - transactions from WIP previous period two backwards). If not provided, the default is C</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current month;P=Previous month 1;B=Previous month 2"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence">
+    <xsd:annotation>
+      <xsd:documentation>This specifies which sequence in which the data is returned ( J - Job sequence, C - Job Classification sequence, L - Ledger control account sequence, S - Stock code sequence).  If not provided the default is J.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;J=Job;C=Job classification;L=Ledger control account;S=Stock code"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="J"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeJobsOnHold">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include jobs on hold ( I - Include, E - Exclude, O - Only).  If not provided, the default is I.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeJobsCompleted">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include completed jobs ( I - Include, E - Exclude, O - Only).  If not provided, the default is I.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeJobsUnconfirmed">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include unconfirmed jobs ( I - Include, E - Exclude, O - Only).  If not provided, the default is I.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeSubJobs">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include sub jobs ( Y - Yes, N - No).  If not provided, the default is Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroWIPValueJobs">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include jobs with a WIP value of zero ( Y - Yes, N - No).  If not provided, the default is N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValuesBy">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to show values by N(Notional Part) or C(Co-product). The default is N(Notional Part)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=Notional part;C=Co-product"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the xsd Stylesheet to use</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LedgerCode" minOccurs="0"/>
+        <xsd:element ref="Job" minOccurs="0"/>
+        <xsd:element ref="JobClass" minOccurs="0"/>
+        <xsd:element ref="PlannedDeliveryDate" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the ledger account control selection ( A - All, S - Single).  If not provided the default is A.  </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=GenMaster; A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of jobs ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a -.  Example: 1-9</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=WipMaster;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the job class selection ( A - All, S - Single).  If not provided the default is A.  </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=WipJobClass; A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PlannedDeliveryDate">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of planned delivery date ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a -.  Example: 08/26/02-09/26/02</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date}; A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of customers ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a -.  Example: 1-9</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ArCustomer; A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a -, .</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster; A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Advanced Trial Kitting Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the required date for the source or the date of the supply or demand. The date format is CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="10"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ParentPart">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the stock code for the source or the parent part for the component within the BOM structure for supply and demand records. The format is either up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration for stock code within SYSPRO. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Quantity">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the required quantity for the source or the supply or demand quantity. The format is a signed numeric with 7 integers with 3 decimals.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the component stock code/non-stock code required. The format is either a 30 character alphanumeric field or 15 character numeric field depending on the key configuration for stock codes within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TrialKittingQuery">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence maxOccurs="unbounded">
+        <xsd:element name="Component" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element holds the information pertaining to each component required for a specific date.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence maxOccurs="unbounded">
+              <xsd:element name="ComponentLevel" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds the information pertaining to the component required per level within the BOM structure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="DueDate">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the date that the component is required. The date format is CCYY-MM-DD.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="10"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="StockCode"/>
+                    <xsd:element ref="Warehouse"/>
+                    <xsd:element name="Version" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the version of the component stock code. This element is only applicable if Engineering Change Control is in use and is not controlled at stocking level. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for revision in SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Release" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the release of the component stock code. This element is only applicable if Engineering Change Control is in use and is controlled at release level. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for release in SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Route">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the BOM route used to explode the BOM structure. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Level">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates at which level within the BOM structure the component occurs. The level will contain spaces if the component is used in a job allocation else the format is up to 2 characters numeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="2"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="StockCodeDescription">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the description for the component. The format is up to 30 characters alphanumeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="30"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="UnitOfMeasure"/>
+                    <xsd:element name="GrossQtyRequired">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the gross quantity required for the component on the specified date. The format a signed numeric field with 7 integers and 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="NetQtyRequired">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the net quantity required for the component on the specified date. The format a signed numeric field with 7 integers and 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="QuantityAvailable">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the quantity available for the component on the specified date. The format a signed numeric field with 7 integers and 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="QuantityOnOrder">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the quantity on order for the component on the specified date. The format a signed numeric field with 7 integers and 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Shortage">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the shortage for the component on the specified date. The format a signed numeric field with 7 integers and 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Supplier">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the supplier for the component. The format is either up to 7 characters alphanumeric or numeric depending on the key configuration setup for supplier within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="7"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="PartType">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the part category of the component. Possible values: B (Bought out), M (Made-in) or S (Sub-contracted).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="B"/>
+                          <xsd:enumeration value="M"/>
+                          <xsd:enumeration value="S"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Decimals">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the maximum number of decimals allowed for the component. The format is 1 numeric character.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="0"/>
+                          <xsd:enumeration value="1"/>
+                          <xsd:enumeration value="2"/>
+                          <xsd:enumeration value="3"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LeadTime">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the lead time required for the component. The format is 3 characters numeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="OnHold">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates if the component is on hold. Possible values: P (Partial hold) or F (Full hold).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value=""/>
+                          <xsd:enumeration value="P"/>
+                          <xsd:enumeration value="F"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ComponentSource" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This element holds the information pertaining to the source that caused this component to be required. This element is only output if the input element ReturnSource is Y.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element name="Source">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the type of source that caused the demand for the component. Possible values: P (stocked standard Part), N (Non-stocked standard part), Q (Quote), S (Sales order) or J (Job).</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="P"/>
+                                <xsd:enumeration value="N"/>
+                                <xsd:enumeration value="S"/>
+                                <xsd:enumeration value="Q"/>
+                                <xsd:enumeration value="J"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="SourceKey">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the key of the source that caused the demand for the component.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType mixed="false">
+                              <xsd:all>
+                                <xsd:element name="StockCode" minOccurs="0">
+                                  <xsd:annotation>
+                                    <xsd:documentation>This indicates the stocked standard part that caused the demand for the component if the element Source is P or the non-stocked standard part that caused the demand for the component if the element Source is N. The format is either up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration for stock code within SYSPRO. </xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                      <xsd:minLength value="0"/>
+                                      <xsd:maxLength value="30"/>
+                                      <xsd:whiteSpace value="preserve"/>
+                                    </xsd:restriction>
+                                  </xsd:simpleType>
+                                </xsd:element>
+                                <xsd:element name="Job" minOccurs="0">
+                                  <xsd:annotation>
+                                    <xsd:documentation>This indicates the job that caused the demand for the component if the element Source is J. The format is either up to 8 characters alphanumeric or numeric depending on the key configuration for job within SYSPRO. </xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                      <xsd:minLength value="0"/>
+                                      <xsd:maxLength value="8"/>
+                                      <xsd:whiteSpace value="preserve"/>
+                                    </xsd:restriction>
+                                  </xsd:simpleType>
+                                </xsd:element>
+                                <xsd:element name="SalesOrder" minOccurs="0">
+                                  <xsd:annotation>
+                                    <xsd:documentation>This indicates the sales order that caused the demand for the component if the element Source is S. The format is either up to 6 characters alphanumeric or numeric depending on the key configuration for sales order within SYSPRO. </xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                      <xsd:minLength value="0"/>
+                                      <xsd:maxLength value="6"/>
+                                      <xsd:whiteSpace value="preserve"/>
+                                    </xsd:restriction>
+                                  </xsd:simpleType>
+                                </xsd:element>
+                                <xsd:element name="Quote" minOccurs="0">
+                                  <xsd:annotation>
+                                    <xsd:documentation>This indicates the quote that caused the demand for the component if the element Source is Q. The format is either up to 8 characters alphanumeric or numeric depending on the key configuration for quotations within SYSPRO. </xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                      <xsd:minLength value="0"/>
+                                      <xsd:maxLength value="8"/>
+                                      <xsd:whiteSpace value="preserve"/>
+                                    </xsd:restriction>
+                                  </xsd:simpleType>
+                                </xsd:element>
+                                <xsd:element name="Line" minOccurs="0">
+                                  <xsd:annotation>
+                                    <xsd:documentation>This indicates the quotation line that caused the demand for the component if the element Source is Q or the sales order line that caused the demand for the component if the element Source is S. The format is 4 characters numeric.</xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                      <xsd:minLength value="0"/>
+                                      <xsd:maxLength value="4"/>
+                                      <xsd:whiteSpace value="preserve"/>
+                                    </xsd:restriction>
+                                  </xsd:simpleType>
+                                </xsd:element>
+                              </xsd:all>
+                            </xsd:complexType>
+                          </xsd:element>
+                          <xsd:element ref="Date"/>
+                          <xsd:element ref="Quantity"/>
+                          <xsd:element ref="UnitOfMeasure"/>
+                          <xsd:element ref="ParentPart"/>
+                          <xsd:element name="ParentVersion" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the version of the parent stock code. This element is only applicable if Engineering Change Control is in use and is not controlled at stocking level. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for revision in SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="3"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="ParentRelease" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the release of the parent stock code. This element is only applicable if Engineering Change Control is in use and is controlled at release level. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for release in SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="3"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SupplyDemand" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds the information pertaining to the supply and demand applicable at the required date for the component. This element is only output if the input element ReturnSupplyDemand is Y.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element ref="Date"/>
+                    <xsd:element name="Type">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the type of supply or demand. Possible values: M (safety stock or minimum quantity), P (Purchase order), J (Job),  I (Purchase order inspection), N (WIP inspection), S (Sales order), C (SCT order), Q (Quote), W (WIP allocation) or H (Quantity on hand in warehouse).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="M"/>
+                          <xsd:enumeration value="P"/>
+                          <xsd:enumeration value="J"/>
+                          <xsd:enumeration value="I"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="C"/>
+                          <xsd:enumeration value="Q"/>
+                          <xsd:enumeration value="W"/>
+                          <xsd:enumeration value="H"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Key">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the key of the supply and demand.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element name="PurchaseOrder" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the purchase order that can serve as a supply for the component if the element Type is P. The format is either up to 6 characters alphanumeric or numeric depending on the key configuration for purchase order within SYSPRO. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="SalesOrder" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the sales order that will create a demand on the component if the element Type is S or the SCT order that can serve as a supply for the component if the element Type is C. The format is either up to 6 characters alphanumeric or numeric depending on the key configuration for sales order within SYSPRO. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Line" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the quotation line if the element Type is Q or the sales order line if the element Source is S or C or the purchase order line if the element Type is P. The format is 4 characters numeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="4"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Job" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the job that can serve as a supply for the component if the element Type is J or the job number for the allocation that will create a demand on the component if the element Type is W. The format is either up to 8 characters alphanumeric or numeric depending on the key configuration for job within SYSPRO. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="8"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Allocation" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the job allocation that will create a demand on the component if the element Type is W. The format is up to 2 characters alphanumeric. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Warehouse" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the warehouse of the WIP allocation if the element Type is W or the warehouse from which the safety stock or minimum quantity was taken if the element Type is M. The format is up to 2 characters alphanumeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="GRN" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the Goods receipt note for a purchase order inspection that can serve as a supply for the component if the element Type is I. The format is either up to 9 characters alphanumeric or numeric depending on the key configuration for GRN within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="9"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Lot" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the lot for a purchase order inspection if the element Type is I or the lot for a WIP inspection if the element Type is N. The format is either up to 10 characters alphanumeric or numeric depending on the key configuration for lot within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="10"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="StockCode" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the stock code when the element Type is M. The format is either up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration for stock code within SYSPRO. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="30"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="WipInspecReference" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the WIP inspection reference that can serve as a supply for the component if the element Type is N. The format is either up to 10 characters alphanumeric or numeric depending on the key configuration for WIP inspection reference within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="10"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Quote" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the quote that will create a demand on the component if the element Type is Q. The format is either up to 8 characters alphanumeric or numeric depending on the key configuration for quotations within SYSPRO. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="8"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="UnitOfMeasure"/>
+                    <xsd:element ref="Quantity"/>
+                    <xsd:element ref="ParentPart"/>
+                    <xsd:element name="ParentVersion" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the version of the parent stock code. This element is only applicable if Engineering Change Control is in use and is not controlled at stocking level. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for revision in SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ParentRelease" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the release of the parent stock code. This element is only applicable if Engineering Change Control is in use and is controlled at release level. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for release in SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:byte" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Role" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UnitOfMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the unit of measure. The format is up to 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which warehouse was used to establish a quantity on hand for the component, as well as the warehouse that was used to establish the supply and demand affecting the component. If more than one warehouse was used then this element will contain '--'. The format is up to 2 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Requisition Entry Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>The buyer code to be associated with the requisition. If entered, it must be a valid SYSPRO buyer code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CapexNumber">
+    <xsd:annotation>
+      <xsd:documentation>The capex number. Must be valid if supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Catalogue">
+    <xsd:annotation>
+      <xsd:documentation>The supplier's catalogue number for the supplied stock code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>The customer number. Does not have to be valid when supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomerPoNumber">
+    <xsd:annotation>
+      <xsd:documentation>The customer's purchase order number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>The description of the stock code. If not supplied will default to the description of the stock code itself. A non-blank description must be supplied for a non-stocked item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPercent1">
+    <xsd:annotation>
+      <xsd:documentation>First discount percentage. Discount percentages will only be used if the DiscountCode element is not supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPercent2">
+    <xsd:annotation>
+      <xsd:documentation>Second discount percentage.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPercent3">
+    <xsd:annotation>
+      <xsd:documentation>Third discount percentage.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountCode">
+    <xsd:annotation>
+      <xsd:documentation>Discount code. Must be valid if supplied. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DueDate">
+    <xsd:annotation>
+      <xsd:documentation>The due date for the requisition line. Defaults to today's date.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="User" minOccurs="0"/>
+        <xsd:element ref="UserPassword" minOccurs="0"/>
+        <xsd:element ref="RequisitionNumber" minOccurs="0"/>
+        <xsd:element ref="RequisitionLine" minOccurs="0"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Description" minOccurs="0"/>
+        <xsd:element ref="Revision" minOccurs="0"/>
+        <xsd:element ref="Release" minOccurs="0"/>
+        <xsd:element ref="Quantity"/>
+        <xsd:element ref="Units" minOccurs="0"/>
+        <xsd:element ref="Pieces" minOccurs="0"/>
+        <xsd:element ref="UnitOfMeasure" minOccurs="0"/>
+        <xsd:element ref="DueDate" minOccurs="0"/>
+        <xsd:element ref="Reason" minOccurs="0"/>
+        <xsd:element name="IncludeInMrp" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The flag which can bee toggled to indicate if an item is to be included or excluded from the MRP Calculation. Y = Yes (Default) N = No.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="RouteOn" minOccurs="0"/>
+        <xsd:element ref="RouteToUser" minOccurs="0"/>
+        <xsd:element ref="RouteNotation" minOccurs="0"/>
+        <xsd:element ref="RequisitionType"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="Price" minOccurs="0"/>
+        <xsd:element ref="PriceUom" minOccurs="0"/>
+        <xsd:element ref="DiscountCode" minOccurs="0"/>
+        <xsd:element ref="DiscPercent1" minOccurs="0"/>
+        <xsd:element ref="DiscPercent2" minOccurs="0"/>
+        <xsd:element ref="DiscPercent3" minOccurs="0"/>
+        <xsd:element ref="LessPlusDisc" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="StoresWarehouse" minOccurs="0"/>
+        <xsd:element ref="Catalogue" minOccurs="0"/>
+        <xsd:element ref="Job" minOccurs="0"/>
+        <xsd:element ref="Operation" minOccurs="0"/>
+        <xsd:element ref="LedgerCode" minOccurs="0"/>
+        <xsd:element ref="PasswordForLedgerCode" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="TaxCode" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="CustomerPoNumber" minOccurs="0"/>
+        <xsd:element ref="CapexNumber" minOccurs="0"/>
+        <xsd:element ref="Buyer" minOccurs="0"/>
+        <xsd:element name="DeliveryTerms" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Intrastat Delivery Terms against the requisition.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShippingLocation" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Shipping Location to be used against requisition.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="Notes" minOccurs="0"/>
+        <xsd:element ref="PurchaseOrderComments" minOccurs="0"/>
+        <xsd:element ref="ReceiptIntoInspection" minOccurs="0"/>
+        <xsd:element ref="WithholdingTaxExpenseType" minOccurs="0"/>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Electronic signature password</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>The job number. The job number does not have to be valid if supplied. However, if the job is valid then the job classification of that job is checked for security access.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>The G/L account code. This may only be supplied for a non-stocked item, and will be ignored for a stocked item and ignored for any item that contains a job number. Defaults to the inventory non-stocked control account if not specifically supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LessPlusDisc" default="L">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the discount percentages should be applied as LESS (L) or PLUS (P).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionType" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the different requisition types that can be entered. N=Normal, I=Issue, T=Transfer</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="T"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Notes">
+    <xsd:annotation>
+      <xsd:documentation>Requisition notes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Operation">
+    <xsd:annotation>
+      <xsd:documentation>Subcontract operation number if a job has been supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PasswordForLedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>If ledger codes require a password, this element must contain the relevant password.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrderComments">
+    <xsd:annotation>
+      <xsd:documentation>Comments to be applied to the purchase order when created from this requisition line.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Pieces">
+    <xsd:annotation>
+      <xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostRequisition">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Price">
+    <xsd:annotation>
+      <xsd:documentation>The price quoted by the supplier.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PriceUom">
+    <xsd:annotation>
+      <xsd:documentation>The price unit of measure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>The product class to be applied for a non-stocked item only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Quantity">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory if the stock code is not a unit-qty type stock code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Reason">
+    <xsd:annotation>
+      <xsd:documentation>The reason for the requisition being raised.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReceiptIntoInspection">
+    <xsd:annotation>
+      <xsd:documentation>This element allows a non-stocked requisition to be flagged as requiring inspection. Valid entries are 'N' - No, 'Y' - Yes. If blank, then 'N' is assumed. This is only used for a non-stocked item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Release">
+    <xsd:annotation>
+      <xsd:documentation>The release of the stock code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionLine">
+    <xsd:annotation>
+      <xsd:documentation>The line number of the requisition. The line is applied when changing an existing requisition.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionNumber">
+    <xsd:annotation>
+      <xsd:documentation>The number is used when changing an existing requisition, or when adding new lines to an existing requisition, or when adding a requisition for the first time, and requisition  numbering is manual.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Revision">
+    <xsd:annotation>
+      <xsd:documentation>The revision of the stock code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RouteOn">
+    <xsd:annotation>
+      <xsd:documentation>This element allows you to chose if the requisition line should be routed or not.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RouteNotation">
+    <xsd:annotation>
+      <xsd:documentation>The notation to be applied if the requisition is to be routed to another user.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RouteToUser">
+    <xsd:annotation>
+      <xsd:documentation>The user to whom the requisition should be routed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>The stock code for the requisition. This must be non-blank. The stock code must be valid if the XML parameter option AllowNonStocked is defined as N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>The supplier of the stock item. If the supplier is valid then it is checked to see if the supplier is on hold and for security access on the A/P branch.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TaxCode">
+    <xsd:annotation>
+      <xsd:documentation>The tax code is only used if the item is non-stocked.When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnitOfMeasure">
+    <xsd:annotation>
+      <xsd:documentation>The unit of measure for the quantity supplied. The u/m must be either the stocking or alternate u/m's associated with the stock code. If not supplied then the stocking unit of measure is assumed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Units">
+    <xsd:annotation>
+      <xsd:documentation>If the stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="User">
+    <xsd:annotation>
+      <xsd:documentation>The user who is adding the requisition. If the user is not supplied then the user associated with the operator will be assumed. The user must be valid.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserPassword">
+    <xsd:annotation>
+      <xsd:documentation>The password associated with the user. The password is only required to be supplied if the user element was supplied and it differs from the user associated with the operator default. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>The warehouse for the stock code into which the goods will be supplied. The entry supplied here will be overwritten if there is a warehouse defined against the requisition user.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WithholdingTaxExpenseType">
+    <xsd:annotation>
+      <xsd:documentation>Only applies if withholding tax is in use. Expense type G = Goods, S = Service</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StoresWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>The warehouse for issues and transfers. This is not mandatory and can be entered when physically doing the issue or transfer</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

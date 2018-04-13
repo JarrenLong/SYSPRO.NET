@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters of the WIP Reserving Stock for Allocations Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostWipReserving">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Parameters" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="TransactionType" default="R" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if you want to reserve or release reserved stock for allocations. Possible values: 'R' - Reserve stock for all allocations against a job, 'L' - Release stock for all allocations against a job, 'V' - Reserve stock for a single allocation against a job,  'S' - Release stock for a single allocation against a job. I - Increase the reserved quantity against an allocation. D - Decrease the reserved quantity against an allocation. If 'R' is supplied then the quantity to reserve will be calculated for each allocation against the job. If 'V' is supplied then you can either supply a quantity or the quantity to reserve will be calculated. If you have supplied an 'R' or 'V' and there is already a reserved quantity then this quantity will be released and the new quantity reserved (Either the calculated quantity or the quantity supplied). If you have supplied 'I' or 'D' then the quantity to increase or decrease must be supplied. This element will default to 'R' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="R"/>
+                    <xsd:enumeration value="V"/>
+                    <xsd:enumeration value="L"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="I"/>
+                    <xsd:enumeration value="D"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateOnly" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No updating will take place. If set to 'N', each item is validated and updating is performed based on setting of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApplyIfEntireDocumentValid" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied). This element will default to 'Y' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned.) This element will default to 'N' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

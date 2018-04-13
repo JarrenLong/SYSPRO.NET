@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Sales Order Back Order Release Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ActualShipQty">
+    <xsd:annotation>
+      <xsd:documentation>This quantity is only used to define the actual quantity to ship for a specific line where the order quantity is not in the stocking unit of measure, and the SYSPRO option 'Unit of measure conversion factors are theoretical' is in use. It is only valid if the 'ReleaseFromShip' element is 'A', and the order is in a status of '4' or '8'. May not have more than 7 characters for integers and 3 characters for decimals. The number of decimals will be validated against the number of decimals required for the stock code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AdjustOrderQuantity" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This option forces the order quantity against the sales order line to equal the quantity that is being imported - when the quantity being imported is greater than the current order quantity.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllocateSerialNumbers" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If you select this option the program will confirm the ship quantity for the sales order line and allocate the serials supplied to the sales order line. If you select this option - ReleaseFromShip must be selected. The Quantity supplied must equal the current sales order line ship quantity. The stock Item must be a serialized item and serial tracking must be in use. All serial numbers must be supplied. The total quantity supplied for all serials must be the same as the Quantity for the line. The stock code may not have any previous serial allocation. The stock item should be set-up to capture serial numbers during order entry and flagged as enter serial numbers at sale time only. The sales order set-up option to capture serial numbers for orders - should not be selected. This option may not be selected if you have selected either AdjustOrderQuantity or CompleteLine or ZeroShipQuantity or ReleaseFromMultipleLines.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinLocation">
+    <xsd:annotation>
+      <xsd:documentation>At least one bin must be supplied if the company makes use of multiple bins, and the warehouse on the detail line also uses multiple bins. BinLocation may not be more than 6 characters. Will be validated against the inventory Bin file for the stock code. Take note that the bins do not have to be supplied when ZeroShipQuantity is selected - all bins for the line will be de-allocated automatically when this option is selected. The quantities supplied for all bins must add up to the import quantity supplied for the line when releasing the back order quantity to ship. When changing the ship quantity (not setting to zero) to less than the original ship quantity - therefore creating a back order quantity - only bins that needs to be de-allocated must be supplied. Bins do not have to be supplied if Automatic depletion is in use - unless the stock item is both lot traceable and serialized.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinPieces">
+    <xsd:annotation>
+      <xsd:documentation>Must contain the number of pieces to import for a Bin location for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  May not be more than 3 characters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinQuantity">
+    <xsd:annotation>
+      <xsd:documentation>A bin quantity must be supplied for every bin location supplied if the stock code does not make use of unit quantity processing. If the stock item makes use of unit processing - the quantity can either be supplied as a decimal value or else as Units and Pieces. The bin quantity may not have more than 7 characters for integers and 3 characters for decimals. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinUnits">
+    <xsd:annotation>
+      <xsd:documentation>Must contain the number of units to import for a Bin location for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  May not be more than 7 characters.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Bins">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for the set of bins affected by this transaction, if multiple bins is installed. If the warehouse for the associated detail line does not make use of multiple bins, then any entries in the 'Bins' node will be ignored. It is possible to import several bins for the same order line instead of just one bin per line. Take note that the bins do not have to be supplied when ZeroShipQuantity is selected - all bins for the line will be de-allocated automatically when this option is selected. The quantities supplied for all bins must add up to the import quantity supplied for the line when releasing the back order quantity to ship. When changing the ship quantity (not setting to zero) to less than the original ship quantity - therefore creating a back order quantity - only bins that needs to be de-allocated must be supplied. Bins do not have to be supplied if Automatic depletion is in use - unless the stock item is both lot traceable and serialized.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="BinLocation"/>
+        <xsd:element ref="BinQuantity" minOccurs="0"/>
+        <xsd:element ref="BinUnits" minOccurs="0"/>
+        <xsd:element ref="BinPieces" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CompleteLine" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Forces the sales order line to be marked as complete - regardless of whether there is a remaining back order quantity (i.e. the back order quantity against the sales order line is set to zero, even if there should have been a back order quantity remaining after the import).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Entry in the Customer element is optional, but if supplied will be validated against the Sales order header file. May not be more than 7 characters. If customer numeric key - must be a valid numeric value.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="38"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>The element Item must be used to identify the start and end of the import information for each sales order line.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="LatestAcceptedLotExpiryDate" minOccurs="0"/>
+        <xsd:element ref="LatestAcceptedSerialExpiryDate" minOccurs="0"/>
+        <xsd:element ref="LatestAcceptedSerialScrapDate" minOccurs="0"/>
+        <xsd:element ref="ScheduleAllocateDate" minOccurs="0"/>
+        <xsd:element ref="ScheduleLineShipDate" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="Quantity" minOccurs="0"/>
+        <xsd:element ref="ActualShipQty" minOccurs="0"/>
+        <xsd:element ref="UnitOfMeasure" minOccurs="0"/>
+        <xsd:element ref="Units" minOccurs="0"/>
+        <xsd:element ref="Pieces" minOccurs="0"/>
+        <xsd:element ref="ReleaseFromMultipleLines" minOccurs="0"/>
+        <xsd:element ref="SalesOrderLine" minOccurs="0"/>
+        <xsd:element ref="CompleteLine" minOccurs="0"/>
+        <xsd:element ref="AdjustOrderQuantity" minOccurs="0"/>
+        <xsd:element ref="Serials" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="Lot" minOccurs="0"/>
+        <xsd:element ref="Bins" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="OrderStatus"/>
+        <xsd:element ref="ReleaseFromShip" minOccurs="0"/>
+        <xsd:element ref="ZeroShipQuantity" minOccurs="0"/>
+        <xsd:element ref="AllocateSerialNumbers" minOccurs="0"/>
+        <xsd:element ref="eSignature" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Lot">
+    <xsd:annotation>
+      <xsd:documentation>A lot must be supplied if the stock code is lot traceable. The lot may not be more than 10 characters. If the key lot type for the company is numeric the lot supplied must be a valid numeric value. The lot supplied will be validated against the Lot traceable file for the stock code. Lots do not have to be supplied if Automatic depletion is in use - unless the stock item is both lot traceable and serialized.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LatestAcceptedLotExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>The lot expiry date must be in format CCYY-MM-DD. The lot expiry date supplied will be used to verify if the Lot has already expired.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatus">
+    <xsd:annotation>
+      <xsd:documentation>OrderStatus must be supplied.  If selected "3" - order that are in status 2 will be set to status 3 after releasing back order qty. If selected "8" then the order will be set to status 8 provided there are no serialized items with ship quantities for which serials must still be allocated. Order status must contain 8 when ReleaseFromShip is selected  only when ZeroShipQuantity is not selected. If selected "N" - order will be in the same status as before the update - recommended if you are changing the ship quantity to zero and would like the order status to stay the same. If the set-up option to capture serial numbers for orders (Sales order set-up - Detail tab) is not selected and the stock item is serialized - but Capture Serials during Order Entry is selected - it will be possible to have an order in a status 4 with no serials allocated - order status may not be changed to 8 for such an order.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="8"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Pieces">
+    <xsd:annotation>
+      <xsd:documentation>Must contain the number of pieces to import for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  May not be more than 3 characters. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostSorBackOrderRelease">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quantity">
+    <xsd:annotation>
+      <xsd:documentation>Must be supplied for a stock code that does not make use of unit quantity processing. The quantity can still be supplied for a stock code that makes use of unit quantity processing , but then the units and pieces must NOT be supplied for that item. May not have more than 7 characters for integers and 3 characters for decimals. The number of decimals will be validated against the number of decimals required for the stock code. If the ZeroShipQuantity option is selected then this element must contain zero. The quantity supplied must be in the stocking unit of measure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReleaseFromMultipleLines" default="N">
+    <xsd:annotation>
+      <xsd:documentation>To release the back order qty from several lines for the same stock code. Stock code and Warehouse must be supplied if selected. Line Number must not be supplied when selected. May not be selected when either ReleaseFromShip or CompleteLine or AdjustOrderQuantity has been selected. Serial numbers must be supplied for a serialized item. The quantities supplied for all serial numbers must add up to the import quantity supplied for the stock code. Serial numbers will be allocated to sales order lines from top to bottom in the file. Example - if you have a sales order with two lines for a manual stock code and each line has a back order quantity of 2 - four serial numbers must be supplied. The first two serials will be allocated to the first sales order line and the next two to the second sales order line.  Bin location must be supplied if multiple bins is in use. Bin numbers will also be allocated from top to bottom in the file as described for serials above</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReleaseFromShip" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If this option is selected 'Y' - changes will be made to the ship quantity instead of the back order quantity. Must be selected if you want to set the ship quantity to zero or allocate serial numbers. May not be selected when ReleaseFromMultipleLines is selected. an entry of 'A', Actual means that the quantity will be taken from the element 'ActualShipQty' and applied to the stocking quantity to ship.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Must be supplied. May contain a maximum of 6 characters. Must be a valid numeric value if sales order key for the company is numeric. Sales order must be on file. Changes to sales order in status 4 (changing the ship qty) will only be allowed when the sales order set-up option to allow changes to status 4 orders when import status is 8 is selected - General tab 3. Sales order status may not be cancelled, complete, In process, a Forward order or in suspense. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderLine">
+    <xsd:annotation>
+      <xsd:documentation>Must be supplied if option to release from multiple lines is not selected. Must be a valid numeric value. Sales order line must exists on the sales order detail file and must be a stocked line. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ScheduleAllocateDate">
+    <xsd:annotation>
+      <xsd:documentation>Schedule allocate date must be in format CCYY-MM-DD. The schedule allocate date will be used to verify whether the number of days within which a scheduled order will be allocated has been exceeded. Check only performed if it is a scheduled order, the number of days within which scheduled orders will be allocated is not 999 and a ScheduleAllocateDate has been supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ScheduleLineShipDate">
+    <xsd:annotation>
+      <xsd:documentation>Schedule line ship date must be in format CCYY-MM-DD. The schedule line ship date will be used as Detail line ship date for scheduled orders. If zero, the current SYSPRO date will be used. If moving from ship to back order, and the date supplied is zero, then the date remains unchanged.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialCreationDate">
+    <xsd:annotation>
+      <xsd:documentation>Serial creation date must be in format CCYY-MM-DD. The serial creation date will be saved in the serial tracking master header file against the serial number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LatestAcceptedSerialExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>Latest accepted serial expiry date must be in format CCYY-MM-DD. The serial expiry date will be used to verify if any of the Serials has already expired.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialNumber">
+    <xsd:annotation>
+      <xsd:documentation>At least one serial number must be supplied if Serial tracking is required and the stock item is a serialized item - unless ZeroShipQuantity is selected. May not be more than 20 characters for alphanumeric key type and 15 characters for numeric key type (must be valid numeric value if numeric key type).  Serial number must exist on file and have stock for manual and batch serial numbers if stock code is flagged as captures serial numbers at receipt. When updating a sales order line for a batch serial number for a stock item that is set to capture serial numbers during order entry - the parameter AddQuantityToBatchSerial must be selected. The batch serial will be created and the Total receipt quantity and Qty On Hand for the serial will be updated with the new quantity - leaving the Available qty as zero.  When changing the ship quantity (not setting to zero) to less than the original ship quantity - therefore creating a back order quantity - only serials that needs to be de-allocated.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="20"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialQuantity">
+    <xsd:annotation>
+      <xsd:documentation>A serial quantity must be supplied for each serial number if the stock code does not make use of unit quantity processing. If the stock item makes use of unit processing - the quantity can either be supplied as a decimal value or else as Units and Pieces. Unit quantity processing will only apply to a batch serial item. Serial quantity may not have more than 7 characters for integer and 3 characters for decimals.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialUnits">
+    <xsd:annotation>
+      <xsd:documentation>Must contain the number of units to import for a batch Serial for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  May not be more than 7 characters.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialPieces">
+    <xsd:annotation>
+      <xsd:documentation>Must contain the number of pieces to import for a batch Serial for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  May not be more than 3 characters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialScrapDate">
+    <xsd:annotation>
+      <xsd:documentation>Serial scrap date must be in format CCYY-MM-DD. When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial scrap date will be saved against the serial number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialExpiryDate" default=" ">
+    <xsd:annotation>
+      <xsd:documentation>Serial expiry date must be in format CCYY-MM-DD. When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial expiry date will be saved against the serial number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialLocation">
+    <xsd:annotation>
+      <xsd:documentation>When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial location will be saved against the serial number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LatestAcceptedSerialScrapDate">
+    <xsd:annotation>
+      <xsd:documentation>Serial scrap date must be in format CCYY-MM-DD. The serial scrap date will be used to verify if the Serial has been scrapped.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Serials">
+    <xsd:annotation>
+      <xsd:documentation>It is now possible to import several serials for the same order line instead of just one serial per line. Take note that the serial numbers do not have to be supplied when ZeroShipQuantity is selected - all serials for the line will be de-allocated automatically. The quantities supplied for all serial numbers must add up to the import quantity supplied for the line when releasing the back order quantity to ship. If you are changing the ship quantity and a back order quantity is created - the total quantity for all the serials supplied must add up to the quantity that needs to be moved to back order (i.e. only supply the serial numbers that need to be de-allocated when a back order quantity is created when changing the sales order line ship quantity) .</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="SerialNumber"/>
+        <xsd:element ref="SerialQuantity" minOccurs="0"/>
+        <xsd:element ref="SerialCreationDate" minOccurs="0"/>
+        <xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+        <xsd:element ref="SerialScrapDate" minOccurs="0"/>
+        <xsd:element ref="SerialLocation" minOccurs="0"/>
+        <xsd:element ref="SerialUnits" minOccurs="0"/>
+        <xsd:element ref="SerialPieces" minOccurs="0"/>
+        <xsd:sequence/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock code must be supplied if release from multiple lines is selected. May not be more than 30 characters for alphanumeric key type and 15 characters for numeric key type (must be valid numeric value if numeric key type). Stock code will be validated against the Inventory master file. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnitOfMeasure">
+    <xsd:annotation>
+      <xsd:documentation>Unit of measure of the stock being released. This unit of measure will apply to all quantity elements supplied (eg. BinQuantity and SerialQuantity). If the element is not supplied it will default to the stocking unit of measure for the stock code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Units">
+    <xsd:annotation>
+      <xsd:documentation>Must contain the number of units to import for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value. Either the quantity or Units and Pieces must be supplied for the item.  May not be more than 7 characters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouse must be supplied if release from multiple lines is selected. Stock code supplied must be stocked in this warehouse. May not be more than 2 characters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ZeroShipQuantity" default="N">
+    <xsd:annotation>
+      <xsd:documentation>The sales order line ship quantity will be set to zero, all quantities will be moved to back order and all serial, bins and lots will be de-allocated.  The Quantity supplied must be zero if this option is selected. Zero ship quantity may not be selected when ReleaseFromMultipleLines is selected. When zero ship quantity is selected - ReleaseFromShip must be selected. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

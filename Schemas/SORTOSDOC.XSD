@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Status Change Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ChangeFwdOrderToSched" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is only required when changing the status of a forward order. The valid entries are N (the default) and Y. If set to Y then the forward order will be converted to a scheduled order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreditAuthority">
+    <xsd:annotation>
+      <xsd:documentation>This element must contain a credit authority entry if the order is being released from suspense.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateDeliveryNotePrinted">
+    <xsd:annotation>
+      <xsd:documentation>The date delivery note printed may only be supplied if the sales order is to be changed to a status of 4. The format is CCYY-MM-DD. If not supplied then the current date will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryNoteNumber">
+    <xsd:annotation>
+      <xsd:documentation>The delivery note number may only be supplied if the sales order is to be changed to a status of 4. It may only be supplied if the SYSPRO configuration rules allow it to be supplied. The entry must follow the SYSPRO configuration rules for the type of delivery note number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="38"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvoiceDateEntered">
+    <xsd:annotation>
+      <xsd:documentation>The invoice date may only be supplied if the sales order is to be changed to a status of 8. It may only be supplied if the SYSPRO configuration rules allow it to be supplied, or if the parameter AllowInvoiceInformationEntry is set. The format is CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvoiceNumberEntered">
+    <xsd:annotation>
+      <xsd:documentation>The invoice number may only be supplied if the sales order is to be changed to a status of 8. It may only be supplied if the SYSPRO configuration rules allow it to be supplied, or if the parameter AllowInvoiceInformationEntry is set. The entry must follow the SYSPRO configuration rules for the type of invoice number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="OrderStatus" minOccurs="0"/>
+        <xsd:element ref="NewOrderStatus"/>
+        <xsd:element ref="CreditAuthority" minOccurs="0"/>
+        <xsd:element ref="DeliveryNoteNumber" minOccurs="0"/>
+        <xsd:element ref="DateDeliveryNotePrinted" minOccurs="0"/>
+        <xsd:element ref="TimeDeliveryNotePrinted" minOccurs="0"/>
+        <xsd:element ref="InvoiceNumberEntered" minOccurs="0"/>
+        <xsd:element ref="InvoiceDateEntered" minOccurs="0"/>
+        <xsd:element ref="SctReference" minOccurs="0"/>
+        <xsd:element ref="ChangeFwdOrderToSched" minOccurs="0"/>
+        <xsd:element ref="eSignature" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NewOrderStatus">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory. It must contain the new status for the selected sales order. The SYSPRO configuration rules will be used to validate the correct combination of existing order type and status, and the new order status requested. 
+Valid status codes for a sales order are:-
+1 - Open order,
+2 - Open back order,
+3 - Released back order,
+4 - In warehouse (delivery note printed),
+8 - Released for invoicing (or ready to transfer for an SCT),
+9 - Complete,
+S - In suspense.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="8"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatus">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional. If entered, then it must contain the current status of the order selected.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="8"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostSorOrderStatus">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory and must contain a valid sales order number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SctReference">
+    <xsd:annotation>
+      <xsd:documentation>The SCT reference may only be supplied if the sales order is an SCT order, and is to be changed to a status of 8. It may only be supplied if the SYSPRO configuration rules allow it to be supplied, or if the parameter AllowInvoiceInformationEntry is set. The entry must follow the SYSPRO configuration rules for the type of SCT reference number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="9"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TimeDeliveryNotePrinted">
+    <xsd:annotation>
+      <xsd:documentation>The time delivery note printed may only be supplied if the sales order is to be changed to a status of 4. The format is HH:MM:SS.ddd.  Only the HH:MM portion is required. If not supplied then the current time will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

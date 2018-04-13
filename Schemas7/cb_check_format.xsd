@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Cash Book Check Format Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Bank" minOccurs="0"/>
+				<xsd:element ref="DefaultFormat" minOccurs="0"/>
+				<xsd:element ref="PrintMethod" minOccurs="0"/>
+				<xsd:element ref="DocumentReq" minOccurs="0"/>
+				<xsd:element ref="XslStyleSheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>Indicates for what bank you want to print the report. Only a single bank is allowed and it is mandatory. Bank code passed by another program.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultFormat">
+		<xsd:annotation>
+			<xsd:documentation>Indicate if the bank default format is required. If no value is supplied then a default of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintMethod">
+		<xsd:annotation>
+			<xsd:documentation>Indicate which print method is required. Standard document format (N), Word document format (W) and SRS document format (S). If no value is supplied then a default of 'N' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=Standard document;W=Word document;S=SRS document"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DocumentReq">
+		<xsd:annotation>
+			<xsd:documentation>Indicate which document is required. Both check and remittance (B), Remittance only (R) and Check only (C). If no value is supplied then a default of 'B' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;B=Both check and remittance;R=Remittance only;C=Check only"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStyleSheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

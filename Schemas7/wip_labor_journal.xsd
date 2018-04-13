@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Labor Journal Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="JournalSelection"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JournalSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the journal number selection.The default is A and the other valid options are R and S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MonthSelection" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the month for the period selection.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PrintNewPage"/>
+        <xsd:element ref="MonthSelection"/>
+        <xsd:element ref="YearSelection"/>
+        <xsd:element ref="Reprint"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintNewPage">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate whether to print the report on a new page.The default is N and the other valid option is Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Options"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reprint">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the reprint journal report option.The default is N and the other valid option is Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="YearSelection" type="xsd:short">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the year for the period selection.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the COM Sets Schedule Files on Server Business Object. 
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Function">
+		<xsd:annotation>
+			<xsd:documentation>Should contain the File type for the file that must be saved. SC - Schedule File, ST - StoreFile, RI - Report Info, SR - SavedReport</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="SC"/>
+				<xsd:enumeration value="ST"/>
+				<xsd:enumeration value="RI"/>
+				<xsd:enumeration value="SR"/>
+				<xsd:enumeration value="LL"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Name" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the name of the file that must be saved and is only required when FileType is RI or SR.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:annotation>
+			<xsd:documentation>This is the child parameters element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Function"/>
+				<xsd:element ref="Name" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupComssc">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Parameters"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--  
+     Schema for the SRS Document Print archiving business object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupComtsa">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Parameters">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Action">
+                <xsd:annotation>
+                  <xsd:documentation>The action to perform. CD - create a archive document in the server (either RPT or PDF). UC - updates the archive control file for the document that has been archived and removes the XML file that the document was created from. DF - deletes the server side pending archive folder and all it's files and removes the entry from the pending archive control file. RL - Removes the archive lock from a specific record. RR - Removes the resource lock for a specfic document type.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ArchiveType">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the UC action.  The type of archive documents created for this document. 1 = RPT, 2 = PDF, 3 = RPT and PDF.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DocumentType">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the UC action.  The document type e.g. "A/R Statement Print"</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DocumentTypeFile">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the CD action.  Used to create the server side archive folder for the current document type.  This is essentially the same as DocumentType, but with forward slashes and spaces replace by underscores</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ComputerName">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the UC action.  The name of the client computer that was used to generate the archive document.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ArchiveOper">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the UC action. The name of the operator that started the archive process.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ArchiveDate">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the CD and UC action.  The date that the archive file was created.  When used with the CD action then this date is used to genereate the archive folder.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ArchiveTime">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the UC action.  The time that the archive file was created.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ServerFileName">
+                <xsd:annotation>
+                  <xsd:documentation>Used with the CD action.  The name to use when creating the archive document on the server.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UniqueId">
+                <xsd:annotation>
+                  <xsd:documentation>Used for the UC, DF and the RL actions.  With the UC action it is used to delete a XML file from the pending archive folder.  With the DF action it is used to remove the pending archive folder and the entry in the pending archive control file. With the RL function it is used to removed the archive lock on the pending archive record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="XmlFileName">
+                <xsd:annotation>
+                  <xsd:documentation>Used with the UC action in order to delete the XML file that the document was generated from.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

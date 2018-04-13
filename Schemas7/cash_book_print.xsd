@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Cashbook Print Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Bank">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single bank  to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApBank;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Bank" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeFutureTransactions">
+    <xsd:annotation>
+      <xsd:documentation>Indicated whether you want to inlcude future transactions (Y - Yes, N - No). If no value is supplied then a default value of 'Y' will be assumed</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PrintOf" minOccurs="0"/>
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="IncludeFutureTransactions" minOccurs="0"/>
+        <xsd:element ref="XslStyleSheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintOf">
+    <xsd:annotation>
+      <xsd:documentation>Indicates for which period you want to print the repport (C-Current, 1 - Previous 1, 2- Previous 2). If no value is supplied then a default value of 'C' will be assumed. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current;1=Previous 1;2=Previous 2"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>Indicates in what sequence you wan the report to print (P - Posting date. T - Transaction date, C - Check). If no value is supplied then a default value of 'P' will be assimed. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;P=Posting date;T=Transaction date;C=Check"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStyleSheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

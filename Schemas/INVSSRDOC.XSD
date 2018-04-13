@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Serial Number Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupInvSerialHead">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to maintain a serial number.
+NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.
+</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="Key">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the key information required to maintain a serial number.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="Serial">
+											<xsd:annotation>
+												<xsd:documentation>Serial number being maintained. The format is up to 20 characters alphanumeric, or 15 characters numeric depending on a configuration option within SYSPRO.
+</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StockCode">
+											<xsd:annotation>
+												<xsd:documentation>Stock code to which the serial number being added. The format is up to 30 characters alphanumeric, or 15 characters numeric depending on a configuration option within SYSPRO. The stock code must have serials required set on in stock code setup. This element is mandatory for an Add function, and cannot be maintained in an Update function.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Warehouse">
+											<xsd:annotation>
+												<xsd:documentation>The warehouse being Added/Maintained or Deleted for Serial number. The format is 2 characters alphanumeric.
+</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="SerialDescription" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the stock description to appear against the serial number. The format is 30 characters, alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ExpiryDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Expiry date. Zero indicates no expiry date.  
+The format is CCYY-MM-DD.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ScrapDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Scrap date. Zero indicates no scrap date.  
+The format is CCYY-MM-DD.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="QtyReceived" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If a manual serial number is being added the quantity may only be 1 or zero. The number of decimals entered must match the number of decimals setup against the stock code. This element cannot be maintained in an Update function.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="11"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Location" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The location indicates where the serialized item is stored. This element cannot be maintained in an Update function.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="8"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Customer" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can only access the customer field if you are taking on a manual serial number and the quantity is zero. The format is up to 7 characters, alphanumeric or numeric depending on a configuration option within SYSPRO. This element cannot be maintained in an Update function.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="7"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Version" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory if adding a serial number for a stock code that is ECC-controlled at version or release level. The format is 3 characters alphanumeric or numeric depending on a configuration option within Bill of Materials Setup. This element cannot be maintained in an Update function.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="3"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Release" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory if adding a serial number for a stock code that is ECC-controlled at release level. The format is 3 characters alphanumeric or numeric depending on a configuration option within Bill of Materials Setup. This element cannot be maintained in an Update function.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="3"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

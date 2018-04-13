@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Contact Management Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ContactManagementSetupOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Defaults" minOccurs="0"/>
+        <xsd:element ref="Contact" minOccurs="0"/>
+        <xsd:element ref="ActivityFollowUp" minOccurs="0"/>
+        <xsd:element ref="ActivityChanges" minOccurs="0"/>
+        <xsd:element ref="ActivityCriteria" minOccurs="0"/>
+        <xsd:element ref="ActivityAttachment" minOccurs="0"/>
+        <xsd:element ref="CopyDetails" minOccurs="0"/>
+        <xsd:element ref="AccountUserFields" minOccurs="0"/>
+        <xsd:element ref="ActivityUserFields" minOccurs="0"/>
+        <xsd:element ref="CalenderOptions" minOccurs="0"/>
+        <xsd:element ref="PurgeOptions" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CmsSetupWizard">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to run the Cms Setup Wizard. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MultiMediaImageCat">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Multi Media image category to be selected. If no value is supplied then the default of BMP will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WeatherUrl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the default Weather Url to be used. '{None}' means not required. If no value is supplied then the default of 'http://www.weather.com' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MapUrl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the default Map Url to be used. If no value is supplied then the default of 'http://maps.google.com/maps' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactProperty">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description. If no value is supplied then the default of 'Contact property' will be used.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactClass">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact Classification. If no value is supplied then the default of 'Contact class' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactType">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact type description. If no value is supplied then the default of 'Contact type' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactCategory">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact category description. If no value is supplied then the default of 'Contact category' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Defaults">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CmsSetupWizard"/>
+        <xsd:element ref="MultiMediaImageCat"/>
+        <xsd:element ref="WeatherUrl"/>
+        <xsd:element ref="MapUrl"/>
+        <xsd:element ref="ContactProperty"/>
+        <xsd:element ref="ContactClass"/>
+        <xsd:element ref="ContactType"/>
+        <xsd:element ref="ContactCategory"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionNone">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 1. If no value is supplied then the default value of '{None}' will be assumed (indicating that it is not required).]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionRed">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 2. If no value is supplied then the default of 'Red' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionBlue">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 3. If no value is supplied then the default of 'Blue' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionYellow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 4. If no value is supplied then the default of 'Yellow' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionGreen">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 5. If no value is supplied then the default of 'Green' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionCyan">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 6. If no value is supplied then the default of 'Cyan' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionMagenta">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 7. If no value is supplied then the default of 'Magenta' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ContactPropCaptionWhite">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Contact property description 8. If no value is supplied then the default of 'White' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Contact">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ContactPropCaptionNone"/>
+        <xsd:element ref="ContactPropCaptionRed"/>
+        <xsd:element ref="ContactPropCaptionBlue"/>
+        <xsd:element ref="ContactPropCaptionYellow"/>
+        <xsd:element ref="ContactPropCaptionGreen"/>
+        <xsd:element ref="ContactPropCaptionCyan"/>
+        <xsd:element ref="ContactPropCaptionMagenta"/>
+        <xsd:element ref="ContactPropCaptionWhite"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionCleared">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 1. If no value is supplied then the default of 'Cleared' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionRedFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 2. If no value is supplied then the default of 'Red flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionBlueFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 3. If no value is supplied then the default of 'Blue flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionYellowFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 4. If no value is supplied then the default of 'Yellow flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionGreenFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 5. If no value is supplied then the default of 'Green flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionCyanFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 6. If no value is supplied then the default of 'Cyan flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionMagentaFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 7. If no value is supplied then the default of 'Magenta flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpCaptionWhiteFlag">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Activity flag description 8. If no value is supplied then the default of 'White flag' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityFollowUp">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FollowUpCaptionCleared"/>
+        <xsd:element ref="FollowUpCaptionRedFlag"/>
+        <xsd:element ref="FollowUpCaptionBlueFlag"/>
+        <xsd:element ref="FollowUpCaptionYellowFlag"/>
+        <xsd:element ref="FollowUpCaptionGreenFlag"/>
+        <xsd:element ref="FollowUpCaptionCyanFlag"/>
+        <xsd:element ref="FollowUpCaptionMagentaFlag"/>
+        <xsd:element ref="FollowUpCaptionWhiteFlag"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ActivityChangeSubject">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Subject change flag to be propagated to all attendees when change affects multiple attendees. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityChangeLocation">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Location change flag to be propagated to all attendees when change affects multiple atteedes. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityChangeRegarding">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Regarding change flag to be propagated to all attendees when change affects multiple attendees. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityChangeResult">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Result change flag to be propagated to all attendees when change affects multiple attendees. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityChangeFollowUp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Follow Up change flag to be propagated to all attendees when change affects multiple attendees. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityChangePriority">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Priority change flag to be propagated to all attendees when change affects multiple attendees. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityChanges">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ActivityChangeSubject"/>
+        <xsd:element ref="ActivityChangeLocation"/>
+        <xsd:element ref="ActivityChangeRegarding"/>
+        <xsd:element ref="ActivityChangeResult"/>
+        <xsd:element ref="ActivityChangeFollowUp"/>
+        <xsd:element ref="ActivityChangePriority"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteriaLocation">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Criteria Location flag of fields only allowed from predefined lists. (N - No - Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteriaRegarding">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Criteria Regarding flag of fields only allowed from predefined lists. (N - No - Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteriaResult">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Criteria Result flag of fields only allowed from predefined lists. (N - No - Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteriaUserField1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Criteria User Field 1 flag of fields only allowed from predefined lists. (N - No - Y - Yes). If  no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteriaUserField2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Criteria User Field 2 flag of fields only allowed from predefined lists. (N - No - Y - Yes). If  no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteriaUserField3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Activity Criteria User Field 3 flag of fields only allowed from predefined lists. (N - No - Y - Yes). If  no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityCriteria">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ActivityCriteriaLocation"/>
+        <xsd:element ref="ActivityCriteriaRegarding"/>
+        <xsd:element ref="ActivityCriteriaResult"/>
+        <xsd:element ref="ActivityCriteriaUserField1"/>
+        <xsd:element ref="ActivityCriteriaUserField2"/>
+        <xsd:element ref="ActivityCriteriaUserField3"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UserDefinedFolder">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates location of attachments. (S - Standard attachment folder, U - User defined attachment folder). If no value is supplied then the default value of S will be assumed. Changing the attachment folder will mean that you will not be able to access your existing attachments, unless you MOVE the attachments to the new folder.]]></xsd:documentation>
+      <xsd:appinfo source="S=Standard attachment folder;U=User defined attachment folder;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserDefinedLocation">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates location of attachments. Always ends in slash and must contain quotes. If no value is supplied then the default of  ...\work\crm_?\activity\attach\ will be assumed. No changes are permitted to this folder when 'UserDefinedFolder' is set to S.  (Must not be same as another company attachment location).]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityAttachment">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="UserDefinedFolder"/>
+        <xsd:element ref="UserDefinedLocation"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PopUpCopyDetails">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether a popup 'Copy Details' dialog should be displayed if the details are changed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeWorkPostalAddr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether 'Work postal address' should be changed. Only applicable if changed 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeWorkPhysicalAddr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether 'Work physical address' should be changed. Only applicable if 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeWorkTelNo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether 'Work telephone number' should be changed. Only applicable if 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeWorkFaxNo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether 'Work fax number' should be changed. Only applicable if 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeWebsite">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the 'Web site' address should be changed. Only applicable if 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeMapUrl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the 'Map Url' address should be changed. Only applicable if 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeWeatherUrl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the 'Weather Url' address should changed. Only applicable if 'PopUpCopyDetails' is Y. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CopyDetails">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PopUpCopyDetails"/>
+        <xsd:element ref="ChangeWorkPostalAddr"/>
+        <xsd:element ref="ChangeWorkPhysicalAddr"/>
+        <xsd:element ref="ChangeWorkTelNo"/>
+        <xsd:element ref="ChangeWorkFaxNo"/>
+        <xsd:element ref="ChangeWebsite"/>
+        <xsd:element ref="ChangeMapUrl"/>
+        <xsd:element ref="ChangeWeatherUrl"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AccountUserDefFieldDesc3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates account user defined field captions. If no value is supplied then the default of 'User def 3' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AccountUserDefFieldDesc4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates account user defined field captions. If no value is supplied then the default of 'User def 4' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AccountUserDefFieldDesc5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates account user defined field captions. If no value is supplied then the default of 'User def 5' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AccountUserFields">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AccountUserDefFieldDesc3"/>
+        <xsd:element ref="AccountUserDefFieldDesc4"/>
+        <xsd:element ref="AccountUserDefFieldDesc5"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ActivityUserDefFieldDesc1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates activity user defined field caption 1. If no value is supplied then the default value of 'User field 1' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityUserDefFieldDesc2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates activity user defined field caption 2. If no value is supplied then the default value of 'User field 2' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityUserDefFieldDesc3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates activity user defined field caption 3. If no value is supplied then the default value of 'User field 3' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActivityUserFields">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ActivityUserDefFieldDesc1"/>
+        <xsd:element ref="ActivityUserDefFieldDesc2"/>
+        <xsd:element ref="ActivityUserDefFieldDesc3"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CalendarIncludeOption">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the Calender sync method. (Spaces - Include outstanding items only, N - No calender sync, F - Include outstanding and future items only, 1 - Include outstanding items and all others from 1 month ago, 2 - Include oustanding items and all others from 2 months ago, 3 - Include outstanding items and all others from 3 months ago, 6 - Include outstanding items and all other from 6 months ago, Y - Include outstanding items and all others from 12 months ago).  If no value is supplied then a default value of spaces will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=1Year;N=NoSync;F=Future;1=1Month;2=2Months;3=3Months;6=6Months;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="6"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CalenderOptions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CalendarIncludeOption"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AllowContactPurge">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Contact purge is allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeleteContactsNoActivityFor">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of months that the contact has had no activity. This is only applicable if 'AllowContactPurge' is Y. If no value is supplied then the default value of 3 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowActivityPurge">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Activity purge is allowed. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeleteActivitiesOlderThan">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of months that activities older than this number are to be deleted. This is only applicable if 'AllowContactPurge' is Y. If no value is supplied then the default value of 3 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowRuntimeSelection">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Run time selection in purge is allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PurgeOptions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AllowContactPurge"/>
+        <xsd:element ref="DeleteContactsNoActivityFor"/>
+        <xsd:element ref="AllowActivityPurge"/>
+        <xsd:element ref="DeleteActivitiesOlderThan"/>
+        <xsd:element ref="AllowRuntimeSelection"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the GL Recurring Journal Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="RecurringJournalCodeSelection" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ValidateJournalsForPosting" minOccurs="0"/>
+				<xsd:element ref="AuthorizedJournals" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RecurringJournalCodeSelection">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the recurring journal code selection. The default value is A(All) and the other valid value is R(Range).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=GenRecJnlCtl;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="AuthorizedJournals">
+		<xsd:annotation>
+			<xsd:documentation>This Indicates whether journals that have/havenot been authorized should be printed. You can also print a combination of both. (B- Both , A - Print authorized journals only, U - Print unauthorized journals only). If no value has been passed then a default value of 'B' will be used. will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;B=Both;A=Authorized journals;U=Unauthorized journals"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="U"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValidateJournalsForPosting">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether to validate journals when posting. The default is N(No) and the other valid value is Y(Yes). </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

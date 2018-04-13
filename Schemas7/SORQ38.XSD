@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Dispatch Note Trial Balance Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="GlCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GlCode">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the GL code selected.  The valid options are A=All or S=Single. The default is A.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroBalance" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate whether notes with a zero balance must be printed.  The valid options are Y=Yes or N=No. The default is N. If 'TotalsPerDispatch is "N" then 'IncludeZeroBalance' is not relevant and all selected dispatches are included.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="TotalsPerDispatch" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroBalance" minOccurs="0"/>
+        <xsd:element ref="Period" minOccurs="0"/>
+        <xsd:element ref="xslStyleSheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Period">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the period of the trial balance that must be printed.  The valid options are C=Current, 1=Previous month 1 or 2=Previous month 2. The default is C.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the report type.  The valid options are S=Summary or D=Detail. The default is S.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TotalsPerDispatch">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate whether the totals per dispatch note must be printed.  The valid options are Y=Yes or N=No. The default is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="xslStyleSheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the GL Period End Worksheet
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AdjustmentToPrint">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what adjustment you want to print (P - Period end, A - Auditors, B - Both). If no value is supplied then a default value of 'P' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;P=Period end;A=Auditors;B=Both"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BlankLinesBetweenAccounts" default="1">
+		<xsd:annotation>
+			<xsd:documentation>Indicate how many lines should be left between accounts. If no value is supplied then a default value of 1 will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="0"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="5"/>
+				<xsd:enumeration value="6"/>
+				<xsd:enumeration value="7"/>
+				<xsd:enumeration value="8"/>
+				<xsd:enumeration value="9"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlCode" minOccurs="0"/>
+				<xsd:element ref="GlGroup" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlCode">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of ledger codes  to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=GenMaster;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlGroup">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of GL Group to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=GenGroups;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeAssets">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether you want to view asset type account (Y- Yes,  N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N-No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCapital">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether you want to view capital type account (Y- Yes,  N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N-No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeExpense">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether you want to view expense type account (Y- Yes,  N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeInactiveAccounts">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether you want to inlcude inactive account (N - No, Y - Yes). If no value is supplied then a default value of 'N' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeLiabilities">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether you want to view liabilities type account (Y- Yes,  N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeRevenue">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether you want to view revenue type account (Y- Yes,  N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LedgerPeriod">
+		<xsd:annotation>
+			<xsd:documentation>Select the period you wish to print. If no period is supplied then the current period will be used as default. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="01"/>
+				<xsd:enumeration value="02"/>
+				<xsd:enumeration value="03"/>
+				<xsd:enumeration value="04"/>
+				<xsd:enumeration value="05"/>
+				<xsd:enumeration value="06"/>
+				<xsd:enumeration value="07"/>
+				<xsd:enumeration value="08"/>
+				<xsd:enumeration value="09"/>
+				<xsd:enumeration value="10"/>
+				<xsd:enumeration value="11"/>
+				<xsd:enumeration value="12"/>
+				<xsd:enumeration value="13"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LedgerYear">
+		<xsd:annotation>
+			<xsd:documentation>If you have selected 'P' for LedgerYearAndPeriod then you need to speify what year you wish to print. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LedgerYearAndPeriod">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what Ledger you want to print (C - Current, P - Previous). If no value is supplied then a default value of 'C' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;C=Current;P=Previous;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportSequence" minOccurs="0"/>
+				<xsd:element ref="AdjustmentToPrint" minOccurs="0"/>
+				<xsd:element ref="LedgerYearAndPeriod" minOccurs="0"/>
+				<xsd:element ref="LedgerYear" minOccurs="0"/>
+				<xsd:element ref="LedgerPeriod" minOccurs="0"/>
+				<xsd:element ref="IncludeAssets" minOccurs="0"/>
+				<xsd:element ref="IncludeCapital" minOccurs="0"/>
+				<xsd:element ref="IncludeLiabilities" minOccurs="0"/>
+				<xsd:element ref="IncludeExpense" minOccurs="0"/>
+				<xsd:element ref="IncludeRevenue" minOccurs="0"/>
+				<xsd:element ref="IncludeInactiveAccounts" minOccurs="0"/>
+				<xsd:element ref="WorklinesToPrint" minOccurs="0"/>
+				<xsd:element ref="BlankLinesBetweenAccounts" minOccurs="0"/>
+				<xsd:element ref="XslStyleSheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportSequence">
+		<xsd:annotation>
+			<xsd:documentation>Defines the sequence in which the report will be printed. ( L -Ledger Code, D - Description, G - Group ). If no value is supplied a default of 'L' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;L=Ledger;D=Description;G=Group"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="G"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WorklinesToPrint">
+		<xsd:annotation>
+			<xsd:documentation>Indicate how many worklines you want printed. If no value is supplied then a default value 0 will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="0"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="5"/>
+				<xsd:enumeration value="6"/>
+				<xsd:enumeration value="7"/>
+				<xsd:enumeration value="8"/>
+				<xsd:enumeration value="9"/>
+				<xsd:enumeration value="10"/>
+				<xsd:enumeration value="11"/>
+				<xsd:enumeration value="12"/>
+				<xsd:enumeration value="13"/>
+				<xsd:enumeration value="14"/>
+				<xsd:enumeration value="15"/>
+				<xsd:enumeration value="16"/>
+				<xsd:enumeration value="17"/>
+				<xsd:enumeration value="18"/>
+				<xsd:enumeration value="19"/>
+				<xsd:enumeration value="20"/>
+				<xsd:enumeration value="21"/>
+				<xsd:enumeration value="22"/>
+				<xsd:enumeration value="23"/>
+				<xsd:enumeration value="24"/>
+				<xsd:enumeration value="25"/>
+				<xsd:enumeration value="26"/>
+				<xsd:enumeration value="27"/>
+				<xsd:enumeration value="28"/>
+				<xsd:enumeration value="29"/>
+				<xsd:enumeration value="30"/>
+				<xsd:enumeration value="31"/>
+				<xsd:enumeration value="32"/>
+				<xsd:enumeration value="33"/>
+				<xsd:enumeration value="34"/>
+				<xsd:enumeration value="35"/>
+				<xsd:enumeration value="36"/>
+				<xsd:enumeration value="37"/>
+				<xsd:enumeration value="38"/>
+				<xsd:enumeration value="39"/>
+				<xsd:enumeration value="40"/>
+				<xsd:enumeration value="41"/>
+				<xsd:enumeration value="42"/>
+				<xsd:enumeration value="43"/>
+				<xsd:enumeration value="44"/>
+				<xsd:enumeration value="45"/>
+				<xsd:enumeration value="46"/>
+				<xsd:enumeration value="47"/>
+				<xsd:enumeration value="48"/>
+				<xsd:enumeration value="49"/>
+				<xsd:enumeration value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStyleSheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

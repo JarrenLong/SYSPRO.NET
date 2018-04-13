@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Bank Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupBank">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Bank maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Banks.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="Key">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the key information required to maintain a Bank.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:all>
+										<xsd:element name="Bank">
+											<xsd:annotation>
+												<xsd:documentation>This is the key to the Bank being maintained. This is mandatory. If this Bank is being added, it must not pre-exist. If this Bank is being changed or deleted, it must be a valid Syspro Bank.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Description">
+								<xsd:annotation>
+									<xsd:documentation>This is the name of the Bank and is used primarily to identify the Bank.  This is mandatory.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BankAccount">
+								<xsd:annotation>
+									<xsd:documentation>This is the bank account number. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Telephone">
+								<xsd:annotation>
+									<xsd:documentation>This is the telephone number of the Bank. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NextChequeNum" type="xsd:double">
+								<xsd:annotation>
+									<xsd:documentation>This is the next cheque number for the Bank.  It must be greater than zero.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ArBankChargeReqd">
+								<xsd:annotation>
+									<xsd:documentation>This indicates whether bank charges are required when entering A/R payments.  Valid entries are Y, N and ' '.  If set to 'Y', then the ArBankChargeGlCode must be supplied and valid.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ApEftPayments">
+								<xsd:annotation>
+									<xsd:documentation>This indicates whether A/P EFT payments are allowed for this bank. Valid entries and Y, N and ' '.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NextEftNum" type="xsd:double">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the next Eft number.  If supplied, this value should be greater than the check number to prevent duplciations in the cash book.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ApPostMethod">
+								<xsd:annotation>
+									<xsd:documentation>This indicates whether to post from AP in detail or total. Valid entries are D, T or ' '.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value="T"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LocalOrForeignBank">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether bank is local or foreign.  Valid entries are L or F.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="L"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Currency" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the bank currency code.  If this is a local bank, this value will be ignored.  If this is a foreign bank, this value must be supplied and must be a valid SYSPRO currency.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CbStmtBal1" type="xsd:double">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the Cash book statement balance in the currency of the bank</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CbStmtBalLoc1" type="xsd:double">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the Cash book statement balance in local currency.  If this is a foreign bank, this value cannot be supplied if the statement balance in the currency of the bank is zero.  If this is a local bank, this value cannot be greater than zero.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CashGlCode" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the Cash G/L account number.  This is manadatory This is mandatory and must be a valid SYSPRO GL code.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="GlExchVarCode" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the Exchange variance G/L code.  This is mandatory and must be a valid SYSPRO GL code.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ArBankChargeGlCode" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the Bank charges G/L code.  This should only be supplied if ArBankChargeReqd is set to Y, if not it will be ignored.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

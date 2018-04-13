@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Cash Book Tax Query business object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TransactionDate" minOccurs="0"/>
+				<xsd:element ref="Journal" minOccurs="0"/>
+				<xsd:element ref="TaxCode" minOccurs="0"/>
+				<xsd:element ref="Period" minOccurs="0"/>
+				<xsd:element ref="Year" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TransactionDate">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of transaction dates for tax entries to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Journal">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of journals to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TaxType" minOccurs="0"/>
+				<xsd:element ref="ReportType" minOccurs="0"/>
+				<xsd:element ref="Reprint" minOccurs="0"/>
+				<xsd:element ref="DeleteTaxDistFiles" minOccurs="0"/>
+				<xsd:element ref="IncludeZeroTaxAmt" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Period">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of periods for reprinted tax entries to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TaxType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the type of transaction that should be returned. I (input only - only withdrawals), O (output only - only deposits) or B (both input and output - both withdrawals and deposits). If no value is supplied then a default value of 'B' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;B=Both input and output;I=Input;O=Output;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReportType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates how much detail should be returned (S - summary - prints the tax breakdown by each journal processed in the Cash Book module.D - Detail - print the tax breakdown for each invoice processed in the Cash Book module. If no value is supplied then a default value of 'D' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;D=Detail;S=Summary"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxCode">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of tax codes to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=AdmTax;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Reprint">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether the report will be a reprint. If no value is supplied then a default of 'N' will be used</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DeleteTaxDistFiles">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether the CSHTDD and CSHTDH must be deleted. If no value is supplied then a default of 'N' will be used</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The style sheet to be applied</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Year">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of years for reprinted tax entries to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeZeroTaxAmt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No">When selected will include tax amount that have a zero value</xsd:appinfo>
+			<xsd:documentation>When selected will display tax amounts with the values of zero</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

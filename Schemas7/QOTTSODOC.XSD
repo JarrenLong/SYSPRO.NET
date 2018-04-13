@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Quotations Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="QuotationsOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General" minOccurs="0"/>
+        <xsd:element ref="Pricing" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="QuotationNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates whether quotation numbering will be manual or automatic or by Branch. (Y - Automatic, N - Manual, B - By branch). Is only updateable if 'Automatic estimate numbering' in the companies setup = Y. If no value is supplied then the default of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Automatic;N=Manual;B=By branch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NxtQuotationNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Next quotation number to be used.   Only updateable if 'QuotationNumbering' is set to N.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QuotationVersioning">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Quotation version is required.  (N -No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PromptVersionIncrease">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to always prompt for version increases.  (N -No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:pattern value="Y"/>
+        <xsd:pattern value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDescOffer1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Default offer description 1. If no value is supplied then the default of 'Offer one' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDescOffer2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Default offer description 2. If no value is supplied then the default of 'Offer two' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDescOffer3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Default offer description 3. If no value is supplied then the default of 'Offer three' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDescOffer4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Default offer description 4. If no value is supplied then the default of 'Offer four' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDescOffer5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Default offer description 5. If no value is supplied then the default of 'Offer five' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDescDefOffer">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the Default offer description 6. If no value is supplied then the default of 'Offer six' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CostImplosionJobCreationUseRouteZero">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates cost implosion job creation, use route zero when no components or operations exist on selected route. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowChgQueryDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if changes to date of query are permitted. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowChgExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if changes to expiry date are allowed. (Y - Yes, N - No). May only be set to Y if 'DefExpiryDate' is set to F. If 'DefExpiryDate' is set to P this option will become N. If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates on what basis to set the base expiry date on. (F - Force entry of expiry date, Q - Date of query, T - Tender date, P - Print date, Z - Allow zero expiry date). If no value is supplied then the default value of F will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="F=Force entry of expiry date;Q=Date of query;T=Tender date;P=Print date;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Q"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="Z"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysBaseDateExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates number of days from base date to expiry date. If 'DefExpiryDate' is a F (Force) then no changes are permitted to this element.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="QuotationNumMethod"/>
+        <xsd:element ref="NxtQuotationNum"/>
+        <xsd:element ref="QuotationVersioning"/>
+        <xsd:element ref="DefDescOffer1"/>
+        <xsd:element ref="DefDescOffer2"/>
+        <xsd:element ref="DefDescOffer3"/>
+        <xsd:element ref="DefDescOffer4"/>
+        <xsd:element ref="DefDescOffer5"/>
+        <xsd:element ref="DefDescDefOffer"/>
+        <xsd:element ref="CostImplosionJobCreationUseRouteZero"/>
+        <xsd:element ref="AllowChgQueryDate"/>
+        <xsd:element ref="AllowChgExpiryDate"/>
+        <xsd:element ref="DefExpiryDate"/>
+        <xsd:element ref="DaysBaseDateExpiryDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DefNonStProfitBasis">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the default quotation non-stocked profit basis. (M - Markup, G - Margin). If no value is supplied then the default of M will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="M=Markup;G=Margin;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="G"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefNonStProfitPerc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates default non-stocked profit markup percentage. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefNonStProfitAllowChg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if changes to non-stocked profit levels are allowed at quotation level. (Y - Yes, N - No). If no value is supplied then the default value or Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefNonStProfitConvert">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if conversion is to take place on 'DefNonStProfitPerc'.(Y - Yes, N - No). If no value is supplied then the default value or Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddLabProfitBasis">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the default quotation labour profit basis. (M - Markup, G - Margin). If no value is supplied then the default of M will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="M=Markup;G=Margin;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="G"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddLabProfitPerc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates default labour profit markup percentage. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddLabProfitAllowChg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if labor charge percent changes are allowed aestimate level. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddLabProfitConvert">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if conversion is to take place on 'DefAddLabProfitPerc'.(Y - Yes, N - No). If no value is supplied then the default value or Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplySOLineDiscBreaks">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if sales order line discount break allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RecalcLineDiscBreaks">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to recalculate the line discount breaks on quotation confirmation. (y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddMatProfitBasis">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the default esitmate additional materials profit basis. (M - Markup, G - Margin). If no value is supplied then the default of M will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="M=Markup;G=Margin;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="G"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddMatProfitPerc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates default estimate additional material charge  profit markup percentage. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddMatProfitAllowChg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if changes are allowed at material estimate level. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefAddMatProfitConvert">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if conversion is to take place on 'DefAddMatProfitPerc'.(Y - Yes, N - No). If no value is supplied then the default value or Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CostToUseForQotImplosion">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates Cost to use for implosion. (I - Inventory, L - Last, S - Bom).  If no value is supplied then the default value of I will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="I=Inventory;L=Last;S=BOM;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Pricing">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DefNonStProfitBasis"/>
+        <xsd:element ref="DefNonStProfitPerc"/>
+        <xsd:element ref="DefNonStProfitAllowChg"/>
+        <xsd:element ref="DefNonStProfitConvert"/>
+        <xsd:element ref="DefAddLabProfitBasis"/>
+        <xsd:element ref="DefAddLabProfitPerc"/>
+        <xsd:element ref="DefAddLabProfitAllowChg"/>
+        <xsd:element ref="DefAddLabProfitConvert"/>
+        <xsd:element ref="ApplySOLineDiscBreaks"/>
+        <xsd:element ref="RecalcLineDiscBreaks"/>
+        <xsd:element ref="DefAddMatProfitBasis"/>
+        <xsd:element ref="DefAddMatProfitPerc"/>
+        <xsd:element ref="DefAddMatProfitAllowChg"/>
+        <xsd:element ref="DefAddMatProfitConvert"/>
+        <xsd:element ref="CostToUseForQotImplosion"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

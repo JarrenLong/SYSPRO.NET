@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the P&C Deposit Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostDeposits">
+		<xsd:annotation>
+			<xsd:documentation>This it the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to create a deposit header record.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Contract">
+								<xsd:annotation>
+									<xsd:documentation>The contract element is mandatory. This will be the contract that you are adding the deposit header record for.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Job">
+								<xsd:annotation>
+									<xsd:documentation>The job element is mandatory. This will be the job that you are adding the deposit header record for.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DepositType" default="P">
+								<xsd:annotation>
+									<xsd:documentation>The Deposit type specifies what type will be used when creating deposits. (V - value, P - Percentage. ) If V is selected then schedules with a specified value will be created and if P is selected then schedules with a specific percentage will be created.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="P"/>
+										<xsd:enumeration value="V"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DepositPercent" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The deposit percent element is the total percentage of deposit for the job that was received. If the deposit method is set to "P" then this field is mandatory.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DepositValue">
+								<xsd:annotation>
+									<xsd:documentation>The deposit value element is the total amount of deposit that was received. If the deposit method is set to "V" then this field is mandatory.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="replace"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DepositRemaining">
+								<xsd:annotation>
+									<xsd:documentation>The depositRemaining element is the deposit amount remaining which is still available to use. It is the only field that may be updated and is a mandatory field.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DepositCustomer">
+								<xsd:annotation>
+									<xsd:documentation>The DepositCustomer element is the customer that deposit has been received for. This is a mandatory field and may not be changed once added.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ProductClass">
+								<xsd:annotation>
+									<xsd:documentation>The ProductClass element is the product class that will be used when adding the deposit miscellaneous line to the sales order. The branch is picked up from the customer. This is a mandatory field and may not be changed once added.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Comment" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The comment element is the comment that will be used when adding the deposit miscellaneous line to the sales order.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The TaxCode element is the tax code that will be used when adding the deposit miscellaneous line to the sales order. This is an optional field and may not be changed once added.When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GstTaxCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The GstTaxCode element is the gst tax code that will be used when adding the deposit miscellaneous line to the sales order. This is an optional field and may not be changed once added.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SalesOrder">
+								<xsd:annotation>
+									<xsd:documentation>The SalesOrder element is the sales order that the miscellaneous line was added to. This is a mandatory field and may not be changed once added.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Invoice" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Invoice element is the invoice number that was generated by the sales order when invoicing the miscellaneous deposit line. It is not yet in use but has been provided for for future use.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NextLine">
+								<xsd:annotation>
+									<xsd:documentation>The NextLine element stores the next line number to be used when adding a deposit detail line. It is a mandatory field and will be updated by the deposit detail business object automatically when a detail line is created. This element must always be set to 1 when adding a deposit header record for the first time.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AP Tax Dsitribution Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="InvoiceDate" minOccurs="0"/>
+        <xsd:element ref="Journal" minOccurs="0"/>
+        <xsd:element ref="TaxCode" minOccurs="0"/>
+        <xsd:element ref="Period" minOccurs="0"/>
+        <xsd:element ref="Year" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="InvoiceDate">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range of invoice dates for tax entries to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Journal">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range, List of journals to be returned. FilterType options - A(All), (S)Single, (R)Range, (L)List. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element name="DeleteFile" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>If you select to print a Summary report then you can indicate whether you want to delete the tax file once the report has been printed, or retain the tax file for reprinting.</xsd:documentation>
+            <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="Reprint" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Period">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range of periods for reprinted tax entries to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Indicates how much detail should be returned (S - summary - prints the tax breakdown by each journal processed in the Accounts Payable module.D - Detail - print the tax breakdown for each invoice processed in the Accounts Payable module. If no value is supplied then a default value of 'D' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;D=Detail;S=Summary"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TaxCode">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range of tax codes to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AdmTax;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reprint">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the report will be a reprint. If no value is supplied then a default of 'N' will be used</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The style sheet to be applied</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Year">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range of years for reprinted tax entries to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Generic Browse Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Browse">
+		<xsd:annotation>
+			<xsd:documentation>The root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:all>
+				<xsd:element ref="BrowseName"/>
+				<xsd:element ref="StartAtKey" minOccurs="0"/>
+				<xsd:element ref="StartCondition" minOccurs="0"/>
+				<xsd:element ref="ReturnRows" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+				<xsd:element ref="BrowseDetails" minOccurs="0"/>
+				<xsd:element name="Filter" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>An Optional Sections that allows for a single filter on a specified Column</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ColumnFilterName" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>Must contain the name of the column that must be filtered on.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ColumnFilterValue" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>Must contain the value of the filter criteria</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BrowseDetails">
+		<xsd:annotation>
+			<xsd:documentation>An optional section than overrides the configuration file information. If this element exists it must contain a tablename element with a value, or else the configuration file will be used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="TableName"/>
+				<xsd:element ref="Title" minOccurs="0"/>
+				<xsd:element ref="Column" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BrowseName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is a user defined name. This is a compulsary.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Column">
+		<xsd:annotation>
+			<xsd:documentation>The column element can appear multiple times. It can contain ColumnName, ColumnDescription and ColumnKey.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="ColumnName"/>
+				<xsd:element ref="ColumnDescription" minOccurs="0"/>
+				<xsd:element ref="ColumnKey" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ColumnDescription">
+		<xsd:annotation>
+			<xsd:documentation>This is the description to appear against this column. If it is blank then the standard column name for this column is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ColumnKey">
+		<xsd:annotation>
+			<xsd:documentation>If this element contains YES it specifies that the data against this column is to be underlined to make it a hyperlink. If multiple columns have this element set to YES then only the last one will be used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Yes"/>
+				<xsd:enumeration value=""/>
+				<xsd:enumeration value="No"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ColumnName">
+		<xsd:annotation>
+			<xsd:documentation>This is the column name of the data to be returned.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReturnRows" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The number of rows either before or after this row to return (depending on whether GR/GE or EF/LE is used). If this is specified then this number of rows will be returned. If blank then the number against this BrowseName in the configuration file will be used. If thie number against the BrowseName is also blank then the default number against the configuration file will be used. If this default is also blank then 20 will be returned.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StartAtKey" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the primary key to the table name defined against this BrowseName in the configuration file. This is optional and will default to the beginning of the file.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StartCondition" default="GE">
+		<xsd:annotation>
+			<xsd:documentation>This is used with the StartAtKey to specify the information to be returned (GR - greater than, GE - greater than or equal to, EF - end of file, LE - less than or equal to). Both GR and GE progress forward through the file whereas EF and LE return backwards through the file. The default is GE.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="GE"/>
+				<xsd:enumeration value="GR"/>
+				<xsd:enumeration value="EF"/>
+				<xsd:enumeration value="LE"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TableName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>If the BrowseDetails element exists then this element is compulsary. This is the TableName from which you require data.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Title">
+		<xsd:annotation>
+			<xsd:documentation>This is the text to be used in the web browser. This is optional.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>An optional section that allows for a filter on the browse</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

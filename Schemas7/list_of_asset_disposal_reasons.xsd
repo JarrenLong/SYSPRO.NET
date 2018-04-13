@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the List of Asset Disposal Reasons Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DisposalReason">
+    <xsd:annotation>
+      <xsd:documentation>The disposal reason code. (A=All, S=Single, R=Range)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AssetReasonDisp;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>The parent filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DisposalReason"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The parent key element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Manifest"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Manifest" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The name of the definition file is expected</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The parent query element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+

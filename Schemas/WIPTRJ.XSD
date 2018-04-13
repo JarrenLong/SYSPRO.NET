@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters for the WIP Reserve Lots and Serials Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostReserveLotSerial">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Parameters" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="TransactionType" default="A" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if you want to add, change, release or delete reserved lots/serials for the parent part or allocation. Possible values: 'A' - Add reserved lots/serials, 'R' - Release specified reserved lots/serials, 'S' - Release all reserved lots and serials for the parent part or allocation,  'E' - Release all reserved lots and serials for the entire job (i.e. for the parent part as well as all the allocations for the job), 'D' - Delete specified reserved lot/serial or 'C' - change the reserved quantity for the reserved lot/serial. This element will default to 'A' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="R"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="E"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value="C"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Source" default="J" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if you want to add/maintain reserved lots and serials for the parent part or for an allocation. Possible values: 'J' - for the parent part or 'A' - for an allocation. This element will default to 'J' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="J"/>
+                    <xsd:enumeration value="A"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateOnly" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document). This element will default to 'N' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApplyIfEntireDocumentValid" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied). This element will default to 'Y' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned.) This element will default to 'N' if not supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Blanket Sales Order Releases Import Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="BlanketSoReleases">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="TransmissionHeader" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The transmission header holds information used to track documents.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="TransmissionReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This reference is for reference purposes only.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SenderCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the code referring to the sending trading partner. Within SYSPRO you can set up trading partners and give them a code. This code is used to identify them so most of the normal information does not need to be passed. If there is an entry for SenderCode it must be valid. If this code is not supplied then the Customer element customer code will be used. If this is not present then the "Customer to Access" against the operator code is used. If this is also not present the "Customer to Use" code in the supplied parameter file is used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReceiverCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the EDI code for the organization and is for reference purposes only.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DatePrepared" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the date that this document was produced and is for reference purposes  only. If not supplied it will default to the run date. The format is CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:date">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TimePrepared" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the time that the orginal document was prepared and is for reference purposes only. If not supplied it defaults to the run time. The format is HH:MM in the 24 hour clock.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="SoRelease" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>The element contains items to be exported.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="SoReleaseHeader">
+                <xsd:annotation>
+                  <xsd:documentation>Sales order release header root element</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="CustomerPoNumber">
+                      <xsd:annotation>
+                        <xsd:documentation>The customer purchase order as specified in the contract.  This element is mandatory.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Customer">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the customer code as specified in the contract.  This element is mandatory.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CustomerStockCode">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the customer stock code.  This element is mandatory).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="OpeningCume" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the deliveries to date according to the customer’s records.  This element is optional. The opening cume may not be less than the total acknowledged as having been received. Cumes should be ascending but it is permitted that they may be the same if no delivery is required for the given date.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ReleaseDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the start date of the release(s) being imported.  This element is optional, but must be entered if the last invoice or the dispatch note number is given. The format is CCYY-MM-DD.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:date">
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ReleaseReference">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the reference that identifies the release being imported.  This element is mandatory.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LastInvoice" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the last invoice number that has been confirmed as received.  This element is optional.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LastInvoiceQty" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicated the quantity received against the last invoice number.  This ielement is optional.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Value" default="Q" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is a quantity type flag. An entry of 'Q' indicates that the release detail lines refer to actual quantities. Any other value, or blanks, defaults to using cumulative quantities. This element is optional.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="Q"/>
+                          <xsd:enumeration value=""/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="DispatchNoteNum" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the dispatch note number that has been confirmed as received for the contract.  This element is optional.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SoReleaseDetails">
+                <xsd:annotation>
+                  <xsd:documentation>Release details root element </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="Item" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This element contains the date and the quantity and can be repeated.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element name="DateRequired">
+                            <xsd:annotation>
+                              <xsd:documentation>this indicates the date required for the release.  This element is mandatory. The format is CCYY-MM-DD.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:date">
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Quantity">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the quantity based on the ValueFlag in the release header.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Asset Count Import Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostAssetCount">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the Asset Count Import.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting of multiple transactions to multiple suppliers.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Branch">
+                <xsd:annotation>
+                  <xsd:documentation>The branch must be a valid SYSPRO asset branch.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Location">
+                <xsd:annotation>
+                  <xsd:documentation>This must be a valid Syspro asset Location which is in count, i.e. for which an Extract for count has already been done</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Asset">
+                <xsd:annotation>
+                  <xsd:documentation>This must be a valid Syspro Asset code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="AssetId" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is an optional element which can be used to record the ID or serial number of an asset. If this element is not supplied, the Asset ID will not be updated in the Asset count.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="QtyCaptured">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and will contain the quantity counted for the asset. It will be imported into the Asset Count as  'Quantity counted' if the value of the parameter in the ASSTCI.xml CounterVerifier element value is = "C". It will be imported into the Asset Count as  'Quantity verifed' if the value of the parameter in the ASSTCI.xml CounterVerifier element value is = "V".</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

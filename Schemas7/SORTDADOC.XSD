@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Dispatch Note Add Lines Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostDispatchNoteLines">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="DispatchNoteLine" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This defines the information to be added for a dispatch line, and may contain one of four types of dispatch line.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="MerchandiseLine" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element defines the merchandise lines (stocked and non-stocked) that are to be selected from the sales order for dispatching. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="DispatchNoteNumber">
+											<xsd:annotation>
+												<xsd:documentation>This is the dispatch note number for adding the line. The dispatch note must have originated from the sales order if the sales order number is supplied. The format is 15 characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SalesOrder" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The sales order number to use as the basis of the dispatch note  If supplied, the sales order must be the one that was used to create the original dispatch. If not supplied, it will be obtained from the dispatch note.. The sales order must be a valid sales order in a status of 1, 2 or 3. The format is six characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SalesOrderLine">
+											<xsd:annotation>
+												<xsd:documentation>This is the line number from the sales order which is to be used for the dispatch. The line type of the selected line can only be 1 (stocked) or 7 (non-stocked). This can be from 1 to 9999, and must point to a valid line on the sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DispatchQty" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The quantity of the item that is to be dispatched in the order unit of measure of the line. If left blank or zero, the full ship or back order quantity on the order line will be assumed. The format is 7.3 positive.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Units" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If the detail line is a stocked line, the stock code is a unit-qty type stock code and the DispatchQty element is not supplied, the quantity of the detail line must be supplied as units and pieces. At least one of these elements must be supplied. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Pieces" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If the detail line is a stocked line, the stock code is a unit-qty type stock code and the DispatchQty element is not supplied, the quantity of the detail line must be supplied as units and pieces. At least one of these elements must be supplied. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StockingDispatchQty" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The quantity of the item that is to be dispatched in the stocking unit of measure of the stock code. This is only relevant if the stocking and the order unit of measure are different, and unit of measure conversion factors are theoretical (Sales Order Setup). If left blank or zero, the calculated stocking quantity to ship will be assumed. The format is 7.3 positive </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Lot" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A lot must be supplied if the stock code is lot traceable and the basis of dispatch  is back order unless Automatic Depletion is in use. Even if Automatic Depletion is in use, a lot must be supplied if the item is also serialized. If the basis of dispatch is ship and the dispatch quantity is less than the current order ship quantity, the lot that is being dispatched must be supplied. A lot does not have to be supplied if the basis of dispatch is ship and the full ship quantity is to be dispatched. The lot may not be more than 10 characters. If the key lot type for the company is numeric the lot supplied must be a valid numeric value. The lot supplied will be validated against the Lot traceable file for the stock code. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Bins" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This is the top element for the set of bins affected by this transaction, if multiple bins is installed, and the basis of dispatch is back order, or the basis of dispatch is ship, and the dispatch quantity is less than the current order ship quantity. The quantities supplied for all bins must add up to the required dispatch quantity supplied for the line.  Bins do not have to be supplied if Automatic Depletion is in use - unless the stock item is both lot traceable and serialized. Bins do not have to be supplied if the basis of dispatch is Ship and the full ship quantity is to be dispatched.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="BinLocation" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>At least one bin must be supplied if the company makes use of multiple bins. BinLocation may not be more than 6 characters. The entry will be validated against the Inventory Bin file for the stock code.  The quantities supplied for all bins must add up to the dispatch quantity supplied for the line .  Bins do not have to be supplied if Automatic Depletion is in use - unless the stock item is both lot traceable and serialized, or the basis of dispatch is ship, and the full quantity is not dispatched.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="BinQuantity" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>A bin quantity must be supplied for every bin location supplied if the stock code does not make use of unit quantity processing. If the stock item makes use of unit processing - the quantity can either be supplied as a decimal value or else as BinUnits and BinPieces. The bin quantity may not have more than 7 characters for integer and 3 characters for decimals. </xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="BinUnits" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>If the stock item makes use of unit quantity processing and an entry is not supplied against the BinQuantity element, the bin quantity must be supplied as units and pieces. At least one of these elements must be supplied. This element may not have more than 7 characters.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="BinPieces" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>If the stock item makes use of unit quantity processing and an entry is not supplied against the BinQuantity element, the bin quantity must be supplied as units and pieces. At least one of these elements must be supplied. This element may not have more than 3 characters.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This element defines all the serials which are required if the item is serialized, and the basis of dispatch is back order, or the basis of dispatch is ship and the dispatch quantity is less than the current order ship quantity. The quantities supplied for all serial numbers must add up to the dispatch quantity . Serials do not have to be supplied if the basis of dispatch is Ship and the full ship quantity is to be dispatched.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="SerialNumber" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>At least one serial number must be supplied if Serial Tracking is required and the stock item is a serialized item. May not be more than 20 characters for alphanumeric key type and 15 characters for numeric key type (must be valid numeric value if numeric key type).  Serial number must exist on file and have stock for manual and batch serial numbers if stock code is flagged as capture serial numbers at receipt. </xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialQuantity" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>A serial quantity must be supplied for each serial number if the stock code does not make use of unit quantity processing. If the stock item makes use of unit processing - the quantity can either be supplied as a decimal value or else as SerialUnits and SerialPieces. Serial quantity may not have more than 7 characters for integer and 3 characters for decimals. A quantity of 1 only must be entered for a manual serialized item.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialUnits" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>If the stock item makes use of unit quantity processing and an entry is not supplied against the SerialQuantity element, the serial quantity must be supplied as units and pieces. At least one of these elements must be supplied. This element may not have more than 7 characters. This element is only valid for batch serialized items.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialPieces" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>If the stock item makes use of unit quantity processing and an entry is not supplied against the SerialQuantity element, the serial quantity must be supplied as units and pieces. At least one of these elements must be supplied. This element may not have more than 3 characters. This element is only valid for batch serialized items.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialCreationDate" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Serial creation date must be in format CCYY-MM-DD. When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial creation date will be saved against the serial number.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialExpiryDate" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Serial expiry date must be in format CCYY-MM-DD. When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial expiry date will be saved against the serial number.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialScrapDate" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Serial scrap date must be in format CCYY-MM-DD. When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial scrap date will be saved against the serial number.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="SerialLocation" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>When adding a new serial for a stock code that is flagged as capture serials during order entry - the serial location will be saved against the serial number. The format is 8 characters, alphanumeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="OverOrUnderDispatch" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element controls the ability to over or under dispatch the current merchandise line. The default setting of 'N' means that the line will be dispatched normally, and that the quantity to dispatch cannot be greater than the remaining order quantity. The setting of 'U' - Under dispatch means  that the quantity to dispatch must be less than the remaining order quantity, and the originating sales order line will be marked as complete. The setting of 'O' - Over dispatch means that the quantity to dispatch must be greater than the remaining order quantity, and will be processed. 
+The use of the element is governed by the SYSPRO setup options to over and under dispatch. 
+The option to over or under dispatch is not available with a dispatch basis of 'ship'.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="O"/>
+													<xsd:enumeration value="U"/>
+													<xsd:enumeration value=""/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DispatchZeroQty" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If set to 'Y', then the line selected will be dispatched with a zero quantity against it. It can only be used if the basis for dispatch is back order. Any quantity supplied is ignored.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value=""/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BasisForDispatch" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element is used to determine the basis of the quantity to dispatch on an order line. If entered, it is used to override the entry given in parameter 'BasisForDispatch'. 'B' is backorder quantity, 'S' is ship quantity.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="S"/>
+													<xsd:enumeration value=""/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BackorderShipBeforeValidation" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element only applies when the BasisForDispatch is 'B' - back order. If passed, it is used to over-ride the setting of parameter 'BackorderShipBeforeValidation'.  If set to 'Y', then any ship quantities on the sales order line selected are moved to back order prior to any quantity validation on the line. Note that if the line is then rejected, then the sales order quantities will remain in back order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value=""/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BackOrderNonStkShipBeforeValidation" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element only applies when the BasisForDispatch is 'B' - back order, and BackOrderShipBeforeValidation is set to 'Y'. This will only apply if the line in question is a back order line.   If set to 'Y', then any ship quantities on the sales order line selected are moved to back order prior to any quantity validation on the line. Note that if the line is then rejected, then the sales order quantities will remain in back order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value=""/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="eSignature" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CommentLine" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element specifies the sub-elements that make up a dispatch note comment line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="DispatchNoteNumber">
+											<xsd:annotation>
+												<xsd:documentation>This is the dispatch note number for adding the line. The format is 15 characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Comment" type="xsd:string">
+											<xsd:annotation>
+												<xsd:documentation>This is the comment. The format is 45 characters, alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="AttachLine" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Enter 'Y' to attach this comment to the last valid dispatch line.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CommentType" default="I" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The comment type specifies whether the comment is for the dispatch only, or for both dispatch and invoice. The valid entries are 'D' (Dispatch only), 'I' (Invoice and Dispatch) and blank. The default is 'I' .  </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="I"/>
+													<xsd:enumeration value="D"/>
+													<xsd:enumeration value=""/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="MiscChargeLine" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element specifies the sub-elements that make up a dispatch note miscellaneous charge line which does not originate from the sales order.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="DispatchNoteNumber">
+											<xsd:annotation>
+												<xsd:documentation>This is the dispatch note number for adding the line. The format is 15 characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscChargeValue">
+											<xsd:annotation>
+												<xsd:documentation>This is the value of the miscellaneous charge. The format is 12.2 either positive or negative. The negative sign can either precede or follow the value.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscChargeCost" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the cost of the miscellaneous charge. The format is 12.2 either positive or negative. The negative sign can either precede or follow the value. If not supplied, it will default to the miscellaneous charge value.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscProductClass">
+											<xsd:annotation>
+												<xsd:documentation>This is the product class to be updated with the sales quantity and cost values for the miscellaneous charge. This is a mandatory element. The product class must be valid within SYSPRO. The format is 4 characters, alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscTaxCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the tax code to be assigned to the miscellaneous charge. If this is present it must be a valid SYSPRO tax code. The format is 1 character, alphanumeric. If a tax code is not supplied, the sales order is taxable and the element MiscNotTaxable is ‘N’, the default tax code defined in Tax Options will be used unless tax by geographic area is in use, in which case the tax code against the geographic area will be used if it is not spaces. When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscNotTaxable" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element is used to override the default tax status of the miscellaneous charge detail line. If the order is subject to sales tax, then setting this element to 'Y' will cause the line to have no sales tax applied. The element may contain 'Y' (not taxable), 'N' (taxable)or blank (default).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=""/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscFstCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the Canadian Federal Sales Tax code to be assigned to the miscellaneous charge. If the Canadian FST system is in use and a tax code is present, it must be valid within SYSPRO. The format is 1 character, alphanumeric. If a tax code is not supplied, the sales order is subject to FST and the element MiscNotFstTaxable is ‘N’, the default tax code defined in Sales Order Setup will be used unless tax by geographic area is in use, in which case the tax code against the geographic area will be used if it is not spaces.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscNotFstTaxable" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element is used to override the default FST (Canadian tax system) status of the miscellaneous charge detail line. If the order is subject to FST, then setting this element to 'Y' will cause the line to have no FST applied. The element may contain 'Y' (not taxable), 'N' (taxable) or blank (default).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=""/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MiscDescription" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the description to appear with the miscellaneous charge. The format is 45 characters, alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="eSignature" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="FreightLine" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element specifies the sub-elements that make up a dispatch note freight line which does not originate from the sales order</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="DispatchNoteNumber">
+											<xsd:annotation>
+												<xsd:documentation>This is the dispatch note number for adding the line. The format is 15 characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreightValue" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the value of the freight charge. The format is 12.2 either positive or negative. The negative sign can either precede or follow the value.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreightCost" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the cost of the freight entry. The format is 12.2 either positive or negative. The negative sign can either precede or follow the value. If not supplied, it will default to the freight value.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreightTaxCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the tax code to be assigned to the freight charge. If this is present it must be a valid SYSPRO tax code. The format is 1 character, alphanumeric. If a tax code is not supplied, the sales order is taxable and the element FreightNotTaxable is ‘N’, the default tax code defined in Tax Options will be used unless tax by geographic area is in use, in which case the tax code against the geographic area will be used if it is not spaces.When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreightNotTaxable" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element is used to override the default tax status of the freight detail line. If the order is subject to sales tax, then setting this element to 'Y' will cause the line to have no sales tax applied. The element may contain 'Y' (not taxable), 'N' (taxable) or blank (default).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=""/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreightFstCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the Canadian Federal Sales Tax code to be assigned to this freight charge. If the Canadian FST system is in use and a tax code is present, it must be valid within SYSPRO. The format is 1 character, alphanumeric. If a tax code is not supplied, the sales order is subject to FST and the element FreightNotFstTaxable is ‘N’, the default tax code defined in Sales Order Setup will be used unless tax by geographic area is in use, in which case the tax code against the geographic area will be used if it is not spaces.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreightNotFstTaxable" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element is used to override the default FST (Canadian tax system) status of the freight detail line. If the order is subject to FST, then setting this element to 'Y' will cause the line to have no FST applied. The element may contain 'Y' (not taxable), 'N' (taxable) or blank (default).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=""/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="eSignature" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

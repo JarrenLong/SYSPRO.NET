@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Stock Code Warehouse Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="CostMultiplier">
+		<xsd:annotation>
+			<xsd:documentation>Cost multiplier is the portion of the transaction value of the stock item comprises non-merchandise costs (e.g. freight, duty, tax, etc.). It is used within Inventory Movements when processing a receipt, but only if you have indicated that you want to apply a cost multiplier when processing receipts (Inventory Setup).
+The format is 3.3 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="7"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultBin">
+		<xsd:annotation>
+			<xsd:documentation>Default bin location of the stock item in a particular warehouse. If it is blank then it defaults to the warehouse code if you have activated the multiple bins options (Inventory Setup).This is also the location from which stock is issued during the Backflushing function of Inventory Movements. The format is 6 characters, alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultSourceWh">
+		<xsd:annotation>
+			<xsd:documentation>Source warehouse is the default supplying warehouse from which stock will be transferred to replenish the warehouse you are maintaining if flagged as transfer supplied (TrfSuppliedItem = "Y") . If left blank then an entry in the warehouse move matrix may be used.
+NOTE: This is documentary only unless Goods in Transit is installed.
+The format is 2 characters, alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SetupInvWarehouse">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information to maintain a single warehouse for a stock code. 
+NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="CostMultiplier" minOccurs="0"/>
+				<xsd:element ref="MinimumQty" minOccurs="0"/>
+				<xsd:element ref="MaximumQty" minOccurs="0"/>
+				<xsd:element ref="UnitCost" minOccurs="0"/>
+				<xsd:element ref="DefaultBin" minOccurs="0"/>
+				<xsd:element ref="SafetyStockQty" minOccurs="0"/>
+				<xsd:element ref="ReOrderQty" minOccurs="0"/>
+				<xsd:element ref="PalletQty" minOccurs="0"/>
+				<xsd:element ref="UserField1" minOccurs="0"/>
+				<xsd:element ref="UserField2" minOccurs="0"/>
+				<xsd:element ref="UserField3" minOccurs="0"/>
+				<xsd:element ref="OrderPolicy" minOccurs="0"/>
+				<xsd:element ref="MajorOrderMult" minOccurs="0"/>
+				<xsd:element ref="MinorOrderMult" minOccurs="0"/>
+				<xsd:element ref="OrderMinimum" minOccurs="0"/>
+				<xsd:element ref="OrderMaximum" minOccurs="0"/>
+				<xsd:element ref="OrderFixPeriod" minOccurs="0"/>
+				<xsd:element ref="TrfSuppliedItem" minOccurs="0"/>
+				<xsd:element ref="DefaultSourceWh" minOccurs="0"/>
+				<xsd:element ref="TrfLeadTime" minOccurs="0"/>
+				<xsd:element ref="TrfCostGlCode" minOccurs="0"/>
+				<xsd:element ref="TrfCostMultiply" minOccurs="0"/>
+				<xsd:element ref="TrfReplenishWh" minOccurs="0"/>
+				<xsd:element ref="TrfBuyingRule" minOccurs="0"/>
+				<xsd:element ref="TrfDockToStock" minOccurs="0"/>
+				<xsd:element ref="TrfFixTimePeriod" minOccurs="0"/>
+				<xsd:element ref="LabourCost" minOccurs="0"/>
+				<xsd:element ref="MaterialCost" minOccurs="0"/>
+				<xsd:element ref="FixedOverhead" minOccurs="0"/>
+				<xsd:element ref="VariableOverhead" minOccurs="0"/>
+				<xsd:element ref="SubContractCost" minOccurs="0"/>
+				<xsd:element ref="ManualCostFlag" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain a warehouse for a stock code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="Warehouse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MaximumQty">
+		<xsd:annotation>
+			<xsd:documentation>Maximum quantity of the item required to be stocked in the warehouse at any point in time. The format is 7.3 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MinimumQty">
+		<xsd:annotation>
+			<xsd:documentation>Minimum quantity of the item required to be stocked in the warehouse at any point in time. The format is 7.3 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PalletQty">
+		<xsd:annotation>
+			<xsd:documentation>Pallet quantity is the default quantity of the stock item that is required to be held in each bin, and is used when processing a purchase order receipt. The format is 7.3 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OrderPolicy" default="C">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates the order policy to be used.
+Valid values are:
+C - Cover shortages (default)
+; I - Cover shortages if less than minimum; S - Order to maximum if shortages; 
+M - Order to maximum if less than minimum
+; P - Suppress MRP ordering</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MajorOrderMult">
+		<xsd:annotation>
+			<xsd:documentation>If this element is supplied with anything other than zeros, the order quantity will be calculated as a multiple of the entered value. It cannot be less than the value supplied in the element 'MinorOrderMult'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MinorOrderMult">
+		<xsd:annotation>
+			<xsd:documentation>If this element is supplied with anything other than zeros, the order quantity will be calculated as a multiple of the entered value.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OrderMinimum">
+		<xsd:annotation>
+			<xsd:documentation>If this element is supplied with anything other than zeros, the order quantity will be at least the supplied value even if the requirement is less.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OrderMaximum">
+		<xsd:annotation>
+			<xsd:documentation>If this element is supplied with anything other than zeros, the order quantity will not exceed. If the requirement is greater than the value supplied, multiple orders will be required. If this value is not zero, it cannot be less than the value supplied in the  element 'OrderMinimum'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OrderFixPeriod">
+		<xsd:annotation>
+			<xsd:documentation>All policies will take this into account. If 1 or zero then the orders will be raised on the date required. Any value greater than zero will cause requirements planning to apply the time period to scheduling demand and raising suggestions</xsd:documentation>
+			<xsd:documentation/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="01"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReOrderQty">
+		<xsd:annotation>
+			<xsd:documentation>Re-order quantity is the quantity at which you should place an order for more of a particular stock item, and is printed on the Purchasing Work Sheet report. The format is 7.3 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SafetyStockQty">
+		<xsd:annotation>
+			<xsd:documentation>Safety stock quantity. This stock control feature highlights instances where stock falls below a prescribed level and is used within the Requirements Planning module.The safety stock level is usually set to be above the minimum stock level. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Stock code to which the Warehouse being maintained, is attached. The format is up to 30 characters alphanumeric, or 15 characters numeric depending on a configuration option within SYSPRO.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfBuyingRule">
+		<xsd:annotation>
+			<xsd:documentation>Batching (or buying rule) to be applied in requirements calculation if the warehouse is transfer supplied (TrfSuppliedItem = 'Y') and you are using warehouse replenishment details (TrfReplenishWh = 1).  Settings are as follows:
+A - Lot for lot.
+B - Multiples of EBQ.
+C - Fixed time period.
+D - Order to maximum if shortage.
+E - Order to maximum if less than minimum.
+F - Multiples of pan.
+G - Multiple EBQ lots.
+H - Multiple pan lots.
+I - Minimum of EBQ.
+J - Minimum of pan.
+K - Multiples of EBQ (fixed time period).
+L - Multiples of pan (fixed time period).
+M - Multiple EBQ lots (fixed time period).
+N - Multiple pan lots (fixed time period).
+O - Minimum of EBQ thereafter multiples of pan.
+P - Suppress MRP ordering.
+NOTE: This is documentary only unless Goods in Transit is installed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="H"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="J"/>
+				<xsd:enumeration value="K"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfCostGlCode">
+		<xsd:annotation>
+			<xsd:documentation>Transfer cost Ledger account to which you want to disburse the non-merchandise value arising from the transfer of goods if flagged as transfer supplied (TrfSuppliedItem = "Y").
+NOTE: This is documentary only unless Goods in Transit is installed.
+The format is 15 characters, alphanumeric</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="15"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfCostMultiply">
+		<xsd:annotation>
+			<xsd:documentation>Transfer cost multiplier. This is used to  calculate the additional non-merchandise costs that you want to add to the cost of transferring goods (e.g. freight and handling charges) if flagged as transfer supplied (TrfSuppliedItem = "Y").
+NOTE: Your entry made here is only applied if you selected to apply a cost multiplier when processing receipts (Inventory Setup).
+NOTE: This is documentary only unless Goods in Transit is installed.
+The format is 3.3 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="7"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfDockToStock">
+		<xsd:annotation>
+			<xsd:documentation>Transfer dock to stock is the number of days a stock item is required to be in stock at the source warehouse prior to transfer if the warehouse is transfer supplied (TrfSuppliedItem = 'Y'). 
+NOTE: Within MRP, the dock to stock days entered here is added to the lead time and the entry defined at the Number of days after stock arrives that it can be used field (Requirements Planning Setup).
+NOTE: This is documentary only unless Goods in Transit is installed.
+The format is 3 characters, numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfFixTimePeriod">
+		<xsd:annotation>
+			<xsd:documentation>Fixed time period (days). Number of working days that represents a fixed time period, if the warehouse is transfer supplied (TrfSuppliedItem = 'Y') and you are using warehouse replenishment details (TrfReplenishWh = 1) . 
+For example: A fixed time period of 1 day indicates that if a shortage is encountered, that the total shortage for today and the next working day is used as if the shortage falls today.
+The entry made here is used for all time-based buying rules (i.e. C, K, L, M and N) to be applied in requirements calculation.
+NOTE: This is documentary only unless Goods in Transit is installed.
+The format is 2 characters, numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfLeadTime">
+		<xsd:annotation>
+			<xsd:documentation>Transfer lead time (days) is the number of days it takes to move the stock item from the source warehouse to the target warehouse if flagged as transfer supplied (TrfSuppliedItem = "Y") . It is used to calculate the expected delivery date.
+NOTE: If this field is left blank, then the the entry defined in the Warehouse Move Matrix is used. If the entry in the matrix is blank, then this field defaults to zero (0). Within requirements calculation, the lead time entered here is added to the dock to stock days and the entry defined at the Number of days after stock arrives that it can be used field (Requirements Planning Setup).
+NOTE: This is documentary only unless Goods in Transit is installed.
+The format is 3 characters, numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfReplenishWh">
+		<xsd:annotation>
+			<xsd:documentation>Use warehouse buying rule flag is to indicate whether to use the replenishment details defined against the warehouse or those defined against the stock code, if the warehouse is transfer supplied (TrfSuppliedItem = 'Y'), when running requirements calculation. (1 - Warehouse, 0 - Stock code)
+NOTE: This is documentary only unless Goods in Transit is installed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="0"/>
+				<xsd:enumeration value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrfSuppliedItem">
+		<xsd:annotation>
+			<xsd:documentation>Transfer supplied item flag is used to indicate whether the stock item for this warehouse is supplied by another warehouse. (Y - Transfer supplied, N - Not transfer supplied).
+NOTE: This is documentary only unless Goods in Transit is installed. You must select this option if you want to be able to create supply chain transfer orders for this warehouse/stock code combination using the Back Order Review program. This option must also be selected if you want the Requirements Planning system to take account of supply chain transfer orders. 
+NOTE: If the warehouse being maintained for the stock item is the same as that assigned to the Warehouse to use field for the stock item then it cannot be transfer supplied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LabourCost">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MaterialCost">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FixedOverhead">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="VariableOverhead">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubContractCost">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ManualCostFlag">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=" "/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UnitCost">
+		<xsd:annotation>
+			<xsd:documentation>Unit cost is the cost of one unit of the stock item in a particular warehouse.
+NOTE: The Unit cost for a stock item in a warehouse can only be set when adding a new warehouse for a stock item. Thereafter you can only change this value using Inventory Movements.The format is 10.5 positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField1">
+		<xsd:annotation>
+			<xsd:documentation>This is a single character free format user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField2">
+		<xsd:annotation>
+			<xsd:documentation>This is a single character free format user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField3">
+		<xsd:annotation>
+			<xsd:documentation>This is a single character free format user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>Warehouse being Added/Maintained or Deleted for the stock item. The format is 2 characters, alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

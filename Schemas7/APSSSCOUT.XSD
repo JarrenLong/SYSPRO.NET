@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for the AP Supplier Classes Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="RecordsInvalid" type="xsd:boolean"/>
+  <xsd:element name="RecordsRead" type="xsd:boolean"/>
+  <xsd:complexType name="StatusOfItemsType">
+    <xsd:sequence>
+      <xsd:element ref="RecordsRead"/>
+      <xsd:element ref="RecordsInvalid"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="itemType">
+    <xsd:sequence>
+      <xsd:element name="key" type="keyType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="keyType">
+    <xsd:sequence>
+      <xsd:element ref="class"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="setupsupplierclass">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="item" type="itemType"/>
+        <xsd:element name="StatusOfItems" type="StatusOfItemsType"/>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Language2" type="xsd:string" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Role" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="OperatorPrimaryRole" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="class" type="xsd:byte"/>
+</xsd:schema>

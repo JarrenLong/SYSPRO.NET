@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Multimedia Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="RecordsInvalid" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>The number of errors that occurred while a particular setup method was being performed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecordsRead" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>The number of records matching the "key" element that were read.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StatusOfItems">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information about the number of records read and how many were invalid.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="RecordsRead"/>
+				<xsd:element ref="RecordsInvalid"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains all the pertinent information regarding the stock code and the multimedia attached - or not - to said stock code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="key"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the multi-part key upon which a setup method is performed. The fields that make up the key are MultimediaFlag, KeyField and ObjectType.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="multimediaflag"/>
+				<xsd:element ref="keyfield"/>
+				<xsd:element ref="objecttype"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="keyfield" type="xsd:hexBinary">
+		<xsd:annotation>
+			<xsd:documentation>This is the key value on which the search will be performed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="multimediaflag" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is an indication of the field type that the KeyField will be referencing, i.e. STK - stock code, LDG - ledger code, CUR - currency, SUP - supplier etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="objecttype" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the type of multimedia object returned, i.e. BMP, SND, VID etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="setupmultimedia">
+		<xsd:annotation>
+			<xsd:documentation>Setup parent element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="item"/>
+				<xsd:element ref="StatusOfItems"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

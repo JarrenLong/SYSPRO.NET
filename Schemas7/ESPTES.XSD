@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Query Espresso Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostEsptes">
+		<xsd:annotation>
+			<xsd:documentation>RootNode</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element name="Parameters" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Parameters Node</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence minOccurs="0">
+							<xsd:element name="FileType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the function for the business object. AM-Add/Update Multimedia, MN-Add/Update Menu, AA-Add Application,UA-Update Application,DA-Delete Applicaiton,AC-Add Component,CL-Add/Update Component Layout,AL-Add/Update Application Layout,OL-Add/Update Options Layout,DCL-Delete Component Layout,DAL-Delete Application Layout,DOL-Delete Options Layout,MD-Add/Update EspressoMedia, AB-Add/Update Binary to the Components folder, RL-Reset Layout, ACS-Adds a custom search, SC-Add/Update readable script text</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="AM"/>
+										<xsd:enumeration value="MN"/>
+										<xsd:enumeration value="AA"/>
+										<xsd:enumeration value="UA"/>
+										<xsd:enumeration value="DA"/>
+										<xsd:enumeration value="AC"/>
+										<xsd:enumeration value="UC"/>
+										<xsd:enumeration value="DC"/>
+										<xsd:enumeration value="CL"/>
+										<xsd:enumeration value="AL"/>
+										<xsd:enumeration value="OL"/>
+										<xsd:enumeration value="DCL"/>
+										<xsd:enumeration value="DAL"/>
+										<xsd:enumeration value="DOL"/>
+										<xsd:enumeration value="MD"/>
+										<xsd:enumeration value="RL"/>
+                    <xsd:enumeration value="SC"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="MultimediaFlag" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the multimedia flag, e.g. STK, CUS. Used when FileType is set to the following: AM</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MultimediaKey" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the key to the multimedia object, e.g. B100,000000000000001. Used when FileType is set to the following: AM</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MultimediaType" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the multimedia Type, e.g. BMP, VID. Used when FileType is set to the following: AM</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MultimediaName" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the multimedia name, e.g. B100.BMP, %mediaA100.BMP. Used when FileType is set to the following: AM</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MultimediaExt" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the multimedia extension e.g. BMP,JPG,PNG. Used when FileType is set to the following: AM</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="DeviceId" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the DeviceId, e.g. 1000-Phone,2000-Tablet,3000-Desktop. Used when FileType is set to the following: MN,CL,AL,OL,DCL,DAL,DOL,RL</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="LevelId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the LevelId, e.g. 1-SYSPRO,2-SYSPRO,3-Company, etc, See EspCustomLevel. Used when FileType is set to the following: MN,CL,AL,OL,DCL,DAL,DOL</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="1"/>
+										<xsd:enumeration value="2"/>
+										<xsd:enumeration value="3"/>
+										<xsd:enumeration value="4"/>
+										<xsd:enumeration value="5"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LevelValue" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the LevelValue. Also depends on LevelId e.g. When LevelId 3-0, 4-001,5-ADMIN. Used when FileType is set to the following: MN,CL,AL,OL,DCL,DAL,DOL</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ApplicationId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the ApplicationId. Used when FileType is set to the following:UA,DA,AL,OL,DCL,DAL,DOL,RL</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ApplicationDesc" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Application Description. Used when FileType is set to the following:AA,UA</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ApplicationKeyField" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Application KeyField. eg. Customer,Supplier. Used when FileType is set to the following:AA,UA</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ApplicationName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Application Name. Must be unqiue and contain no special characters including spaces. Used when FileType is set to the following:AA,UA</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ApplicationType" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Application Type. 0-Display,1-Entry,2-Functional(Sync Manager) Used when FileType is set to the following:AA,UA,CL</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ApplicationMaintainAppId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the MaintenaceAppId. Used when FileType is set to the following:AA,UA</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ApplicationMaintainButTxt" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the MaintenaceButtonText. Used when FileType is set to the following:AA,UA</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ApplicationGuid" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the ApplicationGuid for posting import history. Used when FileType is set to the following:AH</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ApplicationSplit" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the ApplicationSplit for posting import history. Used when FileType is set to the following:AH,UA. Can contain 0,1,2 Default 0.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ComponentId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the ComponentId. Used when FileType is set to the following:UC,DC,CL,OL,DCL,DOL</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentDesc" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Component Description. Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentTypeId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the ComponentTypeId. See EspCompnentType. Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentKeyField" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Component KeyField. eg. Customer,Supplier. Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentDeviceSupport" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Components device support. 0-All Devices, 1 Tablet or Desktop. Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ComponentViewName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the view name of the component.Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentController" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the controller name of the component.Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentReference" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the reference of the component.Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="ComponentOptionType" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the Component OptionType 0-FilterOptions. Used when FileType is set to the following:OL,DOL</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ComponentAssemblyName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the name of the assembly. Used when FileType is set to the following:AC,UC,AB</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ComponentDependentId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the depenent id's of the component. eg. 1012,1013,1014. Used when FileType is set to the following:AC,UC</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MediaId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the MediaId, only used when updating media. Used when FileType is set to the following:MD</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="MediaType" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the MediaType. 1-Tile Image.Used when FileType is set to the following:MD</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MediaName" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the MediaName. Used when FileType is set to the following:MD</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomSearchName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomSearchName.  This must be unique.It corresponds to the id of the container div of the search in the cshtml. Used when FileType is set to the following:ACS,UCS,DCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomKeyFieldName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomKeyFieldName. This must match up to a field from the EspKeyField table.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomViewName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomViewName. This must contain the view associated with the cutom search.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomControllerName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomControllerName. This must contain the name of the controller associated with the cutom search.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomSearchTitle" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomSearchTitle. Used to specify the title of the search that will be displayed to the user.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomInputSearchText" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomInputSearchText. Used to specify the input search text that will be displayed to the user(watermark).  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomWebAPI" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomWebAPI. Used to specify the webAPI that must be used to get the search data.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomPopulateMethod" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomPopulateMethod. Used to specify the method name  that must be used to populate the search model.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomTextboxName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomTextboxName. Used to specify the name of the textbox that is used for the search.  Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomItemTemplateName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomItemTemplateName. Used to specify the name of the javascript template for the search items. Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomCacheTemplateName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomCacheTemplateName. Used to specify the name of the javascript template for the cached items. Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomOnClickName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomOnClickName. Used to specify the name of the javascript method when  an item is selected. Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomNewFunctionName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomNewFunctionName. Used to specify the name of the javascript method when there is a news item for the search. Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomShowMethodName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomShowMethodName.  Used to define the javascript function to call each time the seach is shown. Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomGroupingRequired" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomGroupingRequired.  Used to specify if grouping on the seach is requred. Default is false Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomPriority" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomPriority.  Defines the  priority of the search, can override the SYSPRO search Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CustomAssemblyName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the CustomAssemblyName.  Defines the name of the assembly used for the search, can override the SYSPRO search Used when FileType is set to the following:ACS,UCS</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="StdComponentVersion" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to update the version in the EspVersion table, once the binaries are copied. Used when filetype is set to the following:UV</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CusComponentVersion" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to update the version in the EspVersion table, once the binaries are copied. Used when filetype is set to the following:UV</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="AssemblyName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to specify the assembly name when updating or adding to the history table</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+              <xsd:element name="ScriptFunction" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Used to specify the script function to update for function type SC. Eg. BIND, BEFORESAVE and AFTERSAVE.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Supplier/Stock Code Cross-reference Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ApplyIfEntireDocumentValid" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether the entire document must be validated first before applying the function.
+Valid values are 'N' - Apply function for each valid item (default) and  'Y' - All items must be valid before function is applied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IgnoreWarnings" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Specifies if warnings are to be ignored.
+Valid values are , N - Warnings will be returned as errors in the XML returned (default) and 'Y' - If the warnings are to be ignored.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+				<xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+				<xsd:element ref="ValidateOnly" minOccurs="0"/>
+				<xsd:element ref="UpdateInvSupplierXref" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupSupplierStockXref">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Parameters"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UpdateInvSupplierXref" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether to add/delete the Inventory supplier/stock code cross-reference as well. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValidateOnly" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether to only validate the contents of the document.
+Valid values are 'N' - Validate and apply function (default) and 'Y' - Only validate the document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Load Planning Drivers Manifest Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DeliveryDate">
+    <xsd:annotation>
+      <xsd:documentation>Delivery date selection, A-All, R-Range, and S-Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DeliverySeq">
+    <xsd:annotation>
+      <xsd:documentation>Delivery sequence selection, A-All or Single delivery sequence can be selected.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnSequence">
+    <xsd:annotation>
+      <xsd:documentation>Report sequence C - Customer sales order sequence; S - Delivery sequence order.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Customer;S=Delivery route sequence;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter root</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DeliveryDate"/>
+        <xsd:element ref="DeliverySeq"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>Key root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RouteCode"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ReturnSequence" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RouteCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Route code, this element is mandatory.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SorRouteMaster;A=All;S=Single;R=Range;key=true"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="xslstylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Style sheet.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AP Aged Trial Balance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AgeingMethod">
+    <xsd:annotation>
+      <xsd:documentation>Indicates what ageing method should be applied when aging transactions. (I - Invoice date and F - Financial month) If no value is supllied the default ageing option 'F' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;F=Financial month;I=Invoice date"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="I"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of branches to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApBranch;A=All;S=Single;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ConvertToLocalValue">
+    <xsd:annotation>
+      <xsd:documentation>Only if CurrencyValues has a vaue of 'L' then the ConvertToLocalCurrency is used to indicate whether the transaction must be converted to local currency at the entry time exchange rate (E) or the current exchange rate (C). If no value is supplied then a default value of 'E' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;E=At entry time;C=Current exchange rate"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of currencies to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=TblCurrency;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CurrencyValues">
+    <xsd:annotation>
+      <xsd:documentation>Indicates what currency the values must be returned in. (L - Local and F - Foreign). If no value is supplied then a default value of 'L' will be used.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;L=Local currency;F=Foreign currency"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateOnReport">
+    <xsd:annotation>
+      <xsd:documentation>Indicates what report date should be applied. (I - invoice date and D - Due date).  If no value is supplied the default of 'I' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;J=Journal date;D=Due date"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="FollowUpDate" minOccurs="0"/>
+        <xsd:element ref="Currency" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FollowUpDate">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of suppliers follow up dates to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={Date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeRetainedInvoices">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether retained invoices should be included. (Y - yes and N - No). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeUnapprovedInvoice">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether unapproved invoices should be included. (Y - yes and N - No). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroBalanceSuppliers">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether suppliers with a zero balance should be included. ( Y - yes and N - No ). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportAsOf" minOccurs="0"/>
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="SuppliersOnHold" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroBalanceSuppliers" minOccurs="0"/>
+        <xsd:element ref="IncludeUnapprovedInvoice" minOccurs="0"/>
+        <xsd:element ref="IncludeRetainedInvoices" minOccurs="0"/>
+        <xsd:element ref="CurrencyValues" minOccurs="0"/>
+        <xsd:element ref="ConvertToLocalValue" minOccurs="0"/>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="AgeingMethod" minOccurs="0"/>
+        <xsd:element ref="TagFile" minOccurs="0"/>
+        <xsd:element ref="DateOnReport" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportAsOf">
+    <xsd:annotation>
+      <xsd:documentation>Defines the financial period for which the report will be run. (C - Current, P1 - Previous period 1 and P2 - Previous period 2 ). If no value is supplied a default of 'C' will be used.  </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current period;P1=Previous period 1;P2=Previous period 2"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P1"/>
+        <xsd:enumeration value="P2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>Defines the sequence in which the report will be printed. ( S - Supplier, SN - Shortname, BS - Branch/Supplier and U - user defined sequence). If no value is supplied a default of 'S' will be used. If a value of  'BS' is passed there will be special totalling by branch. If a value of 'U' is passed then a tag file must be supplied indicating the sequence of suppliers.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Supplier;SN=Short name;BS=Branch/Supplier;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="SN"/>
+        <xsd:enumeration value="BS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Indicates how much detail should be returned (S - summary - Select this to print a report listing a list of the accumulated invoice amounts for each supplier on a single line and D -Detail 
+Select this to print a report listing all invoices for each supplier. If no value is supplied then a default value of 'D' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;D=Detail;S=Summary;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of supplierss to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SuppliersOnHold">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether suppliers on hold should be included. (I - Include, E -Exclude and O - Only print suppliers on hold) If no value is passed a default value of 'I' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include suppliers on hold;E=Exclude suppliers on hold;O=Only suppliers on hold"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TagFile" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is the path for the file which must be used for the user defined entry. This will only be used if ReportSequnce has a value of 'U'.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The stylesheet to be applied</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

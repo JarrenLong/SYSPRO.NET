@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the build non-merchandise cost business object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="Build">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Parameters">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="PurchaseOrder">
+								<xsd:annotation>
+									<xsd:documentation>This must contain the purchase order number</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:length value="6"/>
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="6"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PurchaseOrderLine">
+								<xsd:annotation>
+									<xsd:documentation>This must contain the purchase order line</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:length value="4"/>
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="4"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CostMultiplier" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If entered this will be the cost multiplier used to calcuate the non-merchandise amount, if not supplied the program will  use 1.0 for a non stocked line or will use the default against the warehouse</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="7"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Quantity" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If not entered the quantity used to calculate the non merchandise amount will be the oustanding quantity taken off the purchase order line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="10"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Units" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If not entered the quantity used to calculate the non merchandise amount will be the oustanding quantity taken off the purchase order line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="7"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Pieces" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If not entered the quantity used to calculate the non merchandise amount will be the oustanding quantity taken off the purchase order line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Cost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Will be ignored if the cost basis is not "T" - Total or  "M" - Manual, cost will otherwise be calculated, based on the cost basis.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="12"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CostBasis" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Must be 'C','T','P','X' or 'M'.If 'M' the cost entered wiil be used to calculate the Non-merch. If 'T' the cost entered/quantity will be used. If 'P' the cost wiil be calculated using the price on the purchase order. If 'C' the cost will be calculated using the foreign price converted.IN ALL CASES, STANDARD COSTING OVERRIDES EVERYTHING WITH THE INVENTORY WH COST.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NonMerchandiseCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If entered the program will calcuate what the cost multiplier.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="14"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UnitOfMeasure" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Must be either the invertory alternate uom or the other uom fro this stock code, currentely used as an additional conversion.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Assets in Suspense Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Option">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ReportAndGenerate" default="R" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This flag indicates whether the user is reporting only, or reporting and generating Assets from the selected assets in Suspense. (R - Report only, G - Report and generate) If no value is passed a default value of 'R' will be used. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:enumeration value="R"/>
+										<xsd:enumeration value="G"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="FullReport" default="F" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This flag indicates whether the user wishes to print a full report or only show assets in suspense which have errors. (F - Full report, E - errors only) If no value is passed a default value of 'F' will be used. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="F"/>
+										<xsd:enumeration value="E"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeOnHold" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether assets in suspense which are on hold should be included. ( Y - yes and N - No ). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncrementIfExists" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to increment asset values when generating for assets which exist in the assets master.  ( Y - yes and N - No ). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CapexCode">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single selection of Capex Item codes for assets in suspense to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CapexLine">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single selection of Capex Item lines for assets in suspense to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Asset">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single selection of Asset codes for assets in suspense to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

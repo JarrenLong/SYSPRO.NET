@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Parameters used by Transaction to Application Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ApplicationParameter" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Allows a parameter to be passed to the application that is going to be called. The value of this element will only be used if the ApplicationToCall element is valid. If you want the path to the file that was created to be sent through as part of the parameter, simply include the word "$FILENAME" in this element</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ApplicationToCall" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The name of the application that must be called.  Ensure that the full path and the name of the application is provided.  e.g. "C:\Program Files\Application\MyVB6.EXE".  If this element is blank no application will be called.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DocumentDropDirectory" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>A full path to where the document must be dropped.  This path must already exist as the program will not create the directory.  Do not include a filename as a temporary filename will be created using the extension specified in the Extension element. e.g. "c:\My Dropdirectory"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Extension" type="xsd:string" default="XML">
+    <xsd:annotation>
+      <xsd:documentation>A file extension to the document that is created in the dropdirectory. If blank the default extension is XML</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>Compulsary element that contains the parameters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="ApplicationToCall" minOccurs="0"/>
+        <xsd:element ref="ApplicationParameter" minOccurs="0"/>
+        <xsd:element ref="DocumentDropDirectory"/>
+        <xsd:element ref="Extension"/>
+        <xsd:element name="PreserveNulls" type="xsd:string" default="Y">
+          <xsd:annotation>
+            <xsd:documentation>To preserve null characters in the incoming document, set this value to Y. The default value is 'Y'</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostTransApplication">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

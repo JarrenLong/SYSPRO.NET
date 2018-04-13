@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Goods in Inspection Scraps Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Cost">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional and need only be supplied when 'CostBasis' is set to 'M' (manual cost) or 'T' (total cost). It contains the cost of the specified stock code and if it is specified as a total cost, the unit cost will be calculated.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CostBasis">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory if the operator is allowed activity 'P/O Inspection change scrap liability', otherwise it defaults to 'P'. This element specifies which cost to use for the transaction. Valid values are:
+C - Current warehouse cost
+T - Total cost entered manually
+M - Unit cost entered manually
+P - Purchase price at the time of order entry
+X - Purchase price plus tax.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="X"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Document">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional and contains the document number for this scrap transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GRNNumber">
+    <xsd:annotation>
+      <xsd:documentation>This element must contain a valid GRN number and is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="9"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnSource" default="1">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional and if not supplied defaults to '1'. Valid values are '1' to '5'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="GRNNumber"/>
+        <xsd:element ref="Quantity" minOccurs="0"/>
+        <xsd:element ref="UnitOfMeasure" minOccurs="0"/>
+        <xsd:element ref="Units" minOccurs="0"/>
+        <xsd:element ref="Pieces" minOccurs="0"/>
+        <xsd:element ref="Document" minOccurs="0"/>
+        <xsd:element ref="RejectCode" minOccurs="0"/>
+        <xsd:element ref="Narration" minOccurs="0"/>
+        <xsd:element ref="PaySupplierForScrappedItems" minOccurs="0"/>
+        <xsd:element ref="LedgerCode" minOccurs="0"/>
+        <xsd:element ref="PasswordForLedgerCode" minOccurs="0"/>
+        <xsd:element ref="CostBasis" minOccurs="0"/>
+        <xsd:element ref="Cost" minOccurs="0"/>
+        <xsd:element ref="GrnSource" minOccurs="0"/>
+        <xsd:element ref="SelectAvailableSerials" minOccurs="0"/>
+        <xsd:element ref="Serials" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>This element is only required if paying supplier for scrapped items. If not supplied, the warehouse variance account is used. If this is not available, the purchase price variance control account is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Narration">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional. If not supplied and a reject code is supplied, the reject code description is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="60"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PasswordForLedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>If the ledger code requires a password, this element must contain the relevant password for the specified ledger code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PaySupplierForScrappedItems" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional and may be set to 'Y' if suppliers are to be paid for scrapped items. Valid values are 'N' and 'Y'. Default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Pieces">
+    <xsd:annotation>
+      <xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. The pieces may not be less than zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostInspectionScraps">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quantity">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory if stock code is not a unit-qty type stock code. If it is a unit-qty type stock code and this element is supplied, the units and pieces elements must NOT be supplied. The quantity may not be less than zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RejectCode">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the reject code relevant for the transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SelectAvailableSerials" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional. Valid values are 'N' and 'Y'. Default is 'N'.
+When scrapping a serialized stock item and this element is set to 'Y', the serial numbers available for the stock item being processed are used until the quantity supplied is satisfied. This is only applicable to Manual serial items.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialNumber">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory if the stock item being scrapped is serialized. It represents the serial number to be scrapped. However, if the element 'SelectAvailableSerials' is set to 'Y', serial numbers must not be supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="20"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialQuantity">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory and specifies the quantity scrapped for the specified serial number. If manual serial, it can only be 1. However, if the element 'SelectAvailableSerials' is set to 'Y', serial quantity must not be supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialUnits">
+    <xsd:annotation>
+      <xsd:documentation>If stock code is a unit-qty type stock code and the SerialQuantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. This element is only valid for batch serialized items.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialPieces">
+    <xsd:annotation>
+      <xsd:documentation>If stock code is a unit-qty type stock code and the SerialQuantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. This element is only valid for batch serialized items.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Serials">
+    <xsd:annotation>
+      <xsd:documentation>A set of serial numbers and relevant information must be supplied if stock item specified is serialized and the element 'SelectAvailableSerials' is not set to 'Y' (manual serials only).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="SerialNumber"/>
+        <xsd:element ref="SerialQuantity" minOccurs="0"/>
+        <xsd:element ref="SerialUnits" minOccurs="0"/>
+        <xsd:element ref="SerialPieces" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UnitOfMeasure">
+    <xsd:annotation>
+      <xsd:documentation>If quantity supplied in a unit of measure different to the stocking unit of measure, this element must be supplied to indicate the alternate unit of measure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Units">
+    <xsd:annotation>
+      <xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. The units may not be less than zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

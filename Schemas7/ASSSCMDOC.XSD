@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Capex Items Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ApprovalStatus">
+    <xsd:annotation>
+      <xsd:documentation>Approval status. U = Unapproved, A = Approved, D = Denied, C = Closed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AssetCostCenter">
+    <xsd:annotation>
+      <xsd:documentation>Asset cost center. This is a mandatory field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AssetGroupCode">
+    <xsd:annotation>
+      <xsd:documentation>Asset group. This is a mandatory field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Asset branch. This a mandatory field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CapexClass">
+    <xsd:annotation>
+      <xsd:documentation>Capex classification. This is a mandatory field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CapexCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Capex item code. This is a mandatory field.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CapexRef">
+    <xsd:annotation>
+      <xsd:documentation>Capex item reference.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation> Capex item description.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain a single capex item. 
+NOTE: The information held within the key element is mandatory for all functions. Certain information held outside the key element is optional for Add/Update and is not required for Delete</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Description" minOccurs="0"/>
+        <xsd:element ref="CapexRef" minOccurs="0"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="AssetGroupCode"/>
+        <xsd:element ref="AssetCostCenter"/>
+        <xsd:element ref="CapexClass"/>
+        <xsd:element ref="ApprovalStatus"/>
+        <xsd:element ref="ValueBudgeted" minOccurs="0"/>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string"/>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain an asset capex item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CapexCode"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SetupAssetCapexItems">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValueBudgeted">
+    <xsd:annotation>
+      <xsd:documentation>Budgeted value for capex item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal"/>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SYSPRO Workflow Services Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="FileName" type="xsd:string"/>
+  <xsd:element name="FileType" type="xsd:string"/>
+  <xsd:complexType name="ItemType">
+    <xsd:sequence>
+      <xsd:element ref="FileName"/>
+      <xsd:element ref="FileType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="PostSwstsw">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" type="ItemType"/>
+        <xsd:element name="StatusOfItems" type="StatusOfItemsType"/>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Language2" type="xsd:string" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Role" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="OperatorPrimaryRole" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RecordsDeleted" type="xsd:boolean"/>
+  <xsd:element name="RecordsInvalid" type="xsd:boolean"/>
+  <xsd:element name="RecordsWritten" type="xsd:boolean"/>
+  <xsd:complexType name="StatusOfItemsType">
+    <xsd:sequence>
+      <xsd:element ref="RecordsWritten"/>
+      <xsd:element ref="RecordsInvalid"/>
+      <xsd:element ref="RecordsDeleted"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

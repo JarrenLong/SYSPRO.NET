@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for GL Validate Ledger Code Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="key">
+          <xsd:annotation>
+            <xsd:documentation>The key to use for this query.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="LedgerCode">
+                <xsd:annotation>
+                  <xsd:documentation>The ledger code to be validated. Must be non-blank.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Company" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The company to which the ledger code belongs.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SecurityType" default="P" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Describes the type of security to be applied P=Posting, Q=Query. The default is P.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="Q"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateStructure" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter 'Y" to have the ledger code  checked for structure validation and errors returned as appropriate. Enter N if the structure is to be validated but no errors returned. If no value is supplied then the default value is 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateFlags" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>By default various parameters against the ledger account are checked (e.g. if on hold, if a control account). Enter N if these parameters are to be ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BusinessProcess" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter a business process to be applied to the entered ledger code. This element may be left blank if no checking is to be applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="XslStylesheet" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The stylesheet to be applied.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Inventory Where-Referenced Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Key">
+					<xsd:annotation>
+						<xsd:documentation>The key to use for the query</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="StockCode">
+								<xsd:annotation>
+									<xsd:documentation>The stock code to use for the query.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>List of options</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="IncludeLots" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This specifies whether to include lots for the stock code ( N - Exclude, Y - Include (no zero quantity lots), C - Include zero quantity). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeMultipleBins" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include mulltiple bins for the stock code (Y - Yes include, N - No, do not include, C - include zero available quantity). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeFIFOBuckets" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include FIFO buckets for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeGoodsInInspection" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include goods in inspection details for the stock code (Y - Yes, N - No, C - includes goods in inspection with inspection complete, counted complete, and zero quantity). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeGoodsInTransit" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include goods in transit information for the stock code (Y - Yes, N - No, C - include complete goods in transit). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeSupplyChainTransfers" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include supply chain transfer information for the stock code (Y - Yes, N - No, C - include complete supply chain transfers). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeSerialTracking" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include serial tracking information for the stock code (Y - Yes, N - No, C - include zero quantity serial numbers). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeAlternateStk" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include alternate stock codes for this stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeAlternateSupplier" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include alternate suppliers for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeECCRevisionRelease" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include ECC revision/release information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeLctRoutes" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include LCT Routes for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludePurchaseOrders" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include purchase orders for the stock code (Y - Yes, N - No, C - include complete purchase order). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeBlanketPOrders" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include blanket purchase orders for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeForeignPrices" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include foreign prices information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeBomWhereUsed" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include bill of material where used information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeWorkInProgress" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include work in progress information for the stock code (Y - Yes, N - No, C - includes complete jobs). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeJobsCompleted" default="I" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Option to include jobs completed. This option will be ignored if you do not select to include Work In Progress. I - include completed jobs, E - exclude completed jobs. Default to I</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="I"/>
+										<xsd:enumeration value="E"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeSubJobs" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>An option to include subjobs. Y-include sub jobs, N - do not include subjobs. Default N. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeWipAllocations" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include work in progress allocation information for the stock code (Y - Yes, N - No, C - include zero value jobs). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeBomRoutings" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include bill of material routings information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeBuildSchedule" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include build schedule information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeBomStructures" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include bill of material structures for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeSalesOrders" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include sales orders for the stock code (Y - Yes, N - No, C - include complete sales orders). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeDispatchNotes" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include dispatch notes for the stock code (Y - Yes, N - No, C - include complete dispatch notes). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludePricing" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include pricing information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeSupplierStockCode" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include supplier stock code information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeCustomerStockCode" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include customer stock code information for the stock code (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeRequisitions" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include requisitions for the stock code (Y - Yes, N - No, C - include cancelled requisitions). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeSalesHistory" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include sales history quantities for the warehouse (Y - Yes, N - No). If not provided, the default is N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:length value="1"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>List of filters</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="Warehouse" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This specifies the selection of warehouses ( A - All, S - Single, R - Range).  If not provided the default is A.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

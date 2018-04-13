@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the TPM Pricing Detail Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Department">
+    <xsd:annotation>
+      <xsd:documentation>Department to be selected. (Filter type of A - All, R - Range, or S - Single Department. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalDepartment;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the number of records returned. </xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="ProductGroup"/>
+        <xsd:element ref="Department"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeDepartmentType">
+    <xsd:annotation>
+      <xsd:documentation>Include departments? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeProductClassType">
+    <xsd:annotation>
+      <xsd:documentation>Include product classes? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeProductGroupType">
+    <xsd:annotation>
+      <xsd:documentation>Include product groups? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeQuantityBasis">
+    <xsd:annotation>
+      <xsd:documentation>Include Quantity basis? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeStockCodeType">
+    <xsd:annotation>
+      <xsd:documentation>Include stock codes? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeVolumeBasis">
+    <xsd:annotation>
+      <xsd:documentation>Include volume basis? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWeightBasis">
+    <xsd:annotation>
+      <xsd:documentation>Include weight basis? (Y-Yes, N-No). Defaults to Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeStockCodeType"/>
+        <xsd:element ref="IncludeProductClassType"/>
+        <xsd:element ref="IncludeProductGroupType"/>
+        <xsd:element ref="IncludeDepartmentType"/>
+        <xsd:element ref="IncludeWeightBasis"/>
+        <xsd:element ref="IncludeVolumeBasis"/>
+        <xsd:element ref="IncludeQuantityBasis"/>
+        <xsd:element name="XslStylesheet" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Product class to be selected. (Filter type of A - All, R - Range, or S - Single Product class. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClass;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductGroup">
+    <xsd:annotation>
+      <xsd:documentation>Product group to be selected. (Filter type of A - All, R - Range, or S - Single Product group. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=TpmProductGroup;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock code to be selected. (Filter type of A - All, R - Range, or S - Single stock code. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

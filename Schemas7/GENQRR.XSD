@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for General Ledger Financial Report Writer Print Business Object     
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ReportCode">
+          <xsd:annotation>
+            <xsd:documentation>Defines the report name as it appears in SYSPRO. This report must already exist. Only the "Report" type of report is supported by this Business Object.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Option">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="ReportCurrency" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Defines the currency to be used for the report.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ReportTotalOnly" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates whether only report totals should be output. (Y- Yes and N - No. If no value is supplied a default value of 'N' will be used.)</xsd:documentation>
+                  <xsd:appinfo source="screenItem=Y;Browse=GenRecJnlCtl"/>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReportZeroOnly" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates whether detail lines with zero amounts should be excluded.(Y - Yes and N - No. If no value is supplied a default value of 'Y' will be used.)</xsd:documentation>
+                  <xsd:appinfo source="screenItem=Y;Browse=GenRecJnlCtl"/>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RequestPrompts" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If  "Y" the business object will only return the prompts required for the specified report. If “Y” the report will not be run, “N” must be specified for the report to be run.  (Y - Yes and N - No. If no value is supplied a default value of 'N' will be used.) </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:sequence>
+                <xsd:element name="Per1" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Defines the financial period required for reporting. Valid options are: C = Current, P = Previous, Y = Year end, L = Closing and N = Period number. If N is specified the GlPer element below is mandatory.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="GlPer1" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>This element is only required if the ‘Per’ element above is specified with an ‘N’. Possible values are 1 through to 13, depending on the accounting periods per year set for the company.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Per2" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer2" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Per3" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer3" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Per4" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer4" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Per5" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer5" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Per6" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer6" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Per7" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer7" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Per8" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="GlPer8" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year1" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Indicates the ledger year required. A value of ‘C’ will return the current year and a number between 1 and 9 will return the corresponding previous reporting year.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Year2" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year3" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year4" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year5" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year6" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year7" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Year8" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val001" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Defines any numeric value that could be required by the report to be used in calculations. Can be a negative value and can have decimals.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Val002" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val003" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val004" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val005" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val006" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val007" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val008" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val009" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val010" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val011" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val012" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val013" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val014" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val015" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val016" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val017" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val018" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val019" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val020" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val021" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val022" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val023" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val024" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val025" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val026" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val027" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val028" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val029" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val030" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val031" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val032" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val033" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val034" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val035" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val036" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val037" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val038" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val039" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val040" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val041" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val042" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val043" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val044" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val045" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val046" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val047" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val048" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val049" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val050" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val051" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val052" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val053" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val054" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val055" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val056" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val057" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val058" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val059" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val060" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val061" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val062" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val063" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val064" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val065" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val066" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val067" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val068" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val069" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val070" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val071" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val072" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val073" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val074" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val075" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val076" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val077" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val078" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val079" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val080" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val081" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val082" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val083" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val084" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val085" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val086" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val087" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val088" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val089" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val090" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val091" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val092" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val093" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val094" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val095" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val096" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val097" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val098" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val099" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val100" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val101" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val102" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val103" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val104" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val105" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val106" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val107" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val108" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val109" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val110" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val111" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val112" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val113" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val114" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val115" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val116" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val117" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val118" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val119" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val120" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val121" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val122" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val123" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val124" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val125" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val126" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val127" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val128" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val129" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val130" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val131" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val132" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val133" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val134" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val135" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val136" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val137" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val138" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val139" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val140" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val141" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val142" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val143" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val144" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val145" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val146" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val147" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val148" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val149" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val150" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val151" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val152" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val153" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val154" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val155" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val156" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val157" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val158" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val159" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val160" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val161" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val162" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val163" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val164" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val165" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val166" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val167" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val168" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val169" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val170" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val171" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val172" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val173" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val174" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val175" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val176" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val177" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val178" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val179" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val180" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val181" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val182" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val183" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val184" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val185" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val186" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val187" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val188" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val189" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val190" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val191" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val192" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val193" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val194" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val195" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val196" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val197" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val198" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val199" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val200" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val201" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val202" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val203" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val204" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val205" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val206" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val207" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val208" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val209" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val210" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val211" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val212" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val213" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val214" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val215" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val216" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val217" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val218" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val219" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val220" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val221" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val222" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val223" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val224" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val225" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val226" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val227" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val228" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val229" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val230" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val231" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val232" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val233" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val234" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val235" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val236" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val237" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val238" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val239" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val240" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val241" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val242" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val243" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val244" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val245" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val246" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val247" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val248" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val249" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Val250" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr1" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Defines the ledger quarter with a value of ‘C’ for Current quarter, ‘P’ for Previous quarter or  1, 2, 3 or 4 representing a specific quarter.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Qtr2" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr3" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr4" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr5" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr6" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr7" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Qtr8" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date1" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Defines the date entered at run time. Use the format "YYYY/MM/DD"</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Date2" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date3" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date4" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date5" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date6" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date7" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Date8" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text1" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Defines any alphanumeric value that could be required by the report.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="Text2" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text3" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text4" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text5" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text6" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text7" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Text8" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="Mask" type="xsd:string" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Defines the pattern for the run time mask. Must have at least one wildcard character.</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="Company" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Company">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether all companies, a range of companies or a single company should be returned. (A - all,  R – range, S – single). If no value is supplied then the default value of 'A' will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required" fixed=" "/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

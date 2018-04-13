@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Credit Note Change Warehouse Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostChangeSoWarehouse">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to invoice a sales order.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="SalesOrder">
+								<xsd:annotation>
+									<xsd:documentation>The sales order (credit note) number to be changed. It must be supplied. The format is either numeric or alphanumeric depending on the configuration option within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SalesOrderLine" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The sales order line to be changed. If supplied, then the line must be a valid stocked merchandise for the sales order. If not supplied, then the entire order will be changed to the new warehouse. If not supplied, then the bin sets will be ignored.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NewWarehouse">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the new warehouse to be used for the line or for the whole order. It must be a valid warehouse, and must not be the same as the warehouse on the selected line if a single line has been selected. If this warehouse does not have multiple bins, then this variable will be used as a dummy bin, ignoring NewBin and Bin set elements.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NewBin" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the new bin to be used for the line. If supplied all the unassigned bins will be grouped into this bin for the new warehouse.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Bins" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the set of bins to hold transferred stock. If not supplied all stock is transferred to the NewBin. If NewBin is not supplied all stock on this line will be transferred to the warehouse default bin. This Bins element will be ignored if no SalesOrderLine is supplied. This node will also be used if the previous warehouse does not have multiple bins and if the correct FromBin is supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="FromBin">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the bin from where stock needs to be transfered. The warehouse code can be used if the previous warehouse does not have multiple bins.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ToBin">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the new bin to where the stock needs to be transfered. If this bin does not exist it will be created..</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

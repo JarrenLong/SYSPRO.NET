@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AR Customer Stock Codes Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Customer" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is part of the key to the AR Customer Stock Code being maintained. This is not mandatory if you are adding a global AR Customer Stock Code. If this AR Customer Stock Code is being added, and the Customer Stock Code is not global, the customer must pre-exist. If this AR Customer StockCode is being changed or deleted, it must be a valid SYSPRO AR Customer Stock Code.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CustStockCode">
+		<xsd:annotation>
+			<xsd:documentation>This is part of the key to the AR Customer Stock Code being maintained. This is mandatory. If this AR Customer Stock Code is being added, it must not pre-exist. If thisAR Customer StockCode is being changed or deleted, it must be a valid SYSPRO AR Customer Stock Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalInt">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether the customer stock code a global interchange or not. Valid entries are Y = Yes/N = No. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the SYSPRO Stock Code description.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Description">
+		<xsd:annotation>
+			<xsd:documentation>This is the Customer Stock Code description.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LongDesc">
+		<xsd:annotation>
+			<xsd:documentation>This is the Customer Stock Code long description.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to AR Customer Stock Codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="GlobalInt"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element name="Description" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is the description name of the AR Customer Stock Code and is used primarily to identify the AR Customer Stock Code. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="LongDesc" minOccurs="0"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain a AR Customer Stock Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="CustStockCode"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupCustomerStock">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Ap InvoiceTerms Code maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Contact Activity Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Activity">
+		<xsd:annotation>
+			<xsd:documentation>This is the activity parent node that can occur unbounded.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="ActivityType"/>
+				<xsd:element ref="Subject" minOccurs="0"/>
+				<xsd:element ref="Private" minOccurs="0"/>
+				<xsd:element ref="StartDate"/>
+				<xsd:element ref="StartTime"/>
+				<xsd:element ref="EndDate"/>
+				<xsd:element ref="EndTime"/>
+				<xsd:element ref="Attendees" minOccurs="0"/>
+				<xsd:element ref="Regarding" minOccurs="0"/>
+				<xsd:element ref="Location" minOccurs="0"/>
+				<xsd:element ref="UserField1" minOccurs="0"/>
+				<xsd:element ref="UserField2" minOccurs="0"/>
+				<xsd:element ref="UserField3" minOccurs="0"/>
+				<xsd:element ref="Priority" minOccurs="0"/>
+				<xsd:element ref="Result" minOccurs="0"/>
+				<xsd:element ref="Source" minOccurs="0"/>
+				<xsd:element ref="Body" minOccurs="0"/>
+				<xsd:element ref="Attachments" minOccurs="0"/>
+				<xsd:element name="EmailAttendees" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is the EmailAttendees parent element</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="To">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="Contact"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Cc">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="Contact" maxOccurs="unbounded"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Bcc">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="Contact" maxOccurs="unbounded"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="From">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="Contact"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Body255" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Allows you to specify 255 characters of the body.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="FollowUpFlag" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates the status of the activity. This can contain value from 0-9 where 0 is cleared.  The discriptions for the other values can be customized.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="0"/>
+							<xsd:enumeration value="1"/>
+							<xsd:enumeration value="2"/>
+							<xsd:enumeration value="3"/>
+							<xsd:enumeration value="4"/>
+							<xsd:enumeration value="5"/>
+							<xsd:enumeration value="6"/>
+							<xsd:enumeration value="7"/>
+							<xsd:enumeration value="8"/>
+							<xsd:enumeration value="9"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="FollowUpReqd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates if the activity must be followed up.  This flag will only be used if the FollowUpFlag element is greater then 0 and the primary contact is an Employee and is linked to an operator.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="FollowUpDate" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Must contain the date that the activity must be followed up on in the following format CCYY-MM-DD. Will only be used if the rules against the FollowUpReqd is met.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="FollowUpTime" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Must contain the time that the activity must be followed up on in the following format HH:MM:SS. Will only be used if the rules against the FollowUpReqd is met.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaskStatus" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Must contain the status of the task.  This will only be used if the usage of the ActivityType is "T".</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="1"/>
+							<xsd:enumeration value="2"/>
+							<xsd:enumeration value="3"/>
+							<xsd:enumeration value="4"/>
+							<xsd:enumeration value="5"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaskPctComplete" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Must contain the percentage completion of the task.  This will only be used if the usage of the ActivityType is "T".</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TaskDueDate" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Must contain the date that the task is due by in the following format CCYY-MM-DD. This will only be used if the usage of the ActivityType is "T".</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AllDayEvent" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates if a meeting/appointment is an All Day Event.  The default is spaces.  This is only used the ActivityType is a "A" or "M".</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value=""/>
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShowTimeAs" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates how the meeting/appointment time must be displayed in the calender.  The defaultis spaces.  This is only used the ActivityType is a "A" or "M".F-Free, B-Busy,O-Out of Office,T-Tentative</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value=""/>
+							<xsd:enumeration value="F"/>
+							<xsd:enumeration value="B"/>
+							<xsd:enumeration value="T"/>
+							<xsd:enumeration value="O"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="eSignature" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This element contains the GUID of the current process required to authenticate the transaction when Electronic Signatures are in use.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActivityType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Should contain the Type of the activity that must be posted.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Attachment">
+		<xsd:annotation>
+			<xsd:documentation>Each activity can contain an unbounded number of attachments</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AttachmentName"/>
+				<xsd:element ref="AttachmentExt"/>
+				<xsd:element ref="AttachmentData"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AttachmentData" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Must contain a binary representation of the acutal attachment.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AttachmentExt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The type of attachment</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AttachmentName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The name of the attachment that must be display in the querys.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Attachments">
+		<xsd:annotation>
+			<xsd:documentation>This is the Attachements parent element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Attachment" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Attendees">
+		<xsd:annotation>
+			<xsd:documentation>This is the Attendees parent element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Contact" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Body" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Should contain notes about the activity in a Rich Text Format(RTF)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Cleared">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the activity is completed or not</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Contact" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This should contain the {contactid},{email} or {fullname} of the attendees involved in the activity. The  element is unbounded.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ContactId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Must contain the contactid for which the activity must be posted against.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EndDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>Should contain the EndDate of the activity CCYY-MM-DD</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EndTime" type="xsd:time">
+		<xsd:annotation>
+			<xsd:documentation>Must contain the EndTime  of the activity HH:MM:SS</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This is the item parent element that can occur unbounded.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ContactId"/>
+				<xsd:element ref="Activity" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Location" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to indicate where the activity took place.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PostActivity">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Priority">
+		<xsd:annotation>
+			<xsd:documentation>Used to indicate the priority of the activity</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="0"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="5"/>
+				<xsd:enumeration value="6"/>
+				<xsd:enumeration value="7"/>
+				<xsd:enumeration value="8"/>
+				<xsd:enumeration value="9"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Private">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if the activity should be posted as private one on not. Y- Private, N-Public</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Regarding" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Can contain what the activity was regarding.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserField1" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify the UserField1</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserField2" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify the UserField2</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserField3" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify the UserField3</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Result" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to indicate what the result of the activity was.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Source" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to indicate what the source of the activity was.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StartDate">
+		<xsd:annotation>
+			<xsd:documentation>Must contain the Start Date of the activity CCYY-MM-DD</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:date"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StartTime">
+		<xsd:annotation>
+			<xsd:documentation>Must contain the Start Time  of the activity HH:MM:SS</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:time"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Subject" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Should could contain the subject of the activity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

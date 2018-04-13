@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Parameters used by Serial Number Setup Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="SetupInvSerialHead">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Parameters" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="IgnoreWarnings" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned).
+An example of a warning is if a batch serial number already exists for the stock code in another warehouse, it is okay to write the record away as such but you may want the warning supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApplyIfEntireDocumentValid" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether to process entire document only if all items are valid. If set to 'N', each item is validated and rejected if in error or processed if correct. This is the fastest option. If set to 'Y', all items are validated and only processed if entire document is valid. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateOnly" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No updating will take place. If set to 'N', each item is validated and updating is performed based on setting of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Notation" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>A notation may be given to be saved against each transaction record.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="45"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitQuantities" default="Reject" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to determine how the quantity for a units/pieces item is treated. Possible values are 'Reject' and 'Round'. If the 'QtyReceived' element supplied does not convert to a valid number of units and pieces, the transaction will either be rejected or updated with the nearest valid quantity after conversion.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Reject"/>
+                    <xsd:enumeration value="Round"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

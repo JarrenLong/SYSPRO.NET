@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SYSPRO Workflow Services Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="FileName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The name of the file that must be returned.  In most case this field is optional.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FileType">
+		<xsd:annotation>
+			<xsd:documentation>The code of the FileType that must be returned. PR- Preference.  This value is mandatory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="PR"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>The is the child Key element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FileType"/>
+				<xsd:element ref="FileName" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

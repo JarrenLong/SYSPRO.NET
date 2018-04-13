@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Post AP Registered Invoice Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="IgnoreWarnings" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings such as 'Supplier on hold'. (N - No, Y - Yes) If not supplied it defaults to 'N'. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This contains paramaters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="IgnoreWarnings"/>
+        <xsd:element ref="DefaultDiscountDate" minOccurs="0"/>
+        <xsd:element ref="DefaultDueDate" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostApRegisterInvoice">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DefaultDiscountDate">
+    <xsd:annotation>
+      <xsd:documentation>Default discount date. This date will be used as the transaction discount date if no value is supplied against the 'DiscountDate' element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefaultDueDate">
+    <xsd:annotation>
+      <xsd:documentation>Default due date.  This date will be used as the transaction due date if no value is supplied against the 'DueDate' element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

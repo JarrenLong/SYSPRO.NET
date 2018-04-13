@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for Inventory Warehouse Activity Reporting Business Object
+     Note: This schema does NOT support User defined Tag files, even though the business object does.
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="ReportOnStockItems" minOccurs="0"/>
+        <xsd:element ref="NoActivitySince" minOccurs="0"/>
+        <xsd:element ref="IncludeStockAdjustments" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroQtyOnHand" minOccurs="0"/>
+        <xsd:element ref="ShowAllWarehouses" minOccurs="0"/>
+        <xsd:element ref="NoABC" minOccurs="0"/>
+        <xsd:element ref="AClass" minOccurs="0"/>
+        <xsd:element ref="BClass" minOccurs="0"/>
+        <xsd:element ref="CClass" minOccurs="0"/>
+        <xsd:element ref="DClass" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence" default="S">
+    <xsd:annotation>
+      <xsd:documentation>Report Sequence, either S)tock Code, D)escription, SuppL)ier, P)roduct Class, Stock V)alue</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Stock code;D=Description;L=Supplier;P=Product class;V=Stock Value"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="V"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportOnStockItems" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Report on A)ll stock items, or those with some M)ontly activity, or I)nactive stock.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All stock items;M=Any monthly activity;I=Inactive stock items"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="I"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NoABC" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Check stock codes with no ABC classification.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Check stock codes with an A ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Check stock codes with a B ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Check stock codes with a C ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Check stock codes with a D ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the XSL Stylesheet to use</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="CycleCount" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Product Class to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClass;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouses to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CycleCount">
+    <xsd:annotation>
+      <xsd:documentation>Cycle counts to be returned.  FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock codes to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Suppliers to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NoActivitySince" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Date since which there has been no activity on this stock code. Only applicable if Inactive stock is being considered.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date}"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeZeroQtyOnHand" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Include stock codes with zero quantity on hand.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowAllWarehouses" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Include warehouses with no activity for stock code.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeStockAdjustments" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Include stock adjustments when determining activity. Applies to Inactive and Monthly activity reports</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

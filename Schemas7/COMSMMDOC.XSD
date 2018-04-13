@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Multimedia Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains all the pertinent information regarding the stock code and the multimedia attached - or not - to said stock code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="ObjectText"/>
+				<xsd:element ref="MultimediaObject"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This field contains the multi-part key upon which a setup method is performed. The fields that make up the key are MultimediaFlag, KeyField and ObjectType.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MultimediaFlag"/>
+				<xsd:element ref="KeyField"/>
+				<xsd:element ref="ObjectType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="KeyField" type="xsd:byte">
+		<xsd:annotation>
+			<xsd:documentation>This is the key value on which the search will be performed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MultimediaFlag" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is an indication of the field type that the KeyField will be referencing, i.e. STK - stock code, LDG - ledger code, CUR - currency, SUP - supplier etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MultimediaObject" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element contains a CDATA section which contains the full path to the object being assigned to the key.  Mandatory.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ObjectText" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the path to the relevant multimedia object. The contents of this field are stored in AdmMultimedia. Mandatory.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ObjectType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the type of multimedia object returned, i.e. BMP, SND, VID etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SetupMultimedia">
+		<xsd:annotation>
+			<xsd:documentation>Setup parent element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

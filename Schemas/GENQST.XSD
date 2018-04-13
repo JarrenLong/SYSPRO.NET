@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for GL Structure Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Option">
+          <xsd:annotation>
+            <xsd:documentation>The list of options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Section" default="1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The section to query. The section must be between 1 and 9. The default is 1 (the root section).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="9"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="2"/>
+                    <xsd:enumeration value="3"/>
+                    <xsd:enumeration value="4"/>
+                    <xsd:enumeration value="5"/>
+                    <xsd:enumeration value="6"/>
+                    <xsd:enumeration value="7"/>
+                    <xsd:enumeration value="8"/>
+                    <xsd:enumeration value="9"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Parent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The parent section to query. Must be non-blank, except where the section number is 1 (ie the root of the structure).
+1 to 15 characters alpha.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SecurityType" default="P" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Describes the type of security to be applied – P=Posting, Q=Query. The default is P.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="Q"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SecurityParent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The parent section to check for security rules. This should be non-blank, except if the section element does not exist (ie the root of the structure).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeInvalid" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This defines if section items that have an invalid relationship with the parent are to be included. The default is Y. Enter N if invalid sections are to be excluded.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApplySecurity" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Defines if security access rules are to be applied. The default is N. Enter Y if security rules are to be applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStylesheet" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The stylesheet to be applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType/>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

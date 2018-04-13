@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Blanket Purchase Orders Contracts Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="Contract">
+    <xsd:annotation>
+      <xsd:documentation>Contract selected (FilterType of A - All, R - Range, S - Single, FilterValue is range of contracts separated by a comma if FilterType is R, FilterValue contains the selected contract if FilterType is S).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=BpoMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ContractStatus">
+    <xsd:annotation>
+      <xsd:documentation>What contract status do you wish to select?(A - All, O - Open, P - Printed)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;O=Open;P=Printed"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>Expiry Date selection (FilterType of R - Range or S - Single).
+Enter expiry dates that you wish the schedules to be selected from, R - Range  Value is range of expiry dates separated by a comma, S - Single, Value contains the selected expiry date).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:date" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ExpiryDateList">
+    <xsd:annotation>
+      <xsd:documentation>Enter an expiry date list if Expiry Date Selection Type is List. (T - Today, N - Tomorrow, W - This week, M - This Month, * - None)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;T=Today;N=Tomorrow;W=This week;M=This month;*=Date selection"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="*"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="SupplierClass"/>
+        <xsd:element ref="Contract"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="ExpiryDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeActiveContractsOnly">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include active contracts only?(Y - Yes, N - No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCallOffMultiple">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include call off multiple contract types? (Y - Yes, N - No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCallOffSingle">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include call off single contract types? (Y - Yes, N - No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCompletedTransactions">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include completed transactions. This option is avaibale if you select report type summary (N - No, Y - Yes)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeContractSchedule">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include the contract schedule?(N - No, A - All, C - Confirmed, U - Unconfirmed)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;A=All;C=Confirmed;U=Unconfirmed"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeContractsBasedOn">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include contracts based on:?(N - Number of days to contract expiry date, D - Number of deliveries away from contract expiry, P - Percent of total deliveries away from expiry, S - Schedule activity required within date range, A - All contracts)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=Number of days to contract expiry date;D=Number of deliveries away from contract expiry;P=Percent of total deliveries away from expiry;S=Schedule activity required within date range;A=All Contracts"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMonitoringOrder">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include monitoring order contract types? (Y - Yes, N - No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOverReceipts">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include over receipted contransactions. This option is avaibale if you select report type summary (N - No, Y - Yes)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeStandingOrder">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include standing order contract types? (Y - Yes, N - No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeTransactionDetails">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include transaction details?(N - No, Y - Yes)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfDays" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter a number of days to the contract expiry date if contract based on number of days to contract expiry date (0 - 999)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="NumberOfDeliveries" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter a number of deliveries away from the contract expiry date if contract based on number of deliveries away from contract expiry date (0 - 999)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSequence"/>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="IncludeCallOffSingle"/>
+        <xsd:element ref="IncludeCallOffMultiple"/>
+        <xsd:element ref="IncludeStandingOrder"/>
+        <xsd:element ref="IncludeMonitoringOrder"/>
+        <xsd:element ref="ContractStatus"/>
+        <xsd:element ref="IncludeContractSchedule"/>
+        <xsd:element ref="IncludeTransactionDetails"/>
+        <xsd:element ref="IncludeActiveContractsOnly"/>
+        <xsd:element ref="IncludeContractsBasedOn"/>
+        <xsd:element ref="NumberOfDays" minOccurs="0"/>
+        <xsd:element ref="NumberOfDeliveries"/>
+        <xsd:element ref="PercentageOfTotal"/>
+        <xsd:element ref="PercentageTotalContractQtyReceived"/>
+        <xsd:element ref="ExpiryDateList"/>
+        <xsd:element ref="IncludeCompletedTransactions"/>
+        <xsd:element ref="IncludeOverReceipts"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PercentageOfTotal" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter a percentage of total deliveries away from the  contract expiry date if contract based on percentage of total deliveries away from contract expiry date (0 - 99)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PercentageTotalContractQtyReceived">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include lines based on the percentage of total quantity received if you selected to include all contracts  (0 - 99)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>Enter the sequence you require. (C - Contract, S - Supplier)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Contract;S=Supplier"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Enter the required report type (D - Detail, S - Summary)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock code selected (FilterType of A - All, S - Single, FilterValue contains the selected stock code if FilterType is S).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Supplier to be selected (FilterType of A - All, R - Range, S - Single supplier, FilterValue is range of suppliers separated by a comma if FilterType is R. FilterValue FilterValue contains the selected supplier if FilterType is S)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplierClass">
+    <xsd:annotation>
+      <xsd:documentation>Supplier Class selected (FilterType of A - All, S - Single, FilterValue contains the selected supplier class if FilterType is S).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=TblSupplierClass;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

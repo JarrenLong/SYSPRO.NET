@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     This is an example XSD instance to demonstrate
+     use of the Dispatch Note Report Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Selection of branches to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all branches.
+
+'S' - Single 
+Select this to include dispatch notes for a single branch.
+You indicate this branch in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>Selection of currency for values in the report. 
+
+'A' - All (Default) 
+Select this if you want to print the value of dispatch notes regardless of the currency in which they were posted. This is not available if you selected to show values in foreign currency.
+
+'S' - Single 
+Select this if you only want to dispatch notes that were posted in a specific currency.
+You indicate this foreign currency in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Selection of customers to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all customers.
+
+'R' - Range 
+Select this to include dispatch notes for a range of customers.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include dispatch notes for a single customer.
+You indicate this customer in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>Selection of customer classes to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all customer classes.
+
+'S' - Single 
+Select this to include dispatch notes for a single customer class.
+You indicate this customer class in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DispatchDate">
+    <xsd:annotation>
+      <xsd:documentation>Selection of dispatch note dates to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes regardless of date.
+
+'R' - Range 
+Select this to include dispatch notes for a range of dispatch dates.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include dispatch notes for a single dispatch date.
+You indicate this date in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DispatchNote">
+    <xsd:annotation>
+      <xsd:documentation>Selection of dispatch notes to be included in the report.
+
+'A' - All (Default) 
+Select this to include all dispatch notes in the report.
+
+'R' - Range 
+Select this to specify a range of dispatch notes you want to include in the report.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include a single dispatch note in the report.
+You indicate this dispatch note in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DispatchNote"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="GeographicArea"/>
+        <xsd:element ref="CustomerClass"/>
+        <xsd:element ref="DispatchDate"/>
+        <xsd:element ref="OrderType"/>
+        <xsd:element ref="UserDefined1"/>
+        <xsd:element ref="UserDefined2"/>
+        <xsd:element ref="Currency"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicArea">
+    <xsd:annotation>
+      <xsd:documentation>Selection of geographic areas to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all geographic areas.
+
+'S' - Single 
+Select this to include dispatch notes for a single geographic area.
+You indicate this geographic area in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeCancelled" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of * - cancelled. Valid values are 'Y' - Yes (default) and 'N' - No.
+
+If you select this option together with the Print option: Only print dispatches not yet invoiced, then cancelled dispatch notes are not printed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCompleted" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of 9 - invoiced and complete. Valid values are 'Y' - Yes (default) and 'N' - No.
+  
+If you select this option together with the Print option: Only print dispatches not yet invoiced, then completed (invoiced) dispatch notes are not printed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeConsolidated" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of 8 - consolidated for invoicing. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDispatchPrinted" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of 5 - dispatch note printed. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeInProcess" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of 0 - in process. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeInSuspense" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of S - in suspense. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOnHold" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of H - on hold. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeReadyToInvoice" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of 7 - ready to invoice. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeReadyToPrint" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include dispatch notes in a status of 3 - ready to print. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPagePerDispatch" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print each dispatch note on a separate page.
+This option is only available if report type is in detail.
+
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="PrintDeliveryAddressName" minOccurs="0"/>
+        <xsd:element ref="PrintDispatchAddress" minOccurs="0"/>
+        <xsd:element ref="PrintOnlyDispatchedNotInvoiced" minOccurs="0"/>
+        <xsd:element ref="NewPagePerDispatch" minOccurs="0"/>
+        <xsd:element ref="PrintAttachedComments" minOccurs="0"/>
+        <xsd:element ref="PrintFreightMiscLines" minOccurs="0"/>
+        <xsd:element ref="IncludeInProcess" minOccurs="0"/>
+        <xsd:element ref="IncludeReadyToPrint" minOccurs="0"/>
+        <xsd:element ref="IncludeDispatchPrinted" minOccurs="0"/>
+        <xsd:element ref="IncludeReadyToInvoice" minOccurs="0"/>
+        <xsd:element ref="IncludeInSuspense" minOccurs="0"/>
+        <xsd:element ref="IncludeConsolidated" minOccurs="0"/>
+        <xsd:element ref="IncludeCompleted" minOccurs="0"/>
+        <xsd:element ref="IncludeCancelled" minOccurs="0"/>
+        <xsd:element ref="IncludeOnHold" minOccurs="0"/>
+        <xsd:element ref="SupplyChainTransfers" minOccurs="0"/>
+        <xsd:element ref="ShowValuesIn" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>Selection of order types to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all order types.
+
+'S' - Single 
+Select this to include dispatch notes for a single order type.
+You indicate this order type in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintAttachedComments" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include comments attached to dispatch note lines in the report.
+This option is only available if report type is in detail.
+
+Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintDeliveryAddressName" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print the delivery address name on the report.
+
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintDispatchAddress" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print the dispatch address on the report.
+This option is only available if report type is in detail.
+
+Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintFreightMiscLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you went to print the freight and miscellaneous charge lines attached to orders in the report.
+This option is only available if report type is in detail.
+
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintOnlyDispatchedNotInvoiced" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include only dispatch notes that have not yet been invoiced on the report.
+
+Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType" default="D">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'D' and 'S'.
+
+'D' - Detail (default)
+Select this to print dispatch note details together with detail line information and a summary of dispatches according to the status of the dispatch note.
+
+'S' - Summary 
+Select this to print dispatch note details and a summary of dispatches according to the status of the dispatch note.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowValuesIn" default="L">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'L' and 'F'.
+
+'L' - Local currency (default)
+Select this if you want to print foreign amounts in the local currency equivalent.
+
+'F' - Foreign currency 
+Select this if you want to print foreign amounts in the original currency.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupplyChainTransfers" default="I">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'I', 'E' and 'O'.
+
+'I' - Include (default)
+Select this to include supply chain transfer orders in the report.
+
+'E' - Exclude 
+Select this to exclude supply chain transfer orders from the report.
+
+'O' - Only 
+Select this to print the report only for supply chain transfer orders.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserDefined1">
+    <xsd:annotation>
+      <xsd:documentation>Selection of user-defined1 fields to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all user-defined1 fields.
+
+'S' - Single 
+Select this to include dispatch notes for a single user-defined1 field.
+You indicate this user-defined1 field in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UserDefined2">
+    <xsd:annotation>
+      <xsd:documentation>Selection of user-defined1 fields to be included in the report.
+
+'A' - All (Default) 
+Select this to include dispatch notes for all user-defined2 fields.
+
+'S' - Single 
+Select this to include dispatch notes for a single user-defined2 field.
+You indicate this user-defined2 field in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Cash Book Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AsOfPeriod" default="C">
+    <xsd:annotation>
+      <xsd:documentation>This element specifies the period from which to return data (C - transactions from the current cash book period backwards, P - transactions from the previous cash book period backwards, B - transactions from the cash book previous period two backwards, F - transactions from the current cash book period backwards including future transactions).If this element is not provided the default is C.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Bank">
+    <xsd:annotation>
+      <xsd:documentation>This is a mandatory element and must contain a valid SYSPRO Bank code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateSequence" default="E">
+    <xsd:annotation>
+      <xsd:documentation>The posting date sequence that the cash book entries are to be returned (E - Earliest records are returned first, L - Latest records are returned first). If the element is not provided the default is E.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeAllPeriodBal" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Used to include all Cash Book statements for all periods (Y - Yes, N - No). If this element is not provided the default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeApInfo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include the Accounts Payable details associated with a Cash Book transaction originated from Accounts Payable (N - No, Y - Yes). If this element is not provided the default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeArInfo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether to include the Accounts Receivable details associated with a Cash Book transaction originated from Accounts Receivable (N - No, Y - Yes). If this element is not provided the default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExcludeTransactions" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Used to exclude CshTrnItem element from the xml out (N - No, Y - Yes). If this element is not provided the default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCurrencyInfo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Used to include or exclude information about the currency in the returned data (N - No, Y - Yes). If this element is not provided the default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDeposits" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Used to include or exclude cash book deposits in the returned data (Y - Yes, N - No). If this element is not provided the default is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeReconciled" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Used to include or exclude reconciled entries from the cash book in the returned data (Y - Yes, N - No). If this element is not provided the default is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeUnreconciled" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Used to include or exclude unreconciled entries from the cash book in the returned data (Y - Yes, N - No). If this element is not provided the default is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWithdrawals" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Used to include or exclude cash book withdrawals in the returned data (Y - Yes, N - No). If this element is not provided the default  is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key on which the query is to be performed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Bank"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This element contains optional parameters to increase/decrease the amount of information returned, or change the sequence of the data returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="IncludeDeposits" minOccurs="0"/>
+        <xsd:element ref="IncludeWithdrawals" minOccurs="0"/>
+        <xsd:element ref="IncludeReconciled" minOccurs="0"/>
+        <xsd:element ref="IncludeUnreconciled" minOccurs="0"/>
+        <xsd:element ref="DateSequence" minOccurs="0"/>
+        <xsd:element ref="IncludeCurrencyInfo" minOccurs="0"/>
+        <xsd:element ref="AsOfPeriod" minOccurs="0"/>
+        <xsd:element ref="TrnToView" minOccurs="0"/>
+        <xsd:element ref="IncludeApInfo" minOccurs="0"/>
+        <xsd:element ref="IncludeArInfo" minOccurs="0"/>
+        <xsd:element ref="ExcludeTransactions" minOccurs="0"/>
+        <xsd:element ref="IncludeAllPeriodBal" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The XSL Stylesheet to be used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TrnToView" default="A">
+    <xsd:annotation>
+      <xsd:documentation>This element is only relevant if the 'AsOfPeriod' selected is C. The valid values are:
+A - return all transactions for all periods up to and including the current cashbook period 
+C - only return transactions for the current cashbook period If this element is not provided the default is A.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

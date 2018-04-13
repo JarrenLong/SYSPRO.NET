@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Contact Management Organisation Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostList">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element for the XML in</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This is the parent node. More than one item can be processed per call of the object.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="FileName">
+                <xsd:annotation>
+                  <xsd:documentation>This contains the complete file name. Only used when deleting a file.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Header">
+                <xsd:annotation>
+                  <xsd:documentation>The parent node for the parts of the file name.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ListType">
+                      <xsd:annotation>
+                        <xsd:documentation>3 different types of lists can be defined. "C/c" = "Company", "R/r" = "Role", and "O/o" = "Operator".</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:enumeration value="C"/>
+                          <xsd:enumeration value="O"/>
+                          <xsd:enumeration value="R"/>
+                          <xsd:enumeration value="c"/>
+                          <xsd:enumeration value="o"/>
+                          <xsd:enumeration value="r"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ListCode" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the unique identifier of the ListType, i.e. the Company ID, Role name or the Operator-Code</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Description" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the name of the file as defined by the operator. It is always a txt file.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Body">
+                <xsd:annotation>
+                  <xsd:documentation>Parent node for each row in   the body of the xml in.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Row" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>Each row in the list has several parts.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Level" type="xsd:integer">
+                            <xsd:annotation>
+                              <xsd:documentation> Level (00 upwards)</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="Parent">
+                            <xsd:annotation>
+                              <xsd:documentation>P-Parent node</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string"/>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Type">
+                            <xsd:annotation>
+                              <xsd:documentation>A-Acc, C-Cus, S-Sup</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="A"/>
+                                <xsd:enumeration value="C"/>
+                                <xsd:enumeration value="S"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Code" type="xsd:string">
+                            <xsd:annotation>
+                              <xsd:documentation>Account, Customer or Supplier code. </xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="PostList" type="xsd:anyURI" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

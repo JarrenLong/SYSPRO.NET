@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Currency Exchange Rate Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupCurrency">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Currency Exchange Rate maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Currency Exchange Rate.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="Key">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the key information required to maintain a Currency Exchange Rate.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:all>
+										<xsd:element name="Currency">
+											<xsd:annotation>
+												<xsd:documentation>This is the key to the Currency Exchange Rate being maintained. This is mandatory. If this Currency Exchange Rate is being added, it must not pre-exist. If this Currency Exchange Rate is being changed or deleted, it must be a valid SYSPRO Currency Exchange Rate.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Description">
+								<xsd:annotation>
+									<xsd:documentation>This is the name of the Currency Exchange Rate and is used primarily to identify the Currency Exchange Rate. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BuyExchangeRate">
+								<xsd:annotation>
+									<xsd:documentation>This is the buying exchange rate to be applied to the Currency Exchange rate being added or maintained. This rate cannot be zero or spaces.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BuyMulDiv">
+								<xsd:annotation>
+									<xsd:documentation>This is the buying conversion factor to be applied to the Currency Exchange Rate being added or maintained.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+										<xsd:enumeration value="D"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BuyEcDeclRate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the buying EC declaration exchange rate to be applied to the Currency Exchange rate being added or maintained. This rate cannot be zero or spaces. This is not required when a fixed rate option is chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BuyEcDeclFact" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the the buying EC declaration factor to be applied to the Currency Exchange rate being added or maintained. This is not required when a fixed rate option is chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SellExchangeRate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the selling exchange rate to be applied to the Currency Exchange rate being added or maintained. This rate cannot be zero or spaces. This is not required when a fixed rate option is chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SellMulDiv" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the selling conversion factor to be applied to the Currency Exchange Rate being added or maintained. This is not required when a fixed rate option is chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SellEcDeclRate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the selling EC declaration exchange rate to be applied to the Currency Exchange rate being added or maintained. This rate cannot be zero or spaces. This is not required when a fixed rate option is chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SellEcDeclFact" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the the selling EC declaration factor to be applied to the Currency Exchange rate being added or maintained. This is not required when a fixed rate option is chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TriangReqd" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether triangulation needs to be applied to the Currency Exchange rate being added or maintained.  This is not required when the triangulation required option in the company setup is not chosen. If no value is supplied for this element, an "N" will be assumed.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IntermediateCur" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the intermediate currency when triangulation needs to be applied to the Currency Exchange rate being added or maintained.  This is not required when the triangulation required option is not selected.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="FixedRate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether the Currency Exchange rate being added or maintained has a fixed echange rate or not.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Tolerance" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates tolerance percentage to be applied to the Currency Exchange rate being added or maintained.  This is not required when  the triangulation required option in the company setup is not chosen.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string"/>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

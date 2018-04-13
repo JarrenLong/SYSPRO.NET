@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters for the WIP Job Header Maintenance Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ActionType" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether to add update copy or delete jobs (A - add,  C - update,  P - copy,  D - delete). Only live jobs can be added and you cannot do a copy when in snapshot.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings">
+    <xsd:annotation>
+      <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned, W - warnings will be returned as warnings in the XML returned.)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="ActionType" minOccurs="0"/>
+        <xsd:element ref="ValidateOnly" minOccurs="0"/>
+        <xsd:element name="ApplyIfEntireDocumentValid" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied). If not supplied it defaults to 'Y'.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+        <xsd:element ref="Snapshot" minOccurs="0"/>
+        <xsd:element name="TriggerAps" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Specifies whether APS must be triggered  (Y -  APS will be triggered, N - APS will not be triggered) </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="UseParentWhRoute" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This specifies whether or not to use the route, defined against the warehouse control information, when creating a job. It ignores this parameter if alternate routes are not used. (Y - Yes, N - No) The default is No</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="UseParentCompWh" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This specifies whether or not to use the component warehouse, defined against the parent's warehouse control information, when creating a job.  (Y - Yes, N - No) The default is No</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="StatusInProcess" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This parameter alllows you to add a job based on a sales order when the sales order is in process. When this parameter is 'Y' then the sales order in process status is ignored. (Y - Yes, N - No). The default is No.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostJob">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Snapshot" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether maintaining a live, suggested or snapshot job (N -  live, Y - snapshot, S- suggested) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TriggerAps" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Specifies APS will be triggered or not. (Y - Trigger APS, N - will not trigger APS).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

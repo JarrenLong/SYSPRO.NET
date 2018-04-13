@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the LCT Receipts Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CountryOfOrigin">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional. It is only required if EC VAT system is required.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShippingLocation">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional. It is only required if EC VAT system is required and the nationality of the supplier is a member of the EU..</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinLocation">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory if multiple bins are installed. This is the bin location.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinPieces">
+    <xsd:annotation>
+      <xsd:documentation>This is the bin quantity in cases and pieces.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinQuantity">
+    <xsd:annotation>
+      <xsd:documentation>Must be more than zero if bins are installed. This applies to either bin quantity, or units and pieces. The quantity must be entered in stocking unit of measure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinUnits">
+    <xsd:annotation>
+      <xsd:documentation>This is the bin quantity in cases and pieces.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Bins">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory if multiple bins are installed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BinLocation" minOccurs="0"/>
+        <xsd:element ref="BinQuantity" minOccurs="0"/>
+        <xsd:element ref="BinUnits" minOccurs="0"/>
+        <xsd:element ref="BinPieces" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Certificate">
+    <xsd:annotation>
+      <xsd:documentation>Certificate for traceable or inspection items, used to update the InvInspectSerialtable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryDate">
+    <xsd:annotation>
+      <xsd:documentation>Delivery date for traceable or inspection items, used to update the InvInspectSerialtable, becomes mandatory when item is traceable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryNote">
+    <xsd:annotation>
+      <xsd:documentation>Delivery note for traceable or inspection items, used to update the InvInspectSerialtable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryTerms">
+    <xsd:annotation>
+      <xsd:documentation>EEC  delivery terms, will update PorEcReceipts table, default taken from supplier master, and if not found, from tax option, intrastat.Validated against TblSaDelTerms table.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DepartureDate">
+    <xsd:annotation>
+      <xsd:documentation>If entered, must be valid. This is the departure date of the vessel.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GRNNumber">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory if GRN installed and numbering is manual. This is the GRN number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GRNSource">
+    <xsd:annotation>
+      <xsd:documentation>Must be between 1 - 9.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncreaseSalesOrderQuantity">
+    <xsd:annotation>
+      <xsd:documentation>Should a purchase order be linked to a sales order and the qty on the purchase order is greater than the sales order, you can either, increase the sales order or leave it as it is, default "N" - leave as is.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InspectionGRN">
+    <xsd:annotation>
+      <xsd:documentation>It is mandatory if the item is traceable or inspection required and GRN numbering is manual. This is the the GRN number for traceable and inspectable items.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IsSalesOrderComplete">
+    <xsd:annotation>
+      <xsd:documentation>Must be a Y or N, will set sales order to complete should the receipt not satisfy the order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ShipmentReference" minOccurs="0"/>
+        <xsd:element ref="Vessel" minOccurs="0"/>
+        <xsd:element ref="DepartureDate" minOccurs="0"/>
+        <xsd:element ref="GRNNumber" minOccurs="0"/>
+        <xsd:element ref="Reference" minOccurs="0"/>
+        <xsd:element ref="GRNSource"/>
+        <xsd:element ref="JournalNotation" minOccurs="0"/>
+        <xsd:element ref="SupplierDeliveryNote" minOccurs="0"/>
+        <xsd:element ref="PurchaseOrderDetails" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="SundryDetails" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JournalNotation">
+    <xsd:annotation>
+      <xsd:documentation>This is the journal notation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotExpiryDate">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotNumber">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotPieces">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotQuantity">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotUnits">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Lots">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory if item is traceable and lot numbering is manual. Only allowed to enter multiple lots, if lot numbering is not manual, The item is tracelable and requires inspection, and The Item is not serialised</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LotNumber" minOccurs="0"/>
+        <xsd:element ref="LotExpiryDate" minOccurs="0"/>
+        <xsd:element ref="LotQuantity" minOccurs="0"/>
+        <xsd:element ref="LotUnits" minOccurs="0"/>
+        <xsd:element ref="LotPieces" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ModeOfTransport">
+    <xsd:annotation>
+      <xsd:documentation>EEC mode of transport, will update PorEcReceipts table.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Narration">
+    <xsd:annotation>
+      <xsd:documentation>Narration for traceable or inspection items, used to update the InvInspectSerialtable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NatureOfTransaction">
+    <xsd:annotation>
+      <xsd:documentation>EEC nature of transaction, will update PorEcReceipts table, default taken from supplier master, and if not found, from tax option, intrastat. Validated against TblSaDelTerms table.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostLandedCostReceipts">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrder">
+    <xsd:annotation>
+      <xsd:documentation>Must be a valid purchase order and must be on the specified shipment (if specified). If a shipment is not entered, a search is performed to find the correct shipment. (This is the recommended method).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrderDetails">
+    <xsd:annotation>
+      <xsd:documentation>Within an item, either PurchaseOrderDetails nodes, or a SundryDetails node must be entered</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PurchaseOrder"/>
+        <xsd:element ref="PurchaseOrderLine"/>
+        <xsd:element ref="Bins" minOccurs="0"/>
+        <xsd:element ref="Lots" minOccurs="0"/>
+        <xsd:element ref="Serials" minOccurs="0"/>
+        <xsd:element ref="SerialRange" minOccurs="0"/>
+        <xsd:element ref="UseSingleTypeABCElements" minOccurs="0"/>
+        <xsd:element ref="IsSalesOrderComplete" minOccurs="0"/>
+        <xsd:element ref="IncreaseSalesOrderQuantity" minOccurs="0"/>
+        <xsd:element ref="CountryOfOrigin" minOccurs="0"/>
+        <xsd:element ref="DeliveryTerms" minOccurs="0"/>
+        <xsd:element ref="ShippingLocation" minOccurs="0"/>
+        <xsd:element ref="NatureOfTransaction" minOccurs="0"/>
+        <xsd:element ref="ModeOfTransport" minOccurs="0"/>
+        <xsd:element ref="TradersReference" minOccurs="0"/>
+        <xsd:element ref="TariffCode" minOccurs="0"/>
+        <xsd:element ref="UnitMass" minOccurs="0"/>
+        <xsd:element ref="SupplementaryUnits" minOccurs="0"/>
+        <xsd:element ref="SupplementaryUnitsFactor" minOccurs="0"/>
+        <xsd:element ref="DeliveryNote" minOccurs="0"/>
+        <xsd:element ref="DeliveryDate" minOccurs="0"/>
+        <xsd:element ref="Certificate" minOccurs="0"/>
+        <xsd:element ref="Narration" minOccurs="0"/>
+        <xsd:element ref="InspectionGRN" minOccurs="0"/>
+        <xsd:element ref="SampleQuantity" minOccurs="0"/>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Electronic signature</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrderLine">
+    <xsd:annotation>
+      <xsd:documentation>Must be a valid purchase order line number for the purchase order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Reference">
+    <xsd:annotation>
+      <xsd:documentation>This is the reference. This is used if GRN numbering is not installed, and the item is neither traceable nor inspectable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SampleQuantity">
+    <xsd:annotation>
+      <xsd:documentation>The quantity for a traceable item that is to be put ininto inspection. This is only relevant if the associated stock code is lot traceable, and defined as sample quantity.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>This is the date the serial expires.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialLocation">
+    <xsd:annotation>
+      <xsd:documentation>This contains the location of the serial number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialNumber">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory when the item is serialized batch, contains the serial number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialPieces">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialPrefix">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix for serial numbers when generating a range of serial numbers.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialQuantity">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory when the item is serialized batch, and is not unit processing. The quantity must be entered in the stocking unit of measure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialRange">
+    <xsd:annotation>
+      <xsd:documentation>Select a range of serial numbers.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SerialPrefix" minOccurs="0"/>
+        <xsd:element ref="SerialSuffix" minOccurs="0"/>
+        <xsd:element ref="StartSerialNumber" minOccurs="0"/>
+        <xsd:element ref="SerialQuantity" minOccurs="0"/>
+        <xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+        <xsd:element ref="SerialLocation" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SerialSuffix">
+    <xsd:annotation>
+      <xsd:documentation>This is the sufix for serial numbers when generating a range of serial numbers.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialUnits">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Serials">
+    <xsd:annotation>
+      <xsd:documentation>Becomes mandatory when the item is serialized.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SerialNumber" minOccurs="0"/>
+        <xsd:element ref="SerialQuantity" minOccurs="0"/>
+        <xsd:element ref="SerialUnits" minOccurs="0"/>
+        <xsd:element ref="SerialPieces" minOccurs="0"/>
+        <xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+        <xsd:element ref="SerialLocation" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShipmentLine">
+    <xsd:annotation>
+      <xsd:documentation>Line number allocated to a sundry line.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShipmentReference">
+    <xsd:annotation>
+      <xsd:documentation>If entered, must be valid and must contain the purchase order line entered below. This is the shipment being received.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StartSerialNumber">
+    <xsd:annotation>
+      <xsd:documentation>Starting serial number when generating a range of serial numbers.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SundryDetails">
+    <xsd:annotation>
+      <xsd:documentation>Within an item, either  PurchaseOrderDetails nodes, or a SundryDetails node must be entered</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ShipmentLine"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplementaryUnits">
+    <xsd:annotation>
+      <xsd:documentation>EEC supplementary units, will update PorEcReceipts table.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupplementaryUnitsFactor">
+    <xsd:annotation>
+      <xsd:documentation>This will only be used if SupplementaryUnits is set to 'Y', and a SupplUnitcode is entered. If used, it is numeric, positive,  6 units and 6 decimals.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupplierDeliveryNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the supplier's delivery note.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TariffCode">
+    <xsd:annotation>
+      <xsd:documentation>EEC tariff code, will update PorEcReceipts table</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TradersReference">
+    <xsd:annotation>
+      <xsd:documentation>EEC traders reference, will update PorEcReceipts table.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnitMass">
+    <xsd:annotation>
+      <xsd:documentation>EEC unit mass, will update PorEcReceipts table.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseSingleTypeABCElements">
+    <xsd:annotation>
+      <xsd:documentation>Must be a Y or N, only required if ABC costing is in use. If not supplied and ABC costing is required, it defaults to N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Vessel">
+    <xsd:annotation>
+      <xsd:documentation>If entered, must be valid. This is the vessel being received.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

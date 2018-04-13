@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Generic set File Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <xsd:element name="FileName" type="xsd:string">
+      <xsd:annotation>
+         <xsd:documentation>Should contain the file name that must be saved</xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:element name="FileType">
+      <xsd:annotation>
+         <xsd:documentation>Should contain the function that must be actioned. PR - Indicated preference file. 'filename' is optional. MF - Indicates Menu File. 'filename' is required. RC - Indicates Report Control. 'filename' is required. RF - Indicate the report form. 'filename' is required. TM - Indicates Template. 'filename' is required. SR - Indicates saved reports. 'filename' is required. RT - Indicates Report Theme. 'filename is required. DT - Delete report template. 'filename' is required. TD - Indicates Template Document. 'filename' is required. RO - Indicates report options. 'filename' is not required. CP - Indicates copy a report template to a new template on the server. 'filename' and 'filecopyto' are required. RH - Indicates Template as a HEX string. 'filename' is required. DH - Indicates Document Template as a HEX string. 'filename' is required.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="PR"/>
+            <xsd:enumeration value="MF"/>
+            <xsd:enumeration value="RC"/>
+            <xsd:enumeration value="RF"/>
+            <xsd:enumeration value="TM"/>
+            <xsd:enumeration value="OH"/>
+            <xsd:enumeration value="SR"/>
+            <xsd:enumeration value="RT"/>
+            <xsd:enumeration value="DT"/>
+            <xsd:enumeration value="TD"/>
+            <xsd:enumeration value="RO"/>
+            <xsd:enumeration value="CP"/>
+            <xsd:enumeration value="DR"/>
+            <xsd:enumeration value="RH"/>
+            <xsd:enumeration value="TH"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+   </xsd:element>
+   <xsd:element name="Parameters">
+      <xsd:annotation>
+         <xsd:documentation>This is parameters element</xsd:documentation>
+      </xsd:annotation>
+      <xsd:complexType>
+         <xsd:all>
+            <xsd:element ref="FileType"/>
+            <xsd:element ref="FileName" minOccurs="0"/>
+            <xsd:element ref="ValidateOnly" minOccurs="0"/>
+            <xsd:element name="FileCopyTo">
+               <xsd:annotation>
+                  <xsd:documentation>Only applicable to the CP filetype.</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:all>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="SetupComset">
+      <xsd:annotation>
+         <xsd:documentation>This is the root element</xsd:documentation>
+      </xsd:annotation>
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="Parameters"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ValidateOnly" default="N">
+      <xsd:annotation>
+         <xsd:documentation>Indicates if the action must be posted or just tested. Only valid for the following 'filetypes' MF, RF and TM</xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+            <xsd:enumeration value=""/>
+            <xsd:enumeration value="Y"/>
+            <xsd:enumeration value="N"/>
+         </xsd:restriction>
+      </xsd:simpleType>
+   </xsd:element>
+</xsd:schema>

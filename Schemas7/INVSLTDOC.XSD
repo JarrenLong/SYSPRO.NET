@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!--
+     Schema for Parameters used by Lot Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupLot">
+    <xsd:annotation>
+      <xsd:documentation>Root Element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to maintain a single Lot for a stock code/warehouse. 
+NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update. There is no Delete functionality.
+           </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Key">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="StockCode">
+                      <xsd:annotation>
+                        <xsd:documentation>Stock code for which the Lot is being added/maintained.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string"/>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Warehouse">
+                      <xsd:annotation>
+                        <xsd:documentation>Warehouse for the Lot being added/maintained.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string"/>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Lot">
+                      <xsd:annotation>
+                        <xsd:documentation>Lot being added/maintained for the stock code/warehouse.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string"/>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Bin">
+                      <xsd:annotation>
+                        <xsd:documentation>If the Company has multiple bins selected and the warehouse also uses multiple bins then the Bin supplied must be valid.
+If the Company uses multiple bins but the warehouse does not, then the Bin is ignored and the Bin defaults to the warehouse.
+If the Company does not use multple bins then a Bin is not required.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string"/>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Version" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory if stock is ECC-controlled at version or release level. The element is NOT required when modifying an existing Lot.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Release" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory if stock is ECC-controlled at version or release level.  The element is NOT required when modifying an existing Lot.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ExpiryDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the expiry date of the Lot if automatic depletion is set on in SYSPRO. Format CCYY-MM-DD. If 0000/00/00 is used then the Lot never expires.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ExpiryDateReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>When updating the Expiry Date this reference may be supplied.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="LotHoldFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>"Y" or "N" to indicate whether the Lot is to be placed on hold.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Note" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the reason for the Lot being placed on hold and is supplied when the LotHoldFlag is modified.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigQtyReceived" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The lot is created with a zero quantity on hand but for historical purposes you may enter the original quantity of the stock code assigned to the lot. This element is only used when creating a new Lot.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the GUID of the current process required to authenticate the transaction when Electronic Signatures are in use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

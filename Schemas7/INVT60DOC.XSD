@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--  
+     Schema for the Stock Take Selection Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Bin">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Supplier Selection A= All (default), S = Single, R= Range</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CycleCount">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Cycle Count Class Selection A= All (default), S = Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the filter node.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Warehouse"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="Supplier"/>
+				<xsd:element ref="Bin"/>
+				<xsd:element ref="ProductClass"/>
+				<xsd:element ref="CycleCount"/>
+				<xsd:element ref="UnitOfMeasure"/>
+				<xsd:element name="ABCClass">
+					<xsd:annotation>
+						<xsd:documentation>This element allows you to  filter by stock warehouse ABC classification, Selection A= All (default), L = List, if you select L, then you can select the ABC classes that you would like to include separated by commas (A,B,C,D,E) in the FilterValue.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+						<xsd:attribute name="FilterValue" use="optional">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string"/>
+							</xsd:simpleType>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeZeroQuantitiesOnHand" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element includes Zero Quantities On Hand in its search. Y - Yes (default), N - No</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Options">
+		<xsd:annotation>
+			<xsd:documentation>This is the options node.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IncludeZeroQuantitiesOnHand"/>
+				<xsd:element ref="ReturnSelectedStockCodes"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:annotation>
+			<xsd:documentation>This is the sub root node</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="PostSelectStockTake">
+		<xsd:annotation>
+			<xsd:documentation>This is the main root node.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:sequence>
+					<xsd:element ref="Options" minOccurs="0"/>
+					<xsd:element ref="Filter"/>
+					<xsd:element name="eSignature" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Product Class Selection A= All (default), S = Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReturnSelectedStockCodes" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element includes Return Selected Stock Codes in its search. Y - Yes (default), N - No</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Stock code Selection A= All (default), S = Single, R= Range, L = List. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Supplier Selection A= All (default), S = Single, R= Range</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UnitOfMeasure">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Unit Of Measure Selection A= All (default), S = Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:annotation>
+					<xsd:documentation>FilterType can be A or L, if L then you can select the ABC classes that you would like to include. (A,B, C, D or/and E)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" use="required">
+				<xsd:annotation>
+					<xsd:documentation>If the FilterType is L, then you can select the ABC classes that you would like to include, separated by commas. (A,B,C,D,E)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value=""/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>This element allows to be filtered by the Warehouse Selection S = Single (default), L = List. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

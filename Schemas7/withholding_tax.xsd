@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Withholding Tax Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of bank to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ApBank;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Supplier" minOccurs="0"/>
+				<xsd:element ref="Bank" minOccurs="0"/>
+				<xsd:element ref="TaxCode" minOccurs="0"/>
+				<xsd:element ref="Period" minOccurs="0"/>
+				<xsd:element ref="Currency" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportDetails" minOccurs="0"/>
+				<xsd:element name="IncludeForeignSuppliers" minOccurs="0"/>
+				<xsd:element name="IncludeLocalSuppliers" minOccurs="0"/>
+				<xsd:element name="IncludeIndividualSuppliers" minOccurs="0"/>
+				<xsd:element name="IncludeExpenseType" minOccurs="0"/>
+				<xsd:element ref="YearToPrint" minOccurs="0"/>
+				<xsd:element ref="SubTotalsByBank" minOccurs="0"/>
+				<xsd:element ref="SubTotalsByExpenseType" minOccurs="0"/>
+				<xsd:element ref="PrintSupplierAddress" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Period">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of periods to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PrintSupplierAddress">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the supplier address should be returned. If no value is supplied a default value of 'N' will be supplied.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportDetails" default="I">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what detail should be returned (I - Invoice details, SS - Summary report by supplier and ST - summary report by tax code). If no value is supplied then a default value of 'I' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;I=Invoice details;SS=Summary report by supplier;ST=Summary report by tax code;C=Check details"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="SS"/>
+				<xsd:enumeration value="ST"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeForeignSuppliers">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if foreign suppliers should be included on the report (Y - Yes, N - No)</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeLocalSuppliers">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if local suppliers should be included on the report (Y - Yes, N - No)</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeIndividualSuppliers">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if individual suppliers should be included on the report (Y - Yes, N - No)</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeExpenseType" default="G">
+		<xsd:annotation>
+			<xsd:documentation>Indicates which expense types should be included on the report (G - Goods only, S - Services only, B - Both goods and services)</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;G=Goods only;S=Services only;B=Both goods and services"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubTotalsByBank">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether or not the banks should be retuned by sub total. If no value is supplied a default value of 'N' will be supplied.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubTotalsByExpenseType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether or not the expense types should be retuned by sub total. If no value is supplied a default value of 'N' will be supplied.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of suppliers to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TaxCode">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of tax codes to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=AdmWithholdingTax;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Currency">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single tax codes to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblCurrency;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The style sheet to be applied</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="YearToPrint" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates which year should be returned. If no value is supplied the financial year will be used as the default.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

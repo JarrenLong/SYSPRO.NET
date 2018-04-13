@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Journal Query Business Object
+-->
+<xsd:schema id="Query" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:element name="Query" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element name="Option">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="PrintSummaryJournal" minOccurs="0"/>
+              <xsd:element ref="PrintNewPage" minOccurs="0"/>
+              <xsd:element ref="PrintMultipleBinTransfer" minOccurs="0"/>
+              <xsd:element ref="MonthSelection" minOccurs="0"/>
+              <xsd:element ref="YearSelection" minOccurs="0"/>
+              <xsd:element ref="Reprint" minOccurs="0"/>
+              <xsd:element ref="JournalPrintOptions" minOccurs="0"/>
+              <xsd:element ref="XslStylesheet" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="JournalSelection" minOccurs="0" maxOccurs="unbounded"/>
+              <xsd:element ref="WarehouseSelection" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintSummaryJournal">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate whether to print a summary for the journal or not.The default is Y and the other valid value is N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintNewPage">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate whether to print the journal on a new page or not.The default is Y and the other valid option is N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintMultipleBinTransfer">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate whether to print multiple bin. The default is N and the other valid value is Y. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MonthSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the month for the period selection.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;01=01;02=02;03=03;04=04;05=05;06=06;07=07;08=08;09=09;10=10;11=11;12=12;13=13;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="01"/>
+        <xsd:enumeration value="02"/>
+        <xsd:enumeration value="03"/>
+        <xsd:enumeration value="04"/>
+        <xsd:enumeration value="05"/>
+        <xsd:enumeration value="06"/>
+        <xsd:enumeration value="07"/>
+        <xsd:enumeration value="08"/>
+        <xsd:enumeration value="09"/>
+        <xsd:enumeration value="10"/>
+        <xsd:enumeration value="11"/>
+        <xsd:enumeration value="12"/>
+        <xsd:enumeration value="13"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="YearSelection" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the year for the period selection.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Reprint">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the reprint journal report option.The default is N and the other valid option is Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JournalPrintOptions">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the different journal print options. The default is B and the other valid values are F and S</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;B=Both;F=FIFO;S=Standard;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="JournalSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the journal number selection.The default is A and the other valid options are R, S and L.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single;L=List;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WarehouseSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the warehouse selection.The default is A and the other valid options are R and S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

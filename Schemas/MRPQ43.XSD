@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Purchase Order Action Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ActionCancel">
+    <xsd:annotation>
+      <xsd:documentation>Inidicates the information to print according to the 'Cancel' actions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionChng">
+    <xsd:annotation>
+      <xsd:documentation>Inidicates the information to print according to the 'Changed' actions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionDelay">
+    <xsd:annotation>
+      <xsd:documentation>Inidicates the information to print according to the 'Delay' actions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionNew">
+    <xsd:annotation>
+      <xsd:documentation>Inidicates the information to print according to the 'New' actions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all Buyers to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse=InvBuyer;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ConvertQtyAlternateUmSugReq">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print the quantity required for a suggested requisition in its alternate unit of measure.  (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExceptionLate">
+    <xsd:annotation>
+      <xsd:appinfo source="Screenitem=Y; Y=Yes; N=No"/>
+      <xsd:documentation>Indicates the information to print according to the 'Late' exceptions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExceptionOverdue">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the information to print according to the 'Overdue' exceptions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used </xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExcludeActionsDays" type="xsd:double">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the the number of days by which a purchase order or requisition must be rescheduled is less than the entry made here, then the purchase order or requisition is excluded from the report.  You can only access this field if you selected to print orders/requisitions with the Action messages: Change and/or Delay.  If no value is supplied then a default of zero will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the filter element</xsd:documentation>
+      <xsd:appinfo source="Screenitem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="Buyer"/>
+        <xsd:element ref="Planner"/>
+        <xsd:element ref="OrderDate"/>
+        <xsd:element ref="LineDueDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeItemNonStocked">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include information for non-stocked items in the report. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeItemStocked">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include information for stocked items in the report. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOrdersNoException">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the information to print according to the orders with no exceptions identified by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOrdersWithNoAction">
+    <xsd:annotation>
+      <xsd:documentation>Inidicates the information to print that have no actions identified against them by the Requirements Calculation program. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LineDueDate">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all line due dates to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the option element</xsd:documentation>
+      <xsd:appinfo source="Screenitem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSequence"/>
+        <xsd:element ref="PrintNewPagePerSupplier"/>
+        <xsd:element ref="PrintValueTotals"/>
+        <xsd:element ref="PrintPegging"/>
+        <xsd:element ref="ConvertQtyAlternateUmSugReq"/>
+        <xsd:element ref="ValuationMethodSugReq"/>
+        <xsd:element ref="ActionChng"/>
+        <xsd:element ref="ActionDelay"/>
+        <xsd:element ref="ActionCancel"/>
+        <xsd:element ref="ActionNew"/>
+        <xsd:element ref="IncludeOrdersWithNoAction"/>
+        <xsd:element ref="ExcludeActionsDays"/>
+        <xsd:element ref="ExceptionLate"/>
+        <xsd:element ref="ExceptionOverdue"/>
+        <xsd:element ref="IncludeOrdersNoException"/>
+        <xsd:element ref="IncludeItemStocked"/>
+        <xsd:element ref="IncludeItemNonStocked"/>
+        <xsd:element ref="StatisticalParts"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderDate">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all order dates to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).
+</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Planner">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all Planners to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse=InvPlanner;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintNewPagePerSupplier">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print a new page upon change of the supplier.  You can only access this field if the report is run in Supplier sequence. (Y - Yes and N - No). </xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintPegging">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print pegging information that was created when running the Requirements Calculation program. Only pegging between the from/to suggested line due dates selected will be printed. Dock-to-stock is taken into account.  You can only access this option if pegging information was created when running the Requirements Calculation program and the report is run in Stock code sequence. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintValueTotals">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print the total values of the purchase orders/requisitions for each stock item. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all product classes to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).
+      </xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+      <xsd:appinfo source="Screenitem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the sequence to print the report.  (P - Provider and S - Stock code). If no value is supplied then a default of 'P' will be used.  You will be unable to select this option if pegging was not created during the run of the Requirements Calculation program.</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;P=Supplier;S=Stock code"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StatisticalParts">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to I(Include), E(Exclude), O(Only) print the statistical parts in the report. If no value is supplied then a default of  'E' will be used.</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all stock codes to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all suppliers to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).  These options are not available if you selected to print the report in Stock code sequence.</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValuationMethodSugReq">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the method for valuation of suggested requisitions.  C(Current) cost of the item, L(Last) price paid for the item, or D(Default) purchase order review price of the item. If no value is supplied then a default of 'C' will be used.</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;C=Current cost;L=Last price paid;D=Default p/order review price"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of purchase orders and requisition for all warehouses to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="Screenitem=Y;browse=InvWhControl;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

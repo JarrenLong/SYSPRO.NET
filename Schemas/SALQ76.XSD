@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Analysis EC Sales Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="InvoiceDate" minOccurs="0"/>
+        <xsd:element ref="TariffCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ServiceEntries">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available when running the Aggregate report.
+
+
+Valid values are 'I - Include (default), 'E' - Exclude and 'O' - Only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvoiceDate">
+    <xsd:annotation>
+      <xsd:documentation>The Sales Analysis EC Vat Sales file stores the date of each transaction.
+
+This date is used to selectively print invoices as follows:
+
+All 
+Select this to include sales for all invoice dates.
+
+Range 
+Select this to include sales for a range of invoice dates.
+
+You indicate this range in the From and To fields below.
+
+Single 
+Select this if you want to generate the report for sales for a single invoice date.
+
+You indicate this invoice date in the From field below.
+
+From 
+This indicates the first invoice date in a range of invoice dates for which you want to include sales in the report.
+
+If you selected to include sales for a single invoice date, then you enter that invoice date in this field.
+
+To 
+This indicates the last invoice date in a range of invoice dates for which you want to include sales in the report.
+
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MonthEndPeriod">
+    <xsd:annotation>
+      <xsd:documentation>The period end date defaults to the Accounts Receivable period end date (Accounts Receivable Setup - Current Month tab), but can be changed.
+
+You use this option to indicate the month up to which you want to generate the report.
+
+This option is ignored when you select to reprint the report. 
+
+Month 
+This indicates the month (within the year selected below), up to which to print the report
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSelection" minOccurs="0"/>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="MonthEndPeriod" minOccurs="0"/>
+        <xsd:element ref="YearEndPeriod" minOccurs="0"/>
+        <xsd:element ref="Reprint" minOccurs="0"/>
+        <xsd:element ref="ReprintSinglePeriod" minOccurs="0"/>
+        <xsd:element ref="ReprintPeriodMonth" minOccurs="0"/>
+        <xsd:element ref="ReprintPeriodYear" minOccurs="0"/>
+        <xsd:element ref="ServiceEntries" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSelection" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'A' - Aggregate Listing (default) or 'S' - Suplementary Declaration report.
+
+Aggregate sales listing 
+Select this to print a report listing all sales made to EC countries.
+
+This report uses data from the S/A EC VAT sales file to create the listing. Each invoiced line on a sales order for a customer in an EC Member State (excluding local transactions) creates an entry in this file.
+
+This report only prints transactions for those EC customers for whom a VAT registration number is defined (Customers - Tax tab).
+
+Supplementary declaration report 
+Select this to print a report listing all despatches (goods issued from stock) to EC countries.
+
+This report uses data from the S/A EC VAT sales file to create the listing. Each invoiced line on a sales order for a customer in an EC Member State (excluding local transactions) creates an entry in this file.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType" default="S">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'S' - Summary (default) or 'D' - Detail.
+
+Summary 
+Select this to exclude detail information from being printed on the report.
+
+The aggregate sales listing report, lists the total sales value by customer tax registration number.
+
+The supplementary declaration report, lists the total goods issued from stock by tariff code.
+
+Detail 
+Select this to print the detail information as well as totals on the report.
+
+The aggregate sales listing report, lists all sales to each customer by document (invoice) number.
+
+The supplementary declaration report, lists all goods issued from stock by invoice and sales order number.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Reprint" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'N' - No (default) or 'Y' - Yes.
+
+Select this to print a report that was previously printed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReprintPeriodMonth">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the month (within the year selected in 'ReprintPeriodYear'), for which you want to reprint the report.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReprintPeriodYear" default="C">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the year for which the report must be printed.
+Valida values are 'C' - Current (default), 'P' - Previous or a 4-digit field indicating the current or previous AR financial year.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReprintSinglePeriod" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'N' - No (default) or 'Y' - Yes.
+
+If you selected the Reprint option, then you will be able to select to print a single period or all periods.
+
+Select 'N' reprint all the available data, regardless of the month and year.
+
+Select a single period in elements 'ReprintPeriodMonth' and 'ReprintPeriodYear' to reprint all the available data, for one particular period only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TariffCode">
+    <xsd:annotation>
+      <xsd:documentation>Range of tariff codes to be reported on.
+
+Valid values are 'A' - All (default), 'R' - Range or 'S' - Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="YearEndPeriod" default="C">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the year for which the report must be printed.
+Valida values are 'C' - Current (default), 'P' - Previous or a 4-digit field indicating the current or previous AR financial year.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

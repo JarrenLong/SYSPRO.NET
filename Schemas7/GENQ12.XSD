@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the GL History Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlGroup" minOccurs="0"/>
+				<xsd:element ref="GlCode" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Sequence" minOccurs="0"/>
+				<xsd:element ref="HistoryYear" minOccurs="0"/>
+				<xsd:element ref="HistoryType" minOccurs="0"/>
+				<xsd:element ref="Currency" minOccurs="0"/>
+				<xsd:element ref="IncludeAssets" minOccurs="0"/>
+				<xsd:element ref="IncludeLiabilities" minOccurs="0"/>
+				<xsd:element ref="IncludeCapital" minOccurs="0"/>
+				<xsd:element ref="IncludeRevenue" minOccurs="0"/>
+				<xsd:element ref="IncludeExpenses" minOccurs="0"/>
+				<xsd:element ref="IncludeStatistical" minOccurs="0"/>
+				<xsd:element ref="NewPagePerGroup" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Sequence">
+		<xsd:annotation>
+			<xsd:documentation>Determines on what the values returned are sorted. (L - Ledger Code, D - Description, G - Group. If no value is supplied then a default value of 'L' will be used.				</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;L=Ledger Code;D=Description;G=Group"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="G"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="HistoryYear">
+		<xsd:annotation>
+			<xsd:documentation>Determines for which year history is returned.  If no value is supplied the current year will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="HistoryType">
+		<xsd:annotation>
+			<xsd:documentation>Determines whether Account Balances or Period Movements are returned. (B - Account Balances, M - Period Movements. If no value is supplied then a default value of 'B' will be used.				</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;M=Period movement;B=Account balance"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Currency" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Use this to specify what reporting currency you want to use.  If no value is supplied then the local currency will be the default value used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblCurrency"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeAssets">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether data for Asset Accounts will be returned. (Y - Yes, N  - No. If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCapital">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether data for Capital Accounts will be returned. (Y - Yes, N  - No. If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeLiabilities">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether data for Liability Accounts will be returned. (Y - Yes, N  - No. If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeRevenue">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether data for Revenue Accounts will be returned. (Y - Yes, N  - No. If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeExpenses">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether data for Expense Accounts will be returned. (Y - Yes, N  - No. If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeStatistical">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether data for Statistical Accounts will be returned. (Y - Yes, N  - No. If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NewPagePerGroup">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether a page break will be inserted after every Group, if sequenced by Group. (Y - Yes, N  - No. If no value is supplied then a default value of 'N' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlGroup">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of G/L Groups to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=GenGroups;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlCode">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of G/L Codes to be returned. FilterType options - A(All), (R) Range, (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=GenMaster;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The style sheet to be applied</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

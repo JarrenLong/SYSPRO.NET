@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Estimate Routing Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ElapsedTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate a fixed number of days for the elapsed time, used when the element ‘Elapsed Time Cal’ is set to N (no calculation). The format is up to 3 characters positive numeric. Default to: 1.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ElapsedTimeCal" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate whether the elapsed time of the operation must be dynamically calculated, or manually entered as a fixed number of days. Possible values: N (no calculation, fixed elapsed time must be supplied) or Y (calculate elapsed time automatically). Default to: Y (yes).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IBlockQty">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the quantity of the item that will be produced in the amount of time specific in the element ‘Time Taken’, used to calculate the unit run time when your Run time calculation method for your work centre is Rate. The format is up to 11 character positive numeric with 7 integers and 3 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IMachine">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the default machine for the operation. The format is up to 6 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IMaxOperators">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the maximum number of operators permitted to process the operation. This may not exceed the number of operators assigned to the work centre. The format is up to 6 characters positive numeric with 3 integers and 2 decimals. Default to 1.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IMaxProdUnits">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the maximum number of productive units available in the work centre that can be used on the operation. This value is used in the calculation of capacity required and elapsed time. The format is up to 6 characters positive numeric with 3 integers and 2 decimals. Default to 1.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IRunTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the time taken to produce one unit during full speed production. It forms part of elapsed time. This field is only applicable when your Run time calculation method for your work centre is Unit. The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ISetupTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the time taken to ready a specific machine, process or work centre for use. No usable items are produced during the setup period. It forms part of the operation elapsed time. The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IStartupQty">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the quantity of product manufactured during the start up period. This is deducted from the actual quantity to be manufactured when the run time is calculated. The format is up to 11 characters positive numeric with 7 integers and 3 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IStartupTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the time taken to gradually bring the specific machine, line or work centre up to full production speed while producing usable product. It forms part of the operation elapsed time. The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ITeardownTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the time taken to close down the specific machine, line or work centre used in the operation after production is complete. It forms part of the elapsed time. Typically, no usable items are produced during the teardown period.  The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ITimeTaken">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to calculate the unit run time when your Run time calculation method for your work centre is either Block or Rate. The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IWaitTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the amount of time between the end of the current operation and the availability of the product to be moved to the next work centre. This forms part of elapsed time. Wait time is not included in the calculation of capacity required or in the costing calculations. The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InspectionFlag" default="N">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the level of inspection required for the operation. Possible values: N (No inspection), S (Sample inspection) or F (Full inspection). Default to: N.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the information to maintain an operation for an estimate. The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="WorkCentre" minOccurs="0"/>
+				<xsd:element ref="WorkRateInd" minOccurs="0"/>
+				<xsd:element ref="ISetupTime" minOccurs="0"/>
+				<xsd:element ref="IRunTime" minOccurs="0"/>
+				<xsd:element ref="IStartupTime" minOccurs="0"/>
+				<xsd:element ref="ITeardownTime" minOccurs="0"/>
+				<xsd:element ref="IWaitTime" minOccurs="0"/>
+				<xsd:element ref="IStartupQty" minOccurs="0"/>
+				<xsd:element ref="IMachine" minOccurs="0"/>
+				<xsd:element ref="IMaxOperators" minOccurs="0"/>
+				<xsd:element ref="IMaxProdUnits" minOccurs="0"/>
+				<xsd:element ref="ITimeTaken" minOccurs="0"/>
+				<xsd:element ref="IBlockQty" minOccurs="0"/>
+				<xsd:element ref="SubSupplier" minOccurs="0"/>
+				<xsd:element ref="SubPoStockCode" minOccurs="0"/>
+				<xsd:element ref="SubQtyPer" minOccurs="0"/>
+				<xsd:element ref="SubOrderUom" minOccurs="0"/>
+				<xsd:element ref="SubOpUnitValue" minOccurs="0"/>
+				<xsd:element ref="SubPlanner" minOccurs="0"/>
+				<xsd:element ref="SubBuyer" minOccurs="0"/>
+				<xsd:element ref="SubLeadTime" minOccurs="0"/>
+				<xsd:element ref="SubDockToStock" minOccurs="0"/>
+				<xsd:element ref="SubOffsiteDays" minOccurs="0"/>
+				<xsd:element ref="Milestone" minOccurs="0"/>
+				<xsd:element ref="ElapsedTimeCal" minOccurs="0"/>
+				<xsd:element ref="ElapsedTime" minOccurs="0"/>
+				<xsd:element ref="MovementTime" minOccurs="0"/>
+				<xsd:element ref="NarrationCode" minOccurs="0"/>
+				<xsd:element ref="Pieces" minOccurs="0"/>
+				<xsd:element ref="InspectionFlag" minOccurs="0"/>
+				<xsd:element ref="MinorSetup" minOccurs="0"/>
+				<xsd:element ref="MinorSetupCode" minOccurs="0"/>
+				<xsd:element ref="ToolSet" minOccurs="0"/>
+				<xsd:element ref="ToolSetQty" minOccurs="0"/>
+				<xsd:element ref="ToolConsumption" minOccurs="0"/>
+				<xsd:element ref="SellBasis" minOccurs="0"/>
+				<xsd:element ref="SellRateInd" minOccurs="0"/>
+				<xsd:element ref="MarkupMarginPct" minOccurs="0"/>
+				<xsd:element ref="WorkCentreDesc" minOccurs="0"/>
+				<xsd:element name="OperYieldPct" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates the percentage factor by which the quantity per must be increased, to take account of scrap. The format is up to 5 characters positive numeric with 2 integers and 2 decimals.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="5"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="OperYieldQty" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates the quantity which must be added to the components issued, to take account of scrap. The format is up to 8 characters positive numeric with 4 integers and 3 decimals.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="8"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TransferQtyOrPct" default="Q" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates whether the transfer value against the TransferQtyPct element is a quantity or a percentage. Possible values Q - (Quantity), P - (Percentage). Defaults to Q.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="1"/>
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="Q"/>
+							<xsd:enumeration value="P"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="TransferQtyPct" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates the transfer quantity or percentage. This option is currently only used for documentary purposes. The format is up to 11 characters positive numeric with 7 integers and 3 decimals.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="11"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain an estimate routing record.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="NonStockCode"/>
+				<xsd:element ref="Route" minOccurs="0"/>
+				<xsd:element ref="Operation" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MarkupMarginPct">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the markup or margin percentage to be added to the total cost of the operation, when you have selected a ‘Sell Basis’ of ‘M’. This element is only applicable if you have selected that changes to the markup or margin percentage for labor are allowed at estimate level in the quotation setup within SYSPRO. The format is up to 7 characters signed numeric with 3 integers and 2 decimals.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="7"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Milestone" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate whether this is a milestone operation. This enables you to post labor to key operations and update all prior operations with labor postings. Possible values: Y (yes) or N (no). Default to: Y (yes).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MinorSetup">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the time taken to make any minor adjustments for a machine, production line or work center for the operation. The format is up to 10 characters positive numeric with 5 integers and 4 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MinorSetupCode">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the code for any minor set up which is required for a machine, production line or work center, for example: adjusting cutters. The format is up to 4 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MovementTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the time required for the operation to move between work centers. The format is up to 4 characters signed numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NarrationCode">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate a standard narration code. This element is only applicable if you have selected the Bill of Material setup option: ‘Standard narrations for operations required’. The format is up to 4 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NonStockCode">
+		<xsd:annotation>
+			<xsd:documentation>The non-stocked parent code for which you want to create or maintain the estimate. You may not create estimates for stock codes or non-stocked codes that are defined as bought out items or phantom parts. The format is up to 30 characters alphanumeric or 15 characters numeric depending on the configuration option within Syspro.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Operation">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to assign an operation to the parent stock code. If you enter an operation that already exists, and you are adding an operation, it will be inserted as a new operation. The format is a 3 characters numeric field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Pieces">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the number of pieces involved in the operation. This enables you to mark quantities in a measure that is meaningful to you. The format is up to 5 characters positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="5"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Route" default="0">
+		<xsd:annotation>
+			<xsd:documentation>This field enables you to select a specific routing for which you want to maintain an estimate. You may only select routes that are required for the non-stocked parent code. The format is a 1 character alphanumeric field. Default to 0.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SellBasis" default="M">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the pricing method. Possible values: M (if you want a markup or margin percentage to be added to the total cost of the operation) or R (if you want to calculate the price that the customer will be charged for this operation according to the selling rate supplied in the element ‘Sell Rate Ind’). This element is only applicable if you have selected that changes to the markup or margin percentage for labor are allowed at estimate level in the quotation setup within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SellRateInd">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the selling rate that will be used to calculate the price that the customer will be charged for this operation, when you have selected a ‘Sell Basis’ of ‘R’. This element is only applicable if you have selected that changes to the markup or margin percentage for labor are allowed at estimate level in the quotation setup within SYSPRO. The format is 1 character positive numeric. Default to: 1.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SetupQotRouting">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SubBuyer">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the buyer for this operation. This defaults to the buyer assigned to work centre. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubDockToStock">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the number of days required for the inspection of the item. This is added to the offsite time to establish the elapsed time of the operation. The format is up to 3 characters positive numeric.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubLeadTime">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the number of days before this operation which are needed to raise a purchase order and reserve capacity at the subcontractor. The format is up to 3 characters positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubOffsiteDays">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the number of days that the component is off site. This is added to any dock to stock days to determine the elapsed time. The format is up to 3 characters positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubOpUnitValue">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the subcontract value of the operation. The format is up to 16 characters positive numeric with 10 integers and 5 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubOrderUom">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the unit of measure for the operation. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubPlanner">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the planner for this operation. This defaults to the planner assigned to work centre. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubPoStockCode">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the notation that will be entered under the stock code when a purchase order is generated. The format is up to 30 characters alphanumeric or 15 characters field, numeric, depending on the key configuration setup within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubQtyPer">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the quantity of components needed to make one of the parent item. The format is up to 13 characters positive numeric with 6 integers and 6 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="13"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubSupplier">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the supplier providing the service. This defaults to the supplier assigned to work centre. The format is up to 7 characters alphanumeric or numeric depending on the key configuration setting within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="7"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ToolConsumption">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate quantity of the tool sets used during the operation. This can be printed on your factory documentation. The format is up to 1 character positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ToolSet">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the tool set number for the operation. This can be printed on your factory documentation. The format is up to 15 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="15"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ToolSetQty">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the tool set quantity for the operation. This can be printed on your factory documentation. The format is up to 11 characters positive numeric with 7 integers and 3 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WorkCentre">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the work centre in which the operation must be performed. Depending on whether you specified an internal or subcontract work centre, the fields that can be defined changes accordingly. This is a mandatory element when adding an operation. The format is up to 6 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WorkCentreDesc">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the work center description. The format is up to 30 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WorkRateInd">
+		<xsd:annotation>
+			<xsd:documentation>Indicate the work centre rate applicable to this operation. These rates are used to cost labor and overheads for an operation that takes place in the work center. The format is 1 character numeric. Default to 1.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

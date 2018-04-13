@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2009 SYSPRO Ltd.-->
+<!--
+     Schema for Cashbook Journal GL Integration business object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Year" minOccurs="0"/>
+        <xsd:element ref="Month" minOccurs="0"/>
+        <xsd:element ref="Journal" minOccurs="0"/>
+        <xsd:element ref="ToYear" minOccurs="0"/>
+        <xsd:element ref="ToMonth" minOccurs="0"/>
+        <xsd:element ref="ToJournal" minOccurs="0"/>
+        <xsd:element ref="Bank" minOccurs="0"/>
+        <xsd:element ref="JournalList" minOccurs="0"/>
+        <xsd:element ref="esignature" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Month">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the month of the single/from journal you would like to post. If no value is supplied the Cashbook period will be used. This element is ignored if the Action is a "A".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CashbookJournal">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Journal">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicat the journal number of the single/from journal you would like to post.  This element is ignored if the Action is a "A".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Year">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicat the year of the single/from journal you would like to post. If no value is supplied the Cashbook year will be used. This element is ignored if the Action is a "A".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ToJournal">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the to  journal number of the range of  journals you would like to post.  This element is ignored if the Action is a "A" or "S" or "L".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ToMonth">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the to month of the range of journals you would like to post. If no value is supplied the Cashbook period will be used. This element is ignored if the Action is a "A" or "S" or "L".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ToYear">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicat the to year of the range of journals you would like to post. If no value is supplied the Cashbook year will be used. This element is ignored if the Action is a "A" or "S" or "L".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Bank">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicat a single bank. If no value is supplied the all banks will be used. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="esignature" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.
+                </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="JournalList" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If you wish to post a list of cashbook journals then you need to supply the list of journals (including the year and the month) separated by a ','.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

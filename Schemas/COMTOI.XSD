@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SYSPRO Office Integration Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="FileName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the file name element used when the 'FileType' element is "SO".</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FileType">
+		<xsd:annotation>
+			<xsd:documentation>The is is the FileType element. When SO - Will save the search options using the 'FileName' element.  When PR - will save the preference file away.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="SO"/>
+				<xsd:enumeration value="PR"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:annotation>
+			<xsd:documentation>This is the paramenter element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FileType"/>
+				<xsd:element ref="FileName"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostCOMTOI">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Parameters"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

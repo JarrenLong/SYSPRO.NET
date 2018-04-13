@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Retrieve Sales Order Back Order Release Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Build">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of the customer ( A - All, S - Single).  Default is A (All). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of the customer class ( A - All, S - Single).  Default is A (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ExcludeSchedOrderLinesNotAlloc">
+    <xsd:annotation>
+      <xsd:documentation>This element gives an option to exclude scheduled order lines not yet allocated. (Y- Yes, N - No) , default N - No. 
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrder" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="CustomerClass" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="GeographicArea" minOccurs="0"/>
+        <xsd:element ref="ShipDate" minOccurs="0"/>
+        <xsd:element ref="SalesPerson" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicArea">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of the geographic area ( A - All, S - Single).  Default is A (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeBillsStatus8">
+    <xsd:annotation>
+      <xsd:documentation>This element gives an option to include billings in status 8. ( Y - Yes , N -No),  Default - N (No).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCounterSaleOrders">
+    <xsd:annotation>
+      <xsd:documentation>This element gives an option to include counter sale orders.  (Y - Yes , N -No)   Default - N (No).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NegativeWhOnlyConsiderFreeStock">
+    <xsd:annotation>
+      <xsd:documentation>This element gives an option to include negative warehouse only consider free stock. (Y- Yes, N - No) , default N - No. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence1" minOccurs="0"/>
+        <xsd:element ref="Sequence2" minOccurs="0"/>
+        <xsd:element ref="IncludeCounterSaleOrders" minOccurs="0"/>
+        <xsd:element ref="ExcludeSchedOrderLinesNotAlloc" minOccurs="0"/>
+        <xsd:element ref="NegativeWhOnlyConsiderFreeStock" minOccurs="0"/>
+        <xsd:element ref="ShowZeroToRelease" minOccurs="0"/>
+        <xsd:element ref="ShowOnHoldStock" minOccurs="0"/>
+        <xsd:element ref="IncludeBillsStatus8" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of productclass ( A - All, S - Single).  Default is A (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of sales order ( A - All, R - Range, S - Single). Default  A (All). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of salesperson ( A - All, S - Single). Default  A (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence1" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the primary sequence in which you want orders to be returned. The default sequence is sales order(O). ( O - Order number;  S - Salesperson;  C - Customer class;  G - Geographic area; L - Line ship date;      T - Stock code; U - Customer)       
+ 
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Sequence2" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element is used to indicate the secondary sequence in which you want orders to be returned. The default sequence is sales order(O). ( O - Order number;  S - Salesperson;  C - Customer class;  G - Geographic area; L - Line ship date;      T - Stock code; U - Customer)    </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipDate">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of ship date ( A - All, S - Single, R - Range).  Default is A (All). Date must be in CCYYMMDD format.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShowZeroToRelease">
+    <xsd:annotation>
+      <xsd:documentation>This element gives an option to show sales orders with zero quantity to release. (Y- Yes, N - No) , default Y - Yes. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowOnHoldStock">
+    <xsd:annotation>
+      <xsd:documentation>This option can be used to include stock that is on hold in the information returned. N - default - do not return lines where stock is on hold. P - return lines where the stock item is on partial hold. Y - return lines where stock is on either full or partial hold.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes ( A - All, S - Single, R - Range). Default is A (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of warehouses ( A - All, S - Single).  Default A (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

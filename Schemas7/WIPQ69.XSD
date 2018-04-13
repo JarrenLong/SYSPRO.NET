@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Work Center Efficiency Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="WorkCenterSelection" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent option element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="UnitOfMeasure" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UnitOfMeasure">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the work center is to be printed with Time values or Capacity values. (T -  Time, C - Capacity).  If no value is set the default is set to Time.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;T=Time;C=Capacity"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WorkCenterSelection">
+    <xsd:annotation>
+      <xsd:documentation>Work center to be selected (FilterType of A - All, S - Single Work center, R - Range of work centers, L - List of work centers)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=BomWorkCentre;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

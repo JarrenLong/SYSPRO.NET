@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Advanced Trial Kitting Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>This indicate the customer filter on the selection of sales orders or the selection of quotations for which a trial kit list must be generated ( A - All, S - Single).  If not provided the default is A. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="1"/>
+                <xsd:whiteSpace value="preserve"/>
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="S"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="7"/>
+                <xsd:whiteSpace value="preserve"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GrossQuantity" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If progressive scrap is required (Bill of Material setup, General tab) then you may select if the Quantity to make for stocked standard parts represents the Gross or Net quantity. Possible values: N (Net quantity) or Y (Gross quantity). If not provided the default is N. This element will be ignored if the element IncludeStandardParts is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of jobs for which a trial kit list must be generated ( A - All, S - Single, R - Range, L - List).  If not provided the default is A. If R is selected then separated by a ','.  Example: 100,120. If L is selected then a list of jobs must be provided using the group element JobList. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="1"/>
+                <xsd:whiteSpace value="preserve"/>
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="R"/>
+                <xsd:enumeration value="S"/>
+                <xsd:enumeration value="L"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="17"/>
+                <xsd:whiteSpace value="preserve"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NonStockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of non-stocked standard parts for which a trial kit list must be generated ( A - All, S - Single, R - Range, L - List).  If not provided the default is A.  If R is selected then separated by a ','.  Example: B100A,DFMB900. If L is selected then a list of non-stock codes must be provided using the group element NonStockList. This element will be ignored if the element IncludeNonStockedStandardParts is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="1"/>
+                <xsd:whiteSpace value="preserve"/>
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="R"/>
+                <xsd:enumeration value="S"/>
+                <xsd:enumeration value="L"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="61"/>
+                <xsd:whiteSpace value="preserve"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NonStockQuantity">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the quantity to make for the standard non-stock codes specified. The format is up to 12 characters numeric with 7 integers and 3 decimals. If not provided the default is 1. This element will be ignored if the element IncludeNonStockedStandardParts is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Quantity" default="1">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the quantity to make for the standard stock codes specified. This element will be ignored if the element UseEBQ is 'Y'. The format is up to 12 characters numeric with 7 integers and 3 decimals. If not provided the default is 1. This element will be ignored if the element IncludeStandardParts is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:maxLength value="12"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QuantityToMake">
+    <xsd:annotation>
+      <xsd:documentation>If you define a quantity to make then the gross required quantity for each component (allocation) of the job will be calculated as the quantity to make multiplied by the quantity per for the allocation. This element will be ignored if the element UseBalanceOutstanding is 'Y'. The format is up to 12 characters numeric with 7 integers and 3 decimals.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The list of filters.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all minOccurs="0">
+              <xsd:element name="StandardPart" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of stocked and non-stocked standard parts for which a trial kit list must be generated. This element is only applicable when either the element IncludeStandardParts or the element IncludeNonStockedStandardParts is 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence minOccurs="0">
+                    <xsd:element name="Version" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the version of the stock code. This element is only applicable if Engineering Change Control is in use and is not controlled at stocking level. This element is only applicable when the FilterValue for the element StockCode is 'S' and the stock code supplied is an ECC controlled item. This element will be ignored if the element IncludeStandardParts is 'N'. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for revision in SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Release" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the release of the stock code. This element is only applicable if Engineering Change Control is in use and is controlled at release level. This element is only applicable when the FilterValue for the element StockCode is 'S' and the stock code supplied is an ECC controlled item. This element will be ignored if the element IncludeStandardParts is 'N'. The format is either up to 3 characters alphanumeric or numeric depending on the key configuration setup for release in SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Route" default="0" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the BOM route to use for the stocked standard parts, sales order lines and quotation lines. This element is only applicable if alternate routing is required and when 'UseParentWhRoute' = 'N'. If not provided the default is 0. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="StockCode" minOccurs="0"/>
+                    <xsd:element ref="Quantity" minOccurs="0"/>
+                    <xsd:element ref="GrossQuantity" minOccurs="0"/>
+                    <xsd:element ref="UseEBQ" minOccurs="0"/>
+                    <xsd:element name="UseParentWhToUse" default="Y" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether the 'Warehouse to use' against the inventory master for each stocked standard part should be used as a parent warehouse when processing the standard part. This element only applies when you select to use the route defined against the parent warehouse control information (when element UseParentWhRoute = 'Y') or when you select to use the component warehouse defined against the parent's warehouse control information (when element Warehouse = 'P'). Possible values: 'Y' (Yes) or 'N' (No). Default to 'Y'.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="Y"/>
+                          <xsd:enumeration value="N"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ParentWarehouse" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent warehouse that should be used when processing all the stocked standard parts. This element only applies when 'UseParentWhToUse' = 'N' and you select to use the route defined against the parent warehouse control information (when element UseParentWhRoute = 'Y') or when you select to use the component warehouse defined against the parent's warehouse control information (when element Warehouse = 'P'). The format is up to 2 characters alphanumeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="2"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="StockList" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates a list of stocked standard parts for which a trial kit list must be generated. This element is only applicable if the FilterValue for the element StandardPar StockCode is 'L'. This element will be ignored if the element IncludeStandardParts is 'N'. You may list up to 50 stock codes.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element ref="StockCode"/>
+                          <xsd:element ref="Quantity" minOccurs="0"/>
+                          <xsd:element ref="UseEBQ" minOccurs="0"/>
+                          <xsd:element ref="GrossQuantity" minOccurs="0"/>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="DueDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the date when the build for the standard parts should be completed. The format is CCYY-MM-DD.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="NonStockCode" minOccurs="0"/>
+                    <xsd:element name="NonStockRoute" default="0" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the route to use for the non-stocked standard parts estimates. If not provided the default is 0. This element will be ignored if the element IncludeNonStockedStandardParts is 'N'.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="0"/>
+                          <xsd:enumeration value="1"/>
+                          <xsd:enumeration value="2"/>
+                          <xsd:enumeration value="3"/>
+                          <xsd:enumeration value="4"/>
+                          <xsd:enumeration value="5"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="NonStockQuantity" minOccurs="0"/>
+                    <xsd:element name="NonStockGrossQuantity" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>If progressive scrap is required (Bill of Material setup, General tab) then you may select if the Quantity to make for non-stocked standard parts represents the Gross or Net quantity. Possible values: N (Net quantity) or Y (Gross quantity). If not provided the default is N. This element will be ignored if the element IncludeNonStockedStandardParts is 'N'.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="NonStockList" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates a list of non-stocked standard parts for which a trial kit list must be generated. This element is only applicable if the FilterValue for the element StandardPart NonStockCode is 'L'. This element will be ignored if the element IncludeNonStockedStandardParts is 'N'. You may list up to 50 non-stock codes.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element ref="NonStockCode"/>
+                          <xsd:element ref="NonStockQuantity" minOccurs="0"/>
+                          <xsd:element name="NonStockGrossQuantity" default="N" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If progressive scrap is required (Bill of Material setup, General tab) then you may select if the Quantity to make for non-stocked standard parts represents the Gross or Net quantity. Possible values: N (Net quantity) or Y (Gross quantity). If not provided the default is N. This element will be ignored if the element IncludeNonStockedStandardParts is 'N'.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="N"/>
+                                <xsd:enumeration value="Y"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="JobSelection" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of jobs for which a trial kit list must be generated. This element is only applicable when the element IncludeJobSelection is 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element ref="Job" minOccurs="0"/>
+                    <xsd:element ref="UseBalanceOutstanding" minOccurs="0"/>
+                    <xsd:element ref="QuantityToMake" minOccurs="0"/>
+                    <xsd:element name="JobList" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates a list of jobs for which a trial kit list must be generated. This element is only applicable if the FilterValue for the element JobSelection Job is 'L'. You may list up to 50 jobs.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element ref="Job"/>
+                          <xsd:element ref="UseBalanceOutstanding" minOccurs="0"/>
+                          <xsd:element ref="QuantityToMake" minOccurs="0"/>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="JobClass" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicate the job classification filter on the selection of jobs for which a trial kit list must be generated ( A - All, S - Single, R - Range).  If not provided the default is A. If R is selected then separated by a ','.  Example: A,PC. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:simpleContent>
+                          <xsd:extension base="xsd:string">
+                            <xsd:attribute name="FilterType" use="optional" default="A">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="1"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                  <xsd:enumeration value="A"/>
+                                  <xsd:enumeration value="R"/>
+                                  <xsd:enumeration value="S"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                            <xsd:attribute name="FilterValue" use="optional">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="9"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                          </xsd:extension>
+                        </xsd:simpleContent>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="JobStartDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicate the job start date filter on the selection of jobs for which a trial kit list must be generated ( A - All, S - Single, R - Range).  If not provided the default is A. If R is selected then separated by a ','.  Example: 2006-05-10,2006-06-11. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:simpleContent>
+                          <xsd:extension base="xsd:string">
+                            <xsd:attribute name="FilterType" use="optional" default="A">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="1"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                  <xsd:enumeration value="A"/>
+                                  <xsd:enumeration value="R"/>
+                                  <xsd:enumeration value="S"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                            <xsd:attribute name="FilterValue" use="optional">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="21"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                          </xsd:extension>
+                        </xsd:simpleContent>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SalesOrderSelection" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of sales orders for which a trial kit list must be generated. This element is only applicable when the element IncludeSalesOrderSelection is 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="SalesOrders" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This specifies the selection of sales orders for which a trial kit list must be generated ( A - All, S - Single, R - Range).  If not provided the default is A. If R is selected then separated by a ','.  Example: 10,15. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:simpleContent>
+                          <xsd:extension base="xsd:string">
+                            <xsd:attribute name="FilterType" use="optional" default="A">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="1"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                  <xsd:enumeration value="A"/>
+                                  <xsd:enumeration value="R"/>
+                                  <xsd:enumeration value="S"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                            <xsd:attribute name="FilterValue" use="optional">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="13"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                          </xsd:extension>
+                        </xsd:simpleContent>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="ShipDate" minOccurs="0"/>
+                    <xsd:element ref="Customer" minOccurs="0"/>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="QuoteSelection" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of quotations for which a trial kit list must be generated. This element is only applicable when the element IncludeQuoteSelection is 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="Quotes" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This specifies the selection of quotations for which a trial kit list must be generated ( A - All, S - Single, R - Range).  If not provided the default is A. If R is selected then separated by a ','.  Example: 10,15. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:simpleContent>
+                          <xsd:extension base="xsd:string">
+                            <xsd:attribute name="FilterType" use="optional" default="A">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="1"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                  <xsd:enumeration value="A"/>
+                                  <xsd:enumeration value="R"/>
+                                  <xsd:enumeration value="S"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                            <xsd:attribute name="FilterValue" use="optional">
+                              <xsd:simpleType>
+                                <xsd:restriction base="xsd:string">
+                                  <xsd:minLength value="0"/>
+                                  <xsd:maxLength value="17"/>
+                                  <xsd:whiteSpace value="preserve"/>
+                                </xsd:restriction>
+                              </xsd:simpleType>
+                            </xsd:attribute>
+                          </xsd:extension>
+                        </xsd:simpleContent>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element ref="ShipDate" minOccurs="0"/>
+                    <xsd:element ref="Customer" minOccurs="0"/>
+                    <xsd:element name="Offer" default="1" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>The offer quantity of the Offer provided will be used as the source quantity for each quotation line. The format is one character. Possible values: 1,2,3,4,5 or D (default offer). If not provided the default is 1.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="1"/>
+                          <xsd:enumeration value="2"/>
+                          <xsd:enumeration value="3"/>
+                          <xsd:enumeration value="4"/>
+                          <xsd:enumeration value="5"/>
+                          <xsd:enumeration value="D"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Probability" default="0" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Only quotations with a probability greater than the probability provided will be included. The format is one numeric character. If not provided the default is 0.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="0"/>
+                          <xsd:enumeration value="1"/>
+                          <xsd:enumeration value="2"/>
+                          <xsd:enumeration value="3"/>
+                          <xsd:enumeration value="4"/>
+                          <xsd:enumeration value="5"/>
+                          <xsd:enumeration value="6"/>
+                          <xsd:enumeration value="7"/>
+                          <xsd:enumeration value="8"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="UseParentWhRoute" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies whether or not to use the route defined against the parent warehouse control information when expanding the bill of material for a stocked standard part, sales order line or stocked quotation line. For stocked standard parts you must indicate if you want to use the 'warehouse to use' defined against the inventory master for the standard parts (by supplying a 'Y' in the element 'UseParentWhToUse') or supply a parent warehouse in the element 'ParentWarehouse'. This element only applies if alternate routes are used. (Y - Yes, N - No) The default is No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Warehouse element indicates which warehouse/s should be used to establish a quantity on hand for the components, as well as the warehouse/s to use to establish the supply and demand affecting the components (A - All, S - Single, R - Range, L - List, U - Warehouse to Use against the component or P - Use the component warehouse defined against the Parent's warehouse control information). If not provided the default is U.  If R is selected then separated by a ','.  Example: A,D. If L is selected then separated by a ','. Example: A,D,G.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="FilterType" use="optional" default="U">
+                        <xsd:simpleType>
+                          <xsd:restriction base="xsd:string">
+                            <xsd:minLength value="0"/>
+                            <xsd:maxLength value="1"/>
+                            <xsd:whiteSpace value="preserve"/>
+                            <xsd:enumeration value="U"/>
+                            <xsd:enumeration value="A"/>
+                            <xsd:enumeration value="R"/>
+                            <xsd:enumeration value="S"/>
+                            <xsd:enumeration value="L"/>
+                          </xsd:restriction>
+                        </xsd:simpleType>
+                      </xsd:attribute>
+                      <xsd:attribute name="FilterValue" use="optional">
+                        <xsd:simpleType>
+                          <xsd:restriction base="xsd:string">
+                            <xsd:minLength value="0"/>
+                            <xsd:whiteSpace value="preserve"/>
+                          </xsd:restriction>
+                        </xsd:simpleType>
+                      </xsd:attribute>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The list of options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all minOccurs="0">
+              <xsd:element name="IncludeStandardParts" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if a trial kit list should be generated for stocked standard parts. Possible values: Y (Yes) or N (No). If not provided the default is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeNonStockedStandardParts" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if a trial kit list should be generated for non-stocked standard parts. Possible values: Y (Yes) or N (No). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeJobSelection" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if a trial kit list should be generated for jobs. Possible values: Y (Yes) or N (No). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeSalesOrderSelection" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if a trial kit list should be generated for sales orders. Possible values: Y (Yes) or N (No). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeQuoteSelection" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if a trial kit list should be generated for quotations. Possible values: Y (Yes) or N (No). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeConfirmedJobs" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if a trial kit list should be generated for confirmed jobs. Possible values: Y (Yes) or N (No). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeNonStockedCodes" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if jobs, sales orders and quotes for non-stocked codes should be included. Possible values: Y (Yes) or N (No). If not provided default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeSalesOrderAllocations" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities allocated to existing sales orders should reduce the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeWIPAllocations" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities allocated to existing WIP allocations should reduce the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeQuotesInDemand" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities required to satisfy existing unconfirmed quotations should reduce the availability of stock for each component. The default offer for each detail quotation line will be used to determine the demand created by the quote. Possible values: Y (Yes) or N (No). If not provided default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeSafetyMinimumQuantity" default="S" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities required to satisfy either safety stock or minimum quantity should reduce the availability of stock for each component. Possible values: S (Safety stock) or M (Minimum quantity) or N (Neither). If not provided default is S.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeOutstandingPurOrders" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities on order for outstanding purchase orders should increase the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeOutstandingJobs" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities on order for outstanding jobs should increase the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeOutstandingSCT" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities on order for outstanding SCT orders should increase the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y. This element is only applicable if Goods in Transit is in use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeQtyInPoInspection" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities in purchase order inspection should increase the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeQtyInWipInspection" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates that the quantities in WIP inspection should increase the availability of stock for each component. Possible values: Y (Yes) or N (No). If not provided default is Y. This element is only applicable if WIP inspection is in use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UseArchivedBills" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If you select this option then archived bills will be used when applicable. Please note that this might have speed implications for SQL companies, therefore it is recommended not to select this option if at all possible. This option is only applicable when Engineering change Control is in use. Possible values: Y (Yes) or N (No). If not provided default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupplyDueInDays" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the type of time period in days to allow inclusion of supply (such as a p/order), that will be arriving in X number of days from the required date for each component, in the calculation of the net required quantity for the component. Possible values: N (None),  M (Manually supplied number of days. Must supply the number of days in element SupplyDays), D (Demand time fence days) or L (Lead time). Default to N.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value="L"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupplyDays" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates that supply (such as a p/order) that will be arriving in this number of days from the required date for each component should be included in the calculation of the net required quantity for the component. This element is only applicable when element SupplyDueInDays = 'M'. The format is up to 3 characters numeric.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShowNegativeAllocations" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if components with a negative net requirement quantity (i.e. by-products) should be output. Possible values: Y (Yes) or N (No). If not provided default is N. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" default="S" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates in which unit of measure you want the quantities required for the list of components generated for the trial kit list to be output. Possible values: S (Stocking), A (Alternate), O (Other) or M (Manufacturing). If not provided default is S.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="M"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UseSupplierStockUom" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element only applies to purchased items. This indicates that the purchase order quantity unit of measure or the default purchase order price unit of measure defined for the supplier and stock code in the supplier/stock code cross reference (under Purchase orders) should be used to output the quantities required for the components. If there is no supplier/stock code cross reference for the component and supplier combination, then the unit of measure option specified in the element UnitOfMeasure will be used (stocking, alternate or other). Possible values:  O (Order quantity uom), P (Purchase order price uom) or N (Neither). Default N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="P"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ExplodeBoughtOutItems" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if bought-out parents should be ignored and if the program should drop thru bought-out sub-assemblies when generating the trial kit list. Possible values: Y (Include bought-out parents and drop thru bought-out sub-assemblies) or N (Ignore bought-out parents and do not drop thru bought-out sub-assemblies). If not provided default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnSupplyDemand" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if supply and demand information should be returned. Possible values: Y (Yes) or N (No). If not provided default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnSource" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if the source selection information should be returned. Possible values: Y (Yes) or N (No). If not provided default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStyleSheet" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShipDate">
+    <xsd:annotation>
+      <xsd:documentation>This indicate the ship date filter on the selection of sales orders or the selection of quotations for which a trial kit list must be generated ( A - All, S - Single, R - Range).  If not provided the default is A. If R is selected then separated by a ','.  Example: 2006-05-10,2006-06-11. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="1"/>
+                <xsd:whiteSpace value="preserve"/>
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="R"/>
+                <xsd:enumeration value="S"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="21"/>
+                <xsd:whiteSpace value="preserve"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stocked standard parts for which a trial kit list must be generated ( A - All, S - Single, R - Range, L - List).  If not provided the default is A.  If R is selected then separated by a ','.  Example: B100,DFMB900. If L is selected then a list of stock codes must be provided using the group element StockList. This element will be ignored if the element IncludeStandardParts is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="1"/>
+                <xsd:whiteSpace value="preserve"/>
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="R"/>
+                <xsd:enumeration value="S"/>
+                <xsd:enumeration value="L"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" use="optional">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:whiteSpace value="preserve"/>
+                <xsd:minLength value="0"/>
+                <xsd:maxLength value="61"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UseBalanceOutstanding" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>If you select Use Balance Outstanding then the program will take the quantity to make of the job and calculate how much of each component is still required for each allocation. Possible values: Y (use balance outstanding) or N (Use Quantity to Make).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseEBQ" default="N">
+    <xsd:annotation>
+      <xsd:documentation>You may select to use the Economic batch quantity for each stocked parent part (Inventory stock code setup). If the EBQ quantity for a stock code is zero, then the quantity to make will default to one. If you select to use the route defined against the parent warehouse control (when element UseParentWhRoute = 'Y') then the EBQ quantity will be taken as the re-order quantity against the stocked parent part warehouse, therefore you must select to either use the 'warehouse to use' against the stocked parent part (supply 'Y' in 'UseParentWhToUse' element) or supply a warehouse for all standard parts (in element 'ParentWarehouse). If progressive scrap is required (Bill of Material setup, General tab) then the EBQ quantity will be taken as the net quantity. Possible values: Y (use EBQ quantity) or N (use Quantity supplied). If not provided the default is N. This element will be ignored if the element IncludeStandardParts is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

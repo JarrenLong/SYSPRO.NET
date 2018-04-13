@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters for SO Credit Note from Invoice Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostCreditFromInvoice">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Parameters" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This contains parameters</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="DocumentDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This contains a valid date of the format CCYY-MM-DD to be used as the document date. If not supplied, then the system date will be used as the document date. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether or not an item must be rejected if there are any warnings, such as an attached line selected without its parent  If it is not supplied, it defaults to 'N'. Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned, W - warnings will be returned as warnings in the XML returned).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="W"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ApplyIfEntireDocumentValid" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether to process entire document only if all items are valid. If set to 'N', each item is validated and rejected if in error or processed if correct. This is the fastest option. If set to 'Y', all items are validated and only processed if entire document is valid. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ValidateOnly" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No updating will take place. If set to 'N', each item is validated and updating is performed based on setting of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AddAttachedLines" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is only used when individual lines are selected from the invoice. If set to 'Y' , then any non-merchandise lines and comments attached to a selected line are brought through to the credit note. In addition, any attached lines that are selected individually are rejected if their parent is selected.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AddZeroRemainingLines" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element determines whether lines which have already been fully credited are to be added with a zero order quantity. The option 'W' means that the contents of the element 'IgnoreWarnings' will be used to determine if this condition is to be treated as a warning, as an error, or ignored.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="W"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters for the Contact Activity Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ActionType">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the action that must be performed. A-Add, C-Change, D-Delete, R-RemoveAll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyIfEntireDocumentValid">
+    <xsd:annotation>
+      <xsd:documentation>If the value is set to 'Y' the activity will only post if all the actvities are valid.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AttendeeIdType">
+    <xsd:annotation>
+      <xsd:documentation>Specifies the type of Attendee that is being passed in. {contactid},{fullname},{email}</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="{contactid}"/>
+        <xsd:enumeration value="{fullname}"/>
+        <xsd:enumeration value="{email}"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent parameters element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ActionType" minOccurs="0"/>
+        <xsd:element ref="AttendeeIdType" minOccurs="0"/>
+        <xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+        <xsd:element name="IgnoreAttachmentsOnChange" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Ignores the Attachements while performing a change. Default is 'N'. This option has been built-in to cater for the maintenance of the attachments operator security.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AttendeeFollowup" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>When "A" then followup details  
+needs to be applied to all known
+attendees that are employee's.  
+</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value=""/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IgnoreBodyOnChange" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Ignores the Body while performing a change. Default is 'N'.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostActivity">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Lost Sales Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostLostSales">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="TransactionDate" type="xsd:date" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Date of the lost sale. If not supplied, then the transaction date in the parameters is used. If deleting entries then the date of the entry to delete must be passed.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="TransactionTime" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Time of lost sale. If not supplied then the computer time is used. The format is HH:MM:SS.ddd. If deleting entries then the exact time of the entry to delete must be passed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Customer" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer who did not take the sale. Must be a valid customer. If not submitted then the customer is taken from the sales order. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Must contain a valid stock code if submitted. If not submitted then the stock code is taken from the sales order</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Version" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the stock code is ECC controlled then this is the revision. If not submitted then this is taken from the sales order or is assumed to be the current revision</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Release" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the stock code is ECC controlled then this is the release. If not submitted then this is taken from the sales order or is assumed to be the current revision</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Must contain a valid warehouse where the stock code is held. If not submitted then this is taken from the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Quantity" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory if stock item is not a unit-qty type stock item. If it is and this element is supplied, the units and pieces elements must NOT be supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If quantity was supplied in a unit of measure different to the stocking unit of measure, this element must indicate the alternate unit of measure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Units" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the stock item is a unit-qty type stock item and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Pieces" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the stock item is a unit-qty type stock item and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UseTotals" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates whether total value and cost should be used for the lost sale. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Value" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the total value of the lost sale. If it is not submitted then it is calculated as the price multiplied by the quantity. If the lost sale is linked to a sales order the value is calculated using the unit price from the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Cost" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the total cost of the lost sale. If it is not submitted then it is calculated as the unit cost multiplied by the quantity</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitCost" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the unit cost for the item. If not submitted then the current inventory unit cost is used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockDescription" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the stock description. If not submitted then the stock description from the inventory master is used</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProductClass" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the product class used. If not submitted then it is taken from the inventory master</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="QuantityRequested" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the quantity requested for the sale.If it is not submitted or is greater than the quantity lost then the quantity lost is used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitsRequested" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the stock code is a unit quantity item then enter the units requested by the customer</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PiecesRequested" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the stock code is a unit quantity item then enter the pieces requested by the customer</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Price" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the unit price for the item. If not submitted then the list price is used. If the lost sale is linked to a sales order the price is taken from the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PriceUom" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the price unit of measure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrder" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If available enter the sales order against which the lost sale occurred. If submitted then the customer is taken from here.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If available enter the sales order line against which the lost sale occurred. If submitted then the stock code, warehouse, price and price unit of measure is taken from here.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReasonCode">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the reason code for the lost sale.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

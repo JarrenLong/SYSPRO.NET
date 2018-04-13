@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Performance Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of available options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DateSelection"/>
+        <xsd:element ref="InclSubTotalsBranch"/>
+        <xsd:element ref="TopBottomBranches"/>
+        <xsd:element ref="NumberBranches"/>
+        <xsd:element ref="BranchesBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsArea"/>
+        <xsd:element ref="TopBottomAreas"/>
+        <xsd:element ref="NumberAreas"/>
+        <xsd:element ref="AreasBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsOrderType"/>
+        <xsd:element ref="TopBottomOrderTypes"/>
+        <xsd:element ref="NumberOrderTypes"/>
+        <xsd:element ref="OrderTypesBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsCustomerClass"/>
+        <xsd:element ref="TopBottomCustomerClasses"/>
+        <xsd:element ref="NumberCustomerClasses"/>
+        <xsd:element ref="CustomerClassesBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsSalesPerson"/>
+        <xsd:element ref="TopBottomSalesPersons"/>
+        <xsd:element ref="NumberSalesPersons"/>
+        <xsd:element ref="SalesPersonsBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsCustomer"/>
+        <xsd:element ref="TopBottomCustomers"/>
+        <xsd:element ref="NumberCustomers"/>
+        <xsd:element ref="CustomersBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsStockCode"/>
+        <xsd:element ref="TopBottomStockCodes"/>
+        <xsd:element ref="NumberStockCodes"/>
+        <xsd:element ref="StockCodesBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsProductClass"/>
+        <xsd:element ref="TopBottomProductClasses"/>
+        <xsd:element ref="NumberProductClasses"/>
+        <xsd:element ref="ProductClassesBasedOnMeasure"/>
+        <xsd:element ref="InclSubTotalsWarehouse"/>
+        <xsd:element ref="TopBottomWarehouses"/>
+        <xsd:element ref="NumberWarehouses"/>
+        <xsd:element ref="WarehousesBasedOnMeasure"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DateSelection">
+    <xsd:annotation>
+      <xsd:documentation>Allows the user to select the date type to be used. I-Invoice date, T-Transaction date, L-Line ship date, C-Customer request date. Default -I.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsBranch">
+    <xsd:annotation>
+      <xsd:documentation>Include branch totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomBranches">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Branches are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberBranches">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of branches to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BranchesBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsArea">
+    <xsd:annotation>
+      <xsd:documentation>Include area totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomAreas">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Areas are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberAreas">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of areas to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AreasBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsOrderType">
+    <xsd:annotation>
+      <xsd:documentation>Include order type totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomOrderTypes">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Order Types are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOrderTypes">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of order types to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderTypesBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsCustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>Include customer class totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomCustomerClasses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Customer Classes are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberCustomerClasses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of customer classes to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomerClassesBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsSalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>Include sales person totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomSalesPersons">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Salespersons are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberSalesPersons">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of salespersons to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesPersonsBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsCustomer">
+    <xsd:annotation>
+      <xsd:documentation>Include customer totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomCustomers">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Customers are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberCustomers">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of customers to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomersBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsStockCode">
+    <xsd:annotation>
+      <xsd:documentation>Include stock code totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomStockCodes">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Stock Codes are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberStockCodes">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of stock codes to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCodesBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Include product class totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomProductClasses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Product Classes are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberProductClasses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of product classes to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClassesBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>Include warehouse totals in report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TopBottomWarehouses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Warehouse are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberWarehouses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of warehouse to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WarehousesBasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. QI-QuantityInvoiced, QO-QuantityOutstanding, NS-NetSalesValue. Default -QI.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="QI"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="NS"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of available filters</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SelectedDate"/>
+        <xsd:element ref="TrnYear"/>
+        <xsd:element ref="TrnMonth"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="Area"/>
+        <xsd:element ref="OrderType"/>
+        <xsd:element ref="CustomerClass"/>
+        <xsd:element ref="SalesPerson"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="Warehouse"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SelectedDate">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of dates to print as defined by DateSelection type.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TrnYear">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of years to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TrnMonth">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of months to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of branches to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalBranch;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Area">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of areas to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalArea;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of order types to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=TblSoTypes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of customer classes to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=TblCustomerClass;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of sales person to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalSalesperson;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of customers to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ArCustomer;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of product classes to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClass;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of warehouses to print.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWarehouse;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Requisition Hold/Release Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="User"/>
+        <xsd:element ref="UserPassword" minOccurs="0"/>
+        <xsd:element ref="RequisitionNumber"/>
+        <xsd:element ref="RequisitionLine" minOccurs="0"/>
+        <xsd:element ref="Reason" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostReqHold">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reason">
+    <xsd:annotation>
+      <xsd:documentation>A description of the reason for placing the requisition on hold. This element must be non-blank when placing a requisition on hold.
+This element is not required when releasing requisitions.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionLine">
+    <xsd:annotation>
+      <xsd:documentation>The line number of the requisition to be held/released. Set this element to be zero (or blank) if all lines for the requisition are to be held/released.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionNumber">
+    <xsd:annotation>
+      <xsd:documentation>The requisition to be held/released. All lines of a requisition can be held/released by setting the RequisitionLine to be zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="User">
+    <xsd:annotation>
+      <xsd:documentation>The user who is placing the requisition on hold, or releasing the requisition from hold. If the user is not supplied then the user associated with the operator will be assumed. The user must be valid.
+The user must be the owner or current holder to place a requisition on hold. To release a requisition the user must be the one who placed it on hold in the first instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserPassword">
+    <xsd:annotation>
+      <xsd:documentation>The password associated with the user. The password is only required to be supplied if the user element was supplied and it differs from the user associated with the operator default. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

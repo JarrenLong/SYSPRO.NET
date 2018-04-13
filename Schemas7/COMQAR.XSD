@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Generic Get Archive Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="FileExtension" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The extentsion of the file that must be returned for filetype GA</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FileName" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The name of the file to be returned for file type GA</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Filetype">
+    <xsd:annotation>
+      <xsd:documentation>The name of the fucntion that must be applied to the query. BA - Build Archive XP - Returns all the XML for a path.GA - Gets the specified Archive file</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="BA"/>
+        <xsd:enumeration value="XP"/>
+        <xsd:enumeration value="GA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Parent Element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Year"/>
+        <xsd:element ref="Month"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>Parent Element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Filetype"/>
+        <xsd:element ref="FileName"/>
+        <xsd:element ref="FileExtension"/>
+        <xsd:element ref="Year"/>
+        <xsd:element ref="Month"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Month">
+    <xsd:annotation>
+      <xsd:documentation>The Month in which the file to be returned belongs to for filetype GA</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:byte">
+          <xsd:attribute name="FilterType" type="xsd:string"/>
+          <xsd:attribute name="FilterValue" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root Element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Year">
+    <xsd:annotation>
+      <xsd:documentation>The Year in which the file to be returned belongs to for filetype GA</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:short">
+          <xsd:attribute name="FilterType">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="S"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

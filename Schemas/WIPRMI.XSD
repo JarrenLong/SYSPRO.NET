@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Build Material Issue Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Build">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Parameters">
+          <xsd:annotation>
+            <xsd:documentation>This is the list of parameters</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory. It specifies the job to which the material allocation is being issued to. The format is 8 characters alphanumeric or 8 characters numeric depending on the configuration option within Syspro. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" default="S">
+                <xsd:annotation>
+                  <xsd:documentation>Select 'S' for stocking u/m, 'A' for alternate u/m, 'O' for other u/m or 'M' for manufacturing u/m. Quantities and times entered will be according to the unit of measure selected.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="M"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="KitQuantity">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory. It specifies the quantity to Kit Issue. The format is signed 7.3</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="11"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IssueNonStockedMaterial" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to indicate whether you want to output non stocked material allocations or not.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IssueNegativeAllocations" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to  indicate whether you want to output negative material allocations or not.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IssueCompletedAllocations" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to indicate whether you want to output  material allocations that are complete or not.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IssueToMaxOutstanding" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to indicate whether you want to output the quantity of the material allocations to the maximum outstanding</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnValidMaterialsOnly" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to indicates whether you only want valid material allocations. If the setup "Allow kit with shortages to be issued"  in Syspro is set to no then this flag is automatically set to "N"</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnWhenQtyIssueZero" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is used to indicate if you want a material allocation that has a Quantity to Issue of zero to be returned. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreWarnings" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned.)</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeFloorstock" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element specifies whether you want to output floorstock allocations (Y - Include, N - Exclude, O - Only output floorstock). If you have selected to output non-stocked allocations and only Include Floorstock allocations, the floorstock flag will default back to N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="O"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter">
+          <xsd:annotation>
+            <xsd:documentation>This is the list of filters</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="Operation" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of operations ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a ',' .  Example: 1,9</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

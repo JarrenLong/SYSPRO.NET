@@ -1,0 +1,2610 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Key Information Setup Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetKeyInformation">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Customers" minOccurs="0"/>
+        <xsd:element ref="Suppliers" minOccurs="0"/>
+        <xsd:element ref="StockCodes" minOccurs="0"/>
+        <xsd:element ref="Serials" minOccurs="0"/>
+        <xsd:element ref="Lots" minOccurs="0"/>
+        <xsd:element ref="BuyingGroups" minOccurs="0"/>
+        <xsd:element ref="Assets" minOccurs="0"/>
+        <xsd:element ref="CapexNumbers" minOccurs="0"/>
+        <xsd:element ref="EccEcoNumbers" minOccurs="0"/>
+        <xsd:element ref="EccRevision" minOccurs="0"/>
+        <xsd:element ref="EccRelease" minOccurs="0"/>
+        <xsd:element ref="ArInvoices" minOccurs="0"/>
+        <xsd:element ref="ApPaymentRun" minOccurs="0"/>
+        <xsd:element ref="GoodsInTransit" minOccurs="0"/>
+        <xsd:element ref="SalesOrders" minOccurs="0"/>
+        <xsd:element ref="DeliveryNotes" minOccurs="0"/>
+        <xsd:element ref="DispatchNotes" minOccurs="0"/>
+        <xsd:element ref="RmaNumbers" minOccurs="0"/>
+        <xsd:element ref="PurchaseOrders" minOccurs="0"/>
+        <xsd:element ref="GrnNumbers" minOccurs="0"/>
+        <xsd:element ref="Requisitions" minOccurs="0"/>
+        <xsd:element ref="Quotations" minOccurs="0"/>
+        <xsd:element ref="Jobs" minOccurs="0"/>
+        <xsd:element ref="WipInspection" minOccurs="0"/>
+        <xsd:element ref="ArPaymentRun" minOccurs="0"/>
+        <xsd:element ref="ArCollectionRun" minOccurs="0"/>
+        <xsd:element ref="AutoVouchering" minOccurs="0"/>
+        <xsd:element ref="TradePromotions" minOccurs="0"/>
+        <xsd:element ref="InventoryDocs" minOccurs="0"/>
+        <xsd:element ref="WipDocs" minOccurs="0"/>
+        <xsd:element ref="LoadPlanning" minOccurs="0"/>
+        <xsd:element ref="EdiTransmission" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CusKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the customer key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CusCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for customers if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CusZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CusPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for customers. If no value is supplied then a length of 7 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CusMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the customer numbering method. (M - Manual, A - Automatic, S - Scripted). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;S=Scripted;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextCustomer">
+    <xsd:annotation>
+      <xsd:documentation>This is the next customer number to use. This element only applies if the numbering method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Customers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CusKeyType" minOccurs="0"/>
+        <xsd:element ref="CusCase" minOccurs="0"/>
+        <xsd:element ref="CusZero" minOccurs="0"/>
+        <xsd:element ref="CusPresentationLength" minOccurs="0"/>
+        <xsd:element ref="CusMethod" minOccurs="0"/>
+        <xsd:element ref="NextCustomer" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the supplier key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for suppliers if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for suppliers. If no value is supplied then a length of 7 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the supplier numbering method. (M - Manual, A - Automatic, S - Scripted). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;S=Scripted;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextSupplier">
+    <xsd:annotation>
+      <xsd:documentation>This is the next supplier number to use. This element only applies if the numbering method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Suppliers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SupKeyType" minOccurs="0"/>
+        <xsd:element ref="SupCase" minOccurs="0"/>
+        <xsd:element ref="SupZero" minOccurs="0"/>
+        <xsd:element ref="SupPresentationLength" minOccurs="0"/>
+        <xsd:element ref="SupMethod" minOccurs="0"/>
+        <xsd:element ref="NextSupplier" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StkKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the stock code key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StkCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for stock codes if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StkZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StkPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for stock codes. If no value is supplied then a length of 15 is assumed if key type is N - Numeric and 30 if the key type is A - Alphanumeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="30"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StkMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the stock code numbering method. (M - Manual, A - Automatic, S - Scripted). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;S=Scripted;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextStockCode">
+    <xsd:annotation>
+      <xsd:documentation>This is the next stock code number to use. This element only applies if the numbering method is set to A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCodes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StkKeyType" minOccurs="0"/>
+        <xsd:element ref="StkCase" minOccurs="0"/>
+        <xsd:element ref="StkZero" minOccurs="0"/>
+        <xsd:element ref="StkPresentationLength" minOccurs="0"/>
+        <xsd:element ref="StkMethod" minOccurs="0"/>
+        <xsd:element ref="NextStockCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SerKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the serial key type (A - Alphanumeric, N - Numeric). If no value is supplied A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for serials if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for serials. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 50 is allowed. If no value is supplied then a length of 15 is assumed if key type is N - Numeric and 20 if the key type is A - Alphanumeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="50"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ManSerialNoTracking">
+    <xsd:annotation>
+      <xsd:documentation>This is the manual serial tracking suffix to use. (N - None, S - By stock code, C - By company). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=None;S=By stock code;C=By company;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ManSerialNoTrackPrefix">
+    <xsd:annotation>
+      <xsd:documentation>This is the manual serial number tracking prefix. The format is 35 characters, alphanumeric. This element only applies if the suffix to use is C - Company.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="35"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ManSerialNoTrackSuffix">
+    <xsd:annotation>
+      <xsd:documentation>This is the manual serial number tracking next suffix. The format is 15 characters, alphanumeric but can only contain spaces or numeric characters. This element only applies if the suffix to use is C - Company.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Serials">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SerKeyType" minOccurs="0"/>
+        <xsd:element ref="SerCase" minOccurs="0"/>
+        <xsd:element ref="SerZero" minOccurs="0"/>
+        <xsd:element ref="SerPresentationLength" minOccurs="0"/>
+        <xsd:element ref="ManSerialNoTracking" minOccurs="0"/>
+        <xsd:element ref="ManSerialNoTrackPrefix" minOccurs="0"/>
+        <xsd:element ref="ManSerialNoTrackSuffix" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LotKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the lot key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for lots if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for lots. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 50 is allowed. If no value is supplied then a length of 10 is assumed.assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="50"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the lot numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=Manual;Y=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextLot">
+    <xsd:annotation>
+      <xsd:documentation>This is the next lot number to use. This element only applies if the numbering method is set to A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotEqualToJob">
+    <xsd:annotation>
+      <xsd:documentation>Lot number equal to job number (N-No, Y-Yes). If no value is supplied then Y is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Lots">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LotKeyType" minOccurs="0"/>
+        <xsd:element ref="LotCase" minOccurs="0"/>
+        <xsd:element ref="LotZero" minOccurs="0"/>
+        <xsd:element ref="LotPresentationLength" minOccurs="0"/>
+        <xsd:element ref="LotMethod" minOccurs="0"/>
+        <xsd:element ref="NextLot" minOccurs="0"/>
+        <xsd:element ref="LotEqualToJob" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BgrKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the buying group key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BgrZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BuyingGroups">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BgrKeyType" minOccurs="0"/>
+        <xsd:element ref="BgrZero" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AstKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the asset key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AstCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for assets if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AstZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AstPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for assets. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 30 is allowed. If no value is supplied then a length of 15 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AstMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the asset numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextAsset">
+    <xsd:annotation>
+      <xsd:documentation>This is the next asset number to use. This element only applies if the numbering method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Assets">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AstKeyType" minOccurs="0"/>
+        <xsd:element ref="AstCase" minOccurs="0"/>
+        <xsd:element ref="AstZero" minOccurs="0"/>
+        <xsd:element ref="AstPresentationLength" minOccurs="0"/>
+        <xsd:element ref="AstMethod" minOccurs="0"/>
+        <xsd:element ref="NextAsset" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CpxKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the capex key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CpxCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for assets if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CpxZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CpxPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for capex numbers. If no value is supplied then a length of 15 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CpxMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the capex numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextCapex">
+    <xsd:annotation>
+      <xsd:documentation>This is the next capex number to use. This element only applies if the numbering method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CapexNumbers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CpxKeyType" minOccurs="0"/>
+        <xsd:element ref="CpxCase" minOccurs="0"/>
+        <xsd:element ref="CpxZero" minOccurs="0"/>
+        <xsd:element ref="CpxPresentationLength" minOccurs="0"/>
+        <xsd:element ref="CpxMethod" minOccurs="0"/>
+        <xsd:element ref="NextCapex" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="EcoKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the ECC change order key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EcoMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the ECC order numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextEco">
+    <xsd:annotation>
+      <xsd:documentation>This is the next ECC order number to use. This element only applies if the numbering method is A - Automatic. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EccEcoNumbers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="EcoKeyType" minOccurs="0"/>
+        <xsd:element ref="EcoMethod" minOccurs="0"/>
+        <xsd:element ref="NextEco" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RevKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the ECC revision key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RevMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the ECC revision numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EccRevision">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RevKeyType" minOccurs="0"/>
+        <xsd:element ref="RevMethod" minOccurs="0"/>
+        <xsd:element ref="AllowNonSequentialEntries" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RelKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the ECC release key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RelMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the ECC release numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EccRelease">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RelKeyType" minOccurs="0"/>
+        <xsd:element ref="RelMethod" minOccurs="0"/>
+        <xsd:element ref="IncrementRelWithinRev" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AriKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts receivable invoice key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AriCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for accounts receivable invoices if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AriZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AriPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for accounts receivable invoices. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 6 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AriPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for accounts receivable invoices. This element only applies if the key type is A - Alphanumeric and the Method is B - Branch. The prefix length must be less than the presentation length. If value is not supplied then a length 0 of is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AriMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts receivable invoice numbering method. (C - By company, B - By branch). If no value is supplied C is assumed.</xsd:documentation>
+      <xsd:appinfo source="C=By Company;B=By Branch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextInvoice">
+    <xsd:annotation>
+      <xsd:documentation>This is the next invoice number to use. This only applies if numbering method is set to C - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextCreditNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next credit note number to use. This only applies if numbering method is set to C - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextDebitNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next debit note number to use. This only applies if numbering method is set to C - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextDiscCreditNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next discount credit note number to use. This only applies if numbering method is set to C - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextDiscDebitNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next discount debit note number to use. This only applies if numbering method is set to C - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowSameNumForDiffCust">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to allow the same invoice number for different customers. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArInvoices">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AriKeyType" minOccurs="0"/>
+        <xsd:element ref="AriCase" minOccurs="0"/>
+        <xsd:element ref="AriZero" minOccurs="0"/>
+        <xsd:element ref="AriPresentationLength" minOccurs="0"/>
+        <xsd:element ref="AriPrefixLength" minOccurs="0"/>
+        <xsd:element ref="AriMethod" minOccurs="0"/>
+        <xsd:element ref="NextInvoice" minOccurs="0"/>
+        <xsd:element ref="NextCreditNote" minOccurs="0"/>
+        <xsd:element ref="NextDebitNote" minOccurs="0"/>
+        <xsd:element ref="NextDiscCreditNote" minOccurs="0"/>
+        <xsd:element ref="NextDiscDebitNote" minOccurs="0"/>
+        <xsd:element ref="AllowSameNumForDiffCust" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AprKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts payable payment run key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AprZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AprPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for accounts payable payment run. If no value is supplied then a length of 7 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AprMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts payable payment run numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextPayRun">
+    <xsd:annotation>
+      <xsd:documentation>This is the next payment run number to use. This only applies if numbering method is set to A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApPaymentRun">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AprKeyType" minOccurs="0"/>
+        <xsd:element ref="AprZero" minOccurs="0"/>
+        <xsd:element ref="AprPresentationLength" minOccurs="0"/>
+        <xsd:element ref="AprMethod" minOccurs="0"/>
+        <xsd:element ref="NextPayRun" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GtrKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the goods in transit reference key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GtrCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for goods in transit reference if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GtrZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GtrPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for goods in transit references. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 9 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GtrPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for goods in transit references. This element only applies if the key type is A - Alphanumeric and the Method is P - Prefixed by warehouse. The prefix length must be less than the presentation length. If value is not supplied then a length 0 of is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GtrMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the goods in transit reference key type (M - Manual, A - By company, W - By warehouse, P - Prefixed by warehouse). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=By company;W=By warehouse;P=Prefixed by warehouse;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextGoodsInTransit">
+    <xsd:annotation>
+      <xsd:documentation>This is the next goods in transit reference. This only applies if the method is A - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GoodsInTransit">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="GtrKeyType" minOccurs="0"/>
+        <xsd:element ref="GtrCase" minOccurs="0"/>
+        <xsd:element ref="GtrZero" minOccurs="0"/>
+        <xsd:element ref="GtrPresentationLength" minOccurs="0"/>
+        <xsd:element ref="GtrPrefixLength" minOccurs="0"/>
+        <xsd:element ref="GtrMethod" minOccurs="0"/>
+        <xsd:element ref="NextGoodsInTransit" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SorKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the sales orders key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SorCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for sales orders if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SorZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SorPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for sales orders. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 6 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SorPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for sales orders. The prefix length is only allowed if the key type is A - Alphanumeric and the Method is B - By branch. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SorMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the sales order numbering method to use. (M - Manual, A - By company, B - By branch). If no value is supplied then the default value of M will be assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=By company;B=By branch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextSalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This is the next sales order. This only applies if the method is A - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextSorCreditNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next credit note. This only applies if the method is A - By company. The maximum size is dependent on the presentation length. The most significant digit must be an 8. For example if the presentation length is set to 6 then the number must be between 800001 and 899999. If no value is supplied then a value beginning with 8 and ending in 1 will be assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextSorDebitNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next debit note. Applies only if the method is A - By company. The maximum size is dependent on the presentation length. The most significant digit must be a 9. For example if the presentation length is set to 6 then the number must be between 900001 and 999999. If no value is supplied then a value beginning with 9 and ending in 1 will be assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseSrcBranchForSCT">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to use the source branch for SCT orders. If no value is supplied N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderRelAutoInvNumbering">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether invoice numbers must be automatically generated when releasing the order. (Y - Yes, N - No, D - Use delivery note). If no value is supplied then Y is assumed. May not be set to D if the delivery note method is set to N - None.</xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;D=Use delivery note;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrdNoToInvNo">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to automatically move the order number to the invoice number. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrders">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SorKeyType" minOccurs="0"/>
+        <xsd:element ref="SorCase" minOccurs="0"/>
+        <xsd:element ref="SorZero" minOccurs="0"/>
+        <xsd:element ref="SorPresentationLength" minOccurs="0"/>
+        <xsd:element ref="SorPrefixLength" minOccurs="0"/>
+        <xsd:element ref="SorMethod" minOccurs="0"/>
+        <xsd:element ref="NextSalesOrder" minOccurs="0"/>
+        <xsd:element ref="NextSorCreditNote" minOccurs="0"/>
+        <xsd:element ref="NextSorDebitNote" minOccurs="0"/>
+        <xsd:element ref="UseSrcBranchForSCT" minOccurs="0"/>
+        <xsd:element ref="OrderRelAutoInvNumbering" minOccurs="0"/>
+        <xsd:element ref="OrdNoToInvNo" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DlyZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DlyPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for delivery notes. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 6 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DlyPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for delivery notes. The prefix length is only allowed if the method is A - By branch with prefix. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DlyMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the delivery note numbering method (N - No, Y - By company, B - By branch, A - By branch with prefix). If no value is supplied then N is assumed. It cannot be set to N is you are using the delivery note as the invoice when releasing the sales order.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=By company;B=By branch;A=By branch with prefix;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextDeliveryNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next delivery note. Applies only if the method is A - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryNotes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DlyZero" minOccurs="0"/>
+        <xsd:element ref="DlyPresentationLength" minOccurs="0"/>
+        <xsd:element ref="DlyPrefixLength" minOccurs="0"/>
+        <xsd:element ref="DlyMethod" minOccurs="0"/>
+        <xsd:element ref="NextDeliveryNote" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DspKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the dispatch note key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DspCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for dispatch notes if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DspZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DspPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for dispatch notes. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 15 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DspMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the dispatch note numbering method. (M - Manual, A - Automatic, O - Order automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;O=Order automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextDispatchNote">
+    <xsd:annotation>
+      <xsd:documentation>This is the next dispatch note. Applies only if the method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DispatchNotes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DspKeyType" minOccurs="0"/>
+        <xsd:element ref="DspCase" minOccurs="0"/>
+        <xsd:element ref="DspZero" minOccurs="0"/>
+        <xsd:element ref="DspPresentationLength" minOccurs="0"/>
+        <xsd:element ref="DspMethod" minOccurs="0"/>
+        <xsd:element ref="NextDispatchNote" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RmaKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the RMA number key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RmaCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for RMA numbers if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RmaZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RmaPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for RMA numbers. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 8 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RmaPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for RMA numbers. The prefix length is only allowed if the method is P - By branch with prefix. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RmaMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the RMA numbering method. (A - By company, M - Manual, B - By branch, P - By branch with prefix). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="C=By company;M=Manual;B=By branch;P=By branch with prefix;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextRmaNumber">
+    <xsd:annotation>
+      <xsd:documentation>This is the next rma number. Applies only if the method is C - By company. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RmaNumbers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RmaKeyType" minOccurs="0"/>
+        <xsd:element ref="RmaCase" minOccurs="0"/>
+        <xsd:element ref="RmaZero" minOccurs="0"/>
+        <xsd:element ref="RmaPresentationLength" minOccurs="0"/>
+        <xsd:element ref="RmaPrefixLength" minOccurs="0"/>
+        <xsd:element ref="RmaMethod" minOccurs="0"/>
+        <xsd:element ref="NextRmaNumber" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PorKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the purchase order key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PorCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for purchase orders if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PorZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PorPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for purchase orders. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 6 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PorPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for purchase orders. The prefix length is only allowed if the method is either R - Prefixed by branch or P - Prefixed by warehouse. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PorMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the purchase order numbering method. (M - Manual, A - Automatic, W - Warehouse, P - Prefixed warehouse, B - Branch, R - Prefixed branch). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Automatic;M=Manual;W=By warehouse;P=Prefixed warehouse;B=By branch;R=Prefixed branch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextPurchaseOrder">
+    <xsd:annotation>
+      <xsd:documentation>This is the next purchase order. Applies only if the method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrders">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PorKeyType" minOccurs="0"/>
+        <xsd:element ref="PorCase" minOccurs="0"/>
+        <xsd:element ref="PorZero" minOccurs="0"/>
+        <xsd:element ref="PorPresentationLength" minOccurs="0"/>
+        <xsd:element ref="PorPrefixLength" minOccurs="0"/>
+        <xsd:element ref="PorMethod" minOccurs="0"/>
+        <xsd:element ref="NextPurchaseOrder" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GrnKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the GRN key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for GRN numbers if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for GRN numbers. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 6 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for GRN numbers. The prefix length is only allowed if the method is either R - Prefixed by branch or P - Prefixed by warehouse. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the GRN numbering method. (M - Manual, A - Automatic, W - Warehouse, P - Prefixed warehouse, B - Branch, R - Prefixed branch). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Automatic;M=Manual;W=By warehouse;P=Prefixed warehouse;B=By branch;R=Prefixed branch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextGrnNumber">
+    <xsd:annotation>
+      <xsd:documentation>This is the next GRN number. Applies only if the method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoGrnForPoLine">
+    <xsd:annotation>
+      <xsd:documentation>Apply automatic GRN numbering for each new purchase order line. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoGrnForPoLineRecAll">
+    <xsd:annotation>
+      <xsd:documentation>Apply automatic GRN numbering for each new purchase order line when receipting all. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoGrnForShipment">
+    <xsd:annotation>
+      <xsd:documentation>Apply automatic GRN numbering by LCT shipment. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CheckForDuplicateGrn">
+    <xsd:annotation>
+      <xsd:documentation>Check for duplicate GRN's in GRN numbering. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnNumbers">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="GrnKeyType" minOccurs="0"/>
+        <xsd:element ref="GrnCase" minOccurs="0"/>
+        <xsd:element ref="GrnZero" minOccurs="0"/>
+        <xsd:element ref="GrnPresentationLength" minOccurs="0"/>
+        <xsd:element ref="GrnPrefixLength" minOccurs="0"/>
+        <xsd:element ref="GrnMethod" minOccurs="0"/>
+        <xsd:element ref="NextGrnNumber" minOccurs="0"/>
+        <xsd:element ref="AutoGrnForPoLine" minOccurs="0"/>
+        <xsd:element ref="AutoGrnForPoLineRecAll" minOccurs="0"/>
+        <xsd:element ref="AutoGrnForShipment" minOccurs="0"/>
+        <xsd:element ref="CheckForDuplicateGrn" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReqKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the requisition key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReqCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for requisitions if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReqZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReqPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for requisitions. If no value is supplied then a length of 10 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReqMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the requisition numbering method required. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextRequisition">
+    <xsd:annotation>
+      <xsd:documentation>This is the next requisition number. Applies only if the method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Requisitions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReqKeyType" minOccurs="0"/>
+        <xsd:element ref="ReqCase" minOccurs="0"/>
+        <xsd:element ref="ReqZero" minOccurs="0"/>
+        <xsd:element ref="ReqPresentationLength" minOccurs="0"/>
+        <xsd:element ref="ReqMethod" minOccurs="0"/>
+        <xsd:element ref="NextRequisition" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="QotKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the quotation key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QotCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for quotations. if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QotZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QotPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for quotations. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 8 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QotPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for quotations. The prefix length is only allowed if the method is B - By branch. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QotMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the quotation numbering method required. (N - Manual, Y - Automatic, B - By branch). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=Manual;Y=Automatic;B=By branch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextQuotation">
+    <xsd:annotation>
+      <xsd:documentation>This is the next quotation. Applies only if the method is Y - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Quotations">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="QotKeyType" minOccurs="0"/>
+        <xsd:element ref="QotCase" minOccurs="0"/>
+        <xsd:element ref="QotZero" minOccurs="0"/>
+        <xsd:element ref="QotPresentationLength" minOccurs="0"/>
+        <xsd:element ref="QotPrefixLength" minOccurs="0"/>
+        <xsd:element ref="QotMethod" minOccurs="0"/>
+        <xsd:element ref="NextQuotation" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the Job key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobCase">
+    <xsd:annotation>
+      <xsd:documentation>This is the case allowed for jobs if the key type is A - Alphanumeric (M - Mixed, U - Upper, L - Lower). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Mixed;U=Upper;L=Lower;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for jobs. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 8 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for jobs. The prefix length is only allowed if the method is C - Job class. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the job numbering method required. (M - Manual, A - Automatic, C - Job class, S - Scripted). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;C=Job class;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextJob">
+    <xsd:annotation>
+      <xsd:documentation>This is the next job. Applies only if the method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Jobs">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="JobKeyType" minOccurs="0"/>
+        <xsd:element ref="JobCase" minOccurs="0"/>
+        <xsd:element ref="JobZero" minOccurs="0"/>
+        <xsd:element ref="JobPresentationLength" minOccurs="0"/>
+        <xsd:element ref="JobPrefixLength" minOccurs="0"/>
+        <xsd:element ref="JobMethod" minOccurs="0"/>
+        <xsd:element ref="NextJob" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WinKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the WIP Inspection reference key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WinZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WinPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for WIP Inspection references. If the key type is N - Numeric then a maximum of 15 is allowed and if it is A - Alphanumeric then a maximum of 20 is allowed. If no value is supplied then a length of 10 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="20"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WinPrefixLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the prefix length allowed for WIP inspection references. The prefix length is only allowed if the method is C - Job class. The prefix length must be less than the presentation length. If a number is not supplied then a length of 0 is assumed which implies that the prefix size is dynamic.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WinMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the WIP inspection reference numbering method required. (M - Manual, A - Automatic, C - Job class). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;C=Job class;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextWipInspection">
+    <xsd:annotation>
+      <xsd:documentation>This is the next WIP inspection reference. Applies only if the method is A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipInspection">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="WinKeyType" minOccurs="0"/>
+        <xsd:element ref="WinZero" minOccurs="0"/>
+        <xsd:element ref="WinPresentationLength" minOccurs="0"/>
+        <xsd:element ref="WinPrefixLength" minOccurs="0"/>
+        <xsd:element ref="WinMethod" minOccurs="0"/>
+        <xsd:element ref="NextWipInspection" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ArrKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts receivable payment run key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArrZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArrPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for accounts receivable payment run. If no value is supplied then a length of 7 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArrMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts receivable payment run numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextArPayRun">
+    <xsd:annotation>
+      <xsd:documentation>This is the next AR payment run number to use. This only applies if numbering method is set to A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArPaymentRun">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ArrKeyType" minOccurs="0"/>
+        <xsd:element ref="ArrZero" minOccurs="0"/>
+        <xsd:element ref="ArrPresentationLength" minOccurs="0"/>
+        <xsd:element ref="ArrMethod" minOccurs="0"/>
+        <xsd:element ref="NextArPayRun" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ArcKeyType">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts receivable collection run key type (A - Alphanumeric, N - Numeric). If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Alphanumeric;N=Numeric;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArcZero">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to suppress leading zeros if the numbering method is numeric. (N - No, Y - Yes). If no value is supplied then N is assumed.</xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArcPresentationLength">
+    <xsd:annotation>
+      <xsd:documentation>This is the maximum presentation length allowed for accounts receivable collection run. If no value is supplied then a length of 7 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArcMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts receivable collection run numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextArCollectionRun">
+    <xsd:annotation>
+      <xsd:documentation>This is the next collection run number to use. This only applies if numbering method is set to A - Automatic. The maximum size is dependent on the presentation length. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArCollectionRun">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ArcKeyType" minOccurs="0"/>
+        <xsd:element ref="ArcZero" minOccurs="0"/>
+        <xsd:element ref="ArcPresentationLength" minOccurs="0"/>
+        <xsd:element ref="ArcMethod" minOccurs="0"/>
+        <xsd:element ref="NextArCollectionRun" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ApvMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the accounts payable auto vouchering numbering method. (A - Automatic, S - Supplier delivery note, G - Goods received note, P - Purchase order). If the method selected is 'G' or 'P' then the presentation length of that key cannot be greater than 15 characters. If no value is supplied then A is assumed.</xsd:documentation>
+      <xsd:appinfo source="A=Automatic;S=Supplier delivery note;G=Goods received note;P=Purchase order"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NexttAutoVoucher">
+    <xsd:annotation>
+      <xsd:documentation>This is the next AP auto voucher number to use. This only applies if numbering method is set to A - Automatic. The maximum size is 15 characters. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoVouchering">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ApvMethod" minOccurs="0"/>
+        <xsd:element ref="NexttAutoVoucher" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NextTpmReference">
+    <xsd:annotation>
+      <xsd:documentation>This is the next Trade Promotions reference number. If no value is supplied then the default value of 1 will be assumed. The format is 7 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TradePromotions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NextTpmReference"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NextStockRecDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next stock receipt document. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextIssueDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next issue document.  If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextTrfOutDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next transfer out document. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextInspectionDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next inspection print document. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextRejectionDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next inspection rejection print document. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextScrappedDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next inspection scrap print document. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InventoryDocs">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NextStockRecDoc"/>
+        <xsd:element ref="NextIssueDoc"/>
+        <xsd:element ref="NextTrfOutDoc"/>
+        <xsd:element ref="NextInspectionDoc"/>
+        <xsd:element ref="NextRejectionDoc"/>
+        <xsd:element ref="NextScrappedDoc"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NextKitIssueDoc">
+    <xsd:annotation>
+      <xsd:documentation>This is the next kit issue document number. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextWipInspDocNum">
+    <xsd:annotation>
+      <xsd:documentation>This is the next work in progress inspection document number. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextScrapDocNum">
+    <xsd:annotation>
+      <xsd:documentation>This is the next work in progress inspection scrap document number. If no value is supplied then the default value of 1 will be assumed. The format is 9 characters, numeric.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipDocs">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NextKitIssueDoc"/>
+        <xsd:element ref="NextWipInspDocNum"/>
+        <xsd:element ref="NextScrapDocNum"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LoadPlanMethod">
+    <xsd:annotation>
+      <xsd:documentation>This is the load numbering numbering method. (M - Manual, A - Automatic). If no value is supplied then M is assumed.</xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextLoadReference">
+    <xsd:annotation>
+      <xsd:documentation>This is the next load reference to use. This only applies if numbering method is set to A - Automatic. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LoadPlanning">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LoadPlanMethod"/>
+        <xsd:element ref="NextLoadReference"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NextTranReference">
+    <xsd:annotation>
+      <xsd:documentation>This is the next EDI transmission reference to use. This number is used as a suffix to generate unique transmission references. When exporting files, it is included in the file header. It is incremented by 1 each time a file is transmitted. If no value is supplied 1 is assumed.</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EdiTransmission">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NextTranReference"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AllowNonSequentialEntries">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to allow non-sequential entries for revision and release. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:pattern value="N"/>
+        <xsd:pattern value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncrementRelWithinRev">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to increment the release number within revision. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. May only be set to Y if 'AllowNonSequentialEntries' is set to Y, else must be N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

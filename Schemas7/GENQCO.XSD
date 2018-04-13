@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Query Commitment Status Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>The root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Key">
+					<xsd:annotation>
+						<xsd:documentation>The key to use for this query.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="LedgerCode">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the ledger code for the commitment status query. It must contain a valid SYSPRO GL code, and is mandatory.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Options" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>The list of options</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="PasswordForLedgerCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is required if the ledger code entered requires a password.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TypeOfCommitment" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This describes the type of commitment for checking the commitment status. The valid values are R (Requistion), P (Purchase Order), C - (User entry - committed), U (User entry, uncommitted). The default is 'R'. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="R"/>
+										<xsd:enumeration value="P"/>
+										<xsd:enumeration value="U"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CommitmentDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The commitment date is required to derive the period for the commitment status query. The date may be zero, in which case the transaction is considered unallocated. If entered, the date must be in the format CCYY-MM-DD.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CommitmentValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The commitment value if required.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="XslStyleSheet" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

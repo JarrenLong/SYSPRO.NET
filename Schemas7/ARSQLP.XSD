@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the AR Label Print Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="BankSelection">
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BranchSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the branch selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClassSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the customer class selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the customer selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CustomerSelection" minOccurs="0"/>
+        <xsd:element ref="BranchSelection" minOccurs="0"/>
+        <xsd:element ref="CustomerClassSelection" minOccurs="0"/>
+        <xsd:element ref="SalespersonSelection" minOccurs="0"/>
+        <xsd:element ref="GeographicAreaSelection" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicAreaSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the  geographic area selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeSubAccounts">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate whether to include sub accounts or not.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabelSequence">
+    <xsd:annotation>
+      <xsd:documentation>This sequencr is used to indicate the labe sequence for printing. The default is C for customer and the other valid values are N for short name, B for Branch, L for customer class , G for Geographic Area,  S for Salesperson and U for user-defined.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabelsToPrint" type="xsd:double">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the number of labels to print per customer.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LabelSequence" minOccurs="0"/>
+        <xsd:element ref="StartAtCustomerSN" minOccurs="0"/>
+        <xsd:element ref="StartAtBranch" minOccurs="0"/>
+        <xsd:element ref="StartAtCustomerClass" minOccurs="0"/>
+        <xsd:element ref="StartAtGeographicArea" minOccurs="0"/>
+        <xsd:element ref="StartAtSalesperson" minOccurs="0"/>
+        <xsd:element ref="IncludeSubAccounts" minOccurs="0"/>
+        <xsd:element ref="LabelsToPrint" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OtherOptions">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate other options. The default is N and the other valid value is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalespersonSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the salesperson selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StartAt">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate where to start from.Only valid for label sequence N,B,C,G and S.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="TagFile">
+    <xsd:annotation>
+      <xsd:documentation>This field is used when the label sequence is user-defined.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="StartAtCustomerSN" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate where to start from for customer short name.Only valid for label sequence N.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StartAtBranch" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate where to start from for branch.Only valid for label sequence B.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StartAtCustomerClass" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate where to start from for customer class.Only valid for label sequence L.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StartAtGeographicArea" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate where to start from for geographic area.Only valid for label sequence G.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StartAtSalesperson" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate where to start from for sales person.Only valid for label sequence S.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

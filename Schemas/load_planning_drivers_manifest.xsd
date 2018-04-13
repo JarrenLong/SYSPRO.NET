@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Load Planning Drivers Manifest Query Business Objects
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="DeliveryDate">
+		<xsd:annotation>
+			<xsd:documentation>Delivery date selection, A(all), R(range), S(single).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DeliverySeq" default="All">
+		<xsd:annotation>
+			<xsd:documentation>Delivery date selection.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;All=All;01=01;02=02;03=03;04=04;05=05;06=06;07=07;08=08;09=09;10=10;11=11;12=12;13=13;14=14;15=15;16=16;17=17;18=18;19=19;20=20;21=21;22=22;23=23;24=24;25=25;26=26;27=27;28=28;29=29;30=30"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="All"/>
+				<xsd:enumeration value="01"/>
+				<xsd:enumeration value="02"/>
+				<xsd:enumeration value="03"/>
+				<xsd:enumeration value="04"/>
+				<xsd:enumeration value="05"/>
+				<xsd:enumeration value="06"/>
+				<xsd:enumeration value="07"/>
+				<xsd:enumeration value="08"/>
+				<xsd:enumeration value="09"/>
+				<xsd:enumeration value="10"/>
+				<xsd:enumeration value="11"/>
+				<xsd:enumeration value="12"/>
+				<xsd:enumeration value="13"/>
+				<xsd:enumeration value="14"/>
+				<xsd:enumeration value="15"/>
+				<xsd:enumeration value="16"/>
+				<xsd:enumeration value="17"/>
+				<xsd:enumeration value="18"/>
+				<xsd:enumeration value="19"/>
+				<xsd:enumeration value="20"/>
+				<xsd:enumeration value="21"/>
+				<xsd:enumeration value="22"/>
+				<xsd:enumeration value="23"/>
+				<xsd:enumeration value="24"/>
+				<xsd:enumeration value="25"/>
+				<xsd:enumeration value="26"/>
+				<xsd:enumeration value="27"/>
+				<xsd:enumeration value="28"/>
+				<xsd:enumeration value="29"/>
+				<xsd:enumeration value="30"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>Filter root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DeliveryDate"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeSalesorderLines" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Option to include sales order line details.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>Key root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="RouteCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>Options root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DeliverySeq"/>
+				<xsd:element ref="IncludeSalesorderLines"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RouteCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The delivery route code. The routecode is mandatory and is 10 characters long.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SorRouteMaster;key=true"/>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

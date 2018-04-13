@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Part Billings Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostPartBillings">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence maxOccurs="unbounded">
+							<xsd:element name="Journal" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the journal number to which the transaction journal entries generated will be added. It must be valid for the specified posting period and may not have been printed already. If not supplied, a new journal will be created.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Job">
+								<xsd:annotation>
+									<xsd:documentation>The non-stocked job number you wish to part bill which is mandatory. The format is alphanumeric or numeric depending on the key configuration option for jobs within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Quantity" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This field indicates the quantity of the non-stocked item which has been manufactured.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="QuantityToBillFlag" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This flag indicates whether for hierarchical jobs the quantity field will be used purely to release non-merchandise lines on a sales order (e.g. escalation charges, refunds, etc.) which have no bearing on the quantity of the product still to be produced.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Complete" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This flag indicates whether the job is complete or not. Enter Y to set the job to be complete. Enter N to set the job to be not complete. Enter Spaces if you want the completion status to be determined by the program (i.e. the quantity already manufactured for the job is added to the quantity being received in. A comparison is made to the original quantity that was required to be manufactured. If the result is equal to (or greater than) the original quantity to be manufactured, then the job is set to complete. If it is less than the original quantity to be manufactured, then the job is set to be not complete.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CloseDate" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This flag indicates whether you should use the transaction date as the actual job complete date when in a status of complete.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="MaterialValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the value by which the material portion of work in progress must be reduced. If not supplied, or returned as spaces, the material value will be calculated using the cost basis as well as the WIP value basis supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LaborValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the value by which the labor portion of work in progress must be reduced. If not supplied, or returned as spaces, the labor value will be calculated using the cost basis as well as the WIP value basis supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CostBasis" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Select Unit if the material and/or labor values entered are based on the unit quantity that has been manufactured. Select Total if the material and/or labor values entered are based on the total quantity that has been manufactured. Possible values are: U (Unit) or T (Total). When not supplied and the wipvaluebasis is W (Outstanding WIP) and the material or labor value is greater than zero then the default is T (Total) else it is U (Unit).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="U"/>
+										<xsd:enumeration value="T"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="WipValueBasis" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this field to indicate the source of the work in progress value. This can be the outstanding work in progress value, expected costs or actual costs. Possible values are W (Outstanding WIP) or E (Expected cost) or A (Actual cost).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="W"/>
+										<xsd:enumeration value="E"/>
+										<xsd:enumeration value="A"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Distribution" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>You use the GL Distribution function to distribute any outstanding work in progress values to the General Ledger module.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="LedgerCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The ledger code field entered which is validated only if the Work in Progress module is integrated to General Ledger.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="LedgerAmount" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You use the Ledger amount field to assign the outstanding amount to the specified ledger code. This includes the combined material and labor values. Only applicable when you are integrated to general ledger.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PasswordForLedgerCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If the ledger codes require a password, this element must contain the relevant password for the specified ledger code. Only applicable when you are integrated to general ledger.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="HierarchyJob" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="Head" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Head is part of a unique key to identify a hierarchy. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Section1" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Section1 is part of a unique key to identify a hierarchy. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Section2" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Section2 is part of a unique key to identify a hierarchy. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Section3" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Section3 is part of a unique key to identify a hierarchy. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Section4" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Section4 is part of a unique key to identify a hierarchy. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AttachedType" default="M" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Attached Type is part of a unique key used to establish which hierarchies go with which line details when creating sales orders and using the billing method L (Line details). Only applicable when projects and contracts is installed and the job is a hierarchical job and creating a sales order using the billing method L (Line details). Possible values are: M  (Material allocation) or O (Operation allocation) or P (Product class) or T (Total accumulated operation value).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="M"/>
+													<xsd:enumeration value="O"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="T"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="HierarchyAttachedTo" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>HierarchyAttachedTo is part of a unique key used to establish which hierarchies go with which line details when creating sales orders and using the billing method L (Line details). This field can contain either a material allocation, operation number, product class. These fields are based on the AttachedType you supplied and only applicable when projects and contracts is installed and the job is a hierarchical job If the AttachedType is M (Material allocation) then this element length will be either alphanumeric or numeric depending on the key configuration setup for stock codes within SYSPRO. If the AttachedType is O (Operation) then this element length will be numeric. If the AttachedType is P (Product class) then this element length will be alphanumeric. If the AttachedType is T (Total accumulated operation value) then this element is ignored.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CostOfSalesAmount" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You use the cost of sales amount field to assign the outstanding cost of sales amount to specified hierarchies. The cost of sales amount includes the combined labor and material values. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BillingAmount" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You use the billing amount field to assign the outstanding billing amounts to specified hierarchies. The billing value is determined by the billing values of sales orders created/updated/appended to or released. Only applicable when projects and contracts is installed and the job is a hierarchical job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="SalesOrderLink" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This option will allow you to link a job to a sales order. Possible values are: N- (no-link) or C (create) or U (update) or A- (append) or R (Release) or E (Credit note). Only applicable when the job header has a customer attached to it and the sales order module is installed. If there is a hierarchical job which already has a sales order attached to it with detail lines then this field must to be set to R.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="U"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="R"/>
+										<xsd:enumeration value="E"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BillingMethod" default="S" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the method of setting up the sales order you wish to create. Only required when creating a sales order. Possible values are: P- (Progress payment) or S-(Selling price) or L (Line details). This will be forced to be the selling price method if margin checking required and the job is set to complete.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="P"/>
+										<xsd:enumeration value="L"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncreaseSalesOrderQuantity" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is optional. If the Job is linked to a Sales Order and the receipt quantity is greater than the quantity on back order against the sales order, the order quantity will be increased to the receipt quantity, if this element is set to 'Y'.  Default to 'N'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="OrderHeader" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element contains information for the sales order header i.e. customer details and header information will be grouped in this element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="CustomerPoNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the reference number assigned to an invoice produced for the customer. For a sub-account customer, the first three characters defaults to the store number of the sub-account, thereby reflecting the branch (or store) that ordered the goods. This field is a mandatory field if the customer requires a customer purchase order to be entered (defined in the customer setup within SYSPRO). Only applicable when creating a sales order. If this element is not supplied or supplied as spaces and the customer is a sub account, then the store number against the customer account within SYSPRO will be used as a default for the customer purchase order number.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="InvoiceTerms" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Use the invoice terms code to define the default settlement discount you want to extend to a customer whose payments are made within a prescribed period of time. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it defaults to the invoice terms against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Branch" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The branch code is used to integrate the Accounts Receivable module to General Ledger. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it will default to the branch code held against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Area" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The geographic areas required within Accounts Receivable that applies to your customer. Only applicable when creating a sales order and when sales order geo area is required. If this element is not supplied or supplied as spaces and if the multishipcode is supplied the geo area against the multi ship file within SYSPRO will be used else the geo area against the customer account within SYSPRO will be used.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShippingInstrs" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the shipping message that must be used against the sales order for the customer. Only applicable when creating a sales order. The first two characters of the shipping instructions element will be used as the instruction code if the sales order configuration setup option within SYSPRO for Ship via usage is set to Coded. In this case the shipping instruction message will be retrieved by using the instruction code supplied. If the element is not supplied or supplied as spaces it will default to the shipping instructions against the customer account within SYSPRO else will default to the sales order default shipping instructions. The defaults only apply if the sales order configuration setup option within SYSPRO for Ship via usage is set to Free form.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShippingInstrsCode" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerName" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the customer name to appear against the sales order header. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it will default to the customer name held against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipAddress1" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the first line of the delivery address details to which goods will be shipped for the customer. Only applicable when creating a sales order. The complete delivery address will default to the ship to address against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipAddress2" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the second line of the delivery address details to which goods will be shipped for the customer. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipAddress3" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the third line of the delivery address details to which goods will be shipped for the customer. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipAddr3Loc" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipAddress4" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the fourth line of the delivery address details to which goods will be shipped for the customer. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipAddress5" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the fifth line of the delivery address details to which goods will be shipped for the customer. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipPostalCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the postal code for the delivery address to which goods will be shipped for the customer. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipGpsLat" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipGpsLong" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="LanguageCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the Language Code for the delivery address to which goods will be shipped for the customer.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SpecialInstrs" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the message that you want to print on order documents for the customer. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ExtendedTaxCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the tax geo code (i.e. comprising of State, Country/Zip and City code) assigned to the customers ship to address. This is only applicable when creating a sales order and if USA tax by advanced geocodes or USA AVP sales tax system is in use. If this element is not supplied or supplied as spaces and the multishipcode is supplied it will default to the ship to extended tax code against the multi ship file within SYSPRO else if this is spaces it defaults to the Ship to extended tax code against the customer account within SYSPRO. The format is alphanumeric; consisting of a State code, a Country or Zip code and a code if USA AVP sales tax system in use or consisting of a State code, a Country or Zip code and a code if USA tax by advanced geo codes in use.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FixExchangeRate" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This option enables you to change the fixed exchange rate for the sales order. Only applicable when a foreign currency has been specified for the sales order you are creating. Possible values are: Y (Yes) or N (No).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ExchangeRate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Indicates the exchange rate for the sales order when the sales order has been flagged as using a fixed exchange rate. If this element is not supplied or supplied as spaces it defaults to the exchange rate stored against the customers currency within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PaymentMethod" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the payment method, of either cash or credit, which will be used when a sales order is invoiced for the customer. Only applicable when creating a sales order. Possible values are: CR - (Credit) or CS - (Cash). If this element is not supplied it will default to CR - (Credit).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SalesOrder" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The sales order number to use. If the salesorderlink is C - (Create) and sales order numbering in SYSPRO is not automatic then the sales order number must be supplied. If the salesorderlink is A (Append) then the sales order number must be supplied. The format is alphanumeric or numeric depending on the key configuration option for sales orders within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OrderType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the order type that must be assigned as the default for the sales order generated for this customer. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it will default to the order type against the customers account else the order type against the sales order setup program within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OrderStatus" default="8" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the status of an order. Only applicable when creating or updating an order. Possible values: 3 (Released backorder) or 4 (In warehouse) or 8 (Ready to invoice) or S (In suspense). If the element is not supplied it will default to 8 when creating a sales order or when updating a sales order use the existing sales order status. When updating a sales order and the order is in a status of suspense the status cannot be changed.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="S"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MultiShipCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The contents of this element can be used to select one of the predefined multiple ship to addresses against this customer. If this code is supplied, the address against this code will override any other address supplied. Only applicable when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AlternateReference" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the new key that you want to use to print sales orders documents, acknowledgements, delivery notes and invoices in an alternate sequence. You must select that the Alternate key is required in the sales order configuration option within SYSPRO. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces the alternate key will default to either the default warehouse, branch or geographic area depending on the sales order setup configuration option within SYSPRO when adding a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Salesperson" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the salesperson assigned to the customer. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it will default to the salesperson against the customers account within SYSPRO. The format is a 3 Character field, alpha-numeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TaxStatus" default="E" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether the customer is exempt from sales tax. Only applicable when creating a sales order. Possible values are: E (Exempt) or N (Taxable - use tax code) or O (Taxable - use other tax code). If this element is not supplied it defaults to the tax status against the customer account within SYSPRO - else if this is spaces it defaults to E (Exempt). </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="O"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TaxExemptNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the tax exemption number of the customer where the customer qualifies for tax exemption on certain goods. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it defaults to the Tax exemption against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GstExemptFlag" default="E" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether the customer is exempt from Canadian GST. Only applicable if Canadian GST is required and when creating a sales order. Possible values are: E - (Exempt) or N - (Taxable). If this element is not supplied it defaults to the GST exempt status against the customer account within SYSPRO - else if this is spaces it defaults to E (Exempt).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GstRegistrationNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the GST registration number of the client who has to pay GST tax on the order. Only applicable if Canadian GST is required and when creating a sales order. If this element is not supplied or supplied as spaces it defaults to the GST registration number against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Nationality" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the nationality assigned to the customer. Only applicable when creating a sales order and when the EEC vat system is in use. If this element is not supplied or supplied as spaces it defaults to the nationality code against the customer account within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DeliveryTerms" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the delivery terms code e.g. C.O.D. This field is for documentary purposes and is printed on the EC statistical report. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality and when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShippingLocation" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Shipping Location to be used when creating sales order</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TransactionNature" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the nature of the transaction. This field is for documentary purposes and is printed on the EC statistical report. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality and when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TransportMode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the mode of transport used to deliver the goods. This field is for documentary purposes and is printed on the EC statistical report. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality and when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ProcessFlag" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the process used. This field is for documentary purposes and is printed on the Supplementary declaration dispatches report (EC sales report) if the Summary option is selected. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality and when creating a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="RequestedShipDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the date on which the items can be shipped to the customer. Only applicable when creating a sales order. If this element is not supplied or supplied as spaces it defaults to the transaction date supplied in the parameters, otherwise, if this is not supplied the system date will be used.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipLineComplete" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates if the sales order entry program must calculate the quantity of stock that is available to ship. Otherwise the operator is required to make an entry at the ship quantity field when entering sales order line details. Only applicable when creating a sales order. Possible values are: Y - (Yes) or N - (No). If the element is not supplied then it will default to N.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="InvoiceNumberEntered" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The invoice number may only be supplied if the sales order is to be created in a status of 8 (ready to invoice) and when an invoice is requested after being released from status 4 and when invoice numbering is not automatic. The format is alphanumeric or numeric depending on the key configuration option for invoice numbers within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="OrderDetails" minOccurs="0">
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="StockDescription" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the description against the non-stocked finished part. Only applicable when appending to or creating a sales order and when not using the billing method L (Line details).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OrderValue" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the value of the sales order line when creating or appending to a sales order. This field can either contain the selling price or the progress payment order value. Only applicable when appending to or creating a sales order and when not using the billing method L (Line details). If the element is not supplied when the billing method is S (Selling price) it defaults to the selling price against the job. When the billing method is P (Progress payment) it defaults to the value of work in progress not yet billed.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ProductClass" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the product class to be used for the item and is required when creating or appending to a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CommissionCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the product class to be used for the item and is required when creating or appending to a sales order.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element ref="Taxable" minOccurs="0"/>
+										<xsd:element ref="TaxCode" minOccurs="0"/>
+										<xsd:element ref="GSTTaxable" minOccurs="0"/>
+										<xsd:element ref="FederalSalesTax" minOccurs="0"/>
+										<xsd:element name="LotNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the lot number against the non-stocked finished part when the job is lot traceable. The quantity against the lot will be the quantity manufactured. Only applicable when the job is traceable  and when the quantity manufactured is not zero. If  lot numbering within SYSPRO is automatic then the lot number will be ignored. If a negative quantity is manufactured the lot number must exist. The format is alphanumeric or numeric depending on the key configuration option for lots within SYSPRO</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Concession" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the concession number against the lot. Only applicable when the job is traceable and when the quantity manufactured is not zero.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Certificate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>: This indicates the certificate number against the lot. Only applicable when the job is traceable and when there is a sales order link and when the quantity manufactured is not zero.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MarkupBasis" default="L" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the value basis to use for stocked lines when the billing method is L (Line Details). Possible values: M (Markup) or  L (List price) or C (Customer price). Only applicable when appending to or creating a sales order and the billing method is L (Line details). </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="L"/>
+													<xsd:enumeration value="M"/>
+													<xsd:enumeration value="C"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="MaterialMarkup" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the material markup percentage used against allocations when creating or appending to a sales order and when the billing method is L (Line Details). Alternatively this indicates the material margin percentage used when updating a sales order and calculating margin and the billing method is S (Selling price method).  If the element is not supplied when appending to or creating a sales order and using the billing method L (Line details) the default will be the percentage held against the job master.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="LaborMarkup" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the labor markup percentage used against allocations when creating or appending to a sales order and when the billing method is L (Line Details). Alternatively this indicates the labor margin percentage used when updating a sales order and calculating margin and the billing method is S- (Selling price method). If the element is not supplied when appending to or creating a sales order and using the billing method L (Line details) the default will be the percentage held against the job master.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ApplyProductClassToStock" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates that any stocked lines against material allocations when creating or appending to a sales order and using the billing method L (Line details) will use the product class supplied. Possible values are: Y - (Yes) or N (No).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationProductClass" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the product class to be used against operations when    creating or appending to a sales order and using the billing method L (Line details). If creating details per operation or summarizing by product class the supplied product class is only used when there is no product class found against the work center within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CreateOperationDetails" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether or not to create sales order detail lines per operation found when creating or appending to a sales order and using the billing method L (Line details). Possible values are: Y (Yes) or  N (No). </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SummariseByProductClass" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether or not to create sales order detail lines per product class against each work center when creating or appending to a  sales order and using the billing method L (Line details). This option will only be valid when you have elected to create detail lines for operations. Possible values are: Y (Yes) or N (No).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationCommentText" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the description used when creating or appending to sales order detail lines for labor when using the billing method L (Line details). The supplied comment text is required when not creating detail lines per operation. When summarizing by product class and the product class has no description the supplied comment text will be used.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="UseRecommendedCost" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This flag indicates whether or not to use a calculated cost when updating a sales order. The cost is calculated by taking the current ship quantity multiplying it by the current unit cost and adding the result to the job receipt value and then dividing that value by the sum of the current ship quantity and new ship quantity. Only applicable when updating a sales order and the calculated cost is greater than zero. Possible values are: Y (Yes) or N (No).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="UseLaborServiceCharge" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether or not to create labor service charges per operation when creating or appending to a sales order and using the billing method L (Line details). Labor service charges will be built from the labor allocations. You can optionally change certain service charge details via the LaborServiceCharge element. Possible values are: Y (Yes) or N (No).  If the SYSPRO WIP setup option Labor service charge is set to required then this element must be 'Y' as labor service charges must be used.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CopyLaborAllocNarrations" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether or not to create sales order comment lines  per operation narration found when creating or appending to a sales order and using the billing method L (Line details). Possible values are: Y (Yes) or N (No).  Also only applicable when the element CreateOperationDetails is set to ''Y and the element SummariseByProductClass is 'N' or the element UseLaborServiceCharge is set to 'Y'.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CopyMatAllocNarrations" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether or not to create sales order comment lines per material allocation narration found when creating or appending to a sales order and using the billing method L (Line details). Possible values are: Y (Yes) or N (No).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SequenceMatAllocsByLabor" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether or not to sequence material allocations with associated labor allocations when creating or appending to a sales order and using the billing method L (Line details). Possible values are: Y -  (Yes) or  N ( No).  Also only applicable when the element CreateOperationDetails is set to ''Y and the element SummariseByProductClass is 'N' or the element UselaborServiceCharge is set to 'Y'.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="LaborServiceCharge" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element contains information that you can change against service charges when you are using labor service charges.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:all minOccurs="0">
+													<xsd:element name="Operation">
+														<xsd:annotation>
+															<xsd:documentation>This element indicates the operation to which you wish to associate the service charge. This is mandatory if you supply service charge details.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="QuantityTime" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This element indicates the total quantity completed when processing a subcontract operation else it indicates the total time issued when processing an internal operation.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="UnitPrice" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>The element indicates the unit price of the service charge line.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="Taxable" minOccurs="0"/>
+													<xsd:element ref="TaxCode" minOccurs="0"/>
+													<xsd:element ref="GSTTaxable" minOccurs="0"/>
+													<xsd:element ref="FederalSalesTax" minOccurs="0"/>
+													<xsd:element name="IgnoreServiceCharge" default="N" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This element indicates whether or not the operation should be ignored from creating a service charge line or not.  Possible values are: Y (Yes) or N (No). If set to 'Y' then a standard miscellaneous line will be created for the operation.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:enumeration value="N"/>
+																<xsd:enumeration value="Y"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:all>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CreditReason" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the reason for creating a credit note. It is mandatory when the SYSPRO setup option to ask for a reason code when entering new credit notes is set on.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AdjustQtyOnBackOrderForLinkedSalesOrder" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If this element is Y (Yes) and you are creating a credit note, then a new line will be written to the linked sales order, to credit the back order quantity. Y (Yes), N (No), Space (No)</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="BackOrderRelease" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the information for releasing hierarchical sales order lines from back order to ship.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="StockCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the non stocked code against the sales order attached to the job which you want to release back order quantities from to ship. This non-stocked code must match the non-stocked code which already exists against the sales order. Only applicable when the job is hierarchical and sales order lines exist for the job. The format is alphanumeric or numeric depending on the key configuration option for stock codes within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SalesOrderLine" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the sales order line of the non stocked code against the sales order attached to the job which you want to release back order quantities from to ship. This sales order line must match the sales order line which already exists against the non stocked code against the sales order. Only applicable when the job is hierarchical and sales order lines exist for the job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ReleaseQuantity" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the back order quantity to release against the hierarchical sales order attached to the job.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Cost" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the cost of the non-stocked sales order line being released from back order to ship for the sales order attached to the job. Only applicable when the job is hierarchical and sales order lines exist for the job. If the element is not supplied it will default to the cost against the non-stocked sales order line.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BackOrderCostBasis" default="U" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Select Unit if the cost entered is based on the unit quantity that has been released. Select Total if the cost entered is based on the total quantity that has been released.  Only applicable when the job is hierarchical and sales order lines exist for the job. Possible values are: U (Unit) or T (Total).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="U"/>
+													<xsd:enumeration value="T"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AddReference" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can use the additional reference field for your own use to hold any extra information required.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Taxable" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the sales order line you are entering is taxable. Only applicable when appending to or creating a sales order. If the sales order header has been flagged as exempt from tax - this element will be ignored as the line tax status will also be exempt. Possible values are: Y (Taxable) or N (Not taxable).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxCode">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the sales order line you are creating or appending to is taxable and the appropriate tax rate. This element is not applicable when the tax system in use is by USA AVP sales tax. This element will only be applicable for tax systems if the header and line are flagged as taxable. If the element is not supplied or is supplied as spaces and the tax system in use is by geographic area and a tax code has been defined against the geographic area used for the sales order , then the tax code will default to this tax code. For all other tax systems the tax code will default to the tax code defined against the non stocked code.
+When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GSTTaxable" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the sales order line you are creating or appending to is subject to GST. If the sales order header has been flagged as exempt from GST - this element will be ignored as the line will also be exempt. This element is only relevant when your system nationality is set to CAN (Canadian) and the Canadian GST system is in use. Possible values are: Y (GST taxable) or N (not GST taxable). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FederalSalesTax">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the sales order line you are creating or appending to is subject to GST and the appropriate GST rate. Only applicable when appending to or creating a sales order and when the sales order header GST tax status is not exempt and when the line is subject to GST and when your system nationality is set to CAN (Canadian) and the Canadian GST system is in use. If the element is not supplied or is spaces and the tax system in use is by geographic area and a GST code has been defined against the geographic area used for the sales order, then the GST code for the line will default to the GST code against the geographical area. For all other tax systems the GST code will default to the default non-stocked GST code defined in the tax options setup within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

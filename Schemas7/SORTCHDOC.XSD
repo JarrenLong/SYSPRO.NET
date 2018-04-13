@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for SO Add Credit Note Header Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SOCreditNoteHeader">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Customer">
+                <xsd:annotation>
+                  <xsd:documentation>Customer number must be supplied. Mandatory.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CreditNoteNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Credit note number to be created. Mandatory if sales order numbering is manual.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CustomerPoNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer purchase order number for this credit note. Mandatory if so in SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CreditNoteDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Date of credit note. If not supplied, system date will be used. Format CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="InvoiceNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If entered, the invoice number must be a valid open SYSPRO invoice for the customer supplied. The credit invoice when processed will be attached to this invoice. A warning is given if the invoice value is zero.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Branch" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Branch code. If not supplied defaults to the customer's branch code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Salesperson" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Salesperson code. If not supplied, defaults to the customer's salesperson.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ARInvoiceTerms" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer's invoice terms. If not supplied defaults to the customer's invoice terms.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Order type. If not supplied defaults to the customer's order type or the company's default order type.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PaymentMethod" default="CR" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer's payment method. Valid values are 'CR' - Credit and 'CS' - Cash. If not supplied defaults to 'CR' - Credit.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="CR"/>
+                    <xsd:enumeration value="CS"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GeographicArea" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Geographic area. If not supplied defaults to customer's geographic area.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="AlternateReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Alternate reference. If not supplied defaults to either branch, geographic area or warehouse.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MultipleShipCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Multiple ship code. If not supplied, it defaults to  customer's multiple ship code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship date. If not supplied defaults to system datew. Format CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipName" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship name. If not supplied, it defaults customer's ship name.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShippingInstrs" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Shipping instructions. If the SYSPRO option to use coded shipping instructions is in use then the element must contain the relevant ship code. If not supplied defaults to customer's shipping instructions.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShippingInstrsCode" minOccurs="0"/>
+              <xsd:element name="ShipAddress1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Line 1 of shipping address. If not supplied, defaults to customer's address.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipAddress2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Line 2 of shipping address. If not supplied, defaults to customer's address.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipAddress3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Line 3 of shipping address. If not supplied, defaults to customer's address.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipAddress3Locality" minOccurs="0"/>
+              <xsd:element name="ShipAddress4" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Line 4 of shipping address. If not supplied, defaults to customer's address.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipAddress5" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Line 5 of shipping address. If not supplied, defaults to customer's address.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipPostalCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Postal code of shipping address. If not supplied, defaults to customer's shipping postal code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipGPSLat" minOccurs="0"/>
+              <xsd:element name="ShipGPSLong" minOccurs="0"/>
+              <xsd:element name="LanguageCode" minOccurs="0"/>
+              <xsd:element name="Email" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Contact email address. If not supplied, defaults to customer's email address.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SpecialInstrs" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Shipping instructions. If not supplied, defaults to customer's special instructions.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderDiscPercent1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>First line of order discount. Format 999.99</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderDiscPercent2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Second line of order discount. Format 99.99.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderDiscPercent3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Third line of order discount. Format 99.99.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Nationality" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Nationality code. This is only relevant for orders placed where the SYSPRO option 'EC Vat system required' is selected or if delivery terms are required for non-EC members. If not supplied, defaults to customer's nationality.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DeliveryTerms" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Delivery terms. This is only relevant for orders placed where the SYSPRO option 'EC Vat system required' is selected or if delivery terms are required for non-EC members. If not supplied, defaults to customer's delivery terms.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShippingLocation" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Shipping location. This is only relevant for orders placed where the SYSPRO option 'EC Vat system required' is selected or if delivery terms are required for non-EC members. If not supplied, defaults to customer's shipping location.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TransactionNature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Nature of transaction. This is only relevant for orders placed where the SYSPRO option 'EC Vat system required' is selected. If not supplied, defaults to customer's transaction nature.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TransportMode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Transport mode. This is only relevant for orders placed where the SYSPRO option 'EC Vat system required' is selected. If not supplied, defaults to customer's transport mode.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProcessFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Process flag. This is only relevant for orders placed where the SYSPRO option 'EC Vat system required' is selected. If not supplied, defaults to customer's process flag.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TaxExemptNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Tax exempt number. If not supplied defaults to customer's tax exempt number.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TaxExemptStatus" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Tax exempt status. If not supplied defaults to customer's tax exempt status.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="E"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GstExemptNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>GST exempt number. Only applicable if GST in use. If not supplied defaults to customer's gst exempt number.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GstExemptStatus" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>GST exempt status. Only applicable if GST in use. If not supplied defaults to customer's gst exempt status.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="E"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CompanyTaxNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Company tax registration number. If not supplied, defaults to customer's  company tax registration number.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="State" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the state code that is part of the extended tax code applicable to the ship to address. 
+Note: The Extended tax code field is only applicable if your nationality code is defined as USA and either the AVP sales tax system is required or you require tax by advanced geocodes (Tax Options Setup).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CountyZip" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the county or zip code that is part of the extended tax code applicable to the ship to address. 
+Note: The Extended tax code field is only applicable if your nationality code is defined as USA and either the AVP sales tax system is required or you require tax by advanced geocodes (Tax Options Setup).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="City" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the city code that is part of the extended tax code applicable to the ship to address. 
+Note: The Extended tax code field is only applicable if your nationality code is defined as USA and either the AVP sales tax system is required or you require tax by advanced geocodes (Tax Options Setup).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderComments" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Order comments. Any comments required to be added to credit note.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DocumentFormat" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Document format. This is the format to be used when printing credit note documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the GUID of the current process required to authenticate the transaction when Electronic Signatures are in use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="POSSalesOrder" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Sales Order number allocated by SYSPRO Point of Sale. This is only available if the SYSPRO Point of Sale system is currently in use.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

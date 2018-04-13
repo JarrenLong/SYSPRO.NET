@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Job Tracking Lots and Serials Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostTracking">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence maxOccurs="unbounded">
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence maxOccurs="unbounded">
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory. It specifies the job number of the material allocation being tracked. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ParentPart" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only required when you want to track component lots/serials to the lots/serials for an alternate parent part receipted into stock via WIP inspection for this job. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ParentWarehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only required when you want to track component lots/serials to the lots/serials receipted into an alternate warehouse via WIP inspection for this job.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and is the warehouse of the material allocation being tracked.  When the allocation is non-stocked this element must contain "**".</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and is the stock code of the material allocation being tracked. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Line" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional if there is only 1 allocation for that stock code. If there is more than 1 the line number has to be entered. This element is only applicable when the ActionType parameter is 'T' (track).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Lot" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds the component lot, component quantity and parent lot for tracking. If lot tracking is not required this element will be ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="LotNumber">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is mandatory and is the component lot number of the material allocation to be tracked. The format is either alphanumeric or numeric depending on the key configuration option for lot within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Bin" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is required when multiple bins is installed at a company level and at a warehouse level and is the component bin of the material allocation to be tracked.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="Quantity" minOccurs="0"/>
+                    <xsd:element name="ParentLot" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is mandatory when the ActionType parameter is 'T' (Track) or 'C' (change). This element indicates the parent lot number of the finished stock code created against the job. The format is either alphanumeric or numeric depending on the key configuration option for lot within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ParentBin" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is required when multiple bins is installed at a company level and at a warehouse level and is the parent bin of the finished stock code created against the job. This element is only required when the ActionType parameter is 'T' (Track) or 'C' (change).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Line" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is mandatory when the ActionType parameter is 'C' (change) or 'D' (Delete). This indicates the tracking line number for the component lot.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Serial" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds the component serial, component quantity and parent serial for tracking. If serial tracking is not required this element will be ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="SerialNumber">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is mandatory and is the component serial number of the material allocation to be tracked. The format is either alphanumeric or numeric depending on the key configuration for serials within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="Quantity" minOccurs="0"/>
+                    <xsd:element name="ParentSerial" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is mandatory when the ActionType parameter is 'T' (Track) or 'C' (Change) and is the parent serial number of the finished stock code created against the job. The format is either alphanumeric or numeric depending on the key configuration for serials within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Line" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is mandatory when the ActionType parameter is 'C' (Change) or 'D' (Delete). This indicates the tracking line number for the component serial.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quantity">
+    <xsd:annotation>
+      <xsd:documentation>Within the lot node this element is mandatory when the ActionType parameter is 'T' (Track) or 'C' (Change) and indicates the quantity of the component lot to be tracked. Within the serial node this element is mandatory when the ActionType parameter is 'T' (Track) or 'C' (Change) and indicates the quantity of the component serial to be tracked. If the serial method for the material allocation is manual then the quantity can only be 1. The quantity tracked cannot be more than what was issued from the lot/serial for the material allocation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

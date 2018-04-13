@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Contract Price Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>The root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>List of options</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="ContractType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element to view contract details for buying groups or customers or both. Default to A - All. (A - All, B - Buying groups, C - Customers)  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="B"/>
+										<xsd:enumeration value="C"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeFlatPrice" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this option to if you want view to a flat price and unit of measure assigned to the customer or buying group. Default to Y - Yes.  (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeCoded" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this option if you want to view a price code assigned to the contract. Default to Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeQtyDiscountBreaks" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this option if you want to view discounts based on the quantity or value of sales assigned to a contract. Default to Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeListPriceLessPerc" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element if you want to view the list price of stock items in a sale, minus a chained discount for the contract. Default is Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeListPriceLessChainDisc" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element if you want to view the list price of stock items in a sale, minus a chained discount for the contract. Default is Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludePriceCodeLessChainDisc" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element if you want to view the list price of stock items with price code in a sale, minus a chained discount for the contract. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeMarkUpCostPct" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this option if you want to view the cost price of an item in a sale, plus a percentage mark-up for the contract. You will be unable to view contracts of this method if FIFO costing is required. Default to Y. (N - No, Y -  Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeCodedLessUnitDiscValue" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this option if you want to view the if you want to use a specific price code in a sale less a unit discount value assigned to that code. Default to Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeGrossProfitPct" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You only supply the Warehouse to use for costs field if you selected either to include the Mark up cost by a percentage or gross profit percentage options. This enables you to indicate the warehouse that will be used to extract the cost. Default is Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeMarkUpListPrcPct" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this option if you want to view the list price of an item in a sale, plus a percentage mark-up for the contract.  Default to Y. (N - No, Y -  Yes) </xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="WhToUseForCosts" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>(2 character warehouse) - You only supply the Warehouse to use for costs field if you selected either to include the Mark up cost by a percentage or gross profit percentage options. This enables you to indicate the warehouse that will be used to extract the cost.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeNotes" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element if you want to include the notes attached to a contract. Default to N.( N- No, Y - Yes)</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeExpiredContracts" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element if you want to include expired contracts. Default to Y. (N - No, Y - Yes) </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeFutureContracts" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You use this element if you want to include future contracts. Default to Y. (N - No, Y - Yes)</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>List of filters.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="BuyingGroup" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single buying group selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. Buying group filter will not work if you selected to return only customer contracts.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Customer" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single customer selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. Customer filter will not work if you selected to return only buying group contracts.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StockCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range, or  Single stock codes to return. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Contract" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single contract to return. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Supplier" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single supplier selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Salesperson" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single salespersons selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. The result can be filtered in salesperson if customers are returned. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="ProductClass" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single product class selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. The results can be filtered in product class if customers are returned. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Area" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single area selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. The results can be filtered in area if customers are returned. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Branch" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single branch selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. The results can be filtered in product class if customers are returned. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CustomerClass" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range or Single customer class selection on contract to be returned. FilterType options - A(All), R(Range), (S)Single. The results can be filtered in product class if customers are returned. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="ExpiryDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Contracts can be filtered in both start and expiry date. The expiry date must be in format CCYY-MM-DD. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StartDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Contracts can be filtered in both start and expiry date. The start date date must be in format CCYY-MM-DD. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" use="optional">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

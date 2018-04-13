@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the BOM Structure Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ComRelease">
+		<xsd:annotation>
+			<xsd:documentation>ComVersion indicates major design changes made to the component (ComVersion). Note: this field will be ignored if the component is not ECC controlled at a release level. The format is 3 characters alphanumeric or numeric depending on a configuration option within Bill of Materials Setup. The field can have 3 dashes in it (---) indicating use current.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ComVersion">
+		<xsd:annotation>
+			<xsd:documentation>ComVersion indicates major design changes made to the component (ComVersion). Note: this field will be ignored if the component is not ECC controlled at a revision or release level. The format is 3 characters alphanumeric or numeric depending on a configuration option within Bill of Materials Setup. The field can have 3 dashes in it (---) indicating use current.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Component">
+		<xsd:annotation>
+			<xsd:documentation>Component is an item used in the process of creating a BOM for a parent part. The format is 30 characters alphanumeric or 15 chararcters numeric depending on the configuration option within Syspro.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CreateSubJob" default="N">
+		<xsd:annotation>
+			<xsd:documentation>The CreateSubJob flag is used to automatically create sub jobs for components which are subassemblies when creating a job. The parent part must be made-in, subcontracted, bought out or a phantom part. The component is made-in or subcontracted and is not a bulk issue or floorstock item. The format is 1 character alphanumeric and can only be (N - No, Y - Yes). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclKitIssues" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>InclKitIssues is used to include the component in the kit issue. The format is 1 character alphanumeric and can only be (N - No, Y - Yes).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclScrapFlag" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>InclScrapFlag is a factory doc print flag to include any material or progressive scrap factor or % on any factory documentation and in kit issue.The format is 1 character alphanumeric and can only be (N - Nether, Y - Both, M - Material only, P - Progressive only).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeBatch">
+		<xsd:annotation>
+			<xsd:documentation>IncludeBatch is used when a parent is a batch bill and the component is included in the batch bill calculation. The component has to have a specific gravity of greater than zero. The format is 1 character alphanumeric and can  be (N - No, Y - Yes) or spaces if not required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information to maintain a  bill of material structure record.. NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="ComVersion" minOccurs="0"/>
+				<xsd:element ref="ComRelease"/>
+				<xsd:element ref="StructureOnDate" minOccurs="0"/>
+				<xsd:element ref="StructureOffDate" minOccurs="0"/>
+				<xsd:element ref="OpOffsetFlag" minOccurs="0"/>
+				<xsd:element ref="OperationOffset" minOccurs="0"/>
+				<xsd:element ref="UomFlag"/>
+				<xsd:element ref="QtyPer" minOccurs="0"/>
+				<xsd:element name="QtyPerEnt">
+					<xsd:annotation>
+						<xsd:documentation>The Entered Quantity Per is used to indicate the quantity of the component stock code in the unit of measure defined by the UomFlag that is required to make one of the parent non-stocked code. The number of decimals that can be entered (0 to 6) is determined by your entry at the Maximum number of decimals in quantity per option (Bill of Materials Setup). The format is up to 14 characters signed numeric with 6 integers and 6 decimals.  Ignored when parameter UseStockingQuantities is Y.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="14"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="ScrapPercentage" minOccurs="0"/>
+				<xsd:element ref="ScrapQuantity" minOccurs="0"/>
+				<xsd:element name="ScrapQuantityEnt">
+					<xsd:annotation>
+						<xsd:documentation>Indicates the quantity in the component's unit of measure defined by the UomFlag which must be added to the component's quantity issued, to take account of scrap. The format is up to 8 characters positive numeric with 4 integers and 3 decimal.  Ignored when parameter UseStockingQuantities is Y. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="8"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="SoOptionFlag" minOccurs="0"/>
+				<xsd:element ref="SoPrintFlag" minOccurs="0"/>
+				<xsd:element ref="InclScrapFlag" minOccurs="0"/>
+				<xsd:element ref="ReasonForChange" minOccurs="0"/>
+				<xsd:element ref="InclKitIssues" minOccurs="0"/>
+				<xsd:element ref="CreateSubJob" minOccurs="0"/>
+				<xsd:element ref="WetWeightPercent" minOccurs="0"/>
+				<xsd:element ref="IncludeBatch" minOccurs="0"/>
+				<xsd:element ref="IncludeFromJob" minOccurs="0"/>
+				<xsd:element ref="IncludeToJob" minOccurs="0"/>
+				<xsd:element ref="FixedQtyPer" minOccurs="0"/>
+				<xsd:element name="FixedQtyPerEnt">
+					<xsd:annotation>
+						<xsd:documentation>If the FixedQtyPer flag is set to yes, then this field indicates the parent per fixed qty in the u/m defined on the parent. Ignored when parameter UseStockingQuantities is Y. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="12"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="FixedQtyPerFlag" minOccurs="0"/>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+				<xsd:element ref="RollUpCost" minOccurs="0"/>
+				<xsd:element ref="IgnoreFloorFlag" minOccurs="0"/>
+				<xsd:element ref="eSignature" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain a bill of material structure record.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="ParentPart"/>
+				<xsd:element ref="Version" minOccurs="0"/>
+				<xsd:element ref="Release" minOccurs="0"/>
+				<xsd:element ref="Route" minOccurs="0"/>
+				<xsd:element ref="SequenceNum" minOccurs="0"/>
+				<xsd:element ref="Component"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OpOffsetFlag" default="O">
+		<xsd:annotation>
+			<xsd:documentation>OpOffsetFlag indicates the usage of the OperationOffset field. The format is 1 character alphanumeric and can only be( 'O'- for an operation number or  'D'- for offset days).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OperationOffset">
+		<xsd:annotation>
+			<xsd:documentation>OperationOffset is dependent on the OpOffsetFlag. If 'O' this field wil indicate an operation number. If 'D' this field will indicate the number of offset days.The format is 3 characters numeric and can  be from 1 to 999 for operations. If you have selected an operation other than operation 1, it must be valid. 0 to 999 for offsetdays.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ParentPart">
+		<xsd:annotation>
+			<xsd:documentation>ParentPart indicates the parent of the components of the structure you are maintaining. The format is 30 characters alphanumeric or 15 chararcters numeric depending on the configuration option within Syspro.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="QtyPer">
+		<xsd:annotation>
+			<xsd:documentation>QtyPer is used to indicate the quantity of the component stock code that is required to make one of the parent stock code. This relationship is based on the units of measure of the parent part and the component. If included in batch bills the quantity per is calculated and not entered. The number of decimals that can be entered (0 to 6) is determined by your entry at the Maximum number of decimals in quantity per option (Bill of Materials Setup). The format is 6.6 signed numeric. Ignored when parameter UseStockingQuantities is N.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="14"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReasonForChange">
+		<xsd:annotation>
+			<xsd:documentation>ReasonForChange is a field to indicate why the structure has changed. The format is alphanumeric 10.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Release">
+		<xsd:annotation>
+			<xsd:documentation>Release indicates major design changes made to the parent (Release). Note: this field will be ignored if the component is not ECC controlled at a revision or release level. This field can only be the current release which is reflected off the inventory master file in Syspro for the structure to be maintained. Another criteria is that there must be an engineering change order for the release.The format is 3 characters alphanumeric or numeric depending on a configuration option within Bill of Materials Setup.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Route">
+		<xsd:annotation>
+			<xsd:documentation>The Route field is used only if you indicated that alternate routings are required (Bill of Materials Setup). This field enables you to select a specific routing for which you want to maintain structures, and is used for what-if purposes and within the Work in Progress module when creating a job and within the Engineering Change Control module for engineering change orders. The format is a 1 character alphanumeric field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ScrapPercentage">
+		<xsd:annotation>
+			<xsd:documentation>The ScrapPercentage field is used to enter a percentage factor by which the quantity per must be increased, to take account of scrap. The format is 2.2 numeric positive.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="5"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ScrapQuantity">
+		<xsd:annotation>
+			<xsd:documentation>The ScrapQuantity field is used to increase the allocation quantity for this component, calculated at the time of creating a job. The format is 4.3 numeric positive. Ignored when parameter UseStockingQuantities is N.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="8"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SequenceNum">
+		<xsd:annotation>
+			<xsd:documentation>The SequenceNum field is used to indicate the sequence number for the component in relation to the parent stock code. This field will be used if you have indicated that structure sequencing is required (Bill of Materials Setup). The format is 6 characters alphanumeric .</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SetupBomStructure">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SoOptionFlag" default="N">
+		<xsd:annotation>
+			<xsd:documentation>The SoOptionFlag option is used if you want to be able to make the decision at the time of order entry concerning whether to include the component on an order. Otherwise the component is regarded as mandatory and is inserted automatically into the sales order. This option will be ignored if you have not indicated that single level bill of materials are required (Sales Order Setup). The format is 1 character alphanumeric and can only be (N - No, Y - Yes).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SoPrintFlag" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>The SoPrintFlag option is used if you want component order lines to be printed on your order documents. You can override this option if the component is defined as optional. This option is ignored if you have not  indicated that single level bill of materials are required (Sales Order Setup). The format is 1 character (N - No, Y - Yes).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StructureOffDate">
+		<xsd:annotation>
+			<xsd:documentation>The StructureOffDate field is used to indicate when the component must be de-activated from the structure. This field will be zero if structure on/off dates are not required (bill of materials setup) . The format is CCYY-MM-DD.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StructureOnDate">
+		<xsd:annotation>
+			<xsd:documentation>The StructureOnDate field is used to indicate when the component must become active in the structure. This field will be zero if structure on/off dates are not required (bill of materials setup) . The format is CCYY-MM-DD.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Version">
+		<xsd:annotation>
+			<xsd:documentation>Version indicates major design changes made to the parent (Version). Note: this field will be ignored if the component is not ECC controlled at a revision level. This field can only be the current revision which is reflected off the inventory master file in Syspro for the structure to be maintained. Another criteria is that there must be an engineering change order for the revision. The format is 3 characters alphanumeric or numeric depending on a configuration option within Bill of Materials Setup.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WetWeightPercent">
+		<xsd:annotation>
+			<xsd:documentation>The WetWeightPercent is used to indicate the percentage of each component which accumulates to 100% for the batch. It is used with batch bills when the component is included in the batch bill calculation. The format is 2.2 signed numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFromJob">
+		<xsd:annotation>
+			<xsd:documentation>The include from job  is used when the Bill of Material setup option 'Component inclusion by job number' in Syspro is set on. It allows for the component to be included, excluded from the next job number used. This is the lowest limit of the component.The format is 8 characters alphanumeric or  8 chararcters numeric depending on the configuration option within Syspro.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="8"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeToJob">
+		<xsd:annotation>
+			<xsd:documentation>The include to job  is used when the Bill of Material setup option 'Component inclusion by job number' in Syspro is set on. It allows for the component to be included, excluded from the next job number used. This is the highest limit of the component. The format is 8 characters alphanumeric or  8 chararcters numeric depending on the configuration option within Syspro.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="8"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FixedQtyPerFlag" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether the quantity per is a one to one relationship between the component and the parent or the quantity per is for a grouping of parents (eg for every 10 parents apply the compoents qty per).  The format is 1 character alphanumeric (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FixedQtyPer">
+		<xsd:annotation>
+			<xsd:documentation>If the FixedQtyPer flag is set to yes, then this field indicates the parent per fixed qty. Ignored when parameter UseStockingQuantities is N.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="12"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>Enter the warehouse to use for this component. If left blank then the component's warehouse to use will be applied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RollUpCost" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>The RollUpCost flag is used to indicate whether or not the costs from this component will be rolled up into the parent costs. The format is 1 character alphanumeric and can only be (N - No, Y - Yes). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IgnoreFloorFlag" default="N">
+		<xsd:annotation>
+			<xsd:documentation>The IgnoreFloorFlag flag is used to indicate whether or not processes, such as job creation ignore whether or not component is to  is flagged as a floorstock or bulk issue item. If set to Y then the component will be treated as a normal item. The format is 1 character alphanumeric and can only be (N - No, Y - Yes). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UomFlag" default="S">
+		<xsd:annotation>
+			<xsd:documentation>The Manufacturing unit of measure flag is used to indicate which unit of measure the stock item is to use. Valid entries are S (stocking), O (other), A (alternate) or M (manufacturing).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="M"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="eSignature">
+		<xsd:annotation>
+			<xsd:documentation>GUID for eSignature</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="38"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

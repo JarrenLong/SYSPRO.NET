@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Tickover Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter parent element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Guid"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root Element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Guid">
+    <xsd:annotation>
+      <xsd:documentation>Filters on the Guids that must be returned FitlerType can be A-All, S-Single, L-List</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="S"/>
+                <xsd:enumeration value="L"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

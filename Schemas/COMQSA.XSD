@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Operator List Report Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="FileType">
+    <xsd:annotation>
+      <xsd:documentation>This contains an enumeration that indicates the file to return on action to perform.  LO - List of operators. CO - Builds the SQL script used to add the company SourceFilter table items. CT - returns a list of all the columns and their properties for all of the tables in the data dictionary. TC - returns a list of columns and key columns for a specified set of tables. DB - Returns that Master database settings file.  SF - returns a specific script file. PT - returns a specific plugin template. UF - returns a list of the update scripts files. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="2"/>
+        <xsd:maxLength value="2"/>
+        <xsd:enumeration value="AM"/>
+        <xsd:enumeration value="CO"/>
+        <xsd:enumeration value="LC"/>
+        <xsd:enumeration value="LO"/>
+        <xsd:enumeration value="OA"/>
+        <xsd:enumeration value="OS"/>
+        <xsd:enumeration value="OV"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SV"/>
+        <xsd:enumeration value="S1"/>
+        <xsd:enumeration value="S2"/>
+        <xsd:enumeration value="WC"/>
+        <xsd:enumeration value="WV"/>
+        <xsd:enumeration value="W1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This is the key node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FileType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the option node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element name="CompanyId" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Used for the "CO" function to indicate the Company Id on the Analytics database to build the SQL script for.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FileName" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Used for either the "SF" or the "PT" functions to return the contents of a specific file.  </xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Tables" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Used for the "TC" function to specify which tables to return column information for</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Table" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>One or more SYSPRO table names</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SQLVersion" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Used for the "WC" function to indicate the SQL version of the script to return. Either 2000 or 2005.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

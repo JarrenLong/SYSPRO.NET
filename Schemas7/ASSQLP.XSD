@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Asset Label Print Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AssetGroupSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the asset group selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AssetSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the asset selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AssetTypeSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the asset type selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BranchSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the branch selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BranchSelection" minOccurs="0"/>
+        <xsd:element ref="LocationSelection" minOccurs="0"/>
+        <xsd:element ref="AssetSelection" minOccurs="0"/>
+        <xsd:element ref="AssetGroupSelection" minOccurs="0"/>
+        <xsd:element ref="AssetTypeSelection" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LabelFormat" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the label format.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="LabelSequence">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the label sequence for printing. The default is 1 for asset and the other valid values are 2 for branch/location.asset, 3 for branch/group/asset, 4 for branch/asset, 5 for branch/cost centre.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabelsPerCode" type="xsd:double">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the number of labels to print per asset code.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="LocationSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the location selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LabelFormat" minOccurs="0"/>
+        <xsd:element ref="LabelSequence" minOccurs="0"/>
+        <xsd:element ref="PrintByAssetQty" minOccurs="0"/>
+        <xsd:element ref="LabelsPerCode" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintByAssetQty">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used indicate whether to print by asset quantity.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

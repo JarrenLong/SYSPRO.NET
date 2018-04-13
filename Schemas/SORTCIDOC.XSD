@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Credit Note from Invoice Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostCreditFromInvoice">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to create a credit note from an invoice.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CreditNoteNumber" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The credit note number of the credit note to be created. This element is mandatory if sales order numbering is defined as manual in the SYSPRO configuration.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="InvoiceNumber">
+								<xsd:annotation>
+									<xsd:documentation>The invoice number which is to be used as the basis of the credit note. It is mandatory. The format is six characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO. The invoice must exist in one of the SYSPRO reprint tables.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Customer" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The customer which was invoiced. The format is seven characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO. If supplied, it must be the correct customer for the invoice.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="7"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SalesOrder" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The sales order number which was invoiced. The format is six characters, either numeric or alphanumeric, depending on the configuration option within SYSPRO. If supplied, it must be the correct order number for the invoice.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CreditReason" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory if the SYSPRO setup option to ask reason code when entering new credit notes is set. If entered, it must be a valid SYSPRO reason code.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Lines" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the optional information to select individual lines to be credited</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="LineNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This gives the number of the order line or dispatch line on the appropriate reprint file. If the lines element is specified, the line number is mandatory.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="4"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DispatchNote" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is only required if the original invoice was produced from a consolidation of dispatch notes. It is then mandatory.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DispatchLineNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is only required if the original invoice was produced from a consolidation of dispatch notes. It is then mandatory.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="4"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the TPM Qualify Promotions Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Customer" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Customer  
+(Required)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExpiryDate" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Expiry date to be used when qualifying promotions. If not supplied then the current SYPSRO date is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeGlobalPromotions">
+    <xsd:annotation>
+      <xsd:documentation>Global Flag      
+Y - Yes (Default)
+N - No           </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeUnqualifiedPromotions">
+    <xsd:annotation>
+      <xsd:documentation>Include Unqualified Promotions 
+Y - Yes (Default)              
+N - No                         </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Quantity"/>
+        <xsd:element ref="UnitMass" minOccurs="0"/>
+        <xsd:element ref="UnitVolume" minOccurs="0"/>
+        <xsd:element ref="LineValue" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Items">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Customer"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LineValue" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If the line value element is supplied, then any entry including zero will be used in the calculation of the qualifying promotion amount. If the element is not supplied, then the line value is calculated from the applicable stock list price multiplied by the quantity supplied.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeGlobalPromotions"/>
+        <xsd:element ref="IncludeUnqualifiedPromotions"/>
+        <xsd:element ref="StartDate"/>
+        <xsd:element ref="ExpiryDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quantity" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Quantity to be applied to qualify promotions. If the quantity is not given, or is zero, then a quantity of 1 (one) is assumed.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Options"/>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Items"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StartDate" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The start date to be used for qualifying promotions. If not supplied then the current SYPSRO date is used.</xsd:documentation>
+      <xsd:documentation/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StockCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Stock code </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="UnitMass" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If the unit mass element is supplied, then any entry including zero will be used in the calculation of the qualifying promotion mass. If the element is not supplied, then the unit mass is taken from the applicable stock master record.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="UnitVolume" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If the unit volume element is supplied, then any entry including zero will be used in the calculation of the qualifying promotion volume. If the element is not supplied, then the unit volume is taken from the applicable stock master record.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

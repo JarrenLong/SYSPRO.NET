@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for XmlIn to Logon method
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Siteid" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This can be used to specify a SiteId.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Logon">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="Siteid" minOccurs="0"/>
+				<xsd:element name="DefaultRole" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is a numeric parameter that can be from 1 thru 999. The role must 'exist' against the operator else the supplied value will be ignored.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="BuildToPost" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This can be used when you require the output of the Build method to be input of the Post method</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="FailWhenAlreadyLoggedIn" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Allows you to deny a login if the specified user is already logged in.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="SystemInformationReqd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Allows you to request additional system information when calling a business object</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

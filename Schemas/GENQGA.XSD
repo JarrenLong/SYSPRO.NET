@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the GL Analysis Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Option">
+          <xsd:annotation>
+            <xsd:documentation>The list of options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Currency" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the currency to be queried. If left blank will default to the local currency.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Company" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the company to be queried. If left blank will default to the current company.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Section" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the section to be queried. The section must be between 0 and 9. The default is 0 (the root section). Section 0 indicates the topmost level. Selecting zero will return information for all levels i.e. from level 1 to 9.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="2"/>
+                    <xsd:enumeration value="3"/>
+                    <xsd:enumeration value="4"/>
+                    <xsd:enumeration value="5"/>
+                    <xsd:enumeration value="6"/>
+                    <xsd:enumeration value="7"/>
+                    <xsd:enumeration value="8"/>
+                    <xsd:enumeration value="9"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SectionCode">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the section code to be queried.  Must be non-blank.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GLYear" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the financial year to be queried. Defaults to the current financial year.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GLComparisonYear" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the financial year for comparison to be queried.  May be left blank if no comparison figures required.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BudgetType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the budget type to be queried. May be left blank if no budgets required, otherwise N = Next years budget, C=Current years budget, 1-8=Alternate budgets 1 to 8.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="C"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="2"/>
+                    <xsd:enumeration value="3"/>
+                    <xsd:enumeration value="4"/>
+                    <xsd:enumeration value="5"/>
+                    <xsd:enumeration value="6"/>
+                    <xsd:enumeration value="7"/>
+                    <xsd:enumeration value="8"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCommitment" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Defines if commitment accounting values are to be returned. The default is N. Enter Y if commitment values are to be returned.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WhereUsed" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Defines if the supplied section code is to be treated as a where-used parent. The default is N. Enter Y if where-used values are to be returned.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStylesheet" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The stylesheet to be applied.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the AR Initial Invoice Capture Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupArInitialInvoice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Branch"/>
+				<xsd:element ref="InvDate"/>
+				<xsd:element ref="CurrencyValue"/>
+				<xsd:element ref="AutoCalcDisc"/>
+				<xsd:element ref="OrigDiscValue" minOccurs="0"/>
+				<xsd:element ref="CustomerPoNumber" minOccurs="0"/>
+				<xsd:element ref="FixedRate" minOccurs="0"/>
+				<xsd:element ref="ConvRate" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="Invoice"/>
+				<xsd:element ref="DocumentType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the composit key on the AR invoice table. This reflects the AR customer the AR initial invoice is for.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Invoice" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is a composit key on the AR invoice table. This reflects the AR invoice number.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DocumentType">
+		<xsd:annotation>
+			<xsd:documentation>This is the composit key on the AR invoice table. This reflects the document type of the AR initial invoice. Valid entries are "I/D/C".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Branch" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This field denotes the Branch the invoice will be posted against. If nothing is entered, the customer's default branch is assumed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InvDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the date reflected on the AR initial invoice. The format is CCYY/MM/DD.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CurrencyValue" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the value of the AR initial invoice. If a negative number is added, a credit note will be assumed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AutoCalcDisc">
+		<xsd:annotation>
+			<xsd:documentation>This flag indicates whether or not you want the OrigDiscValue to be calculated automatically based on the customer's terms. Valid entries are "Y/N".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OrigDiscValue" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the original discount amount for the AR initial invoice. If no discount value is added, and AutoCalcDisc is set to "Y", this field will automatically be populated based on the customer's invoice terms.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CustomerPoNumber">
+		<xsd:annotation>
+			<xsd:documentation>This field reflects the purchase order against the AR initial invoice.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="FixedRate">
+		<xsd:annotation>
+			<xsd:documentation>This flag indicates whether you want the conversion rate to be fixed or not. Valid entries are "Y/N/ ".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConvRate" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the conversion rate applicable to the foreign AR initial invoice.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

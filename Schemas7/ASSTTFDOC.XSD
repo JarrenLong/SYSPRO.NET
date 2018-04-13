@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Transfer Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostAssetTransfer">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Asset acqusition. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting transfers to assets.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element ref="Asset"/>
+							<xsd:element ref="TransferDate" minOccurs="0"/>
+							<xsd:element ref="TransferComment" minOccurs="0"/>
+							<xsd:element ref="Branch" minOccurs="0"/>
+							<xsd:element ref="AssetCostCenter" minOccurs="0"/>
+							<xsd:element ref="AssetGroupCode" minOccurs="0"/>
+							<xsd:element ref="Location" minOccurs="0"/>
+							<xsd:element ref="RespUser" minOccurs="0"/>
+							<xsd:element ref="AssetOwner" minOccurs="0"/>
+							<xsd:element ref="eSignature" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Asset">
+		<xsd:annotation>
+			<xsd:documentation>This is the key to the asset being acquired. This is mandatory. The format is alphanumeric or numeric depending on a configuration option within SYSPRO. Iit must be a valid SYSPRO asset code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransferDate">
+		<xsd:annotation>
+			<xsd:documentation>This is the date of the transfer, and if supplied must be in the current financial period. If not supplied it will be the assumed to be the current period-end date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransferComment">
+		<xsd:annotation>
+			<xsd:documentation>This is a free-form comment to be associated with this transfer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>This is the branch to which the asset is being transferred. If not supplied it will remain the same. If supplied, it must be a valid SYSPRO branch code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AssetCostCenter">
+		<xsd:annotation>
+			<xsd:documentation>This is the cost center to which the asset is being transferred. If not supplied it will remain the same. If supplied, it must be a valid SYSPRO code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AssetGroupCode">
+		<xsd:annotation>
+			<xsd:documentation>This is the asset group to which the asset is being transferred. If not supplied it will remain the same. If supplied, it must be a valid SYSPRO code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Location">
+		<xsd:annotation>
+			<xsd:documentation>This is the location of the asset. If not supplied it will remain the same. If supplied, it must be a valid SYSPRO branch code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RespUser">
+		<xsd:annotation>
+			<xsd:documentation>This is the responsible user of the asset. If not supplied it will remain the same.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AssetOwner">
+		<xsd:annotation>
+			<xsd:documentation>This is the owner of the asset. If not supplied it will remain the same. If supplied, it must be a valid SYSPRO code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="eSignature" type="xsd:string"/>
+</xsd:schema>

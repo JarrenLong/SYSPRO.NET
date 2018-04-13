@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--This is the schema for the TPM Promotion Code Maintenance Business Object-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostPromotionCode">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for all data required to post the transaction.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ActionType" default="A">
+								<xsd:annotation>
+									<xsd:documentation>Indicates the action to be performed for this promotion code (A - Add a promotion code, C - Change an existing promotion code, D - Cancel the promotion code). Order Action Type will default to A (Add) if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PromotionCode">
+								<xsd:annotation>
+									<xsd:documentation>Promotion Code</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Description">
+								<xsd:annotation>
+									<xsd:documentation>Promotion Description</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Global" default="N">
+								<xsd:annotation>
+									<xsd:documentation>Global Promotion, Valid values are Y -Yes, N - No. Global will default to N - No if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Tiered" default="N">
+								<xsd:annotation>
+									<xsd:documentation>Tiered promotion flag. Does not apply if Promotion type is set to F - Free goods. Valid values are Y - Yes, N -No. Tiered will default to N - No if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PromotionType" default="O">
+								<xsd:annotation>
+									<xsd:documentation>Promotion Type. Valid values are O - Off Invoice, A - Accrual, F - Free goods, P - Off invoice associated products. Promotion Type will default to O (Off invoice) if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="F"/>
+										<xsd:enumeration value="O"/>
+										<xsd:enumeration value="P"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PromotionSequence">
+								<xsd:annotation>
+									<xsd:documentation>Promotion sequence, numeric value to sequence promotions. Also used to identify promotion groups. Cannot be 0 if MemeberOfGroup = "Y"</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PromotionSequenceGroup" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Sets the promotion as part of a group with its selected group maximum.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="MemberOfGroup" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Set the promotion as part of a group. If set as "Y" then other qualifying promotions with the same sequence value will be grouped together. If not supplied MemberOfGroup will default to "N"</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GroupMax" default="0">
+											<xsd:annotation>
+												<xsd:documentation>Sets the maximum selections from this promotions to be selected, if this promotion is selected. The lowest selected GroupMax will apply at time of promotion selection. If MemeberOfGroup = "Y" then GroupMax cannot be 0. Valid values range from 0 to 9.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="0"/>
+													<xsd:enumeration value="1"/>
+													<xsd:enumeration value="2"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="5"/>
+													<xsd:enumeration value="6"/>
+													<xsd:enumeration value="7"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="9"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="DateType" default="R">
+								<xsd:annotation>
+									<xsd:documentation>Date Type. Valid values are R - Requested delivery date, O - Order date. Date Type will default to R(Requested delivery date) if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="R"/>
+										<xsd:enumeration value="O"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StartDate">
+								<xsd:annotation>
+									<xsd:documentation>Start Date. Valid date format CCYY-MM-DD</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ExpiryDate">
+								<xsd:annotation>
+									<xsd:documentation>Expiry Date. Valid date format CCYY-MM-DD</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SelectionMethod" default="C">
+								<xsd:annotation>
+									<xsd:documentation>Sets how the promotion should be applied to an order. C - Set by company, A - Automatic, M - Manual. SelectionMethod will default to C(Set by company) if not supplied</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="M"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockSelection">
+								<xsd:annotation>
+									<xsd:documentation>Group for both Stock Category selections.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="StockCategory" default="0">
+											<xsd:annotation>
+												<xsd:documentation>Defines Stock Category. Valid values are 0 - All, 1 - Stock Code, 2 - Product Group, 3 - Product Class, 4 - Department, 5 - Stock List, 6 - Product Group List, 7 - Product Class List, 8 - Department List, 9 - Stock Custom Form 1, A - Stock Custom Form 2, B - Stock Custom Form 1 List, C - Stock Custom Form 2 List</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="0"/>
+													<xsd:enumeration value="1"/>
+													<xsd:enumeration value="2"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="5"/>
+													<xsd:enumeration value="6"/>
+													<xsd:enumeration value="7"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="9"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="C"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StockCatCode">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a stock category. This should be empty if StockCategory is 0 - All, 5 - Stock List,  6 - Product Group List, 7 - Product Class List, 8 - Department List, B - Stock Custom Form 1 List or C - Stock Custom Form 2 List.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StockCatListItem" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Stock Category Code List. Applies only if Stock Category is set to 5 - Stock List, 6 - Product Group List, 7 - Product Class List, 8 - Department List, B - Stock Custom Form 1 List or C - Stock Custom Form 2 List. Each Secondary Stock Category code element indicates a new row of one stock category item.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="StockCatListCode" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Stock Category code</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="StockCategoryType" default=" " minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Defines how the Secondary Stock Category should be applied. Valid values are Blank - Does not apply, B - Both apply, E - Either apply. Does not apply if StockCatCode is 0 - All.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=" "/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="E"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SecStockCategory" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Defines Secondary Stock Category if StockCategoryType is B or E. Valid values are 1 - Stock Code, 2 - Product Group, 3 - Product Class, 4 - Department, 5 - Stock List, 6 - Product Group List, 7 - Product Class List, 8 - Department List, 9 - Stock Custom Form 1, A - Stock Custom Form 2, B - Stock Custom Form 1 List, C - Stock Custom Form 2 List. Does not apply if StockCatCode is 0 - All.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="1"/>
+													<xsd:enumeration value="2"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="5"/>
+													<xsd:enumeration value="6"/>
+													<xsd:enumeration value="7"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="9"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="C"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SecStockCatCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a Secondary Stock Category. This should be empty if SecStockCategory is 5 - Stock List,  6 - Product Group List, 7 - Product Class List, 8 - Department List, B - Stock Custom Form 1 List or C - Stock Custom Form 2 List.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SecStockCatListItem" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Secondary Stock Category Code List. Applies only if Secondary Stock Category is set to 5 - Stock List, 6 - Product Group List, 7 - Product Class List, 8 - Department List, B - Stock Custom Form 1 List or C - Stock Custom Form 2 List. Each Secondary Stock Category code element indicates a new row of one stock category item.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="SecStockCatListCode" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Secondary Stock Category code</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CustomerSelection">
+								<xsd:annotation>
+									<xsd:documentation>Group for both Customer Category selections.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Currency">
+											<xsd:annotation>
+												<xsd:documentation>Currency code. Must be a valid currency. Currency will default to Local currency if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerCategory" default="1">
+											<xsd:annotation>
+												<xsd:documentation>Defines Customer Category. Valid values are 1 - All, 2 - Customer, 3 - Geographic Area, 4 - Customer Class, 5 - Branch, 6 - Customer List, 7 - Buying Group, 8 - Geographic Area List, 9 - Customer Class List, A - Branch List, B - Buying Group List, C - Customer Custom Form 1, D - Customer Custom Form 2, E - Customer Custom Form 1 List, F - Customer Custom Form 2 List</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="1"/>
+													<xsd:enumeration value="2"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="5"/>
+													<xsd:enumeration value="6"/>
+													<xsd:enumeration value="7"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="9"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="C"/>
+													<xsd:enumeration value="D"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="F"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustCatCode">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a Customer Category. This value should be empty if CustomerCategory is 1 - All, 6 - Customer List, 8 - Geographic Area List, 9 - Customer Class List, A - Branch List, B - Buying Group List, E - Customer Custom Form 1 List or F - Customer Custom Form 2 List</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerCatListItem" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Customer Category List. Applies only if CustomerCategory is set to 6 - Customer List, 8 - Geographic Area List, 9 - Customer Class List, A - Branch List, B - Buying Group List, E - Customer Custom Form 1 List or F - Customer Custom Form 2 List. Each Customer Category code element indicates a new row of one Customer category item.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="CustomerCatListCode" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Customer Category code</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CustomerCategoryType" default=" ">
+											<xsd:annotation>
+												<xsd:documentation>Defines how the secondary Customer Category should be applied. Valid values are Blank - Does not apply, B - Both apply, E - Either apply. Does not apply if CustCatCode is 1 - All.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=" "/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="E"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SecCustomerCategory" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Defines Secondary Customer Category if CustomerCategoryType is B or E. Valid values are 2 - Customer, 3 - Geographic Area, 4 - Customer Class, 5 - Branch, 6 - Customer List, 7 - Buying Group, 8 - Geographic Area List, 9 - Customer Class List, A - Branch List, B - Buying Group List, C - Customer Custom Form 1, D - Customer Custom Form 2, E - Customer Custom Form 1 List, F - Customer Custom Form 2 List. Does not apply if CustCatCode is 1 - All.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="2"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="5"/>
+													<xsd:enumeration value="6"/>
+													<xsd:enumeration value="7"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="9"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="C"/>
+													<xsd:enumeration value="D"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="F"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SecCustCatCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a Customer Category. This value should be empty if CustomerCategory is 6 - Customer List, 8 - Geographic Area List, 9 - Customer Class List, A - Branch List, B - Buying Group List, E - Customer Custom Form 1 List or F - Customer Custom Form 2 List</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SecCustomerCatListItem" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Secondary Customer Category List. Applies only if SecCustomerCategory is set to 6 - Customer List, 8 - Geographic Area List, 9 - Customer Class List, A - Branch List, B - Buying Group List, E - Customer Custom Form 1 List or F - Customer Custom Form 2 List. Each Secondary Customer Category code element indicates a new row of one Customer category item.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="SecCustomerCatListCode" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Secondary Customer Category code</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="ApplySub" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Apply promotion to sub account. Applies only if Customer Category = 2 - Customer or 6 - Customer List or Secondary Customer Category = 2 - Customer or 6 - Customer List</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PromotionBasis">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="CalculationType" default="P">
+											<xsd:annotation>
+												<xsd:documentation>The calculation type used. Valid values are C - Price code, P - Percentage, F - Price, L - Value. Calculation type will default to P (Percentage) if not supplied. CalculationType can only be 'C' if OffInvoiceType is 'P'.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="C"/>
+													<xsd:enumeration value="F"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="L"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PromotionValue">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a calculation type. New price or percentage disc</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ValueType" default="G">
+											<xsd:annotation>
+												<xsd:documentation>The value type to use. Valid values are G - Gross, N - Net, S - Net Sequence, M - Mass, W - Mass plus (Values M and W are only valid if the Threshold type is set to M). Value type will default to G (Gross) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="G"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="S"/>
+													<xsd:enumeration value="M"/>
+													<xsd:enumeration value="W"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ThresholdType" default="Q">
+											<xsd:annotation>
+												<xsd:documentation>The Threshold type to use. Valid values are M - Mass, V - Volume, Q - Quantity, A - Amount. ThresholdType will default to Q (Quantity) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="M"/>
+													<xsd:enumeration value="Q"/>
+													<xsd:enumeration value="V"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Threshold">
+											<xsd:annotation>
+												<xsd:documentation>The threshold value, held in terms of the threshold type.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="OffInvoice" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Off invoice options. Required if Promotion type = O</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="OffInvoiceType" default="L">
+											<xsd:annotation>
+												<xsd:documentation>Off invoice type. Valid values are L - Line promotion, O - Line discount, P - Price change, R - Code less promo. Off Invoice Type will default to L (Line promotion) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="L"/>
+													<xsd:enumeration value="O"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="R"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ProductClass" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Product Class. Mandatory for line promotion and for code less promotion.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PriceCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Price code of promotion. Applies only if OffinvoiceType is 'R' or CalculationType is 'P'.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Accrual" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Accrual options. Required if Promotion type = A</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:annotation>
+											<xsd:documentation>Selects how to update existing promotion records when changing Tax and GST options on an existing promotion code that have attached process promotions and current accruals. Valid values are N - Do not apply, B - Both promotions and accruals, P - In process promotions only, C - Current accruals only.  If not supplied the defaulf of "N" will be applied.</xsd:documentation>
+										</xsd:annotation>
+										<xsd:element name="AccrualType">
+											<xsd:annotation>
+												<xsd:documentation>Accrual Type. Required if Promotion type = A</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AccrualLdg">
+											<xsd:annotation>
+												<xsd:documentation>Promotion Accrual GL. Required if Promotion type = A</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ExpenseLdg">
+											<xsd:annotation>
+												<xsd:documentation>Promotion Expense GL. Required if Promotion type = A</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DeductionCode">
+											<xsd:annotation>
+												<xsd:documentation>Matching Deduction Code. Required if Promotion type = A</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Taxable" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Set this accrual promotion as taxable or not. This option will only be saved if TPM setup option Tax at promotion level is selected. If not supplied a default of "N" will be applied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TaxCode">
+											<xsd:annotation>
+												<xsd:documentation>Sets the tax code for this promotion. This option will only be saved if TPM setup option Tax at promotion level is selected and the Taxable tag = "Y". If not supplied the default Tax code against TPM setup options will be applied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GSTable" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Set this accrual promotion as gstable or not. This option will only be saved if TPM setup option Tax at promotion level is selected. If not supplied a default of "N" will be applied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GSTCode">
+											<xsd:annotation>
+												<xsd:documentation>Sets the tax code for this promotion. This option will only be saved if TPM setup option Tax at promotion level is selected and the GSTable tag = "Y". If not supplied the default GST code against TPM setup options will be applied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="UpdateTaxChanges" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Select how to update the tax and GST options against current accruals and in process promotions when changing the tax and GST options to existing promotion code with current accruals and in process promotions attached to the promotion code. Valid values are N - Do not apply, B - Both promotions and accruals, P - In process promotions, C - Current accruals. If not supplied the default of "N" will be applied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="C"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="FreeGoods" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="FreeGoodType">
+											<xsd:annotation>
+												<xsd:documentation>Free good type. Valid values are O - Order stock code, S - Specific stock code, L - Stock code list. Applies to Stock code to be generated only if Promotion type = F - Free goods. Free good type will default to S (Specific stock code) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StockCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a FreeGoodType if the FreeGoodType is set to S - Specific stock code.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreeGoodStockListItem" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Free goods stock code list. Applies only if FreeGoodType is set to L - Stock code list.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="FreeGoodStockListCode" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Free goods stock code Each FreeGoodStockListCode element indicates a new stock code that can be used as the free good stock code.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="MethodToApply" default="P">
+											<xsd:annotation>
+												<xsd:documentation>Method to apply.  Valid values are P - Actual Price Change, D - Detail Discount, S - Summary Discount, C - Price code. Method to apply will default to P (Actual price change) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="D"/>
+													<xsd:enumeration value="S"/>
+													<xsd:enumeration value="C"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="InvoicePrice" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Free Goods Invoice Price. Applies only if Method to apply is not set to C - Price code</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerPrice">
+											<xsd:annotation>
+												<xsd:documentation>Free Goods Customer Price. Method to apply is not set to P - Actual price change and not C - Price code</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreeGoodsPriceCode" type="xsd:string" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Price code to be used for the free goods promotion. Applies only if MethodToApply is 'C' - Price code.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="FreeGoodsProductClass" type="xsd:string" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Product class to be used on the free goods line created from the promotion. This can only be used if the promotion is a global promotion, or if the setup option to use the merchandise product class for free goods is not selected. If the product class is entered, it must be valid. If not entered, then the default currently in place will be used.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="InMultipleOf" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Multiples of flag. Refers to way free goods quantity is calculated. Y - Applies calculation of 'n' free goods per 'x' items. N - Uses thresholds for calculation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Rounding" default="D" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Multiples of rounding. Applies only if InMultiplesOf is set to Y - Yes. Valid values are U - Up, D - Down. Rounding will default to U (Up) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="U"/>
+													<xsd:enumeration value="D"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreeGoodsThreshold" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Threshold for free goods. Applies only if InMultipleOf is set to Y - Yes</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="QtyToShip" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Threshold value or Qty to ship. Applies only if InMultiplesOf is set to Y - Yes.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="TieredLinesItem" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Tiered lines to apply if Tiered flag is set to Y -Yes, or PromotionType is 'F' (free goods), and InMultipleOf is set to 'N'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="ThresholdLevel" default="Q">
+											<xsd:annotation>
+												<xsd:documentation>The ThresholdLevel is expressed in terms of the ThresholdType, that is quantity, mass, volume or amount. Associated with each threshold level is a ThresholdToApply. For free goods this is the quantity of the free goods to ship. For a tiered promotion it is a percentage or a price, based on the CalculationType.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ThresholdToApply">
+											<xsd:annotation>
+												<xsd:documentation>Threshold or Quantity. Applies only if Tiered is set to Y - Yes</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Limits" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Limited budget options. Does not apply if Promotion type is A - Accrual.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="BudgetLimits" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Limits are used for this promotion. Does not apply if Promotion type is A - Accrual. Valid values are Y - Yes, N - No.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="Y"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Status" default="A">
+											<xsd:annotation>
+												<xsd:documentation>Promotion status. Applies only if Budget Limits is set to Y - Yes. Valid values are A - Active, E - Expired through limit, M - Manually expired, R - Manually re-activated, U - Automatically re-activated. Status will default to A (Active) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="M"/>
+													<xsd:enumeration value="R"/>
+													<xsd:enumeration value="U"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BudgetType" default="P">
+											<xsd:annotation>
+												<xsd:documentation>Limit basis. Applies only if Budget Limits is set to Y - Yes. Valid values are P - Promotion value, A - Qualifying value(Amount), Q - Qualifying quantity, M - Qualifying mass, V - Qualifying volume.  Budget type will default to P (Promotion value) if not supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="Q"/>
+													<xsd:enumeration value="M"/>
+													<xsd:enumeration value="V"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Limit">
+											<xsd:annotation>
+												<xsd:documentation>The value held against a limit basis.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AssociatedStock" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Associated products options. Applies only if PromotionType is 3 - Off invoice - associated products and Global - 'Y'. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="AssocStockCategory" default="0">
+											<xsd:annotation>
+												<xsd:documentation>Defines Associated Stock Category if PromotionType is 3 - Off invoice - associated products. Valid values are 0 - All, 1 - Stock Code, 2 - Product Group, 3 - Product Class, 4 - Department, 5 - Stock List, 6 - Product Group List, 7 - Product Class List, 8 - Department List, 9 - Stock Custom Form 1, A - Stock Custom Form 2, B - Stock Custom Form 1 List, C - Stock Custom Form 2 List</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="0"/>
+													<xsd:enumeration value="1"/>
+													<xsd:enumeration value="2"/>
+													<xsd:enumeration value="3"/>
+													<xsd:enumeration value="4"/>
+													<xsd:enumeration value="5"/>
+													<xsd:enumeration value="6"/>
+													<xsd:enumeration value="7"/>
+													<xsd:enumeration value="8"/>
+													<xsd:enumeration value="9"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="B"/>
+													<xsd:enumeration value="C"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AssocStockCatCode">
+											<xsd:annotation>
+												<xsd:documentation>The value held against an Associated Stock Category. This should be empty if AssocStockCategory is 0 - All, 5 - Stock List,  6 - Product GroupList, 7 - Product ClassList, 8 - Department List, B - Stock Custom Form 1 List or C - Stock Custom Form 2 List.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AssocStockCatListItem" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Associated Stock Category code list. Applies only if Associated Stock Category is set to 5 - Stock List, 6 - Product Group List, 7 - Product Class List, 8 - Department List, B - Stock Custom Form 1 List or C - Stock Custom Form 2 List. Each Associated Stock Category code element indicates a new row of one Associated stock category item.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="AssocStockCatListCode" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Associated customer category code</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="eSignature">
+								<xsd:annotation>
+									<xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

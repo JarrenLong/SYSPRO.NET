@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters for the WIP Job Linking - Job to Sales Order Line Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostLateLinkingWIPSO">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Parameters">
+          <xsd:annotation>
+            <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="ActionType" default="L" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether to link or de-link the job to the sales order line (L - Link,  D - De-link). </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="L"/>
+                    <xsd:enumeration value="D"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateOnly" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreWarnings" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned). An example of a warning is if a ledger code entered is not the correct type of account, it is okay to write the record away as such but you may want the warning supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApplyIfEntireDocumentValid" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If you want to apply the changes only if everything submitted in the xml document is valid, when processing several items at the same time, this parameter should be set to Y else the function will be applied for each valid item. NOTE it is not advised to set this on to process a single item as it causes the program to pass through the same routines twice. Possible values: Y (apply only if everything is valid) or N (apply each valid item). Default to N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UpdateJobQtyWithSOLineQty" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This flag allows you to update the job quantity with the back order quantity of the sales order line. This option is only applicable if the job is not yet confirmed. Possible values Y - Yes, N - No. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UpdateJobDescWithSOLineDesc" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This flag allows you to update the job description with the sales order line stock code description. Possible values Y - Yes, N - No. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

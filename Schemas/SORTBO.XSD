@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Parameters used by Sales Order Back Order Release Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="AddQuantityToBatchSerial" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This parameter will determine if additional quantities may be added to a batch serial when the stock item is set to capture serial numbers during order entry. When this option is set to "Y" and the program reads a batch serial number for a stock item that is set to capture serial numbers during order entry - it will not check the Available quantity for the serial and will update the Total receipt quantity and Qty On Hand for the serial.  This parameter needs to be selected if a sales order line quantity is set to zero for a batch serial stock item with no serial allocations.  
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyIfEntireDocumentValid" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned, W - warnings will be returned as warnings in the XML returned).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreAutoDepletion" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is only relevant if the SYSPRO option to auto-deplete lots and bins for sales orders has been selected. If set to 'Y', then any processing will be carried out as if auto-depletion were not required, and the relevant lot and bin numbers must be supplied in the data XML. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+        <xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+        <xsd:element ref="ValidateOnly" minOccurs="0"/>
+        <xsd:element ref="AddQuantityToBatchSerial" minOccurs="0"/>
+        <xsd:element ref="IgnoreAutoDepletion" minOccurs="0"/>
+        <xsd:element ref="ShipKitFromDefaultBin" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostSorBackOrderRelease">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShipKitFromDefaultBin" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is only relevant if multiple bins are installed. If set to 'Y' then a kit parent may be shipped when mutliple bins are installed, and none of the components are lot traceable, serialized or ECC controlled. There must be sufficient quantity in the default bin of each component.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

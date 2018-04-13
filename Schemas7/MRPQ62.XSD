@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the MRP Build Schedule Actions Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ChangesToInclude">
+		<xsd:annotation>
+			<xsd:documentation>Use this option to see either suggested dates, or suggested quantities or both. (D - Date, Q - Quantity, B- Both). If no value is supplied then a default value of 'D' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;D=Date;Q=Quantity;B=Both"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="Q"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NewBuildSchedules">
+		<xsd:annotation>
+			<xsd:documentation>Select this option to include new suggested build schedules. (Y - Yes and N - No). If no value is supplied then a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ChangesToInclude"/>
+				<xsd:element ref="WhenSuggestedDateIsAfterOriginalDate"/>
+				<xsd:element ref="NewBuildSchedules"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+			<xsd:appinfo source="screenitem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="WhenSuggestedDateIsAfterOriginalDate">
+		<xsd:annotation>
+			<xsd:documentation>Select this option to only show build schedules where the snapshot date is later than the live date. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

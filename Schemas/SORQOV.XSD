@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Valuation Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Area">
+    <xsd:annotation>
+      <xsd:documentation>The geographic area. If SYSPRO is configured for tax by area this is a compulsary element. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CalloutUsaTax" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element determines if tax is to be calcualted by calling the 3rd party USA tax calcualtion routin. This element is only conisdered if the SYSPRO tax option to use a 3rd party calculation is selected.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CountyZip">
+    <xsd:annotation>
+      <xsd:documentation>The county (USA Advanced Geo codes) or zip code (USA AVP Sales tax) portion of the tax code. The otehr portions are State and ExtendedTaxCode. If all three portions are blank, the tax code from the customer is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="5"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreditedInvDate" type="xsd:date">
+    <xsd:annotation>
+      <xsd:documentation>If the DocumentType is C this element should contain the date that the original invoice was created. This is so the credit note can be calculated using the tax percentage in effect at that time. Dates are in CCYY-MM-DD format.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>This contains a valid SYSPRO Accounts Receivable customer account code. This is a compulsary element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPct1">
+    <xsd:annotation>
+      <xsd:documentation>The first order discount percentage to be applied to the sales order. This can be up to 100.00, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="7"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPct2">
+    <xsd:annotation>
+      <xsd:documentation>The second order discount percentage to be applied to the sales order. This can be up to 99.99, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPct3">
+    <xsd:annotation>
+      <xsd:documentation>The third order discount percentage to be applied to the sales order. This can be up to 99.99, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DocumentType" default="O">
+    <xsd:annotation>
+      <xsd:documentation>This is the type of SYSPRO sales order (O - Order, B - Billing, C - Credit Note, D - Debit Note).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExchangeRate">
+    <xsd:annotation>
+      <xsd:documentation>The exchange rate conversion factor to be used if FixExchangeRate is Y. This value is used to either multiply or divide the costs / prices depending on the contents of MulDiv. If FixExchangeRate is Y this is a compulsary element and must be greater than 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="13"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExtendedTaxCode">
+    <xsd:annotation>
+      <xsd:documentation>The city portion of the tax code (USA Advanced Geo tax). The other portions are State and CountyZip.  If all three portions are blank, the tax code from the customer is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="3"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FixExchangeRate">
+    <xsd:annotation>
+      <xsd:documentation>Use the contents of ExchangeRate for the currency conversion or use the currency code against the customer code (Y - Use the value of ExchangeRate to calculate the order values, N or blank - Use the currency code against the customer).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FreightLine">
+    <xsd:annotation>
+      <xsd:documentation>This element contains elements relating to freight charges.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="NMscChargeValue"/>
+        <xsd:element ref="NMscTaxCode" minOccurs="0"/>
+        <xsd:element ref="NMscFstCode" minOccurs="0"/>
+        <xsd:element ref="NMscProductCls" minOccurs="0"/>
+        <xsd:element ref="NMscChargeCost" minOccurs="0"/>
+        <xsd:element ref="NSrvIncTotal" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GstDeduction">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether the Canadian GST is calculated by Invoice or Line (I - Invoice, L - Line). Used for Canada only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GstExemptORide">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether the customer is to be charged GSTor if they are exempt from GST (E - Exempt from GST, N - Non exempt).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvTermsOverride">
+    <xsd:annotation>
+      <xsd:documentation>If this contains a value then this invoice terms code is used instead of the one against the customer within SYSPRO. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LineType">
+    <xsd:annotation>
+      <xsd:documentation>This element specifies whether MStockCode contains a stock code for an item stocked with SYSPRO or a non-stocked item (1 - Stocked, 7 - Non-Stocked). This is a compulsary element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="7"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MConvFactOrdUm">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the conversion factor to be used to convert the order quantity unit of measure to the price unit of measure. If the order quantity unit of measure and the price unit of measure are different and this element is not present, the conversion factor will picked up from the stock code in SYSPRO. If there is no entry for this conversion against the stock code, or this is for a non-stocked item, the default will be 1.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="11"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MDiscPct1">
+    <xsd:annotation>
+      <xsd:documentation>The first line discount percentage to be applied to the sales order. This can be up to 100.00, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="7"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MDiscPct2">
+    <xsd:annotation>
+      <xsd:documentation>The second line discount percentage to be applied to the sales order. This can be up to 99.99, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MDiscPct3">
+    <xsd:annotation>
+      <xsd:documentation>The third line discount percentage to be applied to the sales order. This can be up to 99.99, positive or negative. The negative sign can precede or follow the value. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MDiscValFlag">
+    <xsd:annotation>
+      <xsd:documentation>This element specifies how to apply discounts to this detail line. (blank - Use the percentages in MDiscPct1 to 3, V - the value MDiscValue is applied to the value of the line, P - the discount percentages are applied to the unit price before extending it, U - the discount value is applied to the unit price before extending it).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MDiscValue">
+    <xsd:annotation>
+      <xsd:documentation>This is a dicount value. If MDiscValFlag is either V or U, this must contain a value greater than zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="16"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MFstTaxCode">
+    <xsd:annotation>
+      <xsd:documentation>This is the tax code to use for USA FST. If this is in use MFstTaxCode must be a valid tax code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MMulDivPrcFct" default="M">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether the contents of MOrderQty should be multipled or divided by the value in MConvFactOrdUm before multiplying it by the price, to find the total price (M - Multiply, D - Divide). If MConvFactOrdUm contains a value and this element does not, the default is M.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MOrderQty">
+    <xsd:annotation>
+      <xsd:documentation>This is the original order quantity for this stock code. This is a compulsary field and must contain a value greater than zero. The maximum field size is 7.3 and it can have a leading or following negative sign if required.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="12"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MOrderUom">
+    <xsd:annotation>
+      <xsd:documentation>This contains the unit of measure to be used for MOrderQty. If it is supplied it must be valid within SYSPRO. If this element is not present for a stocked item the stocking unit of measure against the stock code will be used. For a non-stocked item EA will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MPrice">
+    <xsd:annotation>
+      <xsd:documentation>This is the price to be used for this stock item. This is a compulsary element and the maximum size is 10.5. Please see MOrderQty, MOrderUom, MPriceUom, MConvFactOrdUm and MMulDivPrcFct.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="16"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MPriceUom">
+    <xsd:annotation>
+      <xsd:documentation>This contains the unit of measure to be used for MPrice. If it is supplied it must be valid within SYSPRO. If this element is not present for a stocked item the stocking unit of measure against the stock code will be used. For a non-stocked item EA will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This is only required if LineType is '7', and the option to apply order level discounts has been selected. It must be a valid SYSPRO product class, and will be ingored for the calcualtion if it is not.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MShipQty">
+    <xsd:annotation>
+      <xsd:documentation>This contains the quantity that would be shipped in the first shipment from this order. The maximum field size is 7.3 and it can have a leading or following negative sign if required.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="12"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MStockCode">
+    <xsd:annotation>
+      <xsd:documentation>Depending on whether LineType contains either a 1 or 7, this element will contain a stock code for a stocked or non-stocked item. If this is for a stocked item then this stock code must exist within SYSPRO. This is a compulsary element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MStockUnitMass">
+    <xsd:annotation>
+      <xsd:documentation>This is the unit mass for this item. If this is not supplied it defaults to the contents of the unit mass field against the stock code in SYSPRO for a stocked item. For a non-stocked items the default is 1.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="13"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MStockUnitVol">
+    <xsd:annotation>
+      <xsd:documentation>This is the unit volume for this item. If this is not supplied it defaults to the contents of the unit volume field against the stock code in SYSPRO for a stocked item. For a non-stocked items the default is 1.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="13"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MTaxCode">
+    <xsd:annotation>
+      <xsd:documentation>The tax code to use for the valuation. If this is not supplied the tax code against the customer within SYSPRO will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MUnitCost">
+    <xsd:annotation>
+      <xsd:documentation>This is ignored for stocked items. For non-stocked items it is the unit cost for this item in the unit of measure specified in MOrderUom. If MUnitCost is not supplied it defaults to 1.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="17"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>If LineType is 1 and MWarehouse contains a value, this value will be used as the warehouse to look up costs for the stock code. If this element does not exist the Warehouse to Use against the stock code will be used. This element is ignored if LineType is 7.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MZeroQtyCrNote" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element is only used if the element DocumentType is C (Credit Note). It specifies whether the credit note is for a zero quantity (ie. stock not to be returned) (blank or N - No, Y - Yes).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MerchandiseLine">
+    <xsd:annotation>
+      <xsd:documentation>This element contains elements relating to stocked and non-stocked details. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LineType"/>
+        <xsd:element ref="MStockCode"/>
+        <xsd:element ref="MWarehouse" minOccurs="0"/>
+        <xsd:element ref="MOrderQty" minOccurs="0"/>
+        <xsd:element ref="MShipQty" minOccurs="0"/>
+        <xsd:element ref="MOrderUom" minOccurs="0"/>
+        <xsd:element ref="MPrice" minOccurs="0"/>
+        <xsd:element ref="MPriceUom" minOccurs="0"/>
+        <xsd:element ref="MConvFactOrdUm" minOccurs="0"/>
+        <xsd:element ref="MMulDivPrcFct" minOccurs="0"/>
+        <xsd:element ref="MDiscPct1" minOccurs="0"/>
+        <xsd:element ref="MDiscPct2" minOccurs="0"/>
+        <xsd:element ref="MDiscPct3" minOccurs="0"/>
+        <xsd:element ref="MDiscValFlag" minOccurs="0"/>
+        <xsd:element ref="MDiscValue" minOccurs="0"/>
+        <xsd:element ref="MStockUnitMass" minOccurs="0"/>
+        <xsd:element ref="MStockUnitVol" minOccurs="0"/>
+        <xsd:element ref="MZeroQtyCrNote" minOccurs="0"/>
+        <xsd:element ref="MTaxCode" minOccurs="0"/>
+        <xsd:element ref="MFstTaxCode" minOccurs="0"/>
+        <xsd:element ref="MUnitCost" minOccurs="0"/>
+        <xsd:element ref="MProductClass" minOccurs="0"/>
+        <xsd:element ref="ValueKitFromPassedXML" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MiscellaneousLine">
+    <xsd:annotation>
+      <xsd:documentation>This element contains elements relating to miscellaneous charge details.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="NMscChargeValue"/>
+        <xsd:element ref="NMscTaxCode" minOccurs="0"/>
+        <xsd:element ref="NMscFstCode" minOccurs="0"/>
+        <xsd:element ref="NMscProductCls" minOccurs="0"/>
+        <xsd:element ref="NMscChargeCost" minOccurs="0"/>
+        <xsd:element ref="NSrvIncTotal" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MulDiv" default="M">
+    <xsd:annotation>
+      <xsd:documentation>Multiply or divide the costs / prices by the FIxExchangeRate (M - Multiply, D - Divide). If FixExchangeRate is Y then this is a compulsary element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NMscChargeCost">
+    <xsd:annotation>
+      <xsd:documentation>The cost associated with this miscellaneous or freight charge.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="14"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NMscChargeValue">
+    <xsd:annotation>
+      <xsd:documentation>This contains the value of the miscellaneous or freight charge. This is a compulsary element and must contain a value greater than zero. The maximum field size is 12.2 and it can have a preceding or following negative sign if the value is negative.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="14"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NMscFstCode">
+    <xsd:annotation>
+      <xsd:documentation>This is the tax code to use for USA FST. If this is in use NMscFstCode must be a valid tax code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NMscProductCls">
+    <xsd:annotation>
+      <xsd:documentation>The product class to use for this miscellaneous or freight charge.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NMscTaxCode">
+    <xsd:annotation>
+      <xsd:documentation>This is the tax code for the miscellaneous or freight charge. If blank use the tax code against the customer.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NSrvIncTotal" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Include the value of NMscChargeValue in the tax calculation (N - No, Y - Yes).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="OrderHeader"/>
+        <xsd:element ref="MerchandiseLine" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="MiscellaneousLine" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="FreightLine" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderDiscountBreaks" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element determines if order discount breaks are to be taken into account for the supplied order lines prior to valuing the order. It is only relevant where the customer supplied is subject to order discount breaks.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderHeader">
+    <xsd:annotation>
+      <xsd:documentation>This contains the information required for a sales order header (this is compulsary and can only appear once per order).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="DocumentType" minOccurs="0"/>
+        <xsd:element ref="DiscPct1" minOccurs="0"/>
+        <xsd:element ref="DiscPct2" minOccurs="0"/>
+        <xsd:element ref="DiscPct3" minOccurs="0"/>
+        <xsd:element ref="FixExchangeRate" minOccurs="0"/>
+        <xsd:element ref="ExchangeRate" minOccurs="0"/>
+        <xsd:element ref="MulDiv" minOccurs="0"/>
+        <xsd:element ref="State" minOccurs="0"/>
+        <xsd:element ref="CountyZip" minOccurs="0"/>
+        <xsd:element ref="ExtendedTaxCode" minOccurs="0"/>
+        <xsd:element ref="Area" minOccurs="0"/>
+        <xsd:element ref="GstDeduction" minOccurs="0"/>
+        <xsd:element ref="GstExemptORide" minOccurs="0"/>
+        <xsd:element ref="TaxExemptOverride" minOccurs="0"/>
+        <xsd:element ref="InvTermsOverride" minOccurs="0"/>
+        <xsd:element ref="CreditedInvDate" minOccurs="0"/>
+        <xsd:element ref="OrderDiscountBreaks" minOccurs="0"/>
+        <xsd:element ref="CalloutUsaTax" minOccurs="0"/>
+        <xsd:element ref="ShipAddress1" minOccurs="0"/>
+        <xsd:element ref="ShipAddress2" minOccurs="0"/>
+        <xsd:element ref="ShipAddress3" minOccurs="0"/>
+        <xsd:element ref="ShipAddress4" minOccurs="0"/>
+        <xsd:element ref="ShipAddress5" minOccurs="0"/>
+        <xsd:element ref="ShipPostalCode" minOccurs="0"/>
+        <xsd:element ref="MultiShipCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="State">
+    <xsd:annotation>
+      <xsd:documentation>The state code portion of the tax code (USA Advanced Geo codes, or USA AVP Sales tax). The other portions are CountyZip and ExtendedTaxCode.  If all three portions are blank, the tax code from the customer is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TaxExemptOverride">
+    <xsd:annotation>
+      <xsd:documentation>This specifies whether the customer is to be charged tax, they are exempt from tax or the other tax code should be used (E - Exempt from tax, N - Non exempt, O - Use other tax code).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValueKitFromPassedXML">
+    <xsd:annotation>
+      <xsd:documentation>This is only applicable if processing a line for a parent kit stock item.
+It specifies if line value must be calculated from the BOM defined for the parent stock item or from component details passed through in the XML as separate merchandise lines.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The XSL Stylesheet to be used to display the XML file.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShipAddress1" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress2" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress3" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress4" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress5" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipPostalCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MultiShipCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

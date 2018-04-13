@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Post Schedule Information Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostScheduleInformation">
+		<xsd:annotation>
+			<xsd:documentation>This it the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="0">
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to post the schedule information.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Job">
+								<xsd:annotation>
+									<xsd:documentation>The job element is mandatory for schedule postings. This will be the job that you are posting schedule information too.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DateCalcMethod" default="M" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Date Calculation Method  specifies what date method you are using so that you can set the dates to manual when updating the dates from factory scheduling. The flag must be set to 'M' in order to set the dates to Manual.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ScheduleFlag">
+								<xsd:annotation>
+									<xsd:documentation>The schedule flag element is used to indicate if the item has been scheduled or simply output to the schedule. (U - Updated from scheduler, O - Output to scheduler) Please note that this is a mandatory field.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="U"/>
+										<xsd:enumeration value="O"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Priority" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The priority element will update the job priority field.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ScheduleStartDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Schedule Start Date element will update the Job Start Date.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ScheduleStartTime" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Schedule Start Date element will update the Job Start Date.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ScheduleEndDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Schedule Start Date element will update the Job Start Date.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ScheduleEndTime" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Schedule Start Date element will update the Job Start Date.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SuggestedJob" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The suggested job element is used to indicate if the job is a suggested job. (N - No, Y - Yes) If it is not specified it will default to 'N'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Operation" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="OperationNumber">
+											<xsd:annotation>
+												<xsd:documentation>The operation number element is mandatory for schedule postings. Since everything is scheduled via operations, you will never only be updating the job. You should always have operation information.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationStatus" default="S" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The operation status flag element is used to indicate the operation status. (S - Scheduled, R - Released (rel onto shopfloor),  H - Held by scheduling, L - Locked in scheduling).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="S"/>
+													<xsd:enumeration value="R"/>
+													<xsd:enumeration value="H"/>
+													<xsd:enumeration value="L"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationSchedMachine" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The machine element is used to indicate the machine on which the opertaion is scheduled.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationSetupDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The Operation Setup Date element will update the Operation Setup Date of the scheduled operation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationSetupTime" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The Operation Setup Time element will update the Operation Setup Time of the scheduled operation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationStartDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The Operation Start Date element will update the Operation Start Date.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationStartTime" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The Operation Start Date element will update the Operation Start Date.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationEndDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The Operation Start Date element will update the Operation Start Date.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OperationEndTime" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The Operation Start Date element will update the OperationStart Date.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Billing Schedules Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostBillSchedules">
+    <xsd:annotation>
+      <xsd:documentation>This it the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="0">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to create a billing schedule. NOTE: There are parts of the key that is not mandatory for certain billing methods. It will be clearly documented on each element explaining under which conditions the key element will be mandatory.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Contract">
+                <xsd:annotation>
+                  <xsd:documentation>The contract element is mandatory for all billing methods. This will be the contract that you are adding the billing schedules for.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Job" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The job element is mandatory for the following billing methods... Fixed day of the month, Series of fixed dates, Percentage of heads/sections complete and Percentage of anticipated costs. These billing methods are all at job level so the job is therefore mandatory. NOTE although the Percentage of notional value and the Percentage of costs accumulated Billing methods do not require a job number, it is important to note that they are still billied at job level accross all existing jobs for the specified contract. This will be the job number that you are adding the billing schedules for.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="HierHead" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The hierhead element is hierarchy head you wish to create a billing schedule for. It is mandatory for the following billing methods. Percentage of heads/sections complete and Percentage of anticipated costs. These scheules will be specific to the selected head.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Section1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The section1 element is hierarchy section you wish to create a billing schedule for. It is mandatory for the following billing methods. Percentage of heads/sections complete and Percentage of anticipated costs. These scheules will be specific to the selected section. Please note that this may only be entered if the HierHead element is not blank.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Section2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The section2 element is hierarchy section you wish to create a billing schedule for. It is mandatory for the following billing methods. Percentage of heads/sections complete and Percentage of anticipated costs. These scheules will be specific to the selected section. Please note that this may only be entered if the Section1 element is not blank.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Section3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The section3 element is hierarchy section you wish to create a billing schedule for. It is mandatory for the following billing methods. Percentage of heads/sections complete and Percentage of anticipated costs. These scheules will be specific to the selected section. Please note that this may only be entered if the section2 element is not blank.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Section4" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The section4 element is hierarchy section you wish to create a billing schedule for. It is mandatory for the following billing methods. Percentage of heads/sections complete and Percentage of anticipated costs. These scheules will be specific to the selected section. Please note that this may only be entered if the section3 element is not blank.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ScheduleDate">
+                <xsd:annotation>
+                  <xsd:documentation>The scheduleDate element is the date on which you require the schedules to be billed.  It is mandatory for the following billing methods... Fixed day of the month, Series of fixed dates and  Percentage of heads/sections complete and Percentage of notional value. Please note that although it is only required for the obove mentioned billing methods, a valid date must be supplied for all schedules because SQL requires a valid date. For the billing methods that do not require a date it is suggested that you just default it to todays date even though it will have no relevance to the schedules created.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BillingType" default="V">
+                <xsd:annotation>
+                  <xsd:documentation>The BillingType specifies what type will be used when creating schedules. (V - value, P - Percentage. ) If V is selected then schedules with a specified value will be created and if P is selected then schedules with a specific percentage will be created. Please not that once you have selected to use a value or percentage type for a contract and job, you may not change the type. A new type may only be selected for a new contract and job with no existing schedules.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="V"/>
+                    <xsd:enumeration value="P"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BillPercent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The BillPercent element is the percentage amount that will be billed fot this schedule. Please note that this is a mandatory field if the Billing type element is set to 'P'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BillValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The BillVal element is the value amount that will be billed fot this schedule. Please note that this is a mandatory field if the Billing type element is set to 'V'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SchedulePosted" default="N">
+                <xsd:annotation>
+                  <xsd:documentation>The SchedulePosted element specifies if the schedule has been billed yet or not. (N - not billed, Y - billed. ) This is a mandatory field and must be set to N on creation of schedules.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

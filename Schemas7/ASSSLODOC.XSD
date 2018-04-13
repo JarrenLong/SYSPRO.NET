@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Location Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Location">
+    <xsd:annotation>
+      <xsd:documentation>This is the key to the Asset Location being maintained. This is mandatory. If this Asset Location is being added, it must not pre-exist. If this Asset Location is being changed or deleted, it must be a valid SYSPRO Asset Location.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CountInProgress">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Asset Location codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Key"/>
+        <xsd:element name="Description">
+          <xsd:annotation>
+            <xsd:documentation>This is the name of the Asset Location and is used primarily to identify the Asset Location. </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CountInProgress" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is a flag reflecting whether the asset location is in the process of being counted.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value=""/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="VerifyReqd" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is a flag indicationg whether the asset count at this location needs to be verified. This flag can only have a value if the flag reflecting whether the asset location is being counted is set to "Y".</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value=""/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain a Asset Location.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Location"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SetupAssetLocation">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for Asset Location maintenance. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="VerifyReqd">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

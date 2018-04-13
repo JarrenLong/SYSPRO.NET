@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+  SRS MRP Capacity Loading Report 
+  SYSPRO Reporting Services XSDIn
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PrintManufacturingUMQuantities">
+    <xsd:annotation>
+      <xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default depends on your setup options.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>(A)All, (S)Single or (R)Range of dates.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Date" minOccurs="0"/>
+        <xsd:element ref="WorkCenter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FirstDayOfWeek">
+    <xsd:annotation>
+      <xsd:documentation>This element is used when the period is set to (WK)Weeks.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;SUN=Sunday;MON=Monday;TUE=Tuesday;WED=Wednesday;THU=Thursday;FRI=Friday;SAT=Saturday"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SUN"/>
+        <xsd:enumeration value="MON"/>
+        <xsd:enumeration value="TUE"/>
+        <xsd:enumeration value="WED"/>
+        <xsd:enumeration value="THU"/>
+        <xsd:enumeration value="FRI"/>
+        <xsd:enumeration value="SAT"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeSuggestedJobs">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include suggested jobs which cause a load on the work center in the specified time period. (Y)Yes or (N)No. If no value is supplied this will default to (N)No.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPagePerWorkCenter">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print the details for each work center on a separate page. (Y)Yes or (N)No. If no value is supplied this will default to (N)No.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintGraphs">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print the work center load graph. (Y)Yes or (N)No. If no value is supplied this will default to (Y)Yes.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfDays" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element is used when the period is set to (MD)Multiple Days.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Period" minOccurs="0"/>
+        <xsd:element ref="NumberOfDays" minOccurs="0"/>
+        <xsd:element ref="FirstDayOfWeek" minOccurs="0"/>
+        <xsd:element ref="IncludeSuggestedJobs" minOccurs="0"/>
+        <xsd:element ref="WorkCenterStatus" minOccurs="0"/>
+        <xsd:element ref="Pegging" minOccurs="0"/>
+        <xsd:element ref="NewPagePerWorkCenter" minOccurs="0"/>
+        <xsd:element ref="PrintGraphs" minOccurs="0"/>
+        <xsd:element ref="PrintManufacturingUMQuantities" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Pegging">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print the pegging information. (Y)Yes or (N)No. If no value is supplied this will default to (Y)Yes.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Period">
+    <xsd:annotation>
+      <xsd:documentation>The time period to use for the capacity load. The options are (SD)Single Day, (MD)Multiple Days, (WK)Weeks and (MO)Months.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;SD=Single Day;MD=Multiple Days; WK=Weeks;MO=Months"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SD"/>
+        <xsd:enumeration value="MD"/>
+        <xsd:enumeration value="WK"/>
+        <xsd:enumeration value="MO"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WorkCenter">
+    <xsd:annotation>
+      <xsd:documentation>(A)All, (S)Single, (R)Range or (L)List of work centers.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=BomWorkCentre;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WorkCenterStatus">
+    <xsd:annotation>
+      <xsd:documentation>Use this to select either loaded, overloaded or unloaded work centers. By default this will be set to (L)Load, which will include loaded and overloaded work centers. Other options are (O)Overloaded only and (A)All, which will include work centers without load at all.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;L=All loaded centers;O=Overloaded centers only;A=All work centers"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

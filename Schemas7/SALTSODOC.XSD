@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Sales Analysis Setup Transaction Posting Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="SalesAnalysisOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General" minOccurs="0"/>
+        <xsd:element ref="HistorySetup" minOccurs="0"/>
+        <xsd:element ref="History" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SlsHistUpdMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates when sales history files are to be updated. (B - Batch, O - Online). If no value is supplied then a default value of B will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="B=Batch;O=Online;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SABudgRepresents">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates how month-to-date and year-to-date sales values are represented. (Q - Quantity, V - Value). If no value is supplied then a default value of Q will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Q=Quantity;V=Value;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Q"/>
+        <xsd:enumeration value="V"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvHstWhenChgbud">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Changing the method of representing budgets will invalidate historical information currently held for salespersons and product classes when setup options are saved. (N - No, Y- Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesTaxSummReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if the sales analysis tax report program will produce an analysis of all taxable/exempt sales made against each tax code for the period, month and year-to-date. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SlsHistUpdMethod"/>
+        <xsd:element ref="SABudgRepresents"/>
+        <xsd:element ref="InvHstWhenChgbud"/>
+        <xsd:element ref="SalesTaxSummReq"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RetDetSlsHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if a detailed history of sales transactions should be retained, sequenced according to the detailed key options selected. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No'Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetSummSlsHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if a summary history of sales transactions should be retained, sequenced according to the sales history key areas. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetArchSlsHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if a file of all transactions from the AR Receivable Sales Transaction Detail File that has been used to create history should be retained.  (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetSummZoomInd">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if the summary zoom index should be retained. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclMiscChgInHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if miscellaneous charges should be retained in sales history. (N - No, Y - Yes). If no value is supplied then a value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsSlsPerson">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the salesperson to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsBranch">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the branch to be part of the key to the detailed sales history records. (N - No, Y - Yes).If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsOrdTyp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the order type to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsCustCls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the customer class to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsGeoArea">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the geographic area to be partof the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsCust">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the customer to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsWh">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the warehouse to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsDept">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the department to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsProdCls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the product class to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DetKeyOptsStockCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates if you require the stock code to be part of the key to the detailed sales history records. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ClrDatForPrimKeyChg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates if data can be cleared when the primary key has been changed. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HistorySetup">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RetDetSlsHist"/>
+        <xsd:element ref="RetSummSlsHist"/>
+        <xsd:element ref="RetArchSlsHist"/>
+        <xsd:element ref="RetSummZoomInd"/>
+        <xsd:element ref="InclMiscChgInHist"/>
+        <xsd:element ref="DetKeyOptsSlsPerson"/>
+        <xsd:element ref="DetKeyOptsBranch"/>
+        <xsd:element ref="DetKeyOptsOrdTyp"/>
+        <xsd:element ref="DetKeyOptsCustCls"/>
+        <xsd:element ref="DetKeyOptsGeoArea"/>
+        <xsd:element ref="DetKeyOptsCust"/>
+        <xsd:element ref="DetKeyOptsWh"/>
+        <xsd:element ref="DetKeyOptsDept"/>
+        <xsd:element ref="DetKeyOptsProdCls"/>
+        <xsd:element ref="DetKeyOptsStockCode"/>
+        <xsd:element ref="ClrDatForPrimKeyChg"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="YrsRetDetSlsHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many years the detailed sales history data should be retained.This number may be from 1 to 99 inclusive. If no value or a zero value is supplied, 2 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="YrsRetSummSlsHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many years the summary sales history data should be retained.This number may be from 1 to 99 inclusive. If no value or a zero value is supplied, 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="YrsRetArchSlsHist">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many years the Archived sales history data should be retained. This number may be from 1 to 99 inclusive. If no value or a zero value is supplied, 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetComm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many months the sales commission data should be retained. This number may be from 1 to 99 inclusive. If no value or a zero value is supplied, 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetTax">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many months the sales tax details should be retained. This number may be from 1 to 99 inclusive. If no value or a zero value is supplied, 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetGst">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many months the GST tax details should be retained. This number may be from 0 to 99 inclusive. If no value is supplied, 1 will be assumed. This value may only be altered if the Federal sales tax system is required.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetEcVat">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ This indicates how many months the EC tax details should be retained. This number may be from 0 to 99 inclusive. If no value is supplied, 0 will be assumed. This value may only be altered if the EC VAT system is required.]]></xsd:documentation>
+      <xsd:appinfo source=""/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="History">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="YrsRetDetSlsHist"/>
+        <xsd:element ref="YrsRetSummSlsHist"/>
+        <xsd:element ref="YrsRetArchSlsHist"/>
+        <xsd:element ref="MthsRetComm"/>
+        <xsd:element ref="MthsRetTax"/>
+        <xsd:element ref="MthsRetGst"/>
+        <xsd:element ref="MthsRetEcVat"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+
+
+
+
+
+
+

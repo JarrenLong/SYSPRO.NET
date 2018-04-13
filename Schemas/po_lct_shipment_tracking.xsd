@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the LCT Shipment Tracking Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ArchiveShipmentReference">
+    <xsd:annotation>
+      <xsd:documentation>All or Single Shipment reference returned. FilterType options - (A)All, (S)Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=LctCostingRegArc;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default=" "/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Query filters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Vessel"/>
+        <xsd:element ref="ReceiptDate"/>
+        <xsd:element ref="ShipmentReference"/>
+        <xsd:element ref="ArchiveShipmentReference"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>Query options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="UseXrefForExpectedMerchCost"/>
+        <xsd:element ref="UseTotalQtyForActualMerchCost"/>
+        <xsd:element ref="UseExpectedElementValueWhenActualZero"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReceiptDate">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single Receipt date returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Your can either extract the C=Current Shipments, R=Received Shipments, A=Archived Shipments or S=Shipment Contents Note</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current shipments;R=Received shipments;A=Archived shipments;S=Shipment contents note"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="R"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShipmentReference">
+    <xsd:annotation>
+      <xsd:documentation>All or Single Shipment reference returned. FilterType options - (A)All, (S)Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=LctCostingReg;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UseExpectedElementValueWhenActualZero">
+    <xsd:annotation>
+      <xsd:documentation>Assume expected element value when actual element value is zero N= No, Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseTotalQtyForActualMerchCost">
+    <xsd:annotation>
+      <xsd:documentation>Assume total receipt when calculating actual merchandise cost N=No Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseXrefForExpectedMerchCost">
+    <xsd:annotation>
+      <xsd:documentation>Use supplier xref for expected merchandise cost N=No, Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Vessel">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single vessel to be returned. FilterType options - A(All), (R)Range, (S)Single. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=LctShipmentHdr;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

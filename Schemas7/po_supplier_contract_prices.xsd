@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the List of Supplier/Stock Code Contract Prices Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Catalogue">
+    <xsd:annotation>
+      <xsd:documentation>Enter the Catalogue to query.  A - All; R - Range; S - Single.   If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a catalouge code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Contract">
+    <xsd:annotation>
+      <xsd:documentation>Enter the contract to query.  A - All; R - Range; S - Single.   If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a contract code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>The parent filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Catalogue"/>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="Contract"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Reference"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeExtraPriceInformation">
+    <xsd:annotation>
+      <xsd:documentation>This will include the extended contract price information. N - No; Y - Yes. Default  N - No</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePriceDetails">
+    <xsd:annotation>
+      <xsd:documentation>This will include the basic contract price information. N - No; Y - Yes. Default  Y - Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPagePerSupplier">
+    <xsd:annotation>
+      <xsd:documentation>This element is only relevant when producing a report, and if selected will cause the reoprt to print a new page for each new supplier. The use of this element does not affect the XML returned. N - No; Y - Yes. Default  N - No</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The parent option element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludePriceDetails"/>
+        <xsd:element ref="IncludeExtraPriceInformation"/>
+        <xsd:element ref="NewPagePerSupplier"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reference">
+    <xsd:annotation>
+      <xsd:documentation>Enter the reference to query.  A - All; R - Range; S - Single.  If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a reference code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Enter the stock code to query. A - All; R - Range; S - Single.   If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a stock code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Enter the suppler to query. A - All; R - Range; S - Single.   If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a supplier code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=ApSupplier; A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

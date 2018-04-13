@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Valuation Summary Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="ValuationCostBasedOn" minOccurs="0"/>
+        <xsd:element ref="ReturnWarehouseSummary" minOccurs="0"/>
+        <xsd:element ref="ApplyActualCosting" minOccurs="0"/>
+        <xsd:element ref="PrintZeroValueItems" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of product class ( A - All, S - Single, R - Range, L - List).  If not provided default is A. If range(R) is selected then start and end product classes are separated by a comma. If single(S) is selected a product class is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence" default="S">
+    <xsd:annotation>
+      <xsd:documentation>This specifies which sequence in which the data is returned ( S - Stock code, D - Stock code description,  U - Supplier, P - Product class).  If not provided the default is S. (W - Warehouse: Summary report only)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Stock code;D=Description;U=Supplier;P=Product class;W=Warehouse"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes ( A - All, S - Single, R - Range, L - List).  If not provided default is A.  If range(R) is selected then start and end stock codes are separated by a comma. If single(S) is selected a stock code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of suppliers ( A - All, S - Single, R - Range, L - List).  If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a supplier code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValuationCostBasedOn" default="C">
+    <xsd:annotation>
+      <xsd:documentation>Default C - Current costing method. You can select to return the values based on Fifo(F), if you have FIFO on. If you do not FIFO set on, and you selected to F(FIFO) the program will default to the current costing method. You can select, F - Fifo, L - last costing, and C - current cost. Select FIFO to show inventory value according to the FIFO costs held in each FIFO bin location. W - Warehouse costs, this will return the values based on the warehouse costing method, this option is only available if you have costing per warehouse, else the default will be applied</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current;L=Last cost;F=FIFO;W=Warehouse cost"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of warehouses ( A - All, S - Single, R - Range, L - List).  If not provided default is A.  If range(R) is selected then start and end warehouses are separated by a comma. If single(S) is selected a warehouse is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReturnWarehouseSummary" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This option creates a warehouse summary, then the summary for the selected sequence is also sequenced by warehouse.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyActualCosting" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This option applies actual costing FIFO valuation on lot traceable or serialized items based on the company settings..</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintZeroValueItems" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This option will include or exclude zero value items.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

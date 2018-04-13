@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Order Contract Pricing List Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include customers for specific branches only (i.e. it enables you to filter the customer codes selected based on the branch selection made here).
+
+'A' - All (default)
+Select this to include contracts for all A/R branches on file.
+
+'R' - Range 
+Select this to include contracts for a range of A/R branches.
+You indicate this range using the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a specific branch only.
+You indicate this range using the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BuyingGroup">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific buying groups only and it is not available if you selected the Contract types as Customer.
+
+'A' - All (default)
+Select this to include contracts for all buying groups.
+
+'R' - Range 
+Select this to include contracts for a range of buying groups..
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single buying group.
+You indicate this buying group in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CodedLessUnitDiscountValue" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include Coded Less Unit Discount Value contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MarkupListPrice" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>You use this option if you want to view the list price of an item in a sale, plus a percentage mark-up for the contract. You will be unable to view contracts of this method if FIFO costing is required. Default to Y. (N - No, Y -  Yes) </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CodedPrice" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include Coded Price contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Contract">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include specific contracts.
+
+'A' - All (default)
+Select this to include all contracts.
+
+'R' - Range 
+Select this to include a range of contracts.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include a single contract.
+You indicate this buying group in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="RS"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ContractTypes" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Select this option to specify the contract types to be included.
+Valid values are 'A' - All (default), 'B' - Buying group contracts and 'C' - Customer contracts.
+
+'A' - All 
+Select this to include all contract types.
+
+'B' - Buying group contracts
+Select this to include buying group contracts only.
+
+'C' - Customer 
+Select this to include customer contracts only.
+
+The customers you select to include can be filtered according to the Branch(es) you select to include in the Branch Option.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific customers but is not available if you selected the Contract types as Buying group.
+The customers you select to include can be filtered according to the Branch(es) you select to include in the Branch option.
+
+'A' - All (default)
+Select this to include contracts for all customers.
+
+'R' - Range 
+Select this to include contracts for a range of customers.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single customer.
+You indicate this customer in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific customer classes.
+
+'A' - All (default)
+Select this to include contracts for all customer classes.
+
+'R' - Range 
+Select this to include contracts for a range of customer classes.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single customer class.
+You indicate this customer class in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DateSelection" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this to exclude contracts based on specific dates.
+Valid values are 'N' - No exclusions (default), 'S' - By contract start date and 'E' - By contract expiry date.
+
+'N' - No exclusions
+Select this if you want to include contracts for all dates.
+
+'S' - By contract start date 
+Select this if you want to specify a range of start dates according to which contracts must be included.
+
+'E' - By contract expiry date 
+Select this if you want to specify an expiry date according to which contracts must be included.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StartDate"/>
+        <xsd:element ref="BuyingGroup"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Contract"/>
+        <xsd:element ref="SalesPerson"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="GeographicArea"/>
+        <xsd:element ref="CustomerClass"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FlatPrice" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include Flat Price contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GeographicArea">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific geographic areas.
+
+'A' - All (default)
+Select this to include contracts for all geographic areas.
+
+'R' - Range 
+Select this to include contracts for a range of geographic areas.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single geographic area.
+You indicate this geographic area in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ListPriceLessChainDiscount" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include List Price Less Chain Discount contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ListPriceLessPercentage" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include List Price Less Percentage contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MarkupCostByPercentage" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include Mark-Up Cost by Percentage contracts. Valid values are 'N' - No (default) and 'Y' - Yes. You will be unable to select this option if FIFO valuation is in use. In addition, you will be unable to select this option if a Costing method of Last cost and FIFO valuation is in use.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPageOnChange" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to insert a page break between contracts. Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ContractTypes"/>
+        <xsd:element ref="FlatPrice"/>
+        <xsd:element ref="CodedPrice"/>
+        <xsd:element ref="QuantityDiscountBreaks"/>
+        <xsd:element ref="ListPriceLessPercentage"/>
+        <xsd:element ref="ListPriceLessChainDiscount"/>
+        <xsd:element ref="PriceCodeLessChainDiscount"/>
+        <xsd:element ref="MarkupCostByPercentage"/>
+        <xsd:element ref="CodedLessUnitDiscountValue"/>
+        <xsd:element ref="MarkupListPrice"/>
+        <xsd:element ref="PrintGrossProfitPercentage"/>
+        <xsd:element ref="WarehouseToUseForCosts"/>
+        <xsd:element ref="DateSelection"/>
+        <xsd:element ref="PrintContractsExpiringBefore"/>
+        <xsd:element ref="NewPageOnChange"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PriceCodeLessChainDiscount" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include Price Code Less Chain Discount contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintContractsExpiringBefore">
+    <xsd:annotation>
+      <xsd:documentation>Enter a valid expiry date to include only contracts which expiry before this date. This option is only available if you selected to include contracts according to an expiry date.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintGrossProfitPercentage" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include gross profit percentages. Valid values are 'N' - No (default) and 'Y' - Yes. You will be unable to select this option if FIFO valuation is in use </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for stock codes belonging to  specific product classes.
+
+'A' - All (default)
+Select this to include contracts for all product classes.
+
+'R' - Range 
+Select this to include contracts for stock codes belonging to a range of product classes.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for stock codes belonging to a single product class.
+You indicate this product class in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="QuantityDiscountBreaks" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include Quantity Discounted contracts. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific salespersons.
+
+'A' - All (default)
+Select this to include contracts for all salespersons.
+
+'R' - Range 
+Select this to include contracts for a range of salespersons.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single salesperson.
+You indicate this salesperson in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StartDate">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific start dates but is only available if you selected to include contracts according to a range of start dates.
+
+'A' - All (default)
+Select this to include contracts for all start dates.
+
+'R' - Range 
+Select this to include contracts for a range of start datess.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single start date.
+You indicate this start date in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific stock codes.
+The stock codes you select to include can be filtered according to the Product class(es) you select to include in the Product Class Option.
+
+'A' - All (default)
+Select this to include contracts for all stock codes.
+
+'R' - Range 
+Select this to include contracts for a range of stock codes.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single stock code.
+You indicate this stock code in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to include contracts for specific suppliers.
+
+'A' - All (default)
+Select this to include contracts for all suppliers.
+
+'R' - Range 
+Select this to include contracts for a range of suppliers.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include contracts for a single supplier.
+You indicate this supplier in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WarehouseToUseForCosts">
+    <xsd:annotation>
+      <xsd:documentation>Enter a valid warehouse to indicate the warehouse that will be used to extract the cost. You can only access this option if you selected either the Mark up cost by a percentage or Print gross profit percentage options.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

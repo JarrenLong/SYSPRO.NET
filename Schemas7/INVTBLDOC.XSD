@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Balance Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostInvOnHandBalance">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Options" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TransactionDate" minOccurs="0"/>
+        <xsd:element ref="LockType" minOccurs="0"/>
+        <xsd:element ref="UseBalanceResults" minOccurs="0"/>
+        <xsd:element ref="BalanceRunDate" minOccurs="0"/>
+        <xsd:element ref="BalanceRunTime" minOccurs="0"/>
+        <xsd:element ref="RecalcWhsCostsFromFifo" minOccurs="0"/>
+        <xsd:element ref="RecalcActCostsFromFifo" minOccurs="0"/>
+        <xsd:element ref="RecalcActRecQtyOnFifo" minOccurs="0"/>
+        <xsd:element ref="DeleteFifoOrphans" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionDate">
+    <xsd:annotation>
+      <xsd:documentation>Date the transaction raised. If not supplied, rundate is assumed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LockType" default="H">
+    <xsd:annotation>
+      <xsd:documentation>
+This is the type of locking you wish to apply in SQL when correcting on hand imbalances The type of lock you select may improve the speed of the query but locking of the table is not recommended if used whilst operators are transacting.
+      The types of locking available are:
+        L – Acquire a shared lock on each row as it is processed.
+        H - Acquire a hold lock on each row as it is processed (HOLDLOCK). This is the default.
+        T – Acquire a shared lock on each table as it is processed (TABLOCK)
+        X – Exclusively lock the tables whilst processing (TABLOCKX)
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="X"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseBalanceResults" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not to use output from the Inventory On Hand Balance HealthCheck. Valid values are 'Y' (Yes), 'N' (No) and 'L' (Last). Default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BalanceRunDate" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If you choose to use the output from the Inventory On Hand Balance Healthcheck then you can, if you wish enter the date and time of the run you wish to balance. If you leave it blank then it will process all entries.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BalanceRunTime" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This is the time portion of the key to indicate which entries to process from a run. If you leave it blank then it will process all entries for the date. This is ignored if you do not enter a date.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RecalcWhsCostsFromFifo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether to recalculate current warehouse costs from the contents of the FIFO buckets. The cost is recalculated by taking the total value of stock at FIFO value and dividing this by the on hand quantity in the warehouse. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RecalcActCostsFromFifo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether to recalculate current warehouse costs for actual costing items from the contents of the FIFO buckets. The cost is recalculated by taking the total value of stock at FIFO value and dividing this by the on hand quantity in the warehouse.. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RecalcActRecQtyOnFifo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether to recalculate receipt quantities against the actual cost buckets for items actual costing item. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeleteFifoOrphans" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether to delete actual cost buckets where the parent lot does not exist. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>If you want to run the balance function for a single warehouse then you can enter it here. If left as spaces then the balance function will be run for all warehouses</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Build Inventory Movements Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="Build">
+		<xsd:annotation>
+			<xsd:documentation>This the root node.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Parameters">
+					<xsd:annotation>
+						<xsd:documentation>The list of parameters.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="Warehouse">
+								<xsd:annotation>
+									<xsd:documentation>The warehouse code to use for the build.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockCode">
+								<xsd:annotation>
+									<xsd:documentation>The stock code to use for the build.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TransactionType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates which type of Inventory movement transaction is being performed. Currently only the Expense Issue ("I") transaction is supported.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="I"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings such as stock code is on Partial hold. If not supplied it defaults to 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockInformationOnly" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether or not to return only the information required to populate the Stock information page. If not supplied it defaults to 'N'. If it is supplied with a value of 'Y' then the TransactionType and IgnoreWarnings elements are not required. Valid values are 'N' and 'Y'</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

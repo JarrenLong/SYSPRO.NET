@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     This is an example XML instance to demonstrate
+     use of the POSQRY Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="EnglishTextType">
+    <xsd:sequence>
+      <xsd:element ref="Text" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="IncludeCompanyInfo" type="xsd:string" default="Y"/>
+  <xsd:element name="IncludeLicenseInfo" type="xsd:string" default="Y"/>
+  <xsd:element name="IncludeProgramList" type="xsd:string" default="Y"/>
+  <xsd:element name="IncludeSystemInfo" type="xsd:string" default="Y"/>
+  <xsd:element name="IncludeTranslatedText" type="xsd:string" default="Y"/>
+  <xsd:complexType name="OptionsType">
+    <xsd:sequence>
+      <xsd:element ref="IncludeProgramList" minOccurs="0"/>
+      <xsd:element ref="IncludeLicenseInfo" minOccurs="0"/>
+      <xsd:element ref="IncludeCompanyInfo" minOccurs="0"/>
+      <xsd:element ref="IncludeSystemInfo" minOccurs="0"/>
+      <xsd:element ref="IncludeTranslatedText" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Options" type="OptionsType"/>
+        <xsd:element name="EnglishText" type="EnglishTextType" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Text" type="xsd:string"/>
+</xsd:schema>

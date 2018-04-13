@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Supplier Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupApSupplier">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to maintain a single supplier.
+NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Key">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the key information required to maintain a supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="Supplier">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the key to the supplier being maintained. This is mandatory.The format is up to 7 characters, alphanumeric or numeric depending on a configuration option within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="7"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SupplierName" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the name of the supplier and is used primarily to identify the supplier. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupShortName" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is a short name and is used in searching for a supplier. It is also used as selection criteria in some reports.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupplierChName" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the full name of the supplier that you want to print on checks made out to the supplier. If you leave this field blank then the entry at the supplier name field is printed on checks made out to this supplier. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="50"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Telephone" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Telephone number for the supplier. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Fax" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Fax number for the supplier. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Contact" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Contact name for the supplier. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Branch" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Branch to be used as the default branch during invoice posting. 
+
+The branch is used for purchase analysis and integrating Accounts Payable to General Ledger. Suppliers can be classified by branch. For example, all local suppliers can be assigned a branch number together with one General Ledger control account and all foreign currency suppliers can be assigned a different branch number with a different General Ledger control account.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TermsCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the default payment terms required for the supplier. Invoice terms are used to calculate discount amounts, as well as discount dates and due dates of supplier documents processed within the A/P Invoice Posting and A/P Post Permanent Entries programs.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Bank" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the default bank from which the supplier is paid.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Currency" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the currency in which invoices and payments are processed for the supplier. You cannot change a supplier's currency once transactions have been processed for that supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DateSuppAdded" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the date on which the supplier details were captured</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WithTaxId" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the supplier’s withholding tax Id number. This Id number is used on A/P Withholding Tax Report and check remittances (A/P Check Print). 
+
+This field is only available if Withholding tax is required (Tax Options)</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WithTaxCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the default tax code that will determine the tax rate to be used when automatically calculating withholding tax values. This code will only be used if the option Automatic calculation of withholding tax is selected (Tax Options).
+This field is only available if Withholding tax is required (Tax Options)</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="5"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupAddr1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the first line of the supplier's address. This address can be viewed using the Supplier Query program and is printed on purchase orders and remittance advices.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupAddr2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the second line of the supplier's address.This address can be viewed using the Supplier Query program and is printed on purchase orders and remittance advices.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupAddr3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the third line of the supplier's address. This address can be viewed using the Supplier Query program and is printed on purchase orders and remittance advices.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupAddr4" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the fourth line of the supplier's address.This address can be viewed using the Supplier Query program and is printed on purchase orders and remittance advices.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupAddr5" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the fifth line of the supplier's address. This address can be viewed using the Supplier Query program and is printed on purchase orders and remittance advices.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupPostalCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the postal/zip code for the supplier's address. This address can be viewed using the Supplier Query program and is printed on purchase orders and remittance advices.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="9"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitName" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the alternative name to be printed on the remittance advice. It is also displayed in the Supplier Query.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitAddr1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the first line of the supplier's remittance address.This is the address to which you send your payments to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitAddr2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the second line of the supplier's remittance address.This is the address to which you send your payments to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitAddr3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the third line of the supplier's remittance address.This is the address to which you send your payments to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitAddr4" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the fourth line of the supplier's remittance address.This is the address to which you send your payments to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitAddr5" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the fifth line of the supplier's remittance address.This is the address to which you send your payments to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitPostalCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the postal/zip code of the supplier's remittance address.This is the address to which you send your payments to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="9"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupplierClass" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the category to which a supplier is assigned. It is an optional field and enables you to classify suppliers for reporting purposes. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LineDiscCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the automatic discount to be applied to each purchase order line entered. A blank entry here indicates that no automatic line discount is required for the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="InvDiscCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the automatic discount to be applied to a complete invoice. A blank entry here indicates that no automatic invoice discount is required for the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Area" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the geographic area to which a supplier belongs. It is an optional field and enables you to classify suppliers by area. It may be used as a selection criteria within the A/P Label Print program. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UserField1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is a 15 character free format alphanumeric user defined field.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UserField2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is a single character free format alphanumeric user defined field.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DefTaxCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the EC Value Added Tax code for the supplier.
+
+This field is only available if the EC VAT system is required (Tax Options).
+
+If you selected the setup option: Supplier default tax code required (Accounts Payable Setup - Tax tab), then the code you define in this field is used as the default tax code when processing transactions using the A/P Invoice Posting and A/P Permanent Entries programs.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TaxRegnNum" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the supplier's VAT (Value Added Tax) registration number.
+
+This field is validated if you indicated that the EC VAT system is required (Tax Options) and you enter the appropriate nationality code for the EC country.
+
+Refer to the EC VAT Registration Number Formats section in the SYSPRO help to view the valid formats for EC VAT registration numbers.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DefaultChequeDay" default="00" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the day of the month on which all system checks must be dated for the supplier. If you run the A/P Check Print program before the date entered here then the current month is used, otherwise the next month is used as the check date.
+
+If zero is entered then the Payment date entered in the A/P Invoice Payment program is printed on checks.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="00"/>
+                    <xsd:enumeration value="01"/>
+                    <xsd:enumeration value="02"/>
+                    <xsd:enumeration value="03"/>
+                    <xsd:enumeration value="04"/>
+                    <xsd:enumeration value="05"/>
+                    <xsd:enumeration value="06"/>
+                    <xsd:enumeration value="07"/>
+                    <xsd:enumeration value="08"/>
+                    <xsd:enumeration value="09"/>
+                    <xsd:enumeration value="10"/>
+                    <xsd:enumeration value="11"/>
+                    <xsd:enumeration value="12"/>
+                    <xsd:enumeration value="13"/>
+                    <xsd:enumeration value="14"/>
+                    <xsd:enumeration value="15"/>
+                    <xsd:enumeration value="16"/>
+                    <xsd:enumeration value="17"/>
+                    <xsd:enumeration value="18"/>
+                    <xsd:enumeration value="19"/>
+                    <xsd:enumeration value="20"/>
+                    <xsd:enumeration value="21"/>
+                    <xsd:enumeration value="22"/>
+                    <xsd:enumeration value="23"/>
+                    <xsd:enumeration value="24"/>
+                    <xsd:enumeration value="25"/>
+                    <xsd:enumeration value="26"/>
+                    <xsd:enumeration value="27"/>
+                    <xsd:enumeration value="28"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoDefaultDoc" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the default format that used when printing purchase orders for the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="2"/>
+                    <xsd:enumeration value="3"/>
+                    <xsd:enumeration value="4"/>
+                    <xsd:enumeration value="5"/>
+                    <xsd:enumeration value="6"/>
+                    <xsd:enumeration value="7"/>
+                    <xsd:enumeration value="8"/>
+                    <xsd:enumeration value="9"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="B"/>
+                    <xsd:enumeration value="C"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value="E"/>
+                    <xsd:enumeration value="F"/>
+                    <xsd:enumeration value="G"/>
+                    <xsd:enumeration value="H"/>
+                    <xsd:enumeration value="I"/>
+                    <xsd:enumeration value="J"/>
+                    <xsd:enumeration value="K"/>
+                    <xsd:enumeration value="L"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="Q"/>
+                    <xsd:enumeration value="R"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="T"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value="V"/>
+                    <xsd:enumeration value="W"/>
+                    <xsd:enumeration value="X"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="Z"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OnHold" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is hold the hold status of the supplier. If set to Y then this prevents the capture of new purchase orders for this supplier. You could use this option, for example, if you detect that the supplier is providing you with inferior quality goods, or where the supplier’s delivery performance deteriorates.
+
+You can still maintain orders for suppliers on hold, but the maintenance functions available are limited to cancelling order lines or cancelling the order.
+
+Suppliers placed on hold are excluded from being automatically selected by the A/P Release Schedule. To select these suppliers for payment, you must either process a manual check payment, or process invoices manually using the A/P Payment Releaseprogram.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FaxRemitFlag" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This flag indicates whether or not remittance advice is to be faxed or emailed to the supplier.
+
+If the Office Automation and Messaging module is installed (Company Setup) and you indicated that fax/mail integration is required (Operators) then you can fax or email remittance advices directly to your suppliers when printing checks and remittances using the A/P Check Print program.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="E"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FaxRemitNum" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the facsimile number to which remittances must be faxed to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FaxRemitContact" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the name of the person to whom the faxed remittance is addressed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RemitEmail" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the email address that  is used when emailing remittance advices directly to your supplier when printing checks and remittances using A/P Check Print program.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="50"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupplierType" default="P" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates how suppliers should be deleted from the Accounts Payable module.
+
+P - Permanent 
+If you select Permanent then the supplier can only be removed from the system using the Delete function of this program.
+
+T - Temporary 
+If you select Temporary then the supplier is automatically removed from the system when next you run the Purge option of the A/P Period End program (providing there are no outstanding invoices held on file for the supplier).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="T"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="NumMthsBeforDel" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the length of time that a temporary supplier with a zero balance must be retained on file.
+
+If the supplier has had a zero balance for the number of months entered here, then the supplier is deleted when next you run Purge option of the A/P Period End program (providing there are no outstanding invoices held on file for the supplier).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MerchGlCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This the first default ledger account that is displayed during the General Ledger distribution phase of the A/P Invoice Posting program.
+
+If you leave this field blank, then the program uses the Default merchandise General Ledger control account configured for the Accounts Payable module (G/L Integration).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FreightGlCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the second default ledger account that is displayed during the General Ledger distribution phase of the A/P Invoice Posting program. 
+
+If you leave this field blank, then the program uses the Default freight General Ledger control account configured for the Accounts Payable module (G/L Integration).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PayByEft" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates whether or not you want to pay this supplier via Electronic Funds Transfers (EFTs).
+  
+The default bank from which the supplier is paid (Bank) must be defined as an EFT bank (Bank Maintenance).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BankBranch" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the branch of the suppliers’ bank. This information is used for documentary purposes only.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BankAccount" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the suppliers’ bank account number. This information is used for documentary purposes only.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EftUserField1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is a 20 character free format alphanumeric user defined field for additional information that may be required by a bank. It can also be used for capturing additional information to be used for internal purposes.
+
+The information entered here is written to the XML file if you selected to create an XML file for EFT purposes (Bank Maintenance).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EftUserField2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is a 12 character free format numeric user defined field for additional information that may be required by a bank. It can also be used for capturing additional information to be used for internal purposes.
+
+The information entered here is written to the XML file if you selected to create an XML file for EFT purposes (Bank Maintenance).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="12"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EftStatementRef" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This field can be used to enter the text that must be displayed on the beneficiary's bank statement when an electronic payment is processed.
+
+You can also define the text to be displayed against all beneficiaries for EFT payments against the bank (Bank Maintenance).
+
+The information entered here is written to the XML file if you selected to create an XML file (Bank Maintenance).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EftBankAccType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the supplier's (beneficiary's) account type.
+
+Account types are normally issued by the banks. For example 1 could indicate a current account, 2 could indicate a savings account, etc.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ChLanguage" default="05" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate the language in which you want to print the full wording amount for checks produced for this supplier. 
+
+You configure the language and associated denomination wording for the suppliers’ bank in the Check preferences section of the A/P Check Format program.
+
+The currently supported languages are:
+
+05 - English
+07 - French
+08 - German
+11 - Portuguese
+12 - Spanish</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="05"/>
+                    <xsd:enumeration value="07"/>
+                    <xsd:enumeration value="08"/>
+                    <xsd:enumeration value="11"/>
+                    <xsd:enumeration value="12"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Required1099" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the nationality code of your installation is defined as USA, the A/P 1099 Label Print program can be used to print the Accumulated gross payment amount and the PAYE reference number for the current and previous years, regardless of whether 1099 labels are enabled for the supplier.
+
+Select Y if you wish to print 1099 Labels  for this supplier</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DefaultFmt1099" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the 1099 Label format assigned to the supplier. You assign a 1099 label format against each supplier that requires a 1099 label.
+
+The A/P 1099 Label Print program prints labels only when the format defined against the supplier matches the format selected at the time of running the A/P 1099 Label Print program. When adding a new supplier, this field defaults to 00 and is assigned the format description A/P 1099 Label Format. If the format has not been defined in the A/P Supplier 1099 Format file, you will receive the error message "1099 label format not on file." Once the format is defined, the program displays the format description directly below the format number.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="AskYtdValue1099" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates whether you are allowed to override the value held against the supplier's Minimum YTD payment field.
+
+By default, the minimum YTD payment defined against the selected 1099 Label Format is used to populate the Minimum YTD payment field. The YTD payment value is displayed once the 1099 label format is assigned to the supplier.
+
+If you select to override the value, then you can enter a value in the Minimum YTD payment field.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MinPay1099" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is Minimum YTD payment for 1099 labels. This field is used when printing 1099 labels. No label is produced if the accumulated YTD payments for the supplier is less than the value in this field.
+
+The value you enter here is saved against the 1099 Minimum payment value field in the A/P Supplier Master file. 
+
+Format is 12.2 numeric. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PayeRef1099" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the supplier's PAYE reference number. (i.e. The registration number at the Receiver of Revenue).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="YtdAmount1099" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the supplier's accumulated gross payment value for the current year.
+
+When processing payments at run time, you define whether the payments must be accumulated into the current year or the previous year. The payment value is then accumulated into the relevant field within the A/P Supplier Master file. At the end of the tax year, you print a 1099 label displaying the total payments you made to the supplier and send this to the Receiver of Revenue.
+
+Once all 1099 labels have been printed for the year, you then run the Set 1099 accumulated gross payments to zero option in the A/P Period End program. This clears the accumulated gross payments for the current year field, after moving the values into the previous year field.
+
+Format is 12.2 numeric. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PurchOrdAllowed" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate whether you are allowed to enter purchase orders for this supplier.
+
+'Y' - Select this if you want purchase orders to be processed for this supplier.
+
+'N' - Select this if you do not want purchases orders to be processed for this supplier.
+
+If you select 'N' and there are outstanding purchase orders for this supplier, then you can only process those orders until they are complete. Thereafter you will be unable to process new purchase orders for the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MinPoVal" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the minimum purchase order value (in local currency) applicable to this supplier. The default value for this field is zero, which means that minimum purchase order value checking for this supplier is not required.
+
+Regardless of whether you are processing a local or a foreign currency supplier, the program compares the purchase order value entered with the local currency value of the order.
+
+The minimum purchase order value only applies to stocked items and non-stocked items. Freight and Miscellaneous charge lines are ignored.
+
+Format is 12.2 numeric. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MinPoMass" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the minimum purchase order mass value applicable to this supplier when entering a purchase order for a stocked item. The default value for this field is zero, which means that minimum purchase order mass checking for this supplier is not required.
+
+The minimum purchase order mass value only applies to stocked lines and relates to the value held against the Mass per stocking unit field for the item (Stock Code Maintenance).
+
+Format is 8.3 numeric</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="12"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MinPoVolume" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the minimum purchase order volume value applicable to this supplier when entering a purchase order. The default value for this field is zero, which means that minimum purchase order volume checking for this supplier is not required.
+
+The minimum purchase order volume value only applies to stocked lines and relates to the value held against the Volume per stocking unit field for the item (Stock Code Maintenance).
+
+Format is 8.3 numeric</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="12"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Contracts" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate that you have a contract with this supplier to supply goods for a specific price over a specified period. The Blanket Purchase Order facility within the Purchase Order module allows you to create, maintain and use contract purchase orders as well as monitor purchase order receipts against a supplier's contract. The purpose of these contracts is to allow a fixed price to be recorded for a specified period and/or volume, plus an agreed delivery schedule. With extensive querying and reporting capabilities, it is possible to centrally manage anticipated deliveries and review supplier delivery performance. Using Business-to-Business Trading, contract details can be exported into XML format for electronic exchange with trading partners.
+
+You will be unable capture blanket purchase orders for this supplier if this option is not selected.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GrnMatchReqd" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate whether you require goods received note matching for the supplier during processing in the A/P Invoice Posting program.
+
+Y - Select this if you want to process goods received notes for purchases made from this supplier.
+
+N - Select this if you do not require goods received notes to be processed for purchases made from this supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LctRequired" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate that goods ordered from this supplier are to be tracked using the Landed Cost Tracking system. Using the LCT system will allow you to keep track of the goods during transit and to calculate the expected and actual costs of transporting the goods.
+
+Y - Select this if the Landed Cost Tracking module is installed and you want to track goods received from the supplier using this module.
+
+N - Select this if you do not want to track goods received from this supplier using the Landed Cost Tracking module or the Landed Cost Tracking module is not installed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EdiTypeFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You can fax purchase order documents directly to your suppliers providing that the Office Automation and Messaging module is installed (Company Setup) and you indicated that fax/mail integration is required (Operators).
+
+N - Print document only Select Print document only if you only require your purchase order documents to be printed.
+
+Y - Indicate that purchase orders entered for this supplier must be transmitted using the Electronic Data Interchange (EDI) system. Purchase orders captured for this supplier are transmitted to the receiving company (Purchase Order Export). The receiving company can import this file (Sales Order Import) providing that its receiver code (Interface System SetupI, Local Site tab) matches the entry made here.
+
+F - Fax purchase orders to the supplier in batch mode using the P/O Print program. Your entry at the fax number field is used when faxing documents to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="F"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EdiReceiverCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the Trading partner field and it enables you to indicate the receiver code of the company to which you export orders electronically via an ASCII file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EdiFax" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the fax number to be used when faxing purchase order documents to the supplier.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FaxContact" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You can optionally specify a Contact name which will be inserted into the Subject section of the cover page (if a cover page precedes the fax). The contact name also appears in the Subject section of the Exchange Outbox.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Email" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the E-mail address of the supplier. This field is not validated.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="50"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Nationality" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate the nationality code for the country in which the supplier is located.
+
+Nationalities are maintained using the Nationalities program.
+
+The nationality is only validated if you have Landed Cost Tracking installed or EC VAT system is required (Tax Options).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TransactionNature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Default Intrastat Nature of Transaction to be used against the supplier.
+
+This is only required if the EC VAT system is required (Tax Options).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DeliveryTerms" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Default Intrastat Delivery Terms to be used against supplier. 
+
+This is only required if the EC VAT system is required (Tax Options). </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>GUID for eSignatures</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="38"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

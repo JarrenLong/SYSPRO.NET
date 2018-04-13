@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Labor Analysis Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="EntryDate">
+    <xsd:annotation>
+      <xsd:documentation>Date selection. A=All;S=Single;R=Range</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Sngle;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="EntryDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FirstReport">
+    <xsd:annotation>
+      <xsd:documentation>First report option.              A = WorkCenter -Employee (Default)B = WorkCenter-Job;C = WorkCenter-Machine; D = WorkCenter Operation; E = Job -WorkCenter; F = Job-employee;G = Job-Machine;  H = Job-Operation;I  = Employee-WorkCenter;J = Employee-Job;K = Employee-Machine; L = Employee-Operation;M = Machine-WorkCenter;N = Machine-Employee;O = Machine-Job;P = Machine Operation</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=Work center - Employee;B =Work center - Job;C=Work center - Machine;D=Work center - Operation;E=Job - Work center;F=Job - Employee;G=Job - Machine;H=Job - Operation;I=Employee - Work center;J=Employee - Job;K=Employee - Machine;L=Employee - Operation;M=Machine - Work center;N=Machine - Employee;O=Machine - Job;P=Machine - Operation"/>
+       </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="J"/>
+        <xsd:enumeration value="K"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FourthReport">
+    <xsd:annotation>
+      <xsd:documentation>Fourth report option.  Z=None; A = WorkCenter -Employee (Default)B = WorkCenter-Job;C = WorkCenter-Machine; D = WorkCenter Operation; E = Job -WorkCenter; F = Job-employee;G = Job-Machine;  H = Job-Operation;I  = Employee-WorkCenter;J = Employee-Job;K = Employee-Machine; L = Employee-Operation;M = Machine-WorkCenter;N = Machine-Employee;O = Machine-Job;P = Machine Operation</xsd:documentation>
+            <xsd:appinfo source="screenItem=Y;Z=None;A=Work center - Employee;B =Work center - Job;C=Work center - Machine;D=Work center - Operation;E=Job - Work center;F=Job - Employee;G=Job - Machine;H=Job - Operation;I=Employee - Work center;J=Employee - Job;K=Employee - Machine;L=Employee - Operation;M=Machine - Work center;N=Machine - Employee;O=Machine - Job;P=Machine - Operation"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Z"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="J"/>
+        <xsd:enumeration value="K"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FirstReport"/>
+        <xsd:element ref="SecondReport"/>
+        <xsd:element ref="ThirdReport"/>
+        <xsd:element ref="FourthReport"/>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="PrintCostDetails"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintCostDetails">
+    <xsd:annotation>
+      <xsd:documentation>Option to print cost details. Y=Yes,N=No</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Repor type. D=Detail S=Summary</xsd:documentation>
+       <xsd:appinfo source="screenItem=Y;D=Detail;S=Summary"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SecondReport">
+    <xsd:annotation>
+      <xsd:documentation>Second report option.  Z=None; A = WorkCenter -Employee (Default)B = WorkCenter-Job;C = WorkCenter-Machine; D = WorkCenter Operation; E = Job -WorkCenter; F = Job-employee;G = Job-Machine;  H = Job-Operation;I  = Employee-WorkCenter;J = Employee-Job;K = Employee-Machine; L = Employee-Operation;M = Machine-WorkCenter;N = Machine-Employee;O = Machine-Job;P = Machine Operation</xsd:documentation>
+                  <xsd:appinfo source="screenItem=Y;Z=None;A=Work center - Employee;B =Work center - Job;C=Work center - Machine;D=Work center - Operation;E=Job - Work center;F=Job - Employee;G=Job - Machine;H=Job - Operation;I=Employee - Work center;J=Employee - Job;K=Employee - Machine;L=Employee - Operation;M=Machine - Work center;N=Machine - Employee;O=Machine - Job;P=Machine - Operation"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Z"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="K"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ThirdReport">
+    <xsd:annotation>
+      <xsd:documentation>Third report option.  Z=None; A = WorkCenter -Employee (Default)B = WorkCenter-Job;C = WorkCenter-Machine; D = WorkCenter Operation; E = Job -WorkCenter; F = Job-employee;G = Job-Machine;  H = Job-Operation;I  = Employee-WorkCenter;J = Employee-Job;K = Employee-Machine; L = Employee-Operation;M = Machine-WorkCenter;N = Machine-Employee;O = Machine-Job;P = Machine Operation</xsd:documentation>
+                  <xsd:appinfo source="screenItem=Y;Z=None;A=Work center - Employee;B =Work center - Job;C=Work center - Machine;D=Work center - Operation;E=Job - Work center;F=Job - Employee;G=Job - Machine;H=Job - Operation;I=Employee - Work center;J=Employee - Job;K=Employee - Machine;L=Employee - Operation;M=Machine - Work center;N=Machine - Employee;O=Machine - Job;P=Machine - Operation"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Z"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="K"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

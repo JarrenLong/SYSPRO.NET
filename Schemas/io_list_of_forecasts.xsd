@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the List of Forecasts Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AnalysisType">
+    <xsd:annotation>
+      <xsd:documentation>The analysis type required for the report. S-Sales, C-Current forecasts, D-Draft forecasts. Default -S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Sales;C=Current forecasts;D=Draft forecasts"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AnyPeriodWithinTheNextNumberOfMonths">
+    <xsd:annotation>
+      <xsd:documentation>If 'OnlyPrintDraftDiffersCurrentForecasts' has been selected then the number of months needs to be captured. The report will filter the data for the number of months captured. Default is 12 months.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;01=01;02=02;03=03;04=04;05=05;06=06;07=07;08=08;09=09;10=10;11=11;12=12"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="01"/>
+        <xsd:enumeration value="02"/>
+        <xsd:enumeration value="03"/>
+        <xsd:enumeration value="04"/>
+        <xsd:enumeration value="05"/>
+        <xsd:enumeration value="06"/>
+        <xsd:enumeration value="07"/>
+        <xsd:enumeration value="08"/>
+        <xsd:enumeration value="09"/>
+        <xsd:enumeration value="10"/>
+        <xsd:enumeration value="11"/>
+        <xsd:enumeration value="12"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Buyers to print </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvBuyer;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of available filters</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="Planner"/>
+        <xsd:element ref="Buyer"/>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="ProductClass"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeClassItemsA">
+    <xsd:annotation>
+      <xsd:documentation>This will include class A items on the report. Y-Yes. N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeClassItemsB">
+    <xsd:annotation>
+      <xsd:documentation>This will include class B items on the report. Y-Yes. N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeClassItemsC">
+    <xsd:annotation>
+      <xsd:documentation>This will include class C items on the report. Y-Yes. N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeClassItemsD">
+    <xsd:annotation>
+      <xsd:documentation>This will include class D items on the report. Y-Yes. N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeItemsWithoutCurrentForecasts">
+    <xsd:annotation>
+      <xsd:documentation>This will include items without any current forecasts on the report. Y-Yes, N-No, O-Only. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeItemsWithoutDraftForecasts">
+    <xsd:annotation>
+      <xsd:documentation>This will include items without any draft forecasts on the report. Y-Yes, N-No, O-Only. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeManuallyForecastItems">
+    <xsd:annotation>
+      <xsd:documentation>This will include manually forecast items on the report. Y-Yes, N-No, O-Only. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNoMovementClassItemsE">
+    <xsd:annotation>
+      <xsd:documentation>This will include class E items on the report which are items with no movements. Y-Yes. N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeUnclassifiedItems">
+    <xsd:annotation>
+      <xsd:documentation>This will include unclassified items on the report. Y-Yes. N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OnlyPrintDraftDiffersCurrentForecasts">
+    <xsd:annotation>
+      <xsd:documentation>Only print items where the draft differs from the current forecasts. If this option is selected then the percentage and period needs to be captured. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of available options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="UseForecastingSet"/>
+        <xsd:element ref="SetToUse"/>
+        <xsd:element ref="IncludeItemsWithoutDraftForecasts"/>
+        <xsd:element ref="IncludeItemsWithoutCurrentForecasts"/>
+        <xsd:element ref="PrintPeriodsWithoutDraftsOrCurrentForecasts"/>
+        <xsd:element ref="OnlyPrintDraftDiffersCurrentForecasts"/>
+        <xsd:element ref="PercentOfDraftDiffersCurrentForecast"/>
+        <xsd:element ref="AnyPeriodWithinTheNextNumberOfMonths"/>
+        <xsd:element ref="IncludePartTypeMadeIn"/>
+        <xsd:element ref="IncludePartTypeBoughtOut"/>
+        <xsd:element ref="IncludePartTypeSubcontracted"/>
+        <xsd:element ref="IncludePartTypeKitPart"/>
+        <xsd:element ref="IncludePartTypeCoProduct"/>
+        <xsd:element ref="IncludePartTypeByProduct"/>
+        <xsd:element ref="IncludeClassItemsA"/>
+        <xsd:element ref="IncludeClassItemsB"/>
+        <xsd:element ref="IncludeClassItemsC"/>
+        <xsd:element ref="IncludeClassItemsD"/>
+        <xsd:element ref="IncludeNoMovementClassItemsE"/>
+        <xsd:element ref="IncludeUnclassifiedItems"/>
+        <xsd:element ref="AnalysisType"/>
+        <xsd:element ref="ParetoLevel"/>
+        <xsd:element ref="IncludeManuallyForecastItems"/>
+        <xsd:element ref="IncludeReplenishmentItems"/>
+        <xsd:element ref="IncludeMasterProductionScheduledItems"/>
+        <xsd:element ref="IncludeMakeToOrderItems"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ParetoLevel">
+    <xsd:annotation>
+      <xsd:documentation>The pareto level required. 1-Stock code, 2-Warehouse, 3-Product class, 4-Supplier, 5-Planner, 6-Buyer. Default -1.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;1=Stock code;2=Warehouse;3=Product class;4=Supplier;5=Planner;6=Buyer"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+        <xsd:enumeration value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PercentOfDraftDiffersCurrentForecast" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If 'OnlyPrintDraftDiffersCurrentForecasts' has been selected then the percenage is required. The report will use anything greater than this % to output.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Planner">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Planners to print </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvPlanner;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintPeriodsWithoutDraftsOrCurrentForecasts">
+    <xsd:annotation>
+      <xsd:documentation>This will print periods without any draft or current forecasts. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Product classes to print </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SetToUse">
+    <xsd:annotation>
+      <xsd:documentation>If UseForecastingSet is Y then the set name should be in this field.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=IopReportSet"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Stock codes to print </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Suppliers to print </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UseForecastingSet">
+    <xsd:annotation>
+      <xsd:documentation>Allows the user to filter the report against a specific forecasting set. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Warehouses to print </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="IncludePartTypeMadeIn">
+    <xsd:annotation>
+      <xsd:documentation>This will include made-in parts on the report: Y-Yes, N-No, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePartTypeBoughtOut">
+    <xsd:annotation>
+      <xsd:documentation>This will include bought-out parts on the report: Y-Yes, N-No, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePartTypeSubcontracted">
+    <xsd:annotation>
+      <xsd:documentation>This will include subcontracted parts on the report: Y-Yes, N-No, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePartTypeKitPart">
+    <xsd:annotation>
+      <xsd:documentation>This will include kit parts on the report: Y-Yes, N-No, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePartTypeCoProduct">
+    <xsd:annotation>
+      <xsd:documentation>This will include co-products on the report: Y-Yes, N-No, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePartTypeByProduct">
+    <xsd:annotation>
+      <xsd:documentation>This will include by-products parts on the report: Y-Yes, N-No, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeReplenishmentItems">
+    <xsd:annotation>
+      <xsd:documentation>This will include replenishment items on the report: Y-Yes, N-No, O-Only, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMasterProductionScheduledItems">
+    <xsd:annotation>
+      <xsd:documentation>This will include MPS items on the report: Y-Yes, N-No, O-Only, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMakeToOrderItems">
+    <xsd:annotation>
+      <xsd:documentation>This will include MTO items on the report: Y-Yes, N-No, O-Only, default = Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

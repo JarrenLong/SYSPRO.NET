@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Balance Check Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DetailOrSummary" default="S">
+    <xsd:annotation>
+      <xsd:documentation>S – Summary, only a count of the rows where the sales quantities do not balance back to the quantities in inventory. This is the default
+DD – Detail, the count of the rows out of balance as well as a list of each stock code, warehouse combination along with as the relevant quantities on hand are returned. 
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LockType" default="L">
+    <xsd:annotation>
+      <xsd:documentation>This is the type of locking you wish to apply in SQL when querying the tables and accumulating the quantities on hand. The type of lock you select may improve the speed of the query but locking of the table is not recommended if used whilst operators are transacting.
+The types of locking available are:
+L – Acquire a shared lock on each row as it is processed. This is the default.
+T – Acquire a shared lock on each table as it is processed (TABLOCK)
+X – Exclusively lock the tables whilst processing (TABLOCKX)
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="X"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaxItemsToReturn">
+    <xsd:annotation>
+      <xsd:documentation>When you select to return Detail information then you can choose the maximum number of rows you with to return. Zero indicates all rows (Default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LockType" minOccurs="0"/>
+        <xsd:element ref="DetailOrSummary" minOccurs="0"/>
+        <xsd:element ref="MaxItemsToReturn" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

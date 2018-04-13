@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Contract Pricing Maintenance business object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Contract" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Contract number</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ContractType">
+		<xsd:annotation>
+			<xsd:documentation>Contract type    
+B - Buying group 
+C - Customer</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustListPrice">
+		<xsd:annotation>
+			<xsd:documentation>Customer list price. Use for Fixed price method by customer and buying group</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="CustomerBuygrp" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Customer code or buying group code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Discount1">
+		<xsd:annotation>
+			<xsd:documentation>Mark up, list less % or      
+1st chain discount percentage</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Discount2">
+		<xsd:annotation>
+			<xsd:documentation>2nd chain discount %</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Discount3">
+		<xsd:annotation>
+			<xsd:documentation>3rd chain discount %</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="DiscountPct">
+		<xsd:annotation>
+			<xsd:documentation>Discount % to be applied for 
+qty discount break method  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ExpiryDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>Contract expiry date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FixedPrice" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Fixed price for fixed price 
+method                     
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FixedPriceCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Price code for coded and
+fixed price method </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FixedUom" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Price unit of measure for
+fixed price method</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ItemType">
+		<xsd:sequence>
+			<xsd:element name="Key" type="KeyType"/>
+			<xsd:element ref="MaintenanceFlag"/>
+			<xsd:element ref="StartDate"/>
+			<xsd:element ref="ExpiryDate"/>
+			<xsd:element ref="PriceMethod"/>
+			<xsd:element ref="FixedUom"/>
+			<xsd:element ref="FixedPriceCode"/>
+			<xsd:element ref="FixedPrice"/>
+			<xsd:element ref="Discount1"/>
+			<xsd:element ref="Discount2"/>
+			<xsd:element ref="Discount3"/>
+			<xsd:element ref="QtyBreak1" minOccurs="0"/>
+			<xsd:element ref="QtyBreak2" minOccurs="0"/>
+			<xsd:element ref="QtyBreak3" minOccurs="0"/>
+			<xsd:element ref="QtyBreak4" minOccurs="0"/>
+			<xsd:element ref="QtyBreak5" minOccurs="0"/>
+			<xsd:element ref="QtyPrice1" minOccurs="0"/>
+			<xsd:element ref="QtyPrice2" minOccurs="0"/>
+			<xsd:element ref="QtyPrice3" minOccurs="0"/>
+			<xsd:element ref="QtyPrice4" minOccurs="0"/>
+			<xsd:element ref="QtyPrice5" minOccurs="0"/>
+			<xsd:element name="QtyBreaks" type="QtyBreaksType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="CustListPrice"/>
+			<xsd:element ref="DiscountPct"/>
+			<xsd:element ref="eSignature"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="KeyType">
+		<xsd:sequence>
+			<xsd:element ref="ContractType"/>
+			<xsd:element ref="CustomerBuygrp"/>
+			<xsd:element ref="StockCode"/>
+			<xsd:element ref="Contract"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="MaintenanceFlag">
+		<xsd:annotation>
+			<xsd:documentation>Flag indicating what maintenance to do on the contract line.
+Valid values are 'A' - Add, 'U' - Update or 'D' - Delete</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="U"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceMethod">
+		<xsd:annotation>
+			<xsd:documentation>Pricing methods:  
+'F' - Flat price  
+'C' - Coded 
+'Q' -  Quantity discount breaks  
+'L' - List price less percentage  
+'P' - Coded less chain discount  
+'D' - List price less chain discount  
+'M' - Mark-up cost  
+'U' - Coded less unit discount value
+'K' - Mark-up list price
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="Q"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="U"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="K"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="QtyBreak1">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyBreak2">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyBreak3">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyBreak4">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyBreak5">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:complexType name="QtyBreaksType">
+		<xsd:sequence>
+			<xsd:element ref="QtyPriceCode"/>
+			<xsd:element ref="Qtybreak"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="QtyPrice1">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyPrice2">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyPrice3">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyPrice4">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyPrice5">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="QtyPriceCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Qtybreak">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:decimal"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SetupSoContractPricing">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item" type="ItemType" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StartDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>Contract start date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StockCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Stock code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="eSignature">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

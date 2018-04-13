@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--  
+     Schema for the Supplier Requisition List Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Capex">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for all capex codes. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ReqCapex;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for one or all customers. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ArCustomer;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value=""/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DueDate">
+    <xsd:annotation>
+      <xsd:documentation>Select this to return requisitions due on certain dates. A - All; Range - Range; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="EntryDate">
+    <xsd:annotation>
+      <xsd:documentation>Select this to return requisitions placed on certain dates. A-All; R-Range; S-Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>The filter parent node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Originator"/>
+        <xsd:element ref="Holder"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="Job"/>
+        <xsd:element ref="Capex"/>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Requisition"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="EntryDate"/>
+        <xsd:element ref="DueDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Holder">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for one or all holders in the report. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ReqUser;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeApprovedRequisitions">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print all the requisitions which have been approved. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCancelledRequisitions">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print all the requisitions which have been cancelled. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeExceptionMessages">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include all error/warning messages if they apply to a requisition. In some cases multiple errors will print for one requisition line. Y - Yes; N - No. Default Y - Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeLineDetail">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include all the detailed requisition information. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNarrations">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print Requisition narrations and Purchase order comments. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNormalRequisitions">
+    <xsd:annotation>
+      <xsd:documentation>Select this to only include new requisitions added to the system after the last run of the report. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOperator">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print the following codes on the report:
+
+The operator code of the user who originated the requisition.
+
+The operator code and requisition user code of the user who routed the requisition.
+These are printed against the routing details.
+
+The operator code of the user who approved the requisition
+
+This option is only enabled if you selected the option: Routing details.
+
+Y - Yes; N - No. Default N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePurchaseOrderCreatedRequisitions">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print all the requisitions which have been converted into purchase orders. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeRoutingDetails">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include all routing details. Y - Yes; N - No. Default Y - Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for one or all jobs. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=WipMaster;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ListOnlyNewRequisitions">
+    <xsd:annotation>
+      <xsd:documentation>Select this to only include new requisitions added to the system after the last run of the report. Y - Yes; N - No. Default N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The options parent node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSequence"/>
+        <xsd:element ref="PriceDetailsRequired"/>
+        <xsd:element ref="PrintSupplierName"/>
+        <xsd:element ref="SuppliersOnHold"/>
+        <xsd:element ref="IncludeLineDetail"/>
+        <xsd:element ref="IncludeRoutingDetails"/>
+        <xsd:element ref="IncludeOperator"/>
+        <xsd:element ref="IncludeNarrations"/>
+        <xsd:element ref="IncludeExceptionMessages"/>
+        <xsd:element ref="ListOnlyNewRequisitions"/>
+        <xsd:element ref="IncludeNormalRequisitions"/>
+        <xsd:element ref="IncludeApprovedRequisitions"/>
+        <xsd:element ref="IncludeCancelledRequisitions"/>
+        <xsd:element ref="IncludePurchaseOrderCreatedRequisitions"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Originator">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for one or all originators in the report. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ReqUser;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PriceDetailsRequired">
+    <xsd:annotation>
+      <xsd:documentation>This option allows you to specify whether price information relating to the primary supplier for this stock code is to be extracted from the supplier price file. Y - Yes; N - No; D - Detail. Default N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;D=Detail"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintSupplierName">
+    <xsd:annotation>
+      <xsd:documentation>Select this option to print the Supplier's name on the report. This option is only relevant when the query is used to produce a report.  The supplier name will always be returned  in the resulting XML. Y - Yes; N - No. Default N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>Select Originator to display the requisitions for the user who created the requisitions. Select Holder to display the requisitions for the user who is the current holder of the requisitions. O - Originator; H - Holder. Default O - Originator</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;O=Originator;H=Holder"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Requisition">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include certain requisitions in the report. A - All; R - Range; S - Single, L - List. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ReqHeader;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for certain stock codes. A - All; R - Range; S - Single, L - List. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for one or all suppliers. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SuppliersOnHold">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include suppliers that are on hold in the report. I - Include; E - Exclude; O - Only. Default I - Include.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include requisitions for one or all warehouses. A - All; S - Single. Default A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

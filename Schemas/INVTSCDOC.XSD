@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Stock Take Detail Line Capture Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Bin">
+		<xsd:annotation>
+			<xsd:documentation>The bin number containing the stock.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the details for a stock code. This will appear once for each detail line to be captured.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="LineType"/>
+				<xsd:element ref="WarehouseCode" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="QtyCaptured"/>
+				<xsd:element ref="Bin" minOccurs="0"/>
+				<xsd:element ref="Reference" minOccurs="0"/>
+				<xsd:element ref="Serial" minOccurs="0"/>
+				<xsd:element ref="Pieces" minOccurs="0"/>
+				<xsd:element ref="Lot" minOccurs="0"/>
+				<xsd:element ref="LotExpiryDate" minOccurs="0"/>
+				<xsd:element ref="Version" minOccurs="0"/>
+				<xsd:element ref="Release" minOccurs="0"/>
+				<xsd:element ref="TicketNumber" minOccurs="0"/>
+				<xsd:element name="UnitOfMeasure" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Unit of measure for the stock code. This field can be left spaces, in that case the stocking unit of measure will be assumed.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="3"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LineType">
+		<xsd:annotation>
+			<xsd:documentation>The line type to make sure that this is a stock take file. This is a compulsory element and must contain an 'S'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Lot">
+		<xsd:annotation>
+			<xsd:documentation>If the entered lot is not held on file, then you can indicate that the lot number must be created, as well as enter an expiry date for the lot. If you have indicated that the same lot number cannot be used on multiple stock codes (Setup,  Lot Traceability Setup), then you will be unable to capture the same lot number for different stock codes.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LotExpiryDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>The date that the contents of this lot expire.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Pieces">
+		<xsd:annotation>
+			<xsd:documentation>If using unit quantity processing this will contain the pieces portion of the quantity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="7"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="QtyCaptured">
+		<xsd:annotation>
+			<xsd:documentation>The quantity of stock to be captured. If using unit quantity processing this will contain the cases portion. This is a compulsory element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="12"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Reference">
+		<xsd:annotation>
+			<xsd:documentation>A reference of up to nine characters.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="9"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Release">
+		<xsd:annotation>
+			<xsd:documentation>The release level of the captured stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TicketNumber">
+		<xsd:annotation>
+			<xsd:documentation>This is a numeric element of up to 6 digits defining the ticket number if ticket numbers are in use. Use of ticket numbers is controlled by the parameters 'CaptureTicketNumbers' ( a ticket number may be supplied and will be added to the ticket file if new) and 'TicketNumbersExist' (a ticket number must already exist, and the stock code must match that on the ticket, or will be derived from the ticket). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Serial">
+		<xsd:annotation>
+			<xsd:documentation>The serial number of the captured stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="20"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>The stock code/SKU number of the part being captured. This is a compulsory element if ticket numbers are not in use. If ticket numbers are in use, and a ticket number is supplied, then the stock code associated with the ticket is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockTake">
+		<xsd:annotation>
+			<xsd:documentation>The root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="StockTakeDetail"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockTakeDetail">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Version">
+		<xsd:annotation>
+			<xsd:documentation>The version number of the item being captured.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WarehouseCode">
+		<xsd:annotation>
+			<xsd:documentation>This is the warehouse in which the stock take is taking place. If this is blank the warehouse held against the header/detail supplied with INVTSC.XML, will be used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Selection Criteria Phase
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostConfiguration">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="SelectionCriteria">
+								<xsd:annotation>
+									<xsd:documentation>This element holds the information pertaining to the selection</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="Line">
+											<xsd:annotation>
+												<xsd:documentation>This element indicates the selection line you are currently processing. This element is mandatory. The format is a 3 character numeric field.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SkipOptionalSelection" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element allows you to skip optional selections when proceeding forward in a configuration. Possible values are N and Y. This element defaults to N</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CriteriaLine">
+											<xsd:annotation>
+												<xsd:documentation>This element indicates the criteria line you would like to apply to the configuration. This element is mandatory. The format is a 3 character numeric field</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CriteriaValue" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element indicates a value against a criteria which, when selected, can be used to automatically calculate the components/operations. The format is a 7.3  numeric field.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="UserDefinedComments" type="xsd:string" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element indicates user defined comments.</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

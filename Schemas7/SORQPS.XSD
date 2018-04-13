@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for SO Release Reserved Stock Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>List of customers required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="ShipDate" minOccurs="0"/>
+				<xsd:element ref="SalesOrder" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of options available.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PickingStatusLinesOnly" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PickingStatusLinesOnly" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select to include only lines in Picking status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>S/O Release reserved satock query</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SalesOrder">
+		<xsd:annotation>
+			<xsd:documentation>List of sales orders required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ShipDate">
+		<xsd:annotation>
+			<xsd:documentation>List of ship dates required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>List of stock codes required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>List of warehouses required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

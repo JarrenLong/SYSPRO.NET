@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the SO Credit Note Change Merchandise Line Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostChangeCreditNoteLine">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element initiates the data set for a credit note line.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="CreditNoteNumber" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Valid number of an existing credit note, to which lines are to be added.
+Mandatory.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="CreditNoteLine" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>The line number must refer to an existing merchandise line on the credit note. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Customer" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If entered it must be a valid SYPSRO customer, and must be the customer on the selected sales order credit note. This is used for verification purposes only.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="CreditReason" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid credit note reason code if entered. This is used to change the credit reason on the line.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid stocked item code or non-stocked code if non-stocked line. If given, then this will be checked against the stock code on the line.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Description" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Stock description if not using the standard stock code desription.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Warehouse" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid warehouse code where line selected is a stocked merchandise line. If given, then will be validated against the warehouse on the line.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="OrderQty" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>New order quantity required on the selected credit note line. 
+If stock item is a unit-quantity type, quantity can be entered in OrderUnits and OrderPieces elements.
+If the quantity is not to be changed, then all three quantity elements must be removed from the XML.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Price" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Price of stock item. If supplied then the price will be changed on the line. If the price entered is zero, then a warning is given.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="PriceCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Price code if change of price is required. If both price and price code are supplied, then an error is reported. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="OrderUnits" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Number of whole units on the credit note line, if stock item is a unit-quantity type item.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="OrderPieces" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Number of pieces on the credit note line, if stock item is a unit-quantity type item.
+</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element initiates the data set for the aloocation of serials. If the order quantity is increased then the set of serials provided lists the serial numbers to be added to the line. If the order quantity is reduced, then the set of serials provided lists the serial numbers to be removed from the line.
+
+The total quantity of the serial allocations must add up to the change in quantity on the line, not the total quantity on the line if the option ClearLotsBinsSerials is not set to 'Y'. If the option ClearLotsBinsSerials is set to 'Y' then total quantity must add up to the order quantity</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="SerialNumber" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Serial number to allocate or reduce quantity entered.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialQuantity" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Serial quantity to allocate to serial number entered. 
+Not required if stock item is a unit-quantity type item.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialUnits" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of whole units to be allocated to serial number entered, if stock item is a unit-quantity type item.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialPieces" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of pieces to be allocated to serial number entered, if stock item is a unit-quantity type item.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Lot" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid lot number if stock item is lot-traceable. If the order quantity is reduced, then the quantity will be removed from the lot number which must exist against the line. If the order quantity is increased, then the lot number can be new to the order, or existing. If the option ClearLotsBinsSerials is set to 'Y' then this works in the same manner as increasing the quantity. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Bins" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element initiates the data set for the allocation of bins. If the order quantity is increased then the set of bins provided lists the bin numbers to be added to or updated on the line. If the order quantity is reduced, then the set of bins provided lists the bin numbers to be removed from or reduced on the line.
+
+The total quantity of the bin allocations must add up to the change in quantity on the line, not the total quantity on the line if the option ClearLotsBinsSerials is not set to 'Y'. If the option ClearLotsBinsSerials is set to 'Y' then this lists the bins to be added for the total order quantity</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="BinLocation" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Bin location if multiple bins are in use for the warehouse entered.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinQuantity" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation/>
+                        <xsd:documentation>Quantity allocated to bin location entered.
+Not required if stock item is a unit-quantity type item.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinUnits" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of whole units allocated to bin location entered, if stock item is a unit-quantity type item.
+</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinPieces" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of pieces allocated to bin location entered, if stock item is a unit-quantity type item.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ProductClass" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid product class if supplied.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DiscPercent1" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Percentage of first level of discount.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DiscPercent2" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Percentage of second level of discount. Can only be non-zero id first level is non-zero.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DiscPercent3" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Percentage of third level of discount. Can only be non-zero id first 2 levels are non-zero.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DiscValue" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Discount value to be applied if DiscValFlag is 'V' or 'U'.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DiscValFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Flag to indicate if discount is by value or unit. Valid values are ' ' - Spaces (default), 'V' - Value or 'U' - Unit.
+If 'V' or 'U', a DiscValue must be supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="V"/>
+                    <xsd:enumeration value="U"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OverrideCalculatedDiscount" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Flag to indicate override of discount.
+Valid values are ' ' - Spaces, 'Y' - Yes or 'N' - No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CustRequestDate" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer request date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ShipDate" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UserDefined" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>User-defined field. If supplied it will be used to update the user defined field, even if spaces.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UnitMass" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Unit mass.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UnitVolume" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Unit volume.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockTaxCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Tax code, if applicable.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockNotTaxable" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Flag to indicate if credit note line is or is not  taxable. This is used in conjunction with the StockTaxCode element.
+
+Spaces - any tax code entry is ignored, and the tax on the order remains the same
+'Y' - line is set to non-taxable
+'N' - line is set to taxable, and tax code presented is validated
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockFstCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Federal sales tax code, if applicable. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockNotFstTaxable" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Flag to indicate if credit note line is or is not FST taxable. This is used in conjunction with the StockFstCode element.
+
+Spaces - any fst code entry is ignored, and the fston the order remains the same
+'Y' - line is set to non-taxable for fst
+'N' - line is set to taxable for fst, and fst code presented is validated</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="NsUnitCost" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Unit cost of item - only applies to a non-stocked line.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="AddNewKit" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If set to 'Y', then a new kit details will be added to the order. The kit details will be based on the parent stock given, and expanded using the entries on the bill of materials master. Only kit type 'fixed' is allowed. Optional components can be excluded by supplying details in the ComponentExclusions node.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Revision" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Revision if stock code is ECC controlled - only applies when adding a new kit</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Release" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Release if stock code is ECC controlled - only applies when adding a new kit</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ComponentExclusions" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>Components to be excluded from the bill when adding parent and component details to the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ComponentSequenceNum" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the sequence number of the component entry in the Bill of Materials master. If not given, it will be assumed as spaces.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ComponentStockCode" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the component stock code of the component entry in the Bill of Materials master. It is mandatory if an exclusions node is provided. It is used with the parent and the component sequence number to obtain the component details. The component must be optional in the bill. The maximum length is controlled by the current version of SYSPRO. The entry must be valid numeric value if numeric key type. Stock code will also be validated against the Inventory master file. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="eSignature" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ClearLotsBinsSerials" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the lots bins and serials being submitted are for the total quantity and not the difference in quantity then any lots, bins and serials already attached to the line must first be cleared. Y - clear the lots, bins and serials, N - retain the lots bins and serials. Default = N</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

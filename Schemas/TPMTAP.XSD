@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the Trade Protions for Sales Orders Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ApplyIfEntireDocumentValid" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether to process entire document only if all items are valid. If set to 'N', each item is validated and rejected if in error or processed if correct. This is the fastest option. If set to 'Y', all items are validated and only processed if entire document is valid. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FreeGoodsAllocationAction" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether free goods merchandise lines are to be allocated or placed on back order. Valid entries are 'B' -  place whole line on back order, 'A' - allocate available quantity if less than qualified quantity, and place the remainder on back order. If not entered, 'F' is assumed. If set to 'B' (Back order), then the parameter 'ShipFromDefaultBin' is ignored. Note that any items which are kit items, ECC items,  lot traceable or serialised will still be placed on back order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not an item must be rejected if there are any warnings, such as AR posting period one month behind the Inventory posting period. If it is not supplied, it defaults to 'N'. Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned, W - warnings will be returned as warnings in the XML returned).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+        <xsd:element ref="ValidateOnly" minOccurs="0"/>
+        <xsd:element ref="ShipFreeGoodsFromDefaultBin" minOccurs="0"/>
+        <xsd:element ref="FreeGoodsAllocationAction" minOccurs="0"/>
+        <xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostTradePromotionsForSalesOrders">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShipFreeGoodsFromDefaultBin" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether free goods lines are to be shipped from the default bin (Y - Yes, N - No). This parameter is only relevant if multiple bins are in use, and the warehouse on the sales order line required multiple bins. If not set and multiple bins are in use, and the warehouse on the sales order line requires multiple bins , then stocked lines will be placed on back order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No updating will take place. If set to 'N', each item is validated and updating is performed based on setting of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

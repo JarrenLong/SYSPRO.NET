@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     This is an example XML instance to demonstrate
+     use of the SO Load planning Move Sales order Lines to a Load Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="DispatchNote" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Dispatch note, if it exists for the selected sales order line.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DispatchNoteLine" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Dispatch note Line, if the dispatch note exists, for the selected sales order line.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FromDeliveryDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Move sales order line from this delivery date.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FromDeliveryRoute" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Move sales order line from this delivery route.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FromDeliverySequence" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Move sales order line from delivery sequence.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>Root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="SalesOrderLines"/>
+				<xsd:element ref="eSignature" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>Key root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MoveFromLoad"/>
+				<xsd:element ref="MoveToLoad"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MoveFromLoad">
+		<xsd:annotation>
+			<xsd:documentation>Move from Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FromDeliveryRoute"/>
+				<xsd:element ref="FromDeliveryDate"/>
+				<xsd:element ref="FromDeliverySequence"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MoveToLoad">
+		<xsd:annotation>
+			<xsd:documentation>Move to Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ToDeliveryRoute"/>
+				<xsd:element ref="ToDeliveryDate"/>
+				<xsd:element ref="ToDeliverySequence"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostMoveLoadSOrderLine">
+		<xsd:annotation>
+			<xsd:documentation>Main root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SOrderLine">
+		<xsd:annotation>
+			<xsd:documentation>Sales order line Root element</xsd:documentation>
+			<xsd:documentation/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SalesOrder"/>
+				<xsd:element ref="SalesOrderLine"/>
+				<xsd:element ref="DispatchNote" minOccurs="0"/>
+				<xsd:element ref="DispatchNoteLine" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SalesOrder" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Sales order to be moved to another load.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SalesOrderLine" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Sales order line of the supplied sales order.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SalesOrderLines">
+		<xsd:annotation>
+			<xsd:documentation>Root element for all sales order lines.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SOrderLine" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ToDeliveryDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Move sales order line to this delivery date.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ToDeliveryRoute" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Move sales order line to this delivery route.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ToDeliverySequence" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Move sales order line to delivery sequence.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="eSignature" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>esignature password for each Load movement.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Capex in Suspense Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostAssetCapexSuspense">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the Asset Capex in Suspense.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting of multiple transactions to multiple suppliers.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="CapexCode">
+                <xsd:annotation>
+                  <xsd:documentation>The Capex Code must be a valid code which exists in the Assets Capex system.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CapexLine">
+                <xsd:annotation>
+                  <xsd:documentation>The Capex Line number must be in the range 1-99999 and be a valid Capex Requisition Line number which exists in the Assets Capex system</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PurchaseDate">
+                <xsd:annotation>
+                  <xsd:documentation>This is the transaction date of the originating transaction which will be used as the purchase date of the asset.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CreatedFromFlag">
+                <xsd:annotation>
+                  <xsd:documentation>This flag denotes whether the asset to be created in suspense originates from a Part Billing or from a GRN. The valid vlaues are "P" or "G".</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CreatedFromKey">
+                <xsd:annotation>
+                  <xsd:documentation>This is the key of the originating Part Billing or Purchase Order record.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Qty">
+                <xsd:annotation>
+                  <xsd:documentation>This is the quantity that was part-billed or receipted, and will become the quantity of the asset in suspense. It can be negative to accomodate negative receipting.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Spent">
+                <xsd:annotation>
+                  <xsd:documentation>This was the value of the asset part-billed or receipted, and will become the Asset Cost/Value of the asset in suspense. It can be negative to accomodate negative receipting.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

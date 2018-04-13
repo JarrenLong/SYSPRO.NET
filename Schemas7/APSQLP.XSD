@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the AP Label Print Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="BankSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the bank selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BranchSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the branch selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CurrencySelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the currency selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SupplierSelection" minOccurs="0"/>
+        <xsd:element ref="SupplierClassSelection" minOccurs="0"/>
+        <xsd:element ref="BankSelection" minOccurs="0"/>
+        <xsd:element ref="GeographicAreaSelection" minOccurs="0"/>
+        <xsd:element ref="BranchSelection" minOccurs="0"/>
+        <xsd:element ref="CurrencySelection" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicAreaSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the  geographic area selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LabelSequence">
+    <xsd:annotation>
+      <xsd:documentation>This sequencr is used to indicate the labe sequence for printing. The default is S for supplier and the other valid value is N for short name.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabelsToPrint" type="xsd:double">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the number of labels to print per supplier.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LabelSequence" minOccurs="0"/>
+        <xsd:element ref="LabelsToPrint" minOccurs="0"/>
+        <xsd:element ref="Tax1099Year" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OtherOptions">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate other options. The default is N and the other valid value is Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplierClassSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the supplier class selection.The default is A and the other valid values is S. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplierSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the supplier selection.The default is A and the other valid values are R,S and L. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Tax1099Year">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the 1099 tax year. The default is C for current year and the other valid value is P for previous year.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

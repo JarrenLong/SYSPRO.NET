@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Price History Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Sequence" default="S" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The query details can be returned in stock code, stock code description, supplier or product class sequence. The  options: S - Stock code, price code and P - price code,Stock code, D - Date, time, default to S, (stock code, price code).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="P"/>
+										<xsd:enumeration value="D"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="PriceCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can select, All(A), or  Single(S). The default is all(A) price codes.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StockCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can select, All(A), or  Single(S). The default is all(A) stock codes.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Operator" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can select, All(A), or  Single(S). The default is all(A) operators.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="DateChanged" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can select, All(A), Range(R) or  Single(S). The default is all(A) date changed.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="xsd:string">
+											<xsd:attribute name="FilterType" type="xsd:string" default="A"/>
+											<xsd:attribute name="FilterValue" type="xsd:string"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

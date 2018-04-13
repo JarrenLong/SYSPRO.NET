@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     This is an example XML instance to demonstrate
+     use of the SO Release Negative Line from Back Order Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SOBackOrderReleaseNegative">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This element initiates the data set for a sales order line for back order release.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="SalesOrder" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Valid sales order number which is to be used for releasing back orders. The sales order must be active, and must not be in use by another user.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>A valid sales order line on the order entered in the SalesOrder element. The line must be a stocked or non-stocked line, and must contain a back order quantity.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Customer" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If entered it must be a valid SYPSRO customer, and must be the customer on the selected sales order. This is used for verification purposes only.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If entered it must be a valid SYPSRO stock code, and must be the stock code on the selected sales order line.  If the selected line is non-stocked, then the number is only checked against the sales order line. This is used for verification purposes only.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Warehouse" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If entered it must be a valid SYPSRO warehouse, and must be the warehouse on the selected sales order line. This must not be entered for a non-stocked line. This is used for verification purposes only.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Revision" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the line is a stocked line, and the item is an ECC item at revision or release level, then the revision number to be used for the allocation must be provided.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="Release" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the line is a stocked line, and the item is an ECC item at  release level, then the release number to be used for the allocation must be provided.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="Quantity" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Total quantity to be allocated to the selected line. If the item is not unit quantity processing, then the quantity must be provided in this element. If the item is unit quantity processing, then the quantity can be provided in this element, or in the unit and pieces elements. It must not be provided in both.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Units" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Number of units to be released for the line, if stock item is a unit-quantity type item. The quantity for a unit quantity processing item may be entered instead of unit and pieces, but the quantity must be entered in such a way that it converts to the correct number of units and pieces.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Pieces" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Number of pieces to be released for sales order line, if stock item is a unit-quantity type item. The quantity for a unit quantity processing item may be entered instead of unit and pieces, but the quantity must be entered in such a way that it converts to the correct number of units and pieces.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element initiates the data set for the allocation of serials. If serials are in use for the warehouse on the sales order line, then serial information must be provided. The total quantity provided against the serial numbers must equal the quantity to be released for the line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="SerialNumber" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>Serial number to be used if stock item requires batch or manual serials.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialQuantity" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Quantity allocated to serial number entered. If the item is not unit quantity processing, then the quantity must be provided in this element. If the item is unit quantity processing, then the quantity can be provided in this element, or in the unit and pieces elements. It must not be provided in both.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialUnits" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of units allocated to serial number entered, if stock item is a unit-quantity type item. The quantity for a unit quantity processing item may be entered instead of unit and pieces, but the quantity must be entered in such a way that it converts to the correct number of units and pieces.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialPieces" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of pieces allocated to serial number  entered, if stock item is a unit-quantity type item. The quantity for a unit quantity processing item may be entered instead of unit and pieces, but the quantity must be entered in such a way that it converts to the correct number of units and pieces.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialLocation" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>The location of the serial number to be allocated. If entered it will be used to update the current location of the serial number.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Lot" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Valid lot number if stock item is lot-traceable.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Bins" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element initiates the data set for the allocation of bins. If multiple bins are in use for the warehouse on the sales order line, then bin information must be provided. The total quantity provided against the bin locations must equal the quantity to be released for the line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="BinLocation" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>Bin location if multiple bins are in use for the warehouse on the sales order line.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinQuantity" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Quantity allocated to bin location entered. If the item is not unit quantity processing, then the quantity must be provided in this element. If the item is unit quantity processing, then the quantity can be provided in this element, or in the unit and pieces elements. It must not be provided in both.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinUnits" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of units allocated to bin location entered, if stock item is a unit-quantity type item. The quantity for a unit quantity processing item may be entered instead of unit and pieces, but the quantity must be entered in such a way that it converts to the correct number of units and pieces.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinPieces" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Number of pieces allocated to bin location entered, if stock item is a unit-quantity type item. The quantity for a unit quantity processing item may be entered instead of unit and pieces, but the quantity must be entered in such a way that it converts to the correct number of units and pieces.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="eSignature" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

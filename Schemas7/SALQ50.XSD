@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Analysis Commission Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to indicate the branch for which you want to print this report. A - All; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesPerson"/>
+        <xsd:element ref="Branch"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MonthToPrint">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the month (within the year entered), for which the report must be printed. 01 - 12. Default 01.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="01"/>
+        <xsd:enumeration value="02"/>
+        <xsd:enumeration value="03"/>
+        <xsd:enumeration value="04"/>
+        <xsd:enumeration value="05"/>
+        <xsd:enumeration value="06"/>
+        <xsd:enumeration value="07"/>
+        <xsd:enumeration value="08"/>
+        <xsd:enumeration value="09"/>
+        <xsd:enumeration value="10"/>
+        <xsd:enumeration value="11"/>
+        <xsd:enumeration value="12"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="MonthToPrint"/>
+        <xsd:element ref="YearToPrint"/>
+        <xsd:element ref="Reprint"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reprint" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print a commission report that has been printed at least once before for the entered month and year. Y - Yes; N - No. Default N - No.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>Use this to print the report for all or certain salespersons. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="YearToPrint">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the year for which the report must be printed. The format is 4 characters, which can be either the current or previous AR Financial Year, or can be the character 'C' which indicates current, or 'P' which indicates previous.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

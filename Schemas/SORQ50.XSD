@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order and Booking Report Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Range of branch codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>Currency code for the values in return set if currency filter set to 'S' - Single or values are to be returned in foreign currency.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Range os customer codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>Range of dates.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DateSelectionBasis" default="E">
+    <xsd:annotation>
+      <xsd:documentation>Specify the basis for the date selection. Available if Date Selection Required is set to 'Y' - Yes. Valid values are 'E' - Order Entry date; 'S' - Ship date; 'T' - Status date (this is only availableif report type is not 'K' - Backorder.
+Default value is 'E' - Order Entry date.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="T"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateSelectionRequired" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Supply if selection by a specific date is required. Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Date" minOccurs="0"/>
+        <xsd:element ref="Order" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="Salesperson" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="OrderType" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="SourceWarehouse" minOccurs="0"/>
+        <xsd:element ref="TargetWarehouse" minOccurs="0"/>
+        <xsd:element ref="Currency" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeCompletedOrders" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Available only if report type not 'K' - Backorder.
+Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExcludeNegBackOrderQty" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Available only if report type is 'K' - Backorder.
+Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonStockedLines" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ListOnlyPriceOverride" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select to list only stocked lines where the price was overridden. Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="UserDefinedTagFileName" minOccurs="0"/>
+        <xsd:element ref="SupplyChainTransfers" minOccurs="0"/>
+        <xsd:element ref="DateSelectionRequired" minOccurs="0"/>
+        <xsd:element ref="DateSelectionBasis" minOccurs="0"/>
+        <xsd:element ref="ListOnlyPriceOverride" minOccurs="0"/>
+        <xsd:element ref="OrderStatus" minOccurs="0"/>
+        <xsd:element ref="IncludeNonStockedLines" minOccurs="0"/>
+        <xsd:element ref="PrintCommentsAttachedOrderInvoice" minOccurs="0"/>
+        <xsd:element ref="PrintCommentsAttachedLines" minOccurs="0"/>
+        <xsd:element ref="PrintFreightMiscellaneousLines" minOccurs="0"/>
+        <xsd:element ref="ExcludeNegBackOrderQty" minOccurs="0"/>
+        <xsd:element ref="IncludeCompletedOrders" minOccurs="0"/>
+        <xsd:element ref="ShowValuesIn" minOccurs="0"/>
+        <xsd:element ref="RevisionRelease" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Order">
+    <xsd:annotation>
+      <xsd:documentation>Range of order numbers.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderStatus" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Status of orders to be included in the result set. Available only if report type not 'K' - Backorder or 'ListOnlyPriceOverride' is set to 'N'.
+Valid values are:
+'A' - All
+'F' - Forward
+'S' - Suspense
+The fololowing only available if report type is 'O' - Order:
+'1' - Booked
+'2' - Backorder
+'4' - Warehouse
+'\' - Cancelled
+'8' - Released
+'9' - Completed
+ 
+Default value is 'A' - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="\"/>
+        <xsd:enumeration value="8"/>
+        <xsd:enumeration value="9"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>Order type required if filtering on a single order type.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintCommentsAttachedLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Available only if report type not 'B' - Booked.
+Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintCommentsAttachedOrderInvoice" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Available only if report type not 'B' - Booked.
+Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintFreightMiscellaneousLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Available only if report type not 'B' - Booked.
+Valid values are 'Y' - Yes or 'N' - No.
+Default value is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Range of product class codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence" default="O">
+    <xsd:annotation>
+      <xsd:documentation>Report sequence required. Valid values are 'O' - Order; 'C' - Customer, Order; 'P' - Customer, Purchase Order or 'U' - User-defined sequence.
+Default sequence is 'O' - Order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType" default="B">
+    <xsd:annotation>
+      <xsd:documentation>Report type required. Valid values are 'B' - Booked, 'K' - Backorder or 'O' - Order. Default type is 'B' - Booked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="K"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RevisionRelease">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates only a single revision/release combination for a stock code. This value will only be taken into consideration if a SINGLE stock code is selected. Valid entries are three digit revision/three digit release example: 000/000 or 001/000.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Salesperson">
+    <xsd:annotation>
+      <xsd:documentation>Range os salesperson codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShowValuesIn" default="L">
+    <xsd:annotation>
+      <xsd:documentation>Currency in which values must be returned.
+Valid values are 'L' - Local or 'F' Foreign.
+Default value is 'L' - Local.
+
+If returning only SCT orders, values will be in local currency.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SourceWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>Range of source warehouse codes, available only if SCT's not excluded.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Range of stock codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplyChainTransfers" default="E">
+    <xsd:annotation>
+      <xsd:documentation>Available if report type is not set to 'B' - Booked. Valid values are 'I' - Include; 'E' - Exclude or 'O' - Only. If set to 'O', only SCT orders will be returned.
+Default value is 'E'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TargetWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>Range of target warehouse codes, available only if SCT's not excluded.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UserDefinedTagFileName">
+    <xsd:annotation>
+      <xsd:documentation>Required if report sequence is set to 'U' - User-defined.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Range of warehouse codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="0"/>
+            <xsd:maxLength value="1"/>
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Stylesheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

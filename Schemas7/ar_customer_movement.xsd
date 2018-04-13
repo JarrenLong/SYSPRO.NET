@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AR Customer Movements Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of branches to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalBranch;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range customers to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ArCustomer;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Date">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of dates to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="Branch" minOccurs="0"/>
+				<xsd:element ref="Salesperson" minOccurs="0"/>
+				<xsd:element ref="Date" minOccurs="0"/>
+				<xsd:element ref="OrderType" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="Supplier" minOccurs="0"/>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+				<xsd:element ref="ProductClass" minOccurs="0"/>
+				<xsd:element ref="GeographicArea" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GeographicArea">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of geographic areas to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalArea;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="NewPagePerCustomer">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether a new page per customer will be printed. IF no value is supplied a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The style sheet to be applied</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string"/>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportSequence" minOccurs="0"/>
+				<xsd:element ref="SummaryReport" minOccurs="0"/>
+				<xsd:element ref="SubTotalsRequired" minOccurs="0"/>
+				<xsd:element ref="ProfitDetails" minOccurs="0"/>
+				<xsd:element ref="NewPagePerCustomer" minOccurs="0"/>
+				<xsd:element ref="ShowZeroInvoiceBalance" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OrderType">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of order types to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblSoTypes;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of product class to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalProductClass;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProfitDetails">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether profit details will be returned. IF no value is supplied a default value of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportSequence">
+		<xsd:annotation>
+			<xsd:documentation>Defines the sequence in which the report will be printed. ( CUST - Customer - Stock Code, STCU - Stock code - Customer, PRST - Product class - Stock Code,SUCU - Supplier - Customer, SUPC - Suppier - product class - customer, GECU - geopraphic area - customer ). If no value is supplied a default of 'CUST' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;CUST=Customer - Stock code;STCU=Stock code - Customer; PRST=Product class - Stock code; SUCU=Supplier - Customer;SUPC=Supplier - Product class - Customer;GECU=Geographic area - Customer"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="CUST"/>
+				<xsd:enumeration value="STCU"/>
+				<xsd:enumeration value="PRST"/>
+				<xsd:enumeration value="SUCU"/>
+				<xsd:enumeration value="SUPC"/>
+				<xsd:enumeration value="GECU"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Salesperson">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of salespersons to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalSalesperson;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of stock codes to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SubTotalsRequired">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether sub totals will be returned. The sub total option is only available if the summary report option is set to 'N'. If no value is supplied for sub totals required  then a default of 'N' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SummaryReport">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether the report will be returned in detail or summary. If no value is supplied a default of 'Y' for summary will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of suppliers to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of warehouses to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ShowZeroInvoiceBalance">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether to show the zero invoice balance on the report or not.The default is Y and the other valid value is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

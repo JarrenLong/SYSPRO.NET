@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!--
+     Schema for Report Writer Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The key to use for this query</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Report"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Retrieve" minOccurs="0"/>
+        <xsd:element ref="Summary" minOccurs="0"/>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="PasswordForReport" minOccurs="0"/>
+        <xsd:element ref="RunTime" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PasswordForReport">
+    <xsd:annotation>
+      <xsd:documentation>This is the password which must be supplied for a report which is password protected</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Report" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is mandatory and contains the report code to run a report or retrieve report information. If you want to retrieve a list of all reports this must be set to {all}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Retrieve" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is only used for retrieving run time information pertaining to a specific report. (Y = yes).  When using the retrieve function, only the report element and this element need be supplied.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="RunTime">
+    <xsd:annotation>
+      <xsd:documentation>This is a list of run time variables for the report </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Variable" minOccurs="0"/>
+        <xsd:element ref="Value" minOccurs="0"/>
+        <xsd:element ref="Type" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence" default="1">
+    <xsd:annotation>
+      <xsd:documentation>Report sequence (0-10). If not supplied defaults to 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+        <xsd:enumeration value="6"/>
+        <xsd:enumeration value="7"/>
+        <xsd:enumeration value="8"/>
+        <xsd:enumeration value="9"/>
+        <xsd:enumeration value="0"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Summary" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary report  (Y- Yes, N - No). If not supplied defaults to N</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=" "/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Type" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Run time variable data type (A-alpha, N-numeric, D-date)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Value">
+    <xsd:annotation>
+      <xsd:documentation>Run time variable value eg.B100 </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Variable">
+    <xsd:annotation>
+      <xsd:documentation>Run time variable name eg.FromStock</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

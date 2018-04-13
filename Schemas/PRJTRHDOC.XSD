@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the P&C Deposit Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostRetentions">
+    <xsd:annotation>
+      <xsd:documentation>This it the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to create a deposit header record.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Contract">
+                <xsd:annotation>
+                  <xsd:documentation>The contract element is mandatory. This will be the contract that you are adding the deposit header record for. The format is 20 charactors alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>The job element is mandatory. This will be the job that you are adding the deposit header record for. The format is 8 charactors alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RetentionType" default="P">
+                <xsd:annotation>
+                  <xsd:documentation>The retention type specifies what type will be used when creating retentions. (V - value, P - Percentage. ) If V is selected then retentions with a specified value will be created and if P is selected then retentions with a specific percentage will be created. The format is 1 charactor alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="V"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RetentionPercent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The retentiont percent element is the total percentage of retention for the job that was received. If the retention method is set to "P" then this field is mandatory. The format is 3.2 numeric value.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RetentionValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The retention value element is the total amount of retention to be applied. If the retention method is set to "V" then this field is mandatory The format is 12.2 numeric value.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="replace"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RetentionRemaining">
+                <xsd:annotation>
+                  <xsd:documentation>The retention remaining element is the retention amount remaining which is still available to use. It is the only field that may be updated and is a mandatory field. The format is 12.2 numeric value.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="15"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RetentionCustomer">
+                <xsd:annotation>
+                  <xsd:documentation>The Retention Customer element is the customer that retention is provided for. This may differ from the contract customer. This is a mandatory field and may not be changed once added. The format is 7 charactors alpha numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="7"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Customer">
+                <xsd:annotation>
+                  <xsd:documentation>The Customer element is the contract customer. This may differ from the retention customer. This is a mandatory field and may not be changed once added. The format is 7 charactors alpha numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="7"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProductClass">
+                <xsd:annotation>
+                  <xsd:documentation>The ProductClass element is the product class that will be used when adding the retention miscellaneous line to the sales order. The branch is picked up from the customer. This is a mandatory field and may not be changed once added. The format is 4 charactors alpha numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TaxCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The TaxCode element is the tax code that will be used when adding the retention miscellaneous line to the sales order. This is an optional field and may not be changed once added. The format is 1 charactors alpha numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GstTaxCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The GstTaxCode element is the gst tax code that will be used when adding the retention miscellaneous line to the sales order. This is an optional field and may not be changed once added. The format is 1 charactors alpha numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

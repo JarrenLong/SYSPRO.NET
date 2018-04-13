@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Kardex Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the buyer(s) to query. A - All;  S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvBuyer;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CycleCount">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the cycle count(s) to query. A - All;  S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="Buyer"/>
+        <xsd:element ref="CycleCount"/>
+        <xsd:element ref="Supplier"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LedgerMonth">
+    <xsd:annotation>
+      <xsd:documentation>Default to current month. You can select the month in the current financial year.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;01=01;02=02;03=03;04=04;05=05;06=06;07=07;08=08;09=09;10=10;11=11;12=12"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="01"/>
+        <xsd:enumeration value="02"/>
+        <xsd:enumeration value="03"/>
+        <xsd:enumeration value="04"/>
+        <xsd:enumeration value="05"/>
+        <xsd:enumeration value="06"/>
+        <xsd:enumeration value="07"/>
+        <xsd:enumeration value="08"/>
+        <xsd:enumeration value="09"/>
+        <xsd:enumeration value="10"/>
+        <xsd:enumeration value="11"/>
+        <xsd:enumeration value="12"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LedgerYear">
+    <xsd:annotation>
+      <xsd:documentation>Default to current year. You can select years in the current financial year.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current year; P=Previous year"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MPSItems">
+    <xsd:annotation>
+      <xsd:documentation>Default = Y - Yes, N -No; O = Only</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence"/>
+        <xsd:element ref="PartCategory"/>
+        <xsd:element ref="PrintMovementDetails"/>
+        <xsd:element ref="PrintWhSummaryOnly"/>
+        <xsd:element ref="PrintProductClassTotals"/>
+        <xsd:element ref="PrintForSelectedPeriodOnly"/>
+        <xsd:element ref="PrintRevisionRelease"/>
+        <xsd:element ref="MPSItems"/>
+        <xsd:element ref="StatisticalItems"/>
+        <xsd:element ref="LedgerMonth"/>
+        <xsd:element ref="LedgerYear"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PartCategory">
+    <xsd:annotation>
+      <xsd:documentation>Default to A=All; A=All; M=Made in; B=Bought out; S=Subcontracted; G=Phantom part; K=Planning bill; C=Co-product; Y=By-product.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All; M=Made in; B=Bought out; S=Subcontracted; G=Phantom part; K=Planning bill; C=Co-product; Y=By-product"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="K"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintForSelectedPeriodOnly">
+    <xsd:annotation>
+      <xsd:documentation>Default is N=No, N=No; Y=Yes, if Y(Yes) the report will return details for the selected period only.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintMovementDetails">
+    <xsd:annotation>
+      <xsd:documentation>Default is Y=Yes, Y=Yes, N=No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintProductClassTotals">
+    <xsd:annotation>
+      <xsd:documentation>Default is N=No, N=No; Y=Yes. This option is only available if your sequence is Product class, you may select to print product class totals on change of product class.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintRevisionRelease">
+    <xsd:annotation>
+      <xsd:documentation>Default is N=No, N=No; Y=Yes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintWhSummaryOnly">
+    <xsd:annotation>
+      <xsd:documentation>Default is N=No, N=No; Y=Yes. This option is only available when you select not to print movement details.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the product class(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence">
+    <xsd:annotation>
+      <xsd:documentation>Sequence  (S - Stock code, D - Stock code description, V - Supplier, P - Product class, W - Warehouse)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Stock code; D=Description;V=Supplier;P=Product class;W=Warehouse"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StatisticalItems">
+    <xsd:annotation>
+      <xsd:documentation>Default = Y - Yes; N - No; O = Only</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the stock code(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the supplier(s) to query. A - All; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the warehouse(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

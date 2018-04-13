@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Serial Number Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostInvSerialTransactions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="TransactionType">
+								<xsd:annotation>
+									<xsd:documentation>Mandatory element.  Enter the transaction type. 'S' = Standard, 'M' = Miscellaneous</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="M"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TransactionCode">
+								<xsd:annotation>
+									<xsd:documentation>Mandatory element.  For a Standard transaction type, this Transaction Code must be one of the standard codes listed as an enumeration, for a Miscellaneous transaction type, this Transaction Code must be any code other than one of the standard codes.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="SALES"/>
+										<xsd:enumeration value="MAINT"/>
+										<xsd:enumeration value="SRVIN"/>
+										<xsd:enumeration value="SRVRET"/>
+										<xsd:enumeration value="LOAN"/>
+										<xsd:enumeration value="RETURN"/>
+										<xsd:enumeration value="TRA"/>
+										<xsd:enumeration value="REC"/>
+										<xsd:enumeration value="NOTE"/>
+										<xsd:enumeration value="WARR"/>
+										<xsd:enumeration value="MOVE"/>
+										<xsd:enumeration value="DEPOT"/>
+										<xsd:enumeration value="DEPRET"/>
+										<xsd:enumeration value="ISS"/>
+										<xsd:enumeration value="PHY"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SerialNumber">
+								<xsd:annotation>
+									<xsd:documentation>Mandatory element. Serial number the transaction is against.The format is alphanumeric or numeric depending on a configuration option within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Warehouse" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The warehouse the serial number is in. If the transaction is for a Batch type serial number, this element is mandatory and must be valid.  If it is for a Manual type serial number, and the element is given, it must match the warehouse on file that the serial number is located in, if not given, the warehouse on file is used.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TransactionDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. If this element is not supplied or if zeroes are entered against this element, the current system date will be used as the default. The format is CCYY-MM-DD.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Reference" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Notation" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Quantity" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If a manual serial number is being used the quantity is dependent on the Transaction Code. The number of decimals entered must match the number of decimals setup against the stock code.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Units" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If stock item is a unit-qty type stock item and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. Units cannot be negative unless the TransactionCode is SALES or the TransactionType is M. This element is only applicable to batch serial numbers. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Pieces" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If stock item is a unit-qty type stock item and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. Pieces cannot be negative unless the TransactionCode is SALES or the TransactionType is M. This element is only applicable to batch serial numbers. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Value" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Customer" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. The format is alphanumeric or numeric depending on a configuration option within SYSPRO. This element is available but not mandatory for a miscellaneous transaction type. It is mandatory for a "LOAN" transaction code, and for a "SALES" transaction code if the Quantity is not less than zero.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CustomerName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. Should the customer given be valid on the customer master file, the customer name from the master file will be used.  If the customer is not found on file, this name will be used.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Supplier" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. The format is alphanumeric or numeric depending on a configuration option within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SupplierName" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. Should the supplier given be valid on the supplier master file, the supplier name from the master file will be used.  If the supplier is not found on file, this name will be used.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NewLocation" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NewWarehouse" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Job" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RevisionRef" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DueDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. The format is CCYY-MM-DD.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ExpiryDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Optional element. If this element is not supplied the expiry date against the serial number will not be changed, but if the element is supplied with zeroes or spaces the expiry date will be zeroised. The format is CCYY-MM-DD.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!--
+     Schema for Executive View Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="FifoValuation" default="N">
+		<xsd:annotation>
+			<xsd:documentation>If you have selected 'Y' against  'IncludeInventoryValuation' then this element determines the method by which the value of inventory is calculated. (N - No, Y - Yes) It is invalid to enter 'Y' unless Fifo valuation is set in the SYSPRO Inventory Setup options.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeApBalances" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the Accounts Payable balances for current period,previous period 1 and previous period 2 are to be included in the returned data. (Y - Yes, N - No) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeArBalances" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the Accounts Receivable balances for the current period, previous period 1 and previous period 2 are to be included in the returned data. (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeBankBalances" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the bank balance values (per bank) for current period, previous period 1 and previous period 2 are to be included in the returned data. (Y - Yes, N - No) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeInventoryValuation" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the inventory values, by warehouse, for current period, previous period 1 and previous period 2 are to be included in the returned data. (N - No, Y - Yes)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeOrdersTaken" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the values of sales orders added,changed and cancelled during this week, yesterday and today are included in the returned data. (N - No, Y - Yes, D - details) If 'D' is selected then details of the order lines are returned. The selection of order detail lines to be returned is based on the dates supplied in the 'OrdersTakenFromDate' and the 'OrdersTakenToDate'</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludePurchaseOrderValues" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the net values ofoutstanding purchase orders are to be included in the returned data. (N - No, Y - Yes, D - Details) .
+The data returned consists of 12 values and 12 dates . Details of the purchase orders that make up each of the net values are returned if a 'D' is supplied against this element.   </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeSalesOrderValues" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the net values of outstanding sales orders are to be included in the returned data. (N -No, Y - Yes, D - Details) The data returned consists of 12 values and 12 dates . Details of the sales orders that make up each of the net values are returned if a 'D' is supplied against this element. Additionally, 
+the net values of sales orders, where the customer request date for a given line is before today, are aggregated in 12 buckets in 7-day time periods backwards from yesterday. 
+  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeWipValuation" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the values of Work in Progress for the current period, previous period 1 and previous period 2 are to be included in the returned data. (N - No, Y - Yes)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeSalesByProductClass" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if sales and budgets derived from the Product Class table are to be included in the returned data. (N - No, Y - Yes, B - Branch details, P - Product class details)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all options available in the query.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="IncludeBankBalances"/>
+				<xsd:element ref="IncludeApBalances"/>
+				<xsd:element ref="IncludeArBalances"/>
+				<xsd:element ref="IncludeOrdersTaken"/>
+				<xsd:element ref="OrdersTakenFromDate"/>
+				<xsd:element ref="OrdersTakenToDate"/>
+				<xsd:element ref="IncludeInventoryValuation"/>
+				<xsd:element ref="FifoValuation"/>
+				<xsd:element ref="IncludeWipValuation"/>
+				<xsd:element ref="IncludePurchaseOrderValues"/>
+				<xsd:element ref="PurchaseOrderProjectPeriod"/>
+				<xsd:element ref="PurchaseOrderProjectDate"/>
+				<xsd:element ref="IncludeSalesOrderValues"/>
+				<xsd:element ref="SalesOrderProjectBasis" minOccurs="0"/>
+				<xsd:element ref="SalesOrderProjectPeriod" minOccurs="0"/>
+				<xsd:element ref="SalesOrderProjectDate" minOccurs="0"/>
+				<xsd:element ref="IncludeSalesByProductClass" minOccurs="0"/>
+				<xsd:element ref="IncludeLostSales" minOccurs="0"/>
+				<xsd:element ref="LostSalesFromDate"/>
+				<xsd:element ref="LostSalesToDate"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PurchaseOrderProjectPeriod" default="D">
+		<xsd:annotation>
+			<xsd:documentation>This element determines if the outstanding purchase order net values returned represent daily values or monthly values. This element is only relevant if you have entered 'Y' against the 'IncludePurchaseOrderValues' element (D - Daily values, M - Monthly values) .  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="M"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SalesOrderProjectBasis" default="O">
+		<xsd:annotation>
+			<xsd:documentation>This element determines the ageing date to be used when calculating the outstanding  net value of sales orders. It is only relevent if you have entered 'Y' or 'D' against the 'IncludeSalesOrderValues' element. (O - the sales order is aged according to the order date, S - the sales order is aged according to the ship date)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SalesOrderProjectPeriod" default="D">
+		<xsd:annotation>
+			<xsd:documentation>This element determines if the outstanding sales order net values returned represent daily values, monthly values or 7-day time buckets. This element is only relevant if you have entered 'Y' or 'D' against the 'IncludeSalesOrderValues' element (D - Daily values, M - Monthly values, 7 - 7-day time buckets) .  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="7"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The stylesheet to be applied.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OrdersTakenFromDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant if a 'D' has been supplied against the 'IncludeOrdersTaken' element. Details of a sales order line will be returned if the transaction date of the sales order line is greater than or equal to the date supplied. If this element is not supplied, or the value of this element is spaces or 0000-00-00, then the date selection will start from the lowest transaction date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OrdersTakenToDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant if a 'D' has been supplied against the 'IncludeOrdersTaken' element. Details of a sales order line will be returned if the transaction date of the sales order line is less than or equal to the date supplied. If this element is not supplied, or the value of this element is spaces or 0000-00-00, then the date selection will end at the highest transaction date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PurchaseOrderProjectDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant if a 'D' has been supplied against the 'IncludePurchaseOrderValues'. If this element is not supplied,  or the value supplied is spaces or 000-00-00, then details of all sales orders will be returned.
+If a date is supplied then it must correspond  to the date of one of the twelve periods returned when the 'IncludePurchaseOrderValues' element has a value of 'Y' or 'D'. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SalesOrderProjectDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant if a 'D' has been supplied against the 'IncludeSalesOrderValues'. If this element is not supplied,  or the value supplied is spaces or 000-00-00, then details of all sales orders will be returned.
+If a date is supplied then it must correspond  to the date of one of the twelve periods returned when the 'IncludeSalesOrderValues' element has a value of 'Y' or 'D'. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeLostSales" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies if the values of lost sales during this week, yesterday and today are included in the returned data. (N - No, Y - Yes, D - details) If 'D' is selected then details of the lost sales are returned. The selection of lost sales transactions to be returned is based on the dates supplied in the 'LostSalesFromDate' and the 'LostSalesToDate'</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LostSalesFromDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant if a 'D' has been supplied against the 'IncludeLostSales' element. Details of a lost sale will be returned if the transaction date of the lost sale transaction is greater than or equal to the date supplied. If this element is not supplied, or the value of this element is spaces or 0000-00-00, then the date selection will start from the lowest transaction date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LostSalesToDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant if a 'D' has been supplied against the 'IncludeLostSales' element. Details of a lost sale will be returned if the transaction date of the lost sale transaction is less than or equal to the date supplied. If this element is not supplied, or the value of this element is spaces or 0000-00-00, then the date selection will end at the highest transaction date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Descriptive Tax Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="TaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the key to the Descriptive Tax Code being maintained. This is mandatory. If this Descriptive Tax code is being added, it must not pre-exist. If this Descriptive Tax code is being changed or deleted, it must be a valid SYSPRO Descriptive Tax code.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AltTaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the description of the tax code and is used primarily to identify the Descriptive Tax code. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Descriptive Tax codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="AltTaxCode"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain an Descriptive Tax Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="TaxCode"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupDescriptiveTax">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Descriptive Tax Code maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

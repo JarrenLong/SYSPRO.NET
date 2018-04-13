@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Query Multimedia Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Query parent element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Key">
+					<xsd:annotation>
+						<xsd:documentation>This field contains the multi-part key upon which a search is performed. The fields that make up the key are MultimediaFlag, KeyField and ObjectType.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="MultimediaFlag" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>This is an indication of the field type that the KeyField will be referencing, i.e. STK - stock code, LDG - ledger code, CUR - currency, SUP - supplier etc.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="KeyField" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>This is the key value on which the search will be performed.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ObjectType" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the type of multimedia object returned, i.e. BMP, SND, VID etc.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is the options element</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="FullPathOnly" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If this value is set to 'Y' then the business object will return the path to the multi-media object instead of the object.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

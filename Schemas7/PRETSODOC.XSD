@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+    Schema for the Query of the Factory Scheduling Posting Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="FactorySchedulingOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Setup" minOccurs="0"/>
+				<xsd:element ref="Options" minOccurs="0"/>
+				<xsd:element ref="Database" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="SchedulingLevel">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates Scheduling level integration level for which you are licensed. (00 - None, 01 - SYSPRO Graphical Planning Board, 02 - SYSPRO Finite Scheduler, 03 - SYSPRO Advanced Scheduler, 04 - SYSPRO Advanced Scheduler with CTP, 09 - SYSPRO Preactor Integration).If no value is supplied then the default value of 00 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="00=None;01=Graphical Planning;02=Finite Scheduler;03=Advanced Scheduler;04=Advanced With Ctp;09=Preactor;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PreactorVersion">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates Preactor Version to be used. (9.4 or 11.2 are permitted). If no value is supplied then the default of 0 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="0=None;9=9.4;1=11.2;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="9" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ConfigFolder">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the folder in which your scheduling configuration for SYSPRO resides. This element is optional. Is only updateable if 'SchedulingLevel' is set to 09. Will default to blank if 'SchedulingLevel' is set to 00.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ConfigurationFile">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the Configuration file that will be loaded when running Factory Scheduling. This element is optional. Is only updateable if 'SchedulingLevel' is set to 09. Will default to blank if 'SchedulingLevel' is set to 00.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SchedulingGroupsRequired">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether Scheduling groups are required for multiple manufacturing sites. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed. Must contain N if 'SchedulingLevel' is set to 00.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclJobClass">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether you want to include Job class when setting up scheduling groups. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed. Must contain N if 'SchedulingLevel' is set to 00. May only be Y if 'SchedulingGroupsRequired' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclToolSets">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether you want to include Tool sets when setting up scheduling groups. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed. Must contain N if 'SchedulingLevel' is set to 00. May only be Y if 'SchedulingGroupsRequired' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DispSchedGroupErrors">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether Scheduling group errors should be displayed when exporting data. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed. Must contain N if 'SchedulingLevel' is set to 00. May only be Y if 'SchedulingGroupsRequired' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CoSpecAttributeDataMapping">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether different data mappings for each SYSPRO company using Syspro Factory Scheduling. (N - No, Y - Yes). If no value is supplied then a default of Y will be assumed. May not be changed if 'SchedulingLevel' is  set to 00.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="TimeUomForMappedData">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the selected time unit of measure that will be applied for mapped time information. Options are DAYS,HRS, MIN & SEC. If no value is supplied then a default of HRS will be assumed. May not be changed if 'SchedulingLevel' is set to 00.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SuggSchedInReqPlanning">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the suggested schedule should be used in requirements planning. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UseHardwareConfigKey">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to use the Hardware configuration option. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Setup">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="SchedulingLevel" />
+<xsd:element ref="PreactorVersion" />
+<xsd:element ref="ConfigFolder" />
+<xsd:element ref="ConfigurationFile" />
+<xsd:element ref="SchedulingGroupsRequired" />
+<xsd:element ref="InclJobClass" />
+<xsd:element ref="InclToolSets" />
+<xsd:element ref="DispSchedGroupErrors" />
+<xsd:element ref="CoSpecAttributeDataMapping" />
+<xsd:element ref="TimeUomForMappedData" />
+<xsd:element ref="SuggSchedInReqPlanning" />
+<xsd:element ref="UseHardwareConfigKey" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="BaseEarliestStartForJobs">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to base your earliest start date on the planned start date defined against the job, or on the current system date. (P - Planned start date, C - System date). If no value is supplied then a default value of P will be assumed. If 'UpdatePlannedDates' is set to Y, this element will be set to C (Current System).]]></xsd:documentation>
+<xsd:appinfo source="P=Planned start date;C=System date;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="P" />
+<xsd:enumeration value="C" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedJobs">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates which jobs to include in scheduling. (C - Confirmed jobs, U - Unconfirmed jobs, B - Include both). If no value is supplied then a default value of U will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="U=Unconfirmed;C=Confirmed;B=Both;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="U" />
+<xsd:enumeration value="C" />
+<xsd:enumeration value="B" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UpdatePlannedDates">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates when doing updates to SYSPRO with schedule information whether you want to update the planned dates for jobs with schedule information. (N - No, Y - Yes). If Y is selected, the 'BaseEarliestStart' must be C (Current System date). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyScheduledDates">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to use schedule dates instead of planned dates throughout the system when validating dates and calculating due dates for jobs. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SchedulingHorizonReq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether scheduling horizon is required which enables you to define the number of days into the future that you want to schedule. (N - No, Y - Yes). If no value is supplied then a default of N will be assumed. If set to N 'SchedulingHorizonDays' will be set to zeros.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SchedulingHorizonDays">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the number of scheduling horizon days. If no value is supplied then a default of zeros will be assumed. May only be zeros if 'SchedulingHorizonReq' is not set to Y.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedJobsOnHold">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether jobs on hold should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedStockOnHand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether stock on hand should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedPurchaseOrders">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether purchase orders should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedBulkIssue">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether bulk issues should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedFloorStock">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether floor stock should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedSalesOrders">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether sales orders should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedForwardOrders">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether forward orders should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. May only be Y if 'InclInSchedSalesOrders' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInSchedOrdersInSusp">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether orders in suspense should be included when scheduling. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. May only be Y if 'InclInSchedSalesOrders' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Options">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="BaseEarliestStartForJobs" />
+<xsd:element ref="InclInSchedJobs" />
+<xsd:element ref="UpdatePlannedDates" />
+<xsd:element ref="ApplyScheduledDates" />
+<xsd:element ref="SchedulingHorizonReq" />
+<xsd:element ref="SchedulingHorizonDays" />
+<xsd:element ref="InclInSchedJobsOnHold" />
+<xsd:element ref="InclInSchedStockOnHand" />
+<xsd:element ref="InclInSchedPurchaseOrders" />
+<xsd:element ref="InclInSchedBulkIssue" />
+<xsd:element ref="InclInSchedFloorStock" />
+<xsd:element ref="InclInSchedSalesOrders" />
+<xsd:element ref="InclInSchedForwardOrders" />
+<xsd:element ref="InclInSchedOrdersInSusp" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="SqlServer">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the SQL Server instance name.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to Spaces.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DatabaseName">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the Preactor SQL database name.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to spaces.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Username">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the SQL Username.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to spaces.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Password">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the SQL User password.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to spaces.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="TrustedConnection">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the Authentication type. This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to 'N' if 'PreactorVersion is 9.4. (N - No, Y - Yes).  If no value is supplied then the default value of 'N' will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Network">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the license on network.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to 'N' if 'PreactorVersion is 9.4. (N - No, Y - Yes).  If no value is supplied then the default value of 'N' will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NetworkServer">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the Network server name for locating license.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces. Will default to spaces.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Port">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the Port number.  This element is optional.  Is only updateable if 'PreactorVersion' is 11.2 or spaces.  Will default to zeroes if 'PreactorVersion' is 9.4.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="99999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="License">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This option defines the License number.  This element is optional.  Is only updateable if 'PreactorVersion' is11.2 or spaces.  Will default to spaces.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Database">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="SqlServer" />
+<xsd:element ref="DatabaseName" />
+<xsd:element ref="Username" />
+<xsd:element ref="Password" />
+<xsd:element ref="TrustedConnection" />
+<xsd:element ref="Network" />
+<xsd:element ref="NetworkServer" />
+<xsd:element ref="Port" />
+<xsd:element ref="License" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+ 

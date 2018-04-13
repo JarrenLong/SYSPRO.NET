@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Releases Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>List of options</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="IncludeSalesOrderDetails" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation> You use this option to view confirmed sales order lines. The default is (N) – No. The information returned will be a query from Sales Order query business object. The order header as well as the details will be returned.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeContractDetails" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this option to include contract details defined in the sales order contract pricing. The default is (N) - No. The information returned will be a query from the sales order contract price business object.   </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeDeliveryHistory" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this element to view the delivery history transactions for the selected customer/customer purchase order. Default to (N) – No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeUnconfirmedReleases" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use the this element to view the unconfirmed releases. The default is (N) - No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeConfirmedReleases" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this option to view all releases that have been confirmed. The default is (N) - No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeReleaseDetails" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this option to view the release details. The default is (N) - No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeReleaseHistory" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this option to view release history. The default is (N) - No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>List of filters.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Customer" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Range or Single customer selection sales order releases to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1"/>
+                        <xsd:minLength value="0"/>
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="CustomerPurchaseOrder" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Range or Single customer purchase order selection sales order releases to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:maxLength value="1"/>
+                        <xsd:minLength value="0"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="CustomerStockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Range or Single customer stock code selection sales order releases to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:whiteSpace value="preserve"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

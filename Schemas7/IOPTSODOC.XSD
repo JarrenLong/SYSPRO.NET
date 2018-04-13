@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Optimization Setup Transaction Posting Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="InventoryOptimizationOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Restore" minOccurs="0"/>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="Algorithms1" minOccurs="0"/>
+				<xsd:element ref="Algorithms2" minOccurs="0"/>
+				<xsd:element ref="Modeling" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="Restore">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="RestoreDefaults" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="RestoreDefaults">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether whether to restore defaults. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ForecastHorizon">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This contains the Forecast horizon in months. This may only be between 1 and 24 inclusive. The initial default value is 12.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DefForecastCalendar">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the default forecast calendar. This element is mandatory and must contain a valid IO Forecast Period Calendar (IOPFPR).]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NumStdDevForOutliers">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This contains the number of standard deviations to allow when smoothing history to define outliers. The format is 2.2 numeric. The initial default value is 3.00]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.00" />
+<xsd:maxInclusive value="99.99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SeasProfileCorrCutOff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the minimum value of the correlation coefficient before a series is regarded as seasonal. The initial default value is 0.7500]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MthsRetInvOptInfo">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the retention period (in months) before the old information is purged. 99 implies no purge. If 0 is supplied then the default of 99 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AmendJnlReqFamGroup">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ammendment journal is required for Families and Grouping structure. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AmendJnlReqSelSets">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ammendment journal is required for selection sets. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AmendJnlReqPolicySet">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ammendment journals are required for policy setting. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PostTrnToIoSales">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to automatically update the sales file from the sales transactions when the IO Purge & Movement (IOPPPU) is launched. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AggrFamAndGrpSales">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to automatically aggregate sales when the IO Purge & Movement (IOPPPU) is launched. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="General">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="ForecastHorizon" />
+<xsd:element ref="DefForecastCalendar" />
+<xsd:element ref="NumStdDevForOutliers" />
+<xsd:element ref="SeasProfileCorrCutOff" />
+<xsd:element ref="MthsRetInvOptInfo" />
+<xsd:element ref="AmendJnlReqFamGroup" />
+<xsd:element ref="AmendJnlReqSelSets" />
+<xsd:element ref="AmendJnlReqPolicySet" />
+<xsd:element ref="PostTrnToIoSales" />
+<xsd:element ref="AggrFamAndGrpSales" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DefForecastAlgorithm">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the default forecast algorithm to use. (A - Competition, B - Mean, C - Median, D - Moving average, F - Exponential smoothing trend, G - Six period weighted average, H - Twelve period weighted average, I - Holt-Winters additive, J - Holt-Winters multiplicative, K - Annual seasonal profile - unsmoothed). If no value is supplied then the default value of A will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="A=Competition;B=Mean;C=Median;D=Moving average;F=Exponential smoothing trend;G=Six period weighted average;H=Twelve period weighted average;I=Holt-Winters additive;J=Holt-Winters multiplicative;K=Annual seasonal profile - unsmoothed;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="C" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="F" />
+<xsd:enumeration value="G" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="I" />
+<xsd:enumeration value="J" />
+<xsd:enumeration value="K" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NumMthsForComp">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of months of forecast history to use for the competition method. This may only be between 1 and 12 inclusive. The initial default value is 12.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MeasureForComp">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This contains the measurement to use for competitions. (CFE - Cumulative Forecast Error, MAD - Mean Absolute Deviation, MSD - Mean Square Deviation, MAPE- Mean Absolute Percentage Error, TRACK - Tracking Signal). If no value is supplied then the default vslue of MSD will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="CFE=Cumulative Forecast Error;MAD=Mean Absolute Deviation;MSD=Mean Square Deviation;MAPE=Mean Absolute Percentage Error;TRACK=Tracking Signal;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CFE" />
+<xsd:enumeration value="MAD" />
+<xsd:enumeration value="MSD" />
+<xsd:enumeration value="MAPE" />
+<xsd:enumeration value="TRACK" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NumMthsForMean">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of months of forecast history to use for the mean calculation. This may only be between 2 and 12 inclusive. The initial default value is 12.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NumMthsForMedian">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of months of forecast history to use for the media calculation. This may only be between 2 and 12 inclusive. The initial default value is 12.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NumMthsForMoveAve">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of months of forecast history to use for the moving average calculation. This may only be between 2 and 6 inclusive. The initial default value is 3.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SmoothingCoefficient">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[The is the exponential smoothing coefficient. The initial default value is 0.7000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="TrendCoefficient">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the exponential trend coefficient. The initial default value is 0.6000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Algorithms1">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="DefForecastAlgorithm" />
+<xsd:element ref="NumMthsForComp" />
+<xsd:element ref="MeasureForComp" />
+<xsd:element ref="NumMthsForMean" />
+<xsd:element ref="NumMthsForMedian" />
+<xsd:element ref="NumMthsForMoveAve" />
+<xsd:element ref="SmoothingCoefficient" />
+<xsd:element ref="TrendCoefficient" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 1. It contains six periods average weighting for periods current minus 1 & 2. The initial default value is 0.5000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus34">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 2. It contains six periods average weighting for periods current minus 3 & 4. The initial default value is 0.3000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus56">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 3. It contains six periods average weighting for periods current minus 5 & 6. The initial default value is 0.2000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus123">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 1. It contains twelve periods average weighting for periods current minus 1, 2 & 3. The initial default value is 0.4500.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus456">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 2. It contains twelve periods average weighting for periods current minus 4, 5 & 6. The initial default value is 0.2500.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus789">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 3. It contains twelve periods average weighting for periods current minus 7, 8 & 9. The initial default value is 0.2000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WeightForPerFcMinus101112">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is Coefficient 4. It contains twelve periods average weighting for periods current minus 10, 11 & 12. The initial default value is 0.1000.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintAddOpts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to optimize coefficients for Holt-Winters additive options. (Y - Yes, N - No). If 'HoltWintAddLevelCoeff' contains zeros then this element should be Y. Otherwise it should be N.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintAddLevelCoeff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Holt-Winters additive level coefficient 1. If this element does not contain zeros, then 'HoltWintAddOpts' must be N.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintAddTrendCoeff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Holt-Winters additive trend coefficient 2. If 'HoltWintAddLevelCoeff' contains zeros then this element should also contain zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintAddSeasCoeff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Holt-Winters additive seasonal coefficients. If 'HoltWintAddLevelCoeff' contains zeros then this element should also contain zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintMultOpts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to optimize coefficients for Holt-Winters multiplicative options. (Y - Yes, N - No). If 'HoltWintMultLevelCoeff' contains zeros then this element should be Y. Otherwise it should be N.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintMultLevelCoeff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Holt-Winters multiplicative level coefficient 1. If this element does not contain zeros, then 'HoltWintMultOpts' must be N.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintMultTrendCoeff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Holt-Winters multiplicative trend coefficient 2. If 'HoltWintMultLevelCoeff' contains zeros then this element should also contain zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HoltWintMultSeasCoeff">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Holt-Winters multiplicative seasonal coefficient 3. If 'HoltWintMultLevelCoeff' contains zeros then this element should also contain zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.0000" />
+<xsd:maxInclusive value="9.9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Algorithms2">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="WeightForPerFcMinus12" />
+<xsd:element ref="WeightForPerFcMinus34" />
+<xsd:element ref="WeightForPerFcMinus56" />
+<xsd:element ref="WeightForPerFcMinus123" />
+<xsd:element ref="WeightForPerFcMinus456" />
+<xsd:element ref="WeightForPerFcMinus789" />
+<xsd:element ref="WeightForPerFcMinus101112" />
+<xsd:element ref="HoltWintAddOpts" />
+<xsd:element ref="HoltWintAddLevelCoeff" />
+<xsd:element ref="HoltWintAddTrendCoeff" />
+<xsd:element ref="HoltWintAddSeasCoeff" />
+<xsd:element ref="HoltWintMultOpts" />
+<xsd:element ref="HoltWintMultLevelCoeff" />
+<xsd:element ref="HoltWintMultTrendCoeff" />
+<xsd:element ref="HoltWintMultSeasCoeff" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ForecastToUseInDemand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the modeling forecast to use in demand. (L - Live, D - Draft, S - Last snapshot). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Live;D=Draft;S=Last snapshot" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="S" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyGrossReqRuleForDemand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to apply the gross requirement rule to calculate demand for modeling. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclDependantDemand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to include dependent demand. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyBatchRuleToCalcMax">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to apply batching rule when calculating the maximum level. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PeriodDaysToUse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the period days to use in modeling. (T - Total days in period, W - Working days in period). If no value is supplied then the default value of T will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="T=Total;W=Working;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="T" />
+<xsd:enumeration value="W" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ComparisonType">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the forecast comparison method. (P - Period on period, M - Moving average). If no value is supplied then the default value of P will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="P=Period on period;M=Moving average;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="P" />
+<xsd:enumeration value="M" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ForecastToUse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the forecast to use. (L - Last, O - Last outside lead, A - Average, S - Average outside lead). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Last;O=Last outside lead;A=Average;S=Average outside lead;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="O" />
+<xsd:enumeration value="A" />
+<xsd:enumeration value="S" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MonthsToCompare">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This contains the forecasting accuracy periods (months to compare). This may only be between 1 and 12 inclusive. The initial default value if 1. If this element contains a value < 1 or > 12 then 6 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MovingAverageMonths">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the forecast months for moving average. This may only be between 2 and 6 inclusive. The initial default value is 2. If this element contains a value < 2 or > 6 then 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SnapshotMonths">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the forecast snapshot months. This may only be between 1 and 6 inclusive. The initial default value is 2. If this element contains a value < 1 or > 6 then 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Modeling">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="ForecastToUseInDemand" />
+<xsd:element ref="ApplyGrossReqRuleForDemand" />
+<xsd:element ref="InclDependantDemand" />
+<xsd:element ref="ApplyBatchRuleToCalcMax" />
+<xsd:element ref="PeriodDaysToUse" />
+<xsd:element ref="ComparisonType" />
+<xsd:element ref="ForecastToUse" />
+<xsd:element ref="MonthsToCompare" />
+<xsd:element ref="MovingAverageMonths" />
+<xsd:element ref="SnapshotMonths" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+ 

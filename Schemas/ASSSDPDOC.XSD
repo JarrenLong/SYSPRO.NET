@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Depreciation Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupAssetDepreciation">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for asset depreciation maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Asset Depreciation.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="DepreciationCode">
+								<xsd:annotation>
+									<xsd:documentation>This is the key to the asset depreciation code being maintained. This is mandatory.The format is up to 2 characters, alphanumeric. If this asset depreciation code is being added, it must not pre-exist. If this asset depreciation code is being changed or deleted, it must be a valid Syspro asset depreciation code.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="2"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Description">
+								<xsd:annotation>
+									<xsd:documentation>This is the name of the asset depreciation code and is used primarily to identify the asset depreciation code. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DepnType">
+								<xsd:annotation>
+									<xsd:documentation>This asset depreciation type dictates the method of depreciation. When adding a depreciation code, the default value if this element is not supplied is "S" and the valid values are "S" (Straight line) "R" (Reducing balance) "T" (Statisical EUL) "F" (Fixed EUL) "O" (None) "D" (Sum of digits)  "L" (Remaining value over remaining life) "W" (Declining balance with switch to straight line)  or "N" (Declining balance without switch to straight line).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VaryingDepnFlag">
+								<xsd:annotation>
+									<xsd:documentation>This flag denotes whether varying depreciation is used on this asset.The default value if this element is "N" (No) and the valid values are  "N" (No) "Y" (Annually) "P" (By period) or "F" (By period fixed property).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnnualDepnPct" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the annual depreciation percentage to be applied for depreciation.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="8"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NumberOfPeriods" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the default number of periods in the estmated useful life (EUL) of an asset depreciation code. It is madatory when a fixed EUL depreciation type has been specified.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="NumberOfYears" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the default number of years in the estmated useful life (EUL) of an asset depreciation code. It is madatory when a fixed EUL depreciation type has been specified.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="HalfRule" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used for Canadian depreciation to denote whether to apply the half-year rule. The valid values are "Y" or "N", and the default value is "N". </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DateConvention" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to specify which date convention is to be applied to this depreciation code. When it is not supplied (spaces) the date convention from the Assets Control table is applied. The valid values are spaces, "F" (Full month)  "M" (Mid-month)  "H" (Half year)  "D" (Modified half-year) or "Y" (Full year). </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StatGlCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the Statistical Gl code and is mandatory when adding a statistical asset depreciation code. It must be a valid Syspro Statistical Gl code.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="15"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ThruputEul" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the default throughput for the estmated useful life (EUL) of an asset depreciation code. It is madatory when a statistical EUL depreciation type has been specified.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is required for varying depreciation types and denotes the when the anniversary falls for the year to use. If "S" the anniversary will be governed by the start depreciation month. If set to "F" it will be the fiscal year in which the asset was purchased.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:pattern value="S"/>
+										<xsd:pattern value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VaryingPercentageDetail" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>This element is not mandatory.This is the top element for all data required for the varying depreciation details. This element can occur multiple times.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:sequence>
+										<xsd:element name="VaryingDepreciationYear">
+											<xsd:annotation>
+												<xsd:documentation>This is the year number for varying depreciation in the range 1 to 99.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="2"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for either annual, or for  period 1 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct2" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 2 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct3" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 3 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct4" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 4 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct5" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 5 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct6" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 6 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct7" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 7 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct8" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 8 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct9" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 9 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct10" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 10 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct11" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 11 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct12" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 12 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="VaryingDepreciationPct13" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the  depreciation percentage to be applied for period 13 varying depreciation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

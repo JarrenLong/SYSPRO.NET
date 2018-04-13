@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Price List Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Query optons</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Sequence" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The query details can be returned in stock code, stock code description, supplier or product class sequence. The  options: S - Stock code, D - Stock code description, U - supplier, and P - product class, default to S, (stock code).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value="U"/>
+										<xsd:enumeration value="P"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PriceMethod" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Price method, take values 
+C = Coded, Q = Quantity,   F = Foreign, Default to C.
+</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="Q"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Query filters</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ProductClass" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single product class selection for stock items to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="optional" default="A">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Supplier" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, or Single supplier selection for stock items to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="required">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StockCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>All, Range, Single or List of stock codes to return. FilterType options - A(All), R(Range), (S)Single or (L)List. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="required">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="R"/>
+												<xsd:enumeration value="S"/>
+												<xsd:enumeration value="L"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Currency" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If PriceMethod is foreign price(F), you can select all  or single Currency. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="required">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PriceCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If PriceMethod is coded(C), you can select, All(A), or a List(L) of price codes can be selected in the query filter PriceCode. The default is all(A) price codes.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="required">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="L"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PriceCategory" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If PriceMethod is Coded(C), you can select A(All) or S(Single) PriceCategory. Default to A(All). </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" use="required">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:whiteSpace value="preserve"/>
+												<xsd:enumeration value="A"/>
+												<xsd:enumeration value="S"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters for the WIP Master/Sub Job Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostMasterSubJob">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Parameters">
+					<xsd:annotation>
+						<xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="ActionType" default="A" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Specifies whether to attach a sub job to a master job or detach a sub job from a master job (A - Attach,  D - Detach). </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="D"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ValidateOnly" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IgnoreWarnings" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned). An example of a warning is if a ledger code entered is not the correct type of account, it is okay to write the record away as such but you may want the warning supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TriggerAps" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Specifies APS will be triggered or not. (Y - Trigger APS, N - will not trigger APS).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="MasterAllocationIgnoreQty" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This flag allows you to link a sub job being attached to a material allocation on the master job where the stock code and warehouse match however the quantity required of the material allocation differs from the quantity to make of the sub job. This flag will only be applied if an exact match is not found or you have selected a specific allocation line number. Possible values Y - Yes, N - No. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

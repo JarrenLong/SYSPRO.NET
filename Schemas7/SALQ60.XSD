@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales History Query Business object 
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AsOfPeriod" default="C">
+    <xsd:annotation>
+      <xsd:documentation>Period for which Sales History must be returned.
+
+'C' - Current month (default)
+Select this to return Sales History as of the current month.
+
+'P' - Previous month 1 
+Select this to return Sales History as of the previous month 1.
+
+'B' - Previous month 2 
+Select this to return Sales History as of the previous month 2.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters available.
+
+The filters available depend on the SummarySequence selected.
+
+Only fields that have been assigned as key fields using the Sales Analysis Summary Setup program can be selected and the sequence of those key fields determines the nature of each KeyFilter available.
+
+I.E.
+SummarySequence selected is 'Branch, Customer, Salesperson'.
+In this instance:
+- Key1Filter = Branch
+- Key2Filter = Customer
+- Key3Filter = Salesperson
+
+Another example:
+SummarySequence selected is 'Product Class, Stock Code'.
+In this instance:
+- Key1Filter = Product Class
+- Key2Filter = Stock Code
+- Key3Filter = (not used)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key1Filter"/>
+        <xsd:element ref="Key2Filter"/>
+        <xsd:element ref="Key3Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeOption" default="P">
+    <xsd:annotation>
+      <xsd:documentation>Nature of the details to be returned.
+
+'P' - Profit figures (default)
+Select this to print sales and profit figures on the report.
+
+'Q' - Quantity 
+Select this to print sales and quantity figures on the report.
+
+'M' - Mass 
+Select this to print sales and weight figures on the report.
+
+'V' - Volume 
+Select this to print sales and volume figures on the report.
+
+Please note that all details will be returned on the output XML, regardless of this option. The user can then filter the XML details as required.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="Q"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="V"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>Details of key for query</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key1Filter">
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key2Filter">
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key3Filter">
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AsOfPeriod"/>
+        <xsd:element ref="IncludeOption"/>
+        <xsd:element ref="PrintDescriptions"/>
+        <xsd:element ref="SalespersonBranch"/>
+        <xsd:element ref="PrintNewPageAfterTotals"/>
+        <xsd:element ref="PrintZeroTotals"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintDescriptions" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element determines whether or not key field descriptions are returned.
+Valid values are 'Y' - Yes (default) and 'N' - No.
+
+The Sales Analysis Product Class Description file/table is used to retrieve the product class description.
+
+Please note that all descriptions will be returned on the output XML, regardless of this option. The user can then filter the XML details as required.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintNewPageAfterTotals" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element determines whether to skip to a new page or not, after totals have been printed.
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintZeroTotals" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element determines whether to print lines with zero totals or not.
+Valid values are 'Y' - Yes (default) and 'N' - No.
+
+Please note that zero totals will be returned on the output XML, regardless of this option. The user can then filter the XML details as required.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalespersonBranch">
+    <xsd:annotation>
+      <xsd:documentation>This element is only required if Salesperson is a key part of the SummarySequence requested.
+
+You use this field to enter the branch to use for the salesperson index.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence">
+    <xsd:annotation>
+      <xsd:documentation>The Sequence element must include a valid selection, determined by the indexes you have defined within the Sales Analysis Summary Setup program.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

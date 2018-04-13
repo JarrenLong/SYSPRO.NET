@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Post AR Payments, Adjustments, and Miscellaneous Charges Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="eSignature">
+		<xsd:annotation>
+			<xsd:documentation>eSignature tag for use outside SYSPRO environment. This element must contain a GUID, in the format {36303032-3330-3031-3038-323434363433}, for the eSignature system to accept the transaction as having been authenticated.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AdjustmentLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This element is only validated if A/R is integrated to General Ledger in 'Summary ' or 'Detail' in SYSPRO. This is the ledger code to which the adjustment value will be distributed. If this element is not supplied the default value is the Adjustment ledger code defined on the SYSPRO payments interface record.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AdjustmentTaxCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This element is only relevant if the SYSPRO A/R Setup/Tax/'Request tax portion for invoice adjustments/discounts' is selected. In addition, this element is not relevant if making an adjustment to a foreign currency SYSPRO customer or if the SYSPRO customer is non-taxable. If the element is not supplied, the default is the tax code defined in SYSPRO A/R / Setup / Tax / 'Default tax code'.If the element is supplied with a value of spaces, and 'Y' is supplied against the 'AutoCalculateTax', then a tax rate of zero is applied when the tax is automatically calculated.
+If a value is supplied in this element and 'Y' is supplied against the 'AutoCalculateTax' element, then the tax code supplied is used to ascertain the tax rate to be used in the automatic calculation of the tax portion of the adjustment and must be a valid SYSPRO tax code. 
+ When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AdjustmentValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory within the 'InvoiceToAdjust' element as a zero value adjustment is invalid. This is the value by which the SYSPRO A/R invoice must be adjusted. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Adjustments">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the top element for all data supplied for performing adjustments to  SYSPRO A/R invoices for a SYSPRO customer. This element can occur multiple times within the 'Item' element. Each occurrence contains all the data for adjusting a single or multiple SYSPRO A/R invoice/invoices for a specific SYSPRO customer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="eSignature" minOccurs="0"/>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="Bank" minOccurs="0"/>
+				<xsd:element ref="PaymentType" minOccurs="0"/>
+				<xsd:element ref="DrawerName" minOccurs="0"/>
+				<xsd:element ref="DrawerBank" minOccurs="0"/>
+				<xsd:element ref="DrawerBranch" minOccurs="0"/>
+				<xsd:element name="AnalysisEntry" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If an analysis entry number has been assigned to this detail line, then use this element to store the analysis entry number. If Analysis Line entry is passed then that will overwrite an analysis number supplied in the AnalysisEntry element. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AnalysisLineEntry" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If IgnoreAnalysis is set to 'Y" this node and all its elements are ignored. If you are supplying your own AnalysisEntry Number ensure that you have set IgnoreAnalysis to "Y"</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AnalysisCode1" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an analysis code 1 for the analysis entry you are createing </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode2" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 2 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode3" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an analysis code 3 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode4" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 4 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode5" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 5 for the analysis entry you are createing</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StartDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify a start date for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EndDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an end date for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EntryAmount" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You must specify and entry amount for the analysis entry you are creating. The entry amount entered here must be exclusive of tax.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Comment" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can enter a comment for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="InvoiceToAdjust" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ApplyAutomaticPayments" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This is used to specify whether the undistributed portion of the 'PaymentValue' is to be used to pay all outstanding invoices for the SYSPRO customer, until the undistributed amount falls to zero. 
+Valid values are 'Y' - yes and 'N' - no. The default value is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AutomaticPaymentsOptions">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional .This is the top element for all data supplied for performing automatic payments. This element contains all the elements required to automatically pay SYSPRO A/R invoices for a SYSPRO customer.
+Invoices are systematically paid in the sequence specified in the 'AutomaticPaymentsSequence' element until the 'PaymentValue' is fully distributed. Credit balance invoices are ignored.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="ApplyAutomaticPayments" minOccurs="0"/>
+				<xsd:element ref="AutomaticPaymentsSequence" minOccurs="0"/>
+				<xsd:element ref="IncludeFutureInvoices" minOccurs="0"/>
+				<xsd:element ref="IncludeCurrentInvoices" minOccurs="0"/>
+				<xsd:element ref="Include30DayInvoices" minOccurs="0"/>
+				<xsd:element ref="Include60DayInvoices" minOccurs="0"/>
+				<xsd:element ref="Include90DayInvoices" minOccurs="0"/>
+				<xsd:element ref="Include120DayAndOverInvoices" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AutomaticPaymentsSequence" default="I">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This indicates the sequence in which invoices are to be selected for automatic payment. Valid values are  'I' (invoice sequence) or 
+'D' (invoice date sequence). The default is 'I'</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If the SYSPRO A/R Setup /General / 'Bank deposit slip required' is not selected, then this element is not relevant. The bank must be a valid SYSPRO bank. If the element is not supplied or if spaces or nulls supplied, then the default is the default bank defined against the SYSPRO operator. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BankChargeExchangeRate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant for adjustments. This is the exchange rate at which the bank charge is to be converted to local currency.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BankChargeValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant for adjustments. For payments and miscellaneous receipts this element is only relevant if
+SYSPRO Cash Book is installed and SYSPRO A/R Setup / Integration - payments are linked to Cash Book, and bank charges are required for the 'Bank' supplied.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This element is only relevant to Miscellaneous receipts and is the branch to which the miscellaneous receipt is to be posted. If a 'Y' is supplied against the 'ApplySpecificBranch' element, then the value of this element is ignored and the value against the 'BranchToUse' element is used instead.
+The default value of this element is the default branch defined against the SYSPRO operator. The default will only be used if the element is not supplied.
+If spaces(blanks) or nulls are supplied, the business object will validate whether a branch with a value of 'spaces' exists on the SYSPRO branch file. Historically SYSPRO did allow a branch with a key of 'spaces' to be captured.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CreditLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the credit ledger code to which the miscellaneous receipt value will be distributed. This element must be a valid SYSPRO general ledger code if  A/R is integrated to General Ledger in 'Summary ' or 'Detail' in SYSPRO. If integrated by 'Report', then spaces are invalid. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Currency">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the currency  of the miscellaneous receipt.
+If SYSPRO A/R Setup / General / 'Foreign currency sales required' is not selected, then this element is not relevant and the SYSPRO local currency will always be used. If the element is not supplied or if spaces or nulls are supplied, the default currency will be the currency defined against the 'Bank' element. If the A/R Setup / General / 'Bank Deposit slip required' is not selected, then the default is the SYSPRO local currency. The currency must be a valid SYSPRO currency.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionBranch">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional within the 'Payment' and 'Adjustments' transactions.The value of this element must be a valid SYSPRO Branch.  If supplied, it will take precedence over the invoice branch. For Unapplied payments and Reestablished invoice, this branch will be used unless the OverwriteBranch is supplied at that level. Note that it will be overwritten by the parameter BranchToUse if the  parameter ApplySpecificBranch is set to  Yes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory within the 'Payment' and 'Adjustments' elements. This is the SYSPRO customer against which A/R payments/adjustments are to be processed. The value of this element must be a valid SYSPRO customer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DebitLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the debit ledger code to which the miscellaneous receipt value will be distributed. This element must be a valid SYSPRO general ledger code if  A/R is integrated to General Ledger in 'Summary ' or 'Detail' in SYSPRO. If integrated by 'Report', then spaces are invalid. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultExchangeRateMethod" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If the currency against the SYSPRO customer is local currency or if A/R Setup / General/ 'Foreign sales required' is not ticked, then this element is not relevant. If the currency against the SYSPRO customer is foreign and the rate against the SYSPRO currency is defined as fixed, then this element is not relevant.(If the SYSPRO currency is defined as fixed, then the current rate against the SYSPRO currency is used as the exchange rate for the invoice payments.)This element describes the default exchange rate method to be applied when paying invoices. If a value is supplied in the 'ExchangeRateToUse' element, then this element is not relevant.This element is just a default exchange rate method to be applied, and each invoice can be paid at a different exchange rate by supplying a value in the 'ExchangeRateToUse' element.  Valid values are 'I' (pay the invoice at the exchange rate against the invoice) or 'N' (pay the invoice at a different exchange rate from the original invoice exchange rate). The default value is 'N'. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionArea">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional within the 'Payment' and 'Adjustments' transactions.The value of this element must be a valid SYSPRO Geographic Area.  If supplied, it will take precedence over the invoice Area.  Note that it will be overwritten by the parameter BranchToUse if the  parameter ApplySpecificBranch is set to  Yes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultExchangeRateToUse">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant if the value of the 'DefaultExchangeRateMethod' is 'I'. This is the default exchange rate value to use when paying invoices at an exchange rate that differs from the original invoice exchange rate. The default is the current exchange rate against the SYSPRO currency.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscountValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the value of discount to be given.
+Within the 'InvoiceToReEstablish'  and 'UnappliedPayment' hierarchy, if this element is not supplied or nulls are supplied, a default of zero is used.
+Within the 'InvoiceToPay' hierarchy, if the 'PaymentDate' is within the SYSPRO customer discount terms and the entire invoice balance is being paid, then the default for this element is the original discount against the SYSPRO A/R invoice.This default is only used if the element is not supplied. If  this default exceeds the 'GrossPaymentValue', then the default is set to the 'GrossPaymentValue'. If a value of spaces or nulls is supplied then a discount value of zero is assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DrawerBank">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant if SYSPRO A/R Setup / General / 'Bank Deposit slip required' is not selected. This element is only used if the 'PaymentType' element value is 'C'(check). This is the bank of the drawer of the check.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DrawerBranch">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant if SYSPRO A/R Setup / General / 'Bank Deposit slip required' is not selected. This element is only used if the 'PaymentType' element value is 'C'(check). This is the branch of the drawer of the check.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DrawerName">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant if SYSPRO A/R Setup / General / 'Bank Deposit slip required' is not selected. This element is only used if the 'PaymentType' element value is 'C'(check). The default element value is the customer name of the 'Customer' element.This is the name of the drawer of the check.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExchangeRateToUse">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If SYSPRO A/R Setup / General / 'Foreign currency sales is not required', or if the SYSPRO customer is a local currency customer, then this element is not relevant. If the currency defined against the SYSPRO customer is defined as fixed, then this element is not relevant as the current SYSPRO exchange rate is always used.This is the exchange rate at which to pay the  SYSPRO A/R invoice. If the 'DefaultExchangeRateMethod' element has a value of 'I',  then the default value of this element is the original exchange rate on the SYSPRO A/R invoice. If the 'DefaultExchangeRateMethod' element has a value of 'N', then the default value of this element is the value supplied in the 'DefaultExchangeRateToUse' element. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExchangeRateVarianceLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the SYSPRO ledger code to which any exchange rate variances must be posted. This element defaults to the exchange rate variance account defined in your SYSPRO General Ledger Integration / Receivables / 'Exchange rate variance'.
+This element must be a valid SYSPRO general ledger code if  A/R is integrated to General Ledger in 'Summary ' or 'Detail' in SYSPRO. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GrossPaymentValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. The gross amount is the total payment amount, including tax and discounts to be paid against the SYSPRO A/R invoice. Within the 'InvoiceToPay' hierarchy, if this element is not supplied, the default value is the outstanding value of the SYSPRO A/R invoice.
+Within the 'InvoiceToReEstablish'  and 'UnappliedPayment' hierarchy, if this element is not supplied, the default value is zero.
+Within the 'InvoiceToPay' or the 'InvoiceToReEstablish' hierarchy, if spaces or nulls are supplied in the element value, then the element value is assumed to be zero.
+
+
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Include120DayAndOverInvoices" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. Valid values are 'Y'(yes) and 'N' (no). The default is 'Y'.
+If 'Y' is supplied then all SYSPRO A/R invoices older than 120 days are included for automatic payment/sum credits. If 'N' is supplied then all SYSPRO A/R invoices older than 120 days are excluded from automatic payment/sum credits.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Include30DayInvoices" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. Valid values are 'Y'(yes) and 'N' (no). The default is 'Y'.
+If 'Y' is supplied then all SYSPRO A/R invoices older than 30 days are included for automatic payment/sum credits. If 'N' is supplied then all SYSPRO A/R invoices older than 30 days are excluded from automatic payment/sum credits.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Include60DayInvoices" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. Valid values are 'Y'(yes) and 'N' (no). The default is 'Y'.
+If 'Y' is supplied then all SYSPRO A/R invoices older than 60 days are included for automatic payment/sum credits. If 'N' is supplied then all SYSPRO A/R invoices older than 60 days are excluded from automatic payment/sum credits.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Include90DayInvoices" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. Valid values are 'Y'(yes) and 'N' (no). The default is 'Y'.
+If 'Y' is supplied then all SYSPRO A/R invoices older than 90 days are included for automatic payment/sum credits. If 'N' is supplied then all SYSPRO A/R invoices older than 90 days are excluded from automatic payment/sum credits.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCurrentInvoices" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. Valid values are 'Y'(yes) and 'N' (no). The default is 'Y'.
+If 'Y' is supplied then all SYSPRO A/R invoices that are less than 30 days old are included for automatic payment/sum credits. If 'N' is supplied then all SYSPRO A/R invoices that are less than 30 days old are excluded from automatic payment/sum credits.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFutureInvoices" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. Valid values are 'Y'(yes) and 'N' (no). The default is 'Y'.
+If 'Y' is supplied then all SYSPRO A/R future invoices are included for automatic payment/sum credits. If 'N' is supplied then all SYSPRO A/R future invoices  are excluded from automatic payment/sum credits.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Invoice">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory within the 'InvoiceToPay' or 'InvoiceToAdjust'  or 'InvoiceToReEstablish' elements. This is the invoice to which the payment or adjustment is being made or the invoice that is being re-established. If making a payment or an adjustment then the value of this element must be a valid SYSPRO A/R invoice. If re-establishing an invoice, then this invoice must not exist on the SYSPRO A/R invoice file.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceToAdjust">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory within the 'Adjustments' element but is not mandatory within the 'Item' element. This is the top element for all data supplied for performing an adjustment to a SYSPRO A/R invoice for a SYSPRO customer.This element can occur multiple times within the 'Adjustments' element. Each occurrence contains all the data for adjusting a single A/R invoice.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="TransactionType" minOccurs="0"/>
+				<xsd:element ref="Invoice"/>
+				<xsd:element ref="AdjustmentValue"/>
+				<xsd:element ref="AdjustmentTaxCode" minOccurs="0"/>
+				<xsd:element ref="TaxPortionOfAdjustment" minOccurs="0"/>
+				<xsd:element ref="Reference" minOccurs="0"/>
+				<xsd:element ref="AdjustmentLedgerCode" minOccurs="0"/>
+				<xsd:element ref="PasswordForAdjustmentLedgerCode" minOccurs="0"/>
+				<xsd:element ref="JournalNotation" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InvoiceToPay">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the top element for all data supplied for performing an payment to a SYSPRO A/R invoice for a SYSPRO customer.This element can occur multiple times within the 'Payment' element. Each occurrence contains all the data for making a payment against a single SYSPRO A/R invoice.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="TransactionType" minOccurs="0"/>
+				<xsd:element ref="Invoice"/>
+				<xsd:element ref="GrossPaymentValue" minOccurs="0"/>
+				<xsd:element ref="DiscountValue" minOccurs="0"/>
+				<xsd:element ref="TaxPortionOfDiscount" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxValue" minOccurs="0"/>
+				<xsd:element ref="CustomerPurchaseOrder" minOccurs="0"/>
+				<xsd:element ref="InvoiceNotation" minOccurs="0"/>
+				<xsd:element ref="ExchangeRateToUse" minOccurs="0"/>
+				<xsd:element name="TpmDistribution" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This element is only required for TPM customers if deduction is required. This is the total deduction to be destributed and should equal the TpmAmount in TpmDeductionelemnt. It should only be entered one one invoice entry as Only one invoice can be used to fully distribute the entire deductions. See TpmDedustions in Payment element. </xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory.This is the top element for all data required for performing adjustments,payments or miscellaneous receipts. This element can occur multiple times as the business object caters for the posting of multiple transactions to multiple customers.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence maxOccurs="unbounded">
+				<xsd:element ref="Payment" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="Adjustments" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="MiscellaneousReceipt" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MiscellaneousExchangeRate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is only relevant if A/R Setup / General / 'Foreign currency sales required' is selected and the 'Currency' supplied is foreign currency and the rate defined against the currency in SYSPRO is not fixed. This is the  exchange rate at which the miscellaneous receipt is to be processed. If the 'Currency' is local currency, the value of this element is always set to '1'.  If the 'Currency' is foreign currency, and the SYSPRO currency is defined as a fixed rate, then the rate against the SYSPRO currency is always used and the value of this element is ignored. If this element is not supplied or zeros,spaces or nulls are supplied, the default rate used is the rate against the SYSPRO currency.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MiscellaneousReceipt">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional .This is the top element for all data supplied for performing a miscellaneous receipt. This element can occur multiple times within the 'Item' element. Each occurrence contains all the data for processing a miscellaneous receipt.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="eSignature" minOccurs="0"/>
+				<xsd:element ref="Bank" minOccurs="0"/>
+				<xsd:element ref="Currency" minOccurs="0"/>
+				<xsd:element ref="Branch" minOccurs="0"/>
+				<xsd:element ref="MiscellaneousReceiptValue"/>
+				<xsd:element ref="Reference" minOccurs="0"/>
+				<xsd:element ref="MiscellaneousReceiptDate" minOccurs="0"/>
+				<xsd:element ref="DebitLedgerCode" minOccurs="0"/>
+				<xsd:element ref="PasswordForDebitLedgerCode" minOccurs="0"/>
+				<xsd:element ref="CreditLedgerCode" minOccurs="0"/>
+				<xsd:element ref="PasswordForCreditLedgerCode" minOccurs="0"/>
+				<xsd:element ref="JournalNotation" minOccurs="0"/>
+				<xsd:element ref="MiscellaneousExchangeRate" minOccurs="0"/>
+				<xsd:element ref="PaymentType" minOccurs="0"/>
+				<xsd:element ref="DrawerName" minOccurs="0"/>
+				<xsd:element ref="DrawerBank" minOccurs="0"/>
+				<xsd:element ref="DrawerBranch" minOccurs="0"/>
+				<xsd:element ref="BankChargeValue" minOccurs="0"/>
+				<xsd:element name="CrAnalysisEntry" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If an analysis entry number has been assigned to this detail line, then use this element to store the analysis entry number. If Analysis Line entry is passed then that will overwrite an analysis number supplied in the AnalysisEntry element. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CrAnalysisLineEntry" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If IgnoreAnalysis is set to 'Y" this node and all it's elements are ignored. If you are supplying your own AnalysisEntry Number ensure that you have set IgnoreAnalysis to "Y"</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AnalysisCode1" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an analysis code 1 for the analysis entry you are createing </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode2" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 2 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode3" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an analysis code 3 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode4" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 4 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode5" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 5 for the analysis entry you are createing</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StartDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify a start date for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EndDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an end date for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EntryAmount" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You must specify and entry amount for the analysis entry you are creating. The entry amount entered here must be exclusive of tax.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Comment" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can enter a comment for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MiscellaneousReceiptDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the date to be assigned to the miscellaneous receipt. The default is the current system date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JournalNotation">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory. This is the journal notation for payments, adjustments and miscellaneous receipts.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MiscellaneousReceiptValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory within the 'MiscellaneousReceipt' element as a value of zero is invalid. A negative value will result in a warning message being issued.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PasswordExchangeRateVarianceLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If the  SYSPRO ledger code supplied in the 'ExchangeRateVarianceLedgerCode' element has an associated password, then this element is used to define this password.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PasswordForAdjustmentLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If the  SYSPRO ledger code supplied in the 'AdjustmentLedgerCode' element has an associated password, then this element is used to define this password.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PasswordForCreditLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If the  SYSPRO ledger code supplied in the 'CreditLedgerCode' element has an associated password, then this element is used to define this password.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PasswordForDebitLedgerCode">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If the  SYSPRO ledger code supplied in the 'DebitLedgerCode' element has an associated password, then this element is  used to define this password.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UnappliedNumber">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If it is supplied, then the BO will not generate its own number. It will use the value supplied instead and if the value already exist then will fail with an error. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Payment">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the top element for all data supplied for performing a payment against  SYSPRO A/R invoices for a SYSPRO customer. This element can occur multiple times within the 'Item' element. Each occurrence contains all the data for paying a single or multiple SYSPRO A/R invoice/invoices for a specific SYSPRO customer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="eSignature" minOccurs="0"/>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="TransactionBranch" minOccurs="0"/>
+				<xsd:element ref="TransactionArea" minOccurs="0"/>
+				<xsd:element ref="PaymentValue" minOccurs="0"/>
+				<xsd:element ref="Reference" minOccurs="0"/>
+				<xsd:element ref="PaymentRunNumber" minOccurs="0"/>
+				<xsd:element ref="PaymentRunColNo" minOccurs="0"/>
+				<xsd:element ref="PaymentRunCollector" minOccurs="0"/>
+				<xsd:element ref="PaymentRunNumber" minOccurs="0"/>
+				<xsd:element ref="PaymentRunSalesperson" minOccurs="0"/>
+				<xsd:element ref="PaymentRunArea" minOccurs="0"/>
+				<xsd:element ref="PaymentDate" minOccurs="0"/>
+				<xsd:element ref="JournalNotation" minOccurs="0"/>
+				<xsd:element ref="PaymentNarration" minOccurs="0"/>
+				<xsd:element ref="SettlementDiscountNote" minOccurs="0"/>
+				<xsd:element ref="DefaultExchangeRateMethod" minOccurs="0"/>
+				<xsd:element ref="DefaultExchangeRateToUse" minOccurs="0"/>
+				<xsd:element ref="ExchangeRateVarianceLedgerCode" minOccurs="0"/>
+				<xsd:element ref="PasswordExchangeRateVarianceLedgerCode" minOccurs="0"/>
+				<xsd:element ref="ApplyDuePostDatedChecks" minOccurs="0"/>
+				<xsd:element ref="Bank" minOccurs="0"/>
+				<xsd:element ref="PaymentType" minOccurs="0"/>
+				<xsd:element ref="DrawerName" minOccurs="0"/>
+				<xsd:element ref="DrawerBank" minOccurs="0"/>
+				<xsd:element ref="DrawerBranch" minOccurs="0"/>
+				<xsd:element ref="BankChargeValue" minOccurs="0"/>
+				<xsd:element ref="BankChargeExchangeRate" minOccurs="0"/>
+				<xsd:element name="AnalysisEntry" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If an analysis entry number has been assigned to this detail line, then use this element to store the analysis entry number. If Analysis Line entry is passed then that will overwrite an analysis number supplied in the AnalysisEntry element. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AnalysisLineEntry" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If IgnoreAnalysis is set to 'Y" this node and all its elements are ignored. If you are supplying your own AnalysisEntry Number ensure that you have set IgnoreAnalysis to "Y"</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AnalysisCode1" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an analysis code 1 for the analysis entry you are createing </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode2" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 2 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode3" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an analysis code 3 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode4" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 4 for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AnalysisCode5" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify and analysis code 5 for the analysis entry you are createing</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StartDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify a start date for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EndDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can specify an end date for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EntryAmount" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You must specify and entry amount for the analysis entry you are creating. The entry amount entered here must be exclusive of tax.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Comment" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>You can enter a comment for the analysis entry you are creating</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="InvoiceToPay" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="AutomaticPaymentsOptions" minOccurs="0"/>
+				<xsd:element ref="SumCreditValuesOptions" minOccurs="0"/>
+				<xsd:element ref="InvoiceToReEstablish" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="UnappliedPayment" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="PostDatedCheck" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="TpmDeductions" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="TpmDeduction" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="TpmCode"/>
+										<xsd:element name="TpmReference"/>
+										<xsd:element name="TpmAmount"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PaymentDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the date of the payment. If the element is not supplied or if zeros or spaces are supplied the default is the current system date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PaymentNarration">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the payment narration.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PaymentType" default="C">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is not relevant if SYSPRO A/R Setup / General / 'Bank Deposit slip required' is not selected. This is the type of payment. Valid values are 'C' - check, 'S' - cash or 'O' other. The default value if the payment,adjustment or miscellaneous receipt is in local currency is 'C'. All foreign payments,adjustments or miscellaneous receipts have a 'PaymentType' of 'O' irrespective of the element value supplied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PaymentValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the value of the payment in the currency of the SYSPRO A/R customer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PostArPayment">
+		<xsd:annotation>
+			<xsd:documentation>This is a mandatory element. This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Reference">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the reference to be assigned to a payment, adjustment or miscellaneous receipt.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxPortionOfAdjustment">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This element is only relevant if the SYSPRO A/R Setup/Tax/'Request tax portion for invoice adjustments/discounts' is selected. In addition, this element is not relevant if making an adjustment to a foreign currency SYSPRO customer or if the SYSPRO customer is non-taxable. This is the tax value of the adjustment. If this element is supplied (even if the element value is spaces or nulls), then the value supplied is always used. If this element is not supplied and the value of the 'AutoCalcTax' element is 'N', then the default element value is zero. If the element is not supplied and a 'Y' is supplied against the 'AutoCalcTax' element, then the tax code supplied in the 'AdjustmentTaxCode' element is used to ascertain the tax rate to use in the calculation of the tax portion value. The calculated value is used as the default value.  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionType" default="I">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This is the element to define if the SYSPRO A/R invoice against which the payment or adjustment is being made, was originally captured as an invoice, credit note or debit note.  Valid values of this element are 'I' - invoice, 'C' - credit note, or 'D' - debit note. The default value is 'I'. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is only relevant if SYSPRO Tax setup / Withholding tax / 'Withholding tax' is required. This is the value of withholding tax.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SumCreditValues" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This is used to specify if the total value of all credit value invoices is to be accumulated and added to the 'PaymentValue' supplied. The outstanding balance of these credit value invoices is set to zero.
+Valid options are 'Y' - yes and 'N' - no. The default value is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SumCreditValuesOptions">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This is the top element for all data supplied to allow the value of credit value invoices to be offset against debit value invoices. Invoices with a credit balance that match the selection criteria supplied, are reduced to have an outstanding balance of zero. The value of the credit is added to the 'PaymentValue' element and this can then be distributed against debit value invoices.
+
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="SumCreditValues" minOccurs="0"/>
+				<xsd:element ref="IncludeFutureInvoices" minOccurs="0"/>
+				<xsd:element ref="IncludeCurrentInvoices" minOccurs="0"/>
+				<xsd:element ref="Include30DayInvoices" minOccurs="0"/>
+				<xsd:element ref="Include60DayInvoices" minOccurs="0"/>
+				<xsd:element ref="Include90DayInvoices" minOccurs="0"/>
+				<xsd:element ref="Include120DayAndOverInvoices" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OriginalInvoiceValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This is the value of the invoice that you are re-establishing. If this element is not supplied or if spaces or nulls are supplied, then the default value is zero.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OriginalInvoiceDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the invoice date of the invoice that you are re-establishing. If this element is not supplied or if nulls or spaces are supplied, then the value supplied in the 'PaymentDate' is used as the default.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OriginalInvoiceTerms">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the terms code of the invoice you are re-establishing. If this element is not supplied, or if the 'OriginalInvoiceValue' is not > 0, then the terms code defined against the SYSPRO A/R Customer is used as the default.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OriginalDiscountValue">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the value of the discount on the invoice that you are re-establishing. If the 'OriginalInvoiceValue' is not > 0, then a value of zero is always used and the value supplied is ignored.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OriginalCustomerPurchaseOrder" default="Re-established">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the customer purchase order of the invoice that you are re-establishing. If this element is not supplied, then the default is 'Re-established'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OriginalExchangeRate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If SYSPRO A/R Setup / General / 'Foreign currency sales is not required', or if the SYSPRO customer is a local currency customer, then this element is not relevant. If the currency defined against the SYSPRO customer is defined as fixed, then this element is not relevant as the current SYSPRO exchange rate is always used.This is the original exchange rate at which to re-establish the SYSPRO A/R Invoice. If the 'DefaultExchangeRateMethod'  element has a value of 'I',  then the default value of this element is the current SYSPRO exchange rate. If the 'DefaultExchangeRateMethod' element has a value of 'N', then the default value of this element is the value supplied in the 'DefaultExchangeRateToUse' element. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceToReEstablish">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the top element for all data supplied for re-establishing an invoice. If you want to make a payment against a SYSPRO A/R Invoice which no longer exists on the SYSPRO A/R Invoice file, you can re-establish the invoice and allocate a payment to this invoice from the data supplied within this element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Invoice"/>
+				<xsd:element ref="OriginalInvoiceValue" minOccurs="0"/>
+				<xsd:element ref="OriginalInvoiceDate" minOccurs="0"/>
+				<xsd:element ref="OriginalInvoiceTerms" minOccurs="0"/>
+				<xsd:element ref="OriginalDiscountValue" minOccurs="0"/>
+				<xsd:element ref="OriginalCustomerPurchaseOrder" minOccurs="0"/>
+				<xsd:element ref="OriginalExchangeRate" minOccurs="0"/>
+				<xsd:element ref="GrossPaymentValue" minOccurs="0"/>
+				<xsd:element ref="DiscountValue" minOccurs="0"/>
+				<xsd:element ref="TaxPortionOfDiscount" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxValue" minOccurs="0"/>
+				<xsd:element ref="ExchangeRateToUse" minOccurs="0"/>
+				<xsd:element ref="OverwriteBranch" minOccurs="0"/>
+				<xsd:element ref="TpmDistribution" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustomerPurchaseOrder">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. If you wish to change the customer purchase order against the SYSPRO A/R Invoice, then this element is used to supply the new value of the customer purchase order. For 'UnappliedPayment' the default value of this element, if not supplied, is 'Unapplied cash'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UnappliedPayment">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the top element for all data supplied for performing an 'unapplied' payment.
+An 'unapplied' payment is a payment value that needs to be distributed, but it is not associated with a specific SYSPRO A/R invoice. If the UnappliedNumber is not supplied then the business object automatically generates the invoice number against which the payment value will be allocated.The invoice numbers always starts� _CRD� and the �xx� suffix is determined by getting the highest _CRD invoice number currently on the SYSPRO A/R Invoice file (for the customer), and incrementing this by one. 
+This element can occur multiple times within the 'Payment' element. Each occurrence contains all the data for making a single 'unapplied' payment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="UnappliedNumber" minOccurs="0"/>
+				<xsd:element ref="GrossPaymentValue" minOccurs="0"/>
+				<xsd:element ref="DiscountValue" minOccurs="0"/>
+				<xsd:element ref="TaxPortionOfDiscount" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxValue" minOccurs="0"/>
+				<xsd:element ref="ExchangeRateToUse" minOccurs="0"/>
+				<xsd:element ref="CustomerPurchaseOrder" minOccurs="0"/>
+				<xsd:element ref="OverwriteBranch" minOccurs="0"/>
+				<xsd:element ref="TpmDistribution" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ApplyDuePostDatedChecks" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element allows you to  select all post dated checks that are dated before or equal to the payment date. The total value of these �due� post dated checks is added to the payment value supplied and can then be distributed as normal. 
+If the 'PaymentDate' element is not supplied, or if spaces or zeros are supplied, then the current computer date is used to ascertain if the post dated check is �due�.If you only wish to apply certain checks, then you  must use the elements within the 'PostDatedCheck' hierarchy. Valid values are 'Y' (to apply due post dated checks) and 'N' (to ignore due post dated checks). The default is 'N'
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CheckDate">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the check date of the post dated check to be selected. If the date is not supplied or if spaces or zeros are supplied, the default is the current computer date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CheckNumber">
+		<xsd:annotation>
+			<xsd:documentation>This element is mandatory. This is the check number of the post dated check to be selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PostDatedCheck">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the top element for all data supplied to select and apply a specific SYSPRO post dated check. The value of the post dated check is added to the 'PaymentValue' and can be distributed as normal.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="CheckDate" minOccurs="0"/>
+				<xsd:element ref="CheckNumber"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TaxPortionOfDiscount">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional.This element is only relevant if the SYSPRO A/R Setup/Tax/'Request tax portion for invoice adjustments/discounts' is selected. In addition, this element is not relevant  if the SYSPRO customer is non-taxable. This is the tax value of the discount. If this element is supplied (even if the element value is spaces or nulls), then the value supplied is always used. If this element is not supplied and the value of the 'AutoCalcTax' element is 'N', then the default element value is zero. If the element is not supplied and a 'Y' is supplied against the 'AutoCalcTax' element, then the tax portion value is automatically calculated using the tax code defined in SYSPRO A/R Setup / Tax / 'Default tax code'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SettlementDiscountNote">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element is only relevant if the Syspro A/R Setup/Terms Discount/Print Debit/Credit note settlement for discount is set to either Always or As Requested.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OverwriteBranch">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This element only applies to the Unapplied Payments and the Re-established Invoices. If supplied, it will take precedence over the customer's branch and  PaymentBranch element unless the the Parameter BranchToUse is used with the ApplySpecificBranch set to 'Y'. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TpmDistribution">
+		<xsd:annotation>
+			<xsd:documentation>This element is only required for TPM customers if deduction is required. This is the total deduction to be destributed and should equal the TpmAmount in TpmDeduction elemnt. It should only be entered once per invoice entry as Only one invoice can be used to fully distribute the entire deductions. See TpmDedustions in Payment element. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InvoiceNotation">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional. This is the payment notation at invoice level. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PaymentRunNumber">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional but required if the transaction is from ARSPPR program. If supplied, it will be written to all the invoice transaction files.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PaymentRunColNo">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional but required if the transaction is from ARSPPR program. If supplied, it will be written to all the invoice transaction files.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PaymentRunCollector">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional but required if the transaction is from ARSPPR program. If supplied, it will be written to all the invoice transaction files.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PaymentRunSalesperson">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional but required if the transaction is from ARSPPR program and the Salesperson required in AR setup is selected. If supplied, it will be written to all the invoice transaction files.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PaymentRunArea">
+		<xsd:annotation>
+			<xsd:documentation>This element is optional but required if the transaction is from ARSPPR program and the Area required in the AR setup is selected. If supplied, it will be written to all the invoice transaction files.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

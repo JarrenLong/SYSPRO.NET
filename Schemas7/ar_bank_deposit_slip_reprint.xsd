@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema List for the AR Bank Deposit Slip Report Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="BankAccountNo" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the Bank Account Number. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/> 
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="BankSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the bank selection.The default is S and the other valid value is A.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=ApBank;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="S"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default="FB"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CurrencySelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the currency selection.The default is A and the other valid value is S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=TblCurrency;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BankSelection" minOccurs="0"/>
+        <xsd:element ref="CurrencySelection" minOccurs="0"/>
+        <xsd:element ref="OperatorSelection" minOccurs="0"/>
+        <xsd:element ref="JournalNoSelection" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JournalNoSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the journal number  selection.The default is A and the other valid values are R and S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MonthSelection" type="xsd:double">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used when reprinting the report according to the month selection.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;01=01;02=02;03=03;04=04;05=05;06=06;07=07;08=08;09=09;10=10;11=11;12=12;13=13;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="OperatorSelection">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate the operator selection.The default is A and the other valid value is S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AdmOperator;A=All;L=List;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BankAccountNo" minOccurs="0"/>
+        <xsd:element ref="Reprint" minOccurs="0"/>
+        <xsd:element ref="MonthSelection" minOccurs="0"/>
+        <xsd:element ref="YearSelection" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reprint" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used to indicate whether to reprint the report or not. The default is Y and the other valid value is N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="YearSelection" type="xsd:double">
+    <xsd:annotation>
+      <xsd:documentation>This sequence is used when reprinting the report according to the year selection.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

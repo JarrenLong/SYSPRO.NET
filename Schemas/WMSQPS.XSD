@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2009 SYSPRO Ltd.-->
+<!-- 
+     Schema for Pick Slip Print Business Object 
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Key" minOccurs="0"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>Key for query... none at the mo</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>Query options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence1Key"/>
+        <xsd:element ref="Sequence1KeyBreak"/>
+        <xsd:element ref="Sequence1KeySummarize"/>
+        <xsd:element ref="Sequence2Key" minOccurs="0"/>
+        <xsd:element ref="Sequence2KeyBreak"/>
+        <xsd:element ref="Sequence2KeySummarize"/>
+        <xsd:element ref="Sequence3Key" minOccurs="0"/>
+        <xsd:element ref="Sequence3KeyBreak"/>
+        <xsd:element ref="Sequence3KeySummarize"/>
+        <xsd:element ref="Sequence4Key" minOccurs="0"/>
+        <xsd:element ref="Sequence4KeyBreak"/>
+        <xsd:element ref="Sequence4KeySummarize"/>
+        <xsd:element ref="Sequence5Key" minOccurs="0"/>
+        <xsd:element ref="Sequence5KeyBreak"/>
+        <xsd:element ref="Sequence5KeySummarize"/>
+        <xsd:element ref="Sequence6Key" minOccurs="0"/>
+        <xsd:element ref="Sequence6KeyBreak"/>
+        <xsd:element ref="Sequence6KeySummarize"/>
+        <xsd:element ref="BinGroupLength" minOccurs="0"/>
+        <xsd:element ref="OrderStatusZero" minOccurs="0"/>
+        <xsd:element ref="OrderStatusOne" minOccurs="0"/>
+        <xsd:element ref="OrderStatusTwo" minOccurs="0"/>
+        <xsd:element ref="OrderStatusThree" minOccurs="0"/>
+        <xsd:element ref="OrderStatusFour" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatZero" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatOne" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatTwo" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatThree" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatFour" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatFive" minOccurs="0"/>
+        <xsd:element ref="SalesOrderDetStatSix" minOccurs="0"/>
+        <xsd:element ref="Reprint" minOccurs="0"/>
+        <xsd:element ref="PrintOrderLineComments" minOccurs="0"/>
+        <xsd:element ref="PrintSerialNumber" minOccurs="0"/>
+        <xsd:element ref="PrintLotInformation" minOccurs="0"/>
+        <xsd:element ref="PrintExtendedInformation" minOccurs="0"/>
+        <xsd:element ref="PrintLongDescription" minOccurs="0"/>
+        <xsd:element ref="PrintBarcodes" minOccurs="0"/>
+        <xsd:element ref="WholeOrderProcessing"/>
+        <xsd:element ref="IncludeNonStockedItems"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence1Key" default="WH">
+    <xsd:annotation>
+      <xsd:documentation>The sequence key. WH - Warehouse, WA- Area, BL - Bin location, BS - Bin sequence, PC - Product class, ON - Sales order number, OL - Order line, CS - Customer, RT - Route, SC - Stock code, SA - Stock Alternative, OA - Order Alternative </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;WH=Warehouse;WA=Warehouse area;BL=Bin location;BS=Bin sequence;PC=Product class;ON=Order number;OL=Order line;CS=Customer;RT=Route;SC=Stock code;SA=Alternative key stock;OA=Alternative key order"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="WH"/>
+        <xsd:enumeration value="WA"/>
+        <xsd:enumeration value="BL"/>
+        <xsd:enumeration value="BS"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="ON"/>
+        <xsd:enumeration value="OL"/>
+        <xsd:enumeration value="CS"/>
+        <xsd:enumeration value="RT"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="OA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence1KeyBreak" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break at this key is required</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence1KeySummarize" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary is required at this key.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence2Key" default="WH">
+    <xsd:annotation>
+      <xsd:documentation>The sequence key. WH - Warehouse, WA- Area, BL - Bin location, BS - Bin sequence, PC - Product class, ON - Sales order number, OL - Order line, CS - Customer, RT - Route, SC - Stock code, SA - Stock Alternative, OA - Order Alternative, NA - None </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;NA=None;WH=Warehouse;WA=Warehouse area;BL=Bin location;BS=Bin sequence;PC=Product class;ON=Order number;OL=Order line;CS=Customer;RT=Route;SC=Stock code;SA=Alternative key stock;OA=Alternative key order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="NA"/>
+        <xsd:enumeration value="WH"/>
+        <xsd:enumeration value="WA"/>
+        <xsd:enumeration value="BL"/>
+        <xsd:enumeration value="BS"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="ON"/>
+        <xsd:enumeration value="OL"/>
+        <xsd:enumeration value="CS"/>
+        <xsd:enumeration value="RT"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="OA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence2KeyBreak" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break at this key is required</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence2KeySummarize" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary is required at this key.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence3Key" default="WH">
+    <xsd:annotation>
+      <xsd:documentation>The sequence key. WH - Warehouse, WA- Area, BL - Bin location, BS - Bin sequence, PC - Product class, ON - Sales order number, OL - Order line, CS - Customer, RT - Route, SC - Stock code, SA - Stock Alternative, OA - Order Alternative, NA - None </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;NA=None;WH=Warehouse;WA=Warehouse area;BL=Bin location;BS=Bin sequence;PC=Product class;ON=Order number;OL=Order line;CS=Customer;RT=Route;SC=Stock code;SA=Alternative key stock;OA=Alternative key order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="NA"/>
+        <xsd:enumeration value="WH"/>
+        <xsd:enumeration value="WA"/>
+        <xsd:enumeration value="BL"/>
+        <xsd:enumeration value="BS"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="ON"/>
+        <xsd:enumeration value="OL"/>
+        <xsd:enumeration value="CS"/>
+        <xsd:enumeration value="RT"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="OA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence3KeyBreak" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break at this key is required</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence3KeySummarize" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary is required at this key.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence4Key" default="WH">
+    <xsd:annotation>
+      <xsd:documentation>The sequence key. WH - Warehouse, WA- Area, BL - Bin location, BS - Bin sequence, PC - Product class, ON - Sales order number, OL - Order line, CS - Customer, RT - Route, SC - Stock code, SA - Stock Alternative, OA - Order Alternative, NA - None </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;NA=None;WH=Warehouse;WA=Warehouse area;BL=Bin location;BS=Bin sequence;PC=Product class;ON=Order number;OL=Order line;CS=Customer;RT=Route;SC=Stock code;SA=Alternative key stock;OA=Alternative key order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="NA"/>
+        <xsd:enumeration value="WH"/>
+        <xsd:enumeration value="WA"/>
+        <xsd:enumeration value="BL"/>
+        <xsd:enumeration value="BS"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="ON"/>
+        <xsd:enumeration value="OL"/>
+        <xsd:enumeration value="CS"/>
+        <xsd:enumeration value="RT"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="OA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence4KeyBreak" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break at this key is required</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence4KeySummarize" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary is required at this key.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence5Key" default="WH">
+    <xsd:annotation>
+      <xsd:documentation>The sequence key. WH - Warehouse, WA- Area, BL - Bin location, BS - Bin sequence, PC - Product class, ON - Sales order number, OL - Order line, CS - Customer, RT - Route, SC - Stock code, SA - Stock Alternative, OA - Order Alternative, NA - None </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;NA=None;WH=Warehouse;WA=Warehouse area;BL=Bin location;BS=Bin sequence;PC=Product class;ON=Order number;OL=Order line;CS=Customer;RT=Route;SC=Stock code;SA=Alternative key stock;OA=Alternative key order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="NA"/>
+        <xsd:enumeration value="WH"/>
+        <xsd:enumeration value="WA"/>
+        <xsd:enumeration value="BL"/>
+        <xsd:enumeration value="BS"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="ON"/>
+        <xsd:enumeration value="OL"/>
+        <xsd:enumeration value="CS"/>
+        <xsd:enumeration value="RT"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="OA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence5KeyBreak" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break at this key is required</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence5KeySummarize" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary is required at this key.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence6Key" default="WH">
+    <xsd:annotation>
+      <xsd:documentation>The sequence key. WH - Warehouse, WA- Area, BL - Bin location, BS - Bin sequence, PC - Product class, ON - Sales order number, OL - Order line, CS - Customer, RT - Route, SC - Stock code, SA - Stock Alternative, OA - Order Alternative, NA - None </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;NA=None;WH=Warehouse;WA=Warehouse area;BL=Bin location;BS=Bin sequence;PC=Product class;ON=Order number;OL=Order line;CS=Customer;RT=Route;SC=Stock code;SA=Alternative key stock;OA=Alternative key order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="NA"/>
+        <xsd:enumeration value="WH"/>
+        <xsd:enumeration value="WA"/>
+        <xsd:enumeration value="BL"/>
+        <xsd:enumeration value="BS"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="ON"/>
+        <xsd:enumeration value="OL"/>
+        <xsd:enumeration value="CS"/>
+        <xsd:enumeration value="RT"/>
+        <xsd:enumeration value="SC"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="OA"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence6KeyBreak" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break at this key is required</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence6KeySummarize" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Summary is required at this key.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Reprint" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Report can be reprinted</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinGroupLength" default="6">
+    <xsd:annotation>
+      <xsd:documentation>Number of characters in a bin group, valid number = 1 to 6</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="6"/>
+        <xsd:enumeration value="5"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatusZero" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with status 0. Default N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatusOne" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with status 1. Default Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatusTwo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with status 2. Default N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatusThree" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with status 3. Default Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderStatusFour" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with status 4. Default N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatZero" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 0. Default N</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatOne" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 1. Default Y</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatTwo" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 2. Default N</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatThree" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 3. Default Y</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatFour" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 4. Default Y</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatFive" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 5. Default Y</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderDetStatSix" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Return orders with order detail status 6. Default N</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintOrderLineComments" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Print Order Line Comments N=No, Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintSerialNumber" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Print serial numbers</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintLotInformation" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Print lot information</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintExtendedInformation" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Print extended information N=No, Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintLongDescription" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Print long description N=No; Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintBarcodes" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Print barcode for stocking Uom N=No; Y=Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WholeOrderProcessing" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Allow whole order processing to be taken into account N - No checking; I - Include; E - Exclude</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;N=No checking"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonStockedItems" default="E">
+    <xsd:annotation>
+      <xsd:documentation>Include non-stocked items E - Exclude; I - Include; O - Only</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Query filters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AltStockCode" minOccurs="0"/>
+        <xsd:element ref="AltKeySalesOrder" minOccurs="0"/>
+        <xsd:element ref="Area" minOccurs="0"/>
+        <xsd:element ref="Bin" minOccurs="0"/>
+        <xsd:element ref="BinSeq" minOccurs="0"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="CustomerClass" minOccurs="0"/>
+        <xsd:element ref="SalesOrder" minOccurs="0"/>
+        <xsd:element ref="OrderType" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="LineShipDate" minOccurs="0"/>
+        <xsd:element ref="RouteCode" minOccurs="0"/>
+        <xsd:element ref="Release" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Version" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="WarehouseArea" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AltStockCode">
+    <xsd:annotation>
+      <xsd:documentation>Alternate keys (stock code) returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AltKeySalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Alternate keys (order) returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Bin">
+    <xsd:annotation>
+      <xsd:documentation>Bins returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=InvMultBin"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BinSeq">
+    <xsd:annotation>
+      <xsd:documentation>Bin sequences returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Branches returned. FilterType options - A)ll, R)ange, S)ingle . Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=SalBranch"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Customers returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=ArCustomer"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>Customer classes returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=TblCustomerClass"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Area">
+    <xsd:annotation>
+      <xsd:documentation>Geographic areas returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=SalArea"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Orders returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=SorMaster"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>Order types returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=TblSoTypes"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Product classes returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=SalProductClass"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RouteCode">
+    <xsd:annotation>
+      <xsd:documentation>Route codes returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=SorRouteMaster"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LineShipDate">
+    <xsd:annotation>
+      <xsd:documentation>Ship dates returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse={date}"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Release">
+    <xsd:annotation>
+      <xsd:documentation>Stock code releases returned. Filter Type options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=EccRevHistory;RevRel=Y"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock codes returned. FilterType options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=InvMaster"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Version">
+    <xsd:annotation>
+      <xsd:documentation>Stock code versions returned. Filter Type options - A)ll, R)ange, S)ingle. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=EccRevHistory;RevRel=Y"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouses returned. FilterType options - A)ll, R)ange, S)ingle, L)ist. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=InvWhControl"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WarehouseArea">
+    <xsd:annotation>
+      <xsd:documentation>Warehouse areas returned. FilterType options - A)ll, R)ange, S)ingle, L)ist. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range;browse=InvWhArea"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

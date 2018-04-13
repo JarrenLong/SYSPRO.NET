@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--
+     Schema for the LCT Element Maintenance Setup Business Object 
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Description" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Element Description. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Description"/>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="ExpectedRate" minOccurs="0"/>
+        <xsd:element ref="ExpectedCur" minOccurs="0"/>
+        <xsd:element name="ApportionMeth" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This indicates the basis (e.g. weight, value, volume, etc.) according to which you want to allocate the invoice amount to each line of the purchase order included in the shipment. Valid entries are VAL, VOL, MASS, QTY, LINE, ENT or CALC. It is mandatory.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="AppMethCalcCode" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates the calculation code that you want the system to use to apportion the invoice amount. Only required if ApportionMeth is CALC.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="GlCode" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates the ledger account to which postings are made for each cost element when receiving a shipment into stock.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ExpectedDesc" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates a description for the expected rate.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShowSequence" type="xsd:integer" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates the sequence number that will be used to sort cost element codes.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UsedFixedCost" type="xsd:integer" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates that a fixed cost will be assigned to the element. 1 - Yes, 0 - No.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FixedCost" type="xsd:decimal" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates the fixed cost amount that must be used for this element.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MinimumValue" type="xsd:decimal" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This indicates a minimum charge that you want to assign to the element.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>GUID for eSignatures</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Element"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the supplier code. The supplier should have both GRN Matching (if using GRN system) and LCT switched on to be a valid supplier. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExpectedRate" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This element contains a value that will be used to calculate the expected cost of the service represented by the cost element.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExpectedCur" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the currency in which the supplier will charge you for services, which is the currency in which you will enter the expected rate</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SetupLctElement">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Element" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Route. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

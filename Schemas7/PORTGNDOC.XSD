@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for PO Post GRN Adjustment Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostGrnAdjustments">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This contains the parameters for Change Grn Supplier</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="ChangeGrnSupplier"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This contains the parameters for Grn Details </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="GrnDetails"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GrnDetails">
+    <xsd:annotation>
+      <xsd:documentation>This contains the parameters for Grn Details</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="GrnNumber"/>
+        <xsd:element ref="GrnSource"/>
+        <xsd:element ref="GrnJournal"/>
+        <xsd:element ref="GrnJournalEntry"/>
+        <xsd:element ref="Unmatch"/>
+        <xsd:element ref="AdjustmentValue"/>
+        <xsd:element ref="Reference"/>
+        <xsd:element ref="DeliveryNote"/>
+        <xsd:element ref="JournalNotation"/>
+        <xsd:element ref="LedgerCode"/>
+        <xsd:element ref="LedgerPassword"/>
+        <xsd:element ref="WithholdingTaxExpenseType" minOccurs="0"/>
+        <xsd:element ref="AnalysisEntry"/>
+        <xsd:element ref="AnalysisLineEntry"/>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ChangeGrnSupplier">
+    <xsd:annotation>
+      <xsd:documentation>This contains the parameters to change the Supplier on the GRN</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="NewSupplier"/>
+        <xsd:element ref="GrnNumber"/>
+        <xsd:element ref="GrnSource"/>
+        <xsd:element ref="GrnJournal"/>
+        <xsd:element ref="GrnJournalEntry"/>
+        <xsd:element ref="ChangeAllGrnLines"/>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory and must contain a valid Ledger code if Company is integrated to General Ledger in detail or summary.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LedgerPassword">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional and must contain the password for the debit ledger code if that code is password-secured.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnNumber">
+    <xsd:annotation>
+      <xsd:documentation>The GrnNumber element is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnSource">
+    <xsd:annotation>
+      <xsd:documentation>The GrnSource element is mandatory if changing a GRN.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnJournal">
+    <xsd:annotation>
+      <xsd:documentation>The GrnJournal element is mandatory if changing a GRN.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnJournalEntry">
+    <xsd:annotation>
+      <xsd:documentation>The GrnJournalEntry element is mandatory if changing a GRN.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Unmatch">
+    <xsd:annotation>
+      <xsd:documentation>This element, when selected, will unmatch the entered GRN if it is already matched. When set to Y this will be the only function performed .</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AdjustmentValue">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the value to be posted to the GRN</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory and must contain the Supplier code to which the Grn will be associated.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DeliveryNote">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional when adding a GRN and contains the  delivery note.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Reference">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional when changing a GRN and contains the GRN reference</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeAllGrnLines">
+    <xsd:annotation>
+      <xsd:documentation>This element will change the supplier on all GRN's with the same number</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JournalNotation">
+    <xsd:annotation>
+      <xsd:documentation>This element is optional when changing a GRN and contains the notation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AnalysisEntry">
+    <xsd:annotation>
+      <xsd:documentation>If an analysis entry number has been assigned to this detail line, then use this element to store the analysis entry number. If an analysis Line entry is passed then that will overwrite the analysis number supplied in the AnalysisEntry element. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="AnalysisLineEntry">
+    <xsd:annotation>
+      <xsd:documentation>If IgnoreAnalysis is set to 'Y", this node and all it's elements are ignored. If you are supplying your own AnalysisEntry Number ensure that you have set IgnoreAnalysis to "Y"</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="AnalysisCode1">
+          <xsd:annotation>
+            <xsd:documentation>You can specify an analysis code 1 for the analysis entry you are creating </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="AnalysisCode2">
+          <xsd:annotation>
+            <xsd:documentation>You can specify an analysis code 2 for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="AnalysisCode3">
+          <xsd:annotation>
+            <xsd:documentation>You can specify an analysis code 3 for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="AnalysisCode4">
+          <xsd:annotation>
+            <xsd:documentation>You can specify and analysis code 4 for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="AnalysisCode5">
+          <xsd:annotation>
+            <xsd:documentation>You can specify an analysis code 5 for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="StartDate">
+          <xsd:annotation>
+            <xsd:documentation>You can specify a start date for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="EndDate">
+          <xsd:annotation>
+            <xsd:documentation>You can specify an end date for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="EntryAmount">
+          <xsd:annotation>
+            <xsd:documentation>You must specify an entry amount for the analysis entry you are creating.If the entry amount supplied does not agree with the calculated transaction value at runtime, the entry amount will be overwritten with the transaction value.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Comment">
+          <xsd:annotation>
+            <xsd:documentation>You can enter a comment for the analysis entry you are creating</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WithholdingTaxExpenseType">
+    <xsd:annotation>
+      <xsd:documentation>Only applies if withholding tax is in use. Expense type G = Goods, S = Service</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewSupplier">
+    <xsd:annotation>
+      <xsd:documentation>This element is mandatory when changing a Supplier on a GRN.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

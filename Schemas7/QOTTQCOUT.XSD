@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Quotations Confirmation out Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Customer" type="xsd:byte"/>
+  <xsd:element name="CustomerName" type="xsd:string"/>
+  <xsd:element name="DateCalcMethod" type="xsd:string"/>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Quote"/>
+        <xsd:element ref="QuoteVersion"/>
+        <xsd:element ref="ItemNumber"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ItemNumber" type="xsd:string"/>
+  <xsd:element name="ItemsInvalid" type="xsd:boolean"/>
+  <xsd:element name="ItemsProcessed" type="xsd:boolean"/>
+  <xsd:element name="Job">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:short">
+        <xsd:enumeration value="000000000001098"/>
+        <xsd:enumeration value="000000000001099"/>
+        <xsd:enumeration value="000000000001100"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobCreated">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Job"/>
+        <xsd:element ref="JobDescription"/>
+        <xsd:element ref="StockDescription"/>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="salesOrderLine"/>
+        <xsd:element ref="SellingPrice"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="NonStocked"/>
+        <xsd:element ref="Route"/>
+        <xsd:element ref="QtyToMake"/>
+        <xsd:element ref="JobStartDate"/>
+        <xsd:element ref="DateCalcMethod"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="CustomerName"/>
+        <xsd:element ref="JobTenderDate"/>
+        <xsd:element ref="Priority"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobDescription" type="xsd:string"/>
+  <xsd:element name="JobStartDate">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:date">
+        <xsd:enumeration value="2016-03-01"/>
+        <xsd:enumeration value="2016-03-24"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobTenderDate" type="xsd:date"/>
+  <xsd:element name="NonStocked" type="xsd:string"/>
+  <xsd:element name="Priority" type="xsd:byte"/>
+  <xsd:element name="QtyToMake" type="xsd:string"/>
+  <xsd:element name="Quote" type="xsd:short"/>
+  <xsd:element name="QuoteVersion" type="xsd:byte"/>
+  <xsd:element name="Route" type="xsd:byte"/>
+  <xsd:element name="SalesOrder">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:short">
+        <xsd:enumeration value="000000000001414"/>
+        <xsd:enumeration value="001414"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderFunction" type="xsd:string"/>
+  <xsd:element name="SalesOrderInfo">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrderFunction"/>
+        <xsd:element ref="SalesOrder"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SellingPrice" type="xsd:string"/>
+  <xsd:element name="StatusOfItems">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ItemsProcessed"/>
+        <xsd:element ref="ItemsInvalid"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Q100"/>
+        <xsd:enumeration value="Q103"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockDescription" type="xsd:string"/>
+  <xsd:element name="Warehouse" type="xsd:string"/>
+  <xsd:element name="postquotationconfirmation">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+        <xsd:element ref="SalesOrderInfo"/>
+        <xsd:element ref="JobCreated" maxOccurs="unbounded"/>
+        <xsd:element ref="StatusOfItems"/>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Language2" type="xsd:string" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Role" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="OperatorPrimaryRole" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="salesOrderLine">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:enumeration value="0001"/>
+        <xsd:enumeration value="0002"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

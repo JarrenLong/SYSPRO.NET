@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+    Sample XSDOUT for the Operator Activities Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SystemInformation"/>
+        <xsd:element ref="QueryOptions"/>
+        <xsd:element ref="ExportFileCreated"/>
+        <xsd:element ref="Activities" maxOccurs="unbounded"/>
+        <xsd:element name="TranslatedText">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Text_Yes" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_No" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Operator" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Role" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SystemInformation">
+    <xsd:annotation>
+      <xsd:documentation>Standard SYSPRO System Information</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CssStyle"/>
+        <xsd:element ref="Language"/>
+        <xsd:element ref="DecFormat"/>
+        <xsd:element ref="DateFormat"/>
+        <xsd:element ref="Role"/>
+        <xsd:element ref="Version"/>
+        <xsd:element ref="CompanyId"/>
+        <xsd:element ref="CompanyName"/>
+        <xsd:element ref="OperatorCode"/>
+        <xsd:element ref="OperatorName"/>
+        <xsd:element ref="OperatorGroup"/>
+        <xsd:element ref="OperatorEmailAddress"/>
+        <xsd:element ref="OperatorLocation"/>
+        <xsd:element ref="LocalCurrency"/>
+        <xsd:element ref="LocalCurrencyDesc"/>
+        <xsd:element ref="GlPrdPerYear"/>
+        <xsd:element ref="ReportDate"/>
+        <xsd:element ref="UseSeparatorOnReports"/>
+        <xsd:element ref="SeparatorToUse"/>
+        <xsd:element ref="OperatorPrimaryRole"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="QueryOptions">
+    <xsd:annotation>
+      <xsd:documentation>User-specified XMLIn options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ActivityConfiguration" type="xsd:string"/>
+        <xsd:element name="Translated_ActivityConfiguration" type="xsd:string"/>
+        <xsd:element name="ShowXml" type="xsd:string"/>
+        <xsd:element name="Translated_ShowXml" type="xsd:string"/>
+        <xsd:element name="ExportFile" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Activities">
+    <xsd:annotation>
+      <xsd:documentation>All Activities</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Activity" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Activity">
+    <xsd:annotation>
+      <xsd:documentation>Single Activity</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ActivityNumber" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Activity number in SYSPRO. Activities are listed in ADMACC/ADMRLA in order of activity number.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActivityModule" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Module which Activity is part of.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActivityDescription" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>User readable activity description, eg. "AP Invoices"</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActivitySequence" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Defines the sequence in which Activities are displayed in listview etc. NOT the same as activity number.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ActivityEnet" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Y = E.Net only Activity</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="Configuration" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Configuration">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ConfigType" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Activity assigned by "Role" or "Operator"</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ConfigCode" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Role code or Operator code</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ConfigDescription" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Role name or Operator name.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ConfigAllowed" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Y = Yes, N = No</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ConfigType"/>
+  <xsd:element name="ConfigCode"/>
+  <xsd:element name="ConfigDescription"/>
+  <xsd:element name="ConfigAllowed"/>
+  <xsd:element name="CssStyle" type="xsd:string"/>
+  <xsd:element name="Language" type="xsd:string"/>
+  <xsd:element name="DecFormat" type="xsd:string"/>
+  <xsd:element name="DateFormat" type="xsd:string"/>
+  <xsd:element name="Role" type="xsd:string"/>
+  <xsd:element name="Version" type="xsd:string"/>
+  <xsd:element name="CompanyId" type="xsd:boolean"/>
+  <xsd:element name="CompanyName" type="xsd:string"/>
+  <xsd:element name="OperatorCode" type="xsd:string"/>
+  <xsd:element name="OperatorName" type="xsd:string"/>
+  <xsd:element name="OperatorGroup" type="xsd:string"/>
+  <xsd:element name="OperatorEmailAddress" type="xsd:string"/>
+  <xsd:element name="OperatorLocation" type="xsd:string"/>
+  <xsd:element name="LocalCurrency" type="xsd:string"/>
+  <xsd:element name="LocalCurrencyDesc" type="xsd:string"/>
+  <xsd:element name="GlPrdPerYear" type="xsd:string"/>
+  <xsd:element name="ReportDate" type="xsd:string"/>
+  <xsd:element name="UseSeparatorOnReports" type="xsd:string"/>
+  <xsd:element name="SeparatorToUse" type="xsd:string"/>
+  <xsd:element name="OperatorPrimaryRole" type="xsd:string"/>
+  <xsd:element name="ExportFileCreated" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>When populated wth a filename, that file has been created. When a blank value is returned, no file has been created.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

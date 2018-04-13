@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Transfer Work in Progress Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostWipTransfer">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to transfer work in progress from a non-stocked sub job to the master job's allocation.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="PartBillingJournal" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the part billing journal number to which the part billing transaction journal entries, created against the sub job receipt will be added. It must be valid for the specified posting period and may not have been printed already. If not supplied, a new part billing journal will be created.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="InventoryJournal" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the inventory journal number to which the issue transaction journal entries, created against the issue to the master job will be added. It must be valid for the specified posting period as well as for the default warehouse for the company, and may not have been printed already. If not supplied, a new inventory journal will be created.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and must contain a valid non-stocked sub job against which the transfer is to be made. The format is alphanumeric or numeric depending on the key configuration option for jobs within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" default="S">
+                <xsd:annotation>
+                  <xsd:documentation>Select 'S' for stocking uom, 'A' for alternate uom, 'O' for other uom or 'M' for manufacturing uom. Quantities and times entered will be according to the unit of measure selected.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="M"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Quantity" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Quantity to receive in against the job. If not returned or returned as zero then the quantity to receive is calculated as the difference between the quantity to manufacture and the quantity already received in against the job.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="JobComplete" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the flag indicating whether the job should be flagged as complete or not.
+Enter Y to set the job to be complete.
+Enter N to set the job to be not complete.
+If it is not returned then the program will check whether to set it to complete i.e., the quantity already manufactured for the job is added to the quantity being received in. A comparison is made to the original quantity that was required to be manufactured. If the result is equal to (or greater than) the original quantity to be manufactured, then the job is set to complete. If it is less than the original quantity to be manufactured, then the job is set to be not complete.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CloseDate" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This flag indicates whether you should use the transaction date as the actual job complete date when in a status of complete.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProductClass">
+                <xsd:annotation>
+                  <xsd:documentation>This is the product class to be used for the item when creating the inventory journal.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WipValueBasis" default="A" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to indicate the source of the work in progress value. This can be the outstanding work in progress value, expected costs or actual costs. Possible values are W (Outstanding WIP) or E (Expected cost) or A (Actual cost). It not returned or returned as spaces then it is set to 'W' if the job is complete and to 'A' if it is not.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="E"/>
+                    <xsd:enumeration value="W"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaterialValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the value by which the material portion of work in progress must be reduced. If not supplied the material value will be calculated using the cost basis as well as the WIP value basis supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LaborValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the value by which the labor portion of work in progress must be reduced. If not supplied the labor value will be calculated using the cost basis as well as the WIP value basis supplied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CostBasis" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Select Unit if the material and/or labor values entered are based on the unit quantity that has been manufactured. Select Total if the material and/or labor values entered are based on the total quantity that has been manufactured. Possible values are: U (Unit) or T (Total). When not supplied and the wipvaluebasis is W (Outstanding WIP) and the material or labor value is greater than zero then the default is T (Total) else it is U (Unit).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value="T"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Lot" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The following only applies if the sub job being received in is lot traceable and lot traceability is in use. The entry is mandatory if processing a positive receipt and the lot numbering method is manual and the option to use the job number as the lot has not been set. If a negative receipt is being processed then the lot must be entered.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LotConcession" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the concession number against the lot. Only applicable when the job is traceable and when the quantity manufactured is not zero.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LotCertificate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the certificate against the lot. Only applicable when the job is traceable and when the quantity manufactured is not zero.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Reference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element can contain a source reference for the receipt transaction. This reference is printed on the inventory journal report and is stored on the WIP postings file, part booking file and the lot transaction file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Notation">
+                <xsd:annotation>
+                  <xsd:documentation>This element can contain a 45 character notation that is printed on the inventory journal report after the transaction details and is held on the lot transaction file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="AddReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You can use the additional reference field for your own use to hold any extra information required.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaterialReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You can use the material additional reference field for your own use to hold any extra information required. The field is stored on the job detail posting file.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Rma Setup Options Transaction Posting Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="RmaSetupOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="Options" minOccurs="0"/>
+				<xsd:element ref="Defaults" minOccurs="0"/>
+				<xsd:element ref="Numbering" minOccurs="0"/>
+				<xsd:element ref="UserDefined" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="FixInHouse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether a Sales Order or works order should be created for the repair of merchandise returned by a customer. (N - No action required, S - Sales Order, W - Create Job, B - Both). If no value is supplied then the default value of N - No Action Required will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No Action Required;S=Sales Order;W=Create Job;B=Both;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="S" />
+<xsd:enumeration value="W" />
+<xsd:enumeration value="B" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DaysRetCompRma">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the number of days to retain completed RMA's. This element in optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PromptForRevRelAtIssue">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to be prompted for the revision & release of ECC-Controlled when issuing an RMA. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. If element is set to N, the user will only be prompted at release time.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PrintRma">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to print the RMA document at the time of issue of the RMA or at the time of receipting the returned merchandise. (B - Both, I - At Issue, R - Receipt Only). If no value is supplied then the default value of B will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="B=Both;I=At Issue;R=Receipt Only;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="B" />
+<xsd:enumeration value="I" />
+<xsd:enumeration value="R" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ProblemCodeMan">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the defective merchandise should be categorized by problem type or category. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. If set to Y, the problem code will be mandatory.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PromptForSave">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the user must be prompted to save or if the program should save automatically. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="General">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="FixInHouse" />
+<xsd:element ref="DaysRetCompRma" />
+<xsd:element ref="PromptForRevRelAtIssue" />
+<xsd:element ref="PrintRma" />
+<xsd:element ref="ProblemCodeMan" />
+<xsd:element ref="PromptForSave" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="CrossShipCrSo">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether a sales order should be created automatically when issuing an RMA that requires a cross shipment. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CrossShipSerialNos">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to be prompted to enter serial numbers when processing cross shipment. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. If set to N then a record will not be created in the OT file.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MaxDayRetProd">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the maximum number of days that merchandise returned for cross shipment can be received before warning messages are displayed. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RestockPerc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default restocking percentage fee to apply to returned merchandise. This element if optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="99.99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RestockProdCls">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default product class for the restocking fee. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PromptForRestock">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the system should automatically apply the restocking fee or if the system should prompt to accept or change the restocking fee at line level. (A - Automatically, L - Line Level). If no value is supplied then the default value of A will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="A=Automatically;L=Line Level;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="L" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeDefCr">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to defective credit. (N - No, Y- Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeDefInWarr">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to defective in warranty. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeDefOutWarr">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to defective out of warranty. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeGenRet">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to general return. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeIncOrd">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to an incorrect order. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeIncShip">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to an incorrect shipment. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyRestockFeeShrtShip">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the restocking fee should be applied to short shipment. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Options">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="CrossShipCrSo" />
+<xsd:element ref="CrossShipSerialNos" />
+<xsd:element ref="MaxDayRetProd" />
+<xsd:element ref="RestockPerc" />
+<xsd:element ref="RestockProdCls" />
+<xsd:element ref="PromptForRestock" />
+<xsd:element ref="ApplyRestockFeeDefCr" />
+<xsd:element ref="ApplyRestockFeeDefInWarr" />
+<xsd:element ref="ApplyRestockFeeDefOutWarr" />
+<xsd:element ref="ApplyRestockFeeGenRet" />
+<xsd:element ref="ApplyRestockFeeIncOrd" />
+<xsd:element ref="ApplyRestockFeeIncShip" />
+<xsd:element ref="ApplyRestockFeeShrtShip" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="RmaDefWhCred">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default warehouse for receiving RMA's credits. This element is mandatory and must be a valid SYSPRO warehouse.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefWhRep">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default warehouse for repairing RMA's. This element is mandatory and must be a valid SYSPRO warehouse.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefWhComp">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default warehouse for components when the restocking components option is selected. This element is mandatory and must be avalid SYSPRO warehouse.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefRecAction">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default action to be taken when receiving RMA's. (I - Inspect, A - Archive, C - Credit, E - Exchange, F - Fix in house, Z - Narration). If no value is supplied then the default value of I will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="I=Inspect;A=Archive;C=Credit;E=Exchange;F=Fix In House;Z=Narration;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="I" />
+<xsd:enumeration value="A" />
+<xsd:enumeration value="C" />
+<xsd:enumeration value="E" />
+<xsd:enumeration value="F" />
+<xsd:enumeration value="Z" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefInvTerms">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default invoice terms code that must be used for credit notes. This element is optional. If entered, it must be a valid SYSPRO terms code. If left blank, the invoice terms from the customer record will be used.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefNsUom">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicate the default unit of measure for non-stocked lines. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefNsProdCls">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default product class for non-stocked lines. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaDefLineType">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if RMA issues should default to stocked lines or non-stocked lines. (S - Stocked, N - Non-Stocked). If no value is supplied then the default value of S will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="S=Stocked;N=Non-Stocked;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="S" />
+<xsd:enumeration value="N" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Defaults">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="RmaDefWhCred" />
+<xsd:element ref="RmaDefWhRep" />
+<xsd:element ref="RmaDefWhComp" />
+<xsd:element ref="RmaDefRecAction" />
+<xsd:element ref="RmaDefInvTerms" />
+<xsd:element ref="RmaDefNsUom" />
+<xsd:element ref="RmaDefNsProdCls" />
+<xsd:element ref="RmaDefLineType" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="RmaNumMethod">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to assign RMA numbers automatically. (A - By company, M - Manual, B - By branch, P - By branch with prefix). If no value is supplied then the default value of A will be assumed. May only be set to P if the RMA key type is alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="C=By company;M=Manual;B=By branch;P=By branch with prefix;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaNextNo">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the next RMA Number to be used. Only applies if 'RmaNumMethod' is set to C. May not be set to zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Numbering">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="RmaNumMethod" />
+<xsd:element ref="RmaNextNo" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="RmaUdfHdr">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to prompt for a user defined field on the RMA Header record. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaUdfHdrMand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the user defined field that appears on the RMA Header is mandatory. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaUdfLine1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the description for Line detail 1. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaUdfLine1Mand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the first user-defined field that apprears on the RMA detail line is mandatory. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaUdfLine2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the description for Line detail 2. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RmaUdfLine2Mand">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if the second user-defined field that appears on the RMA detail line is mandatory. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UserDefined">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="RmaUdfHdr" />
+<xsd:element ref="RmaUdfHdrMand" />
+<xsd:element ref="RmaUdfLine1" />
+<xsd:element ref="RmaUdfLine1Mand" />
+<xsd:element ref="RmaUdfLine2" />
+<xsd:element ref="RmaUdfLine2Mand" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+ 

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Sample Schema for the Generate SQL Script Transaction Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CreateSingleScript">
+    <xsd:annotation>
+      <xsd:documentation>"Y" to generate all of  the SQL script as a single file, DropRebuildKey70.sql. Default is "N".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GenerateRebuildFKey">
+    <xsd:annotation>
+      <xsd:documentation>"Y" to generate the SQL script RebuildFKey70.sql to add the foreign keys for each SYSPRO table. Default is "N".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GenerateDropFKey">
+    <xsd:annotation>
+      <xsd:documentation>"Y" to generate the SQL script DropFKey70.sql to drop the foreign keys for each SYSPRO table. Default is "N".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GenerateIndexScript">
+    <xsd:annotation>
+      <xsd:documentation>"Y" to generate the SQL script AddKey70.sql to drop and re-add the primary keys and alternate indexes for each SYSPRO table. Default is "N".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostCOMTDI">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnSqlScript">
+    <xsd:annotation>
+      <xsd:documentation>"Y" to return the generate SQL scripts in the XML out. Default is "N".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="GenerateIndexScript" minOccurs="0"/>
+        <xsd:element ref="GenerateDropFKey" minOccurs="0"/>
+        <xsd:element ref="GenerateRebuildFKey" minOccurs="0"/>
+        <xsd:element ref="ReturnSqlScript" minOccurs="0"/>
+        <xsd:element ref="CreateSingleScript" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

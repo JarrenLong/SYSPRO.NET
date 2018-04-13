@@ -1,0 +1,1476 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Revaluation Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostAssetRevaluation">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Asset Revaluation. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting revaluations to Assets.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="Asset">
+								<xsd:annotation>
+									<xsd:documentation>This is the key to the asset being maintained. This is mandatory.The format is up to 15 characters, alphanumeric or numeric depending on a configuration option within SYSPRO. If this asset is being added, it must not pre-exist. If this asset is being changed or deleted, it must be a valid Syspro asset code.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="15"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RevaluationDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the date of revaluation. If this element is not supplied, the default value will be the current period-end date. This date must be within the current period.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RevaluationReason" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reason code for the revaluation. This element is mandatory when revaluation as asset, and must be a valid Syspro revaluation reason code.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RevaluationComment" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is a free-form alpha-numeric comment related to the revaluation transaction.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="60"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvAssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued book value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxAssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued tax value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 1 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 2 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 3 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 4 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 5 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 6 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 7 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 8 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 9 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10AssetCost" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the new revalued Alternate 10 value of the asset. The revaluation transaction amount will be calculated as the difference between old asset value and revalued asset value. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the residual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvDepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvSuspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvStatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="BvNumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvNumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvRemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BvVaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxDepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxSuspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxStatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="TaxNumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxNumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxRemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TaxVaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CapitalGainsTaxVal" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the capital gains tax value of an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt1NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt1VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt2NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt2VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt3NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt3VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt4NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt4VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt5NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt5VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt6NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt6VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt7NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt7VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt8NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt8VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt9NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt9VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10ResidualValue" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the reisdual value up to which value an asset is depreciated. If the setup option "Exclude Book Value residual from depreciation calculation" is ticked, the residual value is subtracted from the asset Cost/Value before depreciation is calculated. When changing, access to this element is not allowed if the operator security access to "Asset financial fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10DepnCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the depreciation code of an asset and determines the formula for depreciation is calculated. This element must be a valid Syspro Depreciation code. When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10Suspend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to suspend depreciation on an asset. The default value of the flag is "N" and the valid values are "Y" and "N". When changing an asset, access to this element is not allowed if the operator security access to "Asset depreciation fields" is denied. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10ThruputEul" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Throughput for the estimated useful life (EUL) of an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="16"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10StatGlCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Statistical G/L account code to be used to derive the throughput per period used to calculate depreciation for an asset. It is madatory when a Statistical EUL depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Alt10NumberOfPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of periods in the estmated useful life (EUL) of an asset. It is madatory when a fixed EUL, or Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10NumberOfYears" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of years in the estmated useful life (EUL) of an asset. It is madatory when a Sum of year digits or Declining balance depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10RemainingPeriods" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the total number of remaining periods in the estmated useful life (EUL) of an asset. It is madatory when a Remaining value over remaining life depreciation code has been specified for an asset.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Alt10VaryingAnniversary" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used only for varying depreciation for Varying annually and Varying by period. It has the values "S" to indicated sart depreciation period, or "F" for fiscal year. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="F"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="eSignature" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the GUID passed for eSignature</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="38"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

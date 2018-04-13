@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the COM Custom Menu business object.      
+-->
+<xsd:schema id="NewDataSet" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="TOPICS">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TOPIC" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="TOPICS" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="TYPE" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TOPIC">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="TITLE" type="xsd:string" minOccurs="0"/>
+        <xsd:element name="URL" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="refresh" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TOPICLIST">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MAIN" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="TOPICS" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="FAVOURITES" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="TOPIC" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="TYPE" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NewDataSet" >
+    <xsd:complexType>
+      <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="TOPICS"/>
+        <xsd:element ref="TOPIC"/>
+        <xsd:element ref="TOPICLIST"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

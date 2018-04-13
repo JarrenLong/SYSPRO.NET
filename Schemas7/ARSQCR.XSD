@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AR Credit Management Report Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AgeColumn1" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The value supplied will be used for the first column of ageing. If no value is supplied then a default value of 30 will be used. If the value supplied for UseStandardAgeingColumns is a 'Y' then the value supplied for AgeColumn1 will be ignored.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AgeColumn2" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The value supplied will be used for the second column of ageing. If no value is supplied then a default value of 60 will be used. If the value supplied for UseStandardAgeingColumns is a 'Y' then the value supplied for AgeColumn2 will be ignored.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AgeColumn3" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The value supplied will be used for the third column of ageing. If no value is supplied then a default value of 90 will be used. If the value supplied for UseStandardAgeingColumns is a 'Y' then the value supplied for AgeColumn3 will be ignored.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AgeColumn4" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The value supplied will be used for the fourth column of ageing. If no value is supplied then a default value of 120 will be used. If the value supplied for UseStandardAgeingColumns is a 'Y' then the value supplied for AgeColumn4 will be ignored.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AgeColumn5" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The value supplied will be used for the fifth column of ageing. If no value is supplied then a default value of 150 will be used. If the value supplied for UseStandardAgeingColumns is a 'Y' then the value supplied for AgeColumn5 will be ignored.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AgeingDate">
+		<xsd:annotation>
+			<xsd:documentation>This is the ageing date to be applied to the transactions. The program will default to the ageing date for the ReportAsOf period supplied. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date}"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AgeingMethod">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what ageing method should be applied when aging transactions. (S - statement, A - Aged statement, I - Invoice date and D - Invoice due date) If no value is supllied the aging option in the AR setup program will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;S=Statement;A=Aged statement;I=Invoice date;D=Invoice due date"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BalanceTypeSelection">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether customers with certain balances should be included. (A - All, D - Debit and C - Credit). If no value is supplied then a default value of  'A' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;D=Debit balance;C=Credit balance"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BranchSelectionBy">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the branch selection should be made on the Customer branch(C) or the Invoice branch (I). If no value is supplied then a default value of C will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of branches for customers to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalBranch;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ConvertToLocalCurrency">
+		<xsd:annotation>
+			<xsd:documentation>Only if CurrencyValues has a vaue of 'L' then the ConvertToLocalCurrency is used to indicate whether the transaction must be converted to local currency at the entry time exchange rate (E) or the current exchange rate (C). If no value is supplied then a default value of 'E' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;E=At entry time;C=At current exchange rate;Z=Z"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CreditNarrations">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether credit narrations should be returned. (I - Include, E - Exclude and F - Followup date). If no value is supplied then a default value of 'I' will be used. If a value of 'F' is return then credit narrations will be returned depending on the date range selected for the FollowupDate. If a value of 'I' or 'E' is returned then the FollowupDate will be ignored.                          ** This field has been disabled for use on the SRS form of the Ar Trial balance Report and Summary Credit Management Report.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;F=Follow-up date selections"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="F"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Currency">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of customer terms for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblCurrency;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CurrencyValues">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what currency the values must be returned in. (L - Local and F - Foreign). If no value is supplied then a default value of 'L' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;L=Local currency;F=Foreign currency"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="F"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of customers to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ArCustomer;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustomerClass">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of customer class for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblCustomerClass;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustomerDetail">
+		<xsd:annotation>
+			<xsd:documentation>Indicates how much customer detail should be returned (N - summary only customer name and number, and Y - detailed customer information). If no value is supplied then a default value of 'Y' will be used. This flag is only used for the Crystal report to determine how much information should be shown on the report and will not influence the output of the XML in any way.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustomerLimitandTermsBy">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what selection criteria will be used against the customer. (A - All customers, L - Limit checking, T - Terms checking, C - limit and terms checking and M - Minimum balance checking). If no value is supplied then a default value of 'C' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All customers;L=Limit checking;T=Terms checking;C=Limit and terms checking;M=Minimum balance checking"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="T"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="M"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustomersOnHold">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether customers on hold should be included. (I - Include, E -Exclude and O - Only print customers on hold) If no value is passed a default value of 'I' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;I=Include customers on hold;E=Exclude customers on hold;O=Only customers on hold"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DaysOverTerms" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the number of days that the customer should be over his terms before being selected for the report. If no value is supplied then the default value of zeroes will be used. This will be ignored if CustomerLimitandTermsBy is not a 'T' or a 'C'.</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="ShortName" minOccurs="0"/>
+				<xsd:element ref="Branch" minOccurs="0"/>
+				<xsd:element ref="Terms" minOccurs="0"/>
+				<xsd:element ref="Currency" minOccurs="0"/>
+				<xsd:element ref="GeographicArea" minOccurs="0"/>
+				<xsd:element ref="CustomerClass" minOccurs="0"/>
+				<xsd:element ref="SalesPerson" minOccurs="0"/>
+				<xsd:element ref="FollowupDate" minOccurs="0"/>
+				<xsd:element ref="CustomisedSelection" minOccurs="0"/>
+				<xsd:element ref="CustomisedSelection2" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FollowupDate">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of followup dates for customers to be returned. This filter will only be used if CreditNarrations is 'F'. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GeographicArea">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of geographic area for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalArea;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeCrNotAvail">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether customers without credit available should be included. (Y - yes and N - No). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFutureInvoices">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether future invoices should be included. (Y - yes and N - No). If no value is supplied then a default cvalue of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeVoidPdChecks">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether PD checks that have been void should be Included. (Y - yes and N - No). If no value is supplied then a default cvalue of 'N' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludePostDatedChecks">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether post dated checks should be included. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeRetainedInvoices">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether retained invoices should be included. ( N - No and Y - Yes). If no value is supplied then a default value of 'N'  wil be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeZeroBalanceCurrentInvoice">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether current invoices with a zero balance should be included. (Y - Yes and N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeZeroBalanceCustomers">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether customers with a zero balance should be included. ( Y - yes and N - No ). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NumberOfAgeingBuckets" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates into how many buckets you want your invoices aged. Valid options are from 1 to 6. If no number is supplied a default value of 6 will be assumed.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MinimumBalanceAmount" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The minimum balance that a customer should have before that customers data is returned. This is only applicable if CustomerLimitandTermsBy is 'M'. If no value is supplied and CustomerLimitandTermsBy is 'M' then a default value of 999999999999.99 will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportAsOf" minOccurs="0"/>
+				<xsd:element ref="ReportsSequence" minOccurs="0"/>
+				<xsd:element ref="CustomersOnHold" minOccurs="0"/>
+				<xsd:element ref="IncludeZeroBalanceCustomers" minOccurs="0"/>
+				<xsd:element ref="IncludeFutureInvoices" minOccurs="0"/>
+				<xsd:element ref="IncludePostDatedChecks" minOccurs="0"/>
+				<xsd:element ref="IncludeRetainedInvoices" minOccurs="0"/>
+				<xsd:element ref="IncludeZeroBalanceCurrentInvoice" minOccurs="0"/>
+				<xsd:element ref="PrintFullAddress" minOccurs="0"/>
+				<xsd:element ref="CurrencyValues" minOccurs="0"/>
+				<xsd:element ref="ConvertToLocalCurrency" minOccurs="0"/>
+				<xsd:element ref="AgeingMethod" minOccurs="0"/>
+				<xsd:element ref="AgeingDate" minOccurs="0"/>
+				<xsd:element ref="UseStandardAgeingColumns" minOccurs="0"/>
+				<xsd:element ref="AgeColumn1" minOccurs="0"/>
+				<xsd:element ref="AgeColumn2" minOccurs="0"/>
+				<xsd:element ref="AgeColumn3" minOccurs="0"/>
+				<xsd:element ref="AgeColumn4" minOccurs="0"/>
+				<xsd:element ref="AgeColumn5" minOccurs="0"/>
+				<xsd:element ref="CreditNarrations" minOccurs="0"/>
+				<xsd:element ref="BalanceTypeSelection" minOccurs="0"/>
+				<xsd:element ref="MinimumBalanceAmount" minOccurs="0"/>
+				<xsd:element ref="CustomerLimitandTermsBy" minOccurs="0"/>
+				<xsd:element ref="OverLimitAmount" minOccurs="0"/>
+				<xsd:element ref="TermsCheckingBasedOn" minOccurs="0"/>
+				<xsd:element ref="DaysOverTerms" minOccurs="0"/>
+				<xsd:element ref="ReturnNotesinBlock" minOccurs="0"/>
+				<xsd:element ref="ReportType" minOccurs="0"/>
+				<xsd:element ref="TagFile" minOccurs="0"/>
+				<xsd:element ref="CustomerDetail" minOccurs="0"/>
+				<xsd:element name="BranchSelectionBy" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates whether the branch selection should be made on the Customer branch(C) or the Invoice branch (I). If no value is supplied then a default value of C will be used.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="C"/>
+							<xsd:enumeration value="I"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="IncludeCrNotAvail" minOccurs="0"/>
+				<xsd:element name="IncludeSubAttachedMaster" default="N" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates whether sub accounts that is attached to the master account should be included. Y - Yes and N- No. The default is N</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="NumberOfAgeingBuckets" minOccurs="0"/>
+				<xsd:element ref="IncludeVoidPdChecks" minOccurs="0"/>
+				<xsd:element name="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OverLimitAmount" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The maximum balance that a customer should have before that customers data is returned. This is only applicable if CustomerLimitandTermsBy is  'L' or 'C'.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PrintFullAddress">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the full customer address line should be returned. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. When a value of 'N' is used only the first address line will be returned. If a value of 'Y' is supplied then all 5 address lines will be returned as welll as the postal code. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates how much detail should be returned (S - summary - only customer details and balances , I - include invoice detail and D - include transaction details). If not value is supplied then a default value of 'S' will be used. ** This field has been disabled for use on the SRS form of the Ar Trial balance Report and Summary Credit Management Report.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;S=Summary - Balance only;I=Include invoice detail;D=Include transaction detail"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReportAsOf">
+		<xsd:annotation>
+			<xsd:documentation>Defines the financial period for which the report will be run. (C - Current, P1 - Previous period 1 and P2 - Previous period 2 ). If no value is supplied a default of 'C' will be used.  </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;C=Current month;P1=Previous month 1;P2=Previous month 2"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="P1"/>
+				<xsd:enumeration value="P2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReportsSequence">
+		<xsd:annotation>
+			<xsd:documentation>Defines the sequence in which the report will be printed. ( C - Customer number, S - Shortname, B - Branch, L - Customer class, G - Geographical area, P - Salesperson and U - user defained sequence). If no value is supplied a default of 'C' will be used. If a value of  'B' or 'P' is passed there will be special totalling by branch or by salesperson. If a value of 'U' is passed then a tag file must be supplied indicating the sequence of customers.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;C=Customer number;S=Shortname;B=Branch;L=Customer class;G=Geographical area;P=Salesperson"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReturnNotesinBlock">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether notes should be returned combined in a block. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SalesPerson">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of salesperson for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalSalesperson;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ShortName">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of shortname for customers to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ArCustomer;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TagFile">
+		<xsd:annotation>
+			<xsd:documentation>This is the path for the file which must be used for the user defined entry. This will only be used if ReportSequnce has a value of 'U'.</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Terms">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single selection of customer terms for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblArTerms;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TermsCheckingBasedOn">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what method should be used for terms checking. (S - standard ageing and A - actual days). If no value is supplied then a default value of 'S' will be used. This is only applicable if CustomerLimitandTermsBy is a 'T' or 'C'.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;S=Standard ageing;A=Actual days"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="A"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UseStandardAgeingColumns">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the standard aging methods should be used. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used. If a value of 'N' is supplied then the aging columns supplied in AgeColumn1, AgeColumn2, AgeColumn3, AgeColumn4 and AgeColumn5 will be used. </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustomisedSelection">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single of customised selection for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustomisedSelection2">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single of customised selection 2 for customers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

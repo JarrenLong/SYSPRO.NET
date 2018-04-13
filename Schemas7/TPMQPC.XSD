@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the TPM Promotion Code Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>List of options.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="IncludeExpiredPromotions" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Include expired promotions ? (Y - Yes , N - No) Defaults to N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GlobalPromotions" default="I" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Global promotions (I - Include, E - Exclude, O - Only</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="I"/>
+										<xsd:enumeration value="E"/>
+										<xsd:enumeration value="O"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ReturnListInBlock" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Returns lists as a block of items seperated by an ampersand (Y - Yes , N - No) Defaults to N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" type="xsd:string" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This contains one or more filters to restrict the number of documents returned.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="PromotionCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Promotion code to be selected (FilterType of A - All, R - Range or S - Single promotion code, FilterValue contains a range of promotion codes separated by commas if FilterType is R or a single promotion code if S).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PromotionType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Promotion type to be selected (FilterType of A - All or S - Single promotion type, FilterValue contains a single promotion type if S with O - Off Invoice, A - Accrual, F - Free Goods).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="ExpiryDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Expiry date to be selected (FilterType of A - All, R - Range or S - Single expiry date, FilterValue contains a range of expiry dates separated by commas if FilterType is R or a single expiry date if S).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StartDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Start date to be selected (FilterType of A - All, R - Range or S - Single start date, FilterValue contains a range of start dates separated by commas if FilterType is R or a single start date if S).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

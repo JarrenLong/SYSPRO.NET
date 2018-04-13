@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Order Load Planning Sales Order Business Object.
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>The list of Filters subroot node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Route" minOccurs="0"/>
+        <xsd:element ref="SalesOrder" minOccurs="0"/>
+        <xsd:element ref="NumberOfDaysBeforeToday" minOccurs="0"/>
+        <xsd:element ref="NumberOfDaysAfterToday" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="InclCompOrderLines" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include  complete sales order lines. Y - Yes, N - No (default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclCompOrders" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include complete sales orders. Y - Yes, N - No (default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclOrdersInSuspense" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include  sales orders in suspense. Y - Yes, N - No (default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclZeroToShip" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include zero available to ship. Y - Yes, N - No (default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfDaysAfterToday">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering Number of days after todays date. A - All, 30 - 30 days, 60 - 60 days, 90 - 90 days, 180 - 180 days, S - Select a date to input (CCYY-MM-DD).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NumberOfDaysBeforeToday">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering Number of days before todays date. A - All, 30 - 30 days, 60 - 60 days, 90 - 90 days, 180 - 180 days, S - Select a date to input (CCYY-MM-DD).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options subroot node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="InclCompOrderLines" minOccurs="0"/>
+        <xsd:element ref="InclOrdersInSuspense" minOccurs="0"/>
+        <xsd:element ref="InclCompOrders" minOccurs="0"/>
+        <xsd:element ref="InclZeroToShip" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the main root node.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Route">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Route. A - All, R - Range, S - Single (default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Sales Order. A - All, R - Range, S - Single (default)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

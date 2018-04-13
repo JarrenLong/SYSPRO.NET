@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Generic Report Writer business object
+     that illustrates a list of suppliers query
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The is the parent key element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Manifest"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Manifest" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The name of the definition file is expected.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent option element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence minOccurs="0">
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="PrintFullAddress" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence minOccurs="0">
+        <xsd:element ref="SupplierType" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="Bank" minOccurs="0"/>
+        <xsd:element ref="SupplierClass" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence" default="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>The sequence that the report must be created in.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Supplier=Supplier;SupShortName=Short Name;UserField1=Userfield1"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Supplier"/>
+        <xsd:enumeration value="SupShortName"/>
+        <xsd:enumeration value="UserField1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintFullAddress" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the suppliers full address must be printed. (Y -Yes, N - No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SupplierType">
+    <xsd:annotation>
+      <xsd:documentation>SupplierType to be selected (FilterType of A - All, S - Single SypplierType, FilterValue contain P - Permanent T - Temporary if the FilterType is S)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;P=Permanent;T=Temporary"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" use="optional" default="P">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="P"/>
+            <xsd:enumeration value="T"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Supplier to be selected (FilterType of A - All, S - Single Supplier, R - Range of Supplier)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Branch to be selected (FilterType of A - All, S - Single Branch)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApBranch;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Bank">
+    <xsd:annotation>
+      <xsd:documentation>Bank to be selected (FilterType of A - All, S - Single Bank)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApBank;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplierClass">
+    <xsd:annotation>
+      <xsd:documentation>SupplierClass to be selected (FilterType of A - All, S - Single SupplierClass)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

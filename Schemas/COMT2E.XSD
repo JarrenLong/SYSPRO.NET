@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for Email Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Body">
+    <xsd:annotation>
+      <xsd:documentation>Allows for a message in the body of the Email
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="1000"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Email">
+    <xsd:annotation>
+      <xsd:documentation>Compulsary element that contains the email details
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SenderCode"/>
+        <xsd:element ref="Recipient"/>
+        <xsd:element ref="Subject" minOccurs="0"/>
+        <xsd:element ref="Body" minOccurs="0"/>
+        <xsd:element ref="Priority" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SmtpIpAddress">
+    <xsd:annotation>
+      <xsd:documentation>Compulsary element that contains the IP address of the SMTP server</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FileExtension" type="xsd:string" default="XML">
+    <xsd:annotation>
+      <xsd:documentation>The file extension to be used for the attachment that is going to be emailed.
+If blank it will default to XML</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>Compulsary element that contains the parameters 
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="FileExtension" minOccurs="0"/>
+        <xsd:element ref="SmtpIpAddress"/>
+        <xsd:element name="Port" type="xsd:string"/>
+        <xsd:element name="UserName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Login user name when passing credentials. If blank, the default user name defined in the company setup will be used</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Password" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Login password when passing credentials.  If blank, the password defined in the company setup will be used.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="Email"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostEmailDocument">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Priority" default="1">
+    <xsd:annotation>
+      <xsd:documentation>Allows you to set a priority in the Email. If blank it will default to 1.
+( 0 - Low, 1 - Medium, 3 - High ).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="0 "/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2 "/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Recipient" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The email address that the attachment must be sent to.  If blank, the display address from the document flow manager setup will be used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SenderCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Name of the person that is sending the email.  If blank ,the display email address from the document flow manager setup will be used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Subject">
+    <xsd:annotation>
+      <xsd:documentation>The email subject.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="1000"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

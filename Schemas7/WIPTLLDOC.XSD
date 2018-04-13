@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Job Linking - Job to Sales Order Line Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostLateLinkingWIPSO">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to attach or detach a sub job.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>This contains the job you wish to link/de-link to a matching sales order line.
+The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrder" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This contains the sales order number that you wish to link to the job.
+The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This contains the sales order line number that you wish to link to the job.
+The format is numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, in the format {36303032-3330-3031-3038-
+323434363433}, for the eSignature system to accept the transaction as having been authenticated. It is
+up to the developer to have requested a password to protect the transaction. An example is that a GUID
+associated with the act of entering a valid password could be obtained. This GUID would then be passed
+to the eSignature system where it is stored</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

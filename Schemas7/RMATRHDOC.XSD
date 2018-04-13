@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the Add RMA Header Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AllowCustomerOnHold" type="xsd:string"/>
+	<xsd:element name="AlternateKey">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Area">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Contact">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="CreateUpdate" type="xsd:string"/>
+	<xsd:element name="Customer" type="xsd:byte"/>
+	<xsd:element name="CustomerName">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Fax">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CreateUpdate">
+					<xsd:annotation>
+						<xsd:documentation>Flag to create or Update a RMA Header. C = Create, U = Update. Default is C. This is a mandatory field.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="C"/>
+							<xsd:enumeration value="U"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Customer" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Customer for new RMA Header. This field is required if the CreateUpdate flag is C.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AllowCustomerOnHold" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Allow creation of RMA Header for a customer that is on hold. This is a required field if the CreateUpdate flag is C. Y = Yes, N = No. The default is N.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="Y"/>
+							<xsd:enumeration value="N"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="RmaNumber" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>RMA Number to be updated. This field is required if the CreateUpdate flag is U.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Branch" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Branch. Will default to customer's Branch if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CustomerName" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Customer Name for the RMA Header. This will default to the name on the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipAddress1" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Address Line 1 for the RMA Header.  This will default to the Address in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipAddress2" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Address Line 2 for the RMA Header.  This will default to the Address in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipAddress3" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Address Line 3 for the RMA Header.  This will default to the Address in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipAddress3Loc" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Address Line 3 - Locality for the RMA Header.  This will default to the Address in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipAddress4" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Address Line 4 for the RMA Header.  This will default to the Address in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipAddress5" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Address Line 5 for the RMA Header.  This will default to the Address in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipPostalCode" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Ship Postal Code for the RMA Header.  This will default to the Postal Code in the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ShipGpsLat" minOccurs="0"/>
+				<xsd:element name="ShipGpsLong" minOccurs="0"/>
+				<xsd:element name="LanguageCode" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Language code for multiple language document printing</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="MultiShipCode" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Code for Multiple Ship Addresses. This will default to the code on the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Telephone" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Telephone number for customer. This will default to the telephone number on the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Fax" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Fax number for customer. This will default to the fax number on the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Area" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Geographic Area.  Will default to customer's Geographic Area if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="UserField1" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>User defined field as setup in RMA Setup program.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="SpecialInstrs" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Special Instructions for the RMA Header.  This will default to special Instructions from the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="OrderType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Order Type for the RMA.  This will default to the Order Type on the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AlternateKey" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Alternate Key as setup up in the RMA Setup program.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ServiceTicket" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>CRM service ticket for the RMA Header.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Contact" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Contact name for customer. Will default to Contact from the Customer Master file if nothing is entered.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="eSignature" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This element contains the GUID of the current process required to authenticate the transaction when Electronic Signatures are in use.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MultiShipCode">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="OrderType">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="RmaHeader">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>This is the root element.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RmaNumber">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ServiceTicket">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ShipAddress1">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ShipAddress2">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ShipAddress3">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ShipAddress4">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ShipAddress5">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ShipPostalCode">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="SpecialInstrs">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Telephone">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="UserField1">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

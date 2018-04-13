@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+      Schema for the BOM list of Structures
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the Parent Filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeApprovedManufacturerList">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to show only Approved Manufacturers</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMPSItems">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to include MPS Items in the list. ( Y(Yes), N(No) or O(Only)). If no value is supplied then a default value of Y(Yes) will be used.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LevelOfStructure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the Level of Structure to show on the list. F(First), L(Lowest) or A(All). If no value is supplied then a default value of F(First) will be used.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;F=First;L=Lowest;A=All"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ListFullNarrationLines">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to show narrations or not. Y(Yes) or N(No). The default is N(No).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPagePerItem">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to print each item on a new page Y(Yes) or N(No). The default is Y(Yes).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the Parent Option element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeMPSItems"/>
+        <xsd:element ref="LevelOfStructure"/>
+        <xsd:element ref="ListFullNarrationLines"/>
+        <xsd:element ref="ReturnNarrationsInBlock"/>
+        <xsd:element ref="IncludeApprovedManufacturerList"/>
+        <xsd:element ref="NewPagePerItem"/>
+        <xsd:element ref="RevisionRelease"/>
+        <xsd:element ref="Routing"/>
+        <xsd:element ref="PrintManufacturingUMQuantities"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnNarrationsInBlock">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to return narrations in a block of text or line by line Y(Yes) or N(No). The default is Y(Yes). Only taken into account if ListFullNarrationLines is Y(Yes).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RevisionRelease">
+    <xsd:annotation>
+      <xsd:documentation>This is an option to select only a single revision/release combination for a stock code. This value will only be taken into consideration if a SINGLE stock code is selected. Valid entries are three digit revision/three digit release example: 000/000 or 001/000</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=EccRevHistory"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Routing" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which routing to run the report for. Default is 0.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=BomRoute"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range, List of stock codes to be returned. FilterType options - A(All), (S)Single, (R)Range, (L)List. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range;L=List;RevRel=Y"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range, List of warehouses to be returned. FilterType options - A(All), S(Single), R(Range), L(List).  Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="PrintManufacturingUMQuantities">
+    <xsd:annotation>
+      <xsd:documentation>This is the Option to include Manufacturing Unit Of Measure. Y (Yes) or N (No)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

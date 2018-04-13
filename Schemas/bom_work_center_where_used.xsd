@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the BOM Work Centre Where Used Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the Root Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the Parent Option Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="NewPageOnWorkCenter" minOccurs="0"/>
+				<xsd:element ref="PrintManufacturingUMQuantities" minOccurs="0"/>
+				<xsd:element ref="RevisionRelease" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="NewPageOnWorkCenter">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to page on change of work center. Valid entries are Y(Yes) or N(No). Default to Y(Yes)</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;Y=Yes; N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintManufacturingUMQuantities">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default depends on your setup options.</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;Y=Yes; N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RevisionRelease">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to select only a single revision/release combination for a stock code. This value will only be taken into consideration if a SINGLE stock code and SINGLE routing is selected. Valid entries are three digit revision/three digit release example: 000/000 or 001/000</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=EccRevHistory"/>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the Parent Filter Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Routing" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="WorkCenter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Routing">
+		<xsd:annotation>
+			<xsd:documentation>All, Single, Range of Routings to be returned. FilterType options - A(All), S(Single), R(Range).  Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;browse=BomRoute; A=All; S=Single; R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of stock codes to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;browse=InvMaster;A=All;S=Single;R=Range;RevRel=Y"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="WorkCenter">
+		<xsd:annotation>
+			<xsd:documentation>All, Single, Range of work centers to be returned. FilterType options - A(All), S(Single), R(Range).  Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenitem=Y;browse=BomWorkCentre; A=All; S=Single; R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

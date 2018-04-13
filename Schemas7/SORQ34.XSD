@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for the Dispatch Notes by Sales Order List Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Selection of branches whose sales orders are to be included in the report.
+
+'A' - All (Default) 
+Select this to include orders for all branches in the report.
+
+'S' - Single 
+Select this to include orders for a single branch in the report.
+You indicate this branch in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Selection of customers whose sales orders are to be included in the report.
+
+'A' - All (Default) 
+Select this to include orders for all customers in the report.
+
+'R' - Range 
+Select this to specify a range of customers whose orders you want to include in the report.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include orders for a single customer in the report.
+You indicate this customer in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="OrderDate"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="OrderType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeCompletedOrders" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include completed sales orders in the report. Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonAllocSchedOrders" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include non-allocated scheduled order in the report. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeSCTs" default="I">
+    <xsd:annotation>
+      <xsd:documentation>Valid values are:
+
+'I' - Include (default)
+Select this to include supply chain transfer orders in the report.
+
+'E' - Exclude 
+Select this to exclude supply chain transfer orders from the report.
+
+'O' - Only 
+Select this to print the report only for supply chain transfer orders.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This lists the options available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PrintOrderLinesNoDispatches" minOccurs="0"/>
+        <xsd:element ref="IncludeCompletedOrders" minOccurs="0"/>
+        <xsd:element ref="IncludeNonAllocSchedOrders" minOccurs="0"/>
+        <xsd:element ref="PrintCustomerPO" minOccurs="0"/>
+        <xsd:element ref="PrintCancelledDispatches" minOccurs="0"/>
+        <xsd:element ref="IncludeSCTs" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderDate">
+    <xsd:annotation>
+      <xsd:documentation>Selection of sales orders for a specific date to be included in the report.
+
+'A' - All (Default) 
+Select this to include all orders regardless or order date in the report.
+
+'R' - Range 
+Select this to specify a range of order dates whose orders you want to include in the report.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include orders for a single order date in the report.
+You indicate this order date in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>Selection of order types to be included in the report.
+
+'A' - All (Default) 
+Select this to include orders of all order types in the report.
+
+'S' - Single 
+Select this to include orders of a single order type in the report.
+You indicate this order type in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintCancelledDispatches" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include cancelled dispatch notes in the report. Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintCustomerPO" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to print the customer's purchase order number on the report.
+Valid values are 'N' - No (default) and 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintOrderLinesNoDispatches" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Select this if you want to include sales order lines with no dispatches in the report. Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Selection of sales orders to be included in the report.
+
+'A' - All (Default) 
+Select this to include all orders in the report.
+
+'R' - Range 
+Select this to specify a range of orders you want to include in the report.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include a single order in the report.
+You indicate this order in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Selection of stock codes whose sales orders are to be included in the report.
+
+'A' - All (Default) 
+Select this to include orders for all stock codes in the report.
+
+'R' - Range 
+Select this to specify a range of stock codes whose orders you want to include in the report.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to include orders for a single stock code in the report.
+You indicate this stock code in the FilterValue attribute.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

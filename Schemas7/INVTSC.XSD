@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Stock Take Header/Defaults Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="CaptureTicketNumbers" default="N">
+    <xsd:annotation>
+      <xsd:documentation>(N - No, Y - Yes). Default is N. When this option is 'Y' the ticket number details entered will be captured. If the ticket number is found on file, the stock code and the bin must be the same as the stock code and bin held against the ticket number. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreateBins" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Create Bins if they don't exist (N - No, Y - Yes). Default is N.
+However, if the Inventory setup option 'Allow creation of bins when processing Inventory transactions' is not set, this option is ignored and 'N' is assumed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreateLots" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Create Lots if they don't exist (N - No, Y - Yes). Default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreateSerials" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Create Serials if they don't exist (N - No, Y - Yes). Default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreOtherWhsItems" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>(N - No, Y - Yes). Default is Y. This is an option to ignore items of other warehouses, other than the key warehouse. If you selected "N" you can leave the warehouse tag empty or put an invalid warehouse, and the program will ignore this item. If you select "Y" all the warehouses will be validated and a error message will be returned for invalid warehouses.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The key root element contains only the warehouse. The key element is mandatory. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="WarehouseCode"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The stock take option element consists of: 
+  1. CreateBins, 
+  2. CreateSerials,
+   3. CreateLots,
+  4. ValidateReturnsAll,
+  5. ValidateOnly,
+  6. IgnoreOtherWhsItems,
+  7. CaptureTicketNumbers,
+  8. TicketNumbersExist, and
+  9. XslStylesheet.  
+If these options are not supplied, the option defaults will take over.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="CreateBins"/>
+        <xsd:element ref="CreateSerials"/>
+        <xsd:element ref="CreateLots"/>
+        <xsd:element ref="ValidateReturnsAll"/>
+        <xsd:element ref="ValidateOnly"/>
+        <xsd:element ref="IgnoreOtherWhsItems"/>
+        <xsd:element ref="CaptureTicketNumbers"/>
+        <xsd:element ref="TicketNumbersExist"/>
+        <xsd:element ref="DefaultCaptureMethod" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockTake">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TicketNumbersExist" default="N">
+    <xsd:annotation>
+      <xsd:documentation>(N - No, Y - Yes). Default is N. When this option is 'Y', the program will only take ticket numbers that already exist. The stock code and the bin captured should be the same as the stock code and the ticket held against the ticket number. If the stock code is not entered a stock code held against the ticket number is used. If the bin location is not entered a bin location held against the ticket number is used. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If Y = Yes then only validate. If N=No then validate and import. Default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateReturnsAll" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Validate returns all records (N - No, Y - Yes). Default is N.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WarehouseCode">
+    <xsd:annotation>
+      <xsd:documentation>Warehouse to use for Stock Take. This is the warehouse in which the stock take is to take place. 
+
+Although you can count stock in more than one warehouse at a time, the program treats each warehouse separately in the stock count. 
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The XSL Stylesheet to be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="DefaultCaptureMethod" default="I">
+    <xsd:annotation>
+      <xsd:documentation>I - Increase quanity, R - replace quantity. You use this option to increase or replace already captured quantity. Default is I - Increase quantity.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

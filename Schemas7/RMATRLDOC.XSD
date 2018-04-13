@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the Add RMA Line Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AddChange">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Billable">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="BillableType">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="CrossShipment" type="xsd:string"/>
+	<xsd:element name="CrossShipmentDetails">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="XNonStocked"/>
+				<xsd:element ref="XStockCode"/>
+				<xsd:element ref="XDescription"/>
+				<xsd:element ref="XWarehouse"/>
+				<xsd:element ref="XQuantity"/>
+				<xsd:element ref="XUnits"/>
+				<xsd:element ref="XPieces"/>
+				<xsd:element ref="XUnitOfMeasure"/>
+				<xsd:element ref="XPrice"/>
+				<xsd:element ref="XUnitCost"/>
+				<xsd:element ref="XProductClass"/>
+				<xsd:element ref="XUnitMass"/>
+				<xsd:element ref="XUnitVolume"/>
+				<xsd:element ref="XSerials" minOccurs="0"/>
+				<xsd:element ref="XLot" minOccurs="0"/>
+				<xsd:element ref="XBins" minOccurs="0"/>
+				<xsd:element ref="XEccCurrentWhenShipping"/>
+				<xsd:element ref="XRevision"/>
+				<xsd:element ref="XRelease"/>
+				<xsd:element ref="XTaxable"/>
+				<xsd:element ref="XTaxCode"/>
+				<xsd:element ref="XGstTaxable"/>
+				<xsd:element ref="XGstCode"/>
+				<xsd:element ref="XSalesOrder"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Description" type="xsd:string"/>
+	<xsd:element name="EstimatedLaborCost">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="EstimatedMaterialCost">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Invoice">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceNumber" type="xsd:string"/>
+	<xsd:element name="Item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AddChange"/>
+				<xsd:element ref="RmaNumber"/>
+				<xsd:element ref="RmaLineNumber"/>
+				<xsd:element ref="Invoice"/>
+				<xsd:element ref="InvoiceNumber"/>
+				<xsd:element ref="NonStocked"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="Description"/>
+				<xsd:element ref="ProductClass"/>
+				<xsd:element ref="Quantity"/>
+				<xsd:element ref="Units"/>
+				<xsd:element ref="Pieces"/>
+				<xsd:element ref="UnitOfMeasure"/>
+				<xsd:element ref="PurchaseDate"/>
+				<xsd:element ref="WarrantyDate"/>
+				<xsd:element ref="ReturnByDate"/>
+				<xsd:element ref="SerialNumber"/>
+				<xsd:element ref="Lot"/>
+				<xsd:element ref="Revision"/>
+				<xsd:element ref="Release"/>
+				<xsd:element ref="CrossShipment"/>
+				<xsd:element ref="CrossShipmentDetails"/>
+				<xsd:element ref="ProblemCode"/>
+				<xsd:element ref="ProblemNotes"/>
+				<xsd:element ref="RmaType"/>
+				<xsd:element ref="OutOfWarranty"/>
+				<xsd:element ref="UserDefined1"/>
+				<xsd:element ref="UserDefined2"/>
+				<xsd:element ref="eSignature"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Lot" type="xsd:string"/>
+	<xsd:element name="NonStocked" type="xsd:string"/>
+	<xsd:element name="OutOfWarranty">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="EstimatedLaborCost"/>
+				<xsd:element ref="EstimatedMaterialCost"/>
+				<xsd:element ref="Billable"/>
+				<xsd:element ref="BillableType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Pieces" type="xsd:string"/>
+	<xsd:element name="ProblemCode" type="xsd:string"/>
+	<xsd:element name="ProblemNotes">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Text"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PurchaseDate" type="xsd:string"/>
+	<xsd:element name="Quantity" type="xsd:decimal"/>
+	<xsd:element name="Release">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ReturnByDate" type="xsd:string"/>
+	<xsd:element name="Revision">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="RmaLine">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RmaLineNumber" type="xsd:string"/>
+	<xsd:element name="RmaNumber" type="xsd:string"/>
+	<xsd:element name="RmaType" type="xsd:string"/>
+	<xsd:element name="SerialNumber" type="xsd:string"/>
+	<xsd:element name="StockCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Text" type="xsd:string"/>
+	<xsd:element name="UnitOfMeasure" type="xsd:string"/>
+	<xsd:element name="Units" type="xsd:string"/>
+	<xsd:element name="UserDefined1">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserDefined2">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WarrantyDate" type="xsd:string"/>
+	<xsd:element name="XBinLocation">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XBinPieces">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XBinQuantity">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XBinUnits">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XBins">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="XBinLocation"/>
+				<xsd:element ref="XBinQuantity"/>
+				<xsd:element ref="XBinUnits"/>
+				<xsd:element ref="XBinPieces"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XDescription">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XEccCurrentWhenShipping" type="xsd:string"/>
+	<xsd:element name="XGstCode">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XGstTaxable" type="xsd:string"/>
+	<xsd:element name="XLot">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XNonStocked" type="xsd:string"/>
+	<xsd:element name="XPieces" type="xsd:string"/>
+	<xsd:element name="XPrice">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:decimal"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XProductClass">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XQuantity" type="xsd:decimal"/>
+	<xsd:element name="XRelease">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XRevision">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSalesOrder">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialCreationDate">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialExpiryDate">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialNumber">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialPieces">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialQuantity">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialScrapDate">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerialUnits">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XSerials">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="XSerialNumber"/>
+				<xsd:element ref="XSerialQuantity"/>
+				<xsd:element ref="XSerialUnits"/>
+				<xsd:element ref="XSerialPieces"/>
+				<xsd:element ref="XSerialCreationDate"/>
+				<xsd:element ref="XSerialExpiryDate"/>
+				<xsd:element ref="XSerialScrapDate"/>
+				<xsd:element ref="XserialLocation"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XStockCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XTaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="XTaxable" type="xsd:string"/>
+	<xsd:element name="XUnitCost">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:decimal"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XUnitMass">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XUnitOfMeasure" type="xsd:string"/>
+	<xsd:element name="XUnits" type="xsd:string"/>
+	<xsd:element name="XUnitVolume">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="XWarehouse" type="xsd:string"/>
+	<xsd:element name="XserialLocation">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="eSignature">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

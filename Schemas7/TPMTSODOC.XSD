@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Trade Promotion Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="TradePromotionOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General" minOccurs="0"/>
+        <xsd:element ref="Options" minOccurs="0"/>
+        <xsd:element ref="Defaults" minOccurs="0"/>
+        <xsd:element ref="History" minOccurs="0"/>
+        <xsd:element ref="Qualifications" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NextTpmRefNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next Trade Promotions reference number to use. If the TPM control record is not found, a value of 1 will be assumed. This element may not be zeros.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefTextDedAmount">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This contains a user defined text to be used for the deduction amount. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TextForFreeGoods">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This contains a user defined text to be used for free goods. This element is optional. If no value is supplied then the default value of 'Free:' will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextTpmJnl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next Trade Promotion journal number to use. If the TPM control record is not found, a value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DedDebitDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default deduction date for debits. (C - Current date, D - Payment date). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Current date;D=Payment date;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyTpmCrCheck">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Trade Promotion credit checking must be applied. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="KitCompGblProm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether kit components should qualify for global promotions. (N - No, Y- Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NextTpmRefNum"/>
+        <xsd:element ref="DefTextDedAmount"/>
+        <xsd:element ref="TextForFreeGoods"/>
+        <xsd:element ref="NextTpmJnl"/>
+        <xsd:element ref="DedDebitDate"/>
+        <xsd:element ref="ApplyTpmCrCheck"/>
+        <xsd:element ref="KitCompGblProm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AutoSelLineProm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether line promotions should be automatically selected. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoSelGblProm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether global promotions should be automatically selected. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoShipLineFreeGds">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether line free goods should be shipped if the full quantity is available. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoShipGblFreeGds">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether global free goods should be shipped if the full quantity is available. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChkSOProm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if the order must be checked for promotions on loading Sales Order Entry. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowSelGblProm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if global promotions are allowed from edit in the Sales Order Entry. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplySODiscTpmCust">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if order discounts for Trade Promotion customers must apply. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreditAccrualsInvoices">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if you wish to reduce rebate accruals when credit notes are created from invoices against which Trade Promotions accruals apply. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreditOffInvLinesFromInvoices">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if you wish to create and update off invoice promotions on credit notes. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExcludeFGLinesFromInvDisc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if free goods lines must be excluded from the invoice discount calculations. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExcludeSingleQualLinesFromInvDisc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if single qualifying lines must be excluded from the invoice discount calculations. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SetMiscCostToZero">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if miscellaneous lines must be added at a zero cost. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowMaintOfMiscCost">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if the miscellaneous cost on line can be edited. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReactivatePromotionUtilizationReduced">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Set the promotion limit to reactivate promotion when limit utilization reduced.  (N - No, Y - Yes). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyPromotionIfLimitExceeded">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Set the promotion limit to apply promotion if limit will be exceeded. (N - No, Y - Yes). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AutoSelLineProm"/>
+        <xsd:element ref="AutoSelGblProm"/>
+        <xsd:element ref="AutoShipLineFreeGds"/>
+        <xsd:element ref="AutoShipGblFreeGds"/>
+        <xsd:element ref="ChkSOProm"/>
+        <xsd:element ref="AllowSelGblProm"/>
+        <xsd:element ref="ApplySODiscTpmCust"/>
+        <xsd:element ref="CreditAccrualsInvoices"/>
+        <xsd:element ref="CreditOffInvLinesFromInvoices"/>
+        <xsd:element ref="ExcludeFGLinesFromInvDisc"/>
+        <xsd:element ref="ExcludeSingleQualLinesFromInvDisc"/>
+        <xsd:element ref="SetMiscCostToZero"/>
+        <xsd:element ref="AllowMaintOfMiscCost"/>
+        <xsd:element ref="ReactivatePromotionUtilizationReduced"/>
+        <xsd:element ref="ApplyPromotionIfLimitExceeded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DefDedCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the Trade Promotion deduction code. This element is optional. If supplied, it must be a valid deduction code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefOffInvLineProdCls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default product class for the off-invoice line promotion. This element is optional. If supplied, it must be a valid product class code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefOffInvGlobalProdCls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default product class for the off-invoice global promotion. This element is optional. If supplied, it must be a valid product class code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FreeGdsUseMerchProdCls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use the merchandise product class for the free goods line promotions. (Option is updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OffInvUseMerchProdCls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use the merchandise product class for the off invoice line promotions. (Option is updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDedResCodeNormal">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the normal deduction resolution code. This element is optional. If supplied, it must be a valid resolution code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDedResCodeWoff">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the write-off deduction resolution code. This element is optional. If supplied, it must be a valid resolution code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDedResCodeMatch">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the promotion match deduction resolution code. This element is optional. If supplied, it must be a valid resolution code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PromTaxDefTaxCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the tax code used for promotions. This element is optional. If supplied, it must be a valid tax code.]]>
+When using Descriptive Tax Codes, a descriptive tax code must be provided.
+</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PromUseMerchLinTaxCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the merchandise tax code must be used for the line promotion. (Option is updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PromTaxDefGstCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the GST code used for promotions. This element is optional. If supplied, it must be a valid tax code.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PromUseMerchLinGSTCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the merchandise GST code must be used for the line promotion. (Option is updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DedTaxInclDedAccr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates if the tax must be included in deductions and accruals. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. If this element has a value of Y, either/both 'DedTaxDefTaxCode' and 'DedTaxDefGstCode' must be supplied.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DedTaxDefTaxCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the tax code used for deductions. This element is optional. If supplied, it must be a valid tax code. Does not apply if 'DedTaxInclDedAccr' is set to N.]]>
+When using Descriptive Tax Codes, a descriptive tax code must be provided.
+</xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DedTaxCodeDefGstCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the GST code used for deductions. This element is optional. If supplied, it must be a valid tax code. Does not apply if 'DedTaxInclDedAccr' is set to N.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Defaults">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DefDedCode"/>
+        <xsd:element ref="DefOffInvLineProdCls"/>
+        <xsd:element ref="DefOffInvGlobalProdCls"/>
+        <xsd:element ref="FreeGdsUseMerchProdCls"/>
+        <xsd:element ref="OffInvUseMerchProdCls"/>
+        <xsd:element ref="DefDedResCodeNormal"/>
+        <xsd:element ref="DefDedResCodeWoff"/>
+        <xsd:element ref="DefDedResCodeMatch"/>
+        <xsd:element ref="PromTaxDefTaxCode"/>
+        <xsd:element ref="PromUseMerchLinTaxCode"/>
+        <xsd:element ref="PromTaxDefGstCode"/>
+        <xsd:element ref="PromUseMerchLinGSTCode"/>
+        <xsd:element ref="DedTaxInclDedAccr"/>
+        <xsd:element ref="DedTaxDefTaxCode"/>
+        <xsd:element ref="DedTaxCodeDefGstCode"/>
+        <xsd:element name="AccrualTax">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[This is the Accrual Tax option. This element is optional. If supplied, A - Add at time of accrual (default), R - Add at time of review. Does not apply if 'DedTaxInclDedAccr' is set to N.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string"/>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="TaxPromoLevel">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[This is the Tax at promotion level option. This element is optional. If supplied, Y - Yes, N - No (default). Does not apply if 'DedTaxInclDedAccr' is set to N and if AccrualTax is set to A.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string"/>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="UpdateExistingPromotions">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[Select how to update the tax and GST options against existing promotion codes when changing the tax and GST code. Valid values are N - Do not apply, Y - Update promotions. If not supplied the default of "N" will be applied.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string"/>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DaysRetExpProm">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain expired promotions. If this element is not supplied then the default value of all 9's will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="History">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DaysRetExpProm"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockQualification1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is an additional qualification using an Inventory custom form field. This element is optional and the default value of "None" will be assumed. If supplied, it must be a valid Stock code custom form field name.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockQualification2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is an additional qualification using an Inventory custom form field. This element is optional and the default value of "None" will be assumed. If supplied, it must be a valid Stock code custom form field name.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomerQualification1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is an additional qualification using a Customer custom form field. This element is optional and the default value of "None" will be assumed. If supplied, it must be a valid Customer custom form field name.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomerQualification2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is an additional qualification using a Customer custom form field. This element is optional and the default value of "None" will be assumed. If supplied, it must be a valid Customer custom form field name.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Qualifications">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockQualification1"/>
+        <xsd:element ref="StockQualification2"/>
+        <xsd:element ref="CustomerQualification1"/>
+        <xsd:element ref="CustomerQualification2"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

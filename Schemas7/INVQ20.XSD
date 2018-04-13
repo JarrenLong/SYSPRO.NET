@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Inventory Warehouse Exception Business Object Input 
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="UserSequenceTagFile" minOccurs="0"/>
+        <xsd:element ref="AvailableLessThanZero" minOccurs="0"/>
+        <xsd:element ref="AvailableEqualZero" minOccurs="0"/>
+        <xsd:element ref="AvailableGreaterThanZero" minOccurs="0"/>
+        <xsd:element ref="OnPurchaseOrder" minOccurs="0"/>
+        <xsd:element ref="OnBackOrder" minOccurs="0"/>
+        <xsd:element ref="GoodsInTransit" minOccurs="0"/>
+        <xsd:element ref="AvailableLessThanMinimum" minOccurs="0"/>
+        <xsd:element ref="AvailableLessThanSafety" minOccurs="0"/>
+        <xsd:element ref="AvailableGreaterThanMaximum" minOccurs="0"/>
+        <xsd:element ref="InTransitConversionCleared" minOccurs="0"/>
+        <xsd:element ref="ShowMultipleMessages" minOccurs="0"/>
+        <xsd:element ref="NoABC" minOccurs="0"/>
+        <xsd:element ref="AClass" minOccurs="0"/>
+        <xsd:element ref="BClass" minOccurs="0"/>
+        <xsd:element ref="CClass" minOccurs="0"/>
+        <xsd:element ref="DClass" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence" default="S">
+    <xsd:annotation>
+      <xsd:documentation>Report Sequence, either S)tock Code, D)escription, SuppL)ier, P)roduct Class</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Stock codel;D=Description;L=Supplier;P=Product class"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserSequenceTagFile" default="">
+    <xsd:annotation>
+      <xsd:documentation>This must point to a valid tag file if the Report Sequence is U)ser</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AvailableLessThanZero" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the available quantity is less than zero</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AvailableEqualZero" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the available quantity is zero</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AvailableGreaterThanZero" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the available quantity is greater than zero</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OnPurchaseOrder" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code is on a purchase order</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OnBackOrder" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code is back ordered</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GoodsInTransit" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code has a quantity in transit</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AvailableLessThanMinimum" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the available quantity is less than the minimum allowed</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AvailableLessThanSafety" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the available quantity is less than the safety quantity</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AvailableGreaterThanMaximum" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the available quantity is greater than the maximum allowed</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InTransitConversionCleared" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the in transit quantity was cleared during conversion</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowMultipleMessages" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Show all exception messages</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NoABC" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code has no ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code has an A ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code has a B ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code has a C ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show exceptions where the stock code has a D ABC classification</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the XSL Stylesheet to use</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Product Class to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClass;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouses to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;R=Range;S=Single;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock codes to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Suppliers to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

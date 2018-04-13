@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Estimate Heirarchy Maintenance Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="Component">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the component for which you are maintaining hierarchies. This element is mandatory when the element ‘Estimate Flag’ contains ‘C’. The format is up to 30 characters alphanumeric or 15 characters numeric depending on the key configuration option for quotations within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EstimateFlag" default="O">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if you are maintaining hierarchies for operations (O) or components (C). Default to: O.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Head">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the head code of the hierarchy that you want to associate with the component or operation. This is a mandatory field. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Hierarchy">
+		<xsd:annotation>
+			<xsd:documentation>Indicate the hierarchy that you want to associate with the component or operation. The hierarchy can consist of a head code and up to four section codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Head"/>
+				<xsd:element ref="Section1" minOccurs="0"/>
+				<xsd:element ref="Section2" minOccurs="0"/>
+				<xsd:element ref="Section3" minOccurs="0"/>
+				<xsd:element ref="Section4" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the information to assign a hierarchy to a component or an operation for an estimate, for a specific quotation detail line.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="ParentPart"/>
+				<xsd:element ref="Route" minOccurs="0"/>
+				<xsd:element ref="Quote"/>
+				<xsd:element ref="QuotationLine"/>
+				<xsd:element ref="EstimateFlag" minOccurs="0"/>
+				<xsd:element ref="Operation" minOccurs="0"/>
+				<xsd:element ref="SequenceNumber" minOccurs="0"/>
+				<xsd:element ref="Component" minOccurs="0"/>
+				<xsd:element ref="Hierarchy"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Operation">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the operation for which you are maintaining hierarchies. This element is mandatory when the element ‘Estimate Flag’ contains ‘O’. The format is up to 3 characters positive numeric. Possible values: 1 to 999.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ParentPart">
+		<xsd:annotation>
+			<xsd:documentation>The non-stocked parent code for which you want to maintain hierarchies. This is a mandatory element. The format is up to 30 characters alphanumeric or 15 characters numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PostQotHierarchy">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="QuotationLine">
+		<xsd:annotation>
+			<xsd:documentation>The quotation line number associated with the estimate for which you want to maintain the hierarchies. This is a mandatory element. The format is up to 4 characters positive numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Quote">
+		<xsd:annotation>
+			<xsd:documentation>The quotation number associated with the estimate for which you want to maintain the hierarchies. This is a mandatory element. The quote must be in a status of ‘In Progress’ in order to maintain hierarchies for it. The format is up to 8 characters either alphanumeric or numeric depending on the key configuration option for quotations within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="8"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Route" default="0">
+		<xsd:annotation>
+			<xsd:documentation>This field enables you to select a specific routing for which you want to maintain the estimate hierarchy. You may only select routes that are required for the non-stocked parent code. The format is a 1 character numeric field. Default to: 0.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Section1">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the first section of the hierarchy that you want to associate with the component or operation. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Section2">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the second section of the hierarchy that you want to associate with the component or operation. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Section3">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the third section of the hierarchy that you want to associate with the component or operation. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Section4">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the last section of the hierarchy that you want to associate with the component or operation. The format is up to 3 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SequenceNumber">
+		<xsd:annotation>
+			<xsd:documentation>Indicate the sequence number for the component for which you are maintaining hierarchies. This field will only be used if you have indicated that structure sequencing is required (Bill of Materials Setup). The format is up to 6 characters alphanumeric or numeric depending on the sequence key Bill of Material setup option within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

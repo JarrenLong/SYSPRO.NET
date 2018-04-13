@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--  
+     Schema for the SRS Report/Business object for Sales Analysis Target Reports
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="BranchSelection">
+    <xsd:annotation>
+      <xsd:documentation>Use this to select what Branches you wish to report on A - All (default); R - Range; S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalBranch; A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BranchToUseForNames">
+    <xsd:annotation>
+      <xsd:documentation>Branch to use for Names</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalBranch"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CustomerClassSelection">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are reporting on a Product Class Target report
+Use this to select what Customer Class you wish to report on
+A - All (default)
+R - Range
+S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=TblCustomerClass; A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerSelection">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are reporting on a Product Class Target report. Use this to select what Customer you wish to report on. A - All (default); R - Range; S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=ArCustomer;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DepartmentSelection">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are reporting on a Customer Target report
+Use this to select what Department you wish to report on
+A - All (default)
+R - Range
+S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=SalDepartment;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BranchSelection"/>
+        <xsd:element ref="GeographicAreaSelection"/>
+        <xsd:element ref="ProductClassSelection"/>
+        <xsd:element ref="SalespersonSelection"/>
+        <xsd:element ref="CustomerClassSelection"/>
+        <xsd:element ref="DepartmentSelection"/>
+        <xsd:element ref="CustomerSelection"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicAreaSelection">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are reporting on a Product Class Target report
+
+Use this to select what Geographic Area you wish to report on
+A - All (default)
+R - Range
+S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=SalArea;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Keyflag">
+    <xsd:annotation>
+      <xsd:documentation>The Report Target
+C - Customer (default)
+P - Product Class</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Customer;P=Product class"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrimarySequence">
+    <xsd:annotation>
+      <xsd:documentation>Primary Sequence
+Customer Report 
+1 - Customer (default)
+2 - Salesperson
+Product Class Report
+1 - Product Class (default)
+2 - Department</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;1=CustomerProduct class;2=SalespersonDepartment"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintDescendingSalesValues">
+    <xsd:annotation>
+      <xsd:documentation>Print Descending Sales Values
+N - No (default)
+Y - Yes
+When Zero Values is set to Only (O) print profits is not available</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintProfits">
+    <xsd:annotation>
+      <xsd:documentation>Print Profits. Y - Yes (default), N - No When Zero Values is set to Only (O) print profits is not available</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClassSelection">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are reporting on a Customer Target report
+
+Use this to select what Product Class you wish to report on
+A - All (default)
+R - Range
+S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Keyflag"/>
+        <xsd:element ref="Report"/>
+        <xsd:element ref="PrimarySequence"/>
+        <xsd:element ref="SecondarySequence"/>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="ZeroValues"/>
+        <xsd:element ref="PrintProfits"/>
+        <xsd:element ref="PrintDescendingSalesValues"/>
+        <xsd:element ref="SalesValueToUse"/>
+        <xsd:element ref="SubTotals"/>
+        <xsd:element ref="BranchToUseForNames"/>
+        <xsd:element ref="NewPageOnChange"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Report">
+    <xsd:annotation>
+      <xsd:documentation>Report Type
+P - Performance (default)
+A - Achievement</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;P=Performance;A=Achievement"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Report Type
+S - Summary (default)
+D - Detail
+Only available if Customer - Salesperson is selected for a Customer Target Report or when the Target Report is for Product Class</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesValueToUse">
+    <xsd:annotation>
+      <xsd:documentation>Sales Values to use AM - Actual MTD, AY- Actual YTD; TM - Target MTD; TY - Target YTD. 
+Only available if Print Descending Sales Values is Y (Yes).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;AM=Actual MTD; AY=Actual YTD; TM=Target MTD;TY=Target YTD"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="AM"/>
+        <xsd:enumeration value="AY"/>
+        <xsd:enumeration value="TM"/>
+        <xsd:enumeration value="TY"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalespersonSelection">
+    <xsd:annotation>
+      <xsd:documentation>You will be unable to select this option if you are reporting on a Product Class Target report. Use this to select what Salesperson you wish to report on A - All (default); R - Range; S - Single</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalSalesperson;browsefilter=Branch;browsefilterbrowse=SalBranch;A=all;S=single;R=range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SecondarySequence">
+    <xsd:annotation>
+      <xsd:documentation>Secondary Sequence
+B - Branch (default)
+P - Product Class
+Only available when the Target Report is for Product Class</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;B=Branch;P=Product class"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SubTotals">
+    <xsd:annotation>
+      <xsd:documentation>Subtotals Required. N - No Y - Yes Only available when PrintProfits is set to Y (Yes)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ZeroValues">
+    <xsd:annotation>
+      <xsd:documentation>Zero Values
+E - Exclude (default)
+I - Include
+O - Only</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;E=Exclude;I=Include;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPageOnChange">
+    <xsd:annotation>
+      <xsd:documentation>Page break required. N - No Y - Yes</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

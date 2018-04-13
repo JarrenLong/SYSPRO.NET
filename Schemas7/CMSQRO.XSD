@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Contact Management Outlook Sync Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ContactId" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter the ContactId to return a single contact.  The format of the ContactId is a 38 bit GUID in the format {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} (Braces must be included)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FullName" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter the Contact Full name to return a single contact.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="KeyType">
+    <xsd:sequence>
+      <xsd:element ref="ReturnAll" minOccurs="0"/>
+      <xsd:element ref="ContactId" minOccurs="0"/>
+      <xsd:element ref="FullName" minOccurs="0"/>
+      <xsd:element ref="OrgList" minOccurs="0"/>
+      <xsd:element ref="SearchString" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="OrgList" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Returns all contacts for a single Organization List.  This feature has not yet been implemented.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Key" type="KeyType">
+          <xsd:annotation>
+            <xsd:documentation>Specify how to return Contacts. Only one of the child elements should be provided.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnAll">
+    <xsd:annotation>
+      <xsd:documentation>Enter 'Y' to return all Contacts.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SearchString" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Ener a search string to return all contacts matching the value provided.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

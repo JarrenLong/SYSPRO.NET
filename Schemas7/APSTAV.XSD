@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for AP Auto Vouchering Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>The parent filter node</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Supplier"/>
+				<xsd:element ref="Warehouse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>All,  Range, Single, List of suppliers to be returned.  FilterType options - A(All), (R)Range, (S)Single, (L)List. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>All,  Range, Single, List of warehouses to be returned.  FilterType options - A(All), (R)Range, (S)Single, (L)List. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>The parent option element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InvoiceBy" minOccurs="0"/>
+				<xsd:element ref="BatchInvoiceNo" minOccurs="0"/>
+				<xsd:element ref="UseReceiptDate" minOccurs="0"/>
+				<xsd:element ref="Generate" minOccurs="0"/>
+				<xsd:element name="XslStylesheet" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is the style sheet to be applied</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>The parent query element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InvoiceBy">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether auto vouchering will be for one batched invoice or each transaction will be invoiced separately.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;B=Batch;S=Single"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BatchInvoiceNo">
+		<xsd:annotation>
+			<xsd:documentation>Defines the batch invoice number to be used if invoice by is batch.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UseReceiptDate">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether the invoice date will use the purchase order receipt date.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Generate">
+		<xsd:annotation>
+			<xsd:documentation>Defines whether the process will generate invoices or be a projection of expected results only.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;G=Generate only;U=Generate and Update"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="U"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

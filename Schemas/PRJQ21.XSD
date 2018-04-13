@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd. -->
+<!-- 
+     Schema for the P&C Job Transaction Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CompletedJobs">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include, exclude or only report on completed jobs. Valid entries are I(Include), E(Exclude) or O(Only). Default to I(Include).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Job"/>
+        <xsd:element ref="JobClassification"/>
+        <xsd:element ref="JobDeliveryDate"/>
+        <xsd:element ref="TransactionDate"/>
+        <xsd:element ref="JobCompletionDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeJobsWithoutTransactions">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include those jobs with no transaction details. Valid entries are Y(Yes) and N(No). Default to Y(Yes).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range of jobs to be returned. FilterType options – A(All), S(Single), R(Range). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=WipMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobClassification">
+    <xsd:annotation>
+      <xsd:documentation>All, Single job classification to be returned. FilterType options – A(All), S(Single). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=WipJobClass;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobCompletionDate">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include jobs based on completion dates. FilterType options – A(All), S(Single), R(Range). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobDeliveryDate">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include jobs based on delivery dates. FilterType options – A(All), S(Single), R(Range). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobsOnHold">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include, exclude or only report on jobs that are on hold. Valid entries are I(Include), E(Exclude) or O(Only). Default to I(Include).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintManufacturingUMQuantities" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default depends on your setup options.</xsd:documentation>
+       <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TransactionType"/>
+        <xsd:element ref="IncludeJobsWithoutTransactions"/>
+        <xsd:element ref="JobsOnHold"/>
+        <xsd:element ref="UnconfirmedJobs"/>
+        <xsd:element ref="CompletedJobs"/>
+        <xsd:element ref="PrintManufacturingUMQuantities"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionDate">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include jobs based on transaction dates. FilterType options – A(All), S(Single), R(Range). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionType">
+    <xsd:annotation>
+      <xsd:documentation>The report can be generated for the various transaction types. Valid entries are (AT) All transactions, (SA) Sales and adjustments, (BC) Billings and cost of sales, (MI) Material issues, (SI) Subcontract issues, (LI) Labor issues and (OP) Outstanding purchase orders. Default to (AT) All transactions.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;AT=All transactions;SA=Sale and adjustments;BC=Billing and cost of sales;MI=Material issues;SI=Subcontract issues;LI=Labor issues;OP=Outstanding purchase orders"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="AT"/>
+        <xsd:enumeration value="SA"/>
+        <xsd:enumeration value="BC"/>
+        <xsd:enumeration value="MI"/>
+        <xsd:enumeration value="SI"/>
+        <xsd:enumeration value="LI"/>
+        <xsd:enumeration value="OP"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnconfirmedJobs">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include, exclude or only report on unconfirmed jobs. Valid entries are I(Include), E(Exclude) or O(Only). Default to I(Include).</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

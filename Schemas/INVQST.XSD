@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Stock Take Ticket Document Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Key">
+          <xsd:annotation>
+            <xsd:documentation>The key to use for this query.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Warehouse" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>This is a valid warehouse in which the stock take is taking place. The element is mandatory and cannot be spaces.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The list of options</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="NumOfTicketsPerBin" type="xsd:string" default="1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Number of tickets to generate for a single bin. Default is 1. Maximum of 99.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Reprint" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This option takes values Y for Yes and N for No. Default is Yes. If yes the program will return already generated ticket numbers for the selected warehouses. Again if this option is YES(Y),  the value of option, number of ticket numbers per bin, (to generate) will be ignored. If NO, The program will generate ticket numbers for stock/bin items with no tickets against them, and work as stated below. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This contains list of filters.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Range or Single stock code selection. FilterType options - A(All), R(Range), (S)Single. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Bin" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Range or Single bin location selection. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ProductClass" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Range or Single product class selection. FilterType options - A(All), R(Range), (S)Single. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, or Single stocking unit of measure selection. FilterType options - A(All), (S)Single. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

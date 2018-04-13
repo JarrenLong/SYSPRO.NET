@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the use of the Retrieve rtf Stream Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This parent element is mandatory is.  If this element is not present an exception will be raised.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="NoteType"/>
+				<xsd:element ref="KeyFieldValue"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="KeyFieldValue">
+		<xsd:annotation>
+			<xsd:documentation>This element must contain the value of the key field. For instance if the key field is Salesorder then the element value must be the actual sales order number.
+Eg. 000236. This element is mandatory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="90"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NoteType">
+		<xsd:annotation>
+			<xsd:documentation>This element value must contain the type of note that you want returned. This element is mandatory and case sensitive.            USR*- User defined       LDG  - Ledger code           GJ - G/L journal file          GS - G/L std journal         GR - G/L recur journal    ORD - Sales order          PORD   - Purchase Order     SERIAL - Serial Number       
+LLOT  - LotNumber           JOB  - Job Number         CONT - P and C Contract    HIER   - P and C Hierarchy  STDHIE - P and C Std Hierarchy    EPCHDR - Prod config header         ORDCON - S/O contracts     
+ECCDRW - Ecc Draw register  REP - Report writer reports ARPERM - A/R Permanent entries Note entries starting with   'USR' are reserved for end-use</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="6"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root node of the XML document, the business object will not process anything unless this element is present.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="ReturnRtf" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReturnRtf" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element tells the business object to either return plain text or marked-up rich text.  This element is optional, and the default is N.
+Y- Return rich text
+N- Return plain text
+{Blank} – Return plain text</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

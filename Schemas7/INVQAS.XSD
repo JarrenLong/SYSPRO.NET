@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Alternate Stock Allocation Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Warehouse"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="QtyRequired"/>
+        <xsd:element ref="TempFileName" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="QtyRequired" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the quantity required of the parent stock code. It is mandatory. (Must be entered as Unit Quantity).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the parent stockcode. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TempFileName" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the name of the temporary file to which the alternate information is written to.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This element allows you to filter by warehouse. It is mandatory S = Single (Default).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="S">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

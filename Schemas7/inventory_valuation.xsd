@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Valuation Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AsOfPeriod" default="C">
+    <xsd:annotation>
+      <xsd:documentation>Valuation as of period. Select the period in which to show the details. Default is C for Current period.  C - Current period, P - Previous month 1, B - Previous month 2</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current Period;P=Previous Month1;B=Previous Month2"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EccItemsOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies if ECC Items should be included. Default is No</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroEccRevRel" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies if zero value ECC Items should be included. Default is No</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CheckNegativeAtWarehouse" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This parameter applies when using multiple bins, and negative stock is allowed. If selected, then the check for inclusing negative values is made at warehouse level, and not at bin level</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CycleCount">
+    <xsd:annotation>
+      <xsd:documentation>This field enables you to select stock items for valuation according to the number of times a stock item has been counted during the year. The field will have a value(2 character) if a single Cyclecount is selected.  </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="CycleCount" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeProductClassDesc" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This option is effective only if you select to show the query in product class sequence. Your entry at the Branch field is used to extract the relevant product class description. If no Branch is selected, the product class description will not be returned. The default is No.  </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWarehouseMass" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If multiple bins are set on then you have the option to print warehouse mass or not. Otherwise the mass will print in all selections. Default N - No, Values Y - Yes, N - No. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroValueWarehouses" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Default N - No, This element gives an option to include warehouses for  selected stock items that have a zero value. Values Y - Yes, N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;Q=Warehouses with quantity on hand and zero cost;C=Warehouses with zero quantity and non zero cost"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="Q"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="AsOfPeriod" minOccurs="0"/>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroValueWarehouses" minOccurs="0"/>
+        <xsd:element ref="IncludeProductClassDesc" minOccurs="0"/>
+        <xsd:element ref="ValuationCostBasedOn" minOccurs="0"/>
+        <xsd:element ref="EccItemsOnly" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroEccRevRel"/>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="MultipleBinsPrintTotalsOnly" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroBins" minOccurs="0"/>
+        <xsd:element ref="CheckNegativeAtWarehouse" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of product class ( A - All, S - Single, R - Range).  If not provided default is A.  If range(R) is selected then start and end product classes are separated by a comma. If single(S) is selected a product class is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType" default="S">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the type of report, detail or summary (S - Summary, D -Detail).  If not provided the default is D.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence" default="S">
+    <xsd:annotation>
+      <xsd:documentation>This specifies which sequence in which the data is returned ( S - Stock code, D - Stock code description,  U - Supplier, P - Product class).  If not provided the default is S.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Stock code;D=Description;U=Supplier;P=Product class"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes ( A - All, S - Single, R - Range).  If not provided default is A.  If range(R) is selected then start and end stock codes are separated by a comma. If single(S) is selected a stock code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of suppliers ( A - All, S - Single, R - Range).  If not provided default is A.  If range(R) is selected then start and end supplier codes are separated by a comma. If single(S) is selected a supplier code is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValuationCostBasedOn" default="C">
+    <xsd:annotation>
+      <xsd:documentation>Default C - Current costing method. You can select to return the values based on Fifo(F), if you have FIFO on. If you do not FIFO set on, and you selected to F(FIFO) the program will default to the current costing method. You can select, F - Fifo, L - last costing, and C - current cost. Select FIFO to show inventory value according to the FIFO costs held in each FIFO bin location. W - Warehouse costs, this will return the values based on the warehouse costing method, this option is only available if you have costing per warehouse, else the default will be applied</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current;L=Last cost;F=FIFO;W=Warehouse cost"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of warehouses ( A - All, S - Single, R - Range).  If not provided default is A.  If range(R) is selected then start and end warehouses are separated by a comma. If single(S) is selected a warehouse is given as FilterValue.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MultipleBinsPrintTotalsOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This flag enables you to print warehouse totals only when Muliple Bins are switched on. Default is N. Options are Y or N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroBins">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available when you have multiple bins, and you selected not to print totals only. (you want to print every single bin for the warehouse). Y=Yes; N=No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

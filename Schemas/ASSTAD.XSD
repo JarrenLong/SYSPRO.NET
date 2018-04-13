@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters used in the Asset Depreciation Adjustment Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostAssetAdjustment">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Parameters" minOccurs="0">
+					<xsd:complexType>
+						<xsd:all>
+							<xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings .  Default is 'N'. Valid values are 'N' or 'Y'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ApplyIfEntireDocumentValid" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates whether the entire document must be validated prior to any posting taking place. If set to 'N', each item is validated and rejected if in error or posted if correct. This is the fastest option. If set to 'Y', all items in the document are first validated.If the entire document is valid then items are posted.Default  is 'Y'. Valid values are 'Y' and 'N'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ValidateOnly" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No posting will take place. If set to 'N', each item is validated and posting is performed based on the value of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ActionType" default="A">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates that a depreciation adjustment is to be passed. The default value is "A".</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="Q"/>
+										<xsd:enumeration value="T"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

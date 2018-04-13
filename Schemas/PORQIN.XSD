@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Goods in Inspection Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="IncludeNonStockedItems" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include non-stocked items ? (Y - Yes , N - No) Defaults to Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeSerialNumbers" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include serial details ? (Y - Yes , N - No) Defaults to Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeTransactionDetails" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include transaction details ? (Y - Yes , N - No) Defaults to N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStylesheet" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="IncludeCompletedItems" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include transactions that are completed? (Y - Yes, N - No) Defaults to N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All or Single warehouses.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:simpleContent>
+                    <xsd:extension base="xsd:string">
+                      <xsd:attribute name="FilterType" use="optional">
+                        <xsd:simpleType>
+                          <xsd:restriction base="xsd:string">
+                            <xsd:length value="1"/>
+                            <xsd:enumeration value="A"/>
+                            <xsd:enumeration value="S"/>
+                          </xsd:restriction>
+                        </xsd:simpleType>
+                      </xsd:attribute>
+                      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                    </xsd:extension>
+                  </xsd:simpleContent>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Single or Range of stock codes separated by commas.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:length value="1"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="GRNNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Single or Range of GRN numbers separated by commas.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:length value="1"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Supplier" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>All, Single or Range of suppliers separated by commas.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:length value="1"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

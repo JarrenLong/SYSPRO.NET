@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Sample XMLOUT for the SYSPRO Health Checks
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ColumnName" type="xsd:string"/>
+  <xsd:element name="ColumnsAffected" type="xsd:string"/>
+  <xsd:element name="DetailOrSummary" type="xsd:string"/>
+  <xsd:element name="ExceptionMessage" type="xsd:string"/>
+  <xsd:element name="ForeignKeysAffected" type="xsd:string"/>
+  <xsd:element name="HealthCheckResults">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="TablesAffected"/>
+        <xsd:element name="ColumnsAffected"/>
+        <xsd:element name="IndexesAffected"/>
+        <xsd:element name="ForeignKeysAffected"/>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IndexesAffected" type="xsd:string"/>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="TestType"/>
+        <xsd:element name="TableName"/>
+        <xsd:element name="ColumnName" minOccurs="0"/>
+        <xsd:element name="ExceptionMessage"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MaxItemsToReturn" type="xsd:string"/>
+  <xsd:element name="QueryOptions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="DetailOrSummary"/>
+        <xsd:element name="MaxItemsToReturn"/>
+        <xsd:element name="RunDate"/>
+        <xsd:element name="RunTime"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RunDate" type="xsd:string"/>
+  <xsd:element name="RunTime" type="xsd:string"/>
+  <xsd:element name="TableName">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="AbcAnalysis"/>
+        <xsd:enumeration value="UserTable1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TablesAffected" type="xsd:string"/>
+  <xsd:element name="TestType">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Columns"/>
+        <xsd:enumeration value="Tables"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="sqlhealthcheck">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="QueryOptions"/>
+        <xsd:element name="HealthCheckResults"/>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:string" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:string" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:string" use="required"/>
+      <xsd:attribute name="Role" type="xsd:string" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

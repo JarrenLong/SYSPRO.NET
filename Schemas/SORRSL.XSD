@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Retrieve Sales Order Line Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Area">
+    <xsd:annotation>
+      <xsd:documentation>This is the geographic area for this sales order. If supplied it must be valid. If not supplied the geographic area is picked up from the customer account.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Build">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CalloutUsaTax" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element determines if tax is to be calculated by calling the 3rd party USA tax calcualtion routine. This element is only conisdered if the SYSPRO tax option to use a 3rd party calculation is selected, and the parameter ReturnTaxInformation is 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="City">
+    <xsd:annotation>
+      <xsd:documentation>This is the city code that is part of the extended tax code  that will be used for the order. It must make up a valid extended tax code if entered. If not supplied, then the SYSPRO rules for obtaining the extended tax code will be used. 
+Note: The Extended tax code field is only used if either the AVP sales tax system is required or you require tax by advanced geocodes (Tax Options Setup).
+Format is 3 character alphanumeric (Advanced geocodes) or 2 characters alphanumeric (AVP sales tax).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CountyZip">
+    <xsd:annotation>
+      <xsd:documentation>This is the county or zip code that is part of the extended tax code  that will be used for the order. It must make up a valid extended tax code if entered. If not supplied, then the SYSPRO rules for obtaining the extended tax code will be used. 
+Note: The Extended tax code field is only used if either the AVP sales tax system is required or you require tax by advanced geocodes (Tax Options Setup).
+Format is 5 character alphanumeric (AVP sales tax) or 4 characters alphanumeric  (Advanced geocodes). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Enter the customer whom this order is for. This is a compulsory field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="7"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExemptStatus">
+    <xsd:annotation>
+      <xsd:documentation>Enter the tax exempt status to be used (E = tax exempt, N = taxable, O = taxable using the "Other tax code"). If this is left blank the value against the customer will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShipAddress1" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress2" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress3" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress4" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipAddress5" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ShipPostalCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="MultiShipCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The ship address, postal code and multiple ship address elements are only relevant if USA 3rd party tax is in use. If it is, then they are used to determine the address passed. If ShipAddress1 is populated, then the address and postal code elements are used. If blank, then multiple ship address is checked, and if populated, then address from that code is used. If all blank, then the ship address of the customer is used.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeDangerousGoodsText">
+    <xsd:annotation>
+      <xsd:documentation>Enter 'Y' if any dangerous goods text attached to the stock code is to be returned. Valid entries are 'N' - No, and 'Y' - Yes. The default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOrderDiscounts" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If set to 'Y', order discounts based on the customers invoice discount code are calculated and returned. They will also be taken into account when tax is calculated. Order level discounts based on value, quantity or product class are not considered, as they are only relevant for a whole order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePriceList">
+    <xsd:annotation>
+      <xsd:documentation>If set to 'Y' then all price codes and prices for the item will be returned</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeServiceCharges" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Enter 'Y' if any service charges attached to the stock code are to be returned. Valid entries are 'N' - No, and 'Y' - Yes. The default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeStockSalesOrderText">
+    <xsd:annotation>
+      <xsd:documentation>Enter 'Y' if any standard text attached to the stock code is to be returned. Valid entries are 'N' - No, and 'Y' - Yes. The default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderPrice" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If a price is used here it will be used as the basis for any tax calculation that is required.  There will be no line discount applied to the price. Order level discount will be applied if appropriate.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="OrderQuantity" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter the order quantity to be used. If this is left blank, 1.000 is assumed.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="OrderUm">
+    <xsd:annotation>
+      <xsd:documentation>Enter the unit of measure to be used. If this is left blank, the stocking unit of measure from the stock code will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Pieces">
+    <xsd:annotation>
+      <xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Units">
+    <xsd:annotation>
+      <xsd:documentation>If the stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="TypeOfOrder" minOccurs="0"/>
+        <xsd:element ref="ExemptStatus" minOccurs="0"/>
+        <xsd:element ref="OrderQuantity" minOccurs="0"/>
+        <xsd:element ref="OrderUm" minOccurs="0"/>
+        <xsd:element ref="Units" minOccurs="0"/>
+        <xsd:element ref="Pieces" minOccurs="0"/>
+        <xsd:element ref="OrderDate" minOccurs="0"/>
+        <xsd:element ref="PriceCode" minOccurs="0"/>
+        <xsd:element ref="State" minOccurs="0"/>
+        <xsd:element ref="CountyZip" minOccurs="0"/>
+        <xsd:element ref="City" minOccurs="0"/>
+        <xsd:element ref="Area" minOccurs="0"/>
+        <xsd:element ref="OrderPrice" minOccurs="0"/>
+        <xsd:element ref="ShipAddress1" minOccurs="0"/>
+        <xsd:element ref="ShipAddress2" minOccurs="0"/>
+        <xsd:element ref="ShipAddress3" minOccurs="0"/>
+        <xsd:element ref="ShipAddress4" minOccurs="0"/>
+        <xsd:element ref="ShipAddress5" minOccurs="0"/>
+        <xsd:element ref="ShipPostalCode" minOccurs="0"/>
+        <xsd:element ref="MultiShipCode" minOccurs="0"/>
+        <xsd:element ref="IncludeStockSalesOrderText" minOccurs="0"/>
+        <xsd:element ref="IncludeDangerousGoodsText" minOccurs="0"/>
+        <xsd:element ref="IncludeServiceCharges" minOccurs="0"/>
+        <xsd:element ref="IncludePriceList" minOccurs="0"/>
+        <xsd:element ref="ReturnTaxInformation" minOccurs="0"/>
+        <xsd:element ref="CalloutUsaTax" minOccurs="0"/>
+        <xsd:element ref="IncludeOrderDiscounts" minOccurs="0"/>
+        <xsd:element ref="ShowKitComponents" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnTaxInformation">
+    <xsd:annotation>
+      <xsd:documentation>If this parameter is supplied as 'Y', then tax is calcualted on the line where applicable, and the tax code, rate, and tax amount are returned. Tax is calculated on the quantity supplied, and the retrieved price extended by any applicable discounts.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowKitComponents">
+    <xsd:annotation>
+      <xsd:documentation>When set to 'Y' kit comonents will be shown in detail if the stock code selected is a kit parent of any type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="State">
+    <xsd:annotation>
+      <xsd:documentation>This is the state code that is part of the extended tax code  that will be used for the order. It must make up a valid extended tax code if entered. If not supplied, then the SYSPRO rules for obtaining the extended tax code will be used. 
+Note: The Extended tax code field is only used if either the AVP sales tax system is required or you require tax by advanced geocodes (Tax Options Setup).
+Format is 2 character alphanumeric. If the three extended tax entries are left blank, the whole extended tax code will default to that on the customer master.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Enter the stock code for the order line. If the stock code is not valid the program will access the customer/stock code interchange file for a match - if a match is found then the program will return the inventory stock code.
+The stock code must be non-blank and valid.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TypeOfOrder">
+    <xsd:annotation>
+      <xsd:documentation>Enter the type of sales order (O = normal order, I = IBT, C = Credit Note, D = Debit Note, S = Scheduled Order). If this is left blank then type O is assumed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderDate">
+    <xsd:annotation>
+      <xsd:documentation>Enter the order date. This date is used to determine supercession dates, pricing and the line ship date. If no date is supplied then today's date will be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Enter the warehouse from where the stock is to be sold. This is only required when discounts or customer contracts are based on unit cost.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PriceCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>If you wish to have price information returned for a price code as well as the current price information returned enter a valid price code for the stock code and customer.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

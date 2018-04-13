@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.--><!-- 
+     Schema for the Asset Count Exception Business Object 
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of branches for assets to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AssetBranch ;A=All; S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CountItemSelections">
+    <xsd:annotation>
+      <xsd:documentation>All or Exceptions for Count Items to be returned. Filter type options- (A)All, (E)Exceptions, Default to (A)All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;E=Exceptions only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="Location" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeAssetsFoundInOtherLocations">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether assets found in other locations should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCountedNotExtracted">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the assets that have been counted but not extracted for the stock count should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCountedNotVerified">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the assets that have been counted but not verified for the stock count should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDifferenceCountedVerifiedExtracted">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether there are differences between Counted, Verified or extracted assets and should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDifferenceInBranch">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether differences in branches should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDifferenceInIDCode">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether differences in ID Codes should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDifferenceInLocation">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether differences in location should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeExtractedNotCounted">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the assets that have been extracted for the stock count but not yet counted should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNewIDCode">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether  the new ID Code should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeVerifiedNotCounted">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether the assets that have been verified but not counted for the stock count should be included. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Location">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of locations for assets to be returned. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=AssetLocation ;A=All; S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CountItemSelections" minOccurs="0"/>
+        <xsd:element ref="IncludeExtractedNotCounted" minOccurs="0"/>
+        <xsd:element ref="IncludeCountedNotExtracted" minOccurs="0"/>
+        <xsd:element ref="IncludeVerifiedNotCounted" minOccurs="0"/>
+        <xsd:element ref="IncludeCountedNotVerified" minOccurs="0"/>
+        <xsd:element ref="IncludeDifferenceInBranch" minOccurs="0"/>
+        <xsd:element ref="IncludeDifferenceInLocation" minOccurs="0"/>
+        <xsd:element ref="IncludeDifferenceInIDCode" minOccurs="0"/>
+        <xsd:element ref="IncludeDifferenceCountedVerifiedExtracted" minOccurs="0"/>
+        <xsd:element ref="IncludeNewIDCode" minOccurs="0"/>
+        <xsd:element ref="IncludeAssetsFoundInOtherLocations" minOccurs="0"/>
+        <xsd:element name="XslStylesheet" minOccurs="0">
+          <xsd:complexType mixed="true">
+            <xsd:annotation>
+              <xsd:documentation>The stylesheet to be applied</xsd:documentation>
+            </xsd:annotation>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

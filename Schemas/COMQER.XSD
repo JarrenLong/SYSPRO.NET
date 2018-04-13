@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for Error Message Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="ErrorCode">
+    <xsd:annotation>
+      <xsd:documentation>This will contain the error code</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ErrorMessage">
+    <xsd:annotation>
+      <xsd:documentation>This is a parent element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="ErrorCode"/>
+        <xsd:element ref="Parameter1" minOccurs="0"/>
+        <xsd:element ref="Parameter2" minOccurs="0"/>
+        <xsd:element ref="Parameter3" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Parameter1">
+    <xsd:annotation>
+      <xsd:documentation>Should contain the parameter required if the error message contains a %1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameter2" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Should contain the parameter required if the error message contains a %2</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Parameter3" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Should contain the parameter required if the error message contains a %3</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="ErrorMessage" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

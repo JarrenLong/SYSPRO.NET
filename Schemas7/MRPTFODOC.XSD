@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for MRP Forecast Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Enter a customer number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>Describes the forecast. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ForecastDate">
+    <xsd:annotation>
+      <xsd:documentation>Date the forecast is required.  The date required field is mandatory.  If the IgnoreWarnings parameter is set to 'N' and the ActionType is 'A' then a check is made to see if the date entered is a working day and if not an error message is returned. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ForecastQtyOutst">
+    <xsd:annotation>
+      <xsd:documentation>Enter the outstanding quantity to make.  If changing a forecast and the outstanding quantity to make is not provided or is zero then the quantity that is on file is used.  When deleting a forecast the outstanding quantity to make is not checked.  When adding a forecast the outstanding quantity to make must be entered and cannot be zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ForecastType">
+    <xsd:annotation>
+      <xsd:documentation>This element is used as a selection criteria for forecasts.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ForecastWh">
+    <xsd:annotation>
+      <xsd:documentation>Enter a valid warehouse code. If the Inventory control module is not installed, then all entries are assumed to be non-stocked. The warehouse field is a mandatory field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InactiveFlag">
+    <xsd:annotation>
+      <xsd:documentation>You use the Activate/Inactivate function to activate or inactivate the forecast selected. If a forecast is inactivated it will be excluded when creating the Master Production Schedule.  The default is spaces.  Set this flag to 'I' if you want to inactivate the forecast.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="I"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain a forecast.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="ForecastWh"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="NonStockedFlag"/>
+        <xsd:element ref="ForecastDate"/>
+        <xsd:element ref="Line" minOccurs="0"/>
+        <xsd:element ref="ForecastQtyOutst" minOccurs="0"/>
+        <xsd:element ref="Description" minOccurs="0"/>
+        <xsd:element ref="Reference" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="ResourceParent" minOccurs="0"/>
+        <xsd:element ref="InactiveFlag" minOccurs="0"/>
+        <xsd:element ref="ForecastType" minOccurs="0"/>
+        <xsd:element ref="Revision" minOccurs="0"/>
+        <xsd:element ref="Release" minOccurs="0"/>
+        <xsd:element ref="UseCurrentRevisionRelease" minOccurs="0"/>
+        <xsd:element ref="NewDateRequired" minOccurs="0"/>
+        <xsd:element name="LineAction" default="A" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element allows you to add, change or delete in a single run of the business object.  Default A, possible values A, C, D. Only available if parameter action type is L.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="C"/>
+              <xsd:enumeration value="D"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Line">
+    <xsd:annotation>
+      <xsd:documentation>The line number is used to distinguish between forecasts for the same stock code and date required.  The line number is mandatory when the ActionType  is 'C' or 'D'</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewDateRequired">
+    <xsd:annotation>
+      <xsd:documentation>If you want to change the date the forecast is required you put the new date in this element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NonStockedFlag" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Select this option to create/change forecasts for non-stocked items. The default is 'N'</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostForecastMaintenance">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reference">
+    <xsd:annotation>
+      <xsd:documentation>Enter a reference for the forecast.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Release">
+    <xsd:annotation>
+      <xsd:documentation>Release indicates the ECC release number of the component part. Ignored if not an ECC controlled item, or if ECC controlled at a stocking/revision level. 
+When adding and this is not supplied then defaults to the current release number for the stock code. 
+This cannot be changed.
+The format is alphanumeric or numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ResourceParent">
+    <xsd:annotation>
+      <xsd:documentation>Resource parent code.  If the resource parent code supplied does not exists and the the parameter IgnoreWarnings is set to 'N'  then an error message will be output.  If the parameter IgnoreWarnings is set to 'Y' then the resource  parent code will be saved without a warning.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Revision">
+    <xsd:annotation>
+      <xsd:documentation>Revision indicates the ECC version number of the stock code to make. Ignore if not an ECC controlled item, or if ECC controlled at a stocking level. 
+When adding and this is not supplied then defaults to the current version number for the stock code. 
+This cannot be changed.
+The format is alphanumeric or numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Enter a non-blank stock code for which you want to maintain a forecast. This is mandatory. The format is alphanumeric or numeric depending on the configuration option within SYSPRO. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseCurrentRevisionRelease">
+    <xsd:annotation>
+      <xsd:documentation>If this flag is set to 'Y' then the current revision and release will be used and the value of revision and release will be all dashes.  The default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

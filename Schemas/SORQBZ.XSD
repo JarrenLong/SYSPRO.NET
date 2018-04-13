@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     This is an example XSD instance to demonstrate
+     use of the Sales Order Line Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Invoice">
+    <xsd:annotation>
+      <xsd:documentation>Invoice number - required if the sales order has already been invoiced. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>Key element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="SalesOrderLine"/>
+        <xsd:element ref="Invoice" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder" type="xsd:short">
+    <xsd:annotation>
+      <xsd:documentation>Sales order number - The sales order is mandatory</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SalesOrderLine" type="xsd:byte">
+    <xsd:annotation>
+      <xsd:documentation>Line number - The line number is mandatory.  Return the information for this line number. Note that you will not  be able to return information for Comments. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

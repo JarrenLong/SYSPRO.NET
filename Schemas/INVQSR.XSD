@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Stock Take Variance Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="BinLocation">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of bin location ( A - All, S - Single, R - Range).  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ExcludeZeroLots" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="BinLocation" minOccurs="0"/>
+        <xsd:element ref="UnitOfMeasure" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Ticket" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeQtyNotCaptured" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned. If "Y" a list of stock codes with quantities not captured is included.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeZeroSaveQty" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned. If "Y" a list of stock codes with zero quantity on hand is included in the query.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The key consists of only one element, the warehouse. The warehouse should be on file, in the stock take selection, and the operator should have access to the warehouse. Otherwise an error will be returned.  The key is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Warehouse"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OnlyShowExceptionLines" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation> Input Y/N , if anything else is entered, an error message will be returned. If "Y" is selected - Shows a list of stock codes where the captured quantity differs from the original quantity on hand by a specific variance. This variance is specified at the Maximum permitted stock take variance option in Setup Distribution Setup, Inventory, Options.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeTickets">
+    <xsd:annotation>
+      <xsd:documentation>All ticket numbers for a bin(if bins are installed), stock code will be returned when this element is Y. The default for this element is N . Options Y - Yes, and N - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="ValueStockAt" minOccurs="0"/>
+        <xsd:element ref="OnlyShowExceptionLines" minOccurs="0"/>
+        <xsd:element ref="IncludeLots" minOccurs="0"/>
+        <xsd:element ref="IncludeTickets" minOccurs="0"/>
+        <xsd:element ref="ExcludeZeroLots" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroSaveQty" minOccurs="0"/>
+        <xsd:element ref="IncludeQtyNotCaptured" minOccurs="0"/>
+        <xsd:element name="IncludeBatchSerials" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned. If "Y" batch serial numbers are returned.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeManualSerials" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned. If "Y" manual serial numbers are returned.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ExcludeZeroSerials" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned. If "Y" serial numbers where both the saved quantity and captured quantity are zero will be excluded.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of product class ( A - All, S - Single, R - Range).  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The query can be ordered in stock code or bin location sequence. Input S/B, S - Stock code or  B - Bin location sequence, if multiple bins are installed, else will default to stock code. If anything else is entered, an error message will be returned.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeLots" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Input Y/N , if anything else is entered, an error message will be returned. If "Y" a list of stock codes with their corresponding lots showing captured quantities is displayed.  </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock code ( A - All, S - Single, R - Range).  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Ticket">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of ticket ( A - All, S - Single, R - Range). This is only validated in a ticket query, otherwise will be ignored.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UnitOfMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of unit of measure ( A - All, S - Single).  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValueStockAt" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Stock can be values in Cost on warehouse file - value stock at the unit cost currently held against the warehouse. (For FIFO costing the unit cost is the last cost.) OR cost on stock take file - value stock in the stock take file at the unit cost prevailing at the time the stock take selection was run, regardless of any cost changes that may have occurred since the stock take was selected. Enter "W" to select Cost on warehouse file and "S" to select cost on stock take file.  If anything else is entered, an error message will be returned.
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This is the warehouse in which the stock take is taking place. Although stock take selection can be done in more than one warehouse at one time, only one warehouse (selected warehouse) details will be displayed. This is a mandatory element and should be valid. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the xsd Stylesheet to use.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

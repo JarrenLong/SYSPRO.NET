@@ -1,0 +1,2887 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Setup Transaction Posting Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="InventoryOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="DependentOnWarehouseList" minOccurs="0"/>
+				<xsd:element ref="DependentOnWhRange" minOccurs="0"/>
+				<xsd:element ref="Options" minOccurs="0"/>
+				<xsd:element ref="DefineOptions" minOccurs="0"/>
+				<xsd:element ref="DelOptions" minOccurs="0"/>
+				<xsd:element ref="History" minOccurs="0"/>
+				<xsd:element ref="PeriodCurrentYear" minOccurs="0"/>
+				<xsd:element ref="PeriodPreviousYear" minOccurs="0"/>
+				<xsd:element ref="UserDefined" minOccurs="0"/>
+				<xsd:element ref="Documents" minOccurs="0"/>
+				<xsd:element ref="CurrentMonth" minOccurs="0"/>
+				<xsd:element ref="Depletion" minOccurs="0"/>
+				<xsd:element ref="Browse" minOccurs="0"/>
+				<xsd:element ref="Companies" minOccurs="0"/>
+				<xsd:element ref="Numbering" minOccurs="0"/>
+				<xsd:element ref="Configurator" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="FifoValuation">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether FIFO valuation is required. (Option updated with 'F' when Y, 'N' when N). If no value is supplied then the default value of N will be assumed. This may not be selected if LIFO costing is installed and must be selected if FIFO costing is installed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MultipleBins">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether Multiple bins are required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This may not be selected if LIFO costing is installed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvAmendJnlsReq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the stock code ammendment journals are required. (N - No, Y - Yes, A - Yes with additions). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;A=Yes, with additions;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="A" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RoundWipAllocs">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Inventory/WIP component rounding flag to the maximum number of decimals. (S - 5 up/4 down, U - Round Up, D - Round Down). If no value is supplied then the default value of S will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="S=5-up, 4-down;U=Round up;D=Round down;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="S" />
+<xsd:enumeration value="U" />
+<xsd:enumeration value="D" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ABPercentageBreak">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the A/B Percentage break for ABC analysis. If no value is supplied then the default value of 80 will be assumed. The format is 2 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BCPercentageBreak">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the B/C Percentage break for ABC analysis. If no value is supplied then the default value of 95 will be assumed. The format is 2 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AcceptCostVarPerc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the maximum acceptable cost variance percentage. The format is 99.99]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0.00" />
+<xsd:maxInclusive value="99.99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RejectImpRecCostVarExc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to apply cost variance checking and reject lines when importing purchase orders and job receipts. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UseFullGit">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to use the full goods in transit transfers facility. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. All warehouse transfers should be cleared before switching this option on.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UseSctDesciption">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to use the sales order description for stock items originating from SCT. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CostingPerWh">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the costing per warehouse should apply. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This option is not allowed if LIFO costing is installed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyWhBomCost">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether warehouse BOM costs should apply. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CostingMethod">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the costing method to be used. (A - Average, S - Standard, L - Last Cost, F - FIFO, l - LIFO). If no value is supplied then the default value of A will be assumed. FIFO may not be selected if cost U/M other than stocked required.]]></xsd:documentation>
+<xsd:appinfo source="A=Average;S=Standard;L=Last Cost;F=FIFO;l=LIFO;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="S" />
+<xsd:enumeration value="L" />
+<xsd:enumeration value="F" />
+<xsd:enumeration value="l" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DoNotCalcAveCostNegRec">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether NOT to recalculate the average cost on negative receipts. (N - Recalculate, Y - Do Not Recalculate). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ActualCosting">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether actual costing is to apply. (N - None, L - Lot Traceable, S - Batch Serial). If no value is supplied then the default value of N will be assumed. B may not be selected if stock codes set to record serials during order entry exist. Set <RunActualCostingConversion> to Y if this value is changed to either L or S to automatically run the conversion program.]]></xsd:documentation>
+<xsd:appinfo source="N=None;L=Lot traceable;S=Batch serial;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="L" />
+<xsd:enumeration value="S" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AutoDeplCostBuckets">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether depletion of cost buckets must be automatic. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RecordInvMmBySerialLot">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to record the inventory movements by serial or lot. (Option updated with 1 when Y, 0 when N). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="StockOnHandAllowNeg">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether Stock on hand is allowed to go negative. (N - No, Y - Yes, L - Dependent on warehouse list, R - Dependent on warehouse range, W - Dependent on warehouse). If no value is supplied then the default value of Y will be assumed. This may only be set to N if FIFO or LIFO costing is installed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;L=Dependent on w/h list;R=Dependent on w/h range;W=Dependent on warehouse;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:enumeration value="L" />
+<xsd:enumeration value="R" />
+<xsd:enumeration value="W" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RunActualCostingConversion">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to automatically run the conversion program if the ActualCosting has been altered. (N = No, Y = Yes). If no value is supplied then the default value of N will be assumed. Use <ActualBucketCost> to determine the actual bucket cost. ]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ActualBucketCost">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates where to derive the actual bucket cost when converting the ActualCosting. (T = Transaction value, C = Current inventory cost). If no value is supplied then the default value of T will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="T=Transaction value;C=Current inventory cost;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="T" />
+<xsd:enumeration value="C" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="General">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="FifoValuation" />
+<xsd:element ref="MultipleBins" />
+<xsd:element ref="InvAmendJnlsReq" />
+<xsd:element ref="RoundWipAllocs" />
+<xsd:element ref="ABPercentageBreak" />
+<xsd:element ref="BCPercentageBreak" />
+<xsd:element ref="AcceptCostVarPerc" />
+<xsd:element ref="RejectImpRecCostVarExc" />
+<xsd:element ref="UseFullGit" />
+<xsd:element ref="UseSctDesciption" />
+<xsd:element ref="CostingPerWh" />
+<xsd:element ref="ApplyWhBomCost" />
+<xsd:element ref="CostingMethod" />
+<xsd:element ref="DoNotCalcAveCostNegRec" />
+<xsd:element ref="ActualCosting" />
+<xsd:element ref="AutoDeplCostBuckets" />
+<xsd:element ref="RecordInvMmBySerialLot" />
+<xsd:element ref="StockOnHandAllowNeg" />
+<xsd:element ref="RunActualCostingConversion" />
+<xsd:element ref="ActualBucketCost" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NegQtyInSelWhList">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether a negative quantity is allowed in selected warehouses. (A - Allowed, D - Disallowed). If no value is supplied then the default value of A will be assumed. This only applies if the element 'NegQtyInSelWh' is set to L (Dependent on warehouse list).]]></xsd:documentation>
+<xsd:appinfo source="A=Allowed;D=Disallowed" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="D" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Warehouse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[These are the warehouse codes where the stock is allowed to go negative. A maximum of 10 warehouse codes are allowed. Only applies if 'NegQtyInSelWh' is set to L (Dependent on warehouse list). The format is 2 characters, alphanumeric per warehouse code, each separated by a comma. The warehouse codes supplied must be valid SYSPRO warehouses.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="30" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DependentOnWarehouseList">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="NegQtyInSelWhList" />
+<xsd:element ref="Warehouse" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NegQtyInSelWh">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether a negative quantity is allowed in selected warehouses. (A - Allowed, D - Disallowed). If no value is supplied then the default value of A will be assumed. This only applies if the element 'NegQtyInSelWh' is set to R (Dependent on warehouse range.]]></xsd:documentation>
+<xsd:appinfo source="A=Allowed;D=Disallowed" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="D" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="WhSelection">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of range of warehouses where the stock is allowed to go negative. (A - All, R - Range, S - Single). If no value is supplied then the default value of A will be assumed. This only applies if 'NegQtyInSelWh' is set to R (Dependent on  warehouse range).]]></xsd:documentation>
+<xsd:appinfo source="A=All;R=Range;S=Single;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="A" />
+<xsd:enumeration value="R" />
+<xsd:enumeration value="S" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="FromWarehouse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This entry only applies and is mandatory if 'WhSelection' has been set to R (Range) or S (Single). This contains the 2 character warehouse FROM where the stock is allowed to go negative.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="2" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ToWarehouse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This entry only applies and is mandatory if 'WhSelection' has been set to R (Range). This contains the 2 character warehouse TO where the stock is allowed to go negative.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="2" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DependentOnWhRange">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="NegQtyInSelWh" />
+<xsd:element ref="WhSelection" />
+<xsd:element ref="FromWarehouse" />
+<xsd:element ref="ToWarehouse" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="AgedInvValReq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the aged inventory valuation is required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UpdLastCostIfStdCost">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the last cost must be updated when using standard costing. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInvNmCostInLastCost">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to include non-merchandise costs in last cost. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SerialTrackReq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the serial tracking system is required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SameSerialMultStockCodes">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the same serial is to be used for mutiple stock codes. (N - No, Y - Yes). This element only applies if 'SerialTrackReq' is set to Y. If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RetSerialInfoAfterNegRec">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether all serial information after negative receipts is to be retained. (N - No, Y - Yes). This element only applies if 'SerialTrackReq' is set to Y. If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyCostMultInvRec">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether cost multiplier must apply when processing receipts. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SuppStockCodeIchgReq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the supplier/stock code interchange system is required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MultBatchSerialRecAllowed">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether mutiple batch serial receipts are allowed. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AllowBlankListPrcCode">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether blank price list codes are allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ValidateProdClass">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the product class must be validated. (Option updated with 1 when Y, 0 when N). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AllowBackflushOfBoItems">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether backflushing of bought out items is allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RecordMoveForBinTrf">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether movements for bin transfers should be recorded. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AllowCreateBins">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether creation of bins (when processing inventory transactions) is allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ApplyOpAccesCtlDestWh">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to apply operator access control to destination warehouses on transfers OUT. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCostUomOtherThanStocked">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether inventory cost is to be held in a unit of measure other than stocked. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This may only be set to N if FIFO, LIFO or ABC is installed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NegQtyOnHandInInvVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the negative quantity on hand is to be included in the inventory valuation. (N - No, Y -Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodes">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to request the ledger codes for inventory receipts and adjustments. (N - No, Y - Yes, L - List). If Y or L is selected, at least 1 of the 'DefineOptions' elements must be entered. If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;L=List;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="L" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DisallowSingleWhPerEnd">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to disallow a single warehouse selection for the month-end function. (Option updated with 0 when N, 1 when Y). If no value is supplied  then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SetUpStockCodeDelOpts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to set up stock code deletion options. (N - No, Y - Yes). If any of the 'DelOptions' elements have been selected, then this element should contain Y. If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PrintFifoJnls">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to print the FIFO journals. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. Only applies if 'FifoValuation' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BalLotsMostRecFifoBucket">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to balance lots from the most recent FIFO bucket. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This only applies if 'FifoValuation' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UseZeroCostBucketRets">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to use zero FIFO buckets when processing returns. (Option updated with 0 when N, 1 when Y). If no value is supplied then the default value of N will be assumed. This only applies if 'FifoValuation' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RecalcCostFromFifoBalFunc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to recalculate the cost from FIFO when the period-end balance function is run. (Option updated with 0 when N, 1 when Y). If no value is supplied then the default value of N will be assumed. This only applies if 'FifoValuation' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RecalcCostFromFifoChgWhCost">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to recalculate the current cost field to average of FIFO bins on hand when warehouse costing method changes from FIFO. (Option updated with 0 when N, 1 when Y). If no value is supplied then the default value of N will be assumed.This only applies if 'FifoValuation' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="StockTakeVariance">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of stock take variance to use. (P - Percentage, V - Variance). If no value is supplied then the default value of P will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="P=Percentage;V=Variance;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="P" />
+<xsd:enumeration value="V" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="StockTakeVarMaxPerm">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the maximum permitted stock take variance percentage. Format is 8.2 numeric, either positive or negative.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="-99999999.99" />
+<xsd:maxInclusive value="99999999.99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UomDefault">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the default unit of measure. If no value is supplied then the default value of EA will be assumed. The format is 3 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="1" />
+<xsd:maxLength value="3" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Options">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="AgedInvValReq" />
+<xsd:element ref="UpdLastCostIfStdCost" />
+<xsd:element ref="InclInvNmCostInLastCost" />
+<xsd:element ref="SerialTrackReq" />
+<xsd:element ref="SameSerialMultStockCodes" />
+<xsd:element ref="RetSerialInfoAfterNegRec" />
+<xsd:element ref="ApplyCostMultInvRec" />
+<xsd:element ref="SuppStockCodeIchgReq" />
+<xsd:element ref="MultBatchSerialRecAllowed" />
+<xsd:element ref="AllowBlankListPrcCode" />
+<xsd:element ref="ValidateProdClass" />
+<xsd:element ref="AllowBackflushOfBoItems" />
+<xsd:element ref="RecordMoveForBinTrf" />
+<xsd:element ref="AllowCreateBins" />
+<xsd:element ref="ApplyOpAccesCtlDestWh" />
+<xsd:element ref="InvCostUomOtherThanStocked" />
+<xsd:element ref="NegQtyOnHandInInvVal" />
+<xsd:element ref="ReqLedgerCodes" />
+<xsd:element ref="DisallowSingleWhPerEnd" />
+<xsd:element ref="SetUpStockCodeDelOpts" />
+<xsd:element ref="PrintFifoJnls" />
+<xsd:element ref="BalLotsMostRecFifoBucket" />
+<xsd:element ref="UseZeroCostBucketRets" />
+<xsd:element ref="RecalcCostFromFifoBalFunc" />
+<xsd:element ref="RecalcCostFromFifoChgWhCost" />
+<xsd:element ref="StockTakeVariance" />
+<xsd:element ref="StockTakeVarMaxPerm" />
+<xsd:element ref="UomDefault" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesReceipts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for receipts. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesAdjusts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for adjustments. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesIssues">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for issues. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesCostMods">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for cost modifications. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesCostChgs">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for cost changes. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesPhysical">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for physical. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesTransfers">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for stock transfers. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="POReceipts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether ledger codes are to be requested for purchase order receipts. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.If this is set to N, the next 3 elements ('ReqLedgerCodesDebits', 'ReqLedgerCodesCredits' and 'ReqLedgerCodesNonMerch') must be set to N as well.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesDebits">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for debits (non stocked). (N - No, Y - Yes). Y may only be supplied if both 'ReqLedgerCodes' and 'POReceipts' are set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesCredits">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for debits credits. (N - No, Y - Yes). Y may only be supplied if both 'ReqLedgerCodes' and 'POReceipts' are set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ReqLedgerCodesNonMerch">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the ledger code is to be requested for non-merchandised. (N - No, Y - Yes). Y may only be supplied if both 'ReqLedgerCodes' and 'POReceipts' are set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AllowChgGlCodeInBackflush">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the change of ledger code in backflushing. (Y - Yes, N - No). Y may only be supplied if 'ReqLedgerCodes' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DefineOptions">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="ReqLedgerCodesReceipts" />
+<xsd:element ref="ReqLedgerCodesAdjusts" />
+<xsd:element ref="ReqLedgerCodesIssues" />
+<xsd:element ref="ReqLedgerCodesCostMods" />
+<xsd:element ref="ReqLedgerCodesCostChgs" />
+<xsd:element ref="ReqLedgerCodesPhysical" />
+<xsd:element ref="ReqLedgerCodesTransfers" />
+<xsd:element ref="POReceipts" />
+<xsd:element ref="ReqLedgerCodesDebits" />
+<xsd:element ref="ReqLedgerCodesCredits" />
+<xsd:element ref="ReqLedgerCodesNonMerch" />
+<xsd:element ref="AllowChgGlCodeInBackflush" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DelStockCodeConfig">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of stock codes used in a configuration. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelStockCodeCustXref">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of stock codes if it has a customer/stock code cross reference record against it. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelStockCodeSuppXref">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of stock codes if it has a supplier/stock code cross reference record against it. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelStockCodeEccDrawReg">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of stock codes if an ECC drawing number exists against it. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelStockCodeBillLandCost">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of stock codes if it is part of a LCT bill. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelStockCodeTempSoPoDet">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of a temp stock code if purchase order or sales order details exist against it. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelStockCodeOnHold">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to allow the deletion of stock codes if on hold. (Option updated with 0 when N, 1 when Y). Y may only be supplied if 'SetUpStockCodeDelOpts' has been set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DelOptions">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="DelStockCodeConfig" />
+<xsd:element ref="DelStockCodeCustXref" />
+<xsd:element ref="DelStockCodeSuppXref" />
+<xsd:element ref="DelStockCodeEccDrawReg" />
+<xsd:element ref="DelStockCodeBillLandCost" />
+<xsd:element ref="DelStockCodeTempSoPoDet" />
+<xsd:element ref="DelStockCodeOnHold" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="SalesHistQtyIncl">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This shows how the sales history quantities are to be represented. (B - Both sales and issues, S - Sales, I - Issues). If no value is supplied then the default value of B will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="B=Sales and issues;S=Sales;I=Issues;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="B" />
+<xsd:enumeration value="S" />
+<xsd:enumeration value="I" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MthsRetInvJnls">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of months to retain the printed inventory journals. This element may not be zeros. A value of 99 will retain them indefinitely. Valid values are 1 - 60 or 99 only. The format is 2 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MthsRetInvDocs">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of months to retain the inventory documents. A value of 0 will purge them when printed, 99 will mean they never get purged. Valid values are 0 - 60 or 99 only. The format is 2 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="GlPerRetGitEntries">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of G/L periods to retain the inventory GIT entries. If no value is supplied, a minimum value of 3 will be assumed. A value of 99 will retain them indefinitely. If the Inventory integrated with G/L is set to No or Report only, then this element will be set to 3 as a default. Valid values are 3 - 60 or 99 only. The format is 2 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DayRetBucketsZeroQty">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of days to retain the FIFO buckets with a zero quantity. If no value is supplied then the default value of 9999 will be assumed. The format is 4 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PurgeMoveRecs">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the method by which to purge the inventory movement records. (N - By number, D - By date). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=By number;D=By date;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="D" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="MaxNoRecsRet">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the maximum number of movement records to retain (if 'PurgeMoveRecs' is set to N) or the maximum age of transactions before they are deleted. (if 'PurgeMoveRecs' is set to D). If no value is supplied then the default value of 99999 will be assumed. The format is 5 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RetLast12MthOpenStockBal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to retain the last 12 months opening stock balance quantities. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Yes;N=No;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RetHistOfPrcChg">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to retain the history of price changes. (Option updated with 0 when N, 1 when Y). If no value is supplied then the default of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DaysRetPriceChgHist">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of days to retain the price history. This element only applies if 'RetHistOfPrcChg' is set to Y. If applicable, the maximum value of 999 will apply. If 'RetHistOfPrcChg' is set to N, then the default value of 0 will be assumed. The format is 3 characters,numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="HistRetExprInMonths">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the history retentions are to be expressed in months. (Option updated with 0 when N, 1 when Y). If no value is supplied then the default of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPriorYeDate1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the prior year end date 1 used in the aged inventory valuation report. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPriorYeDate2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the prior year end date 2 used in the aged inventory valuation report. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPriorYeDate3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the prior year end date 3 used in the aged inventory valuation report. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPriorYeDate4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the prior year end date 4 used in the aged inventory valuation report. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPriorYeDate5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the prior year end date 5 used in the aged inventory valuation report. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="History">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="SalesHistQtyIncl" />
+<xsd:element ref="MthsRetInvJnls" />
+<xsd:element ref="MthsRetInvDocs" />
+<xsd:element ref="GlPerRetGitEntries" />
+<xsd:element ref="DayRetBucketsZeroQty" />
+<xsd:element ref="PurgeMoveRecs" />
+<xsd:element ref="MaxNoRecsRet" />
+<xsd:element ref="RetLast12MthOpenStockBal" />
+<xsd:element ref="RetHistOfPrcChg" />
+<xsd:element ref="DaysRetPriceChgHist" />
+<xsd:element ref="HistRetExprInMonths" />
+<xsd:element ref="InvPriorYeDate1" />
+<xsd:element ref="InvPriorYeDate2" />
+<xsd:element ref="InvPriorYeDate3" />
+<xsd:element ref="InvPriorYeDate4" />
+<xsd:element ref="InvPriorYeDate5" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 1 month end date. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod1'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the previous period may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod2'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod3'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod4'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod5'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod6'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod7'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod8'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod9'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod10'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod11'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrDatePeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod12'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrFlagPeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PeriodCurrentYear">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="InvCurrDatePeriod1" />
+<xsd:element ref="InvCurrFlagPeriod1" />
+<xsd:element ref="InvCurrDatePeriod2" />
+<xsd:element ref="InvCurrFlagPeriod2" />
+<xsd:element ref="InvCurrDatePeriod3" />
+<xsd:element ref="InvCurrFlagPeriod3" />
+<xsd:element ref="InvCurrDatePeriod4" />
+<xsd:element ref="InvCurrFlagPeriod4" />
+<xsd:element ref="InvCurrDatePeriod5" />
+<xsd:element ref="InvCurrFlagPeriod5" />
+<xsd:element ref="InvCurrDatePeriod6" />
+<xsd:element ref="InvCurrFlagPeriod6" />
+<xsd:element ref="InvCurrDatePeriod7" />
+<xsd:element ref="InvCurrFlagPeriod7" />
+<xsd:element ref="InvCurrDatePeriod8" />
+<xsd:element ref="InvCurrFlagPeriod8" />
+<xsd:element ref="InvCurrDatePeriod9" />
+<xsd:element ref="InvCurrFlagPeriod9" />
+<xsd:element ref="InvCurrDatePeriod10" />
+<xsd:element ref="InvCurrFlagPeriod10" />
+<xsd:element ref="InvCurrDatePeriod11" />
+<xsd:element ref="InvCurrFlagPeriod11" />
+<xsd:element ref="InvCurrDatePeriod12" />
+<xsd:element ref="InvCurrFlagPeriod12" />
+<xsd:element ref="InvCurrDatePeriod13" />
+<xsd:element ref="InvCurrFlagPeriod13" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 1 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvCurrDatePeriod13'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod1'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'InvCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod2'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod3'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod4'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod5'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod6'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod7'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod8'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod9'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod10'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod11'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevDatePeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'InvPrevDatePeriod12'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="10" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvPrevFlagPeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PeriodPreviousYear">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="InvPrevDatePeriod1" />
+<xsd:element ref="InvPrevFlagPeriod1" />
+<xsd:element ref="InvPrevDatePeriod2" />
+<xsd:element ref="InvPrevFlagPeriod2" />
+<xsd:element ref="InvPrevDatePeriod3" />
+<xsd:element ref="InvPrevFlagPeriod3" />
+<xsd:element ref="InvPrevDatePeriod4" />
+<xsd:element ref="InvPrevFlagPeriod4" />
+<xsd:element ref="InvPrevDatePeriod5" />
+<xsd:element ref="InvPrevFlagPeriod5" />
+<xsd:element ref="InvPrevDatePeriod6" />
+<xsd:element ref="InvPrevFlagPeriod6" />
+<xsd:element ref="InvPrevDatePeriod7" />
+<xsd:element ref="InvPrevFlagPeriod7" />
+<xsd:element ref="InvPrevDatePeriod8" />
+<xsd:element ref="InvPrevFlagPeriod8" />
+<xsd:element ref="InvPrevDatePeriod9" />
+<xsd:element ref="InvPrevFlagPeriod9" />
+<xsd:element ref="InvPrevDatePeriod10" />
+<xsd:element ref="InvPrevFlagPeriod10" />
+<xsd:element ref="InvPrevDatePeriod11" />
+<xsd:element ref="InvPrevFlagPeriod11" />
+<xsd:element ref="InvPrevDatePeriod12" />
+<xsd:element ref="InvPrevFlagPeriod12" />
+<xsd:element ref="InvPrevDatePeriod13" />
+<xsd:element ref="InvPrevFlagPeriod13" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DescStockCodeField1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 1 against the stock code. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescStockCodeField2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 2 against the stock code. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescStockCodeField3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 3 against the stock code. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescStockCodeField4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 4 against the stock code. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescStockCodeField5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 5 against the stock code. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescWhField1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 1 against the warehouse. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescWhField2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 2 against the warehouse. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescWhField3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined description 3 against the warehouse. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltKey1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate key 1. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltKey2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate key 2. This element is optional. The format is 15 characters, alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UserDefined">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="DescStockCodeField1" />
+<xsd:element ref="DescStockCodeField2" />
+<xsd:element ref="DescStockCodeField3" />
+<xsd:element ref="DescStockCodeField4" />
+<xsd:element ref="DescStockCodeField5" />
+<xsd:element ref="DescWhField1" />
+<xsd:element ref="DescWhField2" />
+<xsd:element ref="DescWhField3" />
+<xsd:element ref="DescAltKey1" />
+<xsd:element ref="DescAltKey2" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DocSelReceipts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of document required for stock receipts. (N - No document, B - Batch only, O - On line and batch). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No document;B=Batch only;O=On line and batch" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DocSelIssues">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of document required for stock issues. (N - No document, B - Batch only, O - On line and batch). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No document;B=Batch only;O=On line and batch" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DocSelTrfOut">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of document required for stock transfers out. (N - No document, B - Batch only, O - On line and batch). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No document;B=Batch only;O=On line and batch" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DocSelPoReceipts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of document required for purchase order receipts. (N - No document, B - Batch only, O - On line and batch). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No document;B=Batch only;O=On line and batch" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="O" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DocSelInspections">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of document required for inspections. (O - On line and batch, N - No document, B - Batch only). If no value is supplied then the default value of O will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="O=On line and batch;N=No document;B=Batch only;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="O" />
+<xsd:enumeration value="N" />
+<xsd:enumeration value="B" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclInsItemsInDocReceipts">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to include inspection items in inventory document receipts. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DefDecimalsInAlign">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the default number of decimals required in stationery alignment. Valid values are 0 - 3. Format is 1 character, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="9" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Documents">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="DocSelReceipts" />
+<xsd:element ref="DocSelIssues" />
+<xsd:element ref="DocSelTrfOut" />
+<xsd:element ref="DocSelPoReceipts" />
+<xsd:element ref="DocSelInspections" />
+<xsd:element ref="InclInsItemsInDocReceipts" />
+<xsd:element ref="DefDecimalsInAlign" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="InvCurrentYear">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the calendar year in which your current financial year ends. This element may only be altered if there are no records already in the Inventory files. The format is 4 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvCurrentMonth">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the calendar month in which your company is running in relation to the start of your financial year. This element may only be altered if there are no records already in the Inventory files. The format is 2 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CurrentMonth">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="InvCurrentYear" />
+<xsd:element ref="InvCurrentMonth" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="AutoDeplLotsInSO">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if/how the automatic depletion in sales orders is to apply. (N - No, B - Both KitIssues and SalesOrders, K - KitIssues, S - SalesOrders). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;B=Both KitIssues and SalesOrders;K=KitIssues;S=SalesOrders" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="B" />
+<xsd:enumeration value="K" />
+<xsd:enumeration value="S" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AutoDeplLotsInPOS">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to apply automatic depletion in point of sale. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. Only applies if 'AutoDeplLotsInSO' is set to N.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DeplRemFromDefBin">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates if negative on hand, whether to deplete the remainder from default bin. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed. If neither 'AutoDeplLotsInSO' nor 'AutoDeplLotsInPOS' have been set to Y, this element must contain N.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AutoDeplLotsDate">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the method by which to automatically deplete the lots by. (R - Receipt date, E - Expiry date). If no value is supplied then the default value of R will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Receipt date=;E=Expiry date;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="R" />
+<xsd:enumeration value="E" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Depletion">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="AutoDeplLotsInSO" />
+<xsd:element ref="AutoDeplLotsInPOS" />
+<xsd:element ref="DeplRemFromDefBin" />
+<xsd:element ref="AutoDeplLotsDate" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="MultBinBrowseDefSeq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the type of multiple bin default sequence to use. (B - Bin, R - Receipt date). If no value is supplied then the default value of B will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="B=Bin;R=Receipt date;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="B" />
+<xsd:enumeration value="R" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DisplayPriceQtyInvBrowse">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to display the price and quantities in the stock code browse flag. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="FilterStockCodesOpAccess">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to filter stock codes in browse based on operator access list. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DefWhForDispQty">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates which type of default warehouse to use in the browse when displaying quantities. (S - Standard, O - Operator default, C - Company default, W - Warehouse to use, D - Distribution warehouse to use). The default value is S (which will translate to spaces).]]></xsd:documentation>
+<xsd:appinfo source="S=Standard;O=Operator default;C=Company default;W=Warehouse to use;D=Distribution warehouse to use;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="S" />
+<xsd:enumeration value="O" />
+<xsd:enumeration value="C" />
+<xsd:enumeration value="W" />
+<xsd:enumeration value="D" />
+<xsd:minLength value="0" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DefAtpPresentation">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the default ATP presentation to use. (R - Regular, C - Cumulative). If no value is supplied then the default value of R will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="R=Regular;C=Cumulative;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="R" />
+<xsd:enumeration value="C" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ShowWhValsForMultComps">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to show warehouse values for multiple companies. (N - No, Y - Yes). The default value is N. If Y is supplied then 'InvQueryCompanyCode' must have at least 1 value supplied.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Browse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="MultBinBrowseDefSeq" />
+<xsd:element ref="DisplayPriceQtyInvBrowse" />
+<xsd:element ref="FilterStockCodesOpAccess" />
+<xsd:element ref="DefWhForDispQty" />
+<xsd:element ref="DefAtpPresentation" />
+<xsd:element ref="ShowWhValsForMultComps" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="InvQueryCompanyCode">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[These are the selected company codes. These are only applicable if 'ShowWhValsForMultComps' is set to Y. The values supplied must be valid SYSPRO company codes. The format is 1 character, alphanumeric per company code, each separated by a comma. A maximum of 36 company codes are allowed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="72" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InvQueryCompanyName">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[These are the company names for the corresponding company codes entered in 'InvQueryCompanyCode'. The format is 30 characters, alphanumeric per company code, each separated by a comma. A maximum of 36 company names are allowed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="1116" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Companies">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="InvQueryCompanyCode" />
+<xsd:element ref="InvQueryCompanyName" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="NextStockRecDoc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next stock receipt document. If no value is supplied then 1 will be assumed. The format is 9 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextIssueDoc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next issue document. If no value is supplied then 1 will be assumed. The format is 9 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextTrfOutDoc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next transfer out document. If no value is supplied then 1 will be assumed. The format is 9 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextInspectionDoc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next inspection print document. If no value is supplied then 1 will be assumed. The format is 9 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextRejectionDoc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next rejection print document. If no value is supplied then 1 will be assumed. The format is 9 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextScrappedDoc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next scrapped print document. If no value is supplied then 1 will be assumed. The format is 9 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="StockCodeNumMethod">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the stock code numbering method to be used. (M - Manual, A - Automatic, S - Scripted). If no value is supplied then the default value of M will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="M=Manual;A=Automatic;S=Scripted;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="M" />
+<xsd:enumeration value="A" />
+<xsd:enumeration value="S" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextStockCode">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next Stock Code to use. This element is only to be supplied if 'StockCodeNumMethod' is set to A. The format is 15 characters, numeric.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="GitReference">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the goods in transit reference to use. (M - Manual, A - By company, W - By warehouse, P - By warehouse with prefix). If no value is supplied then the default value of M will be assumed. May not be P if IM5-GTR-KEY is numeric. May not be A or W if IM5-GTR-KEY is alphanumeric.]]></xsd:documentation>
+<xsd:appinfo source="M=Manual;A=By company;W=By warehouse;P=By warehouse - with prefix;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="M" />
+<xsd:enumeration value="A" />
+<xsd:enumeration value="W" />
+<xsd:enumeration value="P" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextGitReference">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next goods in transit reference number. The format is 9 characters, numeric. This element may only be supplied if 'GitReference' is not set to A.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ManSerialNoTracking">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the manual serial tracking suffix to use. (N - None, S - By stock code, C - By company). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=None;S=By stock code;C=By company;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="S" />
+<xsd:enumeration value="C" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ManSerialNoTrackPrefix">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the manual serial number tracking prefix. The format is 15 characters, alphanumeric. This may only be supplied if 'ManSerialNoTracking' is set to C.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ManSerialNoTrackSuffix">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the manual serial number tracking next prefix. The format is 15 characters, alphanumeric. This may only be supplied if 'ManSerialNoTracking' is C.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:minLength value="0" />
+<xsd:maxLength value="15" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Numbering">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="NextStockRecDoc" />
+<xsd:element ref="NextIssueDoc" />
+<xsd:element ref="NextTrfOutDoc" />
+<xsd:element ref="NextInspectionDoc" />
+<xsd:element ref="NextRejectionDoc" />
+<xsd:element ref="NextScrappedDoc" />
+<xsd:element ref="StockCodeNumMethod" />
+<xsd:element ref="NextStockCode" />
+<xsd:element ref="GitReference" />
+<xsd:element ref="NextGitReference" />
+<xsd:element ref="ManSerialNoTracking" />
+<xsd:element ref="ManSerialNoTrackPrefix" />
+<xsd:element ref="ManSerialNoTrackSuffix" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DoNotPromptForPrice">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the configurator option to not prompt for prices when running from the sales orders or quotes. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AcceptZeroPrice">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the configurator option to accept zero prices when running from the sales orders or quotes. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This may only be set to Y if 'DoNotPromptForPrice' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CreateJobForExistParent">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the configurator option to create a job through sales orders using existing selection criteria generated stock codes. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="OverrideExistParentDesc">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the configuration option to override stock description when using an existing stock code to create a job. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. May only be set to Y if 'CreateJobForExistParent' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DoNotUpdWhCostExistParent">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the configurator option not to update the warehouse cost for an existing parent.(N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. May only be set to Y if  'CreateJobForExistParent' is set to Y.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CostsForBoItemsInBom">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the costs to use for bought out items when creating a Bill of Material. (I - Inventory, B - BOM). If no value is supplied then the default value of I will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="I=Inventory;B=BOM;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="I" />
+<xsd:enumeration value="B" />
+<xsd:minLength value="1" />
+<xsd:maxLength value="1" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Configurator">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="DoNotPromptForPrice" />
+<xsd:element ref="AcceptZeroPrice" />
+<xsd:element ref="CreateJobForExistParent" />
+<xsd:element ref="OverrideExistParentDesc" />
+<xsd:element ref="DoNotUpdWhCostExistParent" />
+<xsd:element ref="CostsForBoItemsInBom" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+ 

@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Picking Slip Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>Query optons</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Sequence" minOccurs="0"/>
+				<xsd:element ref="Reprint" minOccurs="0"/>
+				<xsd:element ref="NumberofCharactersinaBinGroup" minOccurs="0"/>
+				<xsd:element ref="PrintOptions" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Sequence" default="1">
+		<xsd:annotation>
+			<xsd:documentation>The query details can be returned in a number of varied sequences : 1 = Warehouse, order number, bin location, 2 = Warehouse, order number, stock code, 3 = Warehouse, bin location, 4 = Warehouse, Stock code, 5 = Order number, warehouse, bin location, 6 = Alternate key (stock), order number, warehouse, bin, 7 = Alternate key (order), stock code, warehouse, bin</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:length value="1"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="5"/>
+				<xsd:enumeration value="6"/>
+				<xsd:enumeration value="7"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Reprint" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Report can be reprinted N=No, Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NumberofCharactersinaBinGroup" default="6">
+		<xsd:annotation>
+			<xsd:documentation>Number of characters in a bin group, valid number = 1 to 6</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="6"/>
+				<xsd:enumeration value="5"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintOptions">
+		<xsd:annotation>
+			<xsd:documentation>Print Options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="NewPagePerWarehouse" minOccurs="0"/>
+				<xsd:element ref="NewPagePerOrderNumber" minOccurs="0"/>
+				<xsd:element ref="NewPagePerBin" minOccurs="0"/>
+				<xsd:element ref="PrintOrderLineComments" minOccurs="0"/>
+				<xsd:element ref="PrintSerialNumber" minOccurs="0"/>
+				<xsd:element ref="PrintLotNumbers" minOccurs="0"/>
+				<xsd:element ref="PrintExtendedInformation" minOccurs="0"/>
+				<xsd:element ref="PrintLongDescription" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="NewPagePerWarehouse" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print a new page per warehouse N=No, Y-Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NewPagePerOrderNumber" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print a new page per order number N=No, Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NewPagePerBin" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print a new page per bin N=No, Y-Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintOrderLineComments" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print Order Line Comments N=No, Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintSerialNumber" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print serial numbers N=No, Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintLotNumbers" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print lot numbers N=No, Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintExtendedInformation" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print extended information N=No, Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintLongDescription" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Print long descriotion N=No; Y=Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>Query filters</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Order" minOccurs="0"/>
+				<xsd:element ref="ShipDate" minOccurs="0"/>
+				<xsd:element ref="Branch" minOccurs="0"/>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="GeographicArea" minOccurs="0"/>
+				<xsd:element ref="Bin" minOccurs="0"/>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="OrderType" minOccurs="0"/>
+				<xsd:element ref="AlternateKeyStock" minOccurs="0"/>
+				<xsd:element ref="AlternateKey" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Order">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single order to be returned. FilterType options - A(All), (R) Range, (S)Single. Default to A(All).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:length value="1"/>
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="1"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ShipDate">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single ship date to be returned. FilterType options - A(All), (R)Range, (S)Single. Default to A(All).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="1"/>
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="1"/>
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single Branch to be returned. FilterType options - Filter type options- A(All), R(Range), (S)Single  Default to A(All).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="1"/>
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="1"/>
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single customer to be returned. FilterType options - A(All), (R)Range, (S)Single. Default to A(All).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:length value="1"/>
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="1"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GeographicArea">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single Geographic are to be returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="1"/>
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="1"/>
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Bin">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single Bin returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="1"/>
+						<xsd:minLength value="0"/>
+						<xsd:maxLength value="1"/>
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>All, Range or Single Warehouse returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>All, range or single stock code returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OrderType">
+		<xsd:annotation>
+			<xsd:documentation>All, or single order type returned. FilterType options - (A)All,, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AlternateKeyStock">
+		<xsd:annotation>
+			<xsd:documentation>All, range or single alternate key (stock code) returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AlternateKey">
+		<xsd:annotation>
+			<xsd:documentation>All, range or single alternate key returned. FilterType options - (A)All, (R)Range, (S)Single</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

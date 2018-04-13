@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Stock Take by Stock Code Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="BinLocation">
+		<xsd:annotation>
+			<xsd:documentation>Bin location filter, A-All, R-Range, S-Single, default is A-All.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>Filter root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="BinLocation" minOccurs="0"/>
+				<xsd:element ref="UnitOfMeasure" minOccurs="0"/>
+				<xsd:element ref="ProductClass" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>Key root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Warehouse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OnlyShowExceptionLines">
+		<xsd:annotation>
+			<xsd:documentation>Show exceptionline only, Y-Yes, N-No. Default is N-No.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>options root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="ValueStockAt" minOccurs="0"/>
+				<xsd:element ref="OnlyShowExceptionLines" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>Product class filter, A-All, R-Range, S-Single, default is A-All.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalProductClass;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Stock code filter, A-All, R-Range, S-Single, default is A-All.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UnitOfMeasure">
+		<xsd:annotation>
+			<xsd:documentation>Unit of measure filter, A-All, S-Single, default is A-All.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ValueStockAt" default="S">
+		<xsd:annotation>
+			<xsd:documentation>Value stock at current cost(S) or original cost(W) level. Default is stock code(S). </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;S=Current cost;W=Original cost;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="W"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Warehouse" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>A valid warehouse is mandatory.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvWhControl;key=true"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="XslStylesheet" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Style sheet</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

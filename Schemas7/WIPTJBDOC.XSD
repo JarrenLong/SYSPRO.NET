@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Job Header Maintenance Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AddLabPct">
+    <xsd:annotation>
+      <xsd:documentation>Additional charge percentage for labor to be used in part billings as a means of increasing the value of un-billed labor entries held against the job.This is ignored if the item to make is stocked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AddMatPct">
+    <xsd:annotation>
+      <xsd:documentation>Additional charge percentage for material to be used in part billings as a means of increasing the value of un-billed material entries held against the job. This is ignored if the item to make is stocked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ChangeSalesOrderWarehouse" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Set this flag to change the sales order warehouse if changing the warehouse (Warehouse) against a job that is attached to a sales order.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CheckLeadTime" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Flag indicating whether to calculate a start date based on the delivery date entered and the lead time against the stock code to see whether the job can be done. Ignored if not adding a new job or the date calculation method (DateCalcMethod) is not set to 'S' or 'M'</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ComponentWarehouse">
+    <xsd:annotation>
+      <xsd:documentation>Enter a specific warehouse that must be used when issuing all material to the job. Otherwise the warehouse to use held against each component (specified at the Warehouse to use field of the Stock Codes Setup program) is used when allocating material to the job. This is ignored if not adding a job or allocations are not included.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ConfirmedFlag">
+    <xsd:annotation>
+      <xsd:documentation>Flag indicates whether or not the job is confirmed. If adding or copying a job and this is not returned then the WIP setup option 'Jobs confirmed by default' will be used.
+Material and labor postings cannot be made to an unconfirmed job. Furthermore unconfirmed jobs can be excluded from requirements planning.
+A job can be confirmed at any time but jobs cannot be 'unconfirmed' if the job has been started (i.e. issues of labor hours or materials have been made).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Customer" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Customer to be used to create a sales order if a part billing is required. The format is alphanumeric or numeric depending on a configuration option within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CustomerName">
+    <xsd:annotation>
+      <xsd:documentation>Customer name. This is overwritten by the customer's name held on file. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateCalcMethod">
+    <xsd:annotation>
+      <xsd:documentation>This flag indicates the calculation method to be applied when calculating the job's start/delivery date based on attached labor allocations.
+D - Delivery date based on the start date using forward infinite scheduling.
+S - Start date based on the delivery date using backward infinite scheduling.
+M - Do not calculate start or delivery date.
+F - Delivery date based on the start date using forward finite scheduling. This option is available if the WIP installation option "Load Levelling Required" is set to 'Y' and allocations are attached to the job. If not then it is changed to date method 'D'.
+To calculate the delivery date from the start date the program processes each operation attached to the finished part and assumes the queue date of the first operation to be the start date of the job.
+The finish date of the first operation is calculated by adding the queue and elapsed time of that operation. The start date of the next operation is the finish date of the previous operation, plus movement time plus one day. The delivery date of the job is the finish date of the last operation plus movement time. 
+The reverse is true if calculating the start date.
+If creating sub jobs (CreateSubJob = 'Y') or job is linked to a sales order then the date calculation method is set to 'S'. This element can be supplied when doing a job copy.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExpLabour">
+    <xsd:annotation>
+      <xsd:documentation>Expected unit labor cost of the item to make. This is ignored if the item to make is stocked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExpMaterial">
+    <xsd:annotation>
+      <xsd:documentation>Expected unit material cost of the item to make. This is ignored if the item to make is stocked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HierarchyCode">
+    <xsd:annotation>
+      <xsd:documentation>If the job is hierarchical (HierarchyFlag = 'Y') then a hierarchy library code can be entered here to create the job's hierarchy of heads and sections. Ignored if not adding a job.
+At the time of creating a job you can assign a hierarchy of heads and sections. A head is the top level section for a job. An unlimited number of heads can be assigned. To each head, an unlimited number of sections can be attached and, again, an unlimited number of sections can be attached to each section. The process can continue through four levels of sections.
+Currently user defined hierarchy is not supported by this object.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HierarchyContract">
+    <xsd:annotation>
+      <xsd:documentation>If the job is hierarchical (HierarchyFlag = 'Y') and the job is attached to a contract then the contract must be entered here. Ignored if not adding a job.
+Any number of jobs can be annotated to form part of an overall contract. Transactions cannot be made to the contract; only to a constituent job.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HierarchyFlag" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate whether the job being added is hierarchical. Ignored if not adding a job, if projects and contracts is not installed or the item to make is a notional part or multi-grade coproduct part</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HoldFlag" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Flag indicates whether a job is on hold. Set to 'Y'  to suspend processing for the job.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeAllocations">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate whether to include allocations when adding a job. This flag is ignored if creating a non-stocked item or Bill of Materials is not installed and is set to 'N'.
+If set to 'Y' material and labor allocations are added against the job based on the structure and routings defined in the bill of materials for this parent on this route.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeOvertimePct" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Include overtime percentage in forward finite date calculation (DateMethod = 'F'). The overtime percentage is held against the work centers and is used when calculating capacity available on a given day and when calculating the capacity required by the operation for the day.
+If not returned then will use the WIP setup option 'Apply overtime percentage to forward finite calculation by default '. This element can be supplied when doing a job copy.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain a job.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Job" minOccurs="0"/>
+        <xsd:element ref="JobDescription" minOccurs="0"/>
+        <xsd:element ref="JobClassification" minOccurs="0"/>
+        <xsd:element ref="Priority" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Version" minOccurs="0"/>
+        <xsd:element ref="Release" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element name="UnitOfMeasure" default="S" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Select 'S' for stocking uom, 'A' for alternate uom, 'O' for other uom or 'M' for manufacturing uom. Quantities and times entered will be according to the unit of measure selected.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="S"/>
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="O"/>
+              <xsd:enumeration value="M"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="QtyToMake" minOccurs="0"/>
+        <xsd:element name="GrossQuantityFlag" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This flag indicates that the quantity entered will be the actual gross quantity so the net quantity will be calculated after applying prgressive scrap. Ignored if the item to make is a notional part or a multi-grade co-product part.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:pattern value="N"/>
+              <xsd:pattern value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="CustomerName" minOccurs="0"/>
+        <xsd:element ref="JobTenderDate" minOccurs="0"/>
+        <xsd:element ref="DateCalcMethod"/>
+        <xsd:element ref="IncludeOvertimePct" minOccurs="0"/>
+        <xsd:element ref="SetMethodToManual" minOccurs="0"/>
+        <xsd:element ref="JobStartDate" minOccurs="0"/>
+        <xsd:element ref="JobDeliveryDate" minOccurs="0"/>
+        <xsd:element ref="SeqCheckReq" minOccurs="0"/>
+        <xsd:element ref="ConfirmedFlag" minOccurs="0"/>
+        <xsd:element ref="HoldFlag" minOccurs="0"/>
+        <xsd:element ref="Route" minOccurs="0"/>
+        <xsd:element ref="RoutePassword" minOccurs="0"/>
+        <xsd:element ref="WipCtlGlCode" minOccurs="0"/>
+        <xsd:element ref="NonStocked" minOccurs="0"/>
+        <xsd:element ref="StockDescription" minOccurs="0"/>
+        <xsd:element ref="ExpLabour" minOccurs="0"/>
+        <xsd:element ref="ExpMaterial" minOccurs="0"/>
+        <xsd:element ref="SellingPrice" minOccurs="0"/>
+        <xsd:element ref="AddLabPct" minOccurs="0"/>
+        <xsd:element ref="AddMatPct" minOccurs="0"/>
+        <xsd:element ref="ProfitPct" minOccurs="0"/>
+        <xsd:element ref="TraceableType" minOccurs="0"/>
+        <xsd:element ref="HierarchyFlag" minOccurs="0"/>
+        <xsd:element ref="HierarchyContract" minOccurs="0"/>
+        <xsd:element ref="HierarchyCode" minOccurs="0"/>
+        <xsd:element ref="SalesOrder" minOccurs="0"/>
+        <xsd:element ref="SalesOrderLine" minOccurs="0"/>
+        <xsd:element ref="IncludeAllocations" minOccurs="0"/>
+        <xsd:element ref="ComponentWarehouse" minOccurs="0"/>
+        <xsd:element ref="SubJobOptions" minOccurs="0"/>
+        <xsd:element ref="CheckLeadTime" minOccurs="0"/>
+        <xsd:element ref="ReCalculateJobDates" minOccurs="0"/>
+        <xsd:element ref="ChangeSalesOrderWarehouse" minOccurs="0"/>
+        <xsd:element name="CopyMaterial" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This flag can only be used when adding non-stocked jobs (the job cannot be hierarchical). It allows you to copy material allocations from the specified stocked item in the CopyStockCode tag.  The flag can be either Y or N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CopyLabor" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This flag can only be used when adding non-stocked jobs (the job cannot be hierarchical). It allows you to copy labor allocations from the specified stocked item in the CopyStockCode tag.  The flag can be either Y or N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CopyStockCode" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This item specifies the stock code from which you want to copy material and labor allocations for a non-stocked job.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CopyVer" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This item specifies the revision number for a ECC stock code.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CopyRel" minOccurs="0" maxOccurs="3">
+          <xsd:annotation>
+            <xsd:documentation>This item specifies the release number for a ECC stock code.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CopyFromJob" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to copy a job</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="ArchivedJob" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether an archived job is to be copied. Set to Y to copy archived job. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ArchiveNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the archive number of the job to be copied. If this element is not supplied or returned as spaces when copying an archived job the job number will be used to pick up the archive number.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FromJob">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the job to be copied. This is mandatory. The format is alphanumeric or numeric depending on the configuration option within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PlannedOrBuilt" default="P" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates if the values used when copying the job should be as planned, that is using the figures entered when the job was created or as built, that is using the figures that were issued. The as built option (B) is only applicable if a job is complete and you are not using progressive scrap.
+Possible values are P - planned or B - built. The default is P.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="B"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeMaterialAllocs" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether material allocations are to be copied. Set to Y to copy material allocations. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:pattern value="N"/>
+                    <xsd:pattern value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeLaborAllocs" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether labor allocations are to be copied. Set to Y to copy labor allocations. When progressive scrap is set on and you are copying a job which calculates progressive scrap from gross to net then you must include labor allocations. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeNotepad" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether notepad is to be copied. Set to Y to copy notepad. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCustomForms" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether custom forms are to be copied. Set to Y to  copy custom forms. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeNarrations" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether narrations are to be copied. Set to Y to copy narrations. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeMultimedia" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether multimedia is to be copied. Set to Y to copy multimedia. The default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="CoProducts" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information for individual co-products. This element is only applicable for co-products which will be or have been created via a notional part. The co-product types which apply here are concurrent, sequential and proportional.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="CoProduct" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains co-product information</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="CoProductLine">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the co-product line number of the co-product you wish to update. This is mandatory.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="UnitOfMeasure" default="S">
+                      <xsd:annotation>
+                        <xsd:documentation>Select 'S' for stocking uom, 'A' for alternate uom, 'O' for other uom or 'M' for manufacturing uom. Quantities and times entered will be according to the unit of measure selected.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="A"/>
+                          <xsd:enumeration value="O"/>
+                          <xsd:enumeration value="M"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="QtyToMake" minOccurs="0"/>
+                    <xsd:element name="QtyPerNotional" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>The quantity required per notional part quantity can be adjusted here. This element is only applicable for proportional type co-products. When the quantity required per notional part is supplied for proportional co-products a check is done to make sure the proportion of quantity percentage has not exceeded 100% for the co-products. If the proportion of quantity percentage has exceeded 100% an error will be output. The proportion of quantity percentage can however be less than 100%.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ExcludeCoProduct" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether you want to exclude a co-product from manufacture. When adding a job this element is only available for optional co-products. When maintaining a job and the job is in an unconfirmed stated then this element is available for all co-products. At least one co-product must be included. Possible values for this element are 'N' - do not exclude co-product and 'Y' - exclude co-product.  The default is N - do not exclude co-product. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                          <xsd:enumeration value=" "/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="AutomaticallyReserveAllocs" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Flag to indicate whether to automatically reserve stock for allocations. If the flag is set to 'Y' then stock will be reserved for the quantity required of each allocation where stock is available. If this flag is set to 'N' then reserving will not take place. If a confirmed job is unconfirmed then irrespective of this flag the reserved stock for allocations will be released. This flag is ignored when reserving stock for allocations is switched off in the WIP Setup program. This flag is valid when adding and updating a job. The default is 'Y'</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>GUID for eSignatures</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>Job specifies the job being maintained. This is mandatory if changing or deleting a job or adding/copying and the job numbering method is manual.
+If deleting a job then this is the only element required.  The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobClassification">
+    <xsd:annotation>
+      <xsd:documentation>Job classification for the job. If not supplied when adding a job then this defaults to the job classification held against the stock code if stocked or the job classification against the operator. If job numbering method is by job class then this is used to generate the job on an add. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobDeliveryDate">
+    <xsd:annotation>
+      <xsd:documentation>Date on which the job is due for completion.  If adding/copying a job and this is not returned the date defaults to today.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobDescription">
+    <xsd:annotation>
+      <xsd:documentation>This is the description to appear against the job.  If not defined when adding/copying a job for a stocked item then the stock description is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobStartDate">
+    <xsd:annotation>
+      <xsd:documentation>Date on which the job is to start.  If adding/copying a job and this is not returned the date defaults to today.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobTenderDate">
+    <xsd:annotation>
+      <xsd:documentation>Tender date required. This date is only used for documentation purposes. If adding a job and this is not returned the date defaults to today.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NonStocked" default="N">
+    <xsd:annotation>
+      <xsd:documentation>When adding a job this flag indicates whether the item to make is non-stocked. If the warehouse to use is set to '**' then this flag is set to 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostJob">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Priority">
+    <xsd:annotation>
+      <xsd:documentation>Priority of the job (1-99). 1 indicates the lowest priority and 99 indicates the highest priority.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProfitPct">
+    <xsd:annotation>
+      <xsd:documentation>Additional percentage profit charge to be used in part billings as a means of increasing the value to be invoiced.This is ignored if the item to make is stocked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QtyToMake">
+    <xsd:annotation>
+      <xsd:documentation>Quantity required to make. If adding this is zero then the quantity to make is calculated based on the manufacturing basis defined against the stock code. This cannot be changed against a hierarchical job.  Quantity required to make within the co-product node allows you to individually add co-product quantities. The highest calculated notional part quantity will be used as the notional part quantity and is calculated as follows: (co-product quantity / co-product quantity per = notional part quantity). The default notional part quantity will be the qtytomake supplied or calculated for the notional part within the item node. If not all co-products are individually changed and the default notional part quantity is still the highest notional part quantity then it will be used as the notional part quantity. Co-products which are not individually changed will be driven by the notional part quantity. This element is only applicable when the WIP setup option 'Quantity capture co-product jobs' is a 'C' - Co-product. This element is not applicable for proportional co-products.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReCalculateJobDates" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Set this flag to force recalculation of start and delivery dates when updating a job. This flag is ignored and date recalculation automatically takes place if one of the following has been changed; quantity (QtyToMake), date calculation method (DateCalcMethod), start date (JobStartDate) or delivery date (JobDeliveryDate). The date recalculation is also automatic when dealing with a notional part job and you are changing the quantity against co-products or you are excluding co-products. If the date method is manual then this flag is not ignored unless you are dealing with a notional part job and the co-product quantities change or you are excluding co-products.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Release">
+    <xsd:annotation>
+      <xsd:documentation>Release indicates the ECC release number of the component part. Ignored if not an ECC controlled item, or if ECC controlled at a stocking/revision level. When adding and this is not supplied then defaults to the current release number for the stock code. This cannot be changed. The format is alphanumeric or numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Route">
+    <xsd:annotation>
+      <xsd:documentation>Bill of materials route from which to create the job allocatons. This is only required when adding a job and 'Bill of Materials' is installed and the BOM setup option 'Alternate routings required' is set. This can also be used when copying material and labor allocations for a non-stocked job and specifies the route from which you want to copy. If not supplied then defaults to the standard route (0).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RoutePassword">
+    <xsd:annotation>
+      <xsd:documentation>The password associated with the Bill of Material route. This element can be supplied when copying a job.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Sales order for which the job is to be added. Ignored if not adding a job or sales orders is not installed or the sales order line os not returned.The format is alphanumeric or numeric depending on the sales order key type option within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrderLine" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Sales order line for which the job is to be added. Ignored if not adding a job or sales orders is not installed or the sales order is not returned.  If valid then the information for creating the job (stock code, warehouse, quantity etc.) is all obtained from the sales order line.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SellingPrice">
+    <xsd:annotation>
+      <xsd:documentation>Unit selling price to be used in part billings to determine the value of the sales order.This is ignored if the item to make is stocked. When changing a job if the job is for a capex item then this is also ignored. The format is 10.5 positive numeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SeqCheckReq">
+    <xsd:annotation>
+      <xsd:documentation>Flag indicates whether or not sequence checking is required on operations when posting labor  (i.e. an operation number cannot be posted to if work has not already commenced on the previous operation. If adding a job and this is not returned then will use the WIP setup option 'Sequence checking required by default'</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SetMethodToManual" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This option will fix the calculated dates by setting the calculation method to manual (DateMethod = 'M'). This element can be supplied when doing a job copy.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock code of the finished item that is required to be made. This is mandatory when adding unless created from a sales order (see SalesOrder).
+When changing a job this can only be changed if maintaining a non-stocked live job and the job is not for a capex item. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockDescription">
+    <xsd:annotation>
+      <xsd:documentation>Description of the item to make. If a job for a stocked item is being processed then the description held against the item is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SubJobOptions">
+    <xsd:annotation>
+      <xsd:documentation>Options required when creating sub jobs for attached components.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="CreateSubJobs" minOccurs="0"/>
+        <xsd:element ref="SubJobPrefix" minOccurs="0"/>
+        <xsd:element ref="SubJobSuffix" minOccurs="0"/>
+        <xsd:element ref="UseGlForAllJobs" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CreateSubJobs" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate whether or not to create the required sub jobs for all components in a structure against which you indicated that a sub job must be raised (within the Bill of Materials Structures and Routings program). This will create, in effect, a bill of jobs for all relevant components down the BOM chain.
+Ignored if not adding a new job and if not including allocations (IncludeAllocations = 'N')</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SubJobPrefix">
+    <xsd:annotation>
+      <xsd:documentation>If creating sub jobs for components (CreateSubJobs = 'Y') and job numbering is set to Manual. This prefix is strung together with the sub job suffix (SubJobSuffix) to create the job for each sub job.The format is alphanumeric or numeric depending on the job key type option within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SubJobSuffix">
+    <xsd:annotation>
+      <xsd:documentation>If creating sub jobs for components (CreateSubJobs = 'Y') and job numbering is set to Manual. This suffix is strung together with the sub job prefix (SubJobPrefix) to create the job for each sub job.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseGlForAllJobs" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Set this flag to 'Y' to use the work in progress control account against the parent job for all sub jobs when creating sub jobs for components (CreateSubJobs = 'Y') </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TraceableType" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate whether a non-stocked item to make is traceable. Ignored if not adding a job, if lot traceability is not installed or the item to make is stocked.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Version">
+    <xsd:annotation>
+      <xsd:documentation>Version indicates the ECC version number of the stock code to make. Ignore if not an ECC controlled item, or if ECC controlled at a stocking level. When adding and this is not supplied then defaults to the current version number for the stock code. This cannot be changed. The format is alphanumeric or numeric depending on the configuration option within Bill of Materials setup.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This is the warehouse to use for the finished stock code. When adding and this is not supplied then the finished stock code's warehouse to use is applied. If the non-stocked flag is set then this is ignored.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCtlGlCode">
+    <xsd:annotation>
+      <xsd:documentation>Work in progress control account to which the value of work in progress is to be posted. When adding a job and this is blank then uses the account defined against the stock code, if that is blank then the account defined in GL integration is used. This cannot be changed once the job has been confirmed and transactions have been posted to the job or the job is for a capex item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>GUID for eSignatures</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

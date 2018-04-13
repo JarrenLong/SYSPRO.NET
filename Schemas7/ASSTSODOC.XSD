@@ -1,0 +1,1912 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Register Setup Transaction Posting Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="AssetRegisterOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="BasisDateConventions" minOccurs="0"/>
+				<xsd:element ref="History" minOccurs="0"/>
+				<xsd:element ref="PeriodCurrentYear" minOccurs="0"/>
+				<xsd:element ref="PeriodPreviousYear" minOccurs="0"/>
+				<xsd:element ref="CurrentMonth" minOccurs="0"/>
+				<xsd:element ref="Numbering" minOccurs="0"/>
+				<xsd:element ref="UserDefined" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="BookValDepPostedToGlCode">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates how the book value depreciation is to be posted to the general ledger, either by group or by asset. (G - Intergration, A - Individual setup). If no value is supplied then the default value of G will be assumed. If A is supplied, you must ensure that there is a valid GL code against each asset.]]></xsd:documentation>
+<xsd:appinfo source="G=Integration;A=Individual Setup;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="G" />
+<xsd:enumeration value="A" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="SubAssetsAllowed">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether sub-assets are allowed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="OptionsOnAdditions">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the different depreciation calculation options available for use when adding assets. (Y - Calculate depreciation - add historically, N - No depreciation calculation - add historically, C - Calculate depreciation - add in current period, U - No depreciation calculation - add in current period). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Calculate depreciation - add historically;N=No depreciation calculation - add historically;C=Calculate depreciation - add in current period;U=No depreciation calculation - add in current period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="N" />
+<xsd:enumeration value="C" />
+<xsd:enumeration value="U" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssetAmendJnlsReq">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether the asset amendment journals are required. (N - No, Y - Yes, A - Yes - including additions). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;A=Yes, including additions;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="A" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RoundingOptions">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the tax rounding options and is only used if IM2-TAX-RND-OPTION is set to Y. (R - Normal rounding, U - Up, D - Down). If no value is supplied then the default value of R will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="R=Normal rounding;U=Up;D=Down;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="R" />
+<xsd:enumeration value="U" />
+<xsd:enumeration value="D" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RndOptionsNearestValue">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the depreciation rounding factor (to the nearest value). This element must contain zeros if 'RoundingOptions' element is set to R, else it must contain a value > zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="RndOptionsNearestUnit">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the depreciation rounding factor. (N - Normal rounding, D - Decimals, U - Units). If 'RoundingOptions' is set to R, then this element must contain N. If 'RoundingOptions' is set to either U or D and no value is supplied then D will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=Normal rounding;D=Decimals;U=Units;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="U" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnBookVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the book value depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnTaxVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the tax depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 1 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 2 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 3 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 4 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 5 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 6 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 7 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 8 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 9 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ExclResidFromDepnAltVal10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to exclude residual from the alternate valuation 10 depreciation calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="InclAssetWithNoQtyChg">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates whether to include assets counted with no quantity change. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="N=No;Y=Yes;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="N" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="General">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="BookValDepPostedToGlCode" />
+<xsd:element ref="SubAssetsAllowed" />
+<xsd:element ref="OptionsOnAdditions" />
+<xsd:element ref="AssetAmendJnlsReq" />
+<xsd:element ref="RoundingOptions" />
+<xsd:element ref="RndOptionsNearestValue" />
+<xsd:element ref="RndOptionsNearestUnit" />
+<xsd:element ref="ExclResidFromDepnBookVal" />
+<xsd:element ref="ExclResidFromDepnTaxVal" />
+<xsd:element ref="ExclResidFromDepnAltVal1" />
+<xsd:element ref="ExclResidFromDepnAltVal2" />
+<xsd:element ref="ExclResidFromDepnAltVal3" />
+<xsd:element ref="ExclResidFromDepnAltVal4" />
+<xsd:element ref="ExclResidFromDepnAltVal5" />
+<xsd:element ref="ExclResidFromDepnAltVal6" />
+<xsd:element ref="ExclResidFromDepnAltVal7" />
+<xsd:element ref="ExclResidFromDepnAltVal8" />
+<xsd:element ref="ExclResidFromDepnAltVal9" />
+<xsd:element ref="ExclResidFromDepnAltVal10" />
+<xsd:element ref="InclAssetWithNoQtyChg" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="BasisForDepnTaxVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the tax valuation. (Y - Recalculate current year, L - Recalculate full life, P - Calculate current period). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="Y=Year;L=Life of asset;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="L" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 1. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 2. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 3. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 4. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 5. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 6. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 7. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 8. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 9. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisForDepnAltVal10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[Indicates the basis for depreciation for the alternate valuation 10. (L - Life of asset, Y - Year, P - Period). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="L=Life of asset;Y=Year;P=Period;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="L" />
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="P" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvDefBy">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the level at which the date convention is defined. (B - Depreciation book, D - Depreciation code). If no value is supplied then the default value of B will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="B=Depreciation book;D=Depreciation code;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="B" />
+<xsd:enumeration value="D" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvBookVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the book value depreciation. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvTaxVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the tax depreciation. (Y - Full-year, F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year). If no value is supplied then the default value of Y will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="Y=Full-year;F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Y" />
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 1. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 2. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 3. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 4. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 5. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 6. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 7. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 8. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 9. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DateConvAltVal10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This indicates the date convention for the alternate valuation 10. (F - Full-month, M - Mid-month, H - Half-year, D - Modified half-year, Y - Full-year). If no value is supplied then the default value of F will be assumed. If the 'AccPeriodsPerYear' is set to 13, this element may only be set to F or Y.]]></xsd:documentation>
+<xsd:appinfo source="F=Full-month;M=Mid-month;H=Half-year;D=Modified half-year;Y=Full-year;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="F" />
+<xsd:enumeration value="M" />
+<xsd:enumeration value="H" />
+<xsd:enumeration value="D" />
+<xsd:enumeration value="Y" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="BasisDateConventions">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="BasisForDepnTaxVal" />
+<xsd:element ref="BasisForDepnAltVal1" />
+<xsd:element ref="BasisForDepnAltVal2" />
+<xsd:element ref="BasisForDepnAltVal3" />
+<xsd:element ref="BasisForDepnAltVal4" />
+<xsd:element ref="BasisForDepnAltVal5" />
+<xsd:element ref="BasisForDepnAltVal6" />
+<xsd:element ref="BasisForDepnAltVal7" />
+<xsd:element ref="BasisForDepnAltVal8" />
+<xsd:element ref="BasisForDepnAltVal9" />
+<xsd:element ref="BasisForDepnAltVal10" />
+<xsd:element ref="DateConvDefBy" />
+<xsd:element ref="DateConvBookVal" />
+<xsd:element ref="DateConvTaxVal" />
+<xsd:element ref="DateConvAltVal1" />
+<xsd:element ref="DateConvAltVal2" />
+<xsd:element ref="DateConvAltVal3" />
+<xsd:element ref="DateConvAltVal4" />
+<xsd:element ref="DateConvAltVal5" />
+<xsd:element ref="DateConvAltVal6" />
+<xsd:element ref="DateConvAltVal7" />
+<xsd:element ref="DateConvAltVal8" />
+<xsd:element ref="DateConvAltVal9" />
+<xsd:element ref="DateConvAltVal10" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="PerRetDistrEnt">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset details for the distribution entries. This element may only contain values 24 to 99 inclusive. If no value is supplied then the default value of 99 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetDispAssets">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset details for the disposed assets. This element may only contain values 24 to 99 inclusive. If no value is supplied then the default value of 99 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetTrans">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset details for the transactions. This element may only contain values 24 to 99 inclusive. If no value is supplied then the default value of 99 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetCapex">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset details for the capex items. This element may only contain values 24 to 99 inclusive. If no value is supplied then the default value of 99 will be assumed. This value may not be less than the value supplied in the 'PerRetCapexLines' element.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetCapexLines">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset details for the capex complete of redundant lines. This element may only contain 24 or 99 inclusive. If no value is supplied then the default value of 99 will be assumed. This value may not exceed the value supplied in the 'PerRetCapex' element.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntBookVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the book value. This element may only contain values 24 to 99 inclusive. If no value is supplied then the default value of 99 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntTaxVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for tax. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnTaxVal' is not set to L, then a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 1. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal1' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 2. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal2' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 3. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal3' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 4. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal4' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 5. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal15 is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 6. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal6' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 7. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal7' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 8. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal8' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 9. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal9' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PerRetEntAltVal10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of periods to retain asset entries for the alternate valuation 10. This element is optional. If no value (or a value < 24) is supplied and 'BasisForDepnAltVal10' is not set to L, the a value of 24 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistBookVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the book value. This element may only contain values 2 to 99 inclusive. If no value (or a value < 2) is supplied then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistTaxVal">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the tax valuation. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnTaxVal' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 1. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal1' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 2. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal2' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 3. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal3' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 4. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal4' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 5. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal5' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 6. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal6' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 7. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal7' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 8. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal8' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 9. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal9' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="YearsRetHistAltVal10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the number of years to retain asset entries history for the alternate valuation 10. This element is optional. If no value (or a value < 2) is supplied and 'BasisForDepnAltVal10' is not set to L, then a value of 2 will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="0" />
+<xsd:maxInclusive value="999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="History">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="PerRetDistrEnt" />
+<xsd:element ref="PerRetDispAssets" />
+<xsd:element ref="PerRetTrans" />
+<xsd:element ref="PerRetCapex" />
+<xsd:element ref="PerRetCapexLines" />
+<xsd:element ref="PerRetEntBookVal" />
+<xsd:element ref="PerRetEntTaxVal" />
+<xsd:element ref="PerRetEntAltVal1" />
+<xsd:element ref="PerRetEntAltVal2" />
+<xsd:element ref="PerRetEntAltVal3" />
+<xsd:element ref="PerRetEntAltVal4" />
+<xsd:element ref="PerRetEntAltVal5" />
+<xsd:element ref="PerRetEntAltVal6" />
+<xsd:element ref="PerRetEntAltVal7" />
+<xsd:element ref="PerRetEntAltVal8" />
+<xsd:element ref="PerRetEntAltVal9" />
+<xsd:element ref="PerRetEntAltVal10" />
+<xsd:element ref="YearsRetHistBookVal" />
+<xsd:element ref="YearsRetHistTaxVal" />
+<xsd:element ref="YearsRetHistAltVal1" />
+<xsd:element ref="YearsRetHistAltVal2" />
+<xsd:element ref="YearsRetHistAltVal3" />
+<xsd:element ref="YearsRetHistAltVal4" />
+<xsd:element ref="YearsRetHistAltVal5" />
+<xsd:element ref="YearsRetHistAltVal6" />
+<xsd:element ref="YearsRetHistAltVal7" />
+<xsd:element ref="YearsRetHistAltVal8" />
+<xsd:element ref="YearsRetHistAltVal9" />
+<xsd:element ref="YearsRetHistAltVal10" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the end date of the current period 1. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod1'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the previous period may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod2'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod3'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod4'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod5'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod6'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod7'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod8'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod9'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod10'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod11'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrDatePeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod12'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrFlagPeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PeriodCurrentYear">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="AssCurrDatePeriod1" />
+<xsd:element ref="AssCurrFlagPeriod1" />
+<xsd:element ref="AssCurrDatePeriod2" />
+<xsd:element ref="AssCurrFlagPeriod2" />
+<xsd:element ref="AssCurrDatePeriod3" />
+<xsd:element ref="AssCurrFlagPeriod3" />
+<xsd:element ref="AssCurrDatePeriod4" />
+<xsd:element ref="AssCurrFlagPeriod4" />
+<xsd:element ref="AssCurrDatePeriod5" />
+<xsd:element ref="AssCurrFlagPeriod5" />
+<xsd:element ref="AssCurrDatePeriod6" />
+<xsd:element ref="AssCurrFlagPeriod6" />
+<xsd:element ref="AssCurrDatePeriod7" />
+<xsd:element ref="AssCurrFlagPeriod7" />
+<xsd:element ref="AssCurrDatePeriod8" />
+<xsd:element ref="AssCurrFlagPeriod8" />
+<xsd:element ref="AssCurrDatePeriod9" />
+<xsd:element ref="AssCurrFlagPeriod9" />
+<xsd:element ref="AssCurrDatePeriod10" />
+<xsd:element ref="AssCurrFlagPeriod10" />
+<xsd:element ref="AssCurrDatePeriod11" />
+<xsd:element ref="AssCurrFlagPeriod11" />
+<xsd:element ref="AssCurrDatePeriod12" />
+<xsd:element ref="AssCurrFlagPeriod12" />
+<xsd:element ref="AssCurrDatePeriod13" />
+<xsd:element ref="AssCurrFlagPeriod13" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 1 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssCurrDatePeriod13'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod1'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod2'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod3'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod4'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod5'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod6'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod7'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod8'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod9'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod10'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod11">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod11'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod12">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevDatePeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'AssPrevDatePeriod12'.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssPrevFlagPeriod13">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the previous period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'AssCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+<xsd:appinfo source="C=Closed;O=Open;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C" />
+<xsd:enumeration value="O" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="PeriodPreviousYear">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="AssPrevDatePeriod1" />
+<xsd:element ref="AssPrevFlagPeriod1" />
+<xsd:element ref="AssPrevDatePeriod2" />
+<xsd:element ref="AssPrevFlagPeriod2" />
+<xsd:element ref="AssPrevDatePeriod3" />
+<xsd:element ref="AssPrevFlagPeriod3" />
+<xsd:element ref="AssPrevDatePeriod4" />
+<xsd:element ref="AssPrevFlagPeriod4" />
+<xsd:element ref="AssPrevDatePeriod5" />
+<xsd:element ref="AssPrevFlagPeriod5" />
+<xsd:element ref="AssPrevDatePeriod6" />
+<xsd:element ref="AssPrevFlagPeriod6" />
+<xsd:element ref="AssPrevDatePeriod7" />
+<xsd:element ref="AssPrevFlagPeriod7" />
+<xsd:element ref="AssPrevDatePeriod8" />
+<xsd:element ref="AssPrevFlagPeriod8" />
+<xsd:element ref="AssPrevDatePeriod9" />
+<xsd:element ref="AssPrevFlagPeriod9" />
+<xsd:element ref="AssPrevDatePeriod10" />
+<xsd:element ref="AssPrevFlagPeriod10" />
+<xsd:element ref="AssPrevDatePeriod11" />
+<xsd:element ref="AssPrevFlagPeriod11" />
+<xsd:element ref="AssPrevDatePeriod12" />
+<xsd:element ref="AssPrevFlagPeriod12" />
+<xsd:element ref="AssPrevDatePeriod13" />
+<xsd:element ref="AssPrevFlagPeriod13" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="AssTrnCurrentWeek">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current week of the transactions. This may only contain values between 1 to 5 inclusive.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssTrnCurrentMonth">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the current month of the transactions. This may only contain values between 1 to 12 inclusive.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrentYear">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the calendar year in which your current financial year ends. This element may only be altered if there are no records already in the Asset files.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="9999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="AssCurrentMonth">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the period in which your company is running in relation to the start of the financial year. This element may only be altered if there are no records already in the Asset files.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="99" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CurrentMonth">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="AssTrnCurrentWeek" />
+<xsd:element ref="AssTrnCurrentMonth" />
+<xsd:element ref="AssCurrentYear" />
+<xsd:element ref="AssCurrentMonth" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="AssetNumMethod">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the asset numbering method to use. (M - Manual, A - Automatic). If no value is supplied then the default value of M will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="M=Manual;A=Automatic;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="M" />
+<xsd:enumeration value="A" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextAssetsNum">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next Asset number to use. This element is only to be supplied if the 'AssetNumMethod' is set to A and it may not be set to zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="CapexNumMethod">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the Capex numbering method to use. (M - Manual, A - Automatic). If no value is supplied then the default value of M will be assumed.]]></xsd:documentation>
+<xsd:appinfo source="M=Manual;A=Automatic;" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="M" />
+<xsd:enumeration value="A" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="NextCapexNum">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the next Capex number to use. This element is only to be supplied if the 'CapexNumMethod' is set to A and it may not be set to zeros.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:double">
+<xsd:minInclusive value="1" />
+<xsd:maxInclusive value="999999999999999" />
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Numbering">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="AssetNumMethod" />
+<xsd:element ref="NextAssetsNum" />
+<xsd:element ref="CapexNumMethod" />
+<xsd:element ref="NextCapexNum" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="DescAltVal1">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 1. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal2">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 2. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal3">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 3. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal4">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 4. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal5">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 5. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal6">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 6. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal7">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 7. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal8">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 8. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal9">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 9. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DescAltVal10">
+<xsd:annotation>
+<xsd:documentation>
+<![CDATA[This is the user defined alternate valuation heading 10. This element is optional.]]></xsd:documentation>
+<xsd:appinfo source="" /></xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="UserDefined">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="DescAltVal1" />
+<xsd:element ref="DescAltVal2" />
+<xsd:element ref="DescAltVal3" />
+<xsd:element ref="DescAltVal4" />
+<xsd:element ref="DescAltVal5" />
+<xsd:element ref="DescAltVal6" />
+<xsd:element ref="DescAltVal7" />
+<xsd:element ref="DescAltVal8" />
+<xsd:element ref="DescAltVal9" />
+<xsd:element ref="DescAltVal10" />
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+ 

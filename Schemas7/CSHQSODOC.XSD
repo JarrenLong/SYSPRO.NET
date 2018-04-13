@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Query of the Cash Book Setup Options business object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CashBookOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General" minOccurs="0"/>
+        <xsd:element ref="History" minOccurs="0"/>
+        <xsd:element ref="Tax" minOccurs="0"/>
+        <xsd:element ref="PeriodCurrentYear" minOccurs="0"/>
+        <xsd:element ref="PeriodPreviousYear" minOccurs="0"/>
+        <xsd:element ref="CurrentMonth" minOccurs="0"/>
+        <xsd:element ref="Information" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ForeignCurrCashBookReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Foreign cash book currency required]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PermEntReqCb">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Permanent entries required]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AskNotPerDetDistrEntry">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Ask notation per detail distribution entry]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DispBankBalInRecapScreen">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Display bank balance in deposits recap screen]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoBankReconOfDeposits">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Automatic bank reconciliation of deposits by]]></xsd:documentation>
+      <xsd:appinfo source="N=Value only;Y=Value, date and reference;D=Value and date"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ForeignCurrCashBookReq"/>
+        <xsd:element ref="PermEntReqCb"/>
+        <xsd:element ref="AskNotPerDetDistrEntry"/>
+        <xsd:element ref="DispBankBalInRecapScreen"/>
+        <xsd:element ref="AutoBankReconOfDeposits"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MthsRetCbJnls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Number of days to retain cash book journals]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetReconTrans">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Number of days to retain reconciled transactions]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="History">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="MthsRetCbJnls"/>
+        <xsd:element ref="MthsRetReconTrans"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TaxDistrMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Tax distribution method]]></xsd:documentation>
+      <xsd:appinfo source="N=Not required;D=Detail;S=Summary;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TaxDistrReqFor">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Tax distribution required for]]></xsd:documentation>
+      <xsd:appinfo source="B=Both deposits and withdrawals;D=Deposits;W=Withdrawals;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefTaxCodeCshDep">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Default tax codes for deposits(Must be in the range of A-Z)]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefTaxCodeCshWith">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Default tax codes for withdrawals]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Tax">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TaxDistrMethod"/>
+        <xsd:element ref="TaxDistrReqFor"/>
+        <xsd:element ref="DefTaxCodeCshDep"/>
+        <xsd:element ref="DefTaxCodeCshWith"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 1 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 1 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 2 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 2 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 3 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 3 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 4 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 4 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 5 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 5 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 6 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 6 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 7 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 7 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 8 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 8 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 9 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 9 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 10 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 10 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 11 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 11 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 12 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 12 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrDatePeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 13 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbCurrFlagPeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Current period 13 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PeriodCurrentYear">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CbCurrDatePeriod1"/>
+        <xsd:element ref="CbCurrFlagPeriod1"/>
+        <xsd:element ref="CbCurrDatePeriod2"/>
+        <xsd:element ref="CbCurrFlagPeriod2"/>
+        <xsd:element ref="CbCurrDatePeriod3"/>
+        <xsd:element ref="CbCurrFlagPeriod3"/>
+        <xsd:element ref="CbCurrDatePeriod4"/>
+        <xsd:element ref="CbCurrFlagPeriod4"/>
+        <xsd:element ref="CbCurrDatePeriod5"/>
+        <xsd:element ref="CbCurrFlagPeriod5"/>
+        <xsd:element ref="CbCurrDatePeriod6"/>
+        <xsd:element ref="CbCurrFlagPeriod6"/>
+        <xsd:element ref="CbCurrDatePeriod7"/>
+        <xsd:element ref="CbCurrFlagPeriod7"/>
+        <xsd:element ref="CbCurrDatePeriod8"/>
+        <xsd:element ref="CbCurrFlagPeriod8"/>
+        <xsd:element ref="CbCurrDatePeriod9"/>
+        <xsd:element ref="CbCurrFlagPeriod9"/>
+        <xsd:element ref="CbCurrDatePeriod10"/>
+        <xsd:element ref="CbCurrFlagPeriod10"/>
+        <xsd:element ref="CbCurrDatePeriod11"/>
+        <xsd:element ref="CbCurrFlagPeriod11"/>
+        <xsd:element ref="CbCurrDatePeriod12"/>
+        <xsd:element ref="CbCurrFlagPeriod12"/>
+        <xsd:element ref="CbCurrDatePeriod13"/>
+        <xsd:element ref="CbCurrFlagPeriod13"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 1 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 1 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 2 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 2 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 3 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 3 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 4 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 4 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 5 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 5 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 6 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 6 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 7 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 7 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 8 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 8 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 9 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 9 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 10 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 10 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 11 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 11 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 12 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 12 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevDatePeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 13 end date]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbPrevFlagPeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Previous period 13 status flag]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PeriodPreviousYear">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CbPrevDatePeriod1"/>
+        <xsd:element ref="CbPrevFlagPeriod1"/>
+        <xsd:element ref="CbPrevDatePeriod2"/>
+        <xsd:element ref="CbPrevFlagPeriod2"/>
+        <xsd:element ref="CbPrevDatePeriod3"/>
+        <xsd:element ref="CbPrevFlagPeriod3"/>
+        <xsd:element ref="CbPrevDatePeriod4"/>
+        <xsd:element ref="CbPrevFlagPeriod4"/>
+        <xsd:element ref="CbPrevDatePeriod5"/>
+        <xsd:element ref="CbPrevFlagPeriod5"/>
+        <xsd:element ref="CbPrevDatePeriod6"/>
+        <xsd:element ref="CbPrevFlagPeriod6"/>
+        <xsd:element ref="CbPrevDatePeriod7"/>
+        <xsd:element ref="CbPrevFlagPeriod7"/>
+        <xsd:element ref="CbPrevDatePeriod8"/>
+        <xsd:element ref="CbPrevFlagPeriod8"/>
+        <xsd:element ref="CbPrevDatePeriod9"/>
+        <xsd:element ref="CbPrevFlagPeriod9"/>
+        <xsd:element ref="CbPrevDatePeriod10"/>
+        <xsd:element ref="CbPrevFlagPeriod10"/>
+        <xsd:element ref="CbPrevDatePeriod11"/>
+        <xsd:element ref="CbPrevFlagPeriod11"/>
+        <xsd:element ref="CbPrevDatePeriod12"/>
+        <xsd:element ref="CbPrevFlagPeriod12"/>
+        <xsd:element ref="CbPrevDatePeriod13"/>
+        <xsd:element ref="CbPrevFlagPeriod13"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CbCurrentYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[The calendar year in which your current financial year ends]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GlCurrentMonth">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[The month in which your company is running in relation to the start of your financial year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AccPeriodsPerYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Number of months per year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CurrentMonth">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CbCurrentYear"/>
+        <xsd:element ref="GlCurrentMonth"/>
+        <xsd:element ref="AccPeriodsPerYear"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CbNextJnlPrevYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next cash book journal number for the previous year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbNextJnlCurrYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next cash book journal number for the current year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbNextJnlNextYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next cash book journal number for next year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbNextPayRegPrevYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next on-line payment register for the previous year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbNextPayRegCurrYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next on-line payment register for the current year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CbNextPayRegNextYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next on-line payment register for next year]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Information">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CbNextJnlPrevYear"/>
+        <xsd:element ref="CbNextJnlCurrYear"/>
+        <xsd:element ref="CbNextJnlNextYear"/>
+        <xsd:element ref="CbNextPayRegPrevYear"/>
+        <xsd:element ref="CbNextPayRegCurrYear"/>
+        <xsd:element ref="CbNextPayRegNextYear"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

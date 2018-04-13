@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the IO Stock Code Warehouse Options Business Object Setup
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AlgABasis">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Competition Measure to use. CFE - Cumulative Forecast Error, MAD - Mean Absolute Deviation, MSD - Mean Square Deviation, MAPE - Mean Absolute Percentage Error, TRACK - Tracking Signal . If OverrideAlg is set to "N" then it is set to MSD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgAMonths">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Competition Months to use. 1 - 12. If OverrideAlg is set to "N" then it is set to 12.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgBMonths">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Mean Months to use. 1 - 12. If OverrideAlg is set to "N" then it is set to 12.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgCMonths">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Median Months to use. 1 - 12. If OverrideAlg is set to "N" then it is set to 12.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgDMonths">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Moving average Months to use. 1 - 12. If OverrideAlg is set to "N" then it is set to 3.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgFSmooth">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Smoothing coefficitent. If OverrideAlg is set to "N" then it is set to 0.7</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgFTrend">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Trend coefficitent. If OverrideAlg is set to "N" then it is set to 0.6</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgGCoeff1">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Six Period Weighting forecast minus 1 and 2. If OverrideAlg is set to "N" then it is set to 0.5. NOTE: AlgGCoeff1 + AlgGCoeff2 + AlgGCoeff3 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgGCoeff2">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Six Period Weighting forecast minus 3 and 4. If OverrideAlg is set to "N" then it is set to 0.5. NOTE: AlgGCoeff1 + AlgGCoeff2 + AlgGCoeff3 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgGCoeff3">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Six Period Weighting forecast minus 5 and 6. If OverrideAlg is set to "N" then it is set to 0.5. NOTE: AlgGCoeff1 + AlgGCoeff2 + AlgGCoeff3 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgHCoeff1">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Twelve Period Weighting forecast minus 1,2 and 3. If OverrideAlg is set to "N" then it is set to 0.45. NOTE: AlgHCoeff1 + AlgHCoeff2 + AlgHCoeff3 + AlgHCoeff4 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgHCoeff2">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Twelve Period Weighting forecast minus 4,5 and 6. If OverrideAlg is set to "N" then it is set to 0.25. NOTE: AlgHCoeff1 + AlgHCoeff2 + AlgHCoeff3 + AlgHCoeff4 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgHCoeff3">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Twelve Period Weighting forecast minus 7,8 and 9. If OverrideAlg is set to "N" then it is set to 0.2. NOTE: AlgHCoeff1 + AlgHCoeff2 + AlgHCoeff3 + AlgHCoeff4 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgHCoeff4">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Twelve Period Weighting forecast minus 10,11 and 12. If OverrideAlg is set to "N" then it is set to 0.1. NOTE: AlgHCoeff1 + AlgHCoeff2 + AlgHCoeff3 + AlgHCoeff4 mut equal 1</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:decimal">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgICoeff1">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Additive Level Coefficient. Must be more than 0 and less than 1. If Holtwinter Additive is set to Y then AlgICoeff1, AlgICoeff2, AlgICoeff3 will be set 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgICoeff2">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Additive Trend Coefficient. Must be more than 0 and less than 1. If Holtwinter Additive is set to Y then AlgICoeff1, AlgICoeff2, AlgICoeff3 will be set 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgICoeff3">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Additive Seasonal Coefficient. Must be more than 0 and less than 1. If Holtwinter Additive is set to Y then AlgICoeff1, AlgICoeff2, AlgICoeff3 will be set 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgJCoeff1">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Multiplicative Level Coefficient. Must be more than 0 and less than 1. If Holtwinter Multiplicative is set to Y then AlgJCoeff1, AlgJCoeff2, AlgJCoeff3 will be set 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:boolean">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgJCoeff2">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Multiplicative Trend Coefficient. Must be more than 0 and less than 1. If Holtwinter Multiplicative is set to Y then AlgJCoeff1, AlgJCoeff2, AlgJCoeff3 will be set 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AlgJCoeff3">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Multiplicative Seasonal Coefficient. Must be more than 0 and less than 1. If Holtwinter Multiplicative is set to Y then AlgJCoeff1, AlgJCoeff2, AlgJCoeff3 will be set 0.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Algorithm">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Algorithm. Spaces or U - {Use default}, A - Competition, B - Mean, C - Median, D - Moving average, F - Exp. smoothing with trend, G - Six period weighted average, H - Twelve period weighted average, I - Holt-Winters additive, J - Holt-Winters multiplicative,  L - Seasonal profile - unsmoothed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Calendar">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Calendar. It can be spaces but if not the Calender that is input must already exist. It is not mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HoltWintersAdditive">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Addititve. Y - Yes, N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HoltWintersMultiplicative">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Holt Winters Multiplicative. Y - Yes, N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node,  it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Calendar"/>
+        <xsd:element ref="Algorithm"/>
+        <xsd:element ref="ReplenishItem"/>
+        <xsd:element ref="ManualForecast"/>
+        <xsd:element ref="UserField1"/>
+        <xsd:element ref="UserField2"/>
+        <xsd:element ref="UserField3"/>
+        <xsd:element ref="UserField4"/>
+        <xsd:element ref="UserField5"/>
+        <xsd:element ref="UserField6"/>
+        <xsd:element ref="OverrideAlg"/>
+        <xsd:element ref="AlgAMonths"/>
+        <xsd:element ref="AlgABasis"/>
+        <xsd:element ref="AlgBMonths"/>
+        <xsd:element ref="AlgCMonths"/>
+        <xsd:element ref="AlgDMonths"/>
+        <xsd:element ref="AlgFSmooth"/>
+        <xsd:element ref="AlgFTrend"/>
+        <xsd:element ref="AlgGCoeff1"/>
+        <xsd:element ref="AlgGCoeff2"/>
+        <xsd:element ref="AlgGCoeff3"/>
+        <xsd:element ref="AlgHCoeff1"/>
+        <xsd:element ref="AlgHCoeff2"/>
+        <xsd:element ref="AlgHCoeff3"/>
+        <xsd:element ref="AlgHCoeff4"/>
+        <xsd:element ref="HoltWintersAdditive"/>
+        <xsd:element ref="AlgICoeff1"/>
+        <xsd:element ref="AlgICoeff2"/>
+        <xsd:element ref="AlgICoeff3"/>
+        <xsd:element ref="HoltWintersMultiplicative"/>
+        <xsd:element ref="AlgJCoeff1"/>
+        <xsd:element ref="AlgJCoeff2"/>
+        <xsd:element ref="AlgJCoeff3"/>
+        <xsd:element ref="ProxyForSalesHistory"/>
+        <xsd:element ref="ProxyStockCode"/>
+        <xsd:element ref="ProxyUseUntil"/>
+        <xsd:element ref="ProxyPercentageOfSales"/>
+        <xsd:element ref="ProxyReduceSales"/>
+        <xsd:element ref="ProxyReduceSalesAfter"/>
+        <xsd:element ref="ProxyPercentageToReduce"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element name="Version">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information about the Version. It is the key. It is mandatory.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Release">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information about the Release. It is the key. It is mandatory.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="StockCode"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ManualForecast">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the ManualForecast. Y - Yes, N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OverrideAlg">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Override default settings. Y - Yes, N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyForSalesHistory">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about Use Proxy for sales history. Y - Yes, N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyPercentageOfSales">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Proxy Percentage of Sales. If ProxyForSalesHistroyis set to  N, It will be set to 100. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyPercentageToReduce">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about Proxy Percentage To Reduce.  If ProxyReduceSales is set to  N, or ProxyForSalesHistory is set to N then It will be set to 100.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyReduceSales">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about Proxy Reduce Sales. Y - Yes, N - No. If ProxyForSalesHistroy is set to  N, It will be set to N </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyReduceSalesAfter">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about Proxy Reduce Sales After.  If ProxyReduceSales is set to  N, or ProxyForSalesHistory is set to N then It will be set to the default company default date.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyStockCode">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Proxy StockCode. If ProxyForSalesHistroy is set to  N, It will be set to blank. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProxyUseUntil">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Use Proxy Until. If ProxyForSalesHistroy is set to  N, It will be set to the company default date. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReplenishItem">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the ReplenishItem. Y - Yes, N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SetupIOSelectionSetsMaintenance">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Stock Code. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserField1">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the UserField1.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserField2">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the UserField2.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserField3">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the UserField3.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserField4">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the UserField4.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserField5">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the UserField5.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserField6">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the UserField6.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Warehouse. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

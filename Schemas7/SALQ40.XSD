@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales by Customer Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AsOfPeriod">
+    <xsd:annotation>
+      <xsd:documentation>Select the period in which to show the details. Default is C for Current period.  C - Current period, P - Previous month 1, B - Previous month 2. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to select customers for printing based on the branch to which they have been assigned.  A - All; S - Single. Default A - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" use="optional" default=" ">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to indicate the range of customers that you want to include for selection. A - All; R - Range; S - Single. Default A - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to select customers for printing based on the customer class to which they have been assigned.  A - All; S - Single. Default A - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DescendingSalesValue">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available if you selected to print Sales by Customer by month. This option enables you to sequence the report in descending order of sales value, instead of by branch. Y - Yes; N - No. Default Y - Yes</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Customer"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="Salesperson"/>
+        <xsd:element ref="GeographicArea"/>
+        <xsd:element ref="CustomerClass"/>
+        <xsd:element ref="NumberOfCustomersToPrint"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicArea">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to select customers for printing based on the geographic area to which they have been assigned.  A - All; S - Single. Default A - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LastSaleOnOrBefore" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available if you selected customer in the SalesBy option and will return data on or before the entered date. If this field is blank, then the current date will be used. If a date is entered, the data returned will be on or before the entered date.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="NumberOfCustomersToPrint">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available if you selected customer by month in the SalesBy option. A - All; N - value between 1-9999.  Default is A - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="N"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of Options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesBy"/>
+        <xsd:element ref="ReportSequence"/>
+        <xsd:element ref="AsOfPeriod"/>
+        <xsd:element ref="ShowProfitPercentage"/>
+        <xsd:element ref="PrintZeroTotals"/>
+        <xsd:element ref="DescendingSalesValue"/>
+        <xsd:element ref="LastSaleOnOrBefore"/>
+        <xsd:element ref="TagFile"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintZeroTotals">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available if you selected to print Sales by Customer by month. This option enables you to include customers for whom no sales have been made in the last 12 months. Y - Yes; N - No. Default Y - Yes
+ </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available if you selected to print Sales by Customer by month. This determines in which sequence the report is returned. B - Branch; S - Salesperson; G - Geographic area; C - Customer; T - Customer class; U - User defined. Default B - Branch
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="U"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesBy">
+    <xsd:annotation>
+      <xsd:documentation>Select this to print a report by Customer or Customer by month. When selecting customer by month then you are able to use report sequence option. C - Current; M - Customer by month. Default C - Current. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="M"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Salesperson">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to select customers for printing based on the salesperson to which they have been assigned.  A - All; R - Range; S - Single. Default A - All.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShowProfitPercentage">
+    <xsd:annotation>
+      <xsd:documentation>This option is only available if you selected customer in the SalesBy option. Select this to print the report with gross profit figures.Y - Yes; N - No. Default N - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TagFile">
+    <xsd:annotation>
+      <xsd:documentation>This is the path for the file which must be used for the user defined entry. This will only be used if ReportSequence has a value of 'U'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

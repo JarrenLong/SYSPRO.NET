@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Job Closure Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Complete" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Complete job specifies whether to flag the job as complete or not ( Y -complete, N - not complete) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Distribution">
+    <xsd:annotation>
+      <xsd:documentation>You use the G/L Distribution function to distribute any outstanding work in progress values to the General Ledger module.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="LedgerCode"/>
+        <xsd:element ref="LedgerAmount"/>
+        <xsd:element ref="PasswordForLedgerCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain an allocation. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Journal" minOccurs="0"/>
+        <xsd:element ref="Job"/>
+        <xsd:element ref="Complete" minOccurs="0"/>
+        <xsd:element ref="MaterialValue" minOccurs="0"/>
+        <xsd:element ref="LabourValue" minOccurs="0"/>
+        <xsd:element ref="Distribution" maxOccurs="unbounded"/>
+        <xsd:element name="AddReference" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>You can use the additional reference field for your own use to hold any extra information required. The format is 30 characters alphanumeric.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:minLength value="0"/>
+              <xsd:maxLength value="30"/>
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SetJobCloseDate" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Set Job Close Date is set to "Y" to set the actual job completion date.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:minLength value="0"/>
+              <xsd:maxLength value="1"/>
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Job">
+    <xsd:annotation>
+      <xsd:documentation>Job specifies the job for which the allocations are being maintained. The format
+is 8 characters alphanumeric or 8 characters numeric depending on the configuration option within Syspro.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Journal">
+    <xsd:annotation>
+      <xsd:documentation>This is the journal number to which the transaction journal entries generated will be added. It must be valid for the specified posting period. If not supplied, a new journal will be created. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabourValue">
+    <xsd:annotation>
+      <xsd:documentation>WIP labor value. You use this field to indicate the outstanding labor value that must be distributed for the job. This should be the outstanding work in progress labor value for the job.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="14"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LedgerAmount">
+    <xsd:annotation>
+      <xsd:documentation>You use the LedgerAmount field to assign the outstanding amount to the specified ledger code.
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="14"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>Your entry at the Ledger code field is validated only if the Work in Progress module is integrated to General Ledger in detail or summary</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PasswordForLedgerCode">
+    <xsd:annotation>
+      <xsd:documentation>If ledger codes require a password, this element must contain the relevant password for the specified ledger code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaterialValue">
+    <xsd:annotation>
+      <xsd:documentation>WIP material value. You use this field to indicate the outstanding material value that must be distributed for the job. This should be the outstanding work in progress material value for the job. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="14"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostJobClosure">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

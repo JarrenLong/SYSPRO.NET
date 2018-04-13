@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Projects and Contracts Contract Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Key">
+          <xsd:annotation>
+            <xsd:documentation>The key to use for this query.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="ContractOrJob" default="C" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to query a contract or a hierarchical job (C - Contract ,J - Heirarchical job) Default= Contract.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="C"/>
+                    <xsd:enumeration value="J"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="QueryKey">
+                <xsd:annotation>
+                  <xsd:documentation>The  contract or job to use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="20"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The list of options</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="IncludeHierarchyDetails" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the hierarchy details attached to each job header? If you choose not to include these then the costs for the jobs and contracts are not returned (Y - Yes, N - No). Default = Yes.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeSalesandAdjustments" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the sales orders and adjustments posted against the jobs and its hierarchy? (Y - Yes, N - No). Default = Yes.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeBillingsAndCostOfSales" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the billings and cost of sales posted against the jobs and its hierarchy? (Y - Yes, N - No). Default = Yes.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCommittedMaterial" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the material costs issued to the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCommittedLabor" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the labor costs issued to the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCommittedSubcontract" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the subcontract costs issued to the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludePurchaseOrders" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the purchase orders raised against the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeUncommittedMaterial" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the material costs allocated but not yet issued to the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeUncommittedLabor" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the labor costs allocated but not yet issued to the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeUncommittedSubcontract" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Do you wish to include the subcontract costs allocated but not yet issued to the jobs and its hierarchy?  (N - No,Y - Yes). Default = No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MultiMediaImageType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Image type to retrieve (for example: GIF, JPG)</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStylesheet" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

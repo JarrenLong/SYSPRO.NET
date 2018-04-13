@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Analysis by Salesperson Query Business Object for Xcelsius
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wmh="http://www.wmhelp.com/2003/eGenerator" elementFormDefault="qualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of available options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TopBottomBranches"/>
+        <xsd:element ref="NumberOfBranches"/>
+        <xsd:element ref="BasedOnMeasure"/>
+        <xsd:element ref="MeasureSequencing"/>
+        <xsd:element ref="SalesPeriod"/>
+        <xsd:element ref="PrintZeroBalanceProductClass"/>
+        <xsd:element ref="PrintReportBy"/>
+        <xsd:element ref="DisplayTotals"/>
+        <xsd:element ref="InclMassValue"/>
+        <xsd:element ref="InclUnitValue"/>
+        <xsd:element ref="InclSlsValue"/>
+        <xsd:element ref="InclGPValue"/>
+        <xsd:element ref="InclPercProfit"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TopBottomBranches">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Branches are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfBranches">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of Branches to include on the report. Default -9.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BasedOnMeasure">
+        <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. MV-MassValue, UV-UnitValue, SV-SlsValue, GP-GPValue, PP-PercProfit. Default -UV.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="UV"/>
+        <xsd:enumeration value="MV"/>
+        <xsd:enumeration value="SV"/>
+        <xsd:enumeration value="GP"/>
+        <xsd:enumeration value="PP"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MeasureSequencing">
+        <xsd:annotation>
+      <xsd:documentation>This indicates which values to use for the measure selected. P-PeriodToDate, M-MonthToDate, Y-YearToDate. Default-P</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesPeriod">
+    <xsd:annotation>
+	  <xsd:documentation>Valuation as of period. Select the period in which to show the details. Default is C for Current period.  C - Current period, P - Previous month 1, B - Previous month 2</xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType>
+	  <xsd:restriction base="xsd:string">
+	    <xsd:enumeration value="C"/>
+		<xsd:enumeration value="P"/>
+		<xsd:enumeration value="B"/>
+	  </xsd:restriction>
+	</xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintZeroBalanceProductClass">
+    <xsd:annotation>
+	  <xsd:documentation>This enables you to print product classes with a zero balance on the report. Y- Yes; N - No. Default N - No.</xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType>
+	  <xsd:restriction base="xsd:string">
+	    <xsd:enumeration value="N"/>
+	    <xsd:enumeration value="Y"/>
+	  </xsd:restriction>
+	</xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintReportBy">
+    <xsd:annotation>
+	  <xsd:documentation>Use this to print the report by Units or Mass. U - Units; M - Mass. Default U - Units.</xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType>
+	  <xsd:restriction base="xsd:string">
+	    <xsd:enumeration value="U"/>
+	    <xsd:enumeration value="M"/>
+      </xsd:restriction>
+	</xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DisplayTotals">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether totals should be displayed. Y- Yes; N - No. Default N - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+     </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclMassValue">
+    <xsd:annotation>
+      <xsd:documentation>This will include mass value on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclUnitValue">
+    <xsd:annotation>
+      <xsd:documentation>This will include unit value on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSlsValue">
+    <xsd:annotation>
+      <xsd:documentation>This will include sales value on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclGPValue">
+      <xsd:annotation>
+      <xsd:documentation>This will include gross profit value on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPercProfit">
+      <xsd:annotation>
+      <xsd:documentation>This will include percentage profit on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesPerson"/>
+        <xsd:element ref="Branch"/>
+        <xsd:element ref="ProductClass"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+	  <xsd:documentation>Use this to print the report for all or certain salespersons. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+	  <xsd:attribute name="FilterType" use="optional" default="A">
+	    <xsd:simpleType>
+     	  <xsd:restriction base="xsd:string">
+		    <xsd:enumeration value="A"/>
+			<xsd:enumeration value="R"/>
+			<xsd:enumeration value="S"/>
+		  </xsd:restriction>
+		</xsd:simpleType>
+      </xsd:attribute>
+	  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+	  <xsd:documentation>Use this to print the report for all or certain branches. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+	  <xsd:attribute name="FilterType" use="optional" default="A">
+	    <xsd:simpleType>
+	      <xsd:restriction base="xsd:string">
+	        <xsd:enumeration value="A"/>
+		    <xsd:enumeration value="R"/>
+		    <xsd:enumeration value="S"/>
+          </xsd:restriction>
+	    </xsd:simpleType>
+	  </xsd:attribute>
+	  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+	  <xsd:documentation>Use this to print the report for all or certain product classes. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType>
+	  <xsd:attribute name="FilterType" use="optional" default="A">
+	    <xsd:simpleType>
+     	  <xsd:restriction base="xsd:string">
+		    <xsd:enumeration value="A"/>
+			<xsd:enumeration value="R"/>
+			<xsd:enumeration value="S"/>
+		  </xsd:restriction>
+		</xsd:simpleType>
+      </xsd:attribute>
+	  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>  
+</xsd:schema>
+

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for ATP Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="CumeMaintenance">
+		<xsd:annotation>
+			<xsd:documentation>The flag specifying whether the program has been called by the Blanket S/O review and Confirmation program (Y - Yes, N - No). This is not used for COM.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CumeSalesOrder">
+		<xsd:annotation>
+			<xsd:documentation>If the element CumeMaintenance contains a Y the sales order in this element is ignored when collating data from the sales order file. Not used in for COM.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CumeShipDays" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The number of days to be added to the ship dates held in the temporary file. This is not used for COM.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CumeSoFile" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The name of a temporary file containing details of the Blanket Sales Order being maintained. This is not used for COM.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This contains the key element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="StockCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This contains the optional elements.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Version" minOccurs="0"/>
+				<xsd:element ref="Release" minOccurs="0"/>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+				<xsd:element ref="RunDate" minOccurs="0"/>
+				<xsd:element ref="UseBuildSch" minOccurs="0"/>
+				<xsd:element ref="ReturnType" minOccurs="0"/>
+				<xsd:element ref="CumeMaintenance" minOccurs="0"/>
+				<xsd:element ref="CumeSalesOrder" minOccurs="0"/>
+				<xsd:element ref="CumeShipDays" minOccurs="0"/>
+				<xsd:element ref="CumeSoFile" minOccurs="0"/>
+				<xsd:element ref="TmpAtpFile" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+				<xsd:element name="IgnorePlanningTimeFence" default="N" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This parameter indicates whether or not you wish to ignore the calculated Planning Time Fence when calculating the available to promise quantities for an item. If set to 'Y' then the available to promise quantity will be calculated out to the last supply found for the item.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Option" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Release">
+		<xsd:annotation>
+			<xsd:documentation>This is the required release level if ECC is installed. If it is blank the current release level is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReturnType">
+		<xsd:annotation>
+			<xsd:documentation>This defines the type of data to be returned (S - Summary (only ATP lines and time fences are returned), D - Detail (all the supply and demand lines are also returned)).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RunDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>The date on which to base the time fence calculations. If blank, the system run date is used.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>This is the stock code to be used for the ATP query. This field is mandatory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TmpAtpFile" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The name of the temporary file holding the ATP records and supply and demand details. This is not used for COM.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UseBuildSch">
+		<xsd:annotation>
+			<xsd:documentation>Use the build schedule in the ATP calculation if the stock code is an MPS item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Version">
+		<xsd:annotation>
+			<xsd:documentation>If this item is under the control of ECC and this value is blank, the current revision is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>The warehouse to use for the ATP calculation. If blank the operator's warehouse is used. If this is also blank the warehouse against the stock code is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The XSL Stylesheet to be used for translations.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

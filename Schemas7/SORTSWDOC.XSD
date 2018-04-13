@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the SO Line Change Warehouse Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostChangeSoLineWarehouse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="SalesOrder">
+                <xsd:annotation>
+                  <xsd:documentation>The sales order number to be changed. It must be supplied. The format is either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine">
+                <xsd:annotation>
+                  <xsd:documentation>The sales order line to be changed. The line number must refer to a valid stocked merchandise line for the sales order. The line number is mandatory</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="NewWarehouse">
+                <xsd:annotation>
+                  <xsd:documentation>This parameter contains the new warehouse to be used for the line. It must be a valid warehouse, and must not be the same as the warehouse on the selected line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OldWarehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If supplied, this must match the warehouse on the line to be changed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If supplied, this must match the stock code on the line to be changed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BackOrderNewWarehouse" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If supplied, this will be used to  over-ride the entry made in the parameter of the same name. If the entry is 'Y', then the remaining quantity on the line will be placed on back order, and no allocations need be supplied.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="IgnoreAutoDepletion" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If supplied, this will be used to over-ride the entry made in the parameter of the same name. If set to 'Y', then the auto-depletion settings in SYSPRO will be ignored, and all allocations will be supplied in the XML</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Lot" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>A lot number is required if the item is lot traceable, allocations are required, and auto-depletion is not set or is to be ignored. If entered, must contain a valid lot number for the order line stock code and new warehouse.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Serials" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This node is optional. At least one set must be supplied if the item is serialized, and allocation of serial numbers is required based on the SYSPRO rules.  The total quantity of all serial entries must add up to the total ship or reserved quantity on the line - the quantity is always supplied in stocking unit of measure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="SerialNumber" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>If entered, must contain a valid serial number for the order line stock code and new warehouse</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialQuantity" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="SerialUnits" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="SerialPieces" type="xsd:string" minOccurs="0"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Bins" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This node is optional. At least one set must be supplied if multiple bins are in use for the new warehouse, allocations are required, and auto depletion is not set or is to be ignored.  The total quantity of all bin entries must add up to the total ship or reserved quantity on the line - the quantity is always supplied in stocking unit of measure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="BinLocation" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>If entered, must contain a valid bin number for the order line stock code and new warehouse</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BinQuantity" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="BinUnits" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="BinPieces" type="xsd:string" minOccurs="0"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

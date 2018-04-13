@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Generic Calendar Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Key">
+          <xsd:annotation>
+            <xsd:documentation>Contains all the information that we will need to query ADMCAL.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="SearchType" default="D">
+                <xsd:annotation>
+                  <xsd:documentation>Are we searching for a single day or many days. Single day = "D", many days = "M".</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="D"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SearchSingleDay">
+                <xsd:annotation>
+                  <xsd:documentation>When SearchType = "D", only this element will be processed. The SearchFrom* and SearchTo* elements will be ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:date"/>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SearchFromYear">
+                <xsd:annotation>
+                  <xsd:documentation>When SearchType = "M", this contains the starting year. SearchSingleDay is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SearchToYear">
+                <xsd:annotation>
+                  <xsd:documentation>When SearchType = "M", this contains the ending year. SearchSingleDay is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SearchFromMonth">
+                <xsd:annotation>
+                  <xsd:documentation>When SearchType = "M", this contains the starting month. SearchSingleDay is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SearchToMonth">
+                <xsd:annotation>
+                  <xsd:documentation>When SearchType = "M", this contains the ending month. SearchSingleDay is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

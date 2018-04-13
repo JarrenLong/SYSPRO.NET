@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--
+     Schema for the MRP Resource Setup Business Object 
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ApplyIfEntireDocumentValid">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information about applying changes only when the entire document is valid. Yes=Y,  No=N(Default).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IgnoreWarnings">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information about the ignoring of warnings. W=Warning,Yes=Y,  No=N(Default).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="W"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:annotation>
+			<xsd:documentation>This is the root node. It is mandatory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IgnoreWarnings"/>
+				<xsd:element ref="ApplyIfEntireDocumentValid"/>
+				<xsd:element ref="ValidateOnly"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupMRPResource">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Parameters"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ValidateOnly">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information about validation only. Yes=Y, No=N (Default).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

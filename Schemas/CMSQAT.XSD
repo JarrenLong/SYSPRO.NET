@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd. -->
+<!-- 
+     Schema for the Contact Activity Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Account">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on Account. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActivityType">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on ActivityType. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ContactId">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on ContactId. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on Customer. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="EndDate">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on EndDate. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the Parent Filter element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="Supplier" minOccurs="0"/>
+				<xsd:element ref="Account" minOccurs="0"/>
+				<xsd:element ref="ContactId" minOccurs="0"/>
+				<xsd:element ref="ActivityType" minOccurs="0"/>
+				<xsd:element ref="StartDate" minOccurs="0"/>
+				<xsd:element ref="EndDate" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeAttachments" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' all  the attachments related to the activity will be returned. The default is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeAttendees" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' all  the attendee related to the activity will be returned. The default is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeBottomActivites" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This allows you to specify how many activites needs to be returned for each contact. If you want all the activities to be returned use '{ALL}' as the value. Otherwise use '5' for example and it will return the last 5 activities for each contact. The default is 10.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeCaptions" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' captions will be returned against the element as an attribute. The captions will be a translated word that can be used when developing an application. The default is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCleared" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' actvities that have been cleared will be included. By setting the value to 'N' activities cleared will NOT be included. By setting the value to 'A' both cleared and not cleared will be returned. The default value is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="A"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeContactInfo" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' all  the detailed infomation about the contact will be returned. The default is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFollowUpInformation" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' followup information for the activity will be included. The default value is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFullBody" default="N">
+		<xsd:annotation>
+			<xsd:documentation>By setting the value to 'Y' the entire body text of the activity will be returned. The  default is "N".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Options">
+		<xsd:annotation>
+			<xsd:documentation>This is Parent Options element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IncludeFollowUpInformation" minOccurs="0"/>
+				<xsd:element ref="IncludeBottomActivites" minOccurs="0"/>
+				<xsd:element ref="IncludeCleared" minOccurs="0"/>
+				<xsd:element ref="IncludeFullBody" minOccurs="0"/>
+				<xsd:element ref="IncludeAttendees" minOccurs="0"/>
+				<xsd:element ref="IncludeAttachments" minOccurs="0"/>
+				<xsd:element ref="IncludeContactInfo" minOccurs="0"/>
+				<xsd:element ref="IncludeCaptions" minOccurs="0"/>
+				<xsd:element ref="SubjectSearchString" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="QueryActivity">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Options" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StartDate">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on StartDate. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SubjectSearchString">
+		<xsd:annotation>
+			<xsd:documentation>If a value is provided in this element each activities' subject will be searched and if the subject of the activity contains the value provided in ths element the activity will be returned.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>Allows for the activites to be filtered on Supplier. The default is "A".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

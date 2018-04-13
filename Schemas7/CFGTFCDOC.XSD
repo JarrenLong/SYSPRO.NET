@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Selection Criteria Phase
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostConfiguration">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="CallSource" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the source from which you are accessing the configurator. The possible values are T - testmode which allows  you to test the configuration to make sure it is functioning correctly, S - (Sales orders) which allows to create/maintain a sales order for a configured product, Q- (Quotes) which allows you to create/maintain a quote for a configured product, B - (BOM) which allows you to create a structure parent for a configured product,  b - (BOM) which allows you to maintain an existing structure through a configuration, E - (Estimates) which allows you to created an estimate parent for a configured product, e - (Estimates) which allows you to maintain an existing estimate through a configuration, W - (WIP) which allows you to create a job for a configured item. In addition when the callsource is  S - (Sales Orders), If the option to create a stocked parent was selected when defining the configuration, you can create a job and/or bill of materials for the item. If the option to create a non-stocked parent was selected, you can create a job or estimate for the item.  When the call source is Q - (Quotes). If the option to create a stocked parent was selected when defining the configuration, you will create a bill of materials for the parent. If the option to create a non-stocked parent was selected, you will create an estimate for the parent.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="T"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="Q"/>
+										<xsd:enumeration value="B"/>
+										<xsd:enumeration value="b"/>
+										<xsd:enumeration value="E"/>
+										<xsd:enumeration value="e"/>
+										<xsd:enumeration value="W"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Customer" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the customer code. The customer code is required when the call source is S - (SalesOrders) and a new sales order is being created and is optional when the call source is Q- (Quotes) and a new quote is  being created. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="7"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="FileId" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the file name(GUID)</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="38"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the name of the stock code needed to update the calling program.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TempFile" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the name of the temp file needed to update the calling program.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="255"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Job" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the Job needed to update the calling program.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="14"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

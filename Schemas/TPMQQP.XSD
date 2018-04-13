@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the TPM Qualify Promotions Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Customer" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Customer  
+(Required)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ExpiryDate" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>ExpiryDate      
+Default 99999999</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeGlobalPromotions">
+    <xsd:annotation>
+      <xsd:documentation>Global Flag      
+Y - Yes (Default)
+N - No           </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeUnqualifiedPromotions">
+    <xsd:annotation>
+      <xsd:documentation>Include Unqualified Promotions 
+Y - Yes (Default)              
+N - No                         </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Quantity"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Items">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Customer"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeGlobalPromotions"/>
+        <xsd:element ref="IncludeUnqualifiedPromotions"/>
+        <xsd:element ref="StartDate"/>
+        <xsd:element ref="ExpiryDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quantity" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Quantity 
+Default 1</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Options"/>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Items"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StartDate" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>StartDate        
+Default 00000000 </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="StockCode" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Stock code     
+Default spaces </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Value">
+    <xsd:annotation>
+      <xsd:documentation>Optional element, value of line based on quantity provided. If given, then any promotions based on amount will be included</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

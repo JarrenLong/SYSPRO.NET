@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Operator Copy Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostCOMTOP">
+    <xsd:annotation>
+      <xsd:documentation>Root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>Paramenter element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Action"/>
+        <xsd:element ref="CopyEsigRecords"/>
+        <xsd:element ref="ApplyIfEntireDocumentValid"/>
+        <xsd:element ref="CopyOperatorContact"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Action">
+    <xsd:annotation>
+      <xsd:documentation>The is is the action to take. "C" indicates copying a source operator's details to a target operator. Element is mandatory and must be set to "C".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CopyEsigRecords">
+    <xsd:annotation>
+      <xsd:documentation>Option to copy ESignature records from source operator to target operator. "Y" = Yes, "N" = No. If not specified, defaults to "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyIfEntireDocumentValid">
+    <xsd:annotation>
+      <xsd:documentation>Process xml only if it is ALL valid. "Y" = Yes, "N" = No. If not specified, defaults to "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CopyOperatorContact">
+    <xsd:annotation>
+      <xsd:documentation>Copy contact from source operator. "Y" = Yes, "N" = No. Mandatory. If Y, a check will be performed to see if CMS is installed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Cost Center Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupAssetCostCenter">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for Asset Cost Center code maintenance. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Asset Cost Center codes.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Key">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the key information required to maintain a Asset Cost Center code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:all>
+                    <xsd:element name="Branch">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the composit key to the Asset Cost Center code being maintained. This is mandatory and represents the asset branch. If this Asset Cost Center code is being added, maintained or deleted, it must be a valid SYSPRO Asset Branch code.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="AssetCostCenter">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the composit key to the Asset Cost Center code being maintained. This is mandatory. If this Asset Cost Center code is being added, it must not pre-exist against the asset branch. If this Asset Cost Center code is being changed or deleted, it must be a valid SYSPRO Asset Cost Center code against an Asset Branch.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Description">
+                <xsd:annotation>
+                  <xsd:documentation>This is the name of the Asset Cost Center code and is used primarily to identify the Asset Cost Center code. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

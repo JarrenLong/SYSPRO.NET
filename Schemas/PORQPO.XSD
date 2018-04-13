@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the PO List of Purchase Orders Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>Buyer to be selected (FilterType of A - All, S - Single buyer, FilterValue contains the selected buyer if FilterType is S)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>Currency to be selected (FilterType of A - All, S - Single currency, FilterValue contains the selected currency if FilterType is S)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Customer to be selected (FilterType of A - All, S - Single customer, FilterValue contains the selected customer if FilterType is S)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the amount of data returned</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence minOccurs="0">
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="Currency" minOccurs="0"/>
+        <xsd:element ref="Buyer" minOccurs="0"/>
+        <xsd:element ref="Memo" minOccurs="0"/>
+        <xsd:element ref="PurchaseOrder" minOccurs="0"/>
+        <xsd:element ref="OrderDate" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeCancelledOrders" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include cancelled orders? (N - No, Y - Yes)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCompletedOrders" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include completed orders ?(N - No, Y - Yes)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Memo">
+    <xsd:annotation>
+      <xsd:documentation>Memo to be selected (FilterType of A - All, S - Single memo, FilterValue contains the selected memo if FilterType is S)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence minOccurs="0">
+        <xsd:element ref="IncludeCompletedOrders" minOccurs="0"/>
+        <xsd:element ref="IncludeCancelledOrders" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderDate">
+    <xsd:annotation>
+      <xsd:documentation>Purchase order due dates selected (FilterType of A - All, R - Range, FilterValue is range of order due dates separated by a comma if FilterType is R).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrder">
+    <xsd:annotation>
+      <xsd:documentation>Purchase orders selected (FilterType of A - All, R - Range, FilterValue is range of purchase orders separated by a comma if FilterType is R).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence minOccurs="0">
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Supplier to be selected (FilterType of A - All, S - Single supplier, FilterValue contains the selected supplier if FilterType is S)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:length value="1"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="A"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The XSL Stylesheet to be used</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Notations Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>Filter root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeDangerous">
+		<xsd:annotation>
+			<xsd:documentation>Include dangerous notations.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeInspection">
+		<xsd:annotation>
+			<xsd:documentation>Include stock code inspection notation.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeJob">
+		<xsd:annotation>
+			<xsd:documentation>Include job notations.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludePurchaseOrder">
+		<xsd:annotation>
+			<xsd:documentation>Include stock code purchase order notes.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeSalesOrder">
+		<xsd:annotation>
+			<xsd:documentation>Include stock code sales order notations.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeTechnical">
+		<xsd:annotation>
+			<xsd:documentation>Include stock code technical notes.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>Option root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Sequence" default="S" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Sequence, the default is by S-by stock code. N- by notes type.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="S"/>
+							<xsd:enumeration value="N"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="IncludeTechnical" minOccurs="0"/>
+				<xsd:element ref="IncludeSalesOrder" minOccurs="0"/>
+				<xsd:element ref="IncludePurchaseOrder" minOccurs="0"/>
+				<xsd:element ref="IncludeJob" minOccurs="0"/>
+				<xsd:element ref="IncludeInspection" minOccurs="0"/>
+				<xsd:element ref="IncludeDangerous" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Filter in stock code. Single, Range or All stock codes. Default is to return all stock codes.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>Include style sheet.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

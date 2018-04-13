@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Quotation List of Estimates Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the Parent Option element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="MaterialsAndOperations"/>
+        <xsd:element ref="EstimateRoute"/>
+        <xsd:element ref="SequenceMaterialsByOperation"/>
+        <xsd:element ref="CostSelection"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MaterialsAndOperations">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether to include both materials and operations, only materials or only operations. B - Both, M - Materials only or O - Operations only. The default is B.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;B=Materials and operations;M=Materials only;O=Operations only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EstimateRoute">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the routing for which estimate details must be printed.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;0=Route 0;1=Route 1;2=Route 2;3=Route 3;4=Route 4;5=Route 5"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="0"/>
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SequenceMaterialsByOperation">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the sequence in which operations and component information must be printed for each non-stocked code selected.  If set to yes, each operation is listed together with the list of components for that operation.  If set to no, operations are listed first, followed by the list of components. Y - Yes (list materials by operation) or N - No (standard sequence). The default is N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CostSelection">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which costs must be printed for the materials and operations selected. C - List costs (extended unit costs) or E - List escalated costs (extended costs including mark-ups and/or margins). The default is C.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=List costs;E=List escalated costs"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the Parent Filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="NonStocked"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NonStocked">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of non-stocked items to print. A - All, R - Range, S - Single or L - List. The default is A.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=QotNonStock;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

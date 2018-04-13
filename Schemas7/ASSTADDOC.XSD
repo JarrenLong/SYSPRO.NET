@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Depreciation Adjustment Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostAssetAdjustment">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Asset acqusition. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting depreciation adjustments to assets.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element ref="Asset"/>
+							<xsd:element ref="AdjustmentDate" minOccurs="0"/>
+							<xsd:element ref="AdjustmentPeriod" minOccurs="0"/>
+							<xsd:element ref="AdjustmentComment" minOccurs="0"/>
+							<xsd:element ref="BvAdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="TaxAdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt1AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt2AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt3AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt4AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt5AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt6AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt7AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt8AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt9AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="Alt10AdjustmentThisYear" minOccurs="0"/>
+							<xsd:element ref="BvAdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="TaxAdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt1AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt2AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt3AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt4AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt5AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt6AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt7AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt8AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt9AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="Alt10AdjustmentAccumDepn" minOccurs="0"/>
+							<xsd:element ref="eSignature" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Asset">
+		<xsd:annotation>
+			<xsd:documentation>This is the key to the asset being acquired. This is mandatory.The format is alphanumeric or numeric depending on a configuration option within SYSPRO. Iit must be a valid Syspro asset code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AdjustmentDate">
+		<xsd:annotation>
+			<xsd:documentation>This is the date of the depreciation adjustment, and if supplied must be in the current financial year. If not supplied and a valid adjustment period is supplied, it will be the assumed to be the period-end date of the period supplied. If neither date nor period are supplied, the current period-end and period will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AdjustmentPeriod">
+		<xsd:annotation>
+			<xsd:documentation>This is the period in which an adjustment is to be passed. It must be in the range of 1 to current perioed number. If not supplied and a valid adjustment date is supplied, the period will be calculated from the adjustment date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AdjustmentComment">
+		<xsd:annotation>
+			<xsd:documentation>This is a free-form comment to be associated with this adjustment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BvAdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the book value depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxAdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the tax value depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt1AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 1 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt2AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 2 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt3AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 3 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt4AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 4 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt5AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 5 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt6AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 6 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt7AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 7 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt8AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 8 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt9AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 9 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt10AdjustmentThisYear">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 10 depreciation adjustment value for the current year and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BvAdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the book value depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxAdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the tax value depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt1AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 1 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt2AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 2 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt3AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 3 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt4AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 4 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt5AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 5 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt6AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 6 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt7AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 7 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt8AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 8 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt9AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 9 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Alt10AdjustmentAccumDepn">
+		<xsd:annotation>
+			<xsd:documentation>This is the alternate value 10 depreciation adjustment value for accumulated depreciation prior years and can be positive or negative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="eSignature" type="xsd:string"/>
+</xsd:schema>

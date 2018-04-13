@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Product Configurator Parent Details Phase posting parameters
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="postconfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data output.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="ParentDetails">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds information pertaining to the parent</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="Type">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates what type of parent you are creating and the default will be set according to the way you have setup your configuration. Possible values are S - Stocked and N - Non-stocked.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="N"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="TypeOption">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the possible parent type you can create.  Possible values are S - ( you can only create a stocked parent), N - (you can only create a non-stocked parent) or B - (Both meaning you can either create a stocked parent or a non-stocked parent).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="B"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="StockCode">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent stock code and will contain a value when you have selected the option to automatically generate a stocked/non-stocked code against the configuration header or when you return to the parent details phase from another phase. The format is alphanumeric or numeric depending on the configuration option for stock codes within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Description">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent description and will contain a value when you have selected the option to automatically generate a description against the configuration header and a description has been generated or when the description has been supplied and you return to the parent details phase from another phase.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LongDescription">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent long description and will contain a value when you have selected the option to automatically generate a description against the configuration header and a description has been generated or when the long description has been supplied and you return to the parent details phase from another phase.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Warehouse">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent warehouse and will contain a value when there is a default parent warehouse or when the warehouse has been supplied and you return to the parent details phase from another phase. When the type is 'N' this element will always contain "**".</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ProductClass">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent product class and will contain a value when there is a default parent product class or when the product class has been supplied and you return to the parent details phase from another phase.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="OverrideGeneratedFields">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether generated fields can be overridden. If the configuration is not setup to generate fields then this element will always be a Y. If generating fields using selection criteria and this option is Y then the stock code as well as the description/long description can be overridden. If generating fields using a prefix and this option is Y then the description/long description can be overridden however not the stock code. Possible values are Y and N.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="Y"/>
+                          <xsd:enumeration value="N"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="UseParentCompWh">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether you are going to use the component warehouse defined against the parent warehouse control record for component processing. Possible values Y - Yes or N - No.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ComponentWarehouse" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the component warehouse to use.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="CurrentConfigurationObject">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the name of the current business object to be run.  Possible value is CFGTPD.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="CFGTPD"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Parameters">
+                <xsd:annotation>
+                  <xsd:documentation>This contains parameters.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="Function">
+                      <xsd:annotation>
+                        <xsd:documentation>Refers to the direction you are proceeding in the configuration. Possible values N - Next or P - Previous.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="P"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ConfigurationInstance">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the instance of the configuration you are running. It is indicated by a unique number returned after the start phase of processing.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:byte" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Role" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

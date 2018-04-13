@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Capex Classifications Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="CapexClass">
+		<xsd:annotation>
+			<xsd:documentation>This is the key to the Asset Capex Classification being maintained. This is mandatory. If this Asset Capex Classification is being added, it must not pre-exist. If this Asset Capex Classification is being changed or deleted, it must be a valid SYSPRO Asset Capex Classification.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Description">
+		<xsd:annotation>
+			<xsd:documentation>This is the name of the Asset Capex Classification and is used primarily to identify the Asset Capex Classification. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Asset Capex Classification codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="Key"/>
+				<xsd:element name="Description">
+					<xsd:annotation>
+						<xsd:documentation>This is the name of the Asset Capex Classification and is used primarily to identify the Asset Capex Classification. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain a Asset Capex Classification.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="CapexClass"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupAssetCapexClass">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Asset Capex Classification maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

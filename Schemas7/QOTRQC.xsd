@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Quotations Retrieve Quotation Information Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Build">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BuildPoRequisitionDetails" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether you want to build the suggested requisition or po information when you confirm a quotation.  Possible values: Y (Yes) or N (No). </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CopyNotesToSalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether you want to copy quotation notes to a sales order when creating a sales order through quotation confirmation. Possible values: Y (Yes) or N (No). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreateJobs">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether you want to create jobs for non-stocked items when confirming a quotation.  Possible values: Y (Yes) or N (No). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreateSalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether you want to a sales order when confirming a quotation.  Possible values: Y (Yes), N (No) or A (Append). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomerPoNumber" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the customer purchase order number you will assign to the sales order when you confirm the quotation. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="OfferSelection">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the offers that you will be wanting to confirm. Possible values: 1 to 5, D (Default) or R(Review). </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Quotation"/>
+        <xsd:element ref="OfferSelection"/>
+        <xsd:element ref="CustomerPoNumber"/>
+        <xsd:element ref="CreateSalesOrder"/>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="SalesOrderType"/>
+        <xsd:element ref="CreateJobs"/>
+        <xsd:element ref="BuildPoRequisitionDetails"/>
+        <xsd:element ref="CopyNotesToSalesOrder"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Quotation" type="xsd:short">
+    <xsd:annotation>
+      <xsd:documentation>Enter the quotation number to be used to retrieve the required data.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Enter the sales order number that you would like to create or append to when you will be confirming the quotation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="SalesOrderType">
+    <xsd:annotation>
+      <xsd:documentation>Enter the sales order type to be created when you confirm the quotation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

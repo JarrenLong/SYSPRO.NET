@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Credit Check Business Object  
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SalesOrderCreditCheckQuery">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SalesOrder">
+          <xsd:annotation>
+            <xsd:documentation>Enter the sales order number to be queried. If only a sales order number is entered, then the entire sales order will be processed.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string"/>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SalesOrderLine" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Line" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter the sales order line number. Only lines submitted will be used in the credit check.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="QuantityToShip" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is the quantity used to calculate the credit check on.
+If a quantity is not entered, the credit check will be based on the combined backorder quantity and ship quantity from the sales order line, which will then be subtracted from the actual shipped quantity.
+A valid line number element must be entered if a quantity is entered.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string"/>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

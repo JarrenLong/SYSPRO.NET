@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Lot Traceability Expired Stock Codes Query Business Object for Crystal
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ArchivedLots" default="I">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include archived lots. (I-Include, E-Exclude, O-Only). The default is I.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Bin">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single and List selection for bins to be returned. A(All), (R)Range, (S)Single and (L)List. Default is A.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=InvMultBin;A=All;R=Range;S=Single;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single and List selection for expiry dates to be returned. A(All), (R)Range, (S)Single and (L)List. Default is A.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse={date};A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the Parent filter element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="Lot" minOccurs="0"/>
+        <xsd:element ref="Bin" minOccurs="0"/>
+        <xsd:element ref="ExpiryDate" minOccurs="0"/>
+        <xsd:element ref="TransactionDate" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeAdjustments" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Adjustments. (Y-Yes, N-No). The default value is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeBinTransfers" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Bin Transfers. (Y-Yes, N-No). The default value is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDispatches" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Dispatches. (YYes, N-No). The default value is Y,</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCostChanges" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Cost changes. (Y-Yes, N-No).  The default values is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeExpiry" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Expiry. (Y-Yes, N-No). The default values is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeIssues" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Issues. (Y-Yes, N-No). The default values is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeReceipts" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Receipts. (Y-Yes, N-No). The default values is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeSales" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Sales. (Y-Yes, N-No).  The default values is Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeTransfers" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include transaction type Transfers. (Y-Yes, N-No). The default is set Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroOnHand" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include lots with zero quantity on hand (Y-Yes, N-No). The default is set to Y.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Lot">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single and List selections for lots to be returned. Filter options A(All), R(Range), S(Single) and L(List). Default is A.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=LotDetail;A=All;R=Range;S=Single;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LotsOnHold" default="I">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include lots on hold. (I-Include, E-Exclude or O-Only). The default is set to I.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent Option element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeZeroOnHand" minOccurs="0"/>
+        <xsd:element ref="PrintNarrations" minOccurs="0"/>
+        <xsd:element ref="ArchivedLots" minOccurs="0"/>
+        <xsd:element ref="IncludeIssues" minOccurs="0"/>
+        <xsd:element ref="IncludeSales" minOccurs="0"/>
+        <xsd:element ref="IncludeAdjustments" minOccurs="0"/>
+        <xsd:element ref="IncludeTransfers" minOccurs="0"/>
+        <xsd:element ref="IncludeReceipts" minOccurs="0"/>
+        <xsd:element ref="IncludeBinTransfers" minOccurs="0"/>
+        <xsd:element ref="IncludeExpiry" minOccurs="0"/>
+        <xsd:element ref="IncludeDispatches" minOccurs="0"/>
+        <xsd:element ref="IncludeCostChanges" minOccurs="0"/>
+        <xsd:element ref="LotsOnHold" minOccurs="0"/>
+        <xsd:element name="XslStylesheet" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The stylesheet to be applied.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintNarrations" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print narrations against the lot. (Y-Yes, N-No). The default is set to N.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single and List selection for stock codes to be returned. A(All), (R)Range, (S)Single and (L)List.  Default is A.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=InvMaster;A=All;R=Range;S=Single;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionDate">
+    <xsd:annotation>
+      <xsd:documentation>All, Range and Single selection for transaction dates to be returned. A(All), (R)Range and (S)Single. Default is A.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse={date};A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single and List selection for warehouses to use be returned. A(All), (R)Range, (S)Single and (L)List. Default is A.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;browse=InvWhControl;A=All;R=Range;S=Single;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

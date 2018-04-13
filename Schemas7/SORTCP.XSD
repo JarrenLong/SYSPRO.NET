@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Contract Pricing Maintenance business object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ApplyIfEntireDocumentValid" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned).
+
+An example of a warning is if a ledger code entered is not the correct type of account, it is okay to write the record away as such but you may want the warning supplied.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ParametersType">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element ref="IgnoreWarnings"/>
+      <xsd:element ref="ApplyIfEntireDocumentValid"/>
+      <xsd:element ref="ValidateOnly"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SetupSoContractPricing">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Parameters" type="ParametersType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

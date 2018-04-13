@@ -1,0 +1,1717 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Work in Progress Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="WorkInProgressOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General1" minOccurs="0"/>
+        <xsd:element ref="General2" minOccurs="0"/>
+        <xsd:element ref="History" minOccurs="0"/>
+        <xsd:element ref="JobCreation" minOccurs="0"/>
+        <xsd:element ref="LabourPosting" minOccurs="0"/>
+        <xsd:element ref="PeriodCurrentYear" minOccurs="0"/>
+        <xsd:element ref="PeriodPreviousYear" minOccurs="0"/>
+        <xsd:element ref="CurrentMonth" minOccurs="0"/>
+        <xsd:element ref="Numbering" minOccurs="0"/>
+        <xsd:element ref="LotsAndSerials" minOccurs="0"/>
+        <xsd:element ref="ProjectsAndContracts" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WipLoadLevelReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Work in Progress load levelling is required. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowChgToOperationTimes">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Work in Progress load levelling is allowed to change operation times. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed. Setting this option to N will prevent changes from being made to expected times required for operations on jobs, whereas setting this option to Y will allow changes to be made.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowOpToEndEarlier">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow the operation to end earlier than prior operation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoClearVariance">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the automatically cleared variance is a percentage or value. (V - Value, P - Percentage). If no value is supplied then the default value of V will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="V=Value;P=Percentage;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoClearWipVarLessThan">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Automatically clear any WIP variance smaller than this percentage variance when marking a job as complete in IMP010 if costing is set to standard.This amount only applies if 'AutoClearVariance' is set to P.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoClearWipVarLessThanValue">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Automatically clear any WIP variance smaller than this variance amount when marking a job as complete in IMP010 if costing is set to standard. This amount only applies if 'AutoClearVariance' is set to P.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999999999999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyAutoVarAllCostMethods">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to apply automatic variance for all cost methods. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FloorStockWh">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Contains the floor stock warehouse to use. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AdvancedSchedulingReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether advanced scheduling is required for APS. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LinkSoDirectlyToAps">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to link the Sales Orders directly to APS. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LinkWipDirectlyToAps">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to link Work in Progress directly to APS. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipInspReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Work in Progress inspection is required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CaptureSerialsEndWipInsp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether serials are to be captured at the end of Work in Progress inspection. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CaptureLotsEndWipInsp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether lots are to be captured at the end of Work in Progress inspection. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="WipLoadLevelReq"/>
+        <xsd:element ref="AllowChgToOperationTimes"/>
+        <xsd:element ref="AllowOpToEndEarlier"/>
+        <xsd:element ref="AutoClearVariance"/>
+        <xsd:element ref="AutoClearWipVarLessThan"/>
+        <xsd:element ref="AutoClearWipVarLessThanValue"/>
+        <xsd:element ref="ApplyAutoVarAllCostMethods"/>
+        <xsd:element ref="FloorStockWh"/>
+        <xsd:element ref="AdvancedSchedulingReq"/>
+        <xsd:element ref="LinkSoDirectlyToAps"/>
+        <xsd:element ref="LinkWipDirectlyToAps"/>
+        <xsd:element ref="WipInspReq"/>
+        <xsd:element ref="CaptureSerialsEndWipInsp"/>
+        <xsd:element ref="CaptureLotsEndWipInsp"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CalcGrossProfitPartBill">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether gross profits are to be calculated and checked in part billings. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LowProfitPercForGrossProfit">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the lowest acceptable profit percentage allowed when checking the gross profit. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HighProfitPercForGrossProfit">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the highest acceptable profit percentage allowed when checking the gross profit. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabServChg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the labor service charge is to be billed. (N - Not required, R - Required, P - Prompt operator). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=Not required;R=Required,P=Prompt operator;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="R"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefLabServChg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default labor charge code to be used. This field is optional and is only enterable if 'LabServChg' is not set to N. If supplied, it must be a valid Sales Order Service Charge record.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PlaceMultBinsOnHold">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to place multiple bins on hold when receipting a job. (N - No, Y - Automatic, P - Prompt operator). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Automatic,P=Prompt operator;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintKitIssDocOnline">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to print the kit-issue document in-line. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowKitsWithShortages">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow kits with shortages to be issued. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowSubsInKitIssues">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow substitution in kit issues. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RoundMatIssToPanSize">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to round material allocations up to pan size in kit issues. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipInspDocSel">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the Work in Progress inspection document selection. (N - No document, B - Batch only, O - On line and batch). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No document;B=Batch only;O=On line and batch;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PromptForOperation">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to prompt for operation number when issuing to a previously non-existant material allocation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseManufUom">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow units of measure other than stocking units of measure in manufacturing. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetainSoLink">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates whether to retain the link between the sales order and job for completed jobs (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CalcGrossProfitPartBill"/>
+        <xsd:element ref="LowProfitPercForGrossProfit"/>
+        <xsd:element ref="HighProfitPercForGrossProfit"/>
+        <xsd:element ref="LabServChg"/>
+        <xsd:element ref="DefLabServChg"/>
+        <xsd:element ref="PlaceMultBinsOnHold"/>
+        <xsd:element ref="PrintKitIssDocOnline"/>
+        <xsd:element ref="AllowKitsWithShortages"/>
+        <xsd:element ref="AllowSubsInKitIssues"/>
+        <xsd:element ref="RoundMatIssToPanSize"/>
+        <xsd:element ref="WipInspDocSel"/>
+        <xsd:element ref="PromptForOperation"/>
+        <xsd:element ref="UseManufUom"/>
+        <xsd:element ref="RetainSoLink"/>
+        <xsd:element ref="DemandRevLink"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PermRetScrapAnal">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to permanently retain scrap analysis. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PermRetNonProdAnal">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to permanently retain non-productive analysis. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetLaborJnls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of months to retain labor posting journals. Entered values must be between 1 and 60 inclusively or 99 only. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetPartBillJnls">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of months to retain part billing journals. Entered values must be between 1 and 60 inclusively or 99 only. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GlPerRetLaborDistr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of GL periods to retain the labor distribution entries. Entered values must be less than 61 or 99 only. (99 implies retaining them indefinitely). This field is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GlPerRetPartBillDistr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of GL periods to retain the part billing distribution entries. Entered values must be less than 61 or 99 only. (99 implies retaining them  indefinitely). This field is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseDaysAsRetMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use days as a retention method for completed jobs. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetJobs">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain jobs before deletion (purge). This field is optional and only applies if 'UseDaysAsRetMethod' is set to Y.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArchiveCompletedJobs">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to archive completed jobs before purging. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ArchiveJobTrans">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to archive posting records when archiving jobs. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. May only be set to Y if 'ArchiveCompletedJobs' is set to Y, else N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaxJobsPerArchive">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the maximum number of jobs per archive file. This field only applies if 'ArchiveCompletedJobs' is set to Y, else all 9's will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="History">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PermRetScrapAnal"/>
+        <xsd:element ref="PermRetNonProdAnal"/>
+        <xsd:element ref="MthsRetLaborJnls"/>
+        <xsd:element ref="MthsRetPartBillJnls"/>
+        <xsd:element ref="GlPerRetLaborDistr"/>
+        <xsd:element ref="GlPerRetPartBillDistr"/>
+        <xsd:element ref="UseDaysAsRetMethod"/>
+        <xsd:element ref="DaysRetJobs"/>
+        <xsd:element ref="ArchiveCompletedJobs"/>
+        <xsd:element ref="ArchiveJobTrans"/>
+        <xsd:element ref="MaxJobsPerArchive"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TrfFromBom">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the transfer from Bill of Materials must be at BOM or inventory cost. (S - BOM cost, I - Inventory cost). If no value is supplied then the default value of S will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="S=BOM cost;I=Inventory cost;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="I"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SeqCheckReqByDef">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether sequence checking is required by default for job creations. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobsConfByDef">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether jobs are to be confirmed by default for job creations. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobClassReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether job classification is required for job creations. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This must be set to Y if job numbering by job classification is being used.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyOtimePercFiniteCalc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to apply overtime percentage to finite calculation by default for job creations. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipMaxGenQueueTime">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the maximum generated queue time (in days) for finite scheduling for job creation. If no value is supplied then the default value of 60 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QtyCaptureForCoProdJobs">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the quantity capture for co-product jobs. (N - Notional, C - Co-product). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=Notional;C=Co-product;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobCreation">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TrfFromBom"/>
+        <xsd:element ref="SeqCheckReqByDef"/>
+        <xsd:element ref="JobsConfByDef"/>
+        <xsd:element ref="JobClassReq"/>
+        <xsd:element ref="ApplyOtimePercFiniteCalc"/>
+        <xsd:element ref="WipMaxGenQueueTime"/>
+        <xsd:element ref="QtyCaptureForCoProdJobs"/>
+        <xsd:element name="ReserveStockForAllocs">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[ Indicates whether stock should be reserved for allocations when confirming jobs. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="JobAmendmentJournals">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[ Indicates whether job amendment journals should be captured, when maintaining a job or allocations. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="MthsRetJobAmendJnls">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[This is the number of months to retain job amendment journals. Entered values must be between 1 and 60 inclusively or 99 only. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:double">
+              <xsd:minInclusive value="1"/>
+              <xsd:maxInclusive value="99"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ValidateMachCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to validate machine code during labor posting. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateEmpCode">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to validate employee number during labor posting. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NonProdTimeToUpdateJob">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether non-productive hours are to update jobs during labor posting. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipLabLastPeDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the last period end date. This element is mandatory and if not entered, will default to the current system date. The format is CCYY-MM-DD.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipLabLastMeDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the last month end date. This element is mandatory and if not entered, will default to the current system date. This date may not be later than the 'WipLabLastPeDate' date entered. The format is CCYY-MM-DD.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipLabLastYeDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the last year end date. This element is mandatory and if not entered, will default to the current system date. This date may not be later than the 'WipLabLastMeDate' date entered. The format is CCYY-MM-DD.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LabourPosting">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ValidateMachCode"/>
+        <xsd:element ref="ValidateEmpCode"/>
+        <xsd:element ref="NonProdTimeToUpdateJob"/>
+        <xsd:element ref="WipLabLastPeDate"/>
+        <xsd:element ref="WipLabLastMeDate"/>
+        <xsd:element ref="WipLabLastYeDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the end date of the current period 1. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod1'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the previous period may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod2'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod3'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod4'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod5'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod6'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod7'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod8'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod9'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod10'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod12'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrDatePeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod11'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrFlagPeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the current period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PeriodCurrentYear">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="WipCurrDatePeriod1"/>
+        <xsd:element ref="WipCurrFlagPeriod1"/>
+        <xsd:element ref="WipCurrDatePeriod2"/>
+        <xsd:element ref="WipCurrFlagPeriod2"/>
+        <xsd:element ref="WipCurrDatePeriod3"/>
+        <xsd:element ref="WipCurrFlagPeriod3"/>
+        <xsd:element ref="WipCurrDatePeriod4"/>
+        <xsd:element ref="WipCurrFlagPeriod4"/>
+        <xsd:element ref="WipCurrDatePeriod5"/>
+        <xsd:element ref="WipCurrFlagPeriod5"/>
+        <xsd:element ref="WipCurrDatePeriod6"/>
+        <xsd:element ref="WipCurrFlagPeriod6"/>
+        <xsd:element ref="WipCurrDatePeriod7"/>
+        <xsd:element ref="WipCurrFlagPeriod7"/>
+        <xsd:element ref="WipCurrDatePeriod8"/>
+        <xsd:element ref="WipCurrFlagPeriod8"/>
+        <xsd:element ref="WipCurrDatePeriod9"/>
+        <xsd:element ref="WipCurrFlagPeriod9"/>
+        <xsd:element ref="WipCurrDatePeriod10"/>
+        <xsd:element ref="WipCurrFlagPeriod10"/>
+        <xsd:element ref="WipCurrDatePeriod11"/>
+        <xsd:element ref="WipCurrFlagPeriod11"/>
+        <xsd:element ref="WipCurrDatePeriod12"/>
+        <xsd:element ref="WipCurrFlagPeriod12"/>
+        <xsd:element ref="WipCurrDatePeriod13"/>
+        <xsd:element ref="WipCurrFlagPeriod13"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 1 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipCurrDatePeriod13'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod1'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'WipCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod2'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod3'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod4'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod5">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod5'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod6">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod6'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod7">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod7'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod8">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod8'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod9">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod9'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod10">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod10'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod11">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod11'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod12">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevDatePeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'WipPrevDatePeriod12'.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipPrevFlagPeriod13">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the previous period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Closed;O=Open;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PeriodPreviousYear">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="WipPrevDatePeriod1"/>
+        <xsd:element ref="WipPrevFlagPeriod1"/>
+        <xsd:element ref="WipPrevDatePeriod2"/>
+        <xsd:element ref="WipPrevFlagPeriod2"/>
+        <xsd:element ref="WipPrevDatePeriod3"/>
+        <xsd:element ref="WipPrevFlagPeriod3"/>
+        <xsd:element ref="WipPrevDatePeriod4"/>
+        <xsd:element ref="WipPrevFlagPeriod4"/>
+        <xsd:element ref="WipPrevDatePeriod5"/>
+        <xsd:element ref="WipPrevFlagPeriod5"/>
+        <xsd:element ref="WipPrevDatePeriod6"/>
+        <xsd:element ref="WipPrevFlagPeriod6"/>
+        <xsd:element ref="WipPrevDatePeriod7"/>
+        <xsd:element ref="WipPrevFlagPeriod7"/>
+        <xsd:element ref="WipPrevDatePeriod8"/>
+        <xsd:element ref="WipPrevFlagPeriod8"/>
+        <xsd:element ref="WipPrevDatePeriod9"/>
+        <xsd:element ref="WipPrevFlagPeriod9"/>
+        <xsd:element ref="WipPrevDatePeriod10"/>
+        <xsd:element ref="WipPrevFlagPeriod10"/>
+        <xsd:element ref="WipPrevDatePeriod11"/>
+        <xsd:element ref="WipPrevFlagPeriod11"/>
+        <xsd:element ref="WipPrevDatePeriod12"/>
+        <xsd:element ref="WipPrevFlagPeriod12"/>
+        <xsd:element ref="WipPrevDatePeriod13"/>
+        <xsd:element ref="WipPrevFlagPeriod13"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WipCurrentYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the calendar year in which your current financial year ends. This element may only be altered if there are no records already in the Work in Progress Job Detail file.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipCurrentMonth">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the calendar month in which your company is running in relation to the start of your financial year. This element may only be altered if there are no records already in the Work in Progress Job Detail file.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CurrentMonth">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="WipCurrentYear"/>
+        <xsd:element ref="WipCurrentMonth"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="JobNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the job numbering method to be used. (M - Manual, A - Automatic, C - By job classification, S - Scripted). If no value is supplied then the default value of M will be assumed. This element may not be set to A if the job key type is alphanumeric. This element may only be set to C if 'JobClassReq' is set to Y.]]></xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;C=By job classification;S=Scripted;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WipInspNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the Work in Progress inspection numbering method to be used. (M - Manual, A - Automatic, C - By Job Classification). If no value is supplied then the default value of M will be assumed. This element may not be set to A if the WIP inspection reference key type is alphanumeric. This element may not be set to C unless 'JobClassReq' is set to Y.]]></xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;C=By Job Classification"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextJobNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next job number to use. This element is only to be supplied if the 'WipInspNumMethod' is set to A. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextKitIssueNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next kit issue document number to use. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextWipInspNumber">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next Work in Progress inspection number to use. This element is only to be supplied if the 'WipInspNumMethod' is set to A. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextWipInspDocNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next inspection document number to use. This element is only to be supplied if the 'WipInspReq' is set to Y and 'PromptForOperation' is not set to N. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextScrapDocNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next scrap document number to use. This element is only to be supplied if the 'WipInspReq' is set to Y and 'PromptForOperation' is not set to N. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OpNumberIncrement">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the Work in Progress operation number increment. If no value is supplied or the value supplied exceeds 100 then a value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstOpNumber">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is first Work in Progress operation number. If no value is supplied or the value supplied exceeds 101 then a value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OpRenumber">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the Work in Progress operation renumbering. (Y - No renumbering of started operations, S - No renumbering after job started, C - No renumbering after job confirmed, N - No renumbering after job added). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=No renumbering of started operations;S=No renumbering after job started;C=No renumbering after job confirmed;N=No renumbering after job added;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Numbering">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="JobNumMethod"/>
+        <xsd:element ref="WipInspNumMethod"/>
+        <xsd:element ref="NextJobNum"/>
+        <xsd:element ref="NextKitIssueNum"/>
+        <xsd:element ref="NextWipInspNumber"/>
+        <xsd:element ref="NextWipInspDocNum"/>
+        <xsd:element ref="NextScrapDocNum"/>
+        <xsd:element ref="OpNumberIncrement"/>
+        <xsd:element ref="FirstOpNumber"/>
+        <xsd:element ref="OpRenumber"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReserveLotsForParent">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to reserve lots for parent on job confirmation. (N - No, Y - Yes, P - Prompt operator). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;P=Prompt operator;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReserveSerialsForParent">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to reserve serials for parent on job confirmation. (N - No, Y - Yes, P - Prompt operator). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;P=Prompt operator;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReserveLotsForAlloc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to reserve lots for components on job confirmation. (N - No, Y - Yes, P - Prompt operator). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;P=Prompt operator;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReserveSerialsForAlloc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to reserve serials for components on job confirmation. (N - No, Y - Yes, P - Prompt operator). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;P=Prompt operator;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowSubsLotsSerialsParent">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow substitution for lots/serials for parent parts. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowSubsLotsSerialsComp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow substitution for lots/serials for component parts. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReqCompToParentLotTrack">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether component to parent lot tracking is required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReqCompToParentSerialTrack">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether component to parent serial tracking is required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LotsAndSerials">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReserveLotsForParent"/>
+        <xsd:element ref="ReserveSerialsForParent"/>
+        <xsd:element ref="ReserveLotsForAlloc"/>
+        <xsd:element ref="ReserveSerialsForAlloc"/>
+        <xsd:element ref="AllowSubsLotsSerialsParent"/>
+        <xsd:element ref="AllowSubsLotsSerialsComp"/>
+        <xsd:element ref="ReqCompToParentLotTrack"/>
+        <xsd:element ref="ReqCompToParentSerialTrack"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ChkPostThresholdAgainst">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates how to check the posting threshold when adding/issuing allocations. (1 - Anticipated value 1, 2 - Anticipated value 2, 3 - Anticipated value 3). If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="1=Anticipated value 1;2=Anticipated value 2;3=Anticipated value 3;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="1"/>
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoExpandHierTreeview">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to automatically expand hierarchy treeviews in maintenance and posting. (Y - Yes, N - N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowTreeviewAsListview">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to show treeviews as listviews. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrtOnlineDelNoteBoRelease">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to print online delivery notes when releasing the quantity from back order. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProjectsAndContracts">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ChkPostThresholdAgainst"/>
+        <xsd:element ref="AutoExpandHierTreeview"/>
+        <xsd:element ref="ShowTreeviewAsListview"/>
+        <xsd:element ref="PrtOnlineDelNoteBoRelease"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DemandRevLink" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[ Indicates whether to call the Inventory Demand Review program when doing receipts (N - No, Y - Yes).  If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

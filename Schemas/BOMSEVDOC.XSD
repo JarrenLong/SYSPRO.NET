@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the ECC Events Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupEccStatusEvent">
+    <xsd:annotation>
+      <xsd:documentation>Root Element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information for the status Events</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StatusCode"/>
+        <xsd:element ref="EventNumber"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about  the Status Events NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="EventType" minOccurs="0"/>
+        <xsd:element ref="Description" minOccurs="0"/>
+        <xsd:element ref="DescriptionFixed" minOccurs="0"/>
+        <xsd:element ref="MailUsers" minOccurs="0"/>
+        <xsd:element ref="EmailFixed" minOccurs="0"/>
+        <xsd:element ref="MailSubject" minOccurs="0"/>
+        <xsd:element ref="MailMessage" minOccurs="0"/>
+        <xsd:element ref="EccUser" minOccurs="0"/>
+        <xsd:element ref="ActionUserFixed" minOccurs="0"/>
+        <xsd:element ref="ActionDays" minOccurs="0"/>
+        <xsd:element ref="ActionDaysFixed" minOccurs="0"/>
+        <xsd:element ref="ReminderDays" minOccurs="0"/>
+        <xsd:element ref="ReminderDaysFixed" minOccurs="0"/>
+        <xsd:element ref="OperAction" minOccurs="0"/>
+        <xsd:element ref="ActionType" minOccurs="0"/>
+        <xsd:element ref="PosNextStatus" minOccurs="0"/>
+        <xsd:element ref="NegNextStatus" minOccurs="0"/>
+        <xsd:element ref="MixedNextStatus" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="EventNumber">
+    <xsd:annotation>
+      <xsd:documentation>Event  number  generated</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EventType">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to select the type of event you require (see Events).Type of event-Hold all jobs,HLDSVR - Hold current  version S/orders  ,EXPAVL - Set expected  available date, NOTIFY-E-mail, 
+ACTION-Raise action, EVENT-Trigger  event management.
+BOMCAN-Abandon all changes to structure and routing,
+ADDWHR-Add where-used items
+BOMCUR-Apply structure and routing changes
+CHGUSR-Change ECC user
+BOMAVL-Enable structure and routing maintenance
+WIPNON-Hold non-started jobs
+WIPNOR-Hold non-started jobs for current rev/rel
+SORSHP-Hold shipment for s/o
+SORSHR-Hold shipment for s/o for current rev/rel
+SORNEW-Lock stock for new s/o
+SORNER-Lock stock for new s/o for current rev/rel
+PORNEW-Lock stock for new p/o
+PORNER-Lock stock for new p/o for current rev/rel
+PORREC-Prevent p/o receipt
+PORRER-Prevent p/o receipt for current rev/rel
+WIPBEG-Hold started jobs
+WIPALR-Lock stock for mat alloc for current rev/rel
+WIPALL-Lock stock for material alloc
+WIPNEW-Lock stock for new jobs
+WIPNER-Lock stock for new jobs for current rev/rel
+RELWIP-Release all jobs and locks on new jobs
+RELWAL-Release all locks on material allocations
+RELPOR-Release all p/o and locks on new p/o
+RELSOR-Release all s/o and locks on new s/o
+UNECCC-Unset ECC control</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to enter a description for the event type you selected.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="50"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DescriptionFixed">
+    <xsd:annotation>
+      <xsd:documentation>Select this to disallow the operator from changing the description.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MailUsers">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to enter the e-mail recipient(s).The field defined the user you are emailing.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="300"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EmailFixed">
+    <xsd:annotation>
+      <xsd:documentation>This field is used for both Action user and Change to user.Select this to disallow the operator from changing the action user defined in the previous field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MailSubject">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to enter a subject for the email. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="100"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MailMessage">
+    <xsd:annotation>
+      <xsd:documentation>Message to  the receipient</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1000"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EccUser">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to enter the new user code that must be held against the ECO header.This option is displayed if you selected the event: Change ECC user. This field is used for  Change to user and  Action 
+User.Change User -You use this field to enter the new user code that must be held against the ECO header.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionUserFixed">
+    <xsd:annotation>
+      <xsd:documentation>Select this to disallow the operator from changing the user code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionDays">
+    <xsd:annotation>
+      <xsd:documentation>Number of days to  complete an action</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StatusCode">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the status code of which the event is raised.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionDaysFixed">
+    <xsd:annotation>
+      <xsd:documentation>Select this to disallow the operator from changing the number of days until available value.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionType">
+    <xsd:annotation>
+      <xsd:documentation>This indicates a question-type ;where to complete the action a response must be made (Yes or No) by any one of the operators assigned to the ECC User.The acion type can be set as C-Complete,Q-Question</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="Q"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReminderDays">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to define the number of days before the user is reminded to complete the action.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReminderDaysFixed">
+    <xsd:annotation>
+      <xsd:documentation>Select this to disallow the operator from changing the number of days to reminder defined in the previous field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OperAction">
+    <xsd:annotation>
+      <xsd:documentation>Action to be raised against all user's operators</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NegNextStatus">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to define the next status if the response is negative.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MixedNextStatus">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to define the next status if the response is unresolved.In SYSPRO this field is defined as "Unresolved"</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="9"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PosNextStatus">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to define the next status if the response is positive.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

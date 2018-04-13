@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Operator List Report Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Option">
+					<xsd:annotation>
+						<xsd:documentation>The option node defines which information is returned.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="IncludeContactDetails">
+								<xsd:annotation>
+									<xsd:documentation>Include CMS information for the operator. "Y" = Yes, "N" = No.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="OperatorLockedOut">
+								<xsd:annotation>
+									<xsd:documentation>Include information pertaining to operators that have been locked out of SYSPRO. Y = Yes, N = No.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Operator"/>
+				<xsd:element ref="OperatorGroup"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Operator">
+		<xsd:annotation>
+			<xsd:documentation>Operator code. ADMOPR-OPR.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+					<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OperatorGroup">
+		<xsd:annotation>
+			<xsd:documentation>Group by which resultset is filtered.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+					<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

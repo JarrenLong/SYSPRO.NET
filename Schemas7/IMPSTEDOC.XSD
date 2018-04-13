@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Extended Tax Code Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="EffectiveDate">
+    <xsd:annotation>
+      <xsd:documentation>Effective date of the tax information provided. If not entered, then the system date will be used. Format is CCYY/MM/DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SetupExtendedTax">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain a single extended tax code .
+NOTE: The information held within the key element is mandatory for all functions, although some of the key elements may be spaces. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="EffectiveDate" minOccurs="0"/>
+        <xsd:element ref="Description" minOccurs="0"/>
+        <xsd:element ref="GlCode" minOccurs="0"/>
+        <xsd:element ref="FreightTaxable" minOccurs="0"/>
+        <xsd:element ref="LimitFlag" minOccurs="0"/>
+        <xsd:element ref="FirstRate11" minOccurs="0"/>
+        <xsd:element ref="FirstLimit11" minOccurs="0"/>
+        <xsd:element ref="FirstLimitValue11" minOccurs="0"/>
+        <xsd:element ref="FirstRate21" minOccurs="0"/>
+        <xsd:element ref="FirstLimit21" minOccurs="0"/>
+        <xsd:element ref="FirstLimitValue21" minOccurs="0"/>
+        <xsd:element ref="FirstRate31" minOccurs="0"/>
+        <xsd:element ref="FirstLimit31" minOccurs="0"/>
+        <xsd:element ref="FirstLimitValue31" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain an extended tax code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="State"/>
+        <xsd:element ref="CountyZip" minOccurs="0"/>
+        <xsd:element ref="City" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>The description of the tax code used</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="State">
+    <xsd:annotation>
+      <xsd:documentation>The State code portion of the extended tax code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GlCode">
+    <xsd:annotation>
+      <xsd:documentation>The Sales Tax Code to apply if GL integration is required. It must be a valid SYPSRO code. A warning is given in the account is a control account, or is not a liability account.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CountyZip">
+    <xsd:annotation>
+      <xsd:documentation>County Zip portion of the extended tax code. Mandatory for AVP sales tax or optional for Advanced geocodes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="City">
+    <xsd:annotation>
+      <xsd:documentation>City portion of the extended tax code. Mandatory for AVP sales tax or optional for Advanced geocodes. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FreightTaxable">
+    <xsd:annotation>
+      <xsd:documentation>The flag indicates if any freight on the invoice is taxable if this tax code is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LimitFlag">
+    <xsd:annotation>
+      <xsd:documentation>If used, this flag indicates the type of limit calculation to be applied with this tax code. P - percentage or V - value.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstRate11">
+    <xsd:annotation>
+      <xsd:documentation>This is the tax rate to be applied at state level.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstLimit11">
+    <xsd:annotation>
+      <xsd:documentation>If limit calculations are required, this indicates the value to be used at the state level to determine if limits are to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstLimitValue11">
+    <xsd:annotation>
+      <xsd:documentation>If limit calculations are required, this indicates the value or percentage to be used  at the state level to make the calculation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstRate21">
+    <xsd:annotation>
+      <xsd:documentation>This is the tax rate to be applied at county zip level.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstLimit21">
+    <xsd:annotation>
+      <xsd:documentation>If limit calculations are required, this indicates the value to be used  at the county zip level to determine if limits are to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstLimitValue21">
+    <xsd:annotation>
+      <xsd:documentation>If limit calculations are required, this indicates the value or percentage to be used  at the county zip level to make the calculation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstRate31">
+    <xsd:annotation>
+      <xsd:documentation>This is the tax rate to be applied at city level.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstLimit31">
+    <xsd:annotation>
+      <xsd:documentation>If limit calculations are required, this indicates the value to be used  at the city level to determine if limits are to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FirstLimitValue31">
+    <xsd:annotation>
+      <xsd:documentation>If limit calculations are required, this indicates the value or percentage to be used  at the city level to make the calculation.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

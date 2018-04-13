@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Lot Traceability Upstream Downstream Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="LotUDQuery">
+    <xsd:annotation>
+      <xsd:documentation>Root Element for the Lot Traceable Up and down query</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ParentLotInfo">
+          <xsd:annotation>
+            <xsd:documentation>Parent element grouping the Input details received from the LOTQUD.XML Input file.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="LotNumber" type="xsd:unsignedShort">
+                <xsd:annotation>
+                  <xsd:documentation>Lot number selected from the LOTQUD Input file.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockCode" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Stock code Selected from the Input file.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockCodeDesc" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Stock code description Read from the Inventory Master</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Warehouse" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Warehouse selected from the input file.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="WarehouseDesc" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Warehouse description from the Warehouse Master</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="SerialNumber" type="xsd:unsignedByte">
+                <xsd:annotation>
+                  <xsd:documentation>Serial number selected from the input file.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="BinNumber" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Bin number selected from the input file.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="UpstreamDetails">
+          <xsd:annotation>
+            <xsd:documentation>Upstream Details Root element grouping upstream activites relating to the details received from the LOTQUD.XML file.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="UpstreamJob">
+                <xsd:annotation>
+                  <xsd:documentation>Up stream job root grouping the Receipt (Incoming) transactions that have been received from Jobs.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ParentJob" type="xsd:unsignedShort">
+                      <xsd:annotation>
+                        <xsd:documentation>Job number of the Made in Item</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ParentJobQty" type="xsd:unsignedByte">
+                      <xsd:annotation>
+                        <xsd:documentation>Job quantity received</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ParentJobDate" type="xsd:unsignedInt">
+                      <xsd:annotation>
+                        <xsd:documentation>Job Receipt Date.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ComponentDetails">
+                      <xsd:annotation>
+                        <xsd:documentation>Component root grouping the component / Lot combinations that are assosiated the the ParentJob element.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="CompStockcode" type="xsd:string">
+                            <xsd:annotation>
+                              <xsd:documentation>Component stock code</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="CompQtyPer" type="xsd:decimal">
+                            <xsd:annotation>
+                              <xsd:documentation>Component Quantity Per (One Parent)</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="CompQtyIssued" type="xsd:unsignedByte">
+                            <xsd:annotation>
+                              <xsd:documentation>Component Quantity Issued to the Job.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="CompUOM" type="xsd:string">
+                            <xsd:annotation>
+                              <xsd:documentation>Component Stocking unit of measure.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="UpstreamCompLots">
+                            <xsd:annotation>
+                              <xsd:documentation>Upstream component lot root grouping the component lot numbers that have been issued to the ParentJob.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="UpJobCompLot" type="xsd:unsignedShort">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Component lot number</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="UpJobCompQty" type="xsd:unsignedByte">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Component quantity issued (From the Lot)</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="UpJobCompDat" type="xsd:unsignedInt">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Component issued date.</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="UpCompReceipts">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Component receipts detail root grouping the component  lot receipt details</xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:complexType>
+                                    <xsd:sequence>
+                                      <xsd:element name="UpCompRecType" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Comopnent Receipt type</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="UpCompRecSource" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Component Receipt Source "'P" - Purchase Orders
+"J" - Job receipts
+"I" - Inventory Movements</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="UpCRecPODetail">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Component receipt purchase order details root grouping Purchase order receipts assosiated to the component lot number.</xsd:documentation>
+                                        </xsd:annotation>
+                                        <xsd:complexType>
+                                          <xsd:sequence>
+                                            <xsd:element name="UpCompRecPONum" type="xsd:unsignedByte">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component purchase order receipt number</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecPOSup" type="xsd:unsignedByte">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component Purchase Order Supplier</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecPOQty" type="xsd:unsignedShort">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Comonent Purchase order quantity</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecPODate" type="xsd:unsignedInt">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component purchase order receipt date</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecPORef" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component purchase order reference.</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                          </xsd:sequence>
+                                        </xsd:complexType>
+                                      </xsd:element>
+                                      <xsd:element name="UpCRecInvDetail">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Component inventory receipt detail root grouping inventory movement receipts assosiated to the component lot number</xsd:documentation>
+                                        </xsd:annotation>
+                                        <xsd:complexType>
+                                          <xsd:sequence>
+                                            <xsd:element name="UpCompTrnInvType" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component Inventory transaction type:
+A = Adjustment
+R = Receipt
+E = Expense Issue
+B = Bin Transfer
+T = Warehouse Transfer
+I = Issue</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecInvQty" type="xsd:unsignedShort">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component inventory  receipt quantity</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecInvDate" type="xsd:unsignedInt">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component inventory receipt date</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecInvRef" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component inventory receipt reference</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                          </xsd:sequence>
+                                        </xsd:complexType>
+                                      </xsd:element>
+                                      <xsd:element name="UpCRecJobDetail">
+                                        <xsd:annotation>
+                                          <xsd:documentation>component Job details root grouping job receipts assosiated to the component lot number (Usually sub assembly type stock)</xsd:documentation>
+                                        </xsd:annotation>
+                                        <xsd:complexType>
+                                          <xsd:sequence>
+                                            <xsd:element name="UpCompRecJobNum" type="xsd:unsignedShort">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component Job number</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecJobQty" type="xsd:unsignedShort">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component job receipt quantity</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecJobDate" type="xsd:unsignedInt">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component job receipt date</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="UpCompRecJobRef" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Component job receipt reference</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                          </xsd:sequence>
+                                        </xsd:complexType>
+                                      </xsd:element>
+                                    </xsd:sequence>
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="UpStreamPO">
+                <xsd:annotation>
+                  <xsd:documentation>Up stream purchase order root grouping the  Receipt transactions that have been received from Purchase orders</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="UpPorDetails">
+                      <xsd:annotation>
+                        <xsd:documentation>Upstream purchase order details root groupiing purchase order receipts assosiated to the LOTQUD.XML input</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="PurchOrderNumber" type="xsd:unsignedShort">
+                            <xsd:annotation>
+                              <xsd:documentation>Purchase order number</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="PurchOrdSupplier" type="xsd:unsignedByte">
+                            <xsd:annotation>
+                              <xsd:documentation>Purchase order Supplier</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="PurchOrdDetLines">
+                            <xsd:annotation>
+                              <xsd:documentation>Purchase order line details root grouping the purchase order detail lines assosiated to the PurchaseOrderNumber</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="PurchOrderLine" type="xsd:unsignedByte">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Purchase order line number</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MStockCode" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Purcahase order line stock code</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MStockDesc" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Stock code description from the inventory master</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MWarehouse" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Warehouse code</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MOrderUM" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Line order unit of measure</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MStockingUM" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Line stocking unit of measure</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MOrderQty" type="xsd:unsignedShort">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Line order quantity</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MRecievedQty" type="xsd:unsignedShort">
+                                  <xsd:annotation>
+                                    <xsd:documentation>line received quantity</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="PurchaseLotDetails">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Purchase line lot numbers details root assosiated to the lot numbers for the purchase order line receipt.</xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:complexType>
+                                    <xsd:sequence>
+                                      <xsd:element name="MLotNumber" type="xsd:unsignedByte">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Purcahase order line lot number</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="MLotBin" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Purcahase order line bin number</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="MLotDate" type="xsd:unsignedInt">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Purcahase order line receipt date</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="MLotQuantity" type="xsd:unsignedByte">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Purcahase order line quantity received.</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                    </xsd:sequence>
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="UpstreamInv">
+                <xsd:annotation>
+                  <xsd:documentation>Up stream Inventory root grouping the Receipt transactions that have been received from Inventory movements.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="UpInvReceipts">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="UpInvRecQty" type="xsd:unsignedByte"/>
+                          <xsd:element name="UpInvRecRef" type="xsd:string"/>
+                          <xsd:element name="UpInvRecDate" type="xsd:unsignedInt"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="DownstreamDetails">
+          <xsd:annotation>
+            <xsd:documentation>Downstream details root element grouping activities relating to the downstream transactions for the entered Key.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="DownstreamJobs">
+                <xsd:annotation>
+                  <xsd:documentation>Root Element for Downstream jobs that has been received into the entered key.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="DSJobDetail">
+                      <xsd:annotation>
+                        <xsd:documentation>Downstream job detail Root node.  grouping all Job details that have been receipted into the entrered key.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="DSJobNumber" type="xsd:unsignedShort">
+                            <xsd:annotation>
+                              <xsd:documentation>Job number</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="ComponentLotDetails">
+                            <xsd:annotation>
+                              <xsd:documentation>Component Lot details root element</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="ComponentStockCode" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Component stock code issued to the job</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="ComponentLot" type="xsd:unsignedByte">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Component Lot number issued to the job</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="ComponentRecWH" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Warehouse code where the component lot number was received in.</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="CompRecQty" type="xsd:unsignedByte">
+                                  <xsd:annotation>
+                                    <xsd:documentation>The recieved quantity for the Component key</xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="ComponentJobDetails">
+                                  <xsd:annotation>
+                                    <xsd:documentation>All Jobs that have been issued material from the traceable items assosiated to the entered key.</xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:complexType>
+                                    <xsd:sequence>
+                                      <xsd:element name="IssueJob" type="xsd:unsignedShort">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Job Number component issued to</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="IssueJobLot" type="xsd:unsignedShort">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Lot number assosiated to the  job the compnent was issued to</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="IssueJobQty" type="xsd:unsignedByte">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Job Quantity made</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="IssueJobStk" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Job Stock code</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="IssueJobWh" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Job Receiving warehouse</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="IssueCustomers">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Customer Root node for customers that have received goods from the same job/ Lot number</xsd:documentation>
+                                        </xsd:annotation>
+                                        <xsd:complexType>
+                                          <xsd:sequence>
+                                            <xsd:element name="IssueJobCust" type="xsd:unsignedByte">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Customer Code</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="IssueJobCustQty" type="xsd:unsignedByte">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Quantity customer received</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="IssueJobCusName" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Customer name</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="IssueJobCusEmail" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Customer Email on AR Master</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="IssueJobCusTel" type="xsd:string">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Customer Telephone on AR Master</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="IssueJobInvoice" type="xsd:unsignedInt">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Invoice number</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                            <xsd:element name="IssueJobSOR" type="xsd:unsignedShort">
+                                              <xsd:annotation>
+                                                <xsd:documentation>Sales order number</xsd:documentation>
+                                              </xsd:annotation>
+                                            </xsd:element>
+                                          </xsd:sequence>
+                                        </xsd:complexType>
+                                      </xsd:element>
+                                    </xsd:sequence>
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="DSInvMovement">
+                <xsd:annotation>
+                  <xsd:documentation>All downstream inventory movements assosiated to the entered key</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="DSInvReceipt">
+                      <xsd:annotation>
+                        <xsd:documentation>Inventory Receipt Root node</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="DsInvRecQty" type="xsd:unsignedByte">
+                            <xsd:annotation>
+                              <xsd:documentation>Quantity received from Inventory Movement</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="DsInvRecDate" type="xsd:unsignedInt">
+                            <xsd:annotation>
+                              <xsd:documentation>Inventory Receipt date</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="DsInvRecRef" type="xsd:string">
+                            <xsd:annotation>
+                              <xsd:documentation>Inventory Reciept reference</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="DownStrmCust">
+                            <xsd:annotation>
+                              <xsd:documentation>customer details that have received stock from the entered key</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="DSCustomers">
+                                  <xsd:annotation>
+                                    <xsd:documentation>Customer Root Node</xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:complexType>
+                                    <xsd:sequence>
+                                      <xsd:element name="SoldCustomer" type="xsd:unsignedByte">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Customer Code</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="SoldCustTrnQty" type="xsd:unsignedByte">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Customer Received Quantity</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="SoldCusName" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Customer Name</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="SoldCusEmail" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Customer Email address on ARSMaster</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="SoldCusTel" type="xsd:string">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Customer telephone number on ArsMaster</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="SoldCusSOR" type="xsd:unsignedShort">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Sales order Number linked to entered key</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                      <xsd:element name="SoldCusInv" type="xsd:unsignedInt">
+                                        <xsd:annotation>
+                                          <xsd:documentation>Inventory number linked to sales order</xsd:documentation>
+                                        </xsd:annotation>
+                                      </xsd:element>
+                                    </xsd:sequence>
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:string" use="required"/>
+      <xsd:attribute name="Language2" type="xsd:string" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:string" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:string" use="required"/>
+      <xsd:attribute name="Role" type="xsd:string" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

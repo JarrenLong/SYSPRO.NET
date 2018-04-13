@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--  Copyright 1994-2010 SYSPRO Ltd.   -->
+<!-- 
+      Schema for the Inventory Document Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Key">
+          <xsd:annotation>
+            <xsd:documentation>The key to use for this query.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="DocumentType">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and contains the type of document required. Valid values are:
+R - Stock Receipt
+I - Stock Issue
+T - Transfer Out
+P - Purchase Order Receipt
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:length value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="R"/>
+                    <xsd:enumeration value="I"/>
+                    <xsd:enumeration value="T"/>
+                    <xsd:enumeration value="P"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Option">
+          <xsd:annotation>
+            <xsd:documentation>List of options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="Reprint" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element specifies if this is a document reprint.
+Valid values are 'N' and 'Y'. Default is 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="InventoryMonth" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional but must contain a valid month when 'Reprint' is set to 'Y'. If not supplied it defaults to the current month.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="InventoryYear" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional but must contain a valid year when 'Reprint' is set to 'Y'. If not supplied it defaults to the current year.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GenerateNextDocumentNumber" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Generate next document number will use the next available document number for stock receipts, issues and  transfers from the SYSPRO company control file. This will be used to update the Inventory Document Print Transaction file and the SYSPRO control file will be updated to reflect the use of these numbers.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStylesheet" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter">
+          <xsd:annotation>
+            <xsd:documentation>List of filter options available.
+The contents of FilterType="" can either be :
+A - All
+R - Range
+L - List
+
+The contents of FilterValue="" is dependant on the FilterType. If the FilterType is A the FilterValue is ignored. If the FilterType is L the FilterValue will contain a list of codes delimited by a comma. If the FilterType is R the FilterValue can contain either a single value (where it will take from this one to the highest) or the lowest and highest values delimited by a comma.
+</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:all>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is used when processing any of the report types</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is used when processing any of the report types</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="DestinationWarehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is only used when processing Transfer Out documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Journal" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is used when processing any of the report types</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="GitReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is only used when processing Transfer Out documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Operator" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is used when processing any of the report types</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Job" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional. When processing purchase orders it will only be applicable, should there be a job for the purchase order line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="PurchaseOrder" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is only used when processing Purchase Order Receipt documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Supplier" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is only used when processing Purchase Order Receipt documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Grn" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional and is only used when processing Purchase Order Receipt documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="DocumentNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional but must contain a valid document number when 'Reprint' is set to 'Y' and when processing Stock Receipt and Stock Issue documents.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" type="xsd:string" use="optional"/>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

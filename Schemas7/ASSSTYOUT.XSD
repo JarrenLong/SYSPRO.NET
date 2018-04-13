@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for the Asset Type Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="RecordsInvalid" type="xsd:boolean"/>
+  <xsd:element name="RecordsRead" type="xsd:boolean"/>
+  <xsd:complexType name="StatusOfItemsType">
+    <xsd:sequence>
+      <xsd:element ref="RecordsRead"/>
+      <xsd:element ref="RecordsInvalid"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="itemType">
+    <xsd:sequence>
+      <xsd:element name="key" type="keyType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="keyType">
+    <xsd:sequence>
+      <xsd:element ref="assettype"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="setupassettype">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="item" type="itemType"/>
+        <xsd:element name="StatusOfItems" type="StatusOfItemsType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="assettype" type="xsd:string"/>
+</xsd:schema>

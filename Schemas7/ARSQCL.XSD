@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     This is an example XSD instance to demonstrate
+     use of the Collector Run Business Object Query
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Bank">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Bank. A - All (default), R - Range, S - Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=ApBank;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Currency. A - All (default), R - Range, S - Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=TblCurrency;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CollectorRunNo" minOccurs="0"/>
+        <xsd:element ref="Bank" minOccurs="0"/>
+        <xsd:element ref="GeographicArea" minOccurs="0"/>
+        <xsd:element ref="SalesPerson" minOccurs="0"/>
+        <xsd:element ref="Currency" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GeographicArea">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Geographic area. A - All (default), R - Range, S - Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=SalArea;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="InclCancelled">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include a collectors run status of "Cancelled". Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclCaptured">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include a collectors run status of "Captured". Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclClosed">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include a collectors run status of "Closed". Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclInvoiceAttachedToPD">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include Invoices attached to PD checks. Will only be processed if InclPDChecks has been set to "Y". Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPDChecks">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include PD checks. If this is set to "Y" then InclInvoiceAttached will also be processed by the program else that option will be ignored. Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPayInProcess">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include a collectors run status of "Payment in process". Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclVerified">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to include a collectors run status of "Verified". Y - Yes (default), N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="InclCaptured" minOccurs="0"/>
+        <xsd:element ref="InclCancelled" minOccurs="0"/>
+        <xsd:element ref="InclPayInProcess" minOccurs="0"/>
+        <xsd:element ref="InclVerified" minOccurs="0"/>
+        <xsd:element ref="InclClosed" minOccurs="0"/>
+        <xsd:element ref="InclPDChecks" minOccurs="0"/>
+        <xsd:element ref="InclInvoiceAttachedToPD" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>This element allows to specify whether the report must be run in summary or in detail. S - Summary (default) D - Detail.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;D=Detail;S=Summary;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesPerson">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Sales person. A - All (default), R - Range, S - Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=SalSalesperson;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>This element allows you to sequence the report eith by Collector Run number (R) (Default) or by Collector (C).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;R=Collector run number;C=Collector;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="R"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CollectorRunNo">
+    <xsd:annotation>
+      <xsd:documentation>This element allows for the filtering of the Collector run number. A - All (default), R - Range, S - Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ArCollectorRunHdr;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

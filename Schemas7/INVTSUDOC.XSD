@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--
+     Schema for Inventory Stock Take Confirmation Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AbortExceptionLines">
+		<xsd:annotation>
+			<xsd:documentation>You can only select "Abort confirmation if exception lines exist" option if a non-zero value is defined at the maximum permitted stock take variance field (Setup/Distribution/Inventory/Options). This enables you to abort the confirmation process if a variance between the captured quantity and the saved quantity exceeds a specified value or percentage.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:pattern value="N"/>
+				<xsd:pattern value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>The key consists of only one element, the warehouse. The key is mandatory.</xsd:documentation>
+			<xsd:documentation/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Warehouse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AbortExceptionLines"/>
+				<xsd:element name="UpdateOrigLotRecQty">
+					<xsd:annotation>
+						<xsd:documentation>An option to update the original quantity received when doing adjustments of lot traceable items - Yes/No
+</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:pattern value="N"/>
+							<xsd:pattern value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostStockTakeConfirmation">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>This is the warehouse in which the stock take is taking place.Although you can count stock in more than one warehouse at a time, the system treats each warehouse as a separate stock count (i.e. you need to confirm the stock count in each warehouse separately). Warehouse is mandatory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

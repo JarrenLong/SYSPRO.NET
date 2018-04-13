@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for AR Credit Check Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ArCreditCheck">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. NB: This element is mandatory if 'S' TransactionMethod is selected. Enter the SYSPRO customer applicable to the transaction. This must be a valid SYSPRO customer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustomerFrom">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If "R" TransactionMethod is used, this will be used to query and post the transction starting with the customer that is equal or greater that this input. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustomerTo">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If "R" TransactionMethod is used, this will be used to query and post the transction up until the customer that is equal or greater that this input. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence maxOccurs="unbounded">
+				<xsd:element ref="TransactionMethod"/>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="CustomerFrom" minOccurs="0"/>
+				<xsd:element ref="CustomerTo" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TransactionMethod">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.  Enter the transaction method. 'S' = query single customer, 'R' = Query a range of customers</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="R"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

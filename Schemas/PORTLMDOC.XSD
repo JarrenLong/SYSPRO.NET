@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the LCT Shipment Maintenance Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="ShipmentMaintenance">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Action">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates what action will be taken to the shipment line. A - Add, C - Change, X - Delete
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="C"/>
+                    <xsd:enumeration value="X"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Vessel">
+                <xsd:annotation>
+                  <xsd:documentation>The vessel number of the shipment line requiring maintenance. Must be a valid vessel 
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="7"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DepartureDate">
+                <xsd:annotation>
+                  <xsd:documentation>Departure date of vessel of the shipment line requiring maintenance. Must be a valid date format - CCYY-MM-DD and must be a valid date against the vessel.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:minLength value="10"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipmentReference">
+                <xsd:annotation>
+                  <xsd:documentation>Shipment reference of the shipment line requiring maintenance. Must be a valid shipment number.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PurchaseOrder">
+                <xsd:annotation>
+                  <xsd:documentation>Purchase order number  of the shipment line requiring maintenance Must be a valid purchase order. 
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="6"/>
+                    <xsd:minLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PurchaseOrderLine">
+                <xsd:annotation>
+                  <xsd:documentation>Purchase order line of the shipment line requiring maintenance. Must be a valid line on the purchase order.
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="QuantityShipped" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Quantity shipped on this shipment line. This must be supplied if the line is being added. The format is 7.3 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="12"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Units" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. None of the quantity fields may be negative
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="7"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Pieces" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. None of the quantity fields may be negative
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CreatePurchaseOrderLine" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Should a new purchase order line be created when the quantity entered is less than the purchase order quantity Y - Yes, N - No, Default - N
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PurchaseOrderLineDueDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Due date to be used if a new purchase order line is created. Must be a valid date format - CCYY-MM-DD, Default - todays date
+</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitPrice" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Unit price to be aplied to the line. The format is 10.5 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="16"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscType" default="P" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates if the discount has been entered as a value or percentages. Possible values - P (percentage) or V (value). Default P when element is spaces or is not entered.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="V"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscLessPlus" default="L" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You use the Discount elements to enter/change the discount percentages to be applied to the line. This element indicates if the discount should be added or subtracted from the line value. Possible values: L - less or P - Plus. Default - L when element is spaces or is not entered..</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:enumeration value="L"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscPercent1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>First discount percent, only applicable when discount type is percent. The format is 3.2 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscPercent2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Second discount percent, only applicable when discount type is percent, and first discount percent is not zero. The format is 2.2 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="5"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscPercent3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Third discount percent, only applicable when discount type is percent, and second discount percent is not zero. The format is 2.2 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="5"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Discount value, only applicable when discount type is value. The format is 12.2 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ExchangeRate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Exchange rate to be applied to the shipment. The format is 6.6 positive numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="13"/>
+                    <xsd:minLength value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ExchMD" default="M" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Multiple or divide exchange rate. M - Multiply, D - Divide, or spaces. Default - M when element is spaces or is not entered.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:minLength value="0"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <!--xsd:attribute name="ShipmentMaintenance" type="xsd:anyURI" use="required"/-->
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

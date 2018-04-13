@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Customer Price Look Up Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ContractDetails">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ContractNumberUsed" type="xsd:hexBinary" minOccurs="0"/>
+				<xsd:element name="Contract" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:hexBinary"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="StartDate" minOccurs="0"/>
+				<xsd:element ref="ExpiryDate" minOccurs="0"/>
+				<xsd:element name="ContractPricingMethod" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="FixedPrice" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="PriceMethod" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="PriceMethodDesc" type="xsd:string" minOccurs="0"/>
+				<xsd:element ref="ContractDetails" minOccurs="0"/>
+				<xsd:element name="BasePrice" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BasePriceCode" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BasePricingUom" minOccurs="0">
+					<xsd:complexType/>
+				</xsd:element>
+				<xsd:element name="BaseQuantity" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BasePercent1" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BasePercent2" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BasePercent3" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BaseUnitDisc" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BaseContractPrice" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="BaseProfitPercent" minOccurs="0">
+					<xsd:complexType/>
+				</xsd:element>
+				<xsd:element name="QuantityDiscounted" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Quantity1" type="xsd:string"/>
+							<xsd:element name="QuantityPrice1" type="xsd:string"/>
+							<xsd:element name="Quantity2" type="xsd:string"/>
+							<xsd:element name="QuantityPrice2" type="xsd:string"/>
+							<xsd:element name="Quantity3" type="xsd:string"/>
+							<xsd:element name="QuantityPrice3" type="xsd:string"/>
+							<xsd:element name="Quantity4" type="xsd:string"/>
+							<xsd:element name="QuantityPrice4" type="xsd:string"/>
+							<xsd:element name="Quantity5" type="xsd:string"/>
+							<xsd:element name="QuantityPrice5" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustomerPriceQuery">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CustomerDetails">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Customer" type="xsd:byte"/>
+							<xsd:element name="CustomerName" type="xsd:string"/>
+							<xsd:element name="Branch" type="xsd:byte"/>
+							<xsd:element name="BranchDescription" type="xsd:string"/>
+							<xsd:element name="Geographicarea" type="xsd:string"/>
+							<xsd:element name="GeoAreaDescription" type="xsd:string"/>
+							<xsd:element name="Currency" type="xsd:string"/>
+							<xsd:element name="CurrencyDescription" type="xsd:string"/>
+							<xsd:element name="AutomaticPriceCode" type="xsd:string"/>
+							<xsd:element name="QtyValueDiscount" type="xsd:string"/>
+							<xsd:element name="ProdClassDiscount" type="xsd:string"/>
+							<xsd:element name="LineDiscountCode">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="LineDiscCodeDesc">
+								<xsd:complexType/>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="StockCodeDetails">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="StockCode"/>
+							<xsd:element ref="Description"/>
+							<xsd:element ref="LongDescription"/>
+							<xsd:element name="Warehouse" type="xsd:string"/>
+							<xsd:element name="WarehouseDescription" type="xsd:string"/>
+							<xsd:element name="UnitCost">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="CostUnitOfMeasure" type="xsd:string"/>
+							<xsd:element name="ListPrice" type="xsd:string"/>
+							<xsd:element name="ListPriceUnitOfMeasure">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="PricingCategory" type="xsd:string"/>
+							<xsd:element name="PricingMethod" type="xsd:string"/>
+							<xsd:element name="PricingMethodDesc" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="BestPriceDetails">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="QuantityForQuery" type="xsd:string"/>
+							<xsd:element name="DefaultUnitOfMeasure" type="xsd:string"/>
+							<xsd:element name="BestPrice" type="xsd:string"/>
+							<xsd:element name="PriceUnitOfMeasure" type="xsd:string"/>
+							<xsd:element name="PriceCode">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="DiscountDetails">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="DiscPerc1" type="xsd:string"/>
+										<xsd:element name="DiscPerc2" type="xsd:string"/>
+										<xsd:element name="DiscPerc3" type="xsd:string"/>
+										<xsd:element name="DiscValue" type="xsd:string"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="GrossProfitPerc">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element ref="ContractDetails"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="LastPriceDetails">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="LastPricePaid" type="xsd:string"/>
+							<xsd:element name="LastPriceUnitOfMaesure">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="QuantityPurchased" type="xsd:string"/>
+							<xsd:element name="Line1DiscPerc" type="xsd:string"/>
+							<xsd:element name="Line2DiscPerc" type="xsd:string"/>
+							<xsd:element name="Line3DiscPerc" type="xsd:string"/>
+							<xsd:element name="CommissionCode">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="InvoiceNumber">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="InvoiceDate">
+								<xsd:complexType/>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="PrevPriceDetails">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="PrevLastPricePaid" type="xsd:string"/>
+							<xsd:element name="PrevPriceUnitOfMaesure">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="PrevQuantityPurchased" type="xsd:string"/>
+							<xsd:element name="Prev1stLineDiscPerc" type="xsd:string"/>
+							<xsd:element name="Prev2ndLineDiscPerc" type="xsd:string"/>
+							<xsd:element name="Prev3rdLineDiscPerc" type="xsd:string"/>
+							<xsd:element name="PrevCommissionCode">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="PrevInvoiceNumber">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="PrevInvoiceDate">
+								<xsd:complexType/>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="PriceCategoryCodeTable">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="A">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="B">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="C">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="D">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="E">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="F">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="G">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="H">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="I">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="J">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="K">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="L">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="M">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="N">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="O">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="P">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="Q">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="R">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="S">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="T">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="U">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="V">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="W">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="X">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="Y">
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="Z">
+								<xsd:complexType/>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CustomerContracts">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Contracts">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="ContractDetails" maxOccurs="unbounded"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="BuyingGroups" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="QuantityDiscounts">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="QtyDiscountBreak" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="QuantityBreak" type="xsd:string"/>
+										<xsd:element name="QtyBreakPriceCode">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="D"/>
+													<xsd:enumeration value="L"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="QtyBreakSellingPrice" type="xsd:string"/>
+										<xsd:element name="QtyBreakGrossProfit" type="xsd:string"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="InventoryPrices">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="InvSellingPrice" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="OrderDiscounts" type="xsd:string"/>
+				<xsd:element name="ServiceCharges" type="xsd:string"/>
+				<xsd:element name="TradePromotionDetails">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StockHeader">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element ref="StockCode"/>
+										<xsd:element ref="Description"/>
+										<xsd:element ref="LongDescription"/>
+										<xsd:element name="ProductClass" type="xsd:string"/>
+										<xsd:element name="ProductClassDescription" type="xsd:string"/>
+										<xsd:element name="ProductGroup" type="xsd:string"/>
+										<xsd:element name="Department">
+											<xsd:complexType/>
+										</xsd:element>
+										<xsd:element name="Quantity" type="xsd:string"/>
+										<xsd:element name="QuantityUnits">
+											<xsd:complexType/>
+										</xsd:element>
+										<xsd:element name="Decimals" type="xsd:byte"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="PromotionDetails" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="PromotionCode" type="xsd:string"/>
+										<xsd:element ref="Description"/>
+										<xsd:element ref="StartDate"/>
+										<xsd:element ref="ExpiryDate"/>
+										<xsd:element name="PromotionType">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="F"/>
+													<xsd:enumeration value="O"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PromotionTypeDescription" type="xsd:string"/>
+										<xsd:element name="TieredPromotion">
+											<xsd:complexType/>
+										</xsd:element>
+										<xsd:element name="AccrualType" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="AccrualTypeDescription" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="OffInvoiceAllowanceType" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:enumeration value="L"/>
+													<xsd:enumeration value="P"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OffInvoiceAllowanceTypeDescription" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="AmountType" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:enumeration value="F"/>
+													<xsd:enumeration value="P"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AmountTypeDescription" minOccurs="0">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:enumeration value="Percentage"/>
+													<xsd:enumeration value="Price"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FreeGoodType" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="FreeGoodTypeDescription" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="FreeGoodsStockCode" type="xsd:hexBinary" minOccurs="0"/>
+										<xsd:element name="FreeGoodsStockCodeDescription" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="FreeGoodsMethod" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="FreeGoodsMethodDescription" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="FreeGoodsPrice" minOccurs="0">
+											<xsd:complexType/>
+										</xsd:element>
+										<xsd:element name="FreeGoodsInMultiplesOf" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="FreeGoodsThresholdQty" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="Basis" type="xsd:string"/>
+										<xsd:element name="BasisDescription" type="xsd:string"/>
+										<xsd:element name="Threshold" type="xsd:string"/>
+										<xsd:element name="PromotionResults">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Qualifies" type="xsd:string"/>
+													<xsd:element name="PromotionValue" type="xsd:string"/>
+													<xsd:element name="FreeGoodsQuantity" type="xsd:string"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="Language" type="xsd:byte" use="required"/>
+			<xsd:attribute name="Language2" type="xsd:string" use="required"/>
+			<xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+			<xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+			<xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+			<xsd:attribute name="Role" type="xsd:byte" use="required"/>
+			<xsd:attribute name="Version" type="xsd:string" use="required"/>
+			<xsd:attribute name="OperatorPrimaryRole" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Description" type="xsd:string"/>
+	<xsd:element name="ExpiryDate">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:date"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvSellingPrice">
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="InvSellingPriceCode">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="A"/>
+							<xsd:enumeration value="D"/>
+							<xsd:enumeration value="L"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="InvSellingPrice"/>
+				<xsd:element name="InvSellingPriceBasis" type="xsd:string"/>
+				<xsd:element name="InvSellingPriceBasisDesc" type="xsd:string"/>
+				<xsd:element name="InvSellingGrossProfit" type="xsd:string"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LongDescription" type="xsd:string"/>
+	<xsd:element name="StartDate">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:date"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode" type="xsd:hexBinary"/>
+</xsd:schema>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Status Change Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This contains parameters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="InBoxMsgReqd" minOccurs="0"/>
+        <xsd:element ref="ValidateOnly" minOccurs="0"/>
+        <xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+        <xsd:element ref="AllowInvoiceInformationEntry" minOccurs="0"/>
+        <xsd:element name="ApplyIfEntireDocumentValid" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element indicates whether to process entire document only if all items are valid. If set to 'N', each item is validated and rejected if in error or processed if correct. This is the fastest option. If set to 'Y', all items are validated and only processed if entire document is valid. Default is 'N'. Valid values are 'Y' and 'N'.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:minLength value="0"/>
+              <xsd:maxLength value="1"/>
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="WarnIfCustomerOnHold" minOccurs="0"/>
+        <xsd:element ref="StatusInProcess" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AllowInvoiceInformationEntry" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies whether invoice information (invoice number and invoice date) may be entered for an order that is to be changed to ready to invoice, status 8 (Y - Yes, N - No). If set, this overrides any other SYSPRO configuration rules for supplying invoice numbers. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InBoxMsgReqd" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Write an entry to the ADMMSG file for the logged in operator (N or blank - No, Y - Yes). This message is made available in the Orders Created Externally option of SYSPRO. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Specifies if warnings are to be ignored (Y - if the warnings are to be ignored, N - warnings will be returned as errors in the XML returned, W - warnings will be returned as warnings in the XML returned).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostSorOrderStatus">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StatusInProcess">
+    <xsd:annotation>
+      <xsd:documentation>This parameter is only intended for use when the business object is called from scripting while processing a sales order with the SYSPRO Sales Order Entry program. It should be set to 'Y' in those circumstances, and will allow the business object to access the sales order that is currently held by SYSPRO. If this paramteter is 'Y' then the order must be in process  If this parameter is set to 'Y'  under any other circumstances, then the results will be unpredictable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not the contents of a change request should be validated  only. If so, it will be returned with errors listed as  found. The errors will appear after the element that caused the error. 
+
+Just prior to the closing of the root element will be ValidationStatus element which will have a sub-element of Status. This will contain either Successful or Failed.
+
+ If it is not supplied, it defaults to 'Y'. Valid values are 'N' and 'Y'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WarnIfCustomerOnHold">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to affect the action taken when a customer is on hold. The default is 'N', which means that an order placed for a customer on hold will be rejected. If set to 'N', then the fact that a customer is on hold will be treated as a warning, and the setting of the paramter 'IgnoreWarnings' will be used to determine if the order is reported as an error, a warning or accepted.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

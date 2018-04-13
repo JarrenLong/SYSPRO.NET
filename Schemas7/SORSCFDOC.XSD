@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Counter Sales Cash Drawer Maintenance Business Object Setup
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CashDrawer" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Cash Drawer. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CashDrawerDevice" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the name of the cash drawer device. This will only be available if PrinterPortFlag is set to "Y"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DrawerDescription" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Cash Drawer Description. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DrawerFloat" type="xsd:short">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the default cash float. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node,  it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="DrawerDescription"/>
+        <xsd:element ref="DrawerFloat"/>
+        <xsd:element ref="OpenDrawHexCode"/>
+        <xsd:element ref="PrinterPortFlag"/>
+        <xsd:element ref="CashDrawerDevice"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CashDrawer"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OpenDrawHexCode" type="xsd:hexBinary">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Hex code to open the drawer. It is not mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PrinterPortFlag" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Cash drawer is on same port as printer Y - Yes (Default) N - No. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SetupCounterSalesCashDrawerMaint">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

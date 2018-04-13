@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!--
+     Schema for TPM Deduction Code Maintenance Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupDeductionCode" >
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" >
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to maintain a contract. NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Key" >
+                <xsd:annotation>
+                  <xsd:documentation>The element contains the key elements to maintain a TPM Deduction code</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="DeductionCode" >
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the code of the deduction code you are currently maintaining.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Description" >
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to enter a description for the deduction code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DeductionLdg" >
+                <xsd:annotation>
+                  <xsd:documentation>
+                    You use this field to enter the General Ledger account to which to accumulate deduction amounts in the General Ledger. This is typically the Accounts Receivable Deduction Control Account.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ResolutionLdg" >
+                <xsd:annotation>
+                  <xsd:documentation>
+                    You use this field to enter the General Ledger expense account to charge when a deduction is resolved for a reason other than a match to a corresponding Accrual Promotion account.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WriteOffLdg" >
+                <xsd:annotation>
+                  <xsd:documentation>You use this field to enter the General Ledger expense account to charge when a deduction is written off.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CreditFlag" default="1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Select this if you want the current balance of open deductions to be added back to the customer's balance for credit checking purposes (i.e. open deductions do not reduce the customer's outstanding balance).
+                    Open deductions are deductions taken by the customer, but not yet resolved, written off or offset against a promotion. Posible values 0 = false and 1 = true. Default 1.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Master/Sub Job Post Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="PostMasterSubJob">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to attach or detach a sub job</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="SubJob">
+                <xsd:annotation>
+                  <xsd:documentation>This contains the job you wish to attach to, or detach from, as a sub job against the master job.
+The format is 8 characters alphanumeric or 8 chararcters numeric depending on the configuration option within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MasterJob">
+                <xsd:annotation>
+                  <xsd:documentation>This contains the master job that you wish to attach or detach the sub job.
+The format is 8 characters alphanumeric or 8 chararcters numeric depending on the configuration option within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MasterAllocationLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the line number of the material allocation that the sub job being attached, is linked to. It is required when you are attaching a sub job and there is more than 1 material allocation, against the master job, that matches the stock code, warehouse and quantity to manufacture against the sub job.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UpdateHierarchy" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the flag is mandatory when attaching to a hierarchical job. If you want to update the hierarchy with the costs of the sub job you are attaching this needs to be set to 'Y'. If you would like to leave the hierarchy with the existing costs of the allocation against the master then this flag must be set to 'N'. The format is 1 charactor alphanumeric</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

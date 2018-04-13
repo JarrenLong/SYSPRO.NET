@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Requisition transfer Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostRequisitionIssue">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="User" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Requisition User authorised to transfer</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UserPassword" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Requisition User password authorised to transfer (if required)</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Password for e-signature</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Journal" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the journal number to which the transaction journal entries will be added. It must be valid for the specified posting period and warehouse and may not have been printed already. If not supplied, a new journal will be created.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Requisition">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the requisition to be issued</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="RequisitionLine">
+                <xsd:annotation>
+                  <xsd:documentation>Together with the requisition indicates the requisition line to be issued </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StoresWarehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the stores warehouse for the issue
+Must be valid if submitted but can be setup from the requisition
+</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="BinLocation" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the bin location </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Lot" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the lot number and  is mandatory for traceable item</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Serials" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence minOccurs="0">
+                    <xsd:element name="SerialNumber" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the serial number which is mandatory if the item is serialized</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialQuantity" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the quantity for the above serialnumber</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialUnits" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the quantity for the above serialnumber</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="SerialPieces" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the pieces for the serial number when the item is a units and pieces item</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="IssueDirectToJob" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if the transaction should be issued directly to a job. Only applicable if a job is setup against the requisition</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="AllocationLineNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the material allocation line number if more than one</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Hierarchy" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Head" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the head code of the hierarchy that you want to associate with the component or operation. This is a mandatory field.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Section1" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the first section of the hierarchy that you want to associate with the component or operation.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Section2" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the second section of the hierarchy that you want to associate with the component or operation.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Section3" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the third section of the hierarchy that you want to associate with the component or operation.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Section4" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the last section of the hierarchy that you want to associate with the component or operation.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Reference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Optional reference</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Notation" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Optional notation</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="LedgerCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ledger code is optional, if supplied it will overwrite the default ledger code.
+If no default or no ledger code entered this will be an error
+</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="PasswordForLedgerCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the ledger code requires a password this must contain the relevant password</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

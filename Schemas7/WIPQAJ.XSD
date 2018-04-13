@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Job Amendment Journals Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the list of options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="IncludeMatAllocs" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if the Job Amendment Journals for material allocations should be included in the output. (Y - include, N - exclude). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeLabAllocs" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if the Job Amendment Journals for labor allocations should be included in the output. (Y - include, N - exclude). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeReprint" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if Amendmendt Journals that have already been printed, should be included in the output. (Y - include, N - exclude). If not provided the default is N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PrintAdditions" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if Job Amendment Journals for additions should be included in the output. (Y - include, N - exclude). If not provided the defaults is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PrintChanges" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if Job Amendment Journals for changes should be included in the output. (Y - include, N - exclude). If not provided the defaults is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PrintDeletions" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if Job Amendment Journals for deletions should be included in the output. (Y - include, N - exclude). If not provided the defaults is Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the filter.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Job" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of jobs ( A - All, S - Single, R - Range, L - List).  If not provided the default is A.  If R is selected then separated by a -.  Example: 1-9.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="L"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Requisition Entry Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AcceptGLCodeforStocked" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to add a General Ledger code to the requisition created for a stocked item?  (N - No, Y - Yes) The ledger code added to the requisition is for documentary purposes only, and will not be used by SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowNonStockedItems" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to allow for non-stocked items ? (N - No, Y - Yes)If this option is set as 'N" then a non-existent stock code will be rejected.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IgnoreWarnings" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to ignore warnings ?</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ActionType" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Add or Change action type (A - Add a requisition, C - Change a requisition)The ADD action type will automatically generate a new requisition number (assuming requisition auto numbering) for each new requisition. Requisition lines can be added to an existing requisition if an existing requisition number is supplied in the RequisitionNumber element. The CHANGE action type requires the input of both the RequisitionNumber and RequisitionLine.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GiveErrorWhenDuplicateFound" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to get an error message when the requisition number supplied already exists or increment the line number when adding? (N - Increment, Y - Error).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>This contains parameters.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="AllowNonStockedItems" minOccurs="0"/>
+        <xsd:element ref="AcceptGLCodeforStocked" minOccurs="0"/>
+        <xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+        <xsd:element ref="ActionType" minOccurs="0"/>
+        <xsd:element ref="GiveErrorWhenDuplicateFound" minOccurs="0"/>
+        <xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+        <xsd:element ref="ValidateOnly" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ApplyIfEntireDocumentValid" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether to process entire document only if all items are valid. If set to 'N', each item is validated and rejected if in error or processed if correct. This is the fastest option. If set to 'Y', all items are validated and only processed if entire document is valid. Default is 'Y'. Valid values are 'Y' and 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateOnly" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Validate the entire document and exit without processing</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostRequisition">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--  
+     Schema for the Sales Analysis by Product Class Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Use this field to indicate the branch for which you want to print this report. A - All; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalBranch;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="Branch"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesPeriod"/>
+        <xsd:element ref="PrintUnitQuantitiesForProductClass"/>
+        <xsd:element ref="PrintZeroBalanceProductClass"/>
+        <xsd:element ref="PrintClassZeroBalancesWhen"/>
+        <xsd:element ref="PrintReportBy"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintReportBy">
+    <xsd:annotation>
+      <xsd:documentation>Use this to print the report by Units or Mass. U - Units; M - Mass. Default U - Units.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;U=Units;M=Mass"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="M"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintZeroBalanceProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This enables you to print product classes with a zero balance on the report. Y- Yes; N - No. Default N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintClassZeroBalancesWhen">
+    <xsd:annotation>
+      <xsd:documentation>Use this option to select when to print zero balance product classes. This option is only applicable when the option to PrintZeroBalanceProductClass is not selected. P - This period zero; M - This month zero; Y - Year-to-date zero. Default M - This month zero.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;P=This period zero;M=This month zero; Y=Year-to-date zero"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesPeriod">
+    <xsd:annotation>
+      <xsd:documentation>Valuation as of period. Select the period in which to show the details. Default is C for Current period.  C - Current period, P - Previous month 1, B - Previous month 2</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;C=Current period;P=Previous month 1;B=Previous month 2"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintUnitQuantitiesForProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This option will print quantities as cases and pieces instead of units and decimals, if the stock code has been defined with Unit quantity processing. Y - Yes; N - No. Default N - No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Use this to print the report for all or certain Product Class. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

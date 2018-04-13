@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Inspection Rework Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostWIPInspectRework">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:choice maxOccurs="unbounded">
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to rework a quantity for a stock item in WIP inspection.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:choice maxOccurs="unbounded">
+              <xsd:element name="InspectionReference">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the WIP inspection reference for which you want to rework a specific quantity. This is a mandatory element. The format is up to 9 characters, either alphanumeric or numeric depending on the key configuration option for inspection reference within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="9"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the stock code which you want rework. This is a mandatory element. The format is up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration option for stock code within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Lot" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the lot for which you want to rework a specific quantity, if the item is lot traceable. The format is up to 10 characters, either alphanumeric or numeric depending on the key configuration option for lot within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" default="S" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This option allows you to select the Unit of Measure you would like to output. Possible entries include: S=Stocking UM (default); A=Alternate UM; O=Other UM; M=Manufacturing UM</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="M"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReworkQuantity">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the quantity that must be reworked. The format is up to 12 characters, signed numeric with 7 integers and 3 decimals.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="12"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Document" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the document number for the rework function. The format is up to 10 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Narration" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the reason for reworking. The format is up to 60 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="60"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReworkType" default="I" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You may select to either issue the quantity back to the original job (if the job still exists) or to create a new rework job and issue the quantity to the new job. Possible values: I (issue back to original job) or C (create new rework job). Default to: I.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="I"/>
+                    <xsd:enumeration value="C"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReworkJob" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>You must supply the new rework job number if you select to create a new rework job and issue the quantity to the new job. The format is up to 8 characters either alphanumeric or numeric, depending on the key configuration setup for Job within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LedgerCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the ledger code that will be debited with the rework transaction value if Work in Progress is integrated to general ledger. The ledger code will default to the WIP control ledger account against the stock code; else if not defined against the stock code then the default will be taken as the WIP control account defined in General Ledger Integration within SYSPRO. The format is up to 15 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LedgerPassword" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the ledger code password if required for the ledger account. The format is up to 4 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Journal" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the journal number to which the transaction journal entries generated will be added. It must be valid for the current posting period and warehouse and may not have been printed already. If not supplied a new journal will be created. The format is up to 5 characters numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="5"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SelectAvailableSerials" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional. When reworking a serialized stock item and this element is set to Y, the WIP inspected serial numbers available for the stock item being processed are used until the quantity supplied is satisfied. This is only applicable to Manual serial items and when the WIP setup option Capture serials at end of WIP inspection has not been selected. Possible values: Y (yes) or N (no). Default is N. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReservedSerials" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is optional. When reworking a serialized stock item and this element is set to 'R', It will allow you to select reserved serials and validate accordingly. This is only applicable when the WIP setup option Capture serials at end of WIP inspection has not been selected and when the WIP setup option Reserve lots for parent has been selected. Possible values: R (reserved serials required).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="R"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>A set of serial numbers and relevant information must be supplied if stock item specified is serialized. This element does not apply if the WIP setup option Capture serials at end of WIP Inspection has been selected.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="SerialNumber">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the serial number that you want to rework. You may only select serials that were taken into inspection for this WIP inspection reference. The format is either up to 20 characters alphanumeric or up to 15 characters numeric depending on the key configuration for serials within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="20"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SerialQuantity" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is only applicable for batch serialized items and indicates the quantity that will be reworked for the serial. The format is up to 11 characters numeric with 7 integers and 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="11"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ReservedLot" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the lot for which you want to update the rework quantity when the stock item is lot traceable and you are using reserved lots. This option is mandatory if you are using reserved lots and the 'Capture lots at end of WIP inspection' has been set to 'Y'. The format is up to 10 characters, either alphanumeric or numeric depending on the key configuration option for lot within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="38"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:choice>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

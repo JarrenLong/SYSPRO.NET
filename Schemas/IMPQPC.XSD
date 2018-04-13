@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     This is an example XML instance to demonstrate
+     use of IMPQPC Business Object for Xcelsius
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wmh="http://www.wmhelp.com/2003/eGenerator">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of available options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TopBottomProductClasses"/>
+        <xsd:element ref="NumberOfProductClasses"/>
+        <xsd:element ref="BasedOnMeasure"/>
+        <xsd:element ref="DateSelection"/>
+        <xsd:element ref="Currency"/>
+        <xsd:element ref="InclSubTotalsProductClass"/>
+        <xsd:element ref="InclOrigPurchPrice"/>
+        <xsd:element ref="InclQtyOrdered"/>
+        <xsd:element ref="InclQtyReceived"/>
+        <xsd:element ref="InclRejectionQty"/>
+        <xsd:element ref="InclPriceReceived"/>
+        <xsd:element ref="InclOnTimeInFullQuality"/>
+        <xsd:element ref="InclAgeing"/>
+        <xsd:element ref="InclPurchRecCount"/>
+        <xsd:element ref="InclReceiptCount"/>
+        <xsd:element ref="InclPurchRejCount"/>
+        <xsd:element ref="InclRejectionCount"/>
+        <xsd:element ref="InclPurchaseOrderCount"/>
+        <xsd:element ref="InclQtyVariance"/>
+        <xsd:element ref="InclPriceVariance"/>
+        <xsd:element ref="InclQtyInvoiced"/>
+        <xsd:element ref="InclQtyOutstanding"/>
+        <xsd:element ref="InclNetSlsValExTax"/>
+        <xsd:element ref="InclInvoiceCount"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TopBottomProductClasses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom Product Classes are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfProductClasses">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of Product Classes to include on the report. Default -10.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure the report will be sequenced in. AA-AvgAgeing, OP-AvgOrigPurchPrice, QO-SumQtyOrdered, QR-SumQtyReceived, PR-AvgPriceReceived, OQ-AvgOnTimeInFullQuality, RC-SumRejectCount, PC-AvgPOCount, QV-SumQtyVariance, PV-AvgPriceVariance, RQ-SumRejectionQty,PU-SumPurchRecCount,RE-SumRecCount,RJ-SumPurchRejCount. Default -AA.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="AA"/>
+        <xsd:enumeration value="OP"/>
+        <xsd:enumeration value="QO"/>
+        <xsd:enumeration value="QR"/>
+        <xsd:enumeration value="PR"/>
+        <xsd:enumeration value="OQ"/>
+        <xsd:enumeration value="RC"/>
+        <xsd:enumeration value="PC"/>
+        <xsd:enumeration value="QV"/>
+        <xsd:enumeration value="PV"/>
+        <xsd:enumeration value="RQ"/>
+        <xsd:enumeration value="PU"/>
+        <xsd:enumeration value="RE"/>
+        <xsd:enumeration value="RJ"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateSelection">
+    <xsd:annotation>
+      <xsd:documentation>The date selection required for the report. P-PO Date, D-Due Date, R-Received Date. Default -P.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;P=PO Date;D=Due Date;R=Received Date"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>The currency required for the report. Default -local currency.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="3"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclSubTotalsProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This will include details with subtotals per product class on the report. Y-Yes, N-No. Default -Y.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclOrigPurchPrice">
+    <xsd:annotation>
+      <xsd:documentation>This will include original purchase price on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclQtyOrdered">
+    <xsd:annotation>
+      <xsd:documentation>This will include quantity ordered on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclQtyReceived">
+    <xsd:annotation>
+      <xsd:documentation>This will include qty received on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclRejectionQty">
+    <xsd:annotation>
+      <xsd:documentation>This will include rejection quantities on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPriceReceived">
+    <xsd:annotation>
+      <xsd:documentation>This will include price received on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclOnTimeInFullQuality">
+    <xsd:annotation>
+      <xsd:documentation>This will include on time in full quality on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclAgeing">
+    <xsd:annotation>
+      <xsd:documentation>This will include ageing on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPurchRecCount">
+    <xsd:annotation>
+      <xsd:documentation>This will include purchase receipt count on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclReceiptCount">
+    <xsd:annotation>
+      <xsd:documentation>This will include receipt count on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPurchRejCount">
+    <xsd:annotation>
+      <xsd:documentation>This will include purchase rejection count on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclRejectionCount">
+    <xsd:annotation>
+      <xsd:documentation>This will include rejection count on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPurchaseOrderCount">
+    <xsd:annotation>
+      <xsd:documentation>This will include purchase order count on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclQtyVariance">
+    <xsd:annotation>
+      <xsd:documentation>This will include qty variance on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPriceVariance">
+    <xsd:annotation>
+      <xsd:documentation>This will include price variance on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclQtyInvoiced">
+    <xsd:annotation>
+      <xsd:documentation>This will include sales qty invoiced on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclQtyOutstanding">
+    <xsd:annotation>
+      <xsd:documentation>This will include sales qty outstanding on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclNetSlsValExTax">
+    <xsd:annotation>
+      <xsd:documentation>This will include net sales value excluding tax on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclInvoiceCount">
+    <xsd:annotation>
+      <xsd:documentation>This will include invoice count on the report. Y-Yes, N-No. Default -N.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of available filters</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Date"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="OrderAge"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Dates to print. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Product Classes to print. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderAge">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of Order Ages to print. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

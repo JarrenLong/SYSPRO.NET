@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Contact Management Query Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="Account">
+		<xsd:annotation>
+			<xsd:documentation>Allows filtering on Accounts. A-All,S-Single,R-Range,L-List</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmAccount;A=All;S=Single;R=Range;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActivityFollowUpFlag">
+		<xsd:annotation>
+			<xsd:documentation>Allows filtering on ActivityFollowUpFlag. A-All,S-Single,L-List</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmFollowupFlag;A=All;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActivityPriority">
+		<xsd:annotation>
+			<xsd:documentation>Allows filtering on ActivityPriority. A-All,S-Single,L-List</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;1=Low;3=Medium Low;5=Medium;7=Medium High;9=High;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="1"/>
+						<xsd:enumeration value="3"/>
+						<xsd:enumeration value="5"/>
+						<xsd:enumeration value="7"/>
+						<xsd:enumeration value="9"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActivityType">
+		<xsd:annotation>
+			<xsd:documentation>Allows filtering on ActivityType. A-All,S-Single,L-List</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmActivityType;A=All;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Allows filtering on Customers. A-All,S-Single,R-Range-L-List</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=ArCustomer;A=All;S=Single;R=Range;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string"/>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the child Folder node</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="Supplier"/>
+				<xsd:element ref="Account"/>
+				<xsd:element ref="ActivityType"/>
+				<xsd:element ref="ActivityFollowUpFlag"/>
+				<xsd:element ref="ActivityPriority"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeActivityMaxAge" default="ALL">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the maximum age of the activity that should be returned. Check the enumerators for the list of valid options</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;ALL=All activities;PTH=Previous Month;P2MTH=Previous 2 months;P3MTH=Previous 3 months;P6MTH=Previous 6 months;P9MTH=Previous 9 months;PYR=Past year;P2YR=Past 2 years;P3YR=Past 3 years"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="ALL"/>
+				<xsd:enumeration value="PTH"/>
+				<xsd:enumeration value="P2MTH"/>
+				<xsd:enumeration value="P3MTH"/>
+				<xsd:enumeration value="P6MTH"/>
+				<xsd:enumeration value="P9MTH"/>
+				<xsd:enumeration value="PYR"/>
+				<xsd:enumeration value="P2YR"/>
+				<xsd:enumeration value="P3YR"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeOrganizaitonAccounts" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the Account should be returned. Y-Yes, N-No Default-Y</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeOrganizaitonCustomers" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the Customer should be returned. Y-Yes, N-No Default-Y</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeOrganizaitonSuppliers" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the Supplier should be returned. Y-Yes, N-No Default-Y</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeActivities" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the activities should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeClearedActivities" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Activities that are cleared should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeAddresses" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Contact Addresses should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeMultimedia" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Contact multimedia should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeTelephone" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Contact telephone numbers should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeEmail" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Contact email addresses should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeUrl" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Contact url addresses should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeDate" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Contact dates should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFullBody" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the full body should be returned. Y-Yes, N-No Default-N</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Location" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Allows the filtering on the Location field. Wildcards are supported.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmLocation;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the child Options node</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IncludeOrganizaitonAccounts"/>
+				<xsd:element ref="IncludeOrganizaitonCustomers"/>
+				<xsd:element ref="IncludeOrganizaitonSuppliers"/>
+				<xsd:element ref="IncludeClearedActivities"/>
+				<xsd:element ref="IncludeActivities"/>
+				<xsd:element ref="IncludeAddresses"/>
+				<xsd:element ref="IncludeMultimedia"/>
+				<xsd:element ref="IncludeTelephone"/>
+				<xsd:element ref="IncludeEmail"/>
+				<xsd:element ref="IncludeUrl"/>
+				<xsd:element ref="IncludeDate"/>
+				<xsd:element ref="IncludeFullBody"/>
+				<xsd:element ref="IncludeActivityMaxAge"/>
+				<xsd:element ref="Regarding"/>
+				<xsd:element ref="Result"/>
+				<xsd:element ref="Location"/>
+				<xsd:element ref="UserField1"/>
+				<xsd:element ref="UserField2"/>
+				<xsd:element ref="UserField3"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root node</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Regarding" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Allows the filtering on the Regarding field. Wildcards are supported.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmRegarding;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Result" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Allows the filtering on the Result field. Wildcards are supported.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmResult;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserField1" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Allows the filtering on the UserField1 field. Wildcards are supported.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmActUser1;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserField2" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Allows the filtering on the UserField2 field. Wildcards are supported.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmActUser2;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserField3" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Allows the filtering on the UserField3 field. Wildcards are supported.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=CrmActUser3;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>Allows filtering on Suppliers. A-All,S-Single,R-Range,L-List</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=ApSupplier;A=All;S=Single;R=Range;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

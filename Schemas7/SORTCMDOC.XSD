@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the SO Add Maintain Credit Note Non-Merchandise 
+     Line Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SoCreditNoteNonMerchLine">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This node contains all the information required to add, change or delete a non-merchandise credit note line. It can appear multiple times.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence maxOccurs="unbounded">
+							<xsd:element name="CreditNoteNumber" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>Valid number of an existing credit note, to which lines are to be added, change or deleted. Mandatory.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CreditNoteLine" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>Credit note line number. For a change or a delete, this must be a line that exists on the credit note. This is ignored for a line that is to be added, where the line will be added at the end of the credit note. </xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="LineActionType" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The action to be performed for this credit note line. The action can be:  A - Add a credit note line, C - Change an existing credit note line, D - Cancel the credit note line.  If not given, the default action is assumed to be 'A' - Add.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="LineType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Type of line to be added or changed. This is mandatory for an added line, and if given for a changed or deleted line, then it must match the type of the selected line. Valid types are 4- Freight, 5 Miscellaneous, 6 - Comment.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="4"/>
+										<xsd:enumeration value="5"/>
+										<xsd:enumeration value="6"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Customer" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If entered it must be a valid SYPSRO customer, and must be the customer on the selected sales order credit note. This is used for verification purposes only.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CreditReason" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Valid credit note reason code if entered. This is used to change the credit reason on the line. It may also be required when cancelling the line.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Comment" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The comment will be spilt into separate lines up to the maximum comment length, keeping words whole on a line in order to save them on the sales order detail table. Please note when changing a credit note comment the whole comment will be deleted and overwritten by the new comment supplied unless the option to change a single comment line has been selected . Please note that when changing the comment lines you will not be able to add more comment lines than the original comment had unless the comment is the last line for the credit note. Additional comment lines will be discarded.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="AttachedLineNumber" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the detail line number to which the comment line must be attached. It is only used when adding a comment.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="DeleteAttachedCommentLines" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element will indicate if only this specific comment line should be deleted or the complete comment (if the comment spans over more than one line). Default N (No). (Y- yes will delete the entire comment that icludes the line supplied, N - No will only delete the specific comment line supplied).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value=""/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ChangeSingleCommentLine" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Only used if the comment is to be changed. Possible values Y (Yes) or N (No). The default is N(No). If the element is set  to 'Y', then only the comment line selected will be changed. In addition, the length of the element 'Comment' cannot be more than the maximum length of a single comment line. If set to 'N' then the comment lines from this line to the next non-comment line will be replaced by the contents of the element Comment.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value=""/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CommentType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The comment type specifies whether the comment is for the order only, or for both order and invoice. The valid entries are 'O' (Order only), and 'I' (Invoice and Order) and blank. The default is 'I'.  This is only used when adding a new comment line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value=""/>
+										<xsd:enumeration value="O"/>
+										<xsd:enumeration value="I"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LineValue" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the value of the freight or miscellaneous charge. The format is either positive or negative. The negative sign can either precede or follow the value.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="LineCost" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the cost of the freight or miscellaneous entry. The format is either positive or negative. The negative sign can either precede or follow the value.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MiscQuantity" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If using service charges, this is the quantity of the services charge when the charge is of type 'User'. The integers and decimals are as a SYSPRO quantity, either positive or negative, and the negative sign can precede or follow the value.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MiscPrice" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the price for a miscellaneous charge.  If entered it will override the price that has been set up for the charge.  Only valid when line type = 5.  </xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MiscProductClass" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the product class to be updated with the sales quantity and cost values for the miscellaneous charge. This is a mandatory element for a new line, unless a standard miecellaneous charge code is provided. The product class must be valid within SYSPRO. There must be a valid sales interface for the product class if relevant</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="TaxCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the tax code to be assigned to the freight charge. If this is present it must be a valid SYSPRO tax code.When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="LineNotTaxable" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to override the default tax status of the freight or miscellaneous detail line. If the order is subject to sales tax, then setting this element to 'Y' will cause the line to have no sales tax applied. The element may contain 'Y' (not taxable) or blank (default).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value=""/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="FstCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the Canadian Federal Sales Tax code to be assigned to this freight or miscellaneous charge. If the Canadian FST system is in use and a tax code is present, it must be valid within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="LineNotFstTaxable" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to override the default FST (Canadian tax system) status of the miscellaneous or freight detail line. If the order is subject to FST, then setting this element to 'Y' will cause the line to have no FST applied. The element may contain 'Y' (not taxable) or blank (default).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value=""/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="MiscDescription" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the description to appear with the miscellaneous charge. If presented the description takes precence over that of a charge code, or a standard comment code.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MiscStandardComment" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If presented, this must be a valid SYSPRO standard comment code. The comment from the code will be used to provide the description for the miscellaneous line, unless a description is given, when it will be used to override the comment code. The comment code is ignored if the line is derived from a charge code.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MiscChargeCode" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to select a standard service charge on which to base the miscellaneous line. It is only relevant when a line is added. If entered, it must represent a standard SYSPRO service charge code.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ChargeMerchAttachLine" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is only relevant when an attached service charge line is added and must contain the merchandise line to which it must be attached.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="MiscTariffCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This only applies if a charge code is used to instantiate the information in the miscellaneous charge line. If entered, the contents will be used as the tariff code for the line. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType/>
+							</xsd:element>
+							<xsd:element name="eSignature" type="xsd:string" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

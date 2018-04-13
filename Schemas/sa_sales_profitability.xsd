@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Analysis Profitability Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of options</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportType" minOccurs="0"/>
+				<xsd:element ref="ReportSequence" minOccurs="0"/>
+				<xsd:element ref="MonthToPrint" minOccurs="0"/>
+				<xsd:element ref="YearToPrint" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>Contains one or more filter to restrict the information returned.</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InvoiceDate" minOccurs="0"/>
+				<xsd:element ref="Branch" minOccurs="0"/>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+				<xsd:element ref="InvoiceNumber" minOccurs="0"/>
+				<xsd:element ref="CustomerClass" minOccurs="0"/>
+				<xsd:element ref="SalesPerson" minOccurs="0"/>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="ProductClass" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportType" default="1">
+		<xsd:annotation>
+			<xsd:documentation>The report can be printed for one of the following types:
+
+1 - Profitability report (default)
+2 - Manually entered prices 
+3 - Contract prices entered
+4 - Price margin overridden
+5 - Detail sales turnover report </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;1=Profitability report;2=Manually entered prices;3=Contract prices entered;4=Price margin overridden;5=Detail sales turnover report"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="5"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReportSequence" default="1">
+		<xsd:annotation>
+			<xsd:documentation>The report can be printed in one of the following sequences:
+
+1 - Register number (default) 
+2 - Invoice number 
+3 - Stock code</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;1=Register number;2=Invoice number;3=Stock code"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MonthToPrint">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the month (within the year entered), for which the report must be printed. 01 - 12. Default 01.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;01=01;02=02;03=03;04=04;05=05;06=06;07=07;08=08;09=09;10=10;11=11;12=12"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="01"/>
+				<xsd:enumeration value="02"/>
+				<xsd:enumeration value="03"/>
+				<xsd:enumeration value="04"/>
+				<xsd:enumeration value="05"/>
+				<xsd:enumeration value="06"/>
+				<xsd:enumeration value="07"/>
+				<xsd:enumeration value="08"/>
+				<xsd:enumeration value="09"/>
+				<xsd:enumeration value="10"/>
+				<xsd:enumeration value="11"/>
+				<xsd:enumeration value="12"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="YearToPrint" default="C">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the financial year for which the report must be printed. Valid values are: 'C' - Current year (default); 'P' - Previous year or a 4-digit field indicating the current or previous financial year.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;C=Current;P=Previous"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceDate">
+		<xsd:annotation>
+			<xsd:documentation>All - (default) Select this to print all unprinted invoices.                      
+Range 
+Select this to include invoices  in a certain date range.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this to include invoices for a specific date only.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales belonging to all branches.
+
+Single 
+Select this if you want to generate the report for sales belonging to a single branch only.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalBranch;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales in all warehouses.
+
+Single 
+Select this if you want to generate the report for sales for a single warehouse.
+</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InvoiceNumber">
+		<xsd:annotation>
+			<xsd:documentation>All - (default) 
+Select this to include sales for all invoices.
+                                
+Range 
+Select this to include sales belonging to a range of invoices.
+
+You indicate this range in the FilterValue element.              
+
+Single 
+Select this to include sales for a single invoice.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustomerClass">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales for all customer classes.
+
+Single 
+Select this if you want to include sales for a single customer class.
+
+Customer class 
+This indicates the single customer class for which you want to include customer sales.
+</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=TblCustomerClass;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SalesPerson">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales belonging to all salespersons.
+
+Range 
+Select this to include sales belonging to a range of salespersons.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this if you want to generate the report for customer sales for a single salesperson.
+</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalSalesperson;browsefilter=Branch;browsefilterbrowse=SalBranch;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales for all customers in the report.
+
+Range 
+Select this to include sales for a range of customers.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this if you want to generate the report for sales for a single customer.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ArCustomer;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales for  all stock codes.
+
+Range 
+Select this to include sales for a range of stock codes.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this if you want to generate the report for a single stock code.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>All - (default)
+Select this to include sales for all product classes.
+
+Range 
+Select this to include sales for a range of product classes.
+
+You indicate this range in the FilterValue element.
+
+Single 
+Select this if you want to generate the report for a single product class.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

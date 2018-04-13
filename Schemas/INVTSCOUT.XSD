@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="BatchCases" type="xsd:byte"/>
+	<xsd:element name="BatchPieces" type="xsd:byte"/>
+	<xsd:element name="BatchQuantity" type="xsd:decimal"/>
+	<xsd:element name="Bin" type="xsd:short"/>
+	<xsd:element name="CompanyName" type="xsd:string"/>
+	<xsd:element name="Header">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SystemDate"/>
+				<xsd:element ref="SystemTime"/>
+				<xsd:element ref="ProgramVersion"/>
+				<xsd:element ref="CompanyName"/>
+				<xsd:element ref="WarehouseCode"/>
+				<xsd:element ref="WarehouseDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="LineNumber"/>
+				<xsd:element ref="LineType"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="WarehouseCode"/>
+				<xsd:element ref="QtyCaptured"/>
+				<xsd:element ref="LoosePieces"/>
+				<xsd:element ref="Bin"/>
+				<xsd:element ref="Reference"/>
+				<xsd:element ref="Serial"/>
+				<xsd:element ref="Lot"/>
+				<xsd:element ref="LotExpiryDate"/>
+				<xsd:element ref="Version"/>
+				<xsd:element ref="Release"/>
+				<xsd:element ref="UnitOfMeasure"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ItemsRead" type="xsd:byte"/>
+	<xsd:element name="ItemsWithErrorsFound" type="xsd:byte"/>
+	<xsd:element name="LineNumber" type="xsd:byte"/>
+	<xsd:element name="LineType" type="xsd:string"/>
+	<xsd:element name="LoosePieces">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Lot" type="xsd:short"/>
+	<xsd:element name="LotExpiryDate" type="xsd:date"/>
+	<xsd:element name="ProgramVersion" type="xsd:string"/>
+	<xsd:element name="QtyCaptured" type="xsd:string"/>
+	<xsd:element name="RecordsIgnored" type="xsd:byte"/>
+	<xsd:element name="RecordsImported" type="xsd:byte"/>
+	<xsd:element name="Reference" type="xsd:string"/>
+	<xsd:element name="Release" type="xsd:byte"/>
+	<xsd:element name="Results">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BatchQuantity"/>
+				<xsd:element ref="BatchCases"/>
+				<xsd:element ref="BatchPieces"/>
+				<xsd:element ref="RecordsImported"/>
+				<xsd:element ref="RecordsIgnored"/>
+				<xsd:element ref="ItemsRead"/>
+				<xsd:element ref="ItemsWithErrorsFound"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Serial" type="xsd:short"/>
+	<xsd:element name="StockCode" type="xsd:hexBinary"/>
+	<xsd:element name="StockTake">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Header"/>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+				<xsd:element ref="Results"/>
+			</xsd:sequence>
+			<xsd:attribute name="Language" type="xsd:byte" use="required"/>
+			<xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+			<xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+			<xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+			<xsd:attribute name="Version" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SystemDate" type="xsd:date"/>
+	<xsd:element name="SystemTime" type="xsd:time"/>
+	<xsd:element name="UnitOfMeasure" type="xsd:string"/>
+	<xsd:element name="Version" type="xsd:byte"/>
+	<xsd:element name="WarehouseCode" type="xsd:string"/>
+	<xsd:element name="WarehouseDescription" type="xsd:string"/>
+</xsd:schema>

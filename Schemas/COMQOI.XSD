@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+      Schema for SYSPRO Office Integration Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="FileType">
+    <xsd:annotation>
+      <xsd:documentation>This is the FileType Element.When SO - the search options will be returned for the user The 'FileName' element is required. When PR - the users perference file will be returned. When AC - Info about the users activities will be returned. When CI - Configuration Information will be returned. When SF - The search file for the user is returned. When EI - an list of existing search files will be returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SO"/>
+        <xsd:enumeration value="PR"/>
+        <xsd:enumeration value="AC"/>
+        <xsd:enumeration value="CI"/>
+        <xsd:enumeration value="SF"/>
+        <xsd:enumeration value="EI"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This is the key element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="FileName">
+          <xsd:annotation>
+            <xsd:documentation>This is the FileName attribute and is required whe the 'FileType' element is SO.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element ref="FileType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

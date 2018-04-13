@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!-- 
+     This is an example XSD instance to demonstrate
+     use of the Sales Order Lines Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IncludeCommentLines" type="xsd:string"/>
+  <xsd:element name="IncludeFreightLines" type="xsd:string"/>
+  <xsd:element name="IncludeMiscLines" type="xsd:string"/>
+  <xsd:element name="IncludeNonStockedLines" type="xsd:string"/>
+  <xsd:element name="IncludeStockedLines" type="xsd:string"/>
+  <xsd:element name="Invoice">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="Invoice"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeStockedLines"/>
+        <xsd:element ref="IncludeNonStockedLines"/>
+        <xsd:element ref="IncludeFreightLines"/>
+        <xsd:element ref="IncludeMiscLines"/>
+        <xsd:element ref="IncludeCommentLines"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SalesOrder" type="xsd:short"/>
+  <xsd:element name="XslStylesheet">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

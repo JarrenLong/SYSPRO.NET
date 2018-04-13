@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Cost Unit of Measure Maintenance
+ Business Object Setup
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ConvFactor" type="xsd:byte">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the conversion factor (Rate). It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CostUom" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Cost Unit of Measure. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node,  it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="ConvFactor"/>
+        <xsd:element ref="MulDiv"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockingUom"/>
+        <xsd:element ref="CostUom"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MulDiv" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information whether the rate is multiplied or divided. It is mandatory. M - Multiply (Default) D - (Divide)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SetupInvCostInitOfMeasureMaint">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockingUom" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Stocking Unit of Measure. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

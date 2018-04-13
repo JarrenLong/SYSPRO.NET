@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Reserve Lots and Serials Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostReserveLotSerial">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence maxOccurs="unbounded">
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory. It specifies the job for which reserved lots/serials are being added/maintained. The format is 8 characters alphanumeric or 8 characters numeric depending on the key configuration for job within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CoProductLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the co-product line number for which reserved lots/serials are being added/maintained for a notional job. This element will be ignored if the job is not a notional job. The format is up to 6 characters numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory when adding/maintaining reserved lots/serials for an allocation. It specifies the stocked component for which reserved lots/serials are being added/maintained. The format is 30 characters alphanumeric or 15 characters numeric depending on the key configuration for stock code within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory when adding/maintaining reserved lots/serials for an allocation. It specifies the warehouse for the allocation for which reserved lots/serials are being added/maintained. The format is 2 characters alphanumeric. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="AllocationLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element specifies the allocation line for which reserved lots/serials are being added/maintained. This element is optional if there is only 1 allocation for the stock code. If there is more than 1 allocation for the stock code then the allocation line number must be supplied. If there is no allocation for the specified stock code, line number combination an error message will occur. The format is 2 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="2"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReserveLotSerial" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This is the top element for all reserved lots and serials that must be added/maintained for the parent part or allocation.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="Lot" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the reserve lot that must be added/maintained for the parent part or allocation. The lot must be in stock already when adding reserved lots for allocations with a positive quantity per. The format is up to 10 characters either alphanumeric or numeric, depending on the key configuration setup for lot within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LotExpiryDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the expiry date for the reserved lot. This element is optional and only applies when adding or changing a reserved lot for the parent part where the lot is not in stock already. If supplied it must contain a valid date in the format CCYY-MM-DD.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LotQuantity" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates the quantity to reserve for the lot. This element only applies when adding or changing a reserved lot. The lot must have an available quantity, equal or greater than the quantity to reserve, in stock when adding reserved lots for allocations with a positive quantity per. The format is signed numeric, with up to 7 integers and up to 3 decimals.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Bins" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the top element for the set of bins, for the current lot, affected by this transaction, if multiple bins is in used for the warehouse. This element only applies when adding/maintaining reserved lots for an allocation.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element name="BinLocation">
+                            <xsd:annotation>
+                              <xsd:documentation>This element contains the bin location of the reserved lot being added/maintained. The format is up to 6 characters alphanumeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="BinQuantity" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the quantity to reserve for the lot/bin combination. This element only applies when adding or changing a reserved lot for an allocation. The lot/bin combination must have an available quantity, equal or greater than the quantity to reserve, in stock when adding reserved lots for allocations with a positive quantity per. The format is signed numeric, with up to 7 integers and up to 3 decimals.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the top element for a set of reserved serials that must be added/maintained for the parent part or allocation.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element name="SerialNumber">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the reserve serial that must be added/maintained for the parent part or allocation. The serial must be in stock already when adding reserved serials for allocations with a positive quantity per. The format is up to 15 characters numeric or up to 20 characters alphanumeric, depending on the key configuration setup for serial within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="20"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="SerialQuantity" minOccurs="0"/>
+                          <xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+                          <xsd:element ref="SerialLocation" minOccurs="0"/>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="SerialRange" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is used to specify a prefix and suffix or starting serial number for a range of new reserved serial numbers to be generated. It is only valid when adding reserved serials for the parent part or for an allocation with a negative quantity per. It is only valid for manual serialized stock items. It has two formats, depending on the serial key type. If serial numbers are alphanumeric, a prefix and a suffix need to be supplied. If serial numbers are numeric, a starting serial number is required.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element name="SerialPrefix" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element specifies the prefix to be used when generating a range of alphanumeric serial numbers. Prefix + suffix cannot exceed the size of the serial number key which is 20 characters. Mandatory for alphanumeric serial numbers.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="15"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="SerialSuffix" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element specifies the suffix to be used when generating a range of alphanumeric serial numbers. The suffix element must be numeric. Prefix + suffix cannot exceed the size of the serial number key which is 20 characters. Mandatory for alphanumeric serial numbers.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="15"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="StartSerialNumber" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element specifies the starting serial number when generating a range of numeric serial numbers. Mandatory for numeric serial numbers.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="15"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="SerialQuantity"/>
+                          <xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+                          <xsd:element ref="SerialLocation" minOccurs="0"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="SerialAllocation" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element is used to specify a range of serial numbers that must be reserved for an allocation, in which case the serials must be in stock already. This element can also be used to specify a range of reserved serials that must be released or deleted. It is only valid when processing manual serialized stock items.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element name="FromSerialNumber">
+                            <xsd:annotation>
+                              <xsd:documentation>This element specifies the starting serial number to be allocated when adding reserved serials for an allocation or when releasing reserved serials for the parent part or allocation or when deleting reserved serials for the parent part or allocation. The format is up to 15 characters numeric or up to 20 characters alphanumeric, depending on the key configuration setup for serial within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="20"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="ToSerialNumber" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element specifies the ending serial number to be allocated when adding reserved serials for an allocation or when releasing reserved serials for the parent part or allocation or when deleting reserved serials for the parent part or allocation. If this element is not supplied, serial numbers will be allocated starting at the FromSerialNumber until the specified quantity has been allocated. The format is up to 15 characters numeric or up to 20 characters alphanumeric, depending on the key configuration setup for serial within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="20"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="SerialQuantity"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SerialExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the expiry date for the reserved serial or range of reserved serial numbers. This element is optional and only applies when adding or changing a reserved serial for the parent part where the serial is not in stock already. If supplied it must contain a valid date in the format CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialLocation">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the location of the reserved serial number or range of reserved serial numbers. This element is optional and only applies when adding or changing a reserved serial for the parent part where the serial is not in stock already. The format is up to 8 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialQuantity">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the quantity to reserve for the serial. If within the 'Serials' group and a manual serial, it can only be 1. If within the 'Serials' group this element only applies when adding or changing a reserved serial. If within the 'SerialRange' group, it is the total quantity to be reserved for the specified range. If within the 'SerialAllocation' group, it is the total quantity to be reserved for an allocation or released for the parent part or allocation or deleted for the parent part or allocation, for the specified range.The serial must have an available quantity, equal or greater than the quantity to reserve, in stock when adding reserved serials for allocations with a positive quantity per. The format is numeric, with up to 7 integers and up to 3 decimals.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

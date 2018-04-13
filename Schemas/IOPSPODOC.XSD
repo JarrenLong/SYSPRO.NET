@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for IO Forecasting Sales Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupIopPolicies">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="StockCode">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and the stock code provided must be stocked in specified warehouse.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Version" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory if stock is ECC-controlled at version or release level.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Release" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory if stock is ECC-controlled at release level.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory and the specified stock item must be stocked in the warehouse provided.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="EffectiveDate">
+                <xsd:annotation>
+                  <xsd:documentation>This is the date when the policy becomes effective for the item. The format must be CCYY-MM-DD. When adding a new policy for an item and the parameter to remove existing policies and to set date to period start are set then the period start end dates are calculated based on the forecast calendar using this date.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="10"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Reference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element can contain a  reference that will be held against the policy</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="50"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TargetServiceLevel" default="80.00" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the target service level you wish to achieve with this policy. If the policy is a risk based policy then it is used to calculate the number of days stock cover you require to achieve this. If the policy is fixed then this is used for historical comparison. The format is numeric 2.2</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="50.00"/>
+                    <xsd:enumeration value="55.00"/>
+                    <xsd:enumeration value="60.00"/>
+                    <xsd:enumeration value="65.00"/>
+                    <xsd:enumeration value="70.00"/>
+                    <xsd:enumeration value="75.00"/>
+                    <xsd:enumeration value="80.00"/>
+                    <xsd:enumeration value="81.00"/>
+                    <xsd:enumeration value="82.00"/>
+                    <xsd:enumeration value="83.00"/>
+                    <xsd:enumeration value="84.00"/>
+                    <xsd:enumeration value="85.00"/>
+                    <xsd:enumeration value="86.00"/>
+                    <xsd:enumeration value="87.00"/>
+                    <xsd:enumeration value="88.00"/>
+                    <xsd:enumeration value="89.00"/>
+                    <xsd:enumeration value="90.00"/>
+                    <xsd:enumeration value="91.00"/>
+                    <xsd:enumeration value="92.00"/>
+                    <xsd:enumeration value="93.00"/>
+                    <xsd:enumeration value="94.00"/>
+                    <xsd:enumeration value="95.00"/>
+                    <xsd:enumeration value="96.00"/>
+                    <xsd:enumeration value="97.00"/>
+                    <xsd:enumeration value="98.00"/>
+                    <xsd:enumeration value="99.00"/>
+                    <xsd:enumeration value="99.50"/>
+                    <xsd:enumeration value="99.60"/>
+                    <xsd:enumeration value="99.70"/>
+                    <xsd:enumeration value="99.80"/>
+                    <xsd:enumeration value="99.90"/>
+                    <xsd:enumeration value="99.99"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ServiceLevelMeasure" default="OLFR" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the measure required to calculate your historical service level. The options are 'OLFR' (Order line fill rate), 'OLOT' (Order line on time) 'OLIF' (Order line on time in full), 'OFR" (Order fill rate), 'OOT' (Order on time) and 'OTIF' (Order on time in full). If not submitted when adding then it defaults to OLFR.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="OLFR"/>
+                    <xsd:enumeration value="OLOT"/>
+                    <xsd:enumeration value="OLIF"/>
+                    <xsd:enumeration value="OFR"/>
+                    <xsd:enumeration value="OOT"/>
+                    <xsd:enumeration value="OTIF"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReviewFrequency" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the review or order frequency in days. The format is numeric 3</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaximumQuantity" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Enter a quantity here if you want to cap the calculated maximum quantity. This is used in all policy types and if it is zero then the maximum quantity defined against the warehouse for the stock code is used as the cap. The focmat is numeric 7.3.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="11"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PolicyType" default="F" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the type of policy. It can either be 'F' (fixed) or 'R' (risk). The default is 'F'</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="F"/>
+                    <xsd:enumeration value="R"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="FixedPolicyBase" default="Q" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the policy type is 'F' (fixed) then this is the base to use. It can either be 'Q' (quantity) or 'D' (Days cover). The default is 'Q'</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Q"/>
+                    <xsd:enumeration value="D"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MinimumQuantity" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the minimum quantity required for a fixed policy that is based on quantity. The format is numeric 7.3</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="11"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MinimumDaysCover" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the minimum number of days stock cover required for a fixed policy that is based on days cover. The format is numeric 3</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Algorithm" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the distribution algorithm to use when calculating the service level on a risk based policy. The valid entries are 'N' (Normal), 'P' (Poisson quantity) or'H' (Poisson hits) . The default is 'N'</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="H"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaximumDaysCover" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the cap in days to ensure that the minimum level calculated using a risk policy is not excessive. The fomat is numeric 3</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LeadTime" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the lead time variance that is added to the item's standard lead time when calculating the minimum levels in risk based policies. The format is numeric 3</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="3"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

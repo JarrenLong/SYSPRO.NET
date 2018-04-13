@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Goods in Transit Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>List of filters</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="GtrReference" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies what GtrReference number to return. If this element is empty no GtrReference check is made. Default empty. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeCompletedLines" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include completed transfers lines? (Y - Yes, N - No)  Default Y - Yes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCompletedTransfers" type="xsd:string" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include complete transfers ? (Y - Yes, N - No)  Default Y - Yes</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeFifoBuckets" type="xsd:string" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element gives an option to include FifoBuckets. Fifo records will be returned if you have fifo installed.  Y - Yes include , N -No do not include,  Default - N (No).  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeLotSerial" type="xsd:string" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element gives an option to include lots and serials. Lots are returned if they are installed and the item is traceable, and serials are returned if they are installed and the item is serialized, and they are both returned if (lots and serials) if both installed and the item is traceable and serialized.   Y - Yes include , N -No do not include,  Default - N (No).  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeSupplyChainTransfers" type="xsd:string" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element gives an option to include supply chain transfers. Y - Yes include , N -No do not include,  Default - Y (Yes).  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeTransactions" type="xsd:string" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>A transfer (warehouse transfer or supply chain transfer) can be made up of a number of transactions. This element gives an option to return the query with the transfer transaction(s). Y - Yes include , N -No do not include,  Default - Y (Yes).  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeWarehouseTransfers" type="xsd:string" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element gives an option to include records created during warehouse transfer. Y - Yes include , N -No do not include,  Default - Y (Yes).  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeZeroOutstandingQty" type="xsd:string" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This element gives an option to include records where the quantity received is the same as the original quantity. Y - Yes include , N -No do not include,  Default - Y (Yes).  </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>The key specifies what records to return. If the key is empty, all the records will be returned.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GtrReference"/>
+				<xsd:element ref="SourceWarehouse"/>
+				<xsd:element ref="TargetWarehouse"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>The list of options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IncludeWarehouseTransfers"/>
+				<xsd:element ref="IncludeSupplyChainTransfers"/>
+				<xsd:element ref="IncludeCompletedTransfers"/>
+				<xsd:element ref="IncludeZeroOutstandingQty"/>
+				<xsd:element ref="IncludeCompletedLines"/>
+				<xsd:element ref="IncludeTransactions"/>
+				<xsd:element ref="IncludeLotSerial"/>
+				<xsd:element ref="IncludeFifoBuckets"/>
+				<xsd:element ref="XslStylesheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>The root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SourceWarehouse" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies the source warehouse to use. If this element is empty no restriction on the source warehouse is made. That is if the source warehouse is empty and the target warehouse is not empty, then all the records with that target warehouse and any source warehouse are returned. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TargetWarehouse" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element specifies the target warehouse to use. If this element is empty no restriction on the target warehouse is made. That is if the source warehouse is not empty and the target warehouse is empty, then all the records with that source warehouse and any target warehouse are returned. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

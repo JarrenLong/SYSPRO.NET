@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AR Invoice GL distribution Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ActionType">
+		<xsd:annotation>
+			<xsd:documentation>This element idicates whether all outstanding registers should be posted or only a single register. If you select to post a single register then the year, month and register number must be provided on the XML in. The valid valued are A - All and S - Single. A default value of A is ued.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ApplyIfEntireDocumentValid">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates whether the entire document must be validated prior to any posting taking place. If set to 'N', each item is validated and rejected if in error or posted if correct. This is the fastest option. If set to 'Y', all items in the document are first validated.If the entire document is valid then items are posted.Default  is 'Y'. Valid values are 'Y' and 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IgnoreWarnings">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings such as 'Ledger code on hold'. (N - No, Y - Yes, W - give a warning message but don't reject the transaction) Default is 'N'</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="W"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+				<xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+				<xsd:element ref="ValidateOnly" minOccurs="0"/>
+				<xsd:element ref="ActionType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostArInvoice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Parameters" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ValidateOnly">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No posting will take place. If set to 'N', each item is validated and posting is performed based on the value of the element 'ApplyIfEntireDocumentValid'. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

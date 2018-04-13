@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Stock Code Warehouse Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="UserForPorder">
+    <xsd:annotation>
+      <xsd:documentation>This is the User Code the requisition should be forwarded to in order to create a purchase order. Format is 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="3"/>
+        <xsd:minLength value="0"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SetupReqGroupAuthority">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain a single requisition group with an optional product class. NOTE: The information held within the key element is mandatory for the requisition group, the product class can be optional, depending on how the approval was set up. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="NextUser" minOccurs="0"/>
+        <xsd:element ref="MaxApproveValue" minOccurs="0"/>
+        <xsd:element ref="UserForPorder" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain a requisition group that can be linked to a product class.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="RequisitionGroup"/>
+        <xsd:element ref="ProductClass"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="NextUser">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the user code that the requisition should be forwarded to in the routing. The format is 3 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>The product class being linked to the Requisition group. Note that the characters . and ! are reserved in SYSPRO and therefore cannot be used as a product class. The format is 4 characters alphanumeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaxApproveValue">
+    <xsd:annotation>
+      <xsd:documentation>The maximum requisition approval value that is to be assigned to the Requisition Group. The format is 12.2 positive numeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="16"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionGroup">
+    <xsd:annotation>
+      <xsd:documentation>The element contains the value of the Requisition Group being maintained. The format is up to 6 characters alphanumeric, or 15 characters numeric depending on a configuration option within SYSPRO.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

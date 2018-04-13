@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for AR Invoice Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="FixedExchangeRate">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. Only relevant if the 'TransactionCode' element has a value of 'I'. If the SYSPRO customer is a local currency  the value of this element is ignored.  It is mainly used to ignore invoices for revaluation. Valid values 'Y' and 'N'</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="eSignature">
+		<xsd:annotation>
+			<xsd:documentation>eSignature tag for use outside SYSPRO environment. This element must contain a GUID, in the format {36303032-3330-3031-3038-323434363433}, for the eSignature system to accept the transaction as having been authenticated.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Branch">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.If this element is not supplied or if spaces are specified against this element, then the branch against the SYSPRO customer will be used, otherwise the branch supplied against this element will be used. The branch must be a valid SYSPRO branch.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CostValue">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.  This is the cost value of the transaction in local currency.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element. Enter the SYSPRO customer applicable to the transaction. This must be a valid SYSPRO customer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExchangeRate">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If the SYSPRO customer is a local currency customer the value of this element is ignored and an exchange rate of 1 is always used. For foreign currency SYSPRO customers, the following rules apply: If this element is not supplied or a value of zero is supplied, the exchange rate against the SYSPRO currency code is used as the default. If this element is supplied and the SYSPRO currency code is setup with a non-fixed exchange rate, then the value against the element is used. If this element is supplied and the SYSPRO currency code is setup with a fixed exchange rate, then the value against the element must match the exchange rate setup against the SYSPRO currency code. If a debit or credit note is posted against an existing invoice, the exchange rate against the original invoice is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If this is supplied, then this is the tax code that will be used for the transaction.  If not, the default tax code against AR Setup will be used. 
+When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GSTValue">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.This is the GST value of the transaction in the customers currency. This will only be used if the customer is defined as non-exempt from GST in the Customer setup or the tax status is being overriden to non-exempt and Automatic tax calculation is set to ‘N’
+The SYSPRO nationality code must be defined as CAN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GenerateInvoiceNumber" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.  If invoice numbering is by 'Company', then this is only available if A/R invoice key type is numeric. If invoice numbering is by 'Branch', then this element is available irrespective of the A/R invoice key type.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GeographicArea">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.If this element is not supplied or if spaces are specified against this element, then the geographic area against the SYSPRO customer will be used, otherwise the geographic area supplied against this element will be used. The geographic area must be a valid SYSPRO geographic area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Invoice">
+		<xsd:annotation>
+			<xsd:documentation>Enter the invoice number for the transaction if not selecting to Generate Invoice Number.  If the A/R invoice key type is alphanumeric then an invoice number is mandatory.  If an invoice number is given as well as the 'Generate Invoice Number' being set to yes, this invoice number will be ignored and a system number will be generated.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceDate">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If this element is not supplied or if zeroes are entered against this element, the current system date will be used as the default.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceTerms">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.If this element is not supplied or if spaces are specified against this element, then the invoice terms against the SYSPRO customer will be used, otherwise the invoice terms supplied against this element will be used. The invoice terms must be a valid SYSPRO invoice terms.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceValue">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element. Enter the transaction value in the customer's currency. This may not be a negative value, the system will convert it to be negative for credit notes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence maxOccurs="unbounded">
+				<xsd:element ref="eSignature" minOccurs="0"/>
+				<xsd:element ref="TransactionType"/>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="PostToExistingInvoice" minOccurs="0"/>
+				<xsd:element ref="GenerateInvoiceNumber" minOccurs="0"/>
+				<xsd:element ref="Invoice" minOccurs="0"/>
+				<xsd:element ref="InvoiceDate" minOccurs="0"/>
+				<xsd:element ref="Reference" minOccurs="0"/>
+				<xsd:element ref="InvoiceValue"/>
+				<xsd:element ref="FixedExchangeRate" minOccurs="0"/>
+				<xsd:element ref="ExchangeRate" minOccurs="0"/>
+				<xsd:element ref="Taxable" minOccurs="0"/>
+				<xsd:element ref="TaxCode" minOccurs="0"/>
+				<xsd:element ref="TaxValue" minOccurs="0"/>
+				<xsd:element ref="GSTTaxable" minOccurs="0"/>
+				<xsd:element ref="GSTTaxCode" minOccurs="0"/>
+				<xsd:element ref="GSTValue" minOccurs="0"/>
+				<xsd:element ref="CostValue" minOccurs="0"/>
+				<xsd:element ref="ProductClass"/>
+				<xsd:element ref="InvoiceTerms" minOccurs="0"/>
+				<xsd:element ref="GeographicArea" minOccurs="0"/>
+				<xsd:element ref="Salesperson" minOccurs="0"/>
+				<xsd:element ref="Branch" minOccurs="0"/>
+				<xsd:element ref="USATaxable" minOccurs="0"/>
+				<xsd:element ref="StateExtTax" minOccurs="0"/>
+				<xsd:element ref="CountyZipExtTax" minOccurs="0"/>
+				<xsd:element ref="CityExtTax" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostArInvoices">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostToExistingInvoice" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.  This is only available when processing a credit note or debit note, and the 'Generate Invoice Number' option is set to No.  The existing invoice number must then be input in the Invoice element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element. Enter the SYSPRO product class applicable to the transaction. This must be a valid SYSPRO product class.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Reference">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If the transaction is being posted to a Sub Account and the user has not given a Reference, then the store number from the customer master file will be used as the reference.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Salesperson">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.If this element is not supplied or if spaces are specified against this element, then the salesperson against the SYSPRO customer will be used, otherwise the salesperson supplied against this element will be used. The salesperson must be a valid SYSPRO salesperson.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxValue">
+		<xsd:annotation>
+			<xsd:documentation>Optional element.This is the tax value of the transaction in the customers currency. This will only be used if the customer is defined as non-exempt in the Customer setup or the tax status is being overridden to non-exempt and Automatic tax calculation is set to ‘N’.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionType">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.  Enter the transaction type. 'I' = Invoice, 'D' = Debit note, 'C' = Credit note</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GSTTaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. If this is supplied, then this is the tax code that will be used for the transaction.If not, the default GST tax code against AR Setup will be used. 
+This element will only be used if nationality is CAN.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StateExtTax">
+		<xsd:annotation>
+			<xsd:documentation>The State code portion of the extended tax code (USA Advanced Geo codes or USA AVP Sales tax). The other portions are ‘CountyZip’ and ‘City’. If all three portions are blank, the tax code from the customer is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CountyZipExtTax" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The County (USA Advanced Geo codes) or Zip code (USA AVP Sales tax) portion of the extended tax code. The other portions are ‘State’ and ‘City’. If all three portions are blank, the tax code from the customer is used.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CityExtTax" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The City portion of the extended tax code (USA Advanced Geo tax or USA AVP Sales tax). The other portions are State and CountyZip. If all three portions are blank, the tax code from the customer is used.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Taxable" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. This specifies whether tax will be charged for the specified customer. Valid values ‘N’-Non-Exempt and ‘E’-Exempt.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GSTTaxable" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. This specifies whether tax will be charged for the specified customer. Valid values ‘N’- Non-Exempt and ‘E’- Exempt. The GST taxable is only used if nationality code is set to ‘CAN’ and Canadian GST is required.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="USATaxable" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Optional element. This specifies whether extended tax will be charged for the specified customer. Valid values ‘N’- Non-Exempt and ‘E’- Exempt. This is only applicable if the nationality is ‘USA’ or ‘CAN’ and tax system has been set to ‘USA tax by advanced geocodes’ or ‘USA AVP sales tax system’.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

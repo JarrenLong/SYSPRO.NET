@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the General Ledger Post Commitment Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostGlCommitments">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to post a commitment transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="PostAction" default="A" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the type of action required for the item - valid entries are A - Add , C - Change, D -Delete. The entry in this elemnt controls the validation of all the other elements. If not entered, the default is 'A'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="C"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TypeOfCommitment" default="R" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This describes the type of commitment being added, or the type of commitment which is required after a change. The valid values are R - Requistion, P - Purchase Order, C - User entry - committed, U - User entry, uncommitted. The default is 'R'. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="R"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value="C"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LedgerCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the ledger code for the transaction. It is manadatory for an Add and a Change. If required, then it must be a valid SYSPRO ledger code. The format is 15 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PasswordForLedgerCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is required if the type of commitments is a user entry, and the ledger code entered requires a password. The format is 4 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CommitmentDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The commitment date is required to derive the period for an added or changed transaction. The date is ignored for a deletion. The date may be zero, in which case the transaction is considered unallocated. If entered, the date must be in the format CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CommitmentValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The commitment value is required for an added or changed transaction, and cannot be zero. for a changed transaction, this element represents the new value. It is ignored for a deletion. The format is numeric 12.2 with optional sign.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CommitmentReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the reference for the transaction. It is manadatory for an Add or Change. The element will contain the requisition number for a commitment type 'R', the purchase order number for a  commitment type 'P', and the users own reference for other types of commitment. The format is up to 30 characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CommitmentRefLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the line number of the reference for the transaction. The element will contain the requisition line number for a commitment type 'R', the purchase order line number for a  commitment type 'P', and the users own reference line number for other types of commitment.  It may contain zero. The format is up to 4 characters numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CommitmentSourceKey" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only required for a change, and is only used when the transaction posting is requested by a SYSPRO process. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigTypeOfCommitment" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the type of commitment being changed or deleted, and is used to locate the original transaction. It is mandatory for a change or for a deletion. The valid values are R -Requistion, P -Purchase Order, C - User entry - committed, U -User entry, uncommitted. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="R"/>
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigLedgerCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the original ledger code for the transaction. It is manadatory for a Change and for a Delete. If required, then it must be a valid SYSPRO ledger code. The format is 15 characters alphanumeric. It may be the same as the ledger code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="15"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigCommitmentDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The original commitment date is required to locate the transaction to be changed or deleted. The date may be zero if the date on the original transactin was zero. If entered, the date must be in the format CCYY-MM-DD.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigCommitmentReference" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the reference for the original transaction which is  to be changed or deleted. The element will contain the requisition number for a commitment type 'R', the purchase order number for a  commitment type 'P', and the users own reference number for other types of commitment.  The format is up to 30characters alphanumeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigCommitmentRefLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the line number of the reference for the original transaction which is  to be changed or deleted. The element will contain the requisition line number for a commitment type 'R', the purchase order line number for a  commitment type 'P', and the users own reference line number for other types of commitment.  It may contain zero. The format is up to 4 characters numeric.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrigCommitmentSourceKey" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only required for a deletion, and is only used when the transaction posting is requested by a SYSPRO process. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="40"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

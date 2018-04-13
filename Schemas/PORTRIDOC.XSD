@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Purchase Order Inspection Reverse Business Object
+--> 
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostPoInspectionReverse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for the set of data required for reversing an inspection receipt for a purchase order line. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="PurchaseOrder">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory and contains the Purchase Order being reversed.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PurchaseOrderLine">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory and contains the Purchase Order line being reversed.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Warehouse" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is optional, and if supplied, must be the same as the warehouse on the purchase order line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is optional, and if supplied, must be the same as the stockcode on the purchase order line.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Quantity" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory if stock code is not a unit-qty type stock code. If it is a unit-qty type stock code and this element is supplied, the units and pieces elements must NOT be supplied. It must not be negative.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Units" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. None of the quantity fields may be negative.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="7"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Pieces" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If stock code is a unit-qty type stock code and quantity element is not supplied, the quantity of the transaction must be supplied as units and pieces. At least one of these elements must be supplied. None of the quantity fields may be negative.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="3"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GRNNumber">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory when reversing a quantity. It must refer to an item already in inspection</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="9"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Lot" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is optional, and if supplied, must be the same as the lot number on the inventory inspection control file.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PurchaseOrderLineComplete" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element allows the purchase order line to be set to complete upon completion of the reversed  receipt. When set to a Y, the purchase order line will be marked as complete, regardless of the quantity remaining.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>A set of serial numbers and relevant information must be supplied if stock item specified is serialized, and a partial quantity is being reversed. If no information is entered in this group, it must be removed  when processing serialised items, provided the serial allocation group has been defined.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:sequence>
+										<xsd:element name="SerialNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Serial number being reversed from stock.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SerialQuantity" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element is mandatory and specifies the quantity to reverse for the specified serial number. If within the 'Serials' group and manual serial, it can only be 1. If within the 'SerialRange' group, it is the total quantity in the stocking unit of measure, to be reversed for the specified range.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SerialUnits" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If stock code is a unit-qty type stock code and the SerialQuantity element is not supplied, the quantity of each serial must be supplied as units and pieces. At least one of these elements must be supplied. None of the quantity fields may be negative.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="7"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SerialPieces" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If stock code is a unit-qty type stock code and the SerialQuantity element is not supplied, the quantity of each serial must be supplied as units and pieces. At least one of these elements must be supplied. None of the quantity fields may be negative.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="SerialAllocation" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>This element is used to specify a range of serial numbers to be allocated. It is only valid when processing negative receipts for manual serialized stock items. If no information is entered in this group, it must be removed when processing serialised items, provided the serials group has been defined.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:sequence>
+										<xsd:element name="FromSerialNumber">
+											<xsd:annotation>
+												<xsd:documentation>This element specifies the starting serial number to be allocated when processing negative receipts.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ToSerialNumber">
+											<xsd:annotation>
+												<xsd:documentation>This element specifies the endingserial number to be allocated when processing negative receipts. If this element is not supplied, serial numbers will be allocated starting at the FromSerialNumber until the specified quantity has been allocated.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SerialQuantity" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>It is the total quantity to be received for the specified allocation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="11"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

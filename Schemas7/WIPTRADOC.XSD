@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Reserving Stock Allocations Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostWipReserving">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence maxOccurs="unbounded">
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Job">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory. It specifies the job for which reserving/releasing  stock for allocations is being applied. The format is alphanumeric or numeric depending on the key configuration for job within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory when reserving/releasing a single job allocation. This element is also mandatory when increasing or decreasing the reserved quantity against an allocation. It specifies the stocked component for which reserving/releasing/increase/decrease is being applied. The format is alphanumeric or numeric depending on the key configuration for stock code within SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is mandatory when reserving/releasing a single job allocation. This element is also mandatory when increasing or decreasing the reserved quantity against an allocation. It specifies the warehouse for the allocation for which reserving/releasing/increase/decrease is being applied.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Line" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element specifies the allocation line for which reserving/releasing is being applied. This element specifies the allocation line when increasing or decreasing the reserved quantity against an allocation. This element is optional if there is only 1 allocation for the stock code. If there is more than 1 allocation for the stock code then the allocation line number must be supplied. If there is no allocation for the specified stock code, line number combination an error message will occur.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="QuantityToReserve" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the quantity to reserve when reserving stock for a single allocation (TransactionType = 'V'). If this element is not supplied then the quantity to reserve will be calculated based on what is required against the allocation and the quantity available. This element also indicates the quantity to increase or decrease reserving by for an allocation and is mandatory when the transaction type is 'I' or 'D'. Important note - If manufacturing unit of measure is switched on and the allocation is required in its manufacturing unit of measure  then the quantity to reserve will need to be supplied in the manufacturing unit of measure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

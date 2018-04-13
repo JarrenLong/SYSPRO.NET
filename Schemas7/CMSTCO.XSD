@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the parameters used by the Contact Management Post Contact Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostContact">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Parameters">
+					<xsd:annotation>
+						<xsd:documentation>This element contains the optional parameter elements.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ActionType" default="A">
+								<xsd:annotation>
+									<xsd:documentation>This denotes the maintenance function against the entries i.e. A (Add), C (Change). Default to A (Add).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="D"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="ContactIdType">
+								<xsd:annotation>
+									<xsd:documentation>This denotes which item supplied will be used to read the contact by or if a GUID must be generated. ({guid}/{fullname}/{email}/{telephone}/{governmentid} - the contact will be read by this item, {generate} - GUID must be generated)</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AlwaysApplyAll" default="Y">
+								<xsd:annotation>
+									<xsd:documentation>This denotes that the date element will be ignored when adding/changing an element. ie. all contacts will be updated regardless of the date that the fields were last changed. (Y - ignore, N - do not ignore)</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="OrganizationList" default="A">
+								<xsd:annotation>
+									<xsd:documentation>This denotes whether the list of Organizations supplied are to be added to the existing organizations for this contact or if they are to replace the existing organizations. (A - Add, R - Replace). Default to A.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

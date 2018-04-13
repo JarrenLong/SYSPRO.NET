@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema to demonstrate
+     use of the Sales Order Release Kit Quantities Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostSorKitRelease">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element for Sales Order Release Kit Quantities</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Customer" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Entry in the Customer element is optional, but if supplied will be validated against the Sales order header file. The maximum length is controlled by the current version of SYSPRO. If customer numeric key - must be a valid numeric value.  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="SalesOrder" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Must be supplied. The maximum length is controlled by the current version of SYSPRO. Must be a valid numeric value if sales order key for the company is numeric. Sales order must be on file. Sales order status may not be Cancelled, Complete, In process, a Forward order or in Suspense. If the order is Scheduled, then the parent line selected must be within the period for shipping.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine" type="xsd:string">
+                <xsd:annotation>
+                  <xsd:documentation>Must be supplied. Must be a valid numeric value. Sales order line must exist on the sales order detail file and must be a stocked line containing a kit parent stock code of kit type K or S. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Stock code is optional. May not be more than 30 characters for alphanumeric key type and 15 characters for numeric key type (must be valid numeric value if numeric key type). Stock code will be validated against the Inventory master file if supplied, and must be valid for the sales order line selected. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Warehouse" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Warehouse is optional. The maximum length is controlled by the current version of SYSPRO. Warehouse will be validated against the Warehouse master file if supplied, and must be valid for the sales order line selected. </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Quantity" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Must be supplied for a stock code that does not make use of unit quantity processing. The quantity can still be supplied for a stock code that makes use of unit quantity processing, but then the units and pieces must NOT be supplied for that item. The maximum length and number of decimals is controlled by the current version of SYSPRO. The number of decimals will be validated against the number of decimals required for the stock code. The quantity supplied must be in the order unit of measure unless a specific unit of measure is entered.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UnitOfMeasure" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Unit of measure of the stock being released. This may only be the order unit of measure, or the stocking unit of measure. This unit of measure will apply to only the parent - components are always supplied in stocking unit of measure. If the element is not supplied it will default to the order unit of measure for the stock code.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Units" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Must contain the number of units to ship for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value. Either the quantity or Units and Pieces must be supplied for the item.  The maximum length is controlled by the current version of SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Pieces" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Must contain the number of pieces to ship for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  The maximum length is controlled by the current version of SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ReleaseNegativeParent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If set to "Y', then the parent line must contain a negative order and back order quantity.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ComponentAllocations" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ComponentLine" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>The component node only needs to be supplied if the component part is lot traceable, serialized, or requires bins. The node will be ignored for lines that do not require detailed allocations, and the component quantity calculated will be shipped automatically.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ComponentStockCode" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Stock code is optional, but if supplied must correspond to the stock code on the component line provided. The maximum length is controlled by the current version of SYSPRO. The entry must be valid numeric value if numeric key type. Stock code will also be validated against the Inventory master file. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Lot" type="xsd:string" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>A lot must be supplied if the stock code is lot traceable. The maximum length is controlled by the current version of SYSPRO. If the key lot type for the company is numeric the lot supplied must be a valid numeric value. The lot supplied will be validated against the Lot traceable file for the stock code. Lots do not have to be supplied if Automatic depletion is in use - unless the stock item is both lot traceable and serialized.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>The quantities supplied for all serial numbers must add up to the ship quantity calculated for the component line based on the parent quantity to ship. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="SerialNumber" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>At least one serial number must be supplied if Serial tracking is required and the stock item is a serialized item. The maximum length is controlled by the current version of SYSPRO. Must be valid numeric value if numeric key type.  Serial number must exist on file and have stock for manual and batch serial numbers if stock code is flagged as 'capture serial numbers at receipt' or 'capture serial numbers during order entry'.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="SerialQuantity" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>A serial quantity must be supplied for each serial number if the stock code does not make use of unit quantity processing. If the stock item makes use of unit processing - the quantity can either be supplied as a decimal value or else as Units and Pieces. Unit quantity processing will only apply to a batch serial item. The maximum length and number of decimals is controlled by the current version of SYSPRO and the characteristics of the stock code.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="SerialUnits" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Must contain the number of units to release for a batch Serial for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value. The maximum number of units is controlled by the current version of SYSPRO and the characteristics of the stock code.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="SerialPieces" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Must contain the number of pieces to release for a batch Serial for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value. The maximum number of pieces is controlled by the current version of SYSPRO and the characteristics of the stock code.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="Bins" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the top element for the set of bins affected by this transaction, if multiple bins is installed. If the warehouse for the associated detail line does not make use of multiple bins, then any entries in the 'Bins' node will be ignored.
+
+The quantities supplied for all bins must add up to the ship quantity calculated for the component line based on the parent quantity to ship. 
+
+Bins do not have to be supplied if Automatic depletion is in use - unless the stock item is both lot traceable and serialized.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="BinLocation" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>At least one bin must be supplied if the company makes use of multiple bins, and the warehouse on the detail line also uses multiple bins.The maximum length is controlled by the current version of SYSPRO. Will be validated against the inventory Bin file for the stock code. The quantities supplied for all bins must add up to the required component quantity. </xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="BinQuantity" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>A bin quantity must be supplied for every bin location supplied if the stock code does not make use of unit quantity processing. If the stock item makes use of unit processing - the quantity can either be supplied as a decimal value or else as Units and Pieces. The maximum length and number of decimals is controlled by the current version of SYSPRO and the characteristics of the stock code.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="BinUnits" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Must contain the number of units to release for a Bin location for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  The maximum length is controlled by the current version of SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="BinPieces" type="xsd:string" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Must contain the number of pieces to release for a Bin location for a stock code that makes use of unit quantity processing, if the quantity is not supplied as a decimal value.  The maximum length is controlled by the current version of SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

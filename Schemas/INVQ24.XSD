@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Goods in Inspection Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Warehouse"/>
+				<xsd:element ref="StockCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeNonStockedItems" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Use this element if you would like to include non stock items on your report. N - No; Y - Yes. Default  Y - Yes</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeRevisionRelease" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Use this element if you would like to include the revision and release information on the report. N - No; Y - Yes. Default  Y - Yes</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IncludeSerialNumbers" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Use this element if you would like to include the serial numbers of the stock codes on the report. N - No; Y - Yes. Default  Y - Yes</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NewPagePerWarehouse" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element is only relevant when producing a report, and if selected will cause the reoprt to print a new page for each new warehouse. The use of this element does not affect the XML returned. N - No; Y - Yes. Default  Y - Yes</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IncludeNonStockedItems"/>
+				<xsd:element ref="IncludeSerialNumbers"/>
+				<xsd:element ref="NewPagePerWarehouse"/>
+				<xsd:element ref="IncludeRevisionRelease"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root node</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the stock code(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify a warehouse to query. A - All; S - Single. Default A - All </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

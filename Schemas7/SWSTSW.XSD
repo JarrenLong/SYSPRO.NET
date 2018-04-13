@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SYSPRO Workflow Services Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="FileName" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The name of the file that must be returned.  In most case this field is optional.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FileType">
+    <xsd:annotation>
+      <xsd:documentation>The code of the FileType that must be returned. PR- Preference, AL - Audit Log.  This value is mandatory. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="PR"/>
+        <xsd:enumeration value="AL"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>The is the child Key element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FileType"/>
+        <xsd:element ref="FileName" minOccurs="0"/>
+        <xsd:element name="AuditMessage" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Can be used when the FileType is AL.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostSwstsw">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

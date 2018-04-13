@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Bom Element Structure Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DriverQty" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>Assign a measure of relative importance to the cost defined against a particular product. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Element" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Indicate the element you want to assign to the stock item. Up to 20 elements can be assigned to each incident held against a stock item.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Incident" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the point of transition at which the recovery of costs must take place. Values can be P(Pre-production), M(Manufacturing) or S(Sales).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to BOM ABC Element Structure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Route"/>
+        <xsd:element ref="DriverQty"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain a BOM ABC Element Structure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Incident"/>
+        <xsd:element ref="Element"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Route">
+    <xsd:annotation>
+      <xsd:documentation>You can assign a specific route for the structure or all routes. If this element is left blank, all routes assumed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="SetupAbcElementStructure">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for BOM ABC Element Structure Maintenance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode" type="xsd:hexBinary">
+    <xsd:annotation>
+      <xsd:documentation>Indicate the stock code against which you want to assign elements of cost. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

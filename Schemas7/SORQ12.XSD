@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Backlog by Stock Code Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of branches ( A - All (default) or S - Single). If single(S) is selected, a branch must be supplied as FilterValue.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of currencies ( A - All (default) or S - Single). If single(S) is selected, a currency must be supplied as FilterValue.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DateSelection" default="A">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the which date is to be checked ( A - All (default), E - Order Entry date, S - Ship date or T - Status). If any selection other than A (All) is selected, a date range must be supplied in the FromDate and ToDate elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FromDate">
+    <xsd:annotation>
+      <xsd:documentation>Enter a date where selection must start, if DateSelection is not set to 'A' (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ToDate">
+    <xsd:annotation>
+      <xsd:documentation>Enter a date where selection must end, if DateSelection is not set to 'A' (All).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="OrderType" minOccurs="0"/>
+        <xsd:element ref="Currency" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeNegBackOrderQty" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not order lines with a negative backorder quantity must be displayed. Valid values are N - No (default) or Y - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonAllocSchedOrders" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not non-allocated scheduled orders must be displayed. Valid values are Y - Yes (default) or N - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options available.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="OrderStatusSelection" minOccurs="0"/>
+        <xsd:element ref="PrintOnlyIfStockOnHand" minOccurs="0"/>
+        <xsd:element ref="PrintOnlyIfBackOrderQty" minOccurs="0"/>
+        <xsd:element ref="PrintCustomerPO" minOccurs="0"/>
+        <xsd:element ref="PrintParentsOfKitsKorS" minOccurs="0"/>
+        <xsd:element ref="IncludeNonAllocSchedOrders" minOccurs="0"/>
+        <xsd:element ref="IncludeNegBackOrderQty" minOccurs="0"/>
+        <xsd:element ref="ShowValuesIn" minOccurs="0"/>
+        <xsd:element ref="RevisionRelease" minOccurs="0"/>
+        <xsd:element ref="DateSelection" minOccurs="0"/>
+        <xsd:element ref="FromDate" minOccurs="0"/>
+        <xsd:element ref="ToDate" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderStatusSelection" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Order status to be included in the report.
+A - All (default)
+B - Booked
+K - Backorder
+F - Forward order
+O - Open order</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="T"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of order types ( A - All (default) or S - Single). If single(S) is selected, an order type must be supplied as FilterValue.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" use="optional">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:attribute>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintCustomerPO" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not the customer purchase order must be displayed. Valid values are N - No (default) or Y - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintOnlyIfBackOrderQty" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not to include only order lines that have a backorder quantity. Valid values are Y - Yes (default) or N - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintOnlyIfStockOnHand" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not to include only order lines for a warehouse that has stock on hand. Valid values are N - No (default) or Y - Yes.
+If Y (Yes) selected, the available quantity on hand for the warehouse is displayed.
+This is only available is running the report for a single warehouse.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintParentsOfKitsKorS" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not to display order lines for parents of kit types 'K' and 'S'. Valid values are N - No (default) or Y - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of product classes ( A - All (default) or S - Single). If single(S) is selected, a product class must be supplied as FilterValue.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="RevisionRelease">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates only a single revision/release combination for a stock code. This value will only be taken into consideration if a SINGLE stock code is selected. Valid entries are three digit revision/three digit release example: 000/000 or 001/000.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShowValuesIn" default="L">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates in which currency the report values must be displayed. L - Local (default) or F - Foreign.
+If values are required in a foreign currency, the Currency element must be selected with S (Single) and a foreign currency must be supplied in the FilterValue.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes ( A - All (default),  R - Range or S - Single). If range(R) is selected, start and end stock codes are separated by a comma. If single(S) is selected, a stock code must be supplied as FilterValue and Revision and Release may be supplied for ECC stock codes..</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of warehouses ( A - All (default) or S - Single). If single(S) is selected, a warehouse must be supplied as FilterValue.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The stylesheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

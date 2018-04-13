@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for generic find business object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AndOr" type="xsd:string" default="and">
+		<xsd:annotation>
+			<xsd:documentation>This element must contain an “and” or an “or”. If the value is not supplied a default of “and” will be used in your expression</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CloseBracket">
+		<xsd:annotation>
+			<xsd:documentation>This element can only contain the values “)“,  “))“, “)))“.  This simply means that for each close bracket element under the expression parent node there is a maximum of 3 close brackets values.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value=")"/>
+				<xsd:enumeration value="))"/>
+				<xsd:enumeration value=")))"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Column">
+		<xsd:annotation>
+			<xsd:documentation>This element is a child of the  "Columns" parent element. The value of this element can contain the SQL column name that must be returned.  This element’s occurrence is unbounded. At least one-column name must be supplied, hence making only one occurrence of the column element mandatory.  The value is case sensitive.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Columns">
+		<xsd:annotation>
+			<xsd:documentation>This is a parent element to the child nodes "Column".  This parent element is mandatory. It can only occur once.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Column" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Condition">
+		<xsd:annotation>
+			<xsd:documentation>This element must contain the condition to the expression e.g. GT-Greater than, GE-Greater than equal too, LT-Less than, LE-Less than equal too, EQ-Equal too, NE-Not Equal too, LIKE-when you specify like as a condition, you can use 2 wild cards “*” and “?”. “*” - an infinate number of characters. “?” - any single character </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="GT"/>
+				<xsd:enumeration value="GE"/>
+				<xsd:enumeration value="LT"/>
+				<xsd:enumeration value="LE"/>
+				<xsd:enumeration value="EQ"/>
+				<xsd:enumeration value="NE"/>
+				<xsd:enumeration value="LIKE"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Expression">
+		<xsd:annotation>
+			<xsd:documentation>This element is parent to "AndOr", "OpenBracket", "Column", "Condition", "Value" and "CloseBracket" elements which are discussed below.  This element’s occurrence is unbounded.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="AndOr" minOccurs="0"/>
+				<xsd:element ref="OpenBracket" minOccurs="0"/>
+				<xsd:element name="Column">
+					<xsd:annotation>
+						<xsd:documentation>This element must contain the SQL column name that the condition must be applied to.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element ref="Condition"/>
+				<xsd:element ref="Value"/>
+				<xsd:element ref="CloseBracket" minOccurs="0"/>
+				<xsd:element name="ColumnName" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>This element should contain the name of the column that must be compared. As soon as this element has a value the "Value" element is ignored.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OpenBracket">
+		<xsd:annotation>
+			<xsd:documentation>This element can only contain the values “(“,  “((“, “(((“.  This simply means that for each open bracket element under the expression parent node there is a maximum of 3 open brackets values.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="("/>
+				<xsd:enumeration value="(("/>
+				<xsd:enumeration value="((("/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root node of the XML document, the business object will not process anything unless this element is present.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="TableName"/>
+				<xsd:element ref="ReturnRows" minOccurs="0"/>
+				<xsd:element ref="Columns"/>
+				<xsd:element ref="Where" minOccurs="0"/>
+				<xsd:element name="OrderBy" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This element is a parent element of the child nodes "Column".  This parent element is mandatory only if you want to order by a specific column.  It can only occur once.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Column" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>This element is a child of the "OrderBy" parent.  The value of this element must contain the SQL column name that the sequence must be ordered by. This element’s occurrence is unbounded.  If the company you are using is running on a C-ISAM database then this business object will use the first column specified under the orderby parent, and order the search in that sequence.  For a C-ISAM database the sequence will only be applied if the value of column element specified under the orderby parent is an alternate index for the table specified above.
+If the company you are using is running on a SQL database any number of column elements can be supplied.  The results will be returned in the same sequences as specified in the orderby parent element.  In the example below
+The data will by ordered by Description then QtyOnHand then Mass</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CusFormFieldType" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This element must only by used when the CustomForm  tables are being queried. It should containvalues like 'STD, 'ORD', etc</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReturnRows" type="xsd:long">
+		<xsd:annotation>
+			<xsd:documentation>This element can contain the maximum number of rows to be returned by the search.  If a value for the element is not supplied all the rows in the table will be returned. This value is optional. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TableName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element must contain the name of the table that you would like to do a search on.  The element value must be the SQL table name.  This value is case sensitive and mandatory.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Value" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element must contain the value you want to compare to the column of the expression.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Where">
+		<xsd:annotation>
+			<xsd:documentation>This element is a parent element of the child nodes "Expression".  It is mandatory only if you want to supply an expression to the search. This element can only occur once.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Expression" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

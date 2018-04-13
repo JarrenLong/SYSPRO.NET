@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the IO Stock Levels Modeling Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AnalysisType" type="xsd:string"/>
+  <xsd:element name="ApplyBatchingRule" type="xsd:string"/>
+  <xsd:element name="ApplyGrossReqRule" type="xsd:string"/>
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of buyers to filter on. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CalendarToUse" type="xsd:string"/>
+  <xsd:element name="FaComparisonType" type="xsd:string"/>
+  <xsd:element name="FaForecastToUse" type="xsd:string"/>
+  <xsd:element name="FaMonthsToCompare" type="xsd:byte"/>
+  <xsd:element name="FaMovingAverageMonths" type="xsd:byte"/>
+  <xsd:element name="FaSnapshotMonths" type="xsd:byte"/>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of available filters </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="Planner" minOccurs="0"/>
+        <xsd:element ref="Buyer" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ForecastBase" type="xsd:string"/>
+  <xsd:element name="HorizonMonths" type="xsd:byte"/>
+  <xsd:element name="IncludeClassItemsA" type="xsd:string"/>
+  <xsd:element name="IncludeClassItemsB" type="xsd:string"/>
+  <xsd:element name="IncludeClassItemsC" type="xsd:string"/>
+  <xsd:element name="IncludeClassItemsD" type="xsd:string"/>
+  <xsd:element name="IncludeDependantDemand" type="xsd:string"/>
+  <xsd:element name="IncludeMakeToOrderItems" type="xsd:string"/>
+  <xsd:element name="IncludeManuallyForecastItems" type="xsd:string"/>
+  <xsd:element name="IncludeMasterProductionScheduledItems" type="xsd:string"/>
+  <xsd:element name="IncludeNomovementClassItemsE" type="xsd:string"/>
+  <xsd:element name="IncludePartTypeBoughtOut" type="xsd:string"/>
+  <xsd:element name="IncludePartTypeKitPart" type="xsd:string"/>
+  <xsd:element name="IncludePartTypeMadeIn" type="xsd:string"/>
+  <xsd:element name="IncludePartTypeSubcontracted" type="xsd:string"/>
+  <xsd:element name="IncludeParttypeByProduct" type="xsd:string"/>
+  <xsd:element name="IncludeParttypeCoProduct" type="xsd:string"/>
+  <xsd:element name="IncludeReplenishmentItems" type="xsd:string"/>
+  <xsd:element name="IncludeUnclassifiedItems" type="xsd:string"/>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of available options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element name="UseSelectionSet" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Allows the user to filter the report against a specific selection set. If a selection set is in use then the selection set contains all the inclusion options and filters.  Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SelectionSet" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>If UseSelectionSet is Y then the Selection Set to use</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludePartTypeMadeIn" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include made-in parts on the report: Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludePartTypeBoughtOut" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include bought-out parts on the report: Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludePartTypeSubcontracted" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include subcontracted parts on the report: Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludePartTypeKitPart" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include kit parts on the report: Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludePartTypeCoProduct" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include co-products on the report: Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludePartTypeByProduct" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include by-products parts on the report: Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeManuallyForecastItems" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include manually forecast items on the report. Y-Yes, N-No, O-Only, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="O"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeReplenishmentItems" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include replenishment items on the report: Y-Yes, N-No, O-Only, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="O"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeMasterProductionScheduledItems" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include MPS items on the report: Y-Yes, N-No, O-Only, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="O"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeMakeToOrderItems" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include MTO items on the report: Y-Yes, N-No, O-Only, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="O"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeClassItemsA" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include class A items on the report. Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeClassItemsB" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include class B items on the report. Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeClassItemsC" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include class C items on the report. Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeClassItemsD" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include class D items on the report. Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeNomovementClassItemsE" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include class E items on the report which are items with no movements. Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeUnclassifiedItems" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will include unclassified items on the report. Y-Yes, N-No, Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="AnalysisType" default="S" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The analysis type required for the report. S-Sales, C-Current forecasts, D-Draft forecasts, Default = S.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="S"/>
+              <xsd:enumeration value="C"/>
+              <xsd:enumeration value="D"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ParetoLevel" default="1" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The pareto level required. 1-Stock code, 2-Warehouse, 3-Product class, 4-Supplier, 5-Planner, 6-Buyer, Default = 1.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="1"/>
+              <xsd:enumeration value="2"/>
+              <xsd:enumeration value="3"/>
+              <xsd:enumeration value="4"/>
+              <xsd:enumeration value="5"/>
+              <xsd:enumeration value="6"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="RunDate" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the date on which this Stock Levels Model is run. The default is the system date.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ForecastBase" default="L" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This defines the forecast on which the modeling is based. L-Live forecast, D-Draft forecast, S-last Snapshot. The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="L"/>
+              <xsd:enumeration value="D"/>
+              <xsd:enumeration value="S"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ApplyGrossReqRule" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This will apply the gross requirements rule as defined against the stock master for that stock code. If set to N, then the Forecasts rule is used. Y-Yes, N-No, The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IncludeDependantDemand" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This determines whether or not to include the WIP demand for an item. Y-Yes, N-No, The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ApplyBatchingRule" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This determines whether the the batching rule defined against the stock item will be used to pad the suggested maximum. Y-Yes, N-No, The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="N"/>
+              <xsd:enumeration value="Y"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="PeriodDaysToUse" default="T" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This selects whether to use all days in the periods or just the working days when caluculating the suggested maximums. T-Total, W-Working, The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="T"/>
+              <xsd:enumeration value="W"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FaMonthsToCompare" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the number of months back you wish to compare sales history against forecasts to check the forecast accuracy (range 1 - 12). The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FaComparisonType" default="P" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The type of comparison you would like to use for comparing forecasts. P-Period on period, M-Moving average. The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="P"/>
+              <xsd:enumeration value="M"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FaMovingAverageMonths" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the number of months to use to calculate a moving average for sales and forecasts (range 2 - 6). The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FaForecastToUse" default="L" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the forecast that is compared to the sales. L�Last (the last snapshot taken for a period), l-Last outside lead time (the last snapshot taken outside of the lead time for the item), A-Average (average of the snapshots that apply to a period), a-Average outside of lead time (average of snapshots created for a period outside of lead time). The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="L"/>
+              <xsd:enumeration value="l"/>
+              <xsd:enumeration value="A"/>
+              <xsd:enumeration value="a"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="FaSnapshotMonths" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>How many months of forecasts you wish to use to calculate the average forecast (range 1 - 6). The default is defined in Inventory Optimization Setup > Modeling</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="CalendarToUse" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is a user defined calendar that is used to calculate the periods against which all stock levels are modeled. The default is defined in Inventory Optimization Setup > General > Forecast Calendar</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="HorizonMonths" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This sets the number of months into the future for which you want to model the stock levels (range 1 - 24). The default is defined in Inventory Optimization Setup > General > Forecast Horizon and this entry cannot exceed this setup option. </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnSkuLevel" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures for each Stock code, warehouse (SKU).Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnConLevel" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the aggregated figures for each stock code.Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnPclLevel" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures aggregated for each product class found against selected stock codes. N=No, Y=Yes. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnPlnLevel" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures aggregated for each planner found against selected stock codes. N=No, Y=Yes. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnBuyLevel" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures aggregated for each buyer found against selected stock codes. N=No, Y=Yes. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnWhsLevel" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures aggregated for each warehouse found against selected stock codes. N=No, Y=Yes. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnParetoLevel" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures aggregated for each pareto level against selected stock codes. N=No, Y=Yes. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnValues" default="Q" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This defines the units in which the calculated levels will be returned: Q-Quantity, S-Sales value, C-Cost, Default = Q.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Q"/>
+              <xsd:enumeration value="S"/>
+              <xsd:enumeration value="C"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnSupLevel" default="N" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return all the figures aggregated for each supplier found against selected stock codes. N=No, Y=Yes. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnLiveLevels" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return the live minimum/maximum elements in each period for all levels. Y=Yes, N = No Default = Y.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="ReturnDraftLevels" default="Y" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Setting this option to 'Y' will return the draft minimum/maximum elements in each period for all levels. Y=Yes, N=No. Default = N.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ParetoLevel" type="xsd:boolean"/>
+  <xsd:element name="PeriodDaysToUse" type="xsd:string"/>
+  <xsd:element name="Planner">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of planners to filter on. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of product classes to filter on. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnBuyLevel" type="xsd:string"/>
+  <xsd:element name="ReturnConLevel" type="xsd:string"/>
+  <xsd:element name="ReturnParetoLevel" type="xsd:string"/>
+  <xsd:element name="ReturnPclLevel" type="xsd:string"/>
+  <xsd:element name="ReturnPlnLevel" type="xsd:string"/>
+  <xsd:element name="ReturnSkuLevel" type="xsd:string"/>
+  <xsd:element name="ReturnValues" type="xsd:string"/>
+  <xsd:element name="ReturnWhsLevel" type="xsd:string"/>
+  <xsd:element name="RunDate" type="xsd:date"/>
+  <xsd:element name="SelectionSet">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of stock codes to filter on. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of suppliers to filter on. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UseSelectionSet" type="xsd:string"/>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>This specifies the selection of warehouses to filter on. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:whiteSpace value="preserve"/>
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

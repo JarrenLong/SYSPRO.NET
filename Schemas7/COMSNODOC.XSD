@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Notepad Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupNotepad">
+		<xsd:annotation>
+			<xsd:documentation>Setup parent element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains all the pertinent information regarding the notepad type and content.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="NotepadText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This field contains the item key upon which a setup method is performed. The fields that make up the key are Company, NoteType, KeyField and LanguageCode.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Company"/>
+				<xsd:element ref="NoteType"/>
+				<xsd:element ref="KeyField"/>
+				<xsd:element name="LanguageCode" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Standard SYSPRO 2 character language code</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="NoteType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is an indication of the field type that the KeyField will be referencing, i.e. STK - stock code, LDG - ledger code, CUR - currency, SUP - supplier etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="KeyField" type="xsd:byte">
+		<xsd:annotation>
+			<xsd:documentation>This is the key value on which the search will be performed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NotepadText" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element contains a CDATA section which contains the object itself.  For the delete method this element is optional.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

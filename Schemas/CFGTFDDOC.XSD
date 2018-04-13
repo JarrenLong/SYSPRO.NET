@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Finish Details Phase
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Commission">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the commission for the parent. This element in the finishlistpricedetails node is only applicable when creating a stocked parent. This element in the finishsalesquoteparent node is only applicable when the source of the configuration is sales orders or quotes. The format is a 2 character alphanumeric field. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the description of the library code you are maintaining when in the librarymaintenance node. This element indicate the description of the discount value when in the finishsalesquotenoparent node. The format is a 30 character alphanumeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountFlag">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates if the discount value is unit or a total value. Possible value: U (unit) or V (total value). This element is only applicable when the source of the configuration is sales orders or quotes. If no parent is created then this element can only be a V.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountPct1">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the first discount percentage when using chain discount percentages that will be either subtracted or added to the parent price/sales order/quote value depending on the discount percentage plus less flag. The format is a 3.2 numeric field. This element is only applicable when the discount plus less flag is not spaces.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountPct2">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the second discount percentage when using chain discount percentages that will be either subtracted or added to the parent price/sales order/quote value depending on the discount percentage plus less flag. The format is a signed 2.2 numeric field. This element is only applicable  when the discount plus less flag is not spaces. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountPct3">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the third discount percentage when using chain discount percentages that will be either subtracted or added to the parent price/sales order/quote value depending on the discount percentage plus less flag. The format is a signed 2.2 numeric field. This element is only applicable when the discount plus less flag is not spaces. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountPctPlusLess">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether the discount value should be added or subtracted from the parent price/sales order/quote value and is only applicable when using chain discount percentages . Possible values: P (plus) or L (less).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountValue">
+    <xsd:annotation>
+      <xsd:documentation>This indicates either the total discount value or the unit discount value (depending on the discount flag) that will be added to the parent price/sales order/quote value. This element only applies when the discount flag is either V or U.  The format is a signed 12.2 numeric field. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="16"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostConfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="FinishBomEstimate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains information pertaining to a bill of material or estimate</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element name="Route" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element enables you to supply a specific routing for a structure. This element is only applicable when the source of the configuration is B and the configuration header is setup to allow routes to be overridden. The format is a 1 character alphanumeric field.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ComponentOptions" default="A" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates how to handle duplicate components  when creating/maintaining a bill of material or estimate. Possible values are A - (Accumulate quantity per); R - (Replace existing with new), L - (Leave existing), S - (Automatically sequence duplicate components). S - is only applicable when structure sequencing as well as numeric numbering of the sequence key have been setup in the bill of material setup program within SYSPRO.
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="A"/>
+                          <xsd:enumeration value="R"/>
+                          <xsd:enumeration value="L"/>
+                          <xsd:enumeration value="S"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="FinishListPriceDetails" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains information pertaining to the list price of a stocked parent</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element ref="PriceCode" minOccurs="0"/>
+                    <xsd:element ref="Price" minOccurs="0"/>
+                    <xsd:element name="PriceBasis" default="S" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the unit of measure to base the price on. Possible values are: S - Stocking u/m, O - Other u/m or A - Alternate u/m. The default is S.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="O"/>
+                          <xsd:enumeration value="A"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="Commission" minOccurs="0"/>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="FinishSalesQuoteNoParent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains information pertaining to a sales order/quote when no parent is created</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element ref="Description" minOccurs="0"/>
+                    <xsd:element name="ProductClass" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the product class and will be used when there is  discount applied to the sales order/quote. This element will default to the product class held against the configuration header, else if this is spaces it will default to _DSC. The format is a 4 character alphanumeric field. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="4"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="DiscountFlag" minOccurs="0"/>
+                    <xsd:element ref="DiscountPctPlusLess" minOccurs="0"/>
+                    <xsd:element ref="DiscountPct1" minOccurs="0"/>
+                    <xsd:element ref="DiscountPct2" minOccurs="0"/>
+                    <xsd:element ref="DiscountPct3" minOccurs="0"/>
+                    <xsd:element ref="DiscountValue" minOccurs="0"/>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="FinishSalesQuoteParent" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains information pertaining to a sales order or quote when a parent is being created as well as containing information pertaining to a sales order when using an existing stocked parent part.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element name="Cost" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the cost of a non-stocked parent.  This is only applicable when creating a new non-stocked parent. The cost defaults to the accumulated cost from the components and operations selected. The format is 10.5 numeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="16"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="Price" minOccurs="0"/>
+                    <xsd:element name="PriceFlg" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether you are changing the price code of the parent or the price itself. This element is only applicable when the source of the configuration is sales orders and you are using an existing parent part which has a bill of material. This element is also only applicable when the sales order setup option for pricing is not manual. The possible values are C - (code) and P - (price). </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="C"/>
+                          <xsd:enumeration value="P"/>
+                          <xsd:enumeration value=""/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="PriceCode" minOccurs="0"/>
+                    <xsd:element name="PriceUom" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent price unit of measure. If you are using an existing stocked parent which has a bill of material and are using the simple or extended pricing method then the priceflg element must be a P else this element will be ignored.The format is a 3 character alphanumeric field.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="Commission" minOccurs="0"/>
+                    <xsd:element ref="DiscountFlag" minOccurs="0"/>
+                    <xsd:element ref="DiscountPctPlusLess" minOccurs="0"/>
+                    <xsd:element ref="DiscountPct1" minOccurs="0"/>
+                    <xsd:element ref="DiscountPct2" minOccurs="0"/>
+                    <xsd:element ref="DiscountPct3" minOccurs="0"/>
+                    <xsd:element ref="DiscountValue" minOccurs="0"/>
+                    <xsd:element name="TariffCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>The tariff code is used in the EC VAT system to determine the tax rates to be used for items sold across EC borders.This is only applicable for orders placed where the SYSPRO option 'EC Vat system required' is selected. This is also only applicable when the source is 'S' - Sales orders and you are creating a new stocked parent. This element will default to the tariff code found against the stock code defaults. The format is 15 characters alphanumeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="15"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SupplementaryUnitsFlag" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates whether supplementary units apply to the Tariff code and is printed on the Supplementary Declaration .This is only applicable for orders placed where the SYSPRO option 'EC Vat system required' is selected. This is also only applicable when the source is 'S' - Sales orders and you are creating a new stocked parent. This element will default to the supplementary units flag found against the stock code defaults. Possible values are 'Y' or 'N'.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="Y"/>
+                          <xsd:enumeration value="N"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="FinishJobDetails" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains information pertaining to a job </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element name="Job" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Job specifies the job being created. This element only applicable when the job numbering method is manual.The format is 8 characters alphanumeric or 8 chararcters numeric depending on the configuration option within SYSPRO. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="8"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="JobClassification" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Job classification for the job. If not supplied then this defaults to the job classification held against the stock code if stocked or the job classification against the operator. If job numbering method is by job class then this is used to generate the job. The format is 4 characters alphanumeric.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="4"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="DateCalcMethod" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This flag indicates the calculation method to be applied when calculating the job's start/delivery date based on attached labor allocations. D - Delivery date based on the start date using forward infinite scheduling. S - Start date based on the delivery date using backward infinite scheduling. M - Do not calculate start or delivery date. F - Delivery date based on the start date using forward finite scheduling. This option is available if the WIP installation option "Load Levelling Required" is set to Y and allocations are attached to the job. If not then it is changed to date method D. To calculate the delivery date from the start date the program processes each operation attached to the finished part and assumes the queue date of the first operation to be the start date of the job. The finish date of the first operation is calculated by adding the queue and elapsed time of that operation. The start date of the next operation is the finish date of the previous operation, plus movement time plus one day. The delivery date of the job is the finish date of the last operation plus movement time. The reverse is true if calculating the start date.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="D"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="M"/>
+                          <xsd:enumeration value="F"/>
+                          <xsd:enumeration value=""/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="IncludeOvertimePct" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Include overtime percentage in forward finite date calculation (DateMethod = F). The overtime percentage is held against the work centers and is used when calculating capacity available on a given day and when calculating the capacity required by the operation for the day. If not returned then will use the WIP setup option 'Apply overtime percentage to forward finite calculation by default '.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SetMethodToManual" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This option will fix the calculated dates by setting the calculation method to manual (DateMethod = M). </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="JobStartDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Date on which the job is to start. If not returned the date defaults to today.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="JobDeliveryDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Date on which the job is due for completion.  If not returned the date defaults to today.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SubJobOptions" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Options required when creating sub jobs for attached components.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all minOccurs="0">
+                          <xsd:element name="CreateSubJobs" default="N" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Flag to indicate whether or not to create the sub jobs for components which are setup to create sub jobs. Possible values are N and Y. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="N"/>
+                                <xsd:enumeration value="Y"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="SubJobPrefix" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If creating sub jobs for components (CreateSubJobs = Y) and job numbering is set to Manual. This prefix is strung together with the sub job suffix (SubJobSuffix) to create the job for each sub job.The format is up to 5 characters alphanumeric, or numeric depending on the job key type option within SYSPRO.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="5"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="SubJobSuffix" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If creating sub jobs for components (CreateSubJobs = Y) and job numbering is set to Manual. This suffix is strung together with the sub job prefix (SubJobPrefix) to create the job for each sub job.The format is up to 8 characters numeric. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="8"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="UseGlForAllJobs" default="N" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Set this flag to Y to use the work in progress control account against the parent job for all sub jobs when creating sub jobs for components (CreateSubJobs = Y) . Possible values are N and Y.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="N"/>
+                                <xsd:enumeration value="Y"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="LibraryMaintenance" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains information pertaining to a library and is only applicable when the configuration has been setup to retain libraries. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element name="ActionType" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Specifies whether to add  or update a library  (A - add,  C - update)</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:enumeration value="A"/>
+                          <xsd:enumeration value="C"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LibraryCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the library code you wish to maintain. The format is a 5 character alphanumeric field.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="5"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element ref="Description" minOccurs="0"/>
+                    <xsd:element name="LibraryStartDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the date on which a library becomes available. A zero date indicates that there is no start date. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LibraryExpiryDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the date on which a library expires. A zero date indicates that there is no expiry date. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="DeleteOriginalLibrary" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates when creating a new library from an existing library whether the existing library should be deleted or not. Possible value are Y - Yes or N - No. The default is N.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="CreateBomEstJob" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates what you wish to create in addition to what will be created  from the source of the configuration. This element is only applicable when the source of the configuration is S - Sales orders and you are creating a new parent or you are using an existing parent or the source of your configuration is  W - Jobs. 
+When the source of the configuration is S - Sales orders and you are creating a  new parent or using an existing parent with no bill of material the possible values are: B - (Create Bill of material), E - (Create Estimate), J -(Job) or A - (indicating both a bill of material  and a job are to be created). When the source of the configuration is S -Sales orders and you are using an existing parent which has a bill of material  the possible values are J - (create Job) or N - (do not create job)
+When the source of the configuration is W -Jobs the possible values are B - (created Bill of material) or N - (do not create bill of material).
+If this element is not supplied the defaults which are determined by the way in which the configuration has been setup will be used</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="B"/>
+                    <xsd:enumeration value="J"/>
+                    <xsd:enumeration value="E"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UserDefinedComments" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates user defined comments. This element is ignored when user defined comments have not been set on against the configuration header. This element is also ignored when the source is (T - Test mode), (E - Estimate parent), (e - estimate details and a  non-stocked or no parent is being created), (b - bom details and no parent is being created) or (S - Sales orders and an existing parent which has a BOM is being used).
+The format is a 990 character alphanumeric field. This equates to 22 lines by 45 characters. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="990"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Price">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the price/list price of the parent. The price in the finishlistpricedetails node is only applicable when creating a stocked parent. 
+The price in the finishsalesquoteparent node is only applicable when the source of the configuration is sales orders or quotes When using the price in the finishsalesquoteparent node and you are using an existing stocked parent which has a bill of material and you are using the simple or extended pricing method then the priceflg element must be a P else the finishsalesquoteparent price element will be ignored. When using an existing stocked parent which has a bill of material the finishsalesquoteparent price will default to a calculated price according to pricing options within SYSPRO. When using an existing stocked parent which does not have a bill of material and a contract price exists, the price will default to the contract price else the price will default to the accumulated price according to the operations and components selected.
+When creating a new stock/non-stocked code the price will default to the accumulated price according to the operations and components selected. The format is 10.5 numeric.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="16"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PriceCode">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the price code against the parent price/list price. The price code in the finishlistpricedetails node is only applicable when creating a stocked parent.The price code in the finishsalesquoteparent node is only applicable when using an existing stocked parent which has a bill of material and the source of the configuration is sales orders and when using the simple/extended pricing method which is set in sales order setup on the pricing tab within SYSPRO and when the priceflg element is C . The format is a 2 character alphanumeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

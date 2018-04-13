@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--  
+     Schema for the GL List of Financial Reports
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ReportCode">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single selection of Financial Report code to be returned. FilterType options - A(All), (R)Range, (S)Single. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single;Browse=GENQFR"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="required">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportCode" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType" minOccurs="0"/>
+        <xsd:element ref="IncludeReportOptionsDetails" minOccurs="0"/>
+        <xsd:element ref="IncludeRuntimePromptDetails" minOccurs="0"/>
+        <xsd:element ref="IncludeColumnDetails" minOccurs="0"/>
+        <xsd:element ref="IncludeDetailLinesDetails" minOccurs="0"/>
+        <xsd:element ref="IncludeHeaderDetails" minOccurs="0"/>
+        <xsd:element ref="IncludeFooterDetails" minOccurs="0"/>
+        <xsd:element ref="IncludeMultiColumnHeadingsDetails" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether you want to print the report in summary or in detail.(S - Summary and D - Detail). If no value is supplied then a default value of 'S'  will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeReportOptionsDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the report options defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used.  </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeRuntimePromptDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the run-time prompts defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeColumnDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the column details defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDetailLinesDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the detail line details defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeHeaderDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the header details defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeFooterDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the footer details defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMultiColumnHeadingsDetails">
+    <xsd:annotation>
+      <xsd:documentation>Defines whether the multi-column headings details defined in the financial reports will be printed or not. (Y - Yes, N - No). If no value is supplied a default of 'Y' will be used. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>The style sheet to be applied</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

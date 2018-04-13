@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!--
+     Schema for the Admin Tax Options Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="TaxOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="Options" minOccurs="0"/>
+				<xsd:element ref="WithholdingTax" minOccurs="0"/>
+				<xsd:element ref="Intrastat" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TaxSystem">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the tax system in place (N - Basic tax system, Y - Tax by geographic area, G - USA tax by advanced geocodes, A - USA AVP sales tax system). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=Basic tax system;Y=Tax by geographic area;G=USA tax by advanced geocodes;A=USA AVP sales tax system;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="A"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CompTaxCodeFile" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates company for the tax code file if TaxSystem is G or A.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EcVatReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you are running the EC VAT system (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CanGstReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether Canadian GST is required (N - No, Y - Yes). This can only be set if Basic tax system or Tax by geographic area is set. If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AusGstReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether Australian GST is required. This can only be set to Y if nationality is 'AUS'. If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SalesTaxIntGl">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the sales tax integration level to the general level (B - Branch level, T - Tax code level). If no value is supplied then a default value of B will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="B=Branch level;T=Tax code level;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="T"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SalesTaxCalc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you require the sales tax calculation to be calculated on invoice or line level (I - Invoice level, L - Line level). If no value is supplied then a default value of I will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="I=Invoice level;L=Line level;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="L"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscInclTax">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to reduce tax base by terms discount when inclusive tax exists (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscMerLines">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to reduce tax base by terms discount on merchandise lines (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscFrtLines">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to reduce tax base by terms discount on freight lines (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscMiscLines">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to reduce tax base by terms discount on miscellaneous lines (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GstCalc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you required GST to be calculated on invoice or line level (I - Invoice level, L - Line level). If no value is supplied then a default value of I will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="I=Invoice level;L=Line level;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="L"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="General">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TaxSystem" minOccurs="0"/>
+				<xsd:element ref="CompTaxCodeFile" minOccurs="0"/>
+				<xsd:element ref="EcVatReq" minOccurs="0"/>
+				<xsd:element ref="CanGstReq" minOccurs="0"/>
+				<xsd:element ref="AusGstReq" minOccurs="0"/>
+				<xsd:element ref="SalesTaxIntGl" minOccurs="0"/>
+				<xsd:element ref="SalesTaxCalc" minOccurs="0"/>
+				<xsd:element ref="DiscInclTax" minOccurs="0"/>
+				<xsd:element ref="DiscMerLines" minOccurs="0"/>
+				<xsd:element ref="DiscFrtLines" minOccurs="0"/>
+				<xsd:element ref="DiscMiscLines" minOccurs="0"/>
+				<xsd:element ref="GstCalc" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DefTaxMisc" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default sales tax code for miscellaneous charges.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DefTaxFrt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default sales tax code for freight charges.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DefTaxNon" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default sales tax code for non-stocked items.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DefTaxCr" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default sales tax code for credit notes.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GlPerTaxRet">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether you would like to use GL periods for tax returns (Y - Yes, N - No). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescTaxCodes">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether you would like to use descriptive tax codes (Y - Yes, N - No). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxRndReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether you would like to use tax/invoice rounding (N - No, Y - Yes/Decimals, U - Units). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="U"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RndTaxVal">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether you would like to round the tax value (Y - Yes, N - No). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RndInvVal">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether you would like to round the invoice value (Y - Yes, N - No). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncForInv">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether you would like to include foreign invoices in rounding (Y - Yes, N - No). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RndValues">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates how you would like to round invoices (U - Up, D - Down, O - Off). If no value is supplied then a default value of O will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="U"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvRound">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates which invoices you would like to round (A - All, P - Payments, C - Cash payments). If no value is supplied then a default value of A will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RndFactor" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the number of decimals to round the invoices to. This can only be set if TaxRndReq is not N]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Options">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DefTaxMisc" minOccurs="0"/>
+				<xsd:element ref="DefTaxFrt" minOccurs="0"/>
+				<xsd:element ref="DefTaxNon" minOccurs="0"/>
+				<xsd:element ref="DefTaxCr" minOccurs="0"/>
+				<xsd:element ref="GlPerTaxRet" minOccurs="0"/>
+				<xsd:element ref="DescTaxCodes" minOccurs="0"/>
+				<xsd:element ref="TaxRndReq" minOccurs="0"/>
+				<xsd:element ref="RndTaxVal" minOccurs="0"/>
+				<xsd:element ref="RndInvVal" minOccurs="0"/>
+				<xsd:element ref="IncForInv" minOccurs="0"/>
+				<xsd:element ref="RndValues" minOccurs="0"/>
+				<xsd:element ref="InvRound" minOccurs="0"/>
+				<xsd:element ref="RndFactor" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="WithTaxReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether withholding tax is required (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AutoCalcWithTax">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether automatic calculation of withholding tax should occur. This can only be set to Y if WithTaxReq is Y.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CaptureDelTermsNonEc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether to Capture delivery terms for non-EC members (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingTax">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="WithTaxReq" minOccurs="0"/>
+				<xsd:element ref="AutoCalcWithTax" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxTrn" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxForComp" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxLocComp" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxIndiComp" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxAppProd" minOccurs="0"/>
+				<xsd:element ref="WithholdingTaxCalcBasis" minOccurs="0"/>
+				<xsd:element ref="WithholdingAmtTaxCalc" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IntrInvNatr" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default nature of transaction codes for invoices dispatched.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IntrCrnNatr" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default nature of transaction codes for credit notes dispatched.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IntrArrNatr" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default nature of transaction codes for arrivals.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IntrInvDelt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default delivery terms for invoices dispatched.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxAppProd">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates to what withholding  tax calculation will be applicable (G - Goods ,S - Service , B - Both goods and service)If no value is supplied then a default value of B - Both goods and service will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IntrCrnDelt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default delivery terms for credit notes dispatched.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IntrArrDelt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the default delivery terms for arrivals.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Intrastat">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="CaptureDelTermsNonEc"/>
+				<xsd:element ref="IntrInvNatr" minOccurs="0"/>
+				<xsd:element ref="IntrCrnNatr" minOccurs="0"/>
+				<xsd:element ref="IntrArrNatr" minOccurs="0"/>
+				<xsd:element ref="IntrInvDelt" minOccurs="0"/>
+				<xsd:element ref="IntrCrnDelt" minOccurs="0"/>
+				<xsd:element ref="IntrArrDelt" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxTrn">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the point at which withholding  tax calculation will be done (P - Invoice payment (default), A - Invoice capture). If no value is supplied then a default value of P - Invoice payment will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="A"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxCalcBasis">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates to what withholding  tax calculation will be based on (T - Tiered, R - Fixed rate (default) , V - Fixed value,   P - Base value plus )If no value is supplied then a default value ofR - Fixed rate (default) will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="T"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="V"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingAmtTaxCalc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates mounts used for withholding tax calculation (G - Gross amount less tax (default), N - Net (trade discounts), D - Net (after trade & settlement discounts).  ) If no value is supplied then a default value of G - Gross amount less tax (default) will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxForComp">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates that Withholding tax applicable to foreign companies  (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxLocComp">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates that Withholding tax applicable to local companies  (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithholdingTaxIndiComp">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates that Withholding tax applicable to individual(N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. ]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

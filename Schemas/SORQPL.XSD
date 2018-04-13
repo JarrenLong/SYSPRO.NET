@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     This is an example XSD instance to demonstrate
+     use of the Customer Price Look Up Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the code of the customer for whom you want to view pricing information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="7"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultUnitOfMeasure" default="S">
+		<xsd:annotation>
+			<xsd:documentation>This option enables you to define the unit of measure for the quantity to use and for the quantity for the best price. 
+The following units of measure can be selected:
+'S' - Stocking unit of measure (default)
+'A' - Alternate unit of measure 
+'O' - Other unit of measure</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExpiryDaysBefore">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the expiry date (expiry date up to n days before today) up to which you want to include contracts.
+Only available if 'IncludeAllContracts' is set to 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeAllContracts" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Set this to 'Y' to include all contracts in the query. 
+If set to 'N', you can enter the dates for which contracts must be included.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeGlobalTradePromotions" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Select this to include global promotions in the query.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeUnqualifiedPromotions" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to include promotions the customer did not qualify for. 
+This is useful if, for example, you defined a 'Buy 5 get 1 free' promotion. The customer orders a quantity of 4, therefore the promotion does not apply. If you display these unqualified promotions, then you can inform the customer that the order would qualify for the promotion if the order quantity was increased to 5. 
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="Quantity" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DefaultUnitOfMeasure" minOccurs="0"/>
+				<xsd:element ref="IncludeAllContracts" minOccurs="0"/>
+				<xsd:element ref="ExpiryDaysBefore" minOccurs="0"/>
+				<xsd:element ref="StartingDaysAhead" minOccurs="0"/>
+				<xsd:element ref="WarehouseForCosts" minOccurs="0"/>
+				<xsd:element ref="SpecificWarehouse" minOccurs="0"/>
+				<xsd:element ref="IncludeGlobalTradePromotions" minOccurs="0"/>
+				<xsd:element ref="IncludeUnqualifiedPromotions" minOccurs="0"/>
+				<xsd:element ref="PromotionStartDate" minOccurs="0"/>
+				<xsd:element ref="PromotionExpiryDate" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PromotionExpiryDate">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the promotion end date for which you want to include promotions in the query.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PromotionStartDate">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the promotion start date for which you want to include promotions in the query.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Quantity">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the quantity to use for the query. 
+This defaults to 1, but can be changed. 
+
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="70"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SpecificWarehouse">
+		<xsd:annotation>
+			<xsd:documentation>Enter the specific warehouse if 'WarehouseForCosts' is set to 'S'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StartingDaysAhead">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the starting date (starting date within n days of today) from which you want to include contracts.
+Only available if 'IncludeAllContracts' is set to 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to enter the code of the stock item for which you want to view pricing information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WarehouseForCosts" default="O">
+		<xsd:annotation>
+			<xsd:documentation>This option enables you to define the warehouse from which the cost of the item must be returned. 
+The gross profit percentage for the prices are based on the cost in the selected warehouse.
+
+The following values may be entered:
+'O' - Operator default (default)
+'C' - Customer warehouse
+'D' - Distribution warehouse
+'W' - Inventory warehouse
+'S' - Specific warehouse</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

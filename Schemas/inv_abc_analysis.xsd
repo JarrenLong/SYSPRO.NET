@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory ABC Analysis Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation> This is the filter root element</xsd:documentation>
+      <xsd:appinfo source="screenItem = N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Warehouse"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeAClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Option to include A class ABC. Y=Yes, N=No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeBClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Option to include B class ABC. Y=Yes, N=No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Option to include C class ABC. Y=Yes, N=No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDClass" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Option to include D class ABC. Y=Yes, N=No.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation> This is the option root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="IncludeAClass"/>
+        <xsd:element ref="IncludeBClass"/>
+        <xsd:element ref="IncludeCClass"/>
+        <xsd:element ref="IncludeDClass"/>
+        <xsd:element ref="UpdateIfNoClassesSelected"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation> This is the main query.</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="UpdateIfNoClassesSelected" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This option is only relevant if no classes are included in the selection. If the element is set to 'Y' and there are no classes selected, then the ABC classification on the stock code or warehouse will be updated, and no class information returned. If set to 'N', and no classes are selected, then an error will be returned that no selections have been made.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes; N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouse, you can select All or a single warehouse. A=All, S=Single.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation> Style sheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Operator Copy Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostCOMTOP">
+    <xsd:annotation>
+      <xsd:documentation>Root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ExistingOperCode"/>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ExistingOperCode">
+    <xsd:annotation>
+      <xsd:documentation>Source operator code. Operator to copy from. The same source operator code must be used for all target operators. Element is mandatory and cannot be blank. Element value must be an existing operator code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the item node. It contains all the information [ except the source operator code ] that will be used to create the target ooperator[s].</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Operator"/>
+        <xsd:element ref="Password"/>
+        <xsd:element ref="OperatorName"/>
+        <xsd:element ref="NetworkUserName"/>
+        <xsd:element ref="Group"/>
+        <xsd:element ref="Location"/>
+        <xsd:element ref="Email"/>
+        <xsd:element ref="SqlLoginName"/>
+        <xsd:element ref="SqlPassword"/>
+        <xsd:element ref="PosOnly" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Operator">
+    <xsd:annotation>
+      <xsd:documentation>Target operator code. Limited to 6 characters. Element is mandatory and cannot be blank.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="collapse"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Password">
+    <xsd:annotation>
+      <xsd:documentation>Target operator password. If a password is not supplied, the target operator code will be used as a password.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:maxLength value="30"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OperatorName">
+    <xsd:annotation>
+      <xsd:documentation>Target operator name. If not specified, source operator name will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="collapse"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NetworkUserName">
+    <xsd:annotation>
+      <xsd:documentation>Must not be the same as the source operator code's networkusername. If not specified, the target operator code value specified in the "Operator" tag must be used in it's place.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="32"/>
+        <xsd:whiteSpace value="collapse"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Group">
+    <xsd:annotation>
+      <xsd:documentation>Target operator primary group. If not specified or non-existant, source operator primary group will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="collapse"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Location">
+    <xsd:annotation>
+      <xsd:documentation>Target operator location. If not specified, source operator location will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="collapse"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Email">
+    <xsd:annotation>
+      <xsd:documentation>Target operator email address. If not specified, source operator email address will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:maxLength value="50"/>
+        <xsd:whiteSpace value="collapse"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SqlLoginName">
+    <xsd:annotation>
+      <xsd:documentation>Target operator SQL login name. If not specified, source operator SQL login name will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:maxLength value="30"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SqlPassword">
+    <xsd:annotation>
+      <xsd:documentation>Target Operator SQL password. If not specified, source operator SQL password will be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:maxLength value="30"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PosOnly">
+    <xsd:annotation>
+      <xsd:documentation>Y/N option Flag for POS user. If not Specified, source operator flag will be used. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="collapse"/>
+        <xsd:maxLength value="1"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

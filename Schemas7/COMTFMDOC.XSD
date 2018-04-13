@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for Custom Form Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostCustomForm">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to maintain a custom form. 
+NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.
+</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Key">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the key information required to maintain a custom form.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="FormType">
+                      <xsd:annotation>
+                        <xsd:documentation>The form type for the custom form to be maintained. Valid options are all the custom form types as defined in standard SYSPRO which are listed in IMPCFM.IMP as well as any custom defined types. e.g. SUP - Supplier, CUS - Customer.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="KeyFields">
+                      <xsd:annotation>
+                        <xsd:documentation>This element containst the key columns for the custom form which you wish to maintain.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:all>
+                          <xsd:element name="StockCode" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Key column name for the "STK" custom form type.</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Fields" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the column information for the Add and Update functions. Use the COMQFM business object to query the value columns for a custom form type.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:all>
+                    <xsd:element name="Size" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Sample value column for the "STK" custom form type</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Style" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Sample value column for the "STK" custom form type</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="LoadingFactor" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Sample value column for the "STK" custom form type</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="LookAheadWindow" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Sample value column for the "STK" custom form type</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

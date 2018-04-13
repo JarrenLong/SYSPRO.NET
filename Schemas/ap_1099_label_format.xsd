@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AP 1099 Label Format
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="FormatNo">
+		<xsd:annotation>
+			<xsd:documentation>A/P 1099 Label Format Number is used to select the format that the user wishes to print. If no default is supplied, a default of 00 will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:maxInclusive value="99"/>
+				<xsd:minInclusive value="00"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MinPayment">
+		<xsd:annotation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:decimal"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultFormat">
+		<xsd:annotation>
+			<xsd:documentation>Indicate if the bank default format is required. If no value is supplied then a default of 'Y' will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=Standard document;W=Word document;S=SRS document"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FormatDesc">
+		<xsd:annotation>
+			<xsd:documentation>Indicates what format description the user would like to see printed on the report.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FormatNo" minOccurs="0"/>
+				<xsd:element ref="DefaultFormat" minOccurs="0"/>
+				<xsd:element ref="FormatDesc" minOccurs="0"/>
+				<xsd:element ref="MinPayment" minOccurs="0"/>
+				<xsd:element ref="XslStyleSheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStyleSheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

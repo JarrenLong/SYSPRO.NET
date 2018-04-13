@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for GL Journal Zoom Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Option">
+					<xsd:annotation>
+						<xsd:documentation>This element contains optional parameters to include ledger or sub ledger transactions</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="GeneralLedgerJournal">
+								<xsd:annotation>
+									<xsd:documentation>This element allows you to specify whether you want ledger transations returned. If you want ledger transactions returned you must specify the GlYear and GlJournal that you want to drill into.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="IncludeGLJournals" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Indicates if the General Ledger transactions should be included in the XML OUT</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GlYear" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Year in which journal transaction took place. If IncludeGLJournals is set to �Y�, you must specify the GL year.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GlPer" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Period in which journal transaction took place. If IncludeGLJournals is set to �Y�, you must specify the GL period.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GlJournal" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>GL journal number. If IncludeGLJournal is set to �Y�, you must specify th GL year. The program checks to see if a combination of the GlYear and GlJournal exist in the Ledger Control file. If this combination cannot be found, the following error is returned:	General ledger journal %2 has been purged. Gl Year %1
+</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AuditorsPassword" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Supply the a auditors password that is required to view auditors journals</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="SubLedger">
+								<xsd:annotation>
+									<xsd:documentation>This element allows you to specify whether you want sub ledger transations returned. If you want sub ledger transactions returned you must specify the Origion and the OrigionZoomKeyl that you want to drill into.  </xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="IncludeSubLedger" default="N">
+											<xsd:annotation>
+												<xsd:documentation>Indicates if the sub-ledger transactions should be included in the XML out </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Origin" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Indicates from which sub-ledger this journal originated. If IncludeSubLedger is �Y� then the Origin must be specified </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="CREH"/>
+													<xsd:enumeration value="CREE"/>
+													<xsd:enumeration value="DEBP"/>
+													<xsd:enumeration value="DEBS"/>
+													<xsd:enumeration value="INV"/>
+													<xsd:enumeration value="GRN"/>
+													<xsd:enumeration value="COSL"/>
+													<xsd:enumeration value="COSB"/>
+													<xsd:enumeration value="CRED"/>
+													<xsd:enumeration value="CSBK"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OriginZoomKey" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This is the key for the sub-ledger journal. If IncludeSubLedger is �Y� then the OriginZoomKey must be specified. If the key supplied cannot be found for the journal specified for the �Origin� then the following message is displayed: The OriginZoomKey '%1' has been purged or is invalid</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

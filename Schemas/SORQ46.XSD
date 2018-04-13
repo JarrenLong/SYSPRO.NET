@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order/Invoice Cross Reference Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>Query optons</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Sequence" minOccurs="0"/>
+				<xsd:element ref="Reprint" minOccurs="0"/>
+				<xsd:element ref="ReprintMonth" minOccurs="0"/>
+				<xsd:element ref="ReprintYear" minOccurs="0"/>
+				<xsd:element ref="TagFile" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Sequence">
+		<xsd:annotation>
+			<xsd:documentation>The query details can be returned in register number, sales order, invoice, customer, customer purchase orde or user defined sequencer. The  options: R - register number,S - sales order, I - invoicer, C - customer, P - customer purchase order and U - user defined, default to R, (register number).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:minLength value="0"/>
+				<xsd:length value="1"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="U"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Reprint">
+		<xsd:annotation>
+			<xsd:documentation>Reprint this report, Yes or No, default = N (no)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:length value="1"/>
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReprintMonth" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Enter the month which you wish to reprint</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReprintYear" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Enter the year which you wish to reprint</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TagFile" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Tag file name for user defines sequence</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

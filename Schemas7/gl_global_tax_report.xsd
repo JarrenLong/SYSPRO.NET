@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema List for the GL Global Tax Report Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TransactionDateSelection" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TaxSelection" minOccurs="0"/>
+				<xsd:element ref="Reprint" minOccurs="0"/>
+				<xsd:element ref="ECVATSystemRequired" minOccurs="0"/>
+				<xsd:element ref="ECSubmissionYear" minOccurs="0"/>
+				<xsd:element ref="ECSubmissionPeriod" minOccurs="0"/>
+				<xsd:element ref="ECYearSelection" minOccurs="0"/>
+				<xsd:element ref="ECPeriodSelection" minOccurs="0"/>
+				<xsd:element ref="AllowTransactionPurge" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Reprint">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate whether to reprint the report or not. The default is N-No and the other valid value is Y-Yes.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxSelection">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate the Tax Selection. The Default is B-Both input and output and the other valid values are I-Input and O-Output.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;B=Both input and output;I=Input only;O=Output only"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionDateSelection">
+		<xsd:annotation>
+			<xsd:documentation>All,  Single, Range of transaction dates to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date};A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>This is the style sheet to be applied.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ECVATSystemRequired">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate if  EC VAT is switched on. The default is N-No and the other valid value is Y-Yes.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ECSubmissionYear" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate the submission year for EC Vat.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ECSubmissionPeriod" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate the submission Period for EC Vat.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ECYearSelection" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate the year selection to reprint for EC Vat.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ECPeriodSelection" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element is used to indicate the period selection to reprint for EC Vat.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AllowTransactionPurge">
+		<xsd:annotation>
+			<xsd:documentation>This sequence is used to indicate whether to delete the transactions or not.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

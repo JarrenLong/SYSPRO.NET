@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Tolerance Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Option" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the list of options</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="TolerancePercentage" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The Tolerance percentage is the percentage entered on which you want to report excess scrap over planned scrap.  The format is 3 characters numeric. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="5"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PrintManufacturingUMQuantities" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default is N - No.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This is the filter</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Job" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of jobs ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a -.  Example: 1-9</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="L"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="WorkCentre" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This specifies the selection of work centres ( A - All, S - Single, R - Range).  If not provided the default is A.  If R is selected then separated by a -.  Example: 1-9</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="L"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

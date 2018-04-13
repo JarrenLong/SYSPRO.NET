@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--
+     Schema for the Query Espresso info Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ApplicationId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify the application that must be filtered on, 100000. Used when  FileType is set to the following: CB,AB,CO,SA</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ComponentId">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify the component that must be filtered on, 1001. Used when  FileType is set to the following: CB,CO</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string"/>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ComponentTypeId">
+		<xsd:annotation>
+			<xsd:documentation>Allow for filtering. FilterValue should contain the ComponentTypeId eg. 1-DisplayForm,2-EntryForm,see EspComponentType Used when FileType is set to the following: CL</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ComponentTypeType">
+		<xsd:annotation>
+			<xsd:documentation>Allow for filtering. FilterValue should contain the ComponentType eg. E-Entry,2-Display,see EspComponentType Used when FileType is set to the following: CL</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DeviceId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify what device the information is required for. eg. 1000-Phone,2000-Tablet,3000-Desktop. Used when FileType is set to the following: MN,CB,AB,CO</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FileName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify table names. eg ApSupplier. Used when FileType is set to the following: SS</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FileType">
+		<xsd:annotation>
+			<xsd:documentation>Used to specifywhich action must be performed. MN-Get Menu,SS-Perform a search on a particular table,KF-Return a list of key fields,CL-Returns a list of Components,AL-Retuns a list of Applications,CT-Returns a list of ComponentTypes,DV-Returns a list of Devices,LV-Returns a list of CustomLevels,CB-Returns a component layout(blob) as per the users current session,AB-Returns Application layout(blob) as per the users current session, CO - Returns component options (blob), ML-Returns a list of media items, MI-Returns a specified Media object, SA - Returns a single application, SM - Returns a single MediaItem in XMLRow, OP - Returns operator preferences, MB - Calculate cases and pieces. ST - Serial Tracking Info. DS -DataStore information. BR - Returns the Barcode information. WC - Warehouse Costing for supplied warehouse. SC - Returns readable script text for the function specified.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="MN"/>
+				<xsd:enumeration value="SS"/>
+				<xsd:enumeration value="KF"/>
+				<xsd:enumeration value="CL"/>
+				<xsd:enumeration value="AL"/>
+				<xsd:enumeration value="CT"/>
+				<xsd:enumeration value="DV"/>
+				<xsd:enumeration value="LV"/>
+				<xsd:enumeration value="CB"/>
+				<xsd:enumeration value="AB"/>
+				<xsd:enumeration value="CO"/>
+				<xsd:enumeration value="SA"/>
+				<xsd:enumeration value="CM"/>
+				<xsd:enumeration value="AS"/>
+        <xsd:enumeration value="SC"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>Parent Filter Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="KeyFieldName" minOccurs="0"/>
+				<xsd:element name="ComponentId" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Allow for filtering. FilterValue should contain the ComponentId eg. 1001,1002,etc. See EspComponent Used when FileType is set to the following: CL</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:attribute name="FilterType">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="A"/>
+									<xsd:enumeration value="L"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="FilterValue" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="ComponentTypeId" minOccurs="0"/>
+				<xsd:element ref="ComponentTypeType" minOccurs="0"/>
+				<xsd:element name="DependentComponentId" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Allows for filtering, FilterValue should contain the DependentComponentsId to be filered on.  Used when FileType is set to the following: CL</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:attribute name="FilterType">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="A"/>
+									<xsd:enumeration value="L"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="FilterValue" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>Parent Key Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="FileType" minOccurs="0"/>
+				<xsd:element ref="DeviceId" minOccurs="0"/>
+				<xsd:element ref="ComponentId" minOccurs="0"/>
+				<xsd:element ref="ApplicationId" minOccurs="0"/>
+				<xsd:element name="CustomSearchName" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the CustomSearchName, Used when FileType is set to the following: CS</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="CustomKeyFieldName" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the CustomKeyFieldName, Used when FileType is set to the following: CS</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element ref="FileName" minOccurs="0"/>
+				<xsd:element ref="SearchValue" minOccurs="0"/>
+				<xsd:element ref="OptionType" minOccurs="0"/>
+				<xsd:element ref="MediaId" minOccurs="0"/>
+				<xsd:element name="ApplicationGuid" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the Application Guid when getting the application History. Used when FileType is set to the following:AH</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitsAddSub" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>A =Add, S = Subtract</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitsFactor" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>12 - Eg. Case = 12 pieces</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitsBaseCases" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Number of original cases</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitsBasePieces" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Number of original pieces</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitsCalcCases" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Number of cases to adjust by</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitsCalcPieces" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Number of pieces to adjust by</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitDec" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Number of characters to show in pieces</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="StoreType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the StoreType for the function DS</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="StoreName" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the StoreName for the function DS</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="StockCode" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the stockcode</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Warehouse" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the warehouse</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Qty" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the Quantity</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UnitCost" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the UnitCost</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="TotalCost" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the TotalCost</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="NonMerchandiseCost" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the NonMerchandiseCost</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="UseSingleTypeAbcElements" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the UseSingleTypeAbcElements</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="GrnNumber" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the GrnNumber</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="LotNumber" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the LotNumber</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="BarcodeKeyField" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the BarcodeKeyField. I.e. StockCode,Customer. Used for function BR.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="BarcodeValue" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Used to specify the Barcode Value that must be looked up.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+        <xsd:element name="ScriptFunction" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>The Script function to return. Eg. BIND, BEFORESAVE and AFTERSAVE.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="KeyFieldName">
+		<xsd:annotation>
+			<xsd:documentation>Allow for filtering. FilterValue should contain the KeyFieldName eg. Customer,Supplier. Used when FileType is set to the following: CL,AL</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MediaId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify the MediaId, Used when FileType is set to the following: MI,SM</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OptionType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify which options must be returned for the component. eg.0-FilterOptions. See EspComOption. Used when FileType is set to the following: CO</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="Key" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SearchValue" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Used to specify a search criteria. eg. *Bike*. Used when FileType is set to the following: SS,KF,CL,AL,ML</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Start Phase posting parameters
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostConfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Parameters">
+          <xsd:annotation>
+            <xsd:documentation>This contains parameters.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Function" default="S" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the function you wish to perform on the configuration.   The possible values are  S - Start or C - Cancel. If not supplied this element defaults to S. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="C"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ConfigurationInstance" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The element indicates the instance of the configuration you are running. It is indicated by a unique number returned after the start phase of processing. This unique number is mandatory when cancelling a configuration.The size of the field is a 8 character alphanumeric field.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="8"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether or not a configuration must be rejected if there are any warnings. If not supplied it defaults to N. Valid values are N and Y.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValidateWorkingDays" default="A" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Specifies whether to validate that the ship dates for the sales order/quote are valid working days.  If you are using an existing sales order/quote this will be ignored on the header ship date as the header ship date cannot be changed.  
+When an existing sales order is not a forward order and not a scheduled order then the sales order detail lines will use the existing sales order header ship date and this element will be ignored. Possible values are: (A, ship dates will not be validated, P, ship dates will be validated and if date is not a working day, the previous valid working date will be used instead, N - ship dates will be validated and if date is not a working day, the next valid working date will be used instead). If this element is not supplied it will default to A.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="P"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

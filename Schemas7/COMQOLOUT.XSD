@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Operator List Report Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SystemInformation"/>
+				<xsd:element ref="QueryOptions"/>
+				<xsd:element ref="ResultsFound"/>
+				<xsd:element ref="Operator" maxOccurs="unbounded"/>
+				<xsd:element name="TranslatedText">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Text_Yes" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_No" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_All" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Range" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Single" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_List" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Yes__Server_date" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Yes__Client_date" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Multiple" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_System_wide" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Company" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Operator" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Employee" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Customer" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_No_e_net_use_allowed" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Guest_Anonymous_user" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Text_Class_of_users" type="xsd:string" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SystemInformation">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CssStyle"/>
+				<xsd:element name="Language"/>
+				<xsd:element name="DecFormat"/>
+				<xsd:element name="DateFormat"/>
+				<xsd:element name="Role"/>
+				<xsd:element name="Version"/>
+				<xsd:element name="CompanyId"/>
+				<xsd:element name="CompanyName"/>
+				<xsd:element name="OperatorCode"/>
+				<xsd:element name="OperatorName"/>
+				<xsd:element name="OperatorGroup"/>
+				<xsd:element name="OperatorEmailAddress"/>
+				<xsd:element name="OperatorLocation"/>
+				<xsd:element name="LocalCurrency"/>
+				<xsd:element name="LocalCurrencyDesc"/>
+				<xsd:element name="GlPrdPerYear"/>
+				<xsd:element name="ReportDate"/>
+				<xsd:element name="UseSeparatorOnReports"/>
+				<xsd:element name="SeparatorToUse"/>
+				<xsd:element name="OperatorPrimaryRole"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="QueryOptions">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="OperatorSelection"/>
+				<xsd:element name="OperatorFrom"/>
+				<xsd:element name="OperatorTo"/>
+				<xsd:element name="OperatorGroupSelection"/>
+				<xsd:element name="OperatorGroupFrom"/>
+				<xsd:element name="OperatorGroupTo"/>
+				<xsd:element name="IncludeLockedOperators"/>
+				<xsd:element name="IncludeContactDetails"/>
+				<xsd:element name="CompanyListType"/>
+				<xsd:element name="IncludeNetworkUserName"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ResultsFound">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Results" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Operator">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="OperatorCode"/>
+				<xsd:element name="Name"/>
+				<xsd:element name="NetworkUserName"/>
+				<xsd:element name="Location"/>
+				<xsd:element name="Email"/>
+				<xsd:element name="PreferredName"/>
+				<xsd:element name="JobTitle"/>
+				<xsd:element name="Department"/>
+				<xsd:element name="Office"/>
+				<xsd:element name="Telephone"/>
+				<xsd:element name="TelephoneExtn"/>
+				<xsd:element name="GroupCode"/>
+				<xsd:element name="DefaultCompany"/>
+				<xsd:element name="SpecialLangSupport"/>
+				<xsd:element name="OperatorLockedOut"/>
+				<xsd:element name="CompanyList">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CompanyListType">
+								<xsd:annotation>
+									<xsd:documentation>A = Allowed list, D = Denied list, space = All companies allowed.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="Companies" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If CompanyListType is spaces, this element is omitted.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Comp" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>Single company id</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ChangeCompanyFlag"/>
+				<xsd:element name="TimeoutPeriod"/>
+				<xsd:element name="AccDateToSysDate"/>
+				<xsd:element name="TimeoutAction"/>
+				<xsd:element name="ConcurrentAccess"/>
+				<xsd:element name="DefaultWarehouse"/>
+				<xsd:element name="ListWarehouses">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AllowDisallow"/>
+							<xsd:element name="AllNoneList"/>
+							<xsd:element name="Item" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Code"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DefaultArBranch"/>
+				<xsd:element name="ListArBranches">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AllowDisallow"/>
+							<xsd:element name="AllNoneList"/>
+							<xsd:element name="Item" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Code"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DefaultBank"/>
+				<xsd:element name="ListBanks">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AllowDisallow"/>
+							<xsd:element name="AllNoneList"/>
+							<xsd:element name="Item" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Code"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DefaultApBranch"/>
+				<xsd:element name="ListApBranches">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AllowDisallow"/>
+							<xsd:element name="AllNoneList"/>
+							<xsd:element name="Item" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Code"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="RecordsPerTickover"/>
+				<xsd:element name="DefaultCashDrawer"/>
+				<xsd:element name="DefaultReqnUser"/>
+				<xsd:element name="EnableEditUserMenu"/>
+				<xsd:element name="EnableStdMenus"/>
+				<xsd:element name="FaxMailIntegration"/>
+				<xsd:element name="Salesperson"/>
+				<xsd:element name="SalespersonAccess"/>
+				<xsd:element name="ApBranchFilter"/>
+				<xsd:element name="ArBranchFilter"/>
+				<xsd:element name="WhFilter"/>
+				<xsd:element name="SalespersonFilter"/>
+				<xsd:element name="BankFilter"/>
+				<xsd:element name="LoggedInStatus"/>
+				<xsd:element name="EnetDefaultSup"/>
+				<xsd:element name="EnetDefOrderType"/>
+				<xsd:element name="EnetLanguageCode"/>
+				<xsd:element name="EnetCustomerFilter"/>
+				<xsd:element name="EnetCreditCheck"/>
+				<xsd:element name="EnetNotifyOperator"/>
+				<xsd:element name="EnetMinShipDays"/>
+				<xsd:element name="EnetApplyAtp"/>
+				<xsd:element name="EnetValidWh"/>
+				<xsd:element name="EnetUserSalesMsg"/>
+				<xsd:element name="EnetCreditCheckMsg"/>
+				<xsd:element name="EnetDefOrderStatus"/>
+				<xsd:element name="EnableEditGrpMenu"/>
+				<xsd:element name="EnetAllowNonStock"/>
+				<xsd:element name="EnetCustomerAccess"/>
+				<xsd:element name="EnetSalesperson"/>
+				<xsd:element name="EccUser"/>
+				<xsd:element name="EnetWbCssStyle"/>
+				<xsd:element name="EnetWbCssSuffix"/>
+				<xsd:element name="JobClassFilter"/>
+				<xsd:element name="DefaultJobClass">
+					<xsd:complexType/>
+				</xsd:element>
+				<xsd:element name="ListJobClass">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AllowDisallow"/>
+							<xsd:element name="AllNoneList"/>
+							<xsd:element name="Item" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Code"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="MsgToAdminDupLogin"/>
+				<xsd:element name="EnetDateFormat"/>
+				<xsd:element name="EnetDecimalFormat"/>
+				<xsd:element name="DefaultCtrCustomer"/>
+				<xsd:element name="DefaultPaymentType"/>
+				<xsd:element name="PasswordRetrys"/>
+				<xsd:element name="LoginOverride"/>
+				<xsd:element name="EnetFunctionalRole"/>
+				<xsd:element name="EnetBoLicenseFlag"/>
+				<xsd:element name="EnetBoLicenseUsers"/>
+				<xsd:element name="EnetWbLicenseFlag"/>
+				<xsd:element name="EnetWbLicenseClass"/>
+				<xsd:element name="EnetWbLicenseUsers"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

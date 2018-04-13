@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!--
+     Schema for Message Inbox Post Business Object
+     This is the XSD for XmlIn
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CompanyId">
+    <xsd:annotation>
+      <xsd:documentation>Company id to which to post message. Defaults to current company.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>The date on which the message is to be actioned. If no date is supplied then the action date will be 'zeroes' indicating that the message should be actioned immediately.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="FromName">
+    <xsd:annotation>
+      <xsd:documentation>The name of the operator from whom the message was sent.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="FromOperator">
+    <xsd:annotation>
+      <xsd:documentation>The operator id from whom the message was sent.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CompanyId"/>
+        <xsd:element ref="Operator"/>
+        <xsd:element ref="Date"/>
+        <xsd:element ref="Time"/>
+        <xsd:element ref="MessageType"/>
+        <xsd:element ref="Subject"/>
+        <xsd:element ref="FromOperator"/>
+        <xsd:element ref="FromName"/>
+        <xsd:element ref="ProgramToRun"/>
+        <xsd:element ref="ProgramParameters"/>
+        <xsd:element ref="PreventDuplicate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Message">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MessageType">
+    <xsd:annotation>
+      <xsd:documentation>Messages can be indentified uniquely using a message type. If no type is supplied the object will default to 'USR'. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Operator">
+    <xsd:annotation>
+      <xsd:documentation>The operator for whom the message is intended. The operator must be valid.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="PreventDuplicate">
+    <xsd:annotation>
+      <xsd:documentation>Set this parameter to 'Y' if you wish to prevent messages containing the same message text being displayed in the operator's message inbox. The default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="ProgramParameters">
+    <xsd:annotation>
+      <xsd:documentation>Programs in SYSPRO can accept special parameters being passed to them so that they perform specific tasks automatically. You can define these parameters in this element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="ProgramToRun">
+    <xsd:annotation>
+      <xsd:documentation>The name of a SYSPRO program to run when the message is 'read' by the operator.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Subject">
+    <xsd:annotation>
+      <xsd:documentation>The subject text of the message.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="Time">
+    <xsd:annotation>
+      <xsd:documentation>The time of the message in the format   HHMMSSHH (hours, minutes, seconds, hundreds of second). No validation is performed on the time format supplied.
+If no time is supplied a default of zeroes is assumed. A time element can be useful to uniquely identify each message, if posting many messages to the same operator on the same date.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the  Quotation Reason Code Setup Program
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Description" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is the description of the Quotation Reason Code and is used primarily to identify the Quotation Reason Code. </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to Quotation Reason Codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Description"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This element contains the key information required to maintain a Quotation Reason Code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Reason"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Reason" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This is the key to the Quotation Reason being maintained. This is mandatory. If this Quotation Reason Code is being added, it must not pre-exist. If this Quotation Reason Code is being changed or deleted, it must be a valid Syspro Quotation Reason Code.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SetupQuotationReasonCode">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for Quotation Reason Code maintenance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

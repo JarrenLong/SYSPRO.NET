@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Quotations Non-stocked Code Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupQotNonStock">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to maintain a non-stock item.NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Key">
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="NonStockCode">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the non-stock code being maintained. The non-stock code is mandatory for Add, Update and Delete.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Description" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the description to appear against the non-stock code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Uom" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the unit of measure to be used for the non-stock item e.g. box, ea. Will default to the Inventory unit of measure default if not supplied when adding a new non-stock item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Mass" default="1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the weight of a single unit of the item. Will default to 1 if not supplied when adding a new non-stock item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Volume" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the volume of a single unit of the item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="MaxDecimals" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the maximum number of decimals to use to store and print quantities of the non-stock item. Will default to the Inventory default number of decimals if not supplied when adding a new non-stock item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="3"/>
+                    <xsd:enumeration value="2"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="0"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Supplier" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the supplier from which the item is bought. This element will be ignored when the non-stock item part category is not bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProductClass" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Product class is the category to which the item is assigned. This element is mandatory when adding a new non-stock item.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TraceableType" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To indicate if the item is lot traceable. This element will be ignored when the non-stock item part category is bought-out. Possible values: N (Not traceable) or T (Traceable). Default: N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="T"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Buyer" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Buyer is the person responsible for purchasing the non-stock item. This element will be ignored when the non-stock item part category is not bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Planner" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Planner is the person responsible for the production planning of the stock item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LeadTime" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Lead time is the number of days it takes to buy the item. This element will be ignored when the non-stock item part category is not bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PartCategory" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Part category for the non-stock item. Settings are as follows: B - Bought out indicates that the item is bought from an external supplier. M - Made in indicates that the item is made internally. S - Subcontracted indicates the item is a made-in part that has been assigned at least one subcontract operation. G – Phantom part indicates the item is a parent part of a component structure.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="B"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="G"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DockToStock" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the number of days that it takes from when the item has been delivered before it can be sold or used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WipCtlGlCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the default account to which you want to post the value of work in progress when a job is created for this item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TariffCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The tariff code is used in the EC Vat system to determine the tax rates to be used for items sold across EC borders. This element will be ignored if EC vat system is not required</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SupplementaryUnit" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if supplementary units apply to the entry made in the tariff code element and is printed on the Supplementary Declaration – Dispatches report for items sold to an EC country. Possible values: Y (Yes) or N (No).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitCost" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicates the fixed cost of the item per unit of measure. This field will be ignored when the non-stock item part category is not bought-out or the method of costing is not ‘U’ (unit cost).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteDesc1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To change the default description for Route 0. Default to: Route 0. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteReqd2" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To indicate if Route 1 is available for the item. Route '0' always required. Possible values: 0 – Route not available for item or 1 – Route available for item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteDesc2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To change the default description for Route 1. Default to: Route 1. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteReqd3" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To indicate if Route 2 is available for the item. Possible values: 0 – Route not available for item or 1 – Route available for item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteDesc3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To change the default description for Route 2. Default to: Route 2. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteReqd4" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To indicate if Route 3 is available for the item. Possible values: 0 – Route not available for item or 1 – Route available for item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteDesc4" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To change the default description for Route 3. Default to: Route 3. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteReqd5" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To indicate if Route 4 is available for the item. Possible values: 0 – Route not available for item or 1 – Route available for item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteDesc5" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To change the default description for Route 4. Default to: Route 4. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteReqd6" default="0" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To indicate if Route 5 is available for the item. Possible values: 0 – Route not available for item or 1 – Route available for item. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="0"/>
+                    <xsd:enumeration value="1"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RouteDesc6" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>To change the default description for Route 5. Default to: Route 5. This element will be ignored when the non-stock item part category is bought-out.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CostingMethod" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicate the method of costing for a bought-out item. Possible values: U - Unit cost or P - Purchase prices. This element will be ignored when the non-stock item part category is not bought-out. Defaults to U.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value="P"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="JobClassification" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Default job classification to use when a job is created for this item. The entry made here can be used as a selection criterion when printing reports in the Work in Progress module.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="WithTaxExpenseType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Indicate the Expense type for a bought-out item. Possible values: G - Goods or S - Service. This field is only available if Withholding tax is required (Tax Options) and the non-stock item part category is not bought-out. Defaults to G.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="G"/>
+                    <xsd:enumeration value="S"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eSignature" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the esignature element.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

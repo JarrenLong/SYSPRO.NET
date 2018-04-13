@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the AP Initial Invoice Capture Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupApInitialInvoice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="TransactionType"/>
+				<xsd:element ref="EcAcquisition" minOccurs="0"/>
+				<xsd:element ref="Branch"/>
+				<xsd:element ref="InvAmt" minOccurs="0"/>
+				<xsd:element ref="Tax2Value" minOccurs="0"/>
+				<xsd:element ref="TaxAmt" minOccurs="0"/>
+				<xsd:element ref="FreightAmt" minOccurs="0"/>
+				<xsd:element ref="MiscAmt" minOccurs="0"/>
+				<xsd:element ref="DiscAmt" minOccurs="0"/>
+				<xsd:element ref="ConvRate" minOccurs="0"/>
+				<xsd:element ref="InvDate"/>
+				<xsd:element ref="DiscDate" minOccurs="0"/>
+				<xsd:element ref="InvDueDate"/>
+				<xsd:element ref="Reference" minOccurs="0"/>
+				<xsd:element ref="Notation" minOccurs="0"/>
+				<xsd:element ref="WithHoldingTaxCode" minOccurs="0"/>
+				<xsd:element ref="WithTaxValue" minOccurs="0"/>
+				<xsd:element ref="WithTaxExpenseType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Supplier"/>
+				<xsd:element ref="Invoice"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Supplier" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the composit key of the AP invoice table. This reflects the AP supplier the AP initial invoice is for.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Invoice" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the composit key of the AP invoice table. This reflects the AP initial invoice number</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TransactionType">
+		<xsd:annotation>
+			<xsd:documentation>This denotes whether the transaction is an invoice or adjustment. Valid entries are "I/A"</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="A"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EcAcquisition">
+		<xsd:annotation>
+			<xsd:documentation>This flag reflects whether the invoice is an EC aquisition or not. Valid entries are "Y/N".</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Branch" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the branch code reflected against the invoice</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InvAmt" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the invoice amount.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Tax2Value" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This value reflects the QST tax amount applicable to the AP intial invoice.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TaxAmt" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the tax value against the AP initial invoice.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FreightAmt" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>The reflects the freight amount applicable to the AP initial invoice.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MiscAmt" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the miscellaneous charges due for the AP initial invoice.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscAmt" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the discount amount applied to the AP initial invoice. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ConvRate" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the conversion rate to be applied to the AP initial invoice.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InvDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the invoice date for the AP initial invoice.  Format to be entered is CCYY/MM/DD.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the discount date applicable to the AP initial invoice. Format to be entered is CCYY/MM/DD.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InvDueDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the due date apllicable to the AP initial invoice is due.  Format to be entered is CCYY/MM/DD.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Reference" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the AP initial invoice reference details.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Notation" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the AP initial invoice journal notaion.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WithTaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This is the Withholding tax code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WithTaxValue" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This is the calculated withholding  tax amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WithTaxExpenseType">
+		<xsd:annotation>
+			<xsd:documentation>Defines the Expense type for withholding tax.The flag can be G-Goods, S-Service, B-Both. If the element is spaces it will default to G- G-Goods. If the supplier is set to Both-they can either be Goods or Services</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WithHoldingTaxCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>If Withholding tax required-you will be required to enter the tax code agains the supplier</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

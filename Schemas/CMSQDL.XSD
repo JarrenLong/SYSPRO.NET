@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Query Dynamic List Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="FileName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Must contain the name of the dynamic list file.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>KeyNode</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FileName"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Root Query Node</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element name="ColumnsToInclude">
+					<xsd:annotation>
+						<xsd:documentation>Collection of columns to include</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence maxOccurs="unbounded">
+							<xsd:element name="Column">
+								<xsd:annotation>
+									<xsd:documentation>Name of the column to include.  e.g. ArCustomer.Name, ArCustomer+.WOR001</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

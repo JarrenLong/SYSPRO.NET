@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the MRP Forecast Amendment Journals Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the Root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the Parent Option element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Reprint"/>
+				<xsd:element ref="PrintAdditions"/>
+				<xsd:element ref="PrintDeletions"/>
+				<xsd:element ref="PrintChanges"/>
+				<xsd:element ref="PrintInactiveAndActive"/>
+				<xsd:element ref="DeleteJournalFileAfterReport"/>
+				<xsd:element ref="XslStylesheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Reprint">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether to print all the journals or only the journals created since the last print of this report. Y(Yes) or N(No) the default is N(No) which means it will only show the journals created since the last print.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintAdditions">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to include addition journals (ADDED transaction type) on the report. Y(Yes) or N(No). The default is Y(Yes) which means it will show the journals created when a build schedule is added</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintChanges">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to include change journals (UPDATED transaction type) on the report. Y(Yes) or N(No). The default is Y(Yes) which means it will show the journals created when a build schedule is changed</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintDeletions">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to include deletion journals (DELETED transaction type) on the report. Y(Yes) or N(No). The default is Y(Yes) which means it will show the journals created when a build schedule is deleted</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintInactiveAndActive">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to include inactive and active forecasts. Y(Yes) or N(No). The default is Y(Yes). </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DeleteJournalFileAfterReport">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to clear the file of all journals. Y(Yes) or N(No). The default is N(No).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

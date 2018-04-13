@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for Operator Profile Query Business Object
+     This returns the operator preference for the current operator
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="IncludeActivities" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the Activities security information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeApBranches" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the  AP Branch security information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeArBranches" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the  AR Branch security information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeBanks" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the Bank security information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeDetails" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include a list of customer and warehouse details for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFields" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the Fields security information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeJobClassification" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the Job Classification security information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeModules">
+		<xsd:annotation>
+			<xsd:documentation>Select the setup option subset(s) that you wish to have returned. Valid options are:
+tax          Tax options
+ar           Accounts Receivable
+ap           Accounts Payable
+csh          Cash Book
+sor          Sales orders
+por          Purchase orders
+gen          General ledger
+inv          Inventory
+wip          Work in Progress
+lot          Lot traceability
+bom          Bill of materials
+qot          Quotations
+rma          RMA
+dis          Dispatch Notes
+io           Inventory Optimization
+
+The single word ALL will return all setup options for all modules.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeWarehouses" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Do you wish to include the  warehouse security  information for the current operator (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>The list of Options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="IncludeDetails" minOccurs="0"/>
+				<xsd:element ref="IncludeModules" minOccurs="0"/>
+				<xsd:element ref="Security" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Security">
+		<xsd:annotation>
+			<xsd:documentation>The list of Security Options</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="IncludeWarehouses" minOccurs="0"/>
+				<xsd:element ref="IncludeArBranches" minOccurs="0"/>
+				<xsd:element ref="IncludeApBranches" minOccurs="0"/>
+				<xsd:element ref="IncludeBanks" minOccurs="0"/>
+				<xsd:element ref="IncludeJobClassification" minOccurs="0"/>
+				<xsd:element ref="IncludeActivities" minOccurs="0"/>
+				<xsd:element ref="IncludeFields" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,1743 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Quotation Entry Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ApplyToOffers">
+		<xsd:annotation>
+			<xsd:documentation>This indicates to which offers the sales order additional text and/or dangerous goods text applies. Offers should be entered separated by commas (e.g. 1,3,4,D). The format is up to 11 characters alphanumeric. Possible values: Offer 1 to 5 and D for default offer.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CommissionCode">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the commission code that must be used to calculate the commission for the offer. The format is up to 2 characters alpha-numeric. This element only applies to offers for non-stocked and stocked quotation lines. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultOffer">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the offer which will be used as a default for the line. The default offer for each line can be used to automatically create sales orders, jobs, purchase orders or requisitions using the Quotation Confirmation program. If the default offer element contains 0 then no default offer is required. Possible values: 0 to 5</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="0"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="5"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Description">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the description for the non-stocked item or stock code. The format is up to 30 characters alphanumeric. For stock codes this element is only applicable when the sales order setup option within SYSPRO to allow changes to description for stock items has been selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscountFlag" default="L">
+		<xsd:annotation>
+			<xsd:documentation>This indicates how the offer discount should be applied to the offer line. Discounts can be supplied as either a single value (which will be either a total discount value for the offer or a unit discount value) or up to three chained discount percentages. Possible values: V (Discount value entered for offer line), U (Unit discount value entered for offer line), L (Discount percentages to be subtracted from offer value) or P (Discount percentages to be added to offer value as a surcharge).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="V"/>
+				<xsd:enumeration value="U"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscountValue">
+		<xsd:annotation>
+			<xsd:documentation>This indicates either the total discount value or the unit discount value (depending on the discount flag) that will be added to the offer value. The format is up to 14 characters numeric with 12 integers and 2 decimals. This element only applies to offers for non-stocked and stocked quotation lines and when the discount flag is either V or U.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FederalSalesTax">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the quotation line you are entering is subject to GST and the appropriate GST rate. This element is only relevant when the line is subject to GST. This element is only relevant when your system nationality is set to CAN (Canadian) and the Canadian GST system is in use. The format is up to 1 character alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GSTTaxable" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the quotation line you are entering is subject to GST. If the quotation header has been flagged as exempt from GST, then this element will be ignored as the line will also be exempt. This element is only relevant when your system nationality is set to CAN (Canadian) and the Canadian GST system is in use. Possible values: Y (GST taxable) or N (not GST taxable). The line GST status will default to the GST status of the sales order header for the quotation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LineAction" default="A">
+		<xsd:annotation>
+			<xsd:documentation>This indicates which action should be performed for the detail line. The possible actions are: add (A) a new detail line, change (C) the detail line,  delete (D) the detail line or insert (I) a new detail line. Possible values: A (Add), C (Change), D (Delete) or I (Insert). Default to A (add).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="I"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LineDiscount1">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the first discount value when using chain discount percentages that will be either subtracted or added to the offer value depending on the discount flag. The format is up to 5 characters numeric with 3 integers and 2 decimals. This element only applies to offers for non-stocked and stocked quotation lines and when the discount flag is L or P.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LineDiscount2">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the second discount value when using chain discount percentages that will be either subtracted or added to the offer value depending on the discount flag. The format is up to 4 characters numeric with 2 integers and 2 decimals. This element only applies to offers for non-stocked and stocked quotation lines and when the discount flag is L or P.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="5"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LineDiscount3">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the third discount value when using chain discount percentages that will be either subtracted or added to the offer value depending on the discount flag. The format is up to 4 characters numeric with 2 integers and 2 decimals. This element only applies to offers for non-stocked and stocked quotation lines and when the discount flag is L or P.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="5"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LineShipDate">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the date on which the items can be shipped to the customer. The ship date can be changed for each line on the quote, depending on the items availability. The ship date will be validate to ensure that it falls on a working day if the parameter validate working days is set to P (default to previous working day) or N(default to next working day). The format is 10 characters numeric and must be in a CCYY-MM-DD format. Default to the ship date supplied for the quotation header.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Offer">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the information to maintain an offer for a detail line. You may supply up to five offers for each quotation detail line. The offer number must be defined as an attribute of the offer. Possible offer number values: 1 to 5.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:all>
+				<xsd:element name="OfferAction" default="A" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This indicates which action should be performed for the offer line. The possible actions are: add (A) a new offer, change (C) the offer or delete (D) the offer. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="1"/>
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="A"/>
+							<xsd:enumeration value="C"/>
+							<xsd:enumeration value="D"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="Quantity" minOccurs="0"/>
+				<xsd:element name="QuantityUom" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This indicates the quantity unit of measure for the offer. This element is only applicable for offers for stocked items and when the sales order setup option within SYSPRO to Request unit of measure for order quantity has been selected. The format is up to 3 characters alphanumeric. Default to the unit of measure against the stock code.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="3"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="PriceCalculationMethod" minOccurs="0"/>
+				<xsd:element ref="ProfitPercentage" minOccurs="0"/>
+				<xsd:element ref="PriceCode" minOccurs="0"/>
+				<xsd:element ref="Price" minOccurs="0"/>
+				<xsd:element ref="PriceUom" minOccurs="0"/>
+				<xsd:element ref="LineDiscount1" minOccurs="0"/>
+				<xsd:element ref="LineDiscount2" minOccurs="0"/>
+				<xsd:element ref="LineDiscount3" minOccurs="0"/>
+				<xsd:element ref="DiscountFlag" minOccurs="0"/>
+				<xsd:element ref="DiscountValue" minOccurs="0"/>
+				<xsd:element name="ClearDiscounts" default="N" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This indicates that you want to set the discounts for this offer to zero. This element is only applicable when changing an offer. Possible values: Y (yes, clear the discounts) or N (no, leave discounts as they are). Default to N.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="1"/>
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="CommissionCode" minOccurs="0"/>
+				<xsd:element name="RouteToUse" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This indicates the route to use for a made in non-stocked item. The format is 1 character alphanumeric. This element only applies to offers for non-stocked items. Possible values: C (Lowest Cost), L (Shortest Lead) or 0 to 5 (referring to the routes available for the non-stocked item).</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="1"/>
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="C"/>
+							<xsd:enumeration value="L"/>
+							<xsd:enumeration value="0"/>
+							<xsd:enumeration value="1"/>
+							<xsd:enumeration value="2"/>
+							<xsd:enumeration value="3"/>
+							<xsd:enumeration value="4"/>
+							<xsd:enumeration value="5"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Amount" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This indicates the amount that you want to charge for freight or miscellaneous charges. The format is up to 14 characters numeric with 12 integers and 2 decimals.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="16"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Cost" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This indicates the cost amount for freight or miscellaneous charges. The cost must be entered in local currency. The format is up to 14 characters numeric with 12 integers and 2 decimals.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="16"/>
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:all>
+			<xsd:attribute name="OfferNumber">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="1"/>
+						<xsd:whiteSpace value="preserve"/>
+						<xsd:enumeration value="1"/>
+						<xsd:enumeration value="2"/>
+						<xsd:enumeration value="3"/>
+						<xsd:enumeration value="4"/>
+						<xsd:enumeration value="5"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostQuotation">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This element contains the information to maintain a quote i.e. this element will indicate the start and end of a quotation.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="QuotationHeader">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the information to maintain a quote header i.e. customer details and header information will be grouped in this element.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:choice maxOccurs="unbounded">
+										<xsd:element name="Quote" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the quotation number.  The format is up to 8 characters alphanumeric, or numeric depending on the key configuration option for quotations within SYSPRO. The quotation number does not have to be supplied when adding a new quotation and automatic numbering has been selected in the quotation set-up within SYSPRO. The quotation number is mandatory when maintaining or deleting a quotation or manual quotation numbering in use.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="QuoteStatus" default="P" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the status of the quotation. In order to maintain a quotation, the quotation must be in a status of Preparation. Possible values: P (Preparation), A (Set to Available), H (On Hold) or R (Release hold).  Default to P (Preparation) status when adding a quotation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="P"/>
+													<xsd:enumeration value="A"/>
+													<xsd:enumeration value="H"/>
+													<xsd:enumeration value="R"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StatusReasonCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The reason code will be used to identify the reason for canceling the quotation or putting the quotation on hold. The format is up to 10 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="QuoteDescription" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates a short description for the quotation. The format is up to 30 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Customer" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the code of the customer for whom you want to create the quote. The customer code can only be entered if the Accounts Receivable module has been installed. The format is up to 7 characters alphanumeric or numeric depending on the key configuration option for customer within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="7"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerName" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A customer name can be supplied when the quotation is not created for a specific customer. The customer name will be retrieved from the customer master file for existing customers. The customer name will also be used as the Ship to name for the Order header saved against the quotation. The format is up to 30 characters alphanumeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="HierarchyQuote" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You can flag the quote as hierarchical for line items which are normally associated with a job and where the job is linked to a contract if the Project and Contracts module is in use. You may not add stocked lines to a hierarchical quote or change the hierarchical status of the quote once it has been added to the system. Possible values: Y (Yes) or N (No). </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Contract" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The contract number is used to group together a number of jobs so that reviews and profitability can be jointly accessed. The format is up to 20 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Fax" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A fax number can be supplied when the quotation is not created for a specific customer. If a customer has been supplied, the quotation fax number will default to the fax number held against the customer. The format is up to 20 characters alphanumeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Telephone" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A telephone number can be supplied when the quotation is not created for a specific customer. If a customer has been supplied, the quotation telephone number will default to the telephone number held against the customer. The format is up to 20 characters alphanumeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Email" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>An e-mail address can be supplied when the quotation is not created for a specific customer. If a customer has been supplied, the quotation e-mail address will default to the e-mail addres held against the customer. The format is up to 20 characters alphanumeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="50"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Classification" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the job classification assigned to the quotation. The job classification can be used as a selection criterion when printing a list of quotations. The format is up to 4 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="4"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ProbabilityFlag" default="9" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the likelihood of the client excepting the quote. The probability is used as a selection criterion when performing a MRP requirements calculation. Possible values: 1 to 9. Default to 9.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DateEnquiry" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the date of the query. This date will default to the system date and can only be changed when the quotation configuration option within SYSPRO - Allow changes to date of query has been selected. The format is 10 characters numeric and must be in a CCYY-MM-DD format. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DateTenderRequired" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the tender date if the quotation is created for a tender. This date will default to the system date. The format is 10 characters numeric and must be in a CCYY-MM-DD format. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ExpiryDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the expiry date for the quotation. This date can only be changed when the quotation configuration option within SYSPRO - Allow changes to expiry date has been selected. The expiry date is compulsory if the quotation configuration option within SYSPRO Force entry of expiry date has been selected. The format is 10 characters numeric and must be in a CCYY-MM-DD format. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FollowupDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the follow-up date for the quotation.  The format is 10 characters numeric and must be in a CCYY-MM-DD format.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>		
+										<xsd:element name="Branch" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The branch code is used to integrate the Accounts Receivable module to General Ledger. The branch code is only applicable when the Account Receivable module has been installed. The format is up to 2 characters alphanumeric. Default to the branch on file for the customer when customer code has supplied for quote.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Area" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The geographic area, required within the Accounts Receivable, which applies to your customer and quote. The format is up to 2 characters alphanumeric. Default to the geographic area on file for the customer when customer code has supplied for quote.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Salesperson" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the salesperson assigned to the customer. The format is up to 3 characters alphanumeric. Default to the salesperson on file for the customer when customer code has supplied for quote.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Currency" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the currency for the quotation only applicable when foreign currency sales are required else will default to local currency. The format is up to 3 characters alphanumeric. Default to the currency on file for the customer when customer code has supplied for quote.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FixedExchangeRate" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This option enables you to change the fixed exchange rate for this quotation. This is only applicable when a foreign currency has been specified for the quotation. Possible values: Y (yes) or N (no).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ExchangeRate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Indicates the exchange rate for this quotation. This is only applicable when the quotation has been flagged as using a fixed exchange rate. The format is up to 13 characters numeric with 6 integers and 6 decimals. Default to exchange rate stored against the currency selected for the quotation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="13"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DocumentFormat" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the format that must be used as the default when generating batch invoices and/or delivery notes for the customer and when printing the quotation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="InvoiceTerms" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Use the invoice terms code to define the default settlement discount you want to extend to a customer whose payments are made within a prescribed period of time.  The format is up to 2 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ApplyOrderDiscount" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether you want to be able to assign order discount breaks when processing a sales order for the customer. These discounts are applied to the total value or total quantity of a sales order processed for the customer. If you select to calculate order discounts based on order value or quantity (Y), then you will be unable to assign an invoice discount code to the customer. Possible values: Y (Calculate order discount based on order value/quantity) or N (do not calculate order discount based on order value/quantity).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="InvoiceDiscountCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the automatic discount that is applicable to each invoice processed for the customer. A blank entry indicates that you do not require automatic invoice discount for the customer. If you select to calculate order discounts based on order value or quantity (Y), then you will be unable to assign an invoice discount code to the customer/quote. The format is up to 2 characters alphanumeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ApplyLineDiscount" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether you want to be able to assign order discount breaks to specific customer/product class combinations. These discounts are applied to the order line value or order line quantity of a sales order processed for the customer. If you select to calculate order line discounts according to product class sold (Y), then you will be unable to assign a line discount code to the customer. Possible values: Y (Calculate order line discount according to product class sold) or N (do not calculate order line discount according to product class sold).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="LineDiscountCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the automatic discount that is applicable to each sales order line processed for the customer. A blank entry indicates that you do not require automatic line discount for the customer. If you select to calculate order line discounts according to product class sold (Y), then you will be unable to assign a line discount code to the customer/quote. The format is up to 2 characters alphanumeric. Default to the line discount code on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ContractPricingRequired" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether you require special prices (or price discounts) for stock items to be available to the customer over a fixed time period. This element is not applicable when the quotation is for a specific customer as the information saved on file against the customer will be used. Possible values: Y (contract pricing is required) or N (contract pricing is not required).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyingGroup1" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A buying group enables you to classify a number of contract customers into a common group for use within the contract pricing program. This element is not applicable when the quotation is for a specific customer as the buying group saved on file against the customer will be used. The format is up to 2 characters alphanumeric or numeric depending on the key configuration option for buying group within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyingGroup2" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A buying group enables you to classify a number of contract customers into a common group for use within the contract pricing program. This element is not applicable when the quotation is for a specific customer as the buying group saved on file against the customer will be used. The format is up to 2 characters alphanumeric or numeric depending on the key configuration option for buying group within SYSPRO. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyingGroup3" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A buying group enables you to classify a number of contract customers into a common group for use within the contract pricing program. This element is not applicable when the quotation is for a specific customer as the buying group saved on file against the customer will be used. The format is up to 2 characters alphanumeric or numeric depending on the key configuration option for buying group within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyingGroup4" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A buying group enables you to classify a number of contract customers into a common group for use within the contract pricing program. This element is not applicable when the quotation is for a specific customer as the buying group saved on file against the customer will be used. The format is up to 2 characters alphanumeric or numeric depending on the key configuration option for buying group within SYSPRO. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyingGroup5" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>A buying group enables you to classify a number of contract customers into a common group for use within the contract pricing program. This element is not applicable when the quotation is for a specific customer as the buying group saved on file against the customer will be used. The format is up to 2 characters alphanumeric or numeric depending on the key configuration option for buying group within SYSPRO. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element ref="PriceCode" minOccurs="0"/>
+										<xsd:element name="Nationality" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the nationality assigned to the customer. This is a mandatory field if the EC vat system is in use. The nationality code saved against the customer will be used if the quotation is for a specific customer. The format is up to 3 characters alphanumeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DeliveryTerms" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the delivery terms code e.g. COD. This field is for documentary purposes and is printed on the EC statistical report. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality. The format is up to 3 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TransactionNature" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the nature of the transaction. This field is for documentary purposes and is printed on the EC statistical report. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality. The format is up to 3 characters numeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TransportMode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the mode of transport used to deliver the goods. This field is for documentary purposes and is printed on the EC statistical report. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality. The format is up to 2 characters numeric.   </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ProcessFlag" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the process used. This field is for documentary purposes and is printed on the Supplementary declaration dispatches report (EC sales report) if the Summary option is selected. This element will only be used when the EC vat system is required and the nationality code supplied is a member of EC and is not the same as the system nationality. The format is 1 character numeric. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TaxStatus" default="E" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether the customer is exempt from sales tax. Possible values: E (Exempt) or N (Taxable use tax code) or O (Taxable use other tax code). Default to the tax status on file for the customer when customer code has been supplied, else will default to E (exempt).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="O"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="TaxExemptNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the tax exemption number of the customer where the customer qualifies for tax exemption on certain goods. The format is up to 30 characters alphanumeric. Default to the Tax exemption number on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GstExemptFlag" default="E" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates whether the customer is exempt from Canadian GST. This is only applicable if Canadian GST is required. Possible values: E (Exempt) or N (Taxable). Default to the GST exempt status on file for the customer when customer code has been supplied, else will default to E (Exempt).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="E"/>
+													<xsd:enumeration value="N"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GstRegistrationNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the GST registration number of the client who has to pay GST tax on the order. This is only applicable if Canadian GST is required. The format is up to 15 characters alphanumeric. Default to the GST registration number on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="GstLevel" default="I" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Canadian GST shown by invoice indicate that you want the GST that is calculated on invoice lines to be shown separately in the invoice totals and not to be included in the prices. Canadian GST shown by line indicate that you want the GST that is calculated in invoice lines to be included in the line values. Possible values: I (Invoice) or L (Line). Default to the GST level on file for the customer when customer code has been supplied, else will default to I (Invoice).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="I"/>
+													<xsd:enumeration value="L"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PriceCategoryTable" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>If you use the extended coded pricing method, you can enter up to 26 price codes applicable to a category of products being sold in the customers Price category/code table. The Price category table must be entered as one field i.e. the 26 price codes of two characters each must be stringed into one element of 52 characters. The format is up to 52 characters alphanumeric. This element is not applicable when a customer has been supplied for the quote as the price category table saved against the customer will be used.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="52"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Contact" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the customers contact name. The format is up to 40 characters alphanumeric. Default to the contact on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="40"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerPoNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the reference number assigned to an invoice produced for the customer. For a sub-account customer, the first three characters defaults to the store number of the sub-account, thereby reflecting the branch (or store) that ordered the goods. This field is a mandatory field, if the quotation is for a customer that requires a customer purchase order to be entered (defined in the customer setup within SYSPRO). The format is up to 30 characters </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipToAddress1" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the first line of the delivery address details to which goods will be shipped for the customer. The format is up to 40 characters alphanumeric. The complete delivery address will default to the ship to address on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="40"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipToAddress2" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the second line of the delivery address details to which goods will be shipped for the customer. The format is up to 40 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="40"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipToAddress3" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the third line of the delivery address details to which goods will be shipped for the customer. The format is up to 40 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="40"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipToAddress4" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the forth line of the delivery address details to which goods will be shipped for the customer. The format is up to 40 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="40"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipToAddress5" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the fifth line of the delivery address details to which goods will be shipped for the customer. The format is up to 40 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="40"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipPostalCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the postal code for the delivery address to which goods will be shipped for the customer. The format is 9 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="9"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ExtendedTaxCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the tax geo code assigned to the customers ship to address. This is only applicable if USA tax by advanced geocodes or USA AVP sales tax system is in use. The format is up to 9 characters alphanumeric; consisting of a 2 character State code, a 5 character Country or Zip code and a 2 character City code if USA AVP sales tax system in use or consisting of a 2 character State code, a 4 character Country or Zip code and a 3 character City code if USA tax by advanced geo codes in use. Default to the Ship to extended tax code on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="9"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OrderType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the order type that must be assigned as the default for sales order generated for this customer. The format is up to 2 characters alphanumeric. Default to the order type on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PaymentMethod" default="CR" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the payment method, of either cash or credit, which will be used when a sales order is invoiced for the customer. The format is 2 characters alphanumeric. Possible values: CR (credit) or CS (cash). Default to CR (credit).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="CR"/>
+													<xsd:enumeration value="CS"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="RequiredShipDate" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the date on which the items can be shipped to the customer. The ship date can be changed for each line on the quote, depending on the items availability. The ship date will be validate to ensure that it falls on a working day if the parameter validate working days is set to P (default to previous working day) or N(default to next working day). The format is 10 characters numeric and must be in a CCYY-MM-DD format.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SpecialInstructions" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the message that you want to print on order documents for the customer. The format is up to 30 characters alphanumeric. Default to the special instructions on file for the customer when customer code has been supplied.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="AlternateKey" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the new key that you want to use to print sales orders documents, acknowledgements, delivery notes and invoices in an alternate sequence. You must select that the Alternate key is required in the sales order configuration option within SYSPRO. The format is up to 10 characters alphanumeric. The alternate key will default to either the default warehouse, branch or geographic area depending on the sales order setup configuration option within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="10"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShippingInstructions" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the shipping message that must be used against the sales order for the customer. The first two characters of the shipping instructions element will be used as the instruction code if the sales order configuration setup option within SYSPRO for Ship via usage is set to Coded. In this case the shipping instruction message will be retrieve from file by using the instruction code supplied. The format is up to 30 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="30"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="ShipLineComplete" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates if the sales order entry program must calculate the quantity of stock that is available to ship. Otherwise the operator is required to make an entry at the ship quantity field when entering sales order line details. Possible values: Y (Yes) or N (No). Default to N (No).</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element ref="PriceCalculationMethod" minOccurs="0"/>
+										<xsd:element ref="ProfitPercentage" minOccurs="0"/>
+										<xsd:element name="ApplyPercentageToAllLines" default="N" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This indicates if changes to either the default markup/margin profit percentage or method should be applied to all existing non-stocked items on a quotation where the previous markup/margin percentage has been used. Possible values: Y (yes, apply change to all existing detail lines) or N (do not apply change to all existing detail lines). Default to N.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="1"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="N"/>
+													<xsd:enumeration value="Y"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OfferDescription1" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You may specify up to five offers for each quotation line. You may supply offer descriptions that will be used for the offers for all detail lines, when viewing the quotation, instead of the default offer descriptions. The default offer description will be Offer 1. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OfferDescription2" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You may supply offer descriptions that will be used for the offers for all detail lines, when viewing the quotation, instead of the default offer descriptions. The default offer description will be Offer 2. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OfferDescription3" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You may supply offer descriptions that will be used for the offers for all detail lines, when viewing the quotation, instead of the default offer descriptions. The default offer description will be Offer 3. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OfferDescription4" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You may supply offer descriptions that will be used for the offers for all detail lines, when viewing the quotation, instead of the default offer descriptions. The default offer description will be Offer 4. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="OfferDescription5" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You may supply offer descriptions that will be used for the offers for all detail lines, when viewing the quotation, instead of the default offer descriptions. The default offer description will be Offer 5. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DefaultOfferDescription" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>You may supply offer descriptions that will be used for the offers for all detail lines, when viewing the quotation, instead of the default offer descriptions. The default offer description will be Default Offer. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="QuotationDetails" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the information to maintain the detail lines for the quotation.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:choice maxOccurs="unbounded">
+										<xsd:element name="Non-stockedLine" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the information to maintain a non-stocked detail line for the quotation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:sequence>
+													<xsd:element ref="QuotationLine" minOccurs="0"/>
+													<xsd:element ref="LineAction" minOccurs="0"/>
+													<xsd:element ref="StockCode" minOccurs="0"/>
+													<xsd:element ref="Description" minOccurs="0"/>
+													<xsd:element name="ProductClass" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the Product class assigned to the stock code. Product classes are used throughout the system to record statistics and to add processing and reporting flexibility. In addition, product classes can provide the basis for multiple account distributions of sales revenue and cost of sales expenses (General Ledger Integration Setup). The format is up to 4 characters alpha-numeric. Default to the product class saved against the stock code.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="4"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="Taxable" minOccurs="0"/>
+													<xsd:element ref="TaxCode" minOccurs="0"/>
+													<xsd:element ref="GSTTaxable" minOccurs="0"/>
+													<xsd:element ref="FederalSalesTax" minOccurs="0"/>
+													<xsd:element ref="LineShipDate" minOccurs="0"/>
+													<xsd:element ref="DefaultOffer" minOccurs="0"/>
+													<xsd:element name="HierarchyCode" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the standard hierarchy code that will be used to assign a hierarchy to the non-stocked line. A hierarchy is a means of allocating the costs of a job according to its elements. The format is up to 8 characters alphanumeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="8"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="Offer" minOccurs="0" maxOccurs="5"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="StockLine" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the information to maintain a stocked detail line for the quotation.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:sequence>
+													<xsd:element ref="QuotationLine" minOccurs="0"/>
+													<xsd:element ref="LineAction" minOccurs="0"/>
+													<xsd:element name="Warehouse" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the warehouse from which the stock code must be shipped. This is a mandatory element when adding a new stocked line. The format is up to 2 characters alphanumeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="2"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="StockCode" minOccurs="0"/>
+													<xsd:element ref="Description" minOccurs="0"/>
+													<xsd:element name="Version" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the revision level for the ECC controlled stocked item. This element is only applicable when the Engineering Change Control module is installed and the stock code is an ECC controlled item and ECC stock levels are controlled at either Revision or Release level. If the element Current when shipping is set to Y (yes) then this element does not have to be supplied. The format is up to 3 characters alphanumeric or numeric depending on the revision configuration setup within SYSPRO.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="3"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="Release" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the release level for the ECC controlled stocked item. This element is only applicable when the Engineering Change Control module is installed and the stock code is an ECC controlled item and ECC stock levels are controlled at Release level. If the element Current when shipping is set to Y (yes)  then this element does not have to be supplied. The format is up to 3 characters alphanumeric or numeric depending on the revision configuration setup within SYSPRO.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="3"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="CurrentWhenShipping" default="N" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates that the current revision and release level for the ECC controlled stocked item should be used at the time of shipping the item (will be saved as --- on file). Only applicable when the Engineering Change Control module is installed and the stock code is an ECC controlled item. Possible values: N (no) or Y (Yes). Default to N (no).</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="1"/>
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:enumeration value="N"/>
+																<xsd:enumeration value="Y"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="Taxable" minOccurs="0"/>
+													<xsd:element ref="TaxCode" minOccurs="0"/>
+													<xsd:element ref="GSTTaxable" minOccurs="0"/>
+													<xsd:element ref="FederalSalesTax" minOccurs="0"/>
+													<xsd:element ref="LineShipDate" minOccurs="0"/>
+													<xsd:element ref="DefaultOffer" minOccurs="0"/>
+													<xsd:element name="UnitMass" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the weight of a single unit of the stock item in the stocking unit of measure. The format is up to 12 characters numeric with 6 integers and 6 decimals. Default to the mass saved against the stock code.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="13"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="UnitVolume" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates the volume of a single unit of the stock item in the stocking unit of measure. The format is up to 12 characters numeric with 6 integers and 6 decimals. Default to the volume saved against the stock code.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="13"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="UserDefined" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates extra information that you have assigned to the stock item. The format is up to 4 characters alphanumeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="4"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="PrintComponent" minOccurs="0"/>
+													<xsd:element name="IncludeSOrderText" default="N" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates if sales order additional text defined against the stock item should be included as a comment line on the quotation. This element is only applicable when adding the quotation line. It will not be possible to add sales order additional text for kit items. Possible values: Y (yes add sales order additional text to quotation) or N (no do not add sales order additional text to quotation). Default to N.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="1"/>
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:enumeration value="N"/>
+																<xsd:enumeration value="Y"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="IncludeDangerousGoodsText" default="N" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates if dangerous goods text defined against the stock item should be included as a comment line on the quotation. This element is only applicable when adding the quotation line. It will not be possible to add dangerous goods text for kit items. Possible values: Y (yes add dangerous goods text to quotation) or N (no do not add dangerous goods text to quotation). Default to N.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="1"/>
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:enumeration value="N"/>
+																<xsd:enumeration value="Y"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="ApplyToOffers" minOccurs="0"/>
+													<xsd:element ref="PrintOnQuote" minOccurs="0"/>
+													<xsd:element ref="PrintSalesMethod" minOccurs="0"/>
+													<xsd:element ref="Offer" minOccurs="0" maxOccurs="5"/>
+													<xsd:element name="KitItem" minOccurs="0" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>This element contains the information to maintain the default information for a component quotation line that will be automatically added to the quote when the kit item parent is added to the quote. </xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType mixed="false">
+															<xsd:sequence>
+																<xsd:element name="Component">
+																	<xsd:annotation>
+																		<xsd:documentation>This indicates the component of the kit item, for which you want to supply information. The format is up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration option for stock code within SYSPRO.</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:simpleType>
+																		<xsd:restriction base="xsd:string">
+																			<xsd:minLength value="1"/>
+																			<xsd:maxLength value="30"/>
+																			<xsd:whiteSpace value="preserve"/>
+																		</xsd:restriction>
+																	</xsd:simpleType>
+																</xsd:element>
+																<xsd:element ref="ProductClass" minOccurs="0"/>
+																<xsd:element ref="PrintComponent" minOccurs="0"/>
+																<xsd:element ref="LineShipDate" minOccurs="0"/>
+																<xsd:element name="KitOffer" minOccurs="0" maxOccurs="5">
+																	<xsd:annotation>
+																		<xsd:documentation>This element contains the information to maintain the default information for a offer for a component quotation line that will be automatically added to the quote when the kit item parent is added to the quote. The offer number must be defined as an attribute of the kit offer. Possible offer number values: 1 to 5.</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType mixed="false">
+																		<xsd:sequence>
+																			<xsd:element ref="Quantity" minOccurs="0"/>
+																			<xsd:element name="PriceMethod" default="C" minOccurs="0">
+																				<xsd:annotation>
+																					<xsd:documentation>There are two possible ways to enter the price for an offer for the component: by supplying a price code or by supplying a fixed price. Possible values: C (Price code) or F (Fixed price). Default to: C (Price code).</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:simpleType>
+																					<xsd:restriction base="xsd:string">
+																						<xsd:minLength value="0"/>
+																						<xsd:maxLength value="1"/>
+																						<xsd:whiteSpace value="preserve"/>
+																						<xsd:enumeration value="C"/>
+																						<xsd:enumeration value="F"/>
+																					</xsd:restriction>
+																				</xsd:simpleType>
+																			</xsd:element>
+																			<xsd:element ref="PriceCode" minOccurs="0"/>
+																			<xsd:element ref="Price" minOccurs="0"/>
+																			<xsd:element ref="PriceUom" minOccurs="0"/>
+																			<xsd:element ref="LineDiscount1" minOccurs="0"/>
+																			<xsd:element ref="LineDiscount2" minOccurs="0"/>
+																			<xsd:element ref="LineDiscount3" minOccurs="0"/>
+																			<xsd:element ref="DiscountFlag" minOccurs="0"/>
+																			<xsd:element ref="DiscountValue" minOccurs="0"/>
+																			<xsd:element ref="CommissionCode" minOccurs="0"/>
+																		</xsd:sequence>
+																		<xsd:attribute name="OfferNumber">
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:minLength value="1"/>
+																					<xsd:maxLength value="1"/>
+																					<xsd:whiteSpace value="preserve"/>
+																					<xsd:enumeration value="1"/>
+																					<xsd:enumeration value="2"/>
+																					<xsd:enumeration value="3"/>
+																					<xsd:enumeration value="4"/>
+																					<xsd:enumeration value="5"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="MiscChargeLine" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the information to maintain a miscellaneous quotation line.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:sequence>
+													<xsd:element ref="QuotationLine" minOccurs="0"/>
+													<xsd:element ref="LineAction" minOccurs="0"/>
+													<xsd:element ref="Description" minOccurs="0"/>
+													<xsd:element ref="ProductClass" minOccurs="0"/>
+													<xsd:element ref="Taxable" minOccurs="0"/>
+													<xsd:element ref="TaxCode" minOccurs="0"/>
+													<xsd:element ref="GSTTaxable" minOccurs="0"/>
+													<xsd:element ref="FederalSalesTax" minOccurs="0"/>
+													<xsd:element ref="DefaultOffer" minOccurs="0"/>
+													<xsd:element ref="Offer" minOccurs="0" maxOccurs="5"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="FreightLine" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the information to maintain a freight quotation line.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:sequence>
+													<xsd:element ref="QuotationLine" minOccurs="0"/>
+													<xsd:element ref="LineAction" minOccurs="0"/>
+													<xsd:element ref="Taxable" minOccurs="0"/>
+													<xsd:element ref="TaxCode" minOccurs="0"/>
+													<xsd:element ref="GSTTaxable" minOccurs="0"/>
+													<xsd:element ref="FederalSalesTax" minOccurs="0"/>
+													<xsd:element ref="DefaultOffer" minOccurs="0"/>
+													<xsd:element ref="Offer" minOccurs="0" maxOccurs="5"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="CommentLine" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the information to maintain a comment quotation line.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:all>
+													<xsd:element ref="QuotationLine" minOccurs="0"/>
+													<xsd:element ref="LineAction" minOccurs="0"/>
+													<xsd:element name="Comment" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Comment can contain up to 990 characters, which equals 22 lines of 45 characters. The comment will be spilt into separate lines of 45 characters for you in order to save them on the quotation detail table. The format is up to 990 characters alphanumeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="990"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="StandardCommentCode" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>You may supply a standard comments code that will be used to automatically retrieve the associated text. Standard comments can be used to define default comments (up to 45 characters long) that can be used repeatedly on sales order documents. The format is up to 3 characters alphanumeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="3"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="AttachedToQuoteLine" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This indicates that the comment line is associated with all quotation lines from this quotation line upwards. Comments that are attached to a made-in item are automatically copied to the job notes if you create a job. The format is up to 4 characters numeric.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="4"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element ref="PrintOnQuote" minOccurs="0"/>
+													<xsd:element ref="PrintSalesMethod" minOccurs="0"/>
+													<xsd:element ref="ApplyToOffers" minOccurs="0"/>
+													<xsd:element name="DeleteAttachedCommentLines" default="N" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This element will indicate if only this specific comment line should be deleted or if the entire comment (if the comment spans over more than one line) should be deleted. Default N. Possible values: Y (yes will delete the entire comment - all the lines) or N (No will only delete the specific comment line supplied). </xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="1"/>
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:enumeration value="N"/>
+																<xsd:enumeration value="Y"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="UpdateEntireComment" default="Y" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>This element will indicate if only this specific comment line should be updated or if the entire comment (if the comment spans over more than one line) should be updated. Default Y. Possible values: Y (yes will update the entire comment - all the lines) or N (No will only update the specific comment line supplied).</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="1"/>
+																<xsd:whiteSpace value="preserve"/>
+																<xsd:enumeration value="Y"/>
+																<xsd:enumeration value="N"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:all>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Price">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the price for the offer for the non-stocked or stocked items on a quotation if you want to override the automatic price calculation. This element is only applicable if the price calculation method is fixed. For offers for non-stocked quotation lines changes must be allowed at quotation level in the quotation setup within SYSPRO. The format is up to 15 characters numeric with 10 integers and 5 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="16"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceCalculationMethod">
+		<xsd:annotation>
+			<xsd:documentation>This indicates how the price for a non-stocked or stocked item should be calculated on a quotation. Enter Markup to add a markup percentage to the cost of the non-stocked item on the quotation. Enter Margin to add a margin percentage to the selling price of the non-stocked item on the quotation. Enter Fixed if you want to supply a fixed price for offers for the either non-stocked or stocked items. Enter Coded if you want to supply a price code for the offers for the stocked line. Enter Last if you want the last price paid by the customer for this stock code to be used (The option customer/stock code cross reference must be selected against the customer to use this option). The format is 6 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Markup"/>
+				<xsd:enumeration value="Margin"/>
+				<xsd:enumeration value="Fixed"/>
+				<xsd:enumeration value="Coded"/>
+				<xsd:enumeration value="Last"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceCode">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the code that is used to establish the price (or discount code) applicable to the sale of a specific stock item to the customer, depending on whether the inventory pricing method is coded or discounted. The format is up to 2 characters alphanumeric. Default to the price code on file for the customer when customer code has been supplied</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceUom">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the price unit of measure for the offer for the non-stocked or stocked item on a quotation used when you want to override the automatic price calculation. This element is only applicable if the price calculation method is fixed. This element is only applicable for non-stocked items if changes are allowed at quotation level. The format is up to 3 characters alphanumeric. Default to the unit of measure against the non-stocked or stocked code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="3"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintComponent" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the component should be printed on order documents. Possible values: Y (yes) or N (No).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintOnQuote" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the sales order additional text and/or dangerous goods text should be printed on the quote. Possible values: Y (yes, print comment on quote) or N (No, do not print comment on quote). Default to Y (yes)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintSalesMethod" default="B">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the sales order additional text and/or dangerous goods text should be printed on the delivery notes and invoices created from this quote. Possible values: N(None text applies to neither delivery note nor invoice i.e. the text will not be copied to the sales order), or D (Delivery note only text will be printed on the delivery note only), or B(Both delivery note and invoice text will be printed on both the delivery note and the invoice). Default to B.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the Product class assigned to the stock code. Product classes are used throughout the system to record statistics and to add processing and reporting flexibility. In addition, product classes can provide the basis for multiple account distributions of sales revenue and cost of sales expenses (General Ledger Integration Setup). The format is up to 4 characters alpha-numeric. Default to the product class saved against the stock code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProfitPercentage">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the default markup/margin profit percentage applicable for non-stocked items on a quotation. The format is up to 5 characters numeric with 3 integers and 2 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="6"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Quantity">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the quantity of items for the offer. The element is only applicable when offer is for a for non-stocked and stocked quotation line. The format is up to 10 characters numeric with 7 integers and 3 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="QuotationLine">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the detail line number for the quotation. This is a mandatory field when changing or deleting the line. When inserting a quotation line this element should contain the line number that you want the new line to be inserted as. The next line number will be generated automatically when adding a new quotation line. The format is up to 4 characters numeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the non-stocked item or the stock code that you want to use for the offer. The non-stocked and stock code can not be changed once the quotation line has been saved therefore this element will be ignored when changing the line. The format is up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration option for stock code within SYSPRO.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="30"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxCode">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the quotation line you are entering is taxable and the appropriate tax rate. This element is not applicable when the tax system in use is by USA AVP sales tax. This element will only be applicable for all other tax systems if the line is flagged as taxable. The format is up to 1 character alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Taxable" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if the quotation line you are entering is taxable. If the quotation header has been flagged as exempt from tax this element will be ignored as the line tax status will also be exempt. Possible values: Y (taxable) or N (not taxable). The line tax status will default to the tax status of the sales order header for the quotation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Sales Order History Target List Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The Sales Analysis Target Type key to use for this query.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:all>
+        <xsd:element ref="TargetType"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="MassMetric" minOccurs="0"/>
+        <xsd:element ref="ProfitMetric" minOccurs="0"/>
+        <xsd:element ref="QuantityMetric" minOccurs="0"/>
+        <xsd:element ref="VolumeMetric" minOccurs="0"/>
+        <xsd:element ref="TrnYear" minOccurs="0"/>
+        <xsd:element ref="PageAfterTotals" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MassMetric" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Show mass targets. Returned as metric type M.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProfitMetric" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Show profit targets. Returned as metric type P.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PageAfterTotals" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>New page after printing totals.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QuantityMetric" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Show quantity targets. Returned as metric type Q.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="VolumeMetric" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Show volume targets. Returned as metric type V.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="Key1Filter" minOccurs="0"/>
+        <xsd:element ref="Key2Filter" minOccurs="0"/>
+        <xsd:element ref="Key3Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TargetType">
+    <xsd:annotation>
+      <xsd:documentation>The sales target type definition code. The specific definition of the target selected will determine which of the filter criteria are applicable.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalHistorySumCtl;key=true;SalHistorySumCtl=true"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the XSL Stylesheet to use</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TrnYear">
+    <xsd:annotation>
+      <xsd:documentation>The Financial year to run the report in. Will default to the current year if not specified.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key1Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter for Key Area 1 as defined by the Target Type. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key2Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter for Key Area 2 as defined by the Target Type. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key3Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter for Key Area 3 as defined by the Target Type. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AR Master and Sub Account Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupArMasterSub">
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Item">
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="Key">
+								<xsd:complexType mixed="false">
+									<xsd:sequence>
+										<xsd:element name="Customer">
+											<xsd:annotation>
+												<xsd:documentation>This is the master customer account number to which the sub account will be attatched. This master account can have more than one sub account attached.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CustomerSub">
+											<xsd:annotation>
+												<xsd:documentation>This is the sub customer account that will be attatched to a master account. A sub account can only be attached to 1 master account.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string"/>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="StoreNumber">
+								<xsd:annotation>
+									<xsd:documentation>Up to seven characters can be entered here to identify the sub-account.
+The entry made here is used as the default reference during AR Invoice Posting, and the default customer purchase order number during S/order Entry, however this may be changed when capturing an order.
+</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CustomerType">
+								<xsd:annotation>
+									<xsd:documentation>This enables you to indicate where the invoices for the sub-account must be linked to. You can enter a value of M- Master account or S - sub account. If no value is supplied then a default of M will be used.
+
+Master account 
+Select Master account if you want the sub-account customer's invoices and balances to be accumulated into the master account. Month-to-date sales are posted against the sub-account, while finance charges, terms and credit checking are performed against the master account.
+  
+If you select this option and the same invoice number exists on the master and the sub-account, the attachment process is cancelled.
+
+If you select to attach invoices to the master account, then the invoices and balances are not transferred back to the sub-account when you detach the sub-account. This also applies to invoices raised using the A/R Finance Charge Calculation program.
+ 
+Sub-account 
+Select Sub-account if you want the sub-account customer's invoices and balances to be retained against the individual attached account. Invoices for the sub-account customer are consolidated and printed on the master account customer's statement.
+
+</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+										<xsd:enumeration value="S"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrtMasterAdd" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If you indicated that invoices are attached to the master account, then you can additionally specify which sold to address must be printed on the sub-account invoice, delivery note and order acknowledgement. You can sepcify a Y - Yes use master address or N - use sub accounts address . If not value is supplied then adefault value of Y will be used.
+
+Master accounts address 
+Select this to print the master account sold to address on invoices, delivery notes and order acknowledgement documents for the sub-account.
+
+Sub-accounts address  
+Select this to print the sub-account sold to address on invoices, delivery notes and order acknowledgement documents for the sub-account.
+
+</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

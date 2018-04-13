@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Post AP Registered Invoice Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AuthorisingPerson">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. Person to authorize the registered invoice.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Optional element.If this element is not supplied or if spaces are specified against this element, then the branch against the SYSPRO supplier will be used, otherwise the branch supplied against this element will be used. The branch must be a valid SYSPRO branch.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. Buyer code for this transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DateInvoiceSent">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. This is the date the invoice was sent for approval. If this element is not supplied or if zeroes are entered against this element, the date used will default to the value of the 'InvoiceDate' element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Department">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. This is the department code of the department making the purchase.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountBasis" default="T">
+    <xsd:annotation>
+      <xsd:documentation>Optional element.This element specifies how the value of the discount is to be calculated. (T - discount calculated according to the terms code captured against the SYSPRO supplier, P - discount calculated according to the percentage specified against the 'DiscountPercentageValue' element, V - discount value is specified in the 'DiscountPercentageValue' element) </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="V"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountDate">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. In order to qualify for the invoice discount, payment must be made to the supplier on or before the discount date. If this element is not supplied or if zeroes are entered against this element, the discount date will be calculated according to the invoice terms against the SYSPRO supplier. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountPercentageValue">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. If 'P' (percentage) has been specified against the 'DiscountBasis' element, then this element specifies the percentage to be applied to the 'DiscountableValue' in order to calculate the value of discount.  The maximum size of the data is 2 integers and 2 decimals.
+If 'V' (value) has been specified against the 'DiscountBasis' element, then this is the value of the discount. The maximum size of the data is 12 integers and 2 decimals.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscountableValue">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. If  'T'(invoice terms) or 'P' (percentage) has been specified against 'DiscountBasis' element, then this element specifies how much of the total invoice value is subject to discount. The default is zero.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DueDate">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. This is the date by which the supplier should be paid. If this element is not supplied or if zeroes are entered against this element, the due date will be calculated according to the invoice terms against the SYSPRO supplier. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.
+                </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="38"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ExchRateAtEntry">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. If the SYSPRO supplier is a local currency supplier the value of this element is ignored and an exchange rate of 1 is always used. For foreign currency SYSPRO suppliers, the following rules apply:
+If this element is not supplied or a value of zero is supplied, the exchange rate against the SYSPRO currency code is used as the default.
+ 
+If this element is supplied and the SYSPRO currency code is setup with a non-fixed exchange rate, then the value against the element is used. 
+If this element is supplied and the SYSPRO currency code is setup with a fixed exchange rate, then the value against the element must match the exchange rate setup against the SYSPRO currency code. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="13"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="FollowUpDate">
+    <xsd:annotation>
+      <xsd:documentation>Optional element.If this element is not supplied or if zeroes are entered against this element, the date used will default to the value of the 'InvoiceDate' element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Invoice">
+    <xsd:annotation>
+      <xsd:documentation>Mandatory element. The invoice must not exist on the SYSPRO Accounts Payable invoice file or on the SYSPRO Accounts Payable Registered invoice file.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="20"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvoiceDate">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. If this element is not supplied or if zeroes are entered against this element, the current system date will be used as the default.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvoiceValue">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. This is the total value of the invoice including tax.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="Invoice"/>
+        <xsd:element ref="InvoiceValue" minOccurs="0"/>
+        <xsd:element ref="DiscountBasis" minOccurs="0"/>
+        <xsd:element ref="DiscountableValue" minOccurs="0"/>
+        <xsd:element ref="DiscountPercentageValue" minOccurs="0"/>
+        <xsd:element ref="Reference" minOccurs="0"/>
+        <xsd:element ref="InvoiceDate" minOccurs="0"/>
+        <xsd:element ref="DueDate" minOccurs="0"/>
+        <xsd:element ref="DiscountDate" minOccurs="0"/>
+        <xsd:element ref="ExchRateAtEntry" minOccurs="0"/>
+        <xsd:element ref="AuthorisingPerson" minOccurs="0"/>
+        <xsd:element ref="Buyer" minOccurs="0"/>
+        <xsd:element ref="DateInvoiceSent" minOccurs="0"/>
+        <xsd:element ref="Department" minOccurs="0"/>
+        <xsd:element ref="FollowUpDate" minOccurs="0"/>
+        <xsd:element ref="Narration" minOccurs="0"/>
+        <xsd:element ref="eSignature" minOccurs="0"/>
+        <xsd:element ref="Orders" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Narration">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. Notes against the registered invoice transaction.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="990"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Orders">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. A set of up to twenty purchase order numbers associated with the registered invoice can be supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PurchaseOrder" minOccurs="0" maxOccurs="20"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PostApRegisterInvoice">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrder">
+    <xsd:annotation>
+      <xsd:documentation>Optional element. A maximum of twenty Purchase order numbers can be associated with the registered invoice. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Reference">
+    <xsd:annotation>
+      <xsd:documentation>Optional element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Mandatory element. Enter the SYSPRO supplier applicable to the transaction. This must be a valid SYSPRO supplier.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

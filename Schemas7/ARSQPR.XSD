@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!--
+     Schema for the AR Payment Run Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>Bank filter to include payment runs for specific Banks. Default is "A"- All. Other options are "R" - for a range and "S" for single. If no value is supplied, a default value of 'A' will be used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Customer filter to get payment runs for specific customers. Default is "A"- All. Other options are "R" - for a range and "S" for single. If no value is supplied, a default value of 'A' will be used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="Bank" minOccurs="0"/>
+				<xsd:element ref="PaymentRunNumber" minOccurs="0"/>
+				<xsd:element ref="PaymentDate" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeArInvoiceRelease">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include AR invoice release payment runs. Default is "Y" to include the Payment Runs of this type. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeAuthorizedPayRun">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include payment runs in Authorized status. Default is "Y" to include the Payment Runs in this State. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCancelledPayRun">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include payment runs in Cancelled status. Default is "Y" to include the Payment Runs in this State. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeCollectorRun">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include Collector run payment runs. Default is "Y" to include the Payment Runs of this type. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeInvoice">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include customer invoices. Default is "Y" to include the detail. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeOpenPayRun">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include payment runs in Open status. Default is "Y" to include the Payment Runs in this State. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludePostDatedChecks">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include post dated check payment runs. Default is "Y" to include the Payment Runs of this type. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludePostedPayRun">
+		<xsd:annotation>
+			<xsd:documentation>Flag to include payment runs in Posted status. Default is "Y" to include the Payment Runs in this State. "N" is to not include them. If no value is passed, a value of "Y" will be assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IncludeInvoice" minOccurs="0"/>
+				<xsd:element ref="IncludePostDatedChecks" minOccurs="0"/>
+				<xsd:element ref="IncludeCollectorRun" minOccurs="0"/>
+				<xsd:element ref="IncludeArInvoiceRelease" minOccurs="0"/>
+				<xsd:element ref="IncludeOpenPayRun" minOccurs="0"/>
+				<xsd:element ref="IncludeAuthorizedPayRun" minOccurs="0"/>
+				<xsd:element ref="IncludePostedPayRun" minOccurs="0"/>
+				<xsd:element ref="IncludeCancelledPayRun" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PaymentDate">
+		<xsd:annotation>
+			<xsd:documentation>Payment Date filter to include specific payment runs that occured within a certain date criteria. Default is "A"- All. Other options are "R" - for a range and "S" for single. If no value is supplied, a default value of 'A' will be used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PaymentRunNumber">
+		<xsd:annotation>
+			<xsd:documentation>Payment Run Number filter to include specific payment run numbers. Default is "A"- All. Other options are "R" - for a range and "S" for single. If no value is supplied, a default value of 'A' will be used. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option" minOccurs="0"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DispatchNotesOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General1" minOccurs="0"/>
+        <xsd:element ref="General2" minOccurs="0"/>
+        <xsd:element ref="Options" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DispNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Dispatch note numbering method]]></xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;O=Order auotmatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NxtDispNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Next sales dispatch reference number]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="15"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyCredChkToDispNotes">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Apply credit checking to multiple dispatch notes]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DescDispUdf1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[User defined field 1 text]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DescDispUdf2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[User defined field 2 text]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AccPercToleranceDisp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Acceptable % tollerance when dispatching with theoretical units of measure]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="2"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DispNumMethod"/>
+        <xsd:element ref="NxtDispNum"/>
+        <xsd:element ref="ApplyCredChkToDispNotes"/>
+        <xsd:element ref="DescDispUdf1"/>
+        <xsd:element ref="DescDispUdf2"/>
+        <xsd:element ref="AccPercToleranceDisp"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FrtChgProc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Include freight from sales order]]></xsd:documentation>
+      <xsd:appinfo source="Y=Include freight on all;N=Do not include freight on any;F=Include freight on the first live dispatch note created for order;L=Include freight on the last live dispatch note created for order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MiscChgProc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Include miscellaneous charge from sales order]]></xsd:documentation>
+      <xsd:appinfo source="Y=Include charge on all;N=Do not include charge on any;F=Include charge on the first live dispatch note created for order;L=Include charge on the last live dispatch note created for order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CommLnProc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Include comments from sales order]]></xsd:documentation>
+      <xsd:appinfo source="Y=Include comment on all;N=Do not include comment on any;F=Include comment on the first live dispatch note created for order;L=Include comment on the last live dispatch note created for order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDateDispNote">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Default dispatch note date]]></xsd:documentation>
+      <xsd:appinfo source="T=Today(current syspro system date);S=Sales order ship date;N=No default must enter a date;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FrtChgProc"/>
+        <xsd:element ref="MiscChgProc"/>
+        <xsd:element ref="CommLnProc"/>
+        <xsd:element ref="DefDateDispNote"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BasisForSOIncl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Dispatch quantity basis to use]]></xsd:documentation>
+      <xsd:appinfo source="S=Ship quantity;B=Back order quantity;A=All outstanding both ship and back order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OverDispAllow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Over dispatches allowed]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetainOrgQty">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Retain original order quantity when over-dispatching]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnderDispAllow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Under dispatches allowed]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseDispNoteToConfDel">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Use invoice for confirming blanket sales order deliveries]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AmendDispNotePrtReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Amended dispatch note reprint required]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintDispLnWithZeroDispQty">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Print dispatch note lines with a zero quantity to dispatch]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ManRelToInv">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Release for invoicing required]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SaveCustomFrmForDispInv">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Save custom form for dispatch invoice reprint (Option updated with '1' when Y, '0' when N)]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OnlnPrtOps">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Online dispatch printing]]></xsd:documentation>
+      <xsd:appinfo source="D=Dispatch;I=Invoice;B=Both;N=None;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvReprtAllow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Online dispatch invoice reprints required]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrtDispLnsOnInv">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Consilidated dispatch invoice retain original lines (Option updated with '1' when Y, '0' when N)]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BasisForSOIncl"/>
+        <xsd:element ref="OverDispAllow"/>
+        <xsd:element ref="RetainOrgQty"/>
+        <xsd:element ref="UnderDispAllow"/>
+        <xsd:element ref="UseDispNoteToConfDel"/>
+        <xsd:element ref="AmendDispNotePrtReq"/>
+        <xsd:element ref="PrintDispLnWithZeroDispQty"/>
+        <xsd:element ref="ManRelToInv"/>
+        <xsd:element ref="SaveCustomFrmForDispInv"/>
+        <xsd:element ref="OnlnPrtOps"/>
+        <xsd:element ref="InvReprtAllow"/>
+        <xsd:element ref="PrtDispLnsOnInv"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

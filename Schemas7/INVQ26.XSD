@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Aged Inventory Valuation Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ConsolidateWarehouses">
+    <xsd:annotation>
+      <xsd:documentation>Select Y to consolidate all warehouse values into one warehouse. Otherwise the values for each warehouse is printed on a separate line. The consolidated warehouse is identified by the characters - -.
+</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeLessThanZeroQtyOnHand">
+    <xsd:annotation>
+      <xsd:documentation>Select Y to include items with a quantity on hand that is less than zero.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePercentage">
+    <xsd:annotation>
+      <xsd:documentation>You can only select this option if you selected the Include values option.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeValues">
+    <xsd:annotation>
+      <xsd:documentation>Select Y to print the unit cost and value of your stock items on the report. Otherwise only the quantity of each stock item is printed. 
+The unit cost that is printed is taken from the current unit cost of the stock item, while the value of the stock item is derived from the quantity of each column multiplied by the cost. If FIFO costing is installed (Inventory Setup) then the costs that are printed when selecting the Include values option are based on the last cost.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeZeroQtyOnHand">
+    <xsd:annotation>
+      <xsd:documentation>Select Y to include items with zero quantity on hand.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>Option root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="PrintPriorYears" minOccurs="0"/>
+        <xsd:element ref="ReportOption" minOccurs="0"/>
+        <xsd:element ref="IncludeZeroQtyOnHand" minOccurs="0"/>
+        <xsd:element ref="IncludeLessThanZeroQtyOnHand" minOccurs="0"/>
+        <xsd:element ref="IncludeValues" minOccurs="0"/>
+        <xsd:element ref="IncludePercentage" minOccurs="0"/>
+        <xsd:element ref="ConsolidateWarehouses" minOccurs="0"/>
+        <xsd:element ref="PercentageCurrentYear" minOccurs="0"/>
+        <xsd:element ref="PercentagePreviousYear1" minOccurs="0"/>
+        <xsd:element ref="PercentagePreviousYear2" minOccurs="0"/>
+        <xsd:element ref="PercentagePreviousYear3" minOccurs="0"/>
+        <xsd:element ref="PercentagePreviousYear4" minOccurs="0"/>
+        <xsd:element ref="PercentagePreviousYear5" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PercentageCurrentYear" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Current year percentage.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PercentagePreviousYear1" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Previous year 1 percentage.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PercentagePreviousYear2" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Previous year 2 percentage.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PercentagePreviousYear3" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Previous year 3 percentage.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PercentagePreviousYear4" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Previous year 4 percentage.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PercentagePreviousYear5" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Previous year 5 percentage.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PrintPriorYears">
+    <xsd:annotation>
+      <xsd:documentation>Your selection at this option affects the number of columns printed on the report. The total of all years and the total of the current year are always printed.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;2=2;3=3;4=4;5=5"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="2"/>
+        <xsd:enumeration value="3"/>
+        <xsd:enumeration value="4"/>
+        <xsd:enumeration value="5"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the product(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Query root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportOption">
+    <xsd:annotation>
+      <xsd:documentation>Detail - Select this to print a report showing details of all selected stock items, as well as a summary page of warehouse totals.
+Summary - Select this to print only a summary page of warehouse totals.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;D=Detail;S=Summary"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Sequence">
+    <xsd:annotation>
+      <xsd:documentation>This option enables you to select the order in which the report must be generated. This option is only available if you select to print a detailed report. </xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Stock code;D=Description;V=Supplier;P=Product class;W=Warehouse"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="W"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the stock code(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the supplier(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Use this element to specify the warehouse(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="YearPercentages">
+    <xsd:annotation>
+      <xsd:documentation>Enter obsolescence percentages for each prior year that you selected to print an aged valuation.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

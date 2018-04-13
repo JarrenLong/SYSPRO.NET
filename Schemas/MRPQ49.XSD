@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the MRP Material Requirements Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of requirements for all buyers in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvBuyer;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ConsolidatedRevRel">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print consolidated Rev/Rels the in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CurrentRevRelOnly">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print current Rev/Rels of ECC items in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of dates to be returned in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All). You will be unable to access this field if you selected Months at the Period field.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent filter element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="Date"/>
+        <xsd:element ref="Buyer"/>
+        <xsd:element ref="Planner"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FirstDayOfWeek">
+    <xsd:annotation>
+      <xsd:documentation>This element is used when the period is set to (W)Weeks.</xsd:documentation>
+      <xsd:appinfo source="screenitem=Y;SUN=Sunday;MON=Monday;TUE=Tuesday;WED=Wednesday;THU=Thursday;FRI=Friday;SAT=Saturday"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SUN"/>
+        <xsd:enumeration value="MON"/>
+        <xsd:enumeration value="TUE"/>
+        <xsd:enumeration value="WED"/>
+        <xsd:enumeration value="THU"/>
+        <xsd:enumeration value="FRI"/>
+        <xsd:enumeration value="SAT"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMPSForecasts">
+    <xsd:annotation>
+      <xsd:documentation>Indicates wthere to include forecasts for MPS items. (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMPSSalesOrders">
+    <xsd:annotation>
+      <xsd:documentation>Indicates wthere to include sales orders for MPS items. (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonStocked">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include non-stocked items in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePeggings">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print the source of demand and supply (together with descriptions) for each material requirement in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'Y' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LateSupplyItemsOnly">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print only items that have late supplies in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MPSItemsActualDemandOnly">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print the actual demands for MPS items in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfDays" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the number of days in the time bucket.  You can only access this field if you selected Multiple days at the Period field.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent option element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TimePeriod"/>
+        <xsd:element ref="NumberOfDays"/>
+        <xsd:element ref="FirstDayOfWeek"/>
+        <xsd:element ref="IncludeNonStocked"/>
+        <xsd:element ref="IncludePeggings"/>
+        <xsd:element ref="MPSItemsActualDemandOnly"/>
+        <xsd:element ref="CurrentRevRelOnly"/>
+        <xsd:element ref="SuggestSupplyItemsOnly"/>
+        <xsd:element ref="LateSupplyItemsOnly"/>
+        <xsd:element ref="ConsolidatedRevRel"/>
+        <xsd:element ref="IncludeMPSForecasts"/>
+        <xsd:element ref="IncludeMPSSalesOrders"/>
+        <xsd:element ref="PartCategory"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PartCategory">
+    <xsd:annotation>
+      <xsd:documentation>Inidicates the information to print according to the part category to which they have been assigned. A - All, M - Made in, B - Bought out, S - Subcontracted, G - Phantom,  C - Co-product, or N - Notional. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y; A=All;M=Made in;B=Bought out;S=Subcontracted;G=Phantom part;P=Planning bill;K=Kit part;C=Co-product;Y=By-product;N=Notional part"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Planner">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of requirements for all planners in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvPlanner;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of requirements for all product classes in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of requirements for all stock codes in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SuggestSupplyItemsOnly">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print only items that have suggested quantity to make or a suggested quantity to make in the report.  (Y - Yes and N - No). If no value is supplied then a default of 'N' will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TimePeriod">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the material demand and supply information to be accumulated for single days (S), weeks (W), months (M) or multiple days (D). If no value is supplied then a default of 'Mulitple days  will be used</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Single day; D=Multiple days;W=Weeks;M=Months"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="M"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single, Range of requirements for all warehouses in the report. FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;S=Single;R=Range;"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the Stylesheet that is used</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

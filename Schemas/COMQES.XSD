@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the eSignatures Audit Log Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the parent filter element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Transactionid"/>
+				<xsd:element ref="TransactionDate"/>
+				<xsd:element ref="Operator"/>
+				<xsd:element ref="Key"/>
+				<xsd:element name="Variable">
+					<xsd:annotation>
+						<xsd:documentation>Select Variable A=All S=Single</xsd:documentation>
+						<xsd:appinfo source="screenItem=Y; A=All;S=Single"/>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:attribute name="FilterType" use="optional" default="A">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="A"/>
+									<xsd:enumeration value="S"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeStatCancelled">
+		<xsd:annotation>
+			<xsd:documentation>Include transactions with a status of  'Cancelled' Y=yes N=no</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeStatDenied">
+		<xsd:annotation>
+			<xsd:documentation>Include transactions with a status of 'Denied' Y=yes N=no</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeStatIncomplete">
+		<xsd:annotation>
+			<xsd:documentation>Include transactions with a status of 'Authorized but incomplete' Y=yes N=no</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeStatSuccessful">
+		<xsd:annotation>
+			<xsd:documentation>Include transactions with a status of 'Authorized and completed successfully' Y=yes N=no</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>Select Key range A=All R=Range S=Single</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string"/>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Operator">
+		<xsd:annotation>
+			<xsd:documentation>Select operator A=All S=Single</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=AdmOperator;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the parent option element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportType"/>
+				<xsd:element ref="IncludeStatIncomplete"/>
+				<xsd:element ref="IncludeStatSuccessful"/>
+				<xsd:element ref="IncludeStatCancelled"/>
+				<xsd:element ref="IncludeStatDenied"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N;"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportType">
+		<xsd:annotation>
+			<xsd:documentation>This is the report type s=summary d=detail</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionDate">
+		<xsd:annotation>
+			<xsd:documentation>Select transaction date A=All R=Range S=Single</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse={Date};A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string"/>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Transactionid">
+		<xsd:annotation>
+			<xsd:documentation>Select transaction id A=All R=Range S=Single</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Browse=AdmSignatureLog;A=All;S=Single;R=Range"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

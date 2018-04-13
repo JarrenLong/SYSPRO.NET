@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the MRP Master Production Schedule Query
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="IncludeExcludedItems" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Select this to include items that have been marked as Excluded from the MRP calculation. Y - Yes or N - No  (Default - Y).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>The Root Element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the Parent Options Element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportSelection"/>
+				<xsd:element ref="RunDate"/>
+				<xsd:element ref="PeriodLength"/>
+				<xsd:element ref="NumberPeriods"/>
+				<xsd:element ref="LimitPeriodsUpToSelection"/>
+				<xsd:element ref="PeriodLimit"/>
+				<xsd:element ref="UseWarehouseDefinedInSetup"/>
+				<xsd:element ref="ConsolidateWarehouses"/>
+				<xsd:element ref="StockValueRequired"/>
+				<xsd:element ref="NewPageForEachStockCode"/>
+				<xsd:element ref="IncludePastDueForecasts"/>
+				<xsd:element ref="IncludeExcludedItems"/>
+				<xsd:element ref="IncludeForwardOrders"/>
+				<xsd:element ref="GrossRequirementsSelection"/>
+				<xsd:element ref="RevisionRelease"/>
+				<xsd:element ref="ListNonCurrentRevisionRelease"/>
+				<xsd:element ref="IncludeMakeToOrderItems"/>
+				<xsd:element ref="ATPNegativeInFirstPeriod"/>
+				<xsd:element ref="ProjAvailLessThanSafeWithinPTF"/>
+				<xsd:element ref="ProjAvailableLessSafetyWithinPH"/>
+				<xsd:element ref="PastDueBuildSchedule"/>
+				<xsd:element ref="XslStylesheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportSelection" default="S">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the report should be printed in detail or in summary. D - Detail or S - Summary. The default is S.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RunDate" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Use this field to indicate the date from which you want the period to begin</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date}"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PeriodLength" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Use this field to indicate the number of days required in a period. Default is 7.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NumberPeriods" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the maximum number of periods (in the range 1 to 98) required to be printed. Default is 1.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LimitPeriodsUpToSelection" default="A">
+		<xsd:annotation>
+			<xsd:documentation>Indicate limit periods up to selection can select all, single date or limited by PH. A - All, S- Single or P - Limit PH. The default is A.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;A=All;S=Single;P=Limit PH"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PeriodLimit" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicate the date when limit periods up to selection is single</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse={date}"/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UseWarehouseDefinedInSetup" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to use the warehouse selections made within the Requirements Planning Setup program. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConsolidateWarehouses" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Select this to consolidate the values of all warehouses selected, for each stock code. . Y - Yes or N - No. The default is Y.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockValueRequired" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to show both the list and cost price of the stock and the list and cost value of the projected available for each period shown. This only applies if you selected to print a summary report. Y - Yes or N - No. The defaul is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NewPageForEachStockCode" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Select this to skip to a new page at the beginning of each stock code. Y - Yes or N - No. The default is Y.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludePastDueForecasts" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to include stock codes for Forward Orders in the review. Forward Orders are entered in the Sales Order Entry program and are customer orders that require stock allocations to be made at a future date. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeForwardOrders" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to include stock codes for Forward Orders in the review. Forward Orders are entered in the Sales Order Entry program and are customer orders that require stock allocations to be made at a future date. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GrossRequirementsSelection" default="Z">
+		<xsd:annotation>
+			<xsd:documentation>You use this field to indicate the gross requirements rule according to which you want to include stock items for selection. Z - All, H - Highest of forecasts and sales orders, C - Cumulative highest of forecasts and sales orders, A - Sum of forecasts and sales orders, I - Forecasts only, S - Sales orders only. The default is Z.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Z=All;H=Highest of forecasts and sales orders;C=Cumulative highest of forecasts and sales orders;A=Sum of forecasts and sales orders;I=Forecasts only;S=Sales orders only"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Z"/>
+				<xsd:enumeration value="H"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RevisionRelease">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to select only a single revision/release combination for a stock code. This value will only be taken into consideration if a SINGLE stock code is selected. Valid entries are five digit revision/five digit release example: 00000/00000 or 00001/00000</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="ListNonCurrentRevisionRelease" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Incidate to list non-current revision/release. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeMakeToOrderItems" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Y - Yes Select this to include the printing of stock codes defined as make-to-order items. N - No Select this to exclude stock codes defined as make-to-order items from being printed. O - Only Select this to only print stock codes defined as make-to-order items. The default is Y.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No;O=Only"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ATPNegativeInFirstPeriod" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to print stock codes for which the available-to-promise is negative in period 1. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProjAvailLessThanSafeWithinPTF" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to print stock codes for which the projected available is below safety within the planning time fence. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProjAvailableLessSafetyWithinPH" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to print stock codes for which the projected available is below safety within the planning horizon. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PastDueBuildSchedule" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to print stock codes for which build schedules are past the due date. Y - Yes or N - No. The default is N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>This is the StyleSheet that is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the Parent filter element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Warehouse"/>
+				<xsd:element ref="ProductClass"/>
+				<xsd:element ref="Buyer"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="Planner"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>Include Warehouse, (Filter type contains A=All, R=Range, S=Single, L=List). </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvWhControl;A=All;R=Range;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>Include Product Class, (Filter type contains A=All, R=Range, S=Single, L=List). </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=SalProductClassDes;A=All;R=Range;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Buyer">
+		<xsd:annotation>
+			<xsd:documentation>Include Buyer, (Filter type contains A=All, R=Range, S=Single, L=List)</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvBuyer;A=Alll;R=Range;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Include Stock code, (Filter type contains A=All, R=Range, S=Single, L=List). </xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvMaster;A=All;R=Range;S=Single;L=List;RevRel=Y"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Planner">
+		<xsd:annotation>
+			<xsd:documentation>Include Planner, (Filter type contains A=All, R=Range, S=Single, L=List).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=InvPlanner;A=All;R=Range;S=Single;L=List"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+						<xsd:enumeration value="L"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

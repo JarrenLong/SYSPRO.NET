@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the ECC Status Codes Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupEccStatus">
+    <xsd:annotation>
+      <xsd:documentation>The root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the status code.Key  to  Add,Update and Delete Records</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StatusCode"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information to maintain status codes. NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Description"/>
+        <xsd:element ref="EcnStatus"/>
+        <xsd:element ref="NextStatusMethod"/>
+        <xsd:element ref="MaintItemsAllow"/>
+        <xsd:element ref="MaintHoldAllow"/>
+        <xsd:element ref="MaintRelAllow"/>
+        <xsd:element ref="MaintUserAllow"/>
+        <xsd:element ref="MaintAvailAllow"/>
+        <xsd:element ref="MaintDescAllow"/>
+        <xsd:element ref="StructEnableAllow"/>
+        <xsd:element ref="StructApplyAllow"/>
+        <xsd:element ref="StructCancelAllow"/>
+        <xsd:element ref="UnsetEccAllow"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StatusCode">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the status code.The Status code cannot be deleted  if there are ECO's (Engineering Change Order) (in progress.Check thru all orders to see if any are in progress .If so do not allow the deletion of the status code .
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the description for the status code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="50"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextStatusMethod">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the method of moving to the next status.Available options are (O - Operator,A - When all actions complete,I - Immediate,S - When specified action complete)
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="S"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="EcnStatus">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the current status of the status code.You use this field to enter the status code you want to maintain.  (ECO Status can be P -In progress, H-OnHold C - Complete, X - Cancelled,N-New</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="X"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaintAvailAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not manual changes to the date are allowed. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaintDescAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not manual changes to the description are allowed.(Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaintHoldAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Allow manual locks  to be applied. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaintItemsAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Allow manual additions of affected items. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaintRelAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not manual releases are allowed. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaintUserAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not manual changes to the user are allowed. . (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StructApplyAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>  Allow manual confirmation of structure changes.. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StructCancelAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not manual cancellation of changes made to BOM's are allowed. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StructEnableAllow" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not manual changes to the BOM are allowed. (Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnsetEccAllow">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether or not the option: Unset ECC control from the Functions of the ECC Change Orders program is selected.(Y-Yes,N-No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

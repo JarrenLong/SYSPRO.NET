@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Reporting Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ABCClass">
+    <xsd:annotation>
+      <xsd:documentation>List or Single ABCClasses separated by commas. A - Abc class A, B - Abc class B, C - Abc class C, D - Abc class D. N - for items with no Abc class. 
+FilterType options - A(All), L(List), S(Single). FilterValue option - N,A,B,C,D.
+ </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" use="optional" default="A">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="A"/>
+                <xsd:enumeration value="S"/>
+                <xsd:enumeration value="L"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Buyer">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single buyer selection separated by commas. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Currency">
+    <xsd:annotation>
+      <xsd:documentation>If a foreign price method is selected, all, range or single currency can be entered in the query filter Currency. The default is all currencies. FilterType options - A(All), (R)Range, (S)Single  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single customer selection for stock movement items to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CycleCount">
+    <xsd:annotation>
+      <xsd:documentation>All, or Single cycle count selection for stock items to be returned. FilterType options - A(All), (S)Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of filters</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+        <xsd:element ref="Movements" minOccurs="0"/>
+        <xsd:element ref="Buyer" minOccurs="0"/>
+        <xsd:element ref="CycleCount" minOccurs="0"/>
+        <xsd:element ref="Supplier" minOccurs="0"/>
+        <xsd:element ref="Salesperson" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="Currency" minOccurs="0"/>
+        <xsd:element ref="PriceCode" minOccurs="0"/>
+        <xsd:element ref="PriceCategory" minOccurs="0"/>
+        <xsd:element ref="PriceMethod" minOccurs="0"/>
+        <xsd:element ref="ABCClass" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="InactiveDays" default="60">
+    <xsd:annotation>
+      <xsd:documentation>If you selected to include inactive stock codes, a cut-off number of days is entered in InactiveDays. InactiveDays will default to 60 days.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeAgeValuationInformation" default="N">
+    <xsd:annotation>
+      <xsd:documentation>You can only return warehouse age valuation information if you indicated that an aged inventory valuation is required (Inventory Setup). Otherwise  Aged valuation option is ignored.This element can be "Y" or "N". If  "Y", then all the aged quantities and the aged year for each warehouse will be returned.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeAlternateStock" default="N">
+    <xsd:annotation>
+      <xsd:documentation>All alternate stock codes for each stock code selected will be returned when this element is Y. The default for this element is N . Options Y - Yes, and N - No
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeAlternateSupplier" default="N">
+    <xsd:annotation>
+      <xsd:documentation>All alternate suppliers for each stock code selected will be returned when this element is Y. The default for this element is N . Options Y - Yes, and N - No
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludePriceInformation" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Element options, Y or N. If this element is Y, then the stock code price information based on the price method selected in the query filters will be returned. The default is N.
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementAdjustments" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock adjustment type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementBinTransfers" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include bin transfer type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementCostChanges" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock item cost changes type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementCostMods" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock costs modifications type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementCreditNotes" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock credit note type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementDebitNotes" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock debit note type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementDispatchNotes" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock dispatch note type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementInvoices" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock invoice type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementIssues" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock issues type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementPhysical" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock physical adjustment type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementReceipts" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock sales receipts type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovementTransfers" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock transfer type of inventory movements for the selected period in a warehouse. (Y - Yes or N - No).
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhMovements" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include stock code warehouse movement records. If not movement type has been selected, then this option will be ignored. (Y - Yes or N - No).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhNoActivityAdjustment" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>You have an option to include month-to-date stock adjustments for a warehouse where no activity have taken place. If Y the month to date quantity adjustment records will be included in the output. Y(Yes), N(No). Default is Y(Yes).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeWhSalesHistory" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If element is 'Y',  you select to include warehouse sales history for the selected period in a warehouse. (Y - Yes or N - No).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MPSItems" default="I">
+    <xsd:annotation>
+      <xsd:documentation>You can include, exclude or only return MPS items,  (I - Include, X - Exclude and O - Only) .</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="X"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MakeToOrderItems" default="I">
+    <xsd:annotation>
+      <xsd:documentation>You can include, exclude or only return Make to order items (I - Include, X - Exclude and O - Only).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="X"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaxNumberStkItems" default="100">
+    <xsd:annotation>
+      <xsd:documentation>You use this element to select the number of stock items to return in the query, and will default to 100. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaxNumberWhMovements" default="100">
+    <xsd:annotation>
+      <xsd:documentation>You use this element to select the maximum number of stock code movements  in a warehouse, and will default to 100. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Movements">
+    <xsd:annotation>
+      <xsd:documentation>Movement filter FilterType can take the following values:  C = current month, Y = current year, N = number of months, S = single period.If you selected C, the query will return current month details only. The current period information will be retrieved from the control table, and you do not need to enter anything in the FilterValue. If you selected Y, the query will return details for the current financial year. The current financial year information will be retrieved from the control table, therefore you do not need to enter any value in the FilterValue. If number of months is selected (N), the FilterValue should contain the number of prior periods from which you want to view the your movements. That is, if you have 12 periods in a year, and your FilterValue is 5, the query will return details for the past 5 months. If you selected S, single period, the FilterValue should contain the period number of periods for which you want to view the movements. That is, if you have 12 periods in a year, and your FilterValue is 5, the query will return details for the fifth period only.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="C"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of options</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Sequence" minOccurs="0"/>
+        <xsd:element ref="MaxNumberStkItems" minOccurs="0"/>
+        <xsd:element ref="IncludeAgeValuationInformation" minOccurs="0"/>
+        <xsd:element ref="IncludePriceInformation" minOccurs="0"/>
+        <xsd:element ref="Rules" minOccurs="0"/>
+        <xsd:element ref="InactiveDays" minOccurs="0"/>
+        <xsd:element ref="SupersessionDays" minOccurs="0"/>
+        <xsd:element ref="IncludeWhNoActivityAdjustment" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovements" minOccurs="0"/>
+        <xsd:element ref="WhMovementDateSequence" minOccurs="0"/>
+        <xsd:element ref="MaxNumberWhMovements" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementIssues" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementTransfers" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementReceipts" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementPhysical" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementAdjustments" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementCostChanges" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementCostMods" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementBinTransfers" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementInvoices" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementCreditNotes" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementDebitNotes" minOccurs="0"/>
+        <xsd:element ref="IncludeWhMovementDispatchNotes" minOccurs="0"/>
+        <xsd:element ref="StatisticalItems" minOccurs="0"/>
+        <xsd:element ref="MPSItems" minOccurs="0"/>
+        <xsd:element ref="MakeToOrderItems" minOccurs="0"/>
+        <xsd:element ref="IncludeAlternateStock" minOccurs="0"/>
+        <xsd:element ref="IncludeAlternateSupplier" minOccurs="0"/>
+        <xsd:element ref="IncludeWhSalesHistory" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PriceCategory">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single price category for a stock codes to return. FilterType options - A(All), R(Range), (S)Single.
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PriceCode">
+    <xsd:annotation>
+      <xsd:documentation>If a coded price method is selected, in PriceMethod Filter, All(A), (R)Range or (S)Single price code can be selected in the query filter PriceCode. The default is all(A) price codes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PriceMethod">
+    <xsd:annotation>
+      <xsd:documentation>The business object can return pricing information for more than one pricing method. If IncludePricingInformation option is not 'Y'(Yes), the this option will be ignored.
+A single or list of price methods can be returned. FilterType options - (S)Single, (L)List.  
+
+ A list of pricing methods can be entered in the query FilterValue: 
+ C -  coded, 
+ Q -  quantity, 
+ F -  foreign.
+
+If a coded price method is selected, a list (or single) of price code(s) can be selected in the query filter PriceCode. The default is all price codes.
+
+If a foreign price method is selected, all, range or single currency can be entered in the query filter Currency. The default is all currencies.   
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single product class selection for stock items to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional" default=" "/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Rule" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>You can select each exception type to be included in the XML-out. All the exception options will default to N (No). That is 'Rules' will be empty. These are values you use to select exception types that can be returned:
+ Select warehouses with available quantity less than zero - NegQty.
+ Select warehouses with available quantity zero - ZeroQty 
+ Select warehouses with available quantity greater than zero - PosQty
+ Select warehouses with on purchase order - OnOrder
+ Select warehouses with quantity on back order - BackOrder
+ Select warehouses with goods in transit - GIT
+ Select warehouses with available less than minimum quantity - UnderMin
+ Select warehouses with available less than safety - UnderSafety
+ Select warehouses with available greater than maximum quantity - OverMax
+ Select warehosue with zero quantity on hand - OnHandZero
+ Select inactive stock items - Inactive
+ Select clearing stock items - Clr
+ Select superceded items - Super
+ Select items on hold - OnHold
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Rules">
+    <xsd:annotation>
+      <xsd:documentation>List of rules </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded">
+        <xsd:element ref="Rule" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Salesperson">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single salesperson selection for stock movement items to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Sequence" default="S">
+    <xsd:annotation>
+      <xsd:documentation>The query details can be returned in stock code, stock code description, warehouse, supplier or product class sequence. 
+The input options: S - Stock code, D - Stock code description,  W - warehouse,  V - supplier, and P - product class, with a default of S, (stock code).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StatisticalItems">
+    <xsd:annotation>
+      <xsd:documentation>You can include, exclude or only return Statistical stock items,  (I - Include,  X - Exclude and O - Only).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="X"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single or List of stock codes to return. FilterType options - A(All), R(Range), (S)Single or (L)List. Maximum of 1000 characters can be entered.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupersessionDays" default="0">
+    <xsd:annotation>
+      <xsd:documentation>If you selected to return superseded stock items, a number of supersession days can be entered in SupersessionDays, if not entered will default to zero (0) (that is supersession date is today).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>All, Range or Single supplier selection for stock items to be returned. FilterType options - A(All), R(Range), (S)Single.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>All, Range, Single or List of warehouse selection. FilterType options - A(All), R(Range), (S)Single or (L)List.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:string">
+          <xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+          <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="WhMovementDateSequence" default="A">
+    <xsd:annotation>
+      <xsd:documentation>Inventory warehouse movements can be returned in ascending or descending order. You enter 'A' for ascending and 'D' for descending and the default is 'A'.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>The Stylesheet to be applied.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

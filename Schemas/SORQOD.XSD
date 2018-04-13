@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Documents Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Option">
+          <xsd:annotation>
+            <xsd:documentation>List of options.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Reprint" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates if an original document is to be returned, or one which has already been printed or presented as XML. Valid entries are 'N' and 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DocumentType" default="D" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The type of document to be returned - 'D- Delivery Note, O - Order Acknowledgement - default is 'D'</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value="O"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DocumentDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the date to be output with the document. If provided, it must be of the form CCYY-MM-DD. If not provided, the system date will be used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="10"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeOnlyIfMerchLines" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines when a document is to be produced. This only applies to a delivery note, document type 'D'.  If set to 'Y', then a document will only be produced if the selected order contains a valid merchandise line. Valid entries are 'N' and 'Y' - default is 'N' - no.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeChgWithoutMerchLine" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether service charges attached to a stocked line should be processed if the stocked line is not selected for inclusion in the document - if set to 'Y' then the service charges will be processed with no reference to the stock line. Valid entries are 'Y' and 'N - default is 'Y' - yes'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DateToCheck" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The type of date selection required - N - None, L - date of last document, S - ship date. Default is 'N'. This is used in conjunction with the filter 'RequestedDate', and determines which date is used for the filter.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="L"/>
+                    <xsd:enumeration value="S"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DeliveryNoteComplete" default="Y" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only considered if the type of document is a delivery note, the reprint option is not selected, and the warehouse filter is not set to 'all'.  If selected, then the status of the order is set to '4' meaning the delivery note is complete. Valid entries are 'Y' and 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeNonStocked" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only considered if the type of document is a delivery note, and the warehouse filter is not set to 'all'.  If selected, then any non-stocked merchandise lines on the order will be included in the delivery note. Valid entries are 'Y' and 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ValueOrderAckWithShipQty" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether the ship quantity is to be used to calculated the total values of an order acknowledgement. Valid entries are 'N' - no, and 'Y' - yes. The default is 'N'. If this element is not set to 'Y' then the order quantity will be used to value the order acknowledgement.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCredDebForOrderAck" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element is only relevant if the document type is an Order Acknowledgement. If selected, then a Credit note or a Debit note will be included if it falls within the other parameter selections. Valid entries are 'N' - no (default), and 'Y' - Yes.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeSCT" default="I" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element controls the inclusion of orders that are marked as Supply Chain Transfers - valid options are I (Include), E (Exclude) and O (Only process if an SCT). The default is 'I' - include.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="I"/>
+                    <xsd:enumeration value="E"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeForms" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether custom form information attached to the sales order should be returned. Valid entries are 'N' - no, and 'Y' - yes. The default is 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeCustomerForms" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether custom form information for the sales order customer should be returned. Valid entries are 'N' - no, and 'Y' - yes. The default is 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeStockForms" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether custom form information for the stock code on a detail stocked merchandise line should be returned. Valid entries are 'N' - no, and 'Y' - yes. The default is 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeDetailForms" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether custom form information for the detail merchandise line should be returned. Valid entries are 'N' - no, and 'Y' - yes. The default is 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IncludeNotes" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element determines whether notepad information attached to the sales order should be returned. Valid entries are 'N' - no, and 'Y' - yes. The default is 'N'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IgnorePrintStatus" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If this element is set to 'Y', it will over-ride the contents of the 'Reprint' option. Any orders selected through other criteria will be returned, regardless of the print status for the document. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RoundMass" default="O" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element controls the rounding of the mass on individual merchandise  lines. The rounded figure is added to the total mass for the document. The number of decimals is controlled by the 'RoundMassDecs' option. The rounding is O - 'off', 'U'  - up, or 'D' down. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value="D"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RoundMassDecs" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This controls the number of decimals used in the rounding of mass as described in 'RoundMass'. A single digit in the range 0 to 6 must be provided. If this element is not used, then the number of decimal places in the mass (currently 6) is used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RoundVolume" default="O" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element controls the rounding of the volume on individual merchandise lines. The rounded figure is added to the total volume for the document. The number of decimals is controlled by the 'RoundVolumeDecs' option. The rounding is O - 'off', 'U'  - up, or 'D' down. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value="D"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="RoundVolumeDecs" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This controls the number of decimals used in the rounding of volume as described in 'RoundVolume'. A single digit in the range 0 to 6 must be provided. If this element is not used, then the number of decimal places in the volume (currently 6) is used.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Call3rdPartyForUsaTax" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If USA tax is in use, and the option to calcualte tax using a 3rd party process is selected, then this will be used to determine if the process is to be called to calcualte the tax for the documents. The default is 'N', do not call the process, but calcualte tax using the standard routines.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="XslStylesheet" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The XSL Stylesheet to be used</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="Filter" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This contains one or more filters to restrict the number of documents returned.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Branch" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Branch to be selected (FilterType of A - All, R - Range or S - Single  branch, FilterValue contains a range of branches separated by commas if FilterType is R or  a single branch if S).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="0"/>
+                        <xsd:maxLength value="1"/>
+                        <xsd:whiteSpace value="preserve"/>
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string"/>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Customer" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer to be selected (FilterType of A - All, R - Range or L - List of  customers, FilterValue contains a range or list of customers separated by commas if FilterType is R or L).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="L"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string"/>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Warehouse to be selected (FilterType of A - All, R - Range or L - List of  warehouses, FilterValue contains a range or list of warehouses separated by commas if FilterType is R or L).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="L"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="OrderType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Order type to be selected (FilterType of A - All, R - Range or S - Single  order types, FilterValue contains a range of order types separated by commas if FilterType is R or  a single order type if S).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="CustomerPo" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer purchase order number to be selected (FilterType of A - All, S - Single p/o number, FilterValue contains the selected p/o number if FilterType is S).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SalesOrder" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Sales order to be selected (FilterType of A - All, R - Range or L - List of  sales orders, FilterValue contains a range or list of sales orders separated by commas if FilterType is R or L).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="L"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="OrderDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Sales order date to be selected (FilterType of A - All, R - Range or S - Single  sales order date, FilterValue contains a range of sales order dates separated by commas if FilterType is R or  a single sales order date if S).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" use="optional">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string"/>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Operator" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Operator to be selected (FilterType of A - All, S - Single operator, FilterValue contains the selected operator if FilterType is S).</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="GeographicArea" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Geographic area to be selected (FilterType of A - All, S - Single geographic area, FilterValue contains the selected geographic area if FilterType is S)</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="RequestedDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Date to be selected (FilterType of A - All, R - Range or S - Single date, FilterValue contains a range of  dates separated by commas if FilterType is R or  a single date if S). The date provided will depend on the contents of the option 'DateToCheck', and may either be the ship date or the date last printed. If the option is set to 'N' for no date, then this filter is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:attribute name="FilterType" use="optional" default="A">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="A"/>
+                        <xsd:enumeration value="R"/>
+                        <xsd:enumeration value="S"/>
+                        <xsd:enumeration value=""/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
+                  <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

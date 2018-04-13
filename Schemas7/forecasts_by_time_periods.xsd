@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the MRP Forecasts by Time Periods Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="ProductClass"/>
+        <xsd:element ref="ForecastType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FirstDayOfWeek">
+    <xsd:annotation>
+      <xsd:documentation>This element will only be used if you selected Weeks at the Period Type.Sunday(SUN), Monday(MON), Tuesday(TUE), Wednesday(WED), Thursday(THU), Friday(FRI) or Saturday(SAT).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;SUN=Sunday;MON=Monday;TUE=Tuesday;WEN=Wednesday;THU=Thursday;FRI=Friday;SAT=Saturday"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SUN"/>
+        <xsd:enumeration value="MON"/>
+        <xsd:enumeration value="TUE"/>
+        <xsd:enumeration value="WED"/>
+        <xsd:enumeration value="THU"/>
+        <xsd:enumeration value="FRI"/>
+        <xsd:enumeration value="SAT"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ForecastType">
+    <xsd:annotation>
+      <xsd:documentation>Either all or a single forecast type is to be returned. Filter Type options – A(All), S(Single). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FromDate" type="xsd:date">
+    <xsd:annotation>
+      <xsd:documentation>This element will have no effect if the Period Type is months.</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;Browse={date}"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FromMonth" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element is only used if you selected Months at the Period Type. The format for this entry is month (MM)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FromYear" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element is only used if you selected Months at the Period Type. The format for this entry is century year (CCYY)</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeInactive">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include inactive forecasts in the list. (Y)Yes and (N)No - Default.</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMPS">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include, exclude or only show forecasts for MPS stock items, matching the selection criteria. (Y)Yes, (N)No or (O)Only</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;Y=Yes;N=No;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonStocked">
+    <xsd:annotation>
+      <xsd:documentation>Select this to include forecasts for non stocked items. (N) No, (Y)Yes or (O)Only. The default is (N)No</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;N=No;Y=Yes;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NumberOfDays" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>You can only access this field if you selected Multiple days at the Period Type.</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PeriodType"/>
+        <xsd:element ref="FromDate"/>
+        <xsd:element ref="NumberOfDays"/>
+        <xsd:element ref="FirstDayOfWeek"/>
+        <xsd:element ref="FromMonth"/>
+        <xsd:element ref="FromYear"/>
+        <xsd:element ref="IncludeMPS"/>
+        <xsd:element ref="IncludeInactive"/>
+        <xsd:element ref="IncludeNonStocked"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PeriodType">
+    <xsd:annotation>
+      <xsd:documentation>Define the time period for the report, Single Days(SD), Multiple Days(MD), Weeks(WK) or Months(MO).</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;SD=Single Day; MD=Multiple Days;WK=Weeks;MO=Months"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="SD"/>
+        <xsd:enumeration value="MD"/>
+        <xsd:enumeration value="WK"/>
+        <xsd:enumeration value="MO"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range, List of product classes to be returned. FilterType options – A(All), S(Single), R(Range), L(List). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;Browse=SalProductClassDes;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range, List of stock codes to be returned. FilterType options – A(All), S(Single), R(Range), L(List). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;Browse=InvMaster;A=All;S=Single;R=Range;L=List"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="L"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>All or Single warehouses to be returned. FilterType options – A(All), S(Single). Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="ScreenItem=Y;Browse=InvWhControl;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

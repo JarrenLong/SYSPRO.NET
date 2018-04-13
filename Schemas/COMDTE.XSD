@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Query Date Function Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Date" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element can only be used with Query and NewDate functions. CCYY-MM-DD</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Days" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element can only be used with NewDate function. Number of days to age a date by.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Function">
+    <xsd:annotation>
+      <xsd:documentation>This is the function element. Query - Queries a single date, outputting its attributes , Age - Accepts two dates and returns attrirbutes of dates and no of days between with flag to count only working days,  NewDate - Accepts a date and number of days to age and returns the new date with attributes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Query"/>
+        <xsd:enumeration value="Age"/>
+        <xsd:enumeration value="NewDate"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OnlyCountWorkingDays" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element can only be used with Age and NewDate functions. Flag to only count working days</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:length value="1"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Function"/>
+        <xsd:element ref="Date" minOccurs="0"/>
+        <xsd:element ref="Days" minOccurs="0"/>
+        <xsd:element ref="OnlyCountWorkingDays" minOccurs="0"/>
+        <xsd:element name="Date1" type="xsd:string" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element can only be used with Age function. CCYY-MM-DD</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Date2" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>This element can only be used with Age function. CCYY-MM-DD</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

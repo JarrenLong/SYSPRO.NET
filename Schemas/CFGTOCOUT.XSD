@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Options Phase
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the description of the option you are currently on. This element also indicates the description of the stock code within the component node. This element also indicates the description of the work centre within the operations node. The format is a 30 character alphanumeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Line">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the line you are currently on for the configuration. The line could refer to the option line, component line or operation line. 
+This element can also indicate the component/operation line when components/operations have been supplied for selection and contain errors.
+The format is a 3 character numeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="3"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaximumPer">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the maximum quantity of the component which can be    selected. The format is a signed 7.3  field.
+Within the operation node this element indicates the maximum amount of run time allowed for the operation and is only output for internal operations. The format is a  5.4 numeric field.
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="5"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MinimumPer">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the minimum quantity of the component which must be selected. The format is a signed 7.3  field.
+Within the operation node this element indicates the minimum amount of run time allowed for the operation and is only output for internal operations. The format is a  5.4 numeric field.
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="5"/>
+        <xsd:maxLength value="12"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the product class of the component/operation and will only be output when the source of the configuration is S - Sales orders or Q - Quotes. This element within the component node will not be output if exploding a phantom and the output is for the phantom parent. The format is a 4 character alphanumeric field. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Selected">
+    <xsd:annotation>
+      <xsd:documentation>This element  indicates whether the component/operation has been selected or not. Possible values are 'Yes' and 'No'</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="2"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="No"/>
+        <xsd:enumeration value="Yes"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Type">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the type of option you are currently on. Possible values C - Components or  O - Operations. 
+Within the operations node this element also indicates whether the operation type is mandatory, optional or range.  Mandatory - the operation will be automatically selected. Optional  - When configuring the product you can optionally select the operation but cannot change the run time required. Range - When configuring the product you can optionally select the operation as well as change the run time required within a given range. Range is only applicable for internal operations. This element will not be output when processing a library and returning to the options phase from the finish details phase. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="9"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="Mandatory"/>
+        <xsd:enumeration value="Range "/>
+        <xsd:enumeration value="Optional"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="postconfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data output.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Option" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds information pertaining to the option. Multiple occurences of this element will only occur when processing a library and returning to the options phase from the finish details phase</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element ref="Line"/>
+                    <xsd:element ref="Description"/>
+                    <xsd:element ref="Type" minOccurs="0"/>
+                    <xsd:element name="MinNumComponents" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the minimum quantity of components you can include in the option. This element will only be output when ranges are used in the option
+and the type is components. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 7.3  numeric field. 
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="5"/>
+                          <xsd:maxLength value="11"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MaxNumComponents" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the maximum quantity of components you can include in this option. This element will only be output when ranges are used in the option
+and the type is components. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 7.3  numeric field.
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="5"/>
+                          <xsd:maxLength value="11"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="QtyPerDesc" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This indicates a description for the quantity per unit of measure for components of this option This element will only be output when ranges are used in the option and the type is components. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 15 character alphanumeric field
+
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="15"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MinTotCompQty" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the minimum quantity per in the component per unit of measure that must be selected for this option This element will only be output when ranges are used in the option and the type is components. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 7.3  numeric field.
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="5"/>
+                          <xsd:maxLength value="11"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MaxTotCompQty" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the maximum quantity per in the component per unit of measure that must be selected for this option. This element will only be output when ranges are used in the option and the type is components. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 7.3  numeric field.
+
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="5"/>
+                          <xsd:maxLength value="11"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Component" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This element holds information pertaining to components. This element is only output when the option type is components. This element will not be output when processing a library and returning to the options phase from the finish details phase.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element ref="Line"/>
+                          <xsd:element ref="Selected"/>
+                          <xsd:element ref="PhantomLine" minOccurs="0"/>
+                          <xsd:element name="MaterialType">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates whether the component type is mandatory, optional or range.
+Mandatory - the component will be automatically selected.
+Optional  - When configuring the product you can optionally select the component but cannot change the quantity required
+Range - When configuring the product you can optionally select the component as well as change the quantity required
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:minLength value="5"/>
+                                <xsd:maxLength value="9"/>
+                                <xsd:enumeration value="Mandatory"/>
+                                <xsd:enumeration value="Range"/>
+                                <xsd:enumeration value="Optional"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="StockCode">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the stock code against the component line. The format is 30 characters alphanumeric or 15 chararcters numeric depending on the configuration option for stock codes within Syspro.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="30"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Decimals">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the number of decimals allowed for the stock code. The format is a 1 character numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="Description"/>
+                          <xsd:element name="Warehouse">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the warehouse against the stock code. For non-stocked items this element will always contain "**". The format is a 2 character alphanumeric field
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Available">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the quantity available for the stock code.
+This can also indicate when the parent is a phantom part if your configuration is setup to explode phantoms and will contain the value ‘Phantom’.
+This element can also indicate the message 'Unit qty set' for stocked components as well as the message 'Invalid Wh' if no warehouse is found for the stocked component. The format is a 12 character alphanumeric field
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Free">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the quantity free for the stock code. The format is a signed 7.3  field.
+
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="MinimumPer"/>
+                          <xsd:element ref="MaximumPer"/>
+                          <xsd:element name="TotalQuantity">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the total quantity of the component. The format is a signed 7.3  field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="5"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="QuantityUom">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the quantity unit of measure of the component. The format is a 3 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="3"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Quantity">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the quantity per of the component. The format is a signed 7.3  field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="5"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="ProductClass" minOccurs="0"/>
+                          <xsd:element name="BackOrderQty" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the back order quantity of the component and will only be output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 7.3  field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="5"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Price">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price of the component. If not from sales orders/quotes then this will be the list price. If from sales orders or quotes the default price of the component will be determined by the pricing options within SYSPRO. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a 10.5 numeric field.
+
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="7"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceUom">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price unit of measure of the component. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a 3 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="3"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceCode" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price code of the component. The price code is only output when the source of the configuration is S - Sales orders or Q -Quotes. This element is also only output when the pricing method is simple or extended. If this element contains an ‘!’ then the price is a contract price. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a 2 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Commission" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the commission of the component and is only output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a 2 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountFlag" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies this indicates whether the discount value is unit or total of the component and is only output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. Possible values are U - Unit value or V - total value.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="U"/>
+                                <xsd:enumeration value="V"/>
+                                <xsd:enumeration value=""/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPctPlusLess" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies this indicates whether the discount value should be added to or subtracted from the component line value and is only output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. Possible values are L - Less or P - Plus.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="L"/>
+                                <xsd:enumeration value="P"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountValue" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies and the discountflag is U or V then this indicates the discount value of the component and is only output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 12.2 numeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="4"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPct1" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies this indicates the first discount percentage when using chain discount percentages and is only output when the source of the configuration is S- Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a 3.2 numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="6"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPct2" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies this indicates the second discount percentage when using chain discount percentages and is only output when the source of the configuration is S- Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 2.2 numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="5"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPct3" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies this indicates the third discount percentage when using chain discount percentages and is only output when the source of the configuration is S- Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 2.2 numeric field.
+
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="5"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="TotalDiscountValue" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>If discount applies this indicates the total discount value of the component and is only output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 12.2 numeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="4"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="NetPrice" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the net price and is output when the line discount calculation method within SYSPRO is price and there is a discount and the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 10.5 numeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="4"/>
+                                <xsd:maxLength value="17"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="LineValue" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the total value of the component line and is only output when the source of the configuration is S - Sales orders or Q - Quotes. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a signed 12.2 numeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="4"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="UnitCost" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the unit cost of the component line. This element is only output for non-stocked items or when the security against the operator allows costs to be viewed. This element will not be output if exploding a phantom and the output is for the phantom parent. The format is a 10.5 numeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="7"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Narrations" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element holds component narrations.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element ref="Text" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="MinNumOperations" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the minimum number of operations you can include in this option. This element will only be output when ranges are used in the option. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 3 character  numeric field. 
+
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="3"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MaxNumOperations" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the maximum number of operations you can include in this option. This element will only be output when ranges are used in the option. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 3 character  numeric field. 
+
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="3"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MinTime" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the minimum total runtime allowed for all operations in this option. This element will only be output when ranges are used in the option. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 5.4 numeric field. 
+
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="10"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="MaxTime" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the maximum total runtime allowed for all operations in this option. This element will only be output when ranges are used in the option. This element will not be output when processing a library and returning to the options phase from the finish details phase. The format is a 5.4 numeric field. 
+
+
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="10"/>
+                          <xsd:maxLength value="10"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Operation" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This element holds information pertaining to operations. This element is only output when the option type is operations. This element will not be output when processing a library and returning to the options phase from the finish details phase.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:sequence>
+                          <xsd:element ref="Line"/>
+                          <xsd:element ref="Selected"/>
+                          <xsd:element ref="Type"/>
+                          <xsd:element name="WorkCentre">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the work centre against the operation line. The format is a 6 character alphanumeric field.
+
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="Description"/>
+                          <xsd:element name="RunTime" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the run time per of the operation. Only output for internal operations. The format is a 5.4 numeric field. 
+
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="10"/>
+                                <xsd:maxLength value="10"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="TimeUom" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the time unit of measure of the operation. Only output for internal operations. The format is a 3 character alphanumeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="3"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="TotalTime">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the total time of the operation. If the operation is a subcontract operation then this element will contain the value 'subcontract' in it. The format is a 11 character alphanumeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="10"/>
+                                <xsd:maxLength value="11"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Supplier" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the supplier for subcontract operations. The format is a 7 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="7"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Machine" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the machine used in the operation. Only output for internal operations. The format is a 6 character alphanumeric field.
+</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="MinimumPer" minOccurs="0"/>
+                          <xsd:element ref="MaximumPer" minOccurs="0"/>
+                          <xsd:element name="WorkCtrRate" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the work centre rate used in the calculation of the operation cost. Only output for internal operations. The format is a  1 character numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="UnitValue">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the unit value of the operation.  The format is a  10.5 numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="7"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Cost">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the cost of the operation. The format is a  10.5 numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="7"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="ProductClass" minOccurs="0"/>
+                          <xsd:element name="Narrations" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element holds operation narrations.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType mixed="false">
+                              <xsd:sequence>
+                                <xsd:element ref="Text" maxOccurs="unbounded"/>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="AnySelected" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether any components/operations were selected and is only output  when using a library and returning back to the options phase from the finish details phase. Possible values are 'Yes' and 'No'.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="2"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="Yes"/>
+                          <xsd:enumeration value="No"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Components" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the quantity of components selected and is only output  when using a library and returning back to the options phase from the finish details phase. The format is a signed 7.3 field. </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="5"/>
+                          <xsd:maxLength value="12"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Operations" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the number of operations selected and is only output  when using a library and returning back to the options phase from the finish details phase. The format is a 3 character alphanumeric field.
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="3"/>
+                          <xsd:maxLength value="3"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="TotalValue" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the total value of the components/operations selected per option and is only output when using a library and returning back to the options phase from the finish details phase. The format is a signed 12.2 field.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="4"/>
+                          <xsd:maxLength value="16"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element ref="Line" minOccurs="0"/>
+              <xsd:element ref="PhantomLine" minOccurs="0"/>
+              <xsd:element name="Components" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element will only be output when components have been supplied for  selection and any of the components are invalid</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element ref="LineCount"/>
+                    <xsd:element ref="Valid"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Operations" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element will only be output when operations have been supplied for selection and any of the operations are invalid</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element ref="LineCount"/>
+                    <xsd:element ref="Valid"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="CurrentConfigurationObject">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the name of the current business object to be run.  Possible value is CFGTOC.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="6"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="CFGTOC"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Parameters">
+                <xsd:annotation>
+                  <xsd:documentation>This contains parameters.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:sequence>
+                    <xsd:element name="Function">
+                      <xsd:annotation>
+                        <xsd:documentation>Refers to the direction you are proceeding in the configuration. Possible values N - Next or P - Previous
+</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="P"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ConfigurationInstance">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the instance of the configuration you are running. It is indicated by a unique number returned after the start phase of processing. The size of the field is a 8 character alphanumeric field.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="8"/>
+                          <xsd:maxLength value="8"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:byte" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Role" type="xsd:byte" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PhantomLine">
+    <xsd:annotation>
+      <xsd:documentation>When exploding a phantom parent into its component parts, this element indicates the component line of the phantom. 
+This element can also indicate the component phantom line when phantom parts which are exploded have been supplied for selection and contain errors.
+The format is a 5 character numeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="5"/>
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LineCount">
+    <xsd:annotation>
+      <xsd:documentation>When components/operations are supplied and errors are found then this element is output and indicates the number of component/operation lines processed. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="5"/>
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Valid">
+    <xsd:annotation>
+      <xsd:documentation>When components/operations are supplied and errors are found then this element is output and indicates the number of valid component/operation lines processed. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="5"/>
+        <xsd:maxLength value="5"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Text">
+    <xsd:annotation>
+      <xsd:documentation>This element holds the actual narration text. The format is a 45 character alphanumeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="45"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

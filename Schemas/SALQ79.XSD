@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2009 SYSPRO Ltd.-->
+<!--
+     Schema for Sales Analysis GST by Area report
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Date">
+		<xsd:annotation>
+			<xsd:documentation>Selection of dates to be included in the report.
+
+'A' - All (Default) 
+Select this to produce a report regardless of date.
+
+'R' - Range 
+Select this to produce the report for a range of dates.
+You indicate this range in the FilterValue attribute.
+
+'S' - Single 
+Select this to report on a single date.
+You indicate this date in the FilterValue attribute.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>List of filters available.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Date"/>
+				<xsd:element ref="GeographicArea"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GeographicArea">
+		<xsd:annotation>
+			<xsd:documentation>Selection of geographic areas to be included in the report.
+
+'A' - All (Default) 
+Select this to produce a report regardless of geographic area.
+
+'S' - Single 
+Select this to report on a single geographic area.
+You indicate this geographic area in the FilterValue attribute.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MonthToPrint">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the financial period (within the financial year entered), for which the report must be printed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="2"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of options available.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportType" minOccurs="0"/>
+				<xsd:element ref="MonthToPrint" minOccurs="0"/>
+				<xsd:element ref="YearToPrint" minOccurs="0"/>
+				<xsd:element ref="Reprint" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportType" default="S">
+		<xsd:annotation>
+			<xsd:documentation>Type of report required.
+
+'S' - Summary (default)
+Select this if you want to exclude detail invoice information from being printed on the report.
+Only an analysis of the tax is printed.
+
+'D' - Detail 
+Select this if you want to print detail invoice information as well as an analysis of tax on the report.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Reprint" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this to print a report that was previously printed. Valid values are 'N' - No (default) and 'Y' - Yes.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="YearToPrint" default="C">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the year for which the report must be printed.
+Valid values are 'C' - Current (default), 'P' - Previous or a 4-digit field indicating the current or previous AR financial year.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="4"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

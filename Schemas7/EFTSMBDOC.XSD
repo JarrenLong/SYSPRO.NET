@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd. -->
+<!--
+		This is the schema for EFT Bank Setup Business Object 
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="SetupEftBanks">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="EftXmlOutput"/>
+				<xsd:element ref="EftXmlLocation" minOccurs="0"/>
+				<xsd:element ref="EftXmlDirectory" minOccurs="0"/>
+				<xsd:element ref="EftXmlExtractType" minOccurs="0"/>
+				<xsd:element ref="EftGlobalRef" minOccurs="0"/>
+				<xsd:element ref="eSignature" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This is the key element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Bank"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>Bank code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EftXmlOutput">
+		<xsd:annotation>
+			<xsd:documentation>Output EFT XML file after EFT run. Can be either Y - Yes or N - No. If nothing is supplied a default of N - No is assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EftXmlLocation" default="C">
+		<xsd:annotation>
+			<xsd:documentation>Location of EFT XML file path. Valid entries are C - Client or S - Server. If no value is entered, the default of C - Client is assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="1"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EftXmlDirectory">
+		<xsd:annotation>
+			<xsd:documentation>Directory to place EFT XML file. Must exist in location selected of either C - Client or S - Server.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EftXmlExtractType">
+		<xsd:annotation>
+			<xsd:documentation>Detailed breakdown for XML file extract. Valid entries are S - Supplier or I - Invoice. If no extract type is entered, S - Supplier is assumed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="I"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EftGlobalRef">
+		<xsd:annotation>
+			<xsd:documentation>Global EFT statement reference to use, will be used if supplier statement reference is blank during an EFT extract.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="eSignature" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>GUID for eSignatures</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

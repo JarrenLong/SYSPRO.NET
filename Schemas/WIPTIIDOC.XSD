@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Inspection Quantity Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostWIPInspected">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to maintain the quantity inspected for a WIP inspection reference.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="InspectionReference">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the WIP inspection reference for which you want to update the inspection quantity. This is a mandatory element. The format is up to 9 characters, either alphanumeric or numeric depending on the key configuration option for WIP inspection reference within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="9"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Lot" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the lot for which you want to update the WIP inspection quantity when the stock item is lot traceable. Trhe format is up to 10 characters, either alphanumeric or numeric depending on the key configuration option for lot within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockCode">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the stock code for which you want to update the WIP inspection quantity. This is a mandatory element. The format is up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration option for stock code within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UnitOfMeasure" default="S">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="O"/>
+										<xsd:enumeration value="M"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="QuantityInspected">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the quantity inspected that will be added to the total quantity inspected for the WIP inspection reference. The format is up to 12 characters, signed numeric with 7 integers and 3 decimals.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="12"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Document" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the document number for the inspection. The format is up to 10 characters alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

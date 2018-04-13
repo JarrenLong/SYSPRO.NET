@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Parent Details Phase
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="PostConfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="ParentDetails">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds the information pertaining to the parent details.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="Type" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether the parent code is stocked or non-stocked. Possible values: S (stocked) or N (non-stocked). Default to the parent type defined in the configuration maintenance options.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value=""/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="StockCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent stock code. If it is generated using a prefix then you cannot override the generated stock code even if you are allowed to override generated fields. If it is generated from selection criteria and the option to override generated fields is set on then you can override the generated stock code. The format is alphanumeric or numeric depending on the configuration option for stock codes within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Description" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the description of the parent part you are adding. If the parent stockcode is generated the option to overwrite generated fields must have been selected to allow the description to be supplied. If you are selecting an existing generated parent the option to override the description against the inventory setup within SYSPRO must have been selected to allow the description to be supplied. If the parent stockcode is generated the description will default to the description generated.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LongDescription" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the long description of the parent part you are adding. If the parent stockcode is generated the option to overwrite generated fields must have been selected to allow the long description to be supplied. If you are selecting an existing generated parent the option to override the description against the inventory setup within SYSPRO must have been selected to allow the long description to be supplied. If the parent stockcode is generated the long description will default to the long description generated.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Warehouse" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the warehouse used against the parent stockcode. When the source of the configuration is Sales orders then this element will default to  the warehouse supplied in the start phase, if not supplied and using branch as warehouse then this element will default to the branch else it will default to company warehouse. When the source of the configuration is not sales orders, this element will default to the warehouse supplied in the start phase, if not supplied this element will default to the company warehouse.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ProductClass" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the product class of the parent stockcode. It will default to the product class held against the inventory template. If the inventory product class setup option in the configurator maintenance program on the options tab has been set on this element will be ignored.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="UseExistingParent" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates that you can use an existing stock code within the configuration. This element depends upon the configurator setup option to create jobs for existing parents within inventory setup in SYSPRO. This element is only used when the source of the configuration is sales orders. Possible values: Y (yes) or N (no).  This element defaults to N.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="UseParentCompWh" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether you want to be able to use the component warehouse defined against the parent warehouse control record for component processing. This element is only applicable if you have selected the Ask warehouse option when defining the configuration and the parent part is stocked. This element is also only applicable when the source of the configuration is (S - Sales Orders, Q - Quotes, W- Jobs, T - Test mode). Possible values are N and Y. The default is N.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

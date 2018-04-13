@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for BOM Progressive Scrap Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Options" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This element contains options which will affect the way in which the query works as well as what is to be returned.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:all>
+							<xsd:element name="QuantityBasis" default="M" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the quantity you wish to use as the base for the query calculations. 
+
+Select M if you wish to use the manufacturing quantity basis defined against the parent stock code (EBQ or Pan).
+
+Select S if you wish to use a single unit (i.e. 1)
+
+Select E if you wish to use the quantity entered against each stock code in the list.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="M"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="E"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GrossOrNet" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates whether the quantity to use is net or gross 
+
+Enter N to indicate Net (quantity to make) 
+Enter G to indicate Gross (quantity before progressive scrap is applied).
+</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="G"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeComponents" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include information on the components attached (Y - Yes, N - No). The default is No.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeOperations" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include information on operations attached  (Y - Yes, N - No). The default is Yes.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeCustomForms" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include custom form fields attached to components or operations if they are included (Y - Yes, N - No). The default is No.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeNarrations" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include custom narrations attached to components or operations if they are included (Y - Yes, N - No). The default is No.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeCoProduct" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include Co-Product information. (Y - Yes, N - No). The default is No.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:pattern value="N"/>
+										<xsd:pattern value="Y"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CostBasis" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This specifies your costing preference to calculate costs against components and operations if they are included (N - None, B - Bom, W - What-if,)</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="B"/>
+										<xsd:enumeration value="W"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The Stylesheet to be applied</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UseWhRoute" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This specifies whether or not to use the route (and component warehouse) defined against the warehouse control. (Y - Yes, N - No) The default is No</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UnitOfMeasure" default="S">
+								<xsd:annotation>
+									<xsd:documentation>Select 'S' for stocking u/m, 'A' for alternate u/m, 'O' for other u/m or 'M' for manufacturing u/m. Quantities and times entered will be according to the unit of measure selected.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="O"/>
+										<xsd:enumeration value="M"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for each parent item being queried.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:all>
+							<xsd:element name="StockCode">
+								<xsd:annotation>
+									<xsd:documentation>The parent stock code to use for the query</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Version" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The ECC revision to use for the query. This is ignored if the item is not ECC controlled. If the parent stock code  is ECC controlled and this is not submitted then the query will default to the current revision for the parent.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="3"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Release" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The ECC release to use for the query. This is ignored if the item is not ECC controlled. If the parent stock code  is ECC controlled and this is not submitted then the query will default to the current release for the parent.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="3"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Route" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The BOM route to use for the query. This is ignored if alternate routes are not in use. If not submitted then this will default to route 0.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Quantity" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If quantity basis in options is set to entered quantity (E) then this is the quantity that will be used when processing.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="12"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Warehouse" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The warehouse to use for the query. If you have the option 'UseWhRoute' set to 'Y' then the object will pick up the route (and component warehouse) defined against this warehouse. It is important to note that the parent stock code must be defined against this warehouse. If it is left as spaces then the parent stock code's warehouse to use will be applied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

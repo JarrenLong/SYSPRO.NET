@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Inspection Accept Into Stock Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostWIPInspectAccept">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="Item" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This element contains information to maintain the quantity accepted into stock for a WIP inspection reference.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:choice maxOccurs="unbounded">
+							<xsd:element name="InspectionReference">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the WIP inspection reference for which you want to  accept a quantity into stock. This is a mandatory element. The format is up to 9 characters, either alphanumeric or numeric depending on the key configuration option for WIP inspection reference within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="9"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StockCode">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the stock code for which you want accept a quantity into stock. This is a mandatory element. The format is up to 30 characters alphanumeric or 15 characters numeric depending on the key configuration option for stock code within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Lot" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the lot for which you want to accept a quantity into stock when the stock item is lot traceable. If the WIP setup option Capture lots at end of WIP inspection has been selected then this element must contain the lot that you would like to allocate the stock to, thus this element will only be applicable when auto-lot numbering has not been selected. If the WIP setup option Capture lots at end of WIP inspection has not been selected then this element must contain the lot that was entered when the stock was taken into WIP inspection. The format is up to 10 characters, either alphanumeric or numeric depending on the key configuration option for lot within SYSPRO. If the WIP setup option Capture lots at end of WIP inspection has been selected and auto-lot numbering is not in use and the Lot traceability setup option Lot number to be equal to job number has been selected, then the lot will default to the job saved against the WIP inspection reference if the lot has not been supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LotExpiryDate" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element indicates the expiry date of a new lot number. This element is only applicable when the item is lot traceable and the WIP setup option Capture lots at end of WIP inspection has been selected. The expiry date must be in a CCYY-MM-DD format.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UnitOfMeasure" default="S">
+								<xsd:annotation>
+									<xsd:documentation>Select 'S' for stocking u/m, 'A' for alternate u/m, 'O' for other u/m or 'M' for manufacturing u/m. Quantities and times entered will be according to the unit of measure selected.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="S"/>
+										<xsd:enumeration value="A"/>
+										<xsd:enumeration value="O"/>
+										<xsd:enumeration value="M"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AcceptQuantity">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the quantity that must be accepted into stock from WIP inspection. The format is up to 12 characters, signed numeric with 7 integers and 3 decimals.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="12"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Concession" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the concession number for the receipt transaction for the lot. The forrmat is up to 10 characters, alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="10"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Notation" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates notation saved against the journal. The format is up to 60 characters, alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="60"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LedgerCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the ledger code that will be credited with the transaction value if Work in Progress is integrated to general ledger. Will default to the WIP Inspection ledger account. You will not be able to change this ledger account if you do not have operator access for the Activity WIP Inspection Change accept ledger. The format is up to 15 characters, alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="15"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LedgerPassword" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This indicates the ledger code password if required when changing the ledger code from the default WIP Inspection account. The format is up to 4 characters, alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Journal" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This is the journal number to which the transaction journal entries generated will be added. It must be valid for the current posting period and warehouse and may not have been printed already. If not supplied a new journal will be created. The format is up to 5 characters numeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="5"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AcceptIntoAlternateWarehouse" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates that you want to accept the goods into an alternate warehouse than the warehouse defined for the job. Possible values: Y (Yes) or N (No). Default to: N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AlternateWarehouse" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates the warehouse into which the goods should be receipted when the warehouse differs from the warehouse defined for the job. The format is up to 2 characters alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="2"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AcceptIntoAlternateBin" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates that you want to accept the goods into an alternate bin location than the bin location defined when the item was taken into WIP inspection. This element is only applicable when multiple bins are required for the warehouse. Possible values: Y (Yes) or N (No). Default to: N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AlternateBin" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates the bin location into which the goods should be receipted when the bin location differs from the bin location defined when the item was taken into WIP inspection. This element is only applicable when the AcceptIntoAlternateBin element contains 'Y' and multiple bins are required for the warehouse. The format is up to 6 characters alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="6"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AcceptAsAlternateStock" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates that you want to accept the goods into stock as an alternate stock code. Possible values: Y (Yes) or N (No). Default to: N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AlternateStockCode" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates the alternate stock code as which you want to accept the goods into stock. Selecting alternate stock code is only allowed if the item is not lot traceable or multiple stock codes can use the same lot number (lot traceability setup). The Alternate stock code elements will be ignored for serialized items if the WIP setup option Capture serial numbers after Inspection has not been selected. Please note that alternate stock codes that are ECC controlled items will be taken into stock at the current revision and release. The format is up to 30 characters alphanumeric or up to 15 characters numeric depending on the key configuration option for stock code within SYSPRO.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncreaseSalesOrderQuantity" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is optional. If the Job is linked to a Sales Order and the quantity to accept into stock is greater than the quantity on back order against the sales order, the order quantity will be increased to the quantity accepted into stock, if this element is set to Y. Possible values: Y (yes) or N (no). Default to: N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SalesOrderComplete" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>If accepting a quantity into stock for a job that is attached to a sales order and the quantity being accepted into stock does not satisfy the sales orders back order quantity then this element can be set to Y to set the sales order to be complete (i.e. reduce the sales order quantity to equal the quantity shipped). Possible values: Y (yes) or N (no). Default to: N.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UseSingleTypeABCElements" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element enables you to indicate whether manufacturing ABC elements defined with a calculation method of single must be included in the calculation of costs. This element is only required if ABC costing is in use. If not supplied and ABC costing is required, it defaults to N. Possible values: Y (yes) or N (no).</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SelectAvailableSerials" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is optional. When accepting a serialized stock item into stock from WIP inspection and this element is set to Y, the inspected serial numbers available for the stock item being processed are used until the quantity supplied is satisfied. This is only applicable to Manual serial items and when the WIP setup option Capture serials at end of WIP inspection has not been selected. Valid values are N and Y. Default is N. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Serials" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>A set of serial numbers and relevant information must be supplied if stock item specified is serialized.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="SerialNumber">
+											<xsd:annotation>
+												<xsd:documentation>This indicates the serial number that you want to accept into stock. You may only select serials that were taken into inspection for this WIP inspection reference if the WIP setup option Capture serials at end of WIP Inspection has not been selected, else the serial allocation will work as normal. The format is up to either 20 characters alphanumeric or 15 characters numeric depending on the key configuration for serials within SYSPRO.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="20"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element ref="SerialQuantity" minOccurs="0"/>
+										<xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+										<xsd:element ref="SerialLocation" minOccurs="0"/>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="SerialRange" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>The contents of this node is used to specify a prefix and suffix or starting serial number for a range of new serial numbers to be generated. This element group is only valid when the WIP setup option Capture serials at end of WIP inspection has been selected and when processing receipts for manual serialized stock items. It has two formats, depending on the serial key type. If serial numbers are alphanumeric, a prefix and a suffix need to be supplied. If serial numbers are numeric, a starting serial number is required.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:all>
+										<xsd:element name="SerialPrefix" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element specifies the prefix to be used when generating a range of alphanumeric serial numbers. Prefix + suffix cannot exceed the size of the serial number key which is 20 characters. This element is mandatory for alphanumeric serial numbers. The format is up to 15 characters alphanumeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SerialSuffix" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element specifies the suffix to be used when generating a range of alphanumeric serial numbers. The suffix element must be numeric. Prefix + suffix cannot exceed the size of the serial number key which is 20 characters. This element is mandatory for alphanumeric serial numbers. The format is up to 15 characters numeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StartSerialNumber" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element specifies the starting serial number when generating a range of numeric serial numbers. This element is mandatory for numeric serial numbers. The format is up to 15 characters numeric.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="15"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element ref="SerialQuantity"/>
+										<xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+										<xsd:element ref="SerialLocation" minOccurs="0"/>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="SetAllocationComplete" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element allows you to set the master allocation linked to a sub job to be complete/incomplete when all WIP inspection references for the sub job are complete and the sub job itself is complete. Possible values 'Y' - set master allocation to be complete or 'N' - set master allocation to be incomplete. The default is 'Y'.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SerialExpiryDate">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the expiry date of a new serial number or range of serial numbers being accepted into stock. The expiry date must be in a CCYY-MM-DD format. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="10"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SerialLocation">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the location of the serial number or range of serial numbers being accepted into stock. The format is up to 8 characters alphanumeric.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="8"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SerialQuantity">
+		<xsd:annotation>
+			<xsd:documentation>This element is only applicable for batch serialized items and indicates the quantity that will be taken into stock for the serial or when supplying a range of serials this element specifies the total quantity to be received for the specified range. The format is up to 11 characters numeric with 7 integers and 3 decimals.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="11"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

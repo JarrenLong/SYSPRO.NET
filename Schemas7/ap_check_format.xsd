@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the AP Check Format Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>The root element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of available options</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Bank"/>
+				<xsd:element ref="DefaultFormat"/>
+				<xsd:element ref="DocumentRequired"/>
+				<xsd:element ref="RemittancePrintMethod"/>
+				<xsd:element ref="EFTRemittancePrintMethod"/>
+				<xsd:element ref="CheckPrintMethod"/>
+				<xsd:element ref="XslStyleSheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Bank">
+		<xsd:annotation>
+			<xsd:documentation>This indicates the code of the bank for which you want to print the check and/or remittance format(s). Only a single bank is allowed and it is mandatory. Bank code passed by another program.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=ApBank;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefaultFormat">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether the format saved against the selected bank should be used. Y-Yes, N-No. Default -Y.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DocumentRequired">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether you want to print remittance only, or both remittance and check formats. B-Both remittance and check, R-remittance only. Default-B.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;R=Remittance only;B=Both remittance and check"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="R"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RemittancePrintMethod">
+		<xsd:annotation>
+			<xsd:documentation>These options enable you to select the method by which you want to print remittances for the selected bank. N-Standard document, W-Word document, P-SRS document. Default-N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=Standard document;W=Word document;P=SRS document"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EFTRemittancePrintMethod">
+		<xsd:annotation>
+			<xsd:documentation>These options enable you to select the method by which you want to print EFT remittances for the selected bank. S-Separate remittance for EFT, C-Same as check remittance, W-Print EFT remittance using MS Word, P-Print EFT remittance using SRS. Default-S.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;C=Same as check remittance;S=Separate remittance for EFT;W=Print EFT remittance using MS Word;P=Print EFT remittance using SRS"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CheckPrintMethod">
+		<xsd:annotation>
+			<xsd:documentation>These options enable you to select the method by which you want to print checks for the selected bank. N-Standard document, S-SRS document. Default-N.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=Standard document;S=SRS document"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStyleSheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

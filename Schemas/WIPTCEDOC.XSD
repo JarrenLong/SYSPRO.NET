@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Expected Job Cost Recalculation Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="PostExpectedCosts">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="Item">
+					<xsd:annotation>
+						<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:all>
+							<xsd:element name="Job">
+								<xsd:annotation>
+									<xsd:documentation>This element is mandatory. It specifies the job for which the expected material and labor costs are being recalculated. The format is 8 characters alphanumeric or 8 characters numeric depending on the key configuration for job within SYSPRO. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="8"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UpdateCurrentCost" default="Y" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates if the current expected labor and material costs held against the job header must be updated with the new costs. Possible values: Y - update current expected labor and material costs or N - only recalculate and output current expected labor and material costs. Default to Y if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UpdateOriginalCost" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates if the original expected labor and material costs held against the job header must be updated with the new costs. This element only applies when you have selected to update the current expected costs for the job. This only applies to jobs that have not been confirmed yet. Possible values: Y - update original expected labor and material costs or N - do not update original expected labor and material costs. Default to N if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UpdateHierarchyCost" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates if the expected costs against associated hierarchies must be updated with the new costs. This element only applies when you have selected to update the current expected costs for the job. If this element does not contain Y then the Job element should not contain a hierarchical job. Possible values: Y - update expected costs against associated hierarchies or N - do not update expected costs against associated hierarchies. Default to N if not supplied.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						   <xsd:element name="IncludeConfirmedJobs" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates if the job has been confirmed then the current costs will be updated. Yes to include - Y and No to exclude - N</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>						
+						   <xsd:element name="UpdateCostOfSales" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Indicates if the job is non stocked, not hierarchical, not confirmed and linked to a valid sales order, then the sales order's cost of sales will be updated. Yes to update cost of sales - Y and No not to update cost of sales - N</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>						
+						</xsd:all>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

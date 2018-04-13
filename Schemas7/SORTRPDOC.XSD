@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Set Picking Status Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostSoLinePickStatus">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information of sales order whose line status must be changed.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="SalesOrder">
+                <xsd:annotation>
+                  <xsd:documentation>The number of the sales order whose line status must be changed. It must be supplied, and must be a valid sales order in SYSPRO. The format is either numeric or alphanumeric, depending on the configuration option within SYSPRO.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The sales order line to be processed. If supplied, then the line must be valid for the sales order, and must be a merchandise line.  If not supplied, then the entire order will be considered.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="NewStatus">
+                <xsd:annotation>
+                  <xsd:documentation>This indicates the new status of the order lines.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="2"/>
+                    <xsd:enumeration value="3"/>
+                    <xsd:enumeration value="4"/>
+                    <xsd:enumeration value="6"/>
+                    <xsd:enumeration value="7"/>
+                    <xsd:enumeration value="8"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

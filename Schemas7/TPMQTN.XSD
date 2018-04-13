@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     This is an example XML instance to demonstrate
+     use of the TPM Promotion Detail Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Range of customers to be selected.
+Valid values are 'A' - All (default), 'R' - Range and 'S' - Single'
+
+Enter a range of customers if Range selected.
+
+Enter a single customer if Single selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Customer"/>
+				<xsd:element ref="Promotion"/>
+				<xsd:element ref="SalesOrder"/>
+				<xsd:element ref="StockCode"/>
+				<xsd:element ref="Invoice"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeAccrualPromotions" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Include Accrual promotions.
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeFreeGoodsPromotions" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Include Free Goods promotions.
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeOffInvoicePromotions" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Include Off Invoice promotions.
+Valid values are 'Y' - Yes (default) and 'N' - No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Invoice">
+		<xsd:annotation>
+			<xsd:documentation>Range of invoices to be selected.
+Valid values are 'A' - All (default), 'R' - Range and 'S' - Single'
+
+Enter a range of invoices if Range selected.
+
+Enter a single invoice if Single selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>List of options required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Sequence"/>
+				<xsd:element ref="IncludeOffInvoicePromotions"/>
+				<xsd:element ref="IncludeAccrualPromotions"/>
+				<xsd:element ref="IncludeFreeGoodsPromotions"/>
+				<xsd:element ref="XslStylesheet"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Promotion">
+		<xsd:annotation>
+			<xsd:documentation>Range of promotions to be selected.
+Valid values are 'A' - All (default), 'R' - Range and 'S' - Single'
+
+Enter a range of promotions if Range selected.
+
+Enter a single promotion if Single selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>Query on Promotion Detail transactions.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SalesOrder">
+		<xsd:annotation>
+			<xsd:documentation>Range of sales orders to be selected.
+Valid values are 'A' - All (default), 'R' - Range and 'S' - Single'
+
+Enter a range of sales orders if Range selected.
+
+Enter a single sales order if Single selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Sequence" default="I">
+		<xsd:annotation>
+			<xsd:documentation>Sequence required.
+Valid values are 'I' - Invoice (default), 'C' - Customer and 'P' - Promotion.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Range of stock codes to be selected.
+Valid values are 'A' - All (default), 'R' - Range and 'S' - Single'
+
+Enter a range of stock codes if Range selected.
+
+Enter a single stock code if Single selected.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" type="xsd:string" use="optional" default="A"/>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

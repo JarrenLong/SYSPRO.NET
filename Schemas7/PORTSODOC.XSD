@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Purchase Order Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PurchaseOrderOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General" minOccurs="0"/>
+        <xsd:element ref="Options" minOccurs="0"/>
+        <xsd:element ref="History" minOccurs="0"/>
+        <xsd:element ref="GRN" minOccurs="0"/>
+        <xsd:element ref="Details" minOccurs="0"/>
+        <xsd:element ref="Requisition" minOccurs="0"/>
+        <xsd:element ref="LCT" minOccurs="0"/>
+        <xsd:element ref="Numbering" minOccurs="0"/>
+        <xsd:element ref="CurrentMonth" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DefPriceMethodPo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default pricing method for the purchase order entry. (N - None, C - Current inventory cost price, L - Last price paid to supplier, P - Purchase price). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=None;C=Current inventory cost price;L=Last price paid to supplier;P=Purchase price;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseAltUomPOQty">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use the alternate unit of measure for the order quantity. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowMntCompPo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow maintenance of completed purchase orders. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseAltDocPrice">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use the alternate document price. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetainPoHdrWithoutLines">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to retain the order when it is created without lines. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclPONmCostInLastCost">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to include the non-merchandise costs in last cost. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ShipInstrDefMsg">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default shipping instructions message. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LiableForScrap">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether you can choose the supplier who is liable for scrapped items for purchase orders in inspection. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DefPriceMethodPo"/>
+        <xsd:element ref="UseAltUomPOQty"/>
+        <xsd:element ref="AllowMntCompPo"/>
+        <xsd:element ref="UseAltDocPrice"/>
+        <xsd:element ref="RetainPoHdrWithoutLines"/>
+        <xsd:element ref="InclPONmCostInLastCost"/>
+        <xsd:element ref="WarnAcceptableVarExceed"/>
+        <xsd:element ref="ShipInstrDefMsg"/>
+        <xsd:element ref="LiableForScrap"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="InsertPOAddText">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to insert purchase order additional text automatically. (N - No, Y - Yes). If no value if supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InsertDangerGdsTextInPO">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to insert dangerous goods text automatically. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SetPoStatusAfterMaint">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to set order status to 'ready to print' after maintenance. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PlusLessReqPo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the plus/less wording is required on the purchase order print. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RestrictOrdToSingleWh">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to restrict orders to a single warehouse and use this warehouse address for purchase order delivery. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed. If this element contains Y, the warehouse will not be permitted to be entered per purchase order line. This must be set to Y if 'PONumMethod' is W or P.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowMntDelAddr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow maintenance of the delivery address. (Option updated with 0 when N and 1 when Y). If 'RestrictOrdToSingleWh' is set to N, then this element must also be set to N. If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowMntExchRate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow entry/maintenance of the exchange rate. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ValidateBuyerPoCreated">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates when/if to validate the buyer when creating the purchase order header. (N - No, M - Mandatory, E - If entered). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;M=Mandatory;E=If entered;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ManPoWhenBpoExists">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the maintenance rule indicating whether a manual entry is allowed for normal purchase order lines when a Blanket PO contract exists. (C - Base on contract, N - Not allowed, Y - Allowed). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Base on Contract;N=Not Allowed;Y=Allowed;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefaultTaxStatus">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the default tax status. (E - Exempt, N - Taxable). If no value is supplied then the default value of E will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="E=Exempt;N=Taxable;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="InsertPOAddText"/>
+        <xsd:element ref="InsertDangerGdsTextInPO"/>
+        <xsd:element ref="SetPoStatusAfterMaint"/>
+        <xsd:element ref="PlusLessReqPo"/>
+        <xsd:element ref="RestrictOrdToSingleWh"/>
+        <xsd:element ref="AllowMntDelAddr"/>
+        <xsd:element ref="AllowMntExchRate"/>
+        <xsd:element ref="AllowNewLinBpo"/>
+        <xsd:element ref="ValidateBuyerPoCreated"/>
+        <xsd:element ref="ManPoWhenBpoExists"/>
+        <xsd:element ref="CustActionForPoFromSo"/>
+        <xsd:element ref="DefaultTaxStatus"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MaintHistOfReceipts">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to maintain a history of receipts by supplier/stock code. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowIncomplShipArchive">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow incomplete shipment lines to be designated as ready for archiving. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowAutoRemCompLines">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow for automatic removal of completed lines when purging . (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DelHistRecOrderPurge">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates how to delete history records in the order purge. (N - By number, D - By date). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=By Number;D=By Date;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MaxRecToRetain">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the maximum number of receipt records to retain. If no value is supplied then the default value of all 9's will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MthsRetMatchedGrn">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of months to retain matched GRN's. If no value is supplied then the default value of 1 will be assumed. This element must be between 1 and 60 inclusive or 99 only.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetCompPo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain completed purchase orders. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetReqLines">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain requisition lines.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetCompShipArch">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain completed shipments before archiving. If no value is supplied then the default value of all 9's will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetArchShip">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain archived shipments before deleting. If no value is supplied then the default value of all 9's will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetGrnJnl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain GRN journals.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetGrnPrVar">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain GRN price variances.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysRetCompBpoContr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the number of days to retain completed Blanket Purchase Order contracts. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="HistRetExprInMonths">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether purchase order history retentions are to held in months. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="History">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="MaintHistOfReceipts"/>
+        <xsd:element ref="AllowIncomplShipArchive"/>
+        <xsd:element ref="AllowAutoRemCompLines"/>
+        <xsd:element ref="DelHistRecOrderPurge"/>
+        <xsd:element ref="MaxRecToRetain"/>
+        <xsd:element ref="MthsRetMatchedGrn"/>
+        <xsd:element ref="DaysRetCompPo"/>
+        <xsd:element ref="DaysRetReqLines"/>
+        <xsd:element ref="DaysRetCompShipArch"/>
+        <xsd:element ref="DaysRetArchShip"/>
+        <xsd:element ref="DaysRetGrnJnl"/>
+        <xsd:element ref="DaysRetGrnPrVar"/>
+        <xsd:element ref="DaysRetCompBpoContr"/>
+        <xsd:element ref="HistRetExprInMonths"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GrnSuspReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the GRN suspense system required. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GrnNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the GRN numbering method to be used. (N - Manual, Y - By company, W - By warehouse, P - By warehouse with prefix, B - By branch, R - By branch with prefix). If no value is supplied then the default value of N will be assumed. This element only applies if 'GrnSuspReq' is set to Y. May only be P if the PO key type is alphanumeric. May only be Y or W or B if the PO key type is numeric.]]></xsd:documentation>
+      <xsd:appinfo source="N=Manual;Y=By company;W=By warehouse;P=By warehouse with prefix"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoGrnForPoLine">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to apply automatic GRN numbering for each new purchase order line. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This element only applies if 'GrnSuspReq' is set to Y. May not be Y if 'GrnNumMethod' is set to N.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoGrnForPoLineRecAll">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to apply GRN numbering for each new line when receipting all. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. The element only applies if both 'GrnSuspReq' and 'AutoGrnForPoLine' are set to Y. If 'AutoGrnForPoLine' is set to N, this element must also be set to N. May not be Y if 'GrnNumMethod' is set to N.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoGrnForShipment">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to apply automatic GRN numbering by shipment. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This element only applies if 'GrnSuspReq' is set to Y. May not be Y if 'GrnNumMethod' is set to N.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CheckDuplGrnNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to check for duplicate GRN's in GRN numbering. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default of N will be assumed. This element only applies if 'GrnSuspReq' is set to Y. If 'GrnSuspReq' is set to N then this element must also be set to N.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowNegRecGrnMatched">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow negative receipts when the matching GRN is reversed. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed. This element only applies if 'GrnSuspReq' is set to Y.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="GRN">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="GrnSuspReq"/>
+        <xsd:element ref="GrnNumMethod"/>
+        <xsd:element ref="AutoGrnForPoLine"/>
+        <xsd:element ref="AutoGrnForPoLineRecAll"/>
+        <xsd:element ref="AutoGrnForShipment"/>
+        <xsd:element ref="CheckDuplGrnNum"/>
+        <xsd:element ref="AllowNegRecGrnMatched"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DefFreightChgCurr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the default currency of the freight charges. (L - Local currency, F - Foreign currency). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="L=Local currency;F=Foreign currency;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefMiscChgCurr">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This indicates the default currency of the miscellaneous charges. (L - Local currency, F - Foreign currency). If no value is supplied then the default value of L will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="L=Local currency;F=Foreign currency;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclFreightMiscInXml">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to include freight and miscellaneous lines in the XML export. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DaysEarlyLateSupply">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the receipt exception rules for the number of days permitted for early/late supply. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="QtyOverUnderPerc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the receipt exception rules for an acceptable quantity over/under the supply percentage. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AcceptCostPercVarExpCost">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the acceptable cost percentage variance expected for the accounts payable posting. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AcceptCostPercVarWhCost">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the acceptable cost percentage variance to update warehouse costs. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Details">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DefFreightChgCurr"/>
+        <xsd:element ref="DefMiscChgCurr"/>
+        <xsd:element ref="InclFreightMiscInXml"/>
+        <xsd:element ref="DaysEarlyLateSupply"/>
+        <xsd:element ref="QtyOverUnderPerc"/>
+        <xsd:element ref="AcceptCostPercVarExpCost"/>
+        <xsd:element ref="AcceptCostPercVarWhCost"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReqNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the requisition numbering method required. (M - Manual, A - Automatic). If no value is supplied then the default value of M will be assumed. May not be A if the requisition key is alphanumeric.]]></xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SendConfOfRecToOrig">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the type of confirmation and notification receipt to be sent to originator. (N - Only confirmation, Y - Only one, A - Always). If no value is supplied then the default value of N will be assumed. This field starts out as spaces and is updated when the setup is run for the first time.]]></xsd:documentation>
+      <xsd:appinfo source="N=Only confirmation;Y=Only one;A=Always;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UpdCapexPoMaint">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether and how to update capex during the purchase order maintenance. (C - Only when cancelling, Y - Yes, N - No). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="C=Only when cancelling;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CheckMaxValueAtLevel">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates at what level the maximum value is to be checked. (L - Line level, R - Requisition level). If no value is supplied then the default value of L will be assumed. May not be set to R if 'ApprovalLevelChecking' is set to P.]]></xsd:documentation>
+      <xsd:appinfo source="L=Line level;R=Requisition level;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CheckMaxValueAtTime">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates at what time the maximum value is to be checked. (E - Time of entry, A - Time of approval). If no value is supplied then the default value of E will be assumed. May not be set to E if the 'ApprovalLevelChecking' is not set to U.]]></xsd:documentation>
+      <xsd:appinfo source="E=Time of entry;A=Time of approval;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MinCapexReqLnValue">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the minimum capex requisition line value. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999999999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MinReqLnValueForRouting">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the minimum requisition line value for checking routing. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0.00"/>
+        <xsd:maxInclusive value="999999999.99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MandUserCode1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the mandatory user code 1 checked in routing. This element is optional. If this element has no value, then the next 3 mandatory codes must also have no value. If this element contains a value, then 'MandUserCode2' should contain a value.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MandUserCode2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the mandatory user code 2 checked in routing. This element is optional. If this element has no value, then the next 2 mandatory codes must also have no value. If this element contains a value, then 'MandUserCode3' should contain a value.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MandUserCode3">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the mandatory user code 3 checked in routing. This element is optional. If this element has no value, then the next mandatory code must also have no no value. If this element contains a value, then 'MandUserCode4' should contain a value.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MandUserCode4">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the mandatory user code 4 checked in routing. This element is optional.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StoresRequisitions">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the stores requisitions. (N - Not required, I - Create issue, T - Create transfer, R - Request at run time). If no value is supplied then the default value of N will be assumed. If Goods in Transit tracking is not in use then this element must be set to N.]]></xsd:documentation>
+      <xsd:appinfo source="N=Not required;I=Create issue;T=Create transfer;R=Request at run time;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="R"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NarrNotMandatory">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the routine narrative is not mandatory. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RecordApprovals">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to record approvals for routing. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApprovalLevelChecking">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the type]]></xsd:documentation>
+      <xsd:appinfo source="U=User;G=Group;P=Product class withing group;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="G"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionBudgetsReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the requisition budgets are required. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed. May not be Y if not all requisition users contain a group.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionBudgetsLevel">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the level of the requisition budgets. (S - At stock code level, P - At product class level). If no value is supplied then the default value of S will be assumed. Only applies if 'RequisitionBudgetsReq' is set to Y. This field starts out as spaces and is updated when the setup is run for the first time.]]></xsd:documentation>
+      <xsd:appinfo source="S=At stock code level;P=At product class level;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RequisitionBudgetsTerms">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the terms of the requisition budgets. (V - Expressed in terms of value, Q - Expressed in terms of quantity). If no value is supplied then the default value of V will be assumed. Only applies if 'RequisitionBudgetsReq' is set to Y.]]></xsd:documentation>
+      <xsd:appinfo source="V=Expressed in terms of value;Q=Expressed in terms of quantity;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="Q"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Requisition">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReqNumMethod"/>
+        <xsd:element ref="SendConfOfRecToOrig"/>
+        <xsd:element ref="UpdCapexPoMaint"/>
+        <xsd:element ref="CheckMaxValueAtLevel"/>
+        <xsd:element ref="CheckMaxValueAtTime"/>
+        <xsd:element ref="MinCapexReqLnValue"/>
+        <xsd:element ref="MinReqLnValueForRouting"/>
+        <xsd:element ref="MandUserCode1"/>
+        <xsd:element ref="MandUserCode2"/>
+        <xsd:element ref="MandUserCode3"/>
+        <xsd:element ref="MandUserCode4"/>
+        <xsd:element ref="StoresRequisitions"/>
+        <xsd:element ref="NarrNotMandatory"/>
+        <xsd:element ref="RecordApprovals"/>
+        <xsd:element ref="ApprovalLevelChecking"/>
+        <xsd:element ref="RequisitionBudgetsReq"/>
+        <xsd:element ref="RequisitionBudgetsLevel"/>
+        <xsd:element ref="RequisitionBudgetsTerms"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AutoPromptBillNsLines">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to automatically prompt for a bill for non-stocked lines on purchase order for landed cost tracking. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclOtherCostsInLandedCost">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to include other costs when calculating new landed costs for landed cost tracking. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoPromptExchRate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to automatically prompt to establish exchange rates for landed cost tracking. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseFixedExchRate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use fixed exchange rates when establishing exchange rates for landed cost tracking. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AllowZeroPriceLines">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow lines with zero price to be attached to a shipment for landed cost tracking. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InclLandedCostInLastCost">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to include landed costs in last cost for landed cost tracking. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ConvertQtyToStockedUom">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to convert all quantities entered as alternate uom to stocking uom for landed cost tracking. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of  N will be assumed. Should not be Y if stocking quantities exist on the cost register. Set <CreateStockQtyOnCostReg> to Y is you want to create stocking quantities on the costing register.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UpdatePoDueDate">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to update the due date on the purchase order line when the vessel arrival date is updated. (Option updated with 0 when N and 1 when Y). If no value is supplied then the default value of  N will be assumed. Should not be Y if stocking quantities exist on the cost register.]]></xsd:documentation>
+      <xsd:appinfo source="N=No;Y=Yes;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoSetSoRecQtyEqual">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to automatically set the sales order when receipt quantity is equal to back order quantity. (P - Prompt, C - To complete, N - Not complete). If no value is supplied then the default value of P will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="P=Prompt;C=To complete;N=Not complete;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoSetSoRecQtyLess">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to automatically set the sales order when receipt quantity is less than the back order quantity. (P - Prompt, C - To complete, N - Not complete). If no value is supplied then the default value of P will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="P=Prompt;C=To complete;N=Not complete;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AutoSetSoRecQtyGreater">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to automatically update the sales order when receipt quantity is greater than the back order quantity. (P - Prompt, I - Increase sales order, L - Leave as is). If no value is supplied then the default value of P will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="P=Prompt;I=Increase sales order;L=Leave as is;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="LCT">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AutoPromptBillNsLines"/>
+        <xsd:element ref="InclOtherCostsInLandedCost"/>
+        <xsd:element ref="AutoPromptExchRate"/>
+        <xsd:element ref="UseFixedExchRate"/>
+        <xsd:element ref="AllowZeroPriceLines"/>
+        <xsd:element ref="InclLandedCostInLastCost"/>
+        <xsd:element ref="ConvertQtyToStockedUom"/>
+        <xsd:element ref="UpdatePoDueDate"/>
+        <xsd:element ref="AutoSetSoRecQtyEqual"/>
+        <xsd:element ref="AutoSetSoRecQtyLess"/>
+        <xsd:element ref="AutoSetSoRecQtyGreater"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PONumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the purchase order numbering method to use. (A - By company, M - Manual, W - By warehouse, P - By warehouse with prefix). If no value is supplied then the default value of A will be assumed. May not be W or P if 'RestrictOrdToSingleWh' is set to Y. May not be A or W if the PO key is alphanumeric. May not be P if the PO key is numeric.]]></xsd:documentation>
+      <xsd:appinfo source="A=By company;M=Manual;W=By warehouse;P=By warehouse ;with prefix;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="W"/>
+        <xsd:enumeration value="P"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextPONum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next purchase order number. Only applies if 'PONumMethod' is not set to Manual and should contain at least 1.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextGrnNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next GRN number.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NextReqNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next requisition number.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="9999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Numbering">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PONumMethod"/>
+        <xsd:element ref="NextPONum"/>
+        <xsd:element ref="NextGrnNum"/>
+        <xsd:element ref="NextReqNum"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PoCurrentYear">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the calendar year in which your current financial year ends. This element may not be altered if the inventory module is installed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="9999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PoCurrentMonth">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[The month in which your company is running in relation to the start of your financial year. This element may not be altered if the inventory module is installed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="1"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CurrentMonth">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PoCurrentYear"/>
+        <xsd:element ref="PoCurrentMonth"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AllowNewLinBpo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to allow items to be added to blanket purchase orders using the purchase order entry program. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustActionForPoFromSo">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This applies to purchase orders created from sales orders and enables you to indicate the action to take when appending a sales order back order line to a purchase order when the customer and/or customer purchase order numbers differ. (R - Retain customer & CSPO, C - Change customer & CSPO, I - Ignore customer & CSPO. If no value is supplied then thd default value of R will be assumed.]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="R"/>
+        <xsd:enumeration value="C"/>
+        <xsd:enumeration value="I"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WarnAcceptableVarExceed">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to warn when using the receipt all   function in the purchase order receipt program and  the acceptable variance is exceeded.(Y - Yes, N - No). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

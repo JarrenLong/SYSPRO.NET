@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--This is the schema for TPM Price Maintenance Business Object-->
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <xsd:element name="PostTPMPriceMaintenance">
+  <xsd:annotation>
+   <xsd:documentation>This it the root element</xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType>
+   <xsd:sequence>
+    <xsd:element name="Item">
+     <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required to post the transaction.</xsd:documentation>
+     </xsd:annotation>
+     <xsd:complexType>
+      <xsd:sequence>
+       <xsd:element default="S" name="PriceType">
+        <xsd:annotation>
+         <xsd:documentation>The type of trade promotion to be created, S - Stock code, P - Product class, G - Product group, D - Department</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+          <xsd:enumeration value="S" />
+          <xsd:enumeration value="P" />
+          <xsd:enumeration value="G" />
+          <xsd:enumeration value="D" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element name="KeyArea">
+        <xsd:annotation>
+         <xsd:documentation>Depends on the selection made in the �PriceType� element.  If S � Stock code is selected a valid stock code from inventory master must be supplied. If P � Product class is selected a valid product class must be supplied. If G � Product Group is selected a valid group must be supplied. If D � Department is selected a valid department must be supplied</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element default="P" name="PickupDelivery">
+        <xsd:annotation>
+         <xsd:documentation>Indicates if the price break applies to the delivery to, or the pickup by customers are applied, P - Pickup, D - Delivery</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+          <xsd:enumeration value="P" />
+          <xsd:enumeration value="D" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element name="Currency">
+        <xsd:annotation>
+         <xsd:documentation>You use this field to indicate the currency for which the prices apply. Only valid system formats are allowed</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element default=" " name="SelectionType">
+        <xsd:annotation>
+         <xsd:documentation>This element applies a type to apply the Selection area to, N - None, Space - All, A - Area, B - Buying group, C - Customer class</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+           <xsd:enumeration value=" " /> 
+          <xsd:enumeration value="A" />
+          <xsd:enumeration value="B" />
+          <xsd:enumeration value="C" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element name="SelectionArea">
+        <xsd:annotation>
+         <xsd:documentation>Depends on the selection made in the  �SelectionType� element. If A � Area is selected a valid area must be supplied. If B - Buying group a valid buying group must be supplied. If C - Customer class is selected a valid customer class must be supplied</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element default="Q" name="Basis">
+        <xsd:annotation>
+         <xsd:documentation>This option enables you to define the basis on which the pricing applies. Threshold prices are applied based on the option you select here. If you select Mass or Volume as the price basis, then you must ensure that the correct mass and volume is defined against each stock item to be sold. M - Mass, Q - Quantity, V - Volume</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+          <xsd:enumeration value="M" />
+          <xsd:enumeration value="Q" />
+          <xsd:enumeration value="V" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>
+       <xsd:element default="P" name="PriceDiscountFlag">
+        <xsd:annotation>
+         <xsd:documentation>This element is to select the type of discount to be applied. If P � Price the price is to be used. If D � Discount a percentage of discount to the selling price is to be used, P - Price, D - Discount</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+         <xsd:restriction base="xsd:string">
+          <xsd:whiteSpace value="preserve" />
+          <xsd:enumeration value="P" />
+          <xsd:enumeration value="D" />
+          <xsd:enumeration value="C" />
+         </xsd:restriction>
+        </xsd:simpleType>
+       </xsd:element>       
+       <xsd:element name="PriceBreakLine">
+         <xsd:annotation>
+           <xsd:documentation>This section enables you to define the quantity brackets and prices for the item(s).</xsd:documentation>
+         </xsd:annotation> 
+        <xsd:complexType>
+         <xsd:sequence>
+          <xsd:element name="Quantity">
+           <xsd:annotation>
+            <xsd:documentation>You use this field to indicate the quantity of items that you want to link to the price. This quantity/mass/volume is the upper limit for the price and reflects the quantity/mass/volume of purchase required to qualify for the bracket price. </xsd:documentation>
+           </xsd:annotation>
+           <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+             <xsd:whiteSpace value="preserve" />
+            </xsd:restriction>
+           </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Value">
+           <xsd:annotation>
+            <xsd:documentation>This field is to indicate the price or discount to apply to a Price Break.</xsd:documentation>
+           </xsd:annotation>
+           <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+             <xsd:whiteSpace value="preserve" />
+            </xsd:restriction>
+           </xsd:simpleType>
+          </xsd:element>
+         </xsd:sequence>
+        </xsd:complexType>
+       </xsd:element>
+      </xsd:sequence>
+     </xsd:complexType>
+    </xsd:element>
+   </xsd:sequence>
+  </xsd:complexType>
+ </xsd:element>
+</xsd:schema>

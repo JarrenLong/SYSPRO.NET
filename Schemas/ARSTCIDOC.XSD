@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the Post AP Registered Invoice Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="BankSelection" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>'A' indicates all banks and 'S' indticates a single bank. The default is 'S'.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Bank" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This the the bank code to be selected for integration if you have selected 'S' for the 'BankSelection' element. If you do not supply this element or you supply spaces in this element, the operator default bank will be used. </xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="CurrencySelection" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>'A' indicates all currencies and 'S' indicates a single currency. The default is 'A'. This element is only relevant if the SYSPRO setup option indicates that AR Foreign sales are required.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Currency" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is the currency to be selected for integration if you have selected 'S' for the 'Currency Selection'. This element is only relevant if the SYSPRO setup option indicates that AR Foreign sales are required.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="OperatorSelection" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>'A' indicates all operators and 'S' indicates a single operator. The default is 'A'.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Operator" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This allows you to select to integrate AR payments that have been captured by a specific operator.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostArToCashbookIntegration">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Item"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

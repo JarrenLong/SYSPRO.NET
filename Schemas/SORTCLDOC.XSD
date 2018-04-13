@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Add Credit Note Line Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AllowZeroQty" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Zero quantity allowed on credit note line.
+Valid values are 'N' - No (default) or 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinLocation">
+    <xsd:annotation>
+      <xsd:documentation>Bin location if multiple bins are in use for the warehouse entered.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinPieces">
+    <xsd:annotation>
+      <xsd:documentation>Number of pieces allocated to bin location entered, if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinQuantity">
+    <xsd:annotation>
+      <xsd:documentation>Quantity allocated to bin location entered.
+Not required if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="11"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BinUnits">
+    <xsd:annotation>
+      <xsd:documentation>Number of whole units allocated to bin location entered, if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Bins">
+    <xsd:annotation>
+      <xsd:documentation>This element initiates the data set for the aloocation of bins.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BinLocation"/>
+        <xsd:element ref="BinQuantity" minOccurs="0"/>
+        <xsd:element ref="BinUnits" minOccurs="0"/>
+        <xsd:element ref="BinPieces" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CommissionCode">
+    <xsd:annotation>
+      <xsd:documentation>Valid commission code.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreditNoteNumber">
+    <xsd:annotation>
+      <xsd:documentation>Valid number of an existing credit note, to which lines are to be added.
+Mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CreditReason">
+    <xsd:annotation>
+      <xsd:documentation>Valid credit note reason code. Optional, unless credit note reason required (Sales Order Setup).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustRequestDate">
+    <xsd:annotation>
+      <xsd:documentation>Customer request date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CustomerPartNumber">
+    <xsd:annotation>
+      <xsd:documentation>Customer part number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Description">
+    <xsd:annotation>
+      <xsd:documentation>Stock description if not using the standard stock code desription.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPercent1">
+    <xsd:annotation>
+      <xsd:documentation>Percentage of first level of discount.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPercent2">
+    <xsd:annotation>
+      <xsd:documentation>Percentage of second level of discount.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscPercent3">
+    <xsd:annotation>
+      <xsd:documentation>Percentage of third level of discount.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="6"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscValFlag">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate if discount is by value or unit. Valid values are ' ' - Spaces (default), 'V' - Value or 'U' - Unit.
+If 'V' or 'U', a DiscValue must be supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="U"/>
+        <xsd:enumeration value="V"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DiscValue">
+    <xsd:annotation>
+      <xsd:documentation>Discount value to be applied if DiscValFlag is 'V' or 'U'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="16"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This element initiates the data set for a credit note line.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CreditNoteNumber"/>
+        <xsd:element ref="CreditReason" minOccurs="0"/>
+        <xsd:element ref="NonStockedLine" minOccurs="0"/>
+        <xsd:element ref="StockCode"/>
+        <xsd:element ref="Description" minOccurs="0"/>
+        <xsd:element ref="Revision" minOccurs="0"/>
+        <xsd:element ref="Release" minOccurs="0"/>
+        <xsd:element ref="Warehouse"/>
+        <xsd:element ref="CustomerPartNumber" minOccurs="0"/>
+        <xsd:element ref="OrderQty" minOccurs="0"/>
+        <xsd:element ref="OrderUom" minOccurs="0"/>
+        <xsd:element ref="AllowZeroQty" minOccurs="0"/>
+        <xsd:element ref="Price" minOccurs="0"/>
+        <xsd:element ref="PriceUom" minOccurs="0"/>
+        <xsd:element ref="PriceCode" minOccurs="0"/>
+        <xsd:element ref="OrderUnits" minOccurs="0"/>
+        <xsd:element ref="OrderPieces" minOccurs="0"/>
+        <xsd:element ref="Serials" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="Lot" minOccurs="0"/>
+        <xsd:element ref="Bins" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="DiscPercent1" minOccurs="0"/>
+        <xsd:element ref="DiscPercent2" minOccurs="0"/>
+        <xsd:element ref="DiscPercent3" minOccurs="0"/>
+        <xsd:element ref="DiscValue" minOccurs="0"/>
+        <xsd:element ref="DiscValFlag" minOccurs="0"/>
+        <xsd:element ref="OverrideCalculatedDiscount" minOccurs="0"/>
+        <xsd:element ref="CustRequestDate" minOccurs="0"/>
+        <xsd:element ref="CommissionCode" minOccurs="0"/>
+        <xsd:element ref="ShipDate" minOccurs="0"/>
+        <xsd:element ref="UserDefined" minOccurs="0"/>
+        <xsd:element ref="UnitMass" minOccurs="0"/>
+        <xsd:element ref="UnitVolume" minOccurs="0"/>
+        <xsd:element ref="StockTaxCode" minOccurs="0"/>
+        <xsd:element ref="StockNotTaxable" minOccurs="0"/>
+        <xsd:element ref="StockFstCode" minOccurs="0"/>
+        <xsd:element ref="StockNotFstTaxable" minOccurs="0"/>
+        <xsd:element ref="NsProductClass" minOccurs="0"/>
+        <xsd:element ref="NsUnitCost" minOccurs="0"/>
+        <xsd:element ref="eSignature" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Lot">
+    <xsd:annotation>
+      <xsd:documentation>Valid lot number if stock item is lot-traceable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NonStockedLine" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether new line is a non-stocked line or not.
+Optional. Valid values are "N" - Stocked line (default) or 'Y' - Non-stocked line.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NsProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Valid product class for non-stocked lines.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NsUnitCost">
+    <xsd:annotation>
+      <xsd:documentation>Non-stocked item unit cost.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="16"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderPieces">
+    <xsd:annotation>
+      <xsd:documentation>Number of pieces on the credit note line, if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderQty">
+    <xsd:annotation>
+      <xsd:documentation>Quantity required on credit note line.
+If stock item is a unit-quantity type, enter quantity in OrderUnits and OrderPieces elements.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="11"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderUnits">
+    <xsd:annotation>
+      <xsd:documentation>Number of whole units on the credit note line, if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="7"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OrderUom">
+    <xsd:annotation>
+      <xsd:documentation>Order quantity unit of measure.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OverrideCalculatedDiscount">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate override of discount.
+Valid values are ' ' - Spaces, 'Y' - Yes or 'N' - No.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value=""/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Price">
+    <xsd:annotation>
+      <xsd:documentation>Price of stock item. Mandatory if manual pricing is used or there is no default price for the stock code entered and no PriceCode is entered.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PriceCode">
+    <xsd:annotation>
+      <xsd:documentation>Price code of price to use. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PriceUom">
+    <xsd:annotation>
+      <xsd:documentation>Unit of measure for price entered.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Valid product class.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Release">
+    <xsd:annotation>
+      <xsd:documentation>Release number if ECC stock item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Revision">
+    <xsd:annotation>
+      <xsd:documentation>Revision number if ECC stock item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SOCreditNoteLine">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SerialCreationDate">
+    <xsd:annotation>
+      <xsd:documentation>Serial creation date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialExpiryDate">
+    <xsd:annotation>
+      <xsd:documentation>Serial expiry date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialLocation">
+    <xsd:annotation>
+      <xsd:documentation>Serial location.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialNumber">
+    <xsd:annotation>
+      <xsd:documentation>Serial number to allocate quantity entered.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="20"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialPieces">
+    <xsd:annotation>
+      <xsd:documentation>Number of pieces to be allocated to serial number entered, if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialQuantity">
+    <xsd:annotation>
+      <xsd:documentation>Serial quantity to allocate to serial number entered.
+Not required if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="15"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialScrapDate">
+    <xsd:annotation>
+      <xsd:documentation>Serial scrap date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SerialUnits">
+    <xsd:annotation>
+      <xsd:documentation>Number of whole units to be allocated to serial number entered, if stock item is a unit-quantity type item.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="8"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Serials">
+    <xsd:annotation>
+      <xsd:documentation>This element initiates the data set for the aloocation of serials.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SerialNumber"/>
+        <xsd:element ref="SerialQuantity" minOccurs="0"/>
+        <xsd:element ref="SerialUnits" minOccurs="0"/>
+        <xsd:element ref="SerialPieces" minOccurs="0"/>
+        <xsd:element ref="SerialCreationDate" minOccurs="0"/>
+        <xsd:element ref="SerialExpiryDate" minOccurs="0"/>
+        <xsd:element ref="SerialScrapDate" minOccurs="0"/>
+        <xsd:element ref="SerialLocation" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ShipDate">
+    <xsd:annotation>
+      <xsd:documentation>Ship date. If supplied, must be in the format CCYY-MM-DD.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="10"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Valid stocked item code or non-stocked code if non-stocked line.
+Mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="30"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockFstCode">
+    <xsd:annotation>
+      <xsd:documentation>Federal sales tax code, if applicable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockNotFstTaxable">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate if credit note line is or not FST taxable.
+Valid values are 'N' - No or 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockNotTaxable">
+    <xsd:annotation>
+      <xsd:documentation>Flag to indicate if credit note line is or not taxable.
+Valid values are 'N' - No or 'Y' - Yes.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value=""/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="StockTaxCode">
+    <xsd:annotation>
+      <xsd:documentation>Tax code, if applicable.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnitMass">
+    <xsd:annotation>
+      <xsd:documentation>Unit mass.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="13"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnitVolume">
+    <xsd:annotation>
+      <xsd:documentation>Unit volume.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="13"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UserDefined">
+    <xsd:annotation>
+      <xsd:documentation>User-defined field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Valid warehouse code where given stock item is stocked or "**" if non-stocked line.
+Mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, for the eSignature system to accept the transaction as having been authenticated. The GUID format is in the format {36303032-3330-3031-3038-323434363433}, where the numbers can be replaced with any character. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained and presented.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="38"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

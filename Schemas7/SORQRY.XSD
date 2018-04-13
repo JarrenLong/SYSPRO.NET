@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Sales Order Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="IncludeBins" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include multiple bin lines (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCommentLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include comment lines (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCompletedLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include completed lines (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeFreightLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include freight lines (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeLots" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include lots (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeMiscLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include miscellaneous charge lines (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeNonStockedLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include lines containing non-stocked items (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeStockedLines" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include lines containing stocked items (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeAttachedItems" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to return attached items (Y - Yes, N - No). Default = N. If Yes, this will return the Job, Purchase order,Supply chain transfer or Requisition that has been created against the line. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeSerials" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include serial numbers (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The key to use for this query.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:all>
+        <xsd:element ref="SalesOrder"/>
+        <xsd:element ref="Invoice"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:all>
+        <xsd:element ref="IncludeStockedLines" minOccurs="0"/>
+        <xsd:element ref="IncludeNonStockedLines" minOccurs="0"/>
+        <xsd:element ref="IncludeFreightLines" minOccurs="0"/>
+        <xsd:element ref="IncludeMiscLines" minOccurs="0"/>
+        <xsd:element ref="IncludeCommentLines" minOccurs="0"/>
+        <xsd:element ref="IncludeCompletedLines" minOccurs="0"/>
+        <xsd:element ref="IncludeSerials" minOccurs="0"/>
+        <xsd:element ref="IncludeLots" minOccurs="0"/>
+        <xsd:element ref="IncludeBins" minOccurs="0"/>
+        <xsd:element ref="IncludeAttachedItems" minOccurs="0"/>
+        <xsd:element ref="IncludeCustomForms" minOccurs="0"/>
+        <xsd:element ref="ReturnLineShipDate" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+        <xsd:element ref="IncludeDetailLineCustomForms" minOccurs="0"/>
+        <xsd:element ref="IncludeValues" minOccurs="0"/>
+        <xsd:element ref="IncludeKitComponents" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReturnLineShipDate" default="Y">
+    <xsd:annotation>
+      <xsd:documentation>Option to return Line Ship Date regardless of Order Type. (Y - Yes, N - No)</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesOrder">
+    <xsd:annotation>
+      <xsd:documentation>Enter the sales order number to be queried</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the XSL Stylesheet to use</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Invoice">
+    <xsd:annotation>
+      <xsd:documentation>Enter the A/R invoice number, if the sales order to be queried has already been invoiced.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeCustomForms" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include custom forms (Y - Yes, N - No). Default = N. If Y - Yes, custom form fields and values defined against the sales order are returned.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeDetailLineCustomForms" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to include custom forms for detail lines (Y - Yes, N - No). Default = N. If Y - Yes, custom form fields and values defined against the sales order detail line are returned.  </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="IncludeValues">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not you want all order and line values to be returned. Valid values are 'N' (default) and 'Y'.
+Please note that values will only be returned if querying the primary order. MDN and reprint files are not catered for.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="IncludeKitComponents">
+    <xsd:annotation>
+      <xsd:documentation>Do you wish to return kit component lines (Y - Yes, N - No). Default = Y.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AR Invoice Discount Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Description">
+		<xsd:annotation>
+			<xsd:documentation> Invoice discount description</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscountPct1" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation> First discount percentage</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscountPct2" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Second discount percentage</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscountPct3" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Third discount percentage</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscBasis">
+		<xsd:annotation>
+			<xsd:documentation>Basis for discount (L - List price code; C - Cost plus; P - Specific price code)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Price code for when DisBasis = 'P'</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PriceFlag">
+		<xsd:annotation>
+			<xsd:documentation>Net/gross price flag (G = Gross price; N = Net price)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation> This element contains information to maintain a single invoice discount. 
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Description"/>
+				<xsd:element ref="DiscountPct1" minOccurs="0"/>
+				<xsd:element ref="DiscountPct2" minOccurs="0"/>
+				<xsd:element ref="DiscountPct3" minOccurs="0"/>
+				<xsd:element ref="DiscBasis" minOccurs="0"/>
+				<xsd:element ref="PriceCode" minOccurs="0"/>
+				<xsd:element ref="PriceFlag" minOccurs="0"/>
+				<xsd:element name="eSignature" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation> This element contains the key information required to maintain an invoice discount.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DiscountCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupArInvoiceDiscount">
+		<xsd:annotation>
+			<xsd:documentation> This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DiscountCode">
+		<xsd:annotation>
+			<xsd:documentation> Invoice term code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

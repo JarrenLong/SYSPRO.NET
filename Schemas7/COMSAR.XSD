@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Set Archive Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Entries">
+    <xsd:annotation>
+      <xsd:documentation>Specifies the Extension</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="RPT"/>
+        <xsd:enumeration value="PDF"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Function">
+    <xsd:annotation>
+      <xsd:documentation>Function that must be performed. AI - Add Archive Item AT - Add Archive Template PG - Purges Archived Documents</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="AI"/>
+        <xsd:enumeration value="AT"/>
+        <xsd:enumeration value="PG"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Guid" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Name of the archived file</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Month" type="xsd:byte">
+    <xsd:annotation>
+      <xsd:documentation>Month the archived item belongs to</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Parameters">
+    <xsd:annotation>
+      <xsd:documentation>Parents element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Function"/>
+        <xsd:element ref="Guid"/>
+        <xsd:element ref="Entries"/>
+        <xsd:element ref="Year"/>
+        <xsd:element ref="Month"/>
+        <xsd:element name="Name">
+          <xsd:annotation>
+            <xsd:documentation>The name of the archived report</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SetupComsar">
+    <xsd:annotation>
+      <xsd:documentation>Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Parameters"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Year" type="xsd:short">
+    <xsd:annotation>
+      <xsd:documentation>Year the archived item belongs to</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

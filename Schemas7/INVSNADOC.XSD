@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!--
+     Schema for Inventory narration setup Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupInvNarrations">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to maintain a contract. NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Key">
+                <xsd:annotation>
+                  <xsd:documentation>This is the key elements for narrations</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all>
+                    <xsd:element name="StockCode">
+                      <xsd:annotation>
+                        <xsd:documentation>The stock code for which the narration is held against</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="TextType" default="T" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the type of narration. Valid values are T - Technical spec, S - S/order additional text, P - P/order additional text, W - Job narrations, I - Inspection text, and D - Dangerous goods handling. Defaults to T.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="T"/>
+                          <xsd:enumeration value="S"/>
+                          <xsd:enumeration value="P"/>
+                          <xsd:enumeration value="W"/>
+                          <xsd:enumeration value="I"/>
+                          <xsd:enumeration value="D"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="LanguageCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the language code for the narration.                  Defaults to spaces which represents global. Valid values must be a valid code as defined in ADMSYSML.MAM</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Text">
+                <xsd:annotation>
+                  <xsd:documentation>This is the text for the narration. 
+                  This element contains a CDATA section which contains the object itself.  
+                  For the delete method this element is optional. 
+                  NOTE: The length of this field is based on plain text. 
+                  Due to formatting differences the field size may be shorter than actually stated ten thousand characters as tabs and line feeds are taken into account. 
+                  If the input text is ten thousand characters the program may produce an error as formatting is applied</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

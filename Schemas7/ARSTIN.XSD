@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for AR Invoice Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ApplyIfEntireDocumentValid" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether the entire document must be validated first before applying the function (N - apply function for each valid item, Y - all items must be valid before function is applied). If not supplied it defaults to 'Y'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IgnoreWarnings" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings such as "Document value is zero". (N - No, Y - Yes) If not supplied it defaults to 'N'. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Parameters">
+		<xsd:annotation>
+			<xsd:documentation>This contains parameters</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="IgnoreWarnings" minOccurs="0"/>
+				<xsd:element ref="ApplyIfEntireDocumentValid" minOccurs="0"/>
+				<xsd:element ref="ValidateOnly" minOccurs="0"/>
+				<xsd:element ref="PostingPeriod" minOccurs="0"/>
+				<xsd:element ref="AutomaticTaxCalculation" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostArInvoices">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Parameters"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostingPeriod" default="C">
+		<xsd:annotation>
+			<xsd:documentation>This specifies the period to which the transaction must be posted. Valid values are 'C' for current period, 'P' for previous period and 'B' for before previous period (i.e. prior period 2).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValidateOnly" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether to only validate the contents of the document. (N - validate and apply function, Y - only validate the document). If not supplied it defaults to 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AutomaticTaxCalculation" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates whether the tax value of the transaction is to be automatically calculated if it is not supplied in the 'TaxValue' element.
+Valid values are 'N'o and 'Y'es. The default is 'N'
+
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

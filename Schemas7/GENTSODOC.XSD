@@ -1,0 +1,1759 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the GL Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="GeneralLedgerOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="Budget" minOccurs="0"/>
+				<xsd:element ref="History" minOccurs="0"/>
+				<xsd:element ref="Periods" minOccurs="0"/>
+				<xsd:element ref="CurrentPeriod" minOccurs="0"/>
+				<xsd:element ref="Commitments" minOccurs="0"/>
+				<xsd:element ref="Journals" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DefaultBrowseSequence">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the default browse sequence. (L - Ledger Code Sequence, D - Ledger Description Sequence). If no value is supplied then a default value of L will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="L=Ledger;D=Description;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RevOutProvJnls">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you require provisional journals processed using the GL Journal Entry program to be reversed out automatically at period and/or year end. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalTaxFileReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you required a single tax report for sales transactions processed in the Accounts Receivable and Sales Order modules and for transactions posted in the Accounts Payable and Cash Book modules. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ShowAccBalInGlCodeBrowse">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you would like to restrict the viewing of account balances within the Ledger Code Maintenance listview. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PwdReqForIndivGlAccs">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you would like to prevent unauthorized postings being made to individual ledger accounts. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IntegFromSlAtGlCodeLevel">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you would like to define different levels of integration for specific ledger account codes. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AnalysisEntriesAssets">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to include asset accounts for analysis entries. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AnalysisEntriesLiabilities">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to include liability accounts for analysis entries. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AnalysisEntriesCapital">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to include capital accounts for analysis entries. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AnalysisEntriesRevenue">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to include revenue accounts for analysis entries. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AnalysisEntriesExpense">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to include expense accounts for analysis entries. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="General">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DefaultBrowseSequence"/>
+				<xsd:element ref="RevOutProvJnls"/>
+				<xsd:element ref="GlobalTaxFileReq"/>
+				<xsd:element ref="ShowAccBalInGlCodeBrowse"/>
+				<xsd:element ref="PwdReqForIndivGlAccs"/>
+				<xsd:element ref="IntegFromSlAtGlCodeLevel"/>
+				<xsd:element ref="AnalysisEntriesAssets"/>
+				<xsd:element ref="AnalysisEntriesLiabilities"/>
+				<xsd:element ref="AnalysisEntriesCapital"/>
+				<xsd:element ref="AnalysisEntriesRevenue"/>
+				<xsd:element ref="AnalysisEntriesExpense"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BudgetProcAtYearEnd">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether to leave budget information intact after the Year end function of the GL Period End program. (L - Retain current year budgets, Z - Zeroise current year budgets, C - Copy next year budgets to current year, O - Copy with zero budgets). If no value is supplied then a default value of L will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="L=Retain current year budgets;Z=Zeroise current year budgets;C=Copy next year budgets to current year;O=copy with zero budgets;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="Z"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="VariableBudgetSpread">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the level at which you require variable budget amounts to be spread across each period of the year. (C - by Company, G - by Group).  If no value is supplied then a default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=by Company;G=by Group;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="G"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ZeroiseGrpBudSpreads">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates when selecting to define variable budget spread by company if all group budget spread percentages should be set to zero. (Y - Yes, N -No).  If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BudgetReqYePeriod">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you require an additional budget period for the year end period. (Y - Yes, N - No).  If no value is supplied then a default value of Y will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for first alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for second alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for third alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for fourth alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for fifth alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for sixth alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for seventh alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescAltBud8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Description for eighth alternate budget.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Budget">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BudgetProcAtYearEnd"/>
+				<xsd:element ref="VariableBudgetSpread"/>
+				<xsd:element ref="ZeroiseGrpBudSpreads"/>
+				<xsd:element ref="BudgetReqYePeriod"/>
+				<xsd:element ref="DescAltBud1"/>
+				<xsd:element ref="DescAltBud2"/>
+				<xsd:element ref="DescAltBud3"/>
+				<xsd:element ref="DescAltBud4"/>
+				<xsd:element ref="DescAltBud5"/>
+				<xsd:element ref="DescAltBud6"/>
+				<xsd:element ref="DescAltBud7"/>
+				<xsd:element ref="DescAltBud8"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="YrsRetSummHistOfBals">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the number of years to retain summary history of balances. This number may be from 1 to 99 inclusive. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="YrsRetDetTranHist">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the number of years to retain detail transaction history. This number may be from 1 to 99 inclusive. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPerRetPostedJnls">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the number of periods to retain posted journals. This number may be from 1 to 99 inclusive. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPerRetExpRecJnls">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the number of periods to retain expired recurring journals. This number may be from 1 to 99 inclusive. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPeRetPostedGrpEnt">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the number of periods to retain posted group entries. This number may be from 1 to 99 inclusive. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="History">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="YrsRetSummHistOfBals"/>
+				<xsd:element ref="YrsRetDetTranHist"/>
+				<xsd:element ref="GlPerRetPostedJnls"/>
+				<xsd:element ref="GlPerRetExpRecJnls"/>
+				<xsd:element ref="GlPeRetPostedGrpEnt"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 1. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 1 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 2.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 2 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 3. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 3 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 4.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 4 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 5.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 5 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 6.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 6 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 7.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 7 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 8.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 8 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 9.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 9 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 10.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 10 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 11.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 11 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 12.This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 12 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 13. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 13 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrDatePeriod14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 14. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrFlagPeriod14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 14 status flag. (C - Closed, O - Open). This field is optional. By default, only the current month will have a status of O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 1. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 1 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 2. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 2 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 3. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 3 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 4. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 4 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 5. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 5 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 6. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 6 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 7. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 7 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 8. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 8 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 9. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 9 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 10. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 10 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 11. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 11 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 12. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 12 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 13. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 13 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevDatePeriod14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the previous period 14. This field is optional, but if supplied, must be in the format CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPrevFlagPeriod14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 14 status flag. (C - Closed, O - Open). This field is optional. This field will have default value of C.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Periods">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlCurrDatePeriod1"/>
+				<xsd:element ref="GlCurrFlagPeriod1"/>
+				<xsd:element ref="GlCurrDatePeriod2"/>
+				<xsd:element ref="GlCurrFlagPeriod2"/>
+				<xsd:element ref="GlCurrDatePeriod3"/>
+				<xsd:element ref="GlCurrFlagPeriod3"/>
+				<xsd:element ref="GlCurrDatePeriod4"/>
+				<xsd:element ref="GlCurrFlagPeriod4"/>
+				<xsd:element ref="GlCurrDatePeriod5"/>
+				<xsd:element ref="GlCurrFlagPeriod5"/>
+				<xsd:element ref="GlCurrDatePeriod6"/>
+				<xsd:element ref="GlCurrFlagPeriod6"/>
+				<xsd:element ref="GlCurrDatePeriod7"/>
+				<xsd:element ref="GlCurrFlagPeriod7"/>
+				<xsd:element ref="GlCurrDatePeriod8"/>
+				<xsd:element ref="GlCurrFlagPeriod8"/>
+				<xsd:element ref="GlCurrDatePeriod9"/>
+				<xsd:element ref="GlCurrFlagPeriod9"/>
+				<xsd:element ref="GlCurrDatePeriod10"/>
+				<xsd:element ref="GlCurrFlagPeriod10"/>
+				<xsd:element ref="GlCurrDatePeriod11"/>
+				<xsd:element ref="GlCurrFlagPeriod11"/>
+				<xsd:element ref="GlCurrDatePeriod12"/>
+				<xsd:element ref="GlCurrFlagPeriod12"/>
+				<xsd:element ref="GlCurrDatePeriod13"/>
+				<xsd:element ref="GlCurrFlagPeriod13"/>
+				<xsd:element ref="GlCurrDatePeriod14"/>
+				<xsd:element ref="GlCurrFlagPeriod14"/>
+				<xsd:element ref="GlPrevDatePeriod1"/>
+				<xsd:element ref="GlPrevFlagPeriod1"/>
+				<xsd:element ref="GlPrevDatePeriod2"/>
+				<xsd:element ref="GlPrevFlagPeriod2"/>
+				<xsd:element ref="GlPrevDatePeriod3"/>
+				<xsd:element ref="GlPrevFlagPeriod3"/>
+				<xsd:element ref="GlPrevDatePeriod4"/>
+				<xsd:element ref="GlPrevFlagPeriod4"/>
+				<xsd:element ref="GlPrevDatePeriod5"/>
+				<xsd:element ref="GlPrevFlagPeriod5"/>
+				<xsd:element ref="GlPrevDatePeriod6"/>
+				<xsd:element ref="GlPrevFlagPeriod6"/>
+				<xsd:element ref="GlPrevDatePeriod7"/>
+				<xsd:element ref="GlPrevFlagPeriod7"/>
+				<xsd:element ref="GlPrevDatePeriod8"/>
+				<xsd:element ref="GlPrevFlagPeriod8"/>
+				<xsd:element ref="GlPrevDatePeriod9"/>
+				<xsd:element ref="GlPrevFlagPeriod9"/>
+				<xsd:element ref="GlPrevDatePeriod10"/>
+				<xsd:element ref="GlPrevFlagPeriod10"/>
+				<xsd:element ref="GlPrevDatePeriod11"/>
+				<xsd:element ref="GlPrevFlagPeriod11"/>
+				<xsd:element ref="GlPrevDatePeriod12"/>
+				<xsd:element ref="GlPrevFlagPeriod12"/>
+				<xsd:element ref="GlPrevDatePeriod13"/>
+				<xsd:element ref="GlPrevFlagPeriod13"/>
+				<xsd:element ref="GlPrevDatePeriod14"/>
+				<xsd:element ref="GlPrevFlagPeriod14"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlCurrentYear">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the calendar year in which your current ledger year ends. You can change this only if no active data is held within the ledger history, details, entries and journal files.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="9999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlCurrentMonth">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the period in which your company is running, in relation to the start of your ledger year. You can change this only if no active data is held within the ledger history, details, entries and journal files.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CurrentPeriod">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlCurrentYear"/>
+				<xsd:element ref="GlCurrentMonth"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CommitmentsOffClearData">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you would like to remove all commitment accounting information held on file. ( N - No, Y - Yes). If no value is supplied, a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CommitAccReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you would like to monitor committed and uncommitted costs against budget. ( N - No, Y - Yes). If no value is supplied, a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RequistionsRequired">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you require uncommitted costs to be monitored. ( N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValidateBudgetUncomm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates if this type of commitment should be validated against the ledger account's budget. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RetCompTransUncomm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether to retain transactions once an uncommitted value becomes committed. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AddToBudAtYearEndUncomm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether the budget for the first period of a new year should be increased by any outstanding uncommitted value. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PurchaseOrdersRequired">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if committed costs should be monitored. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValidateBudgetComm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether this type of commitment should be validated against the ledger account's budget. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RetCompTransComm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates whether transactions are retained once a committed value becomes an actual value. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AddToBudAtYearEndComm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if the budget for the first period of a new year should be increased by any outstanding committed value. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WarnIfBudgetExceeded">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if a warning is required when the value of a transaction causes the budget to be exceeded. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UnallocText">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the text that must be used to describe the value for any transaction that could not be allocated against a particular period.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Commitments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="CommitmentsOffClearData"/>
+				<xsd:element ref="CommitAccReq"/>
+				<xsd:element ref="RequistionsRequired"/>
+				<xsd:element ref="ValidateBudgetUncomm"/>
+				<xsd:element ref="RetCompTransUncomm"/>
+				<xsd:element ref="AddToBudAtYearEndUncomm"/>
+				<xsd:element ref="PurchaseOrdersRequired"/>
+				<xsd:element ref="ValidateBudgetComm"/>
+				<xsd:element ref="RetCompTransComm"/>
+				<xsd:element ref="AddToBudAtYearEndComm"/>
+				<xsd:element ref="WarnIfBudgetExceeded"/>
+				<xsd:element ref="UnallocText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AuthJournals">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want journals captured using the GL Journal Entry program to be authorized before they can be posted.  (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AuthSubModJournals">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want ledger journals created for sub module transactions to be authorized before they can be posted. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LimitViewOfJournals">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you would like to restrict operators to viewing only those journals that they created. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextJournalByPeriod">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates if you want to enable General Ledger journal numbering by period. (N - No, Y - Yes). If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 1.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 2.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 3.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 4.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 5.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 6.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 7.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 8.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 9.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 10.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 11.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 12.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 13.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerPrev14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the previous year ledger period 14.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 1.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 2.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 3.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 4.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 5.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 6.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 7.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 8.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 9.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 10.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 11.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 12.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 13.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerCurr14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the current year ledger period 14.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 1.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 2.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 3.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 4.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 5.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 6.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 7.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 8.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 9.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 10.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 11.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 12.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 13.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JnlForFixJnlPerNext14">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This indicates the next journal number for the next year ledger period 14.  If no value is supplied, a value of 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Journals">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AuthJournals"/>
+				<xsd:element ref="AuthSubModJournals"/>
+				<xsd:element ref="LimitViewOfJournals"/>
+				<xsd:element ref="NextJournalByPeriod"/>
+				<xsd:element ref="JnlForFixJnlPerPrev1"/>
+				<xsd:element ref="JnlForFixJnlPerPrev2"/>
+				<xsd:element ref="JnlForFixJnlPerPrev3"/>
+				<xsd:element ref="JnlForFixJnlPerPrev4"/>
+				<xsd:element ref="JnlForFixJnlPerPrev5"/>
+				<xsd:element ref="JnlForFixJnlPerPrev6"/>
+				<xsd:element ref="JnlForFixJnlPerPrev7"/>
+				<xsd:element ref="JnlForFixJnlPerPrev8"/>
+				<xsd:element ref="JnlForFixJnlPerPrev9"/>
+				<xsd:element ref="JnlForFixJnlPerPrev10"/>
+				<xsd:element ref="JnlForFixJnlPerPrev11"/>
+				<xsd:element ref="JnlForFixJnlPerPrev12"/>
+				<xsd:element ref="JnlForFixJnlPerPrev13"/>
+				<xsd:element ref="JnlForFixJnlPerPrev14"/>
+				<xsd:element ref="JnlForFixJnlPerCurr1"/>
+				<xsd:element ref="JnlForFixJnlPerCurr2"/>
+				<xsd:element ref="JnlForFixJnlPerCurr3"/>
+				<xsd:element ref="JnlForFixJnlPerCurr4"/>
+				<xsd:element ref="JnlForFixJnlPerCurr5"/>
+				<xsd:element ref="JnlForFixJnlPerCurr6"/>
+				<xsd:element ref="JnlForFixJnlPerCurr7"/>
+				<xsd:element ref="JnlForFixJnlPerCurr8"/>
+				<xsd:element ref="JnlForFixJnlPerCurr9"/>
+				<xsd:element ref="JnlForFixJnlPerCurr10"/>
+				<xsd:element ref="JnlForFixJnlPerCurr11"/>
+				<xsd:element ref="JnlForFixJnlPerCurr12"/>
+				<xsd:element ref="JnlForFixJnlPerCurr13"/>
+				<xsd:element ref="JnlForFixJnlPerCurr14"/>
+				<xsd:element ref="JnlForFixJnlPerNext1"/>
+				<xsd:element ref="JnlForFixJnlPerNext2"/>
+				<xsd:element ref="JnlForFixJnlPerNext3"/>
+				<xsd:element ref="JnlForFixJnlPerNext4"/>
+				<xsd:element ref="JnlForFixJnlPerNext5"/>
+				<xsd:element ref="JnlForFixJnlPerNext6"/>
+				<xsd:element ref="JnlForFixJnlPerNext7"/>
+				<xsd:element ref="JnlForFixJnlPerNext8"/>
+				<xsd:element ref="JnlForFixJnlPerNext9"/>
+				<xsd:element ref="JnlForFixJnlPerNext10"/>
+				<xsd:element ref="JnlForFixJnlPerNext11"/>
+				<xsd:element ref="JnlForFixJnlPerNext12"/>
+				<xsd:element ref="JnlForFixJnlPerNext13"/>
+				<xsd:element ref="JnlForFixJnlPerNext14"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlStructureReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This indicates if the General Ledger structure definition system is enabled.  (N - No, Y - Yes).  If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NumberOfSectionsReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This indicates the number of sections you want to define for your General Ledger code.  This number may be from 0 to 9 inclusive.  If G/L structure definition system is not required, this will contain 0.  If GL structure definition system is required and this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SectionAnalysisReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This indicates if General Ledger account balances can be queried by section using the GL Structure Query program.  If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BudgetAnalysisReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This indicates if General Ledger budget balances can be queried by section using the GL Structure Query program.  If no value is supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PurchCommitReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This indicates if Purchase Commitment is required and can only be selected if the option: Section analysis required has been selected.  If no value has been supplied, then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

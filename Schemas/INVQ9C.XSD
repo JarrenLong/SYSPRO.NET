@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Serial Tracking Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Customer">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the customer(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DueDate">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the due date(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ExpiryDate">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the expiry date(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Warehouse" minOccurs="0"/>
+				<xsd:element ref="StockCode" minOccurs="0"/>
+				<xsd:element ref="SerialNumber" minOccurs="0"/>
+				<xsd:element ref="Customer" minOccurs="0"/>
+				<xsd:element ref="Location" minOccurs="0"/>
+				<xsd:element ref="ExpiryDate" minOccurs="0"/>
+				<xsd:element ref="ScrapDate" minOccurs="0"/>
+				<xsd:element ref="DueDate" minOccurs="0"/>
+				<xsd:element ref="TransactionType" minOccurs="0"/>
+				<xsd:element ref="TransactionDate" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IncludeWhValues" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Include Warehouse values of on hand stock, Y=Yes, N=No. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeZeroQtyOnhand" default="Y">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IncludeSubsequentTransactions" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Select this if you want to print all transactions posted against the selected serial numbers with the transaction type specified.
+  
+You can only select this option if you specify a single transaction type according to which serialized items must be printed.
+ 
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ItemsAtServiceDepotOnly" default="N">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ItemsInServiceOnly" default="N">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ItemsOnLoanOnly" default="N">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NewPageAfterSubTotals" default="N">
+		<xsd:annotation>
+			<xsd:documentation>An option to print sub-reports, Y=Yes, N=No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Location">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the location(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MiscTransactionType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Enter a Miscellaneous transaction type to be used for selection a single transaction type is required, and the requirement is for a miscellaneous transaction.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReportTitle" minOccurs="0"/>
+				<xsd:element ref="PrimarySeq" minOccurs="0"/>
+				<xsd:element ref="SecondarySeq" minOccurs="0"/>
+				<xsd:element ref="ReportType" minOccurs="0"/>
+				<xsd:element ref="RevisionRelease" minOccurs="0"/>
+				<xsd:element ref="PrintSubTotals" minOccurs="0"/>
+				<xsd:element ref="NewPageAfterSubTotals" minOccurs="0"/>
+				<xsd:element ref="IncludeWhValues" minOccurs="0"/>
+				<xsd:element ref="IncludeZeroQtyOnhand" minOccurs="0"/>
+				<xsd:element ref="PrintBatchSerials" minOccurs="0"/>
+				<xsd:element ref="ItemsInServiceOnly" minOccurs="0"/>
+				<xsd:element ref="ItemsOnLoanOnly" minOccurs="0"/>
+				<xsd:element ref="ItemsAtServiceDepotOnly" minOccurs="0"/>
+				<xsd:element ref="ShowTransactionValues" minOccurs="0"/>
+				<xsd:element ref="ShowTransactionTotals" minOccurs="0"/>
+				<xsd:element name="IncludeSubsequentTransactions" default="N" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:minLength value="0"/>
+							<xsd:maxLength value="1"/>
+							<xsd:whiteSpace value="preserve"/>
+							<xsd:enumeration value="Y"/>
+							<xsd:enumeration value="N"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="StandardTransactionType" minOccurs="0"/>
+				<xsd:element ref="MiscTransactionType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PrimarySeq" default="S">
+		<xsd:annotation>
+			<xsd:documentation>Default to S=Stock code; S=Stock code, C=Customer, W=Warehouse,   L=Location,R=Serial number,  E=Expiry date, P=Scrap date  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintBatchSerials" default="N">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintNewPageAfterSubTots" default="N">
+		<xsd:annotation>
+			<xsd:documentation>an option to print new page after sub totals, Y=Yes, N=No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintSubTotals" default="Y">
+		<xsd:annotation>
+			<xsd:documentation>An option to print sub-reports, Y=Yes, N=No.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReportTitle">
+		<xsd:annotation>
+			<xsd:documentation>The report title defaults to Serial Tracking Report' but it can be changed'</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="25"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReportType" default="D">
+		<xsd:annotation>
+			<xsd:documentation>Default to D=Detail; 1= 1 line summary; 2= 2 Line summary.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RevisionRelease">
+		<xsd:annotation>
+			<xsd:documentation>Stock revision and Release if 'S' stock code selected in the format 001/001.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="7"/>
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ScrapDate">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the srap date(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SecondarySeq">
+		<xsd:annotation>
+			<xsd:documentation>Default to spaces; S=Stock code, C=Customer, W=Warehouse,   L=Location,R=Serial number,  E=Expiry date, P=Scrap date  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value=""/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Sequences">
+		<xsd:complexType>
+			<xsd:sequence/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SerialNumber">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the serial number(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ServiceOptions">
+		<xsd:complexType>
+			<xsd:sequence/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ShowTransactionTotals" default="Y">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ShowTransactionValues" default="Y">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="0"/>
+				<xsd:maxLength value="1"/>
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StandardTransactionType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Enter a Standard transaction type to be used for selection a single transaction type is required, and the requirement is for a standard transaction.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the stock code(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TransactionDate">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the transaction date(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TransactionType">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the transaction type(s) to query. A - All; R - Range; S - Single. Default A - All
+If the selection is S - Single, then the value must define whether a Standard Transaction type is required (S), or a Miscellaneous Transaction type (M). 
+If standard is required, then a standard transaction type must be entered agaisnt the option StandardTransactionType.  If miscellaneous is required, then a miscellaneous type must be entered against the option MiscTransactionType.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Warehouse">
+		<xsd:annotation>
+			<xsd:documentation>Use this element to specify the warehouse(s) to query. A - All; R - Range; S - Single. Default A - All</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A"><xsd:simpleType><xsd:restriction base="xsd:string"><xsd:enumeration value="A"/><xsd:enumeration value="R"/><xsd:enumeration value="S"/></xsd:restriction></xsd:simpleType></xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

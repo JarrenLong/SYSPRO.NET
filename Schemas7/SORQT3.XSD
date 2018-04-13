@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     This is the schema for the Extended Tax Calculation Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="TaxInformation">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Customer" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Customer being invoiced</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="StockCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Stock code - only passed if a mechandise lne</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Quantity" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Quantity being invoiced</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="LineValue" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Net value of line in local currency</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="LineValueGross" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Gross value of line in local currency</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ExtendedTaxCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Full extended tax code of customer</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ExtendedTaxState" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>State portion of extended tax code</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ExtendedTaxCoZip" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>County/Zip portion of extended tax code</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ExtendedTaxCity" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>City portion of extended tax code</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="TaxDate" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Date of invoice at which tax is to be calculated</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Branch" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Branch on sales order</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Nationality" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Nationality code of customer if present</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ProductClass" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Product class of item, stocked or non-stocked</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="Description" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Description of stocked or non-stocked code for line types 1 and 7. Description of the miscellaneous or freight charge for line type 5 and 4.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ShipToAddress1" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>5 lines of ship to address, plus postal code, from sales order</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ShipToAddress2" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipToAddress3" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipToAddress4" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipToAddress5" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipToPostalCode" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="MultiShipCode" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>The multiple ship code used on the order header if applicable</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ShipFromAddress1" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>5 lines of ship from address, plus post code. Obtained from warehouse for stocked lines</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="ShipFromAddress2" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipFromAddress3" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipFromAddress4" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipFromAddress5" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="ShipFromPostalCode" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="NonStockedFlag" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Set to 'Y' if non-stocked merchandise line, or non-merchandise line</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DetailLineType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Detail line type - 1 Stocked, 4 Freight, 5 Miscellaneous, 7 non-stocked</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="1"/>
+                    <xsd:enumeration value="4"/>
+                    <xsd:enumeration value="5"/>
+                    <xsd:enumeration value="7"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ConversionFactor" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Conversion factor from order uom to stocked  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ConversionMd" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>M - multiply, D - divide. Applies to conversion factor from order to stocked  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="D"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PricingUom" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Pricing unit of measure  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderUom" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Order unit of measure - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockingUom" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Stocking unit of measure  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitQuantityFactor" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Number of pices in a unit - unit quantity only -  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UnitQuantityFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Unit quantity processing flag  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LineDiscPerc1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>First percentage discount  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LineDiscPerc2" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Second poercentage discount  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LineDiscPerc3" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Third percentage discount  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscountFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Dscount flag - V - value discount, U - unit discount  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="P"/>
+                    <xsd:enumeration value="V"/>
+                    <xsd:enumeration value="U"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DiscountValue" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Dicount value whan flag is V or U  - stocked line only</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OrderType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Type of order, for example, 'B' - Billing</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Area" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Geographic area code used for order</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Invoice" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Invoice number allocated to order, or actually used depending on timing or request</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="InvoiceDate" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Invoice date if present, format CCYY-MM-DD</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrder" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Sales Order number</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrderLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Line number of detail line on order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrderInitLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Inital line number of detail line on order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DispatchNote" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Dispatch note number for dispatch note or dispatch invoice.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="DispatchLine" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Dispatch line number for dispatch note or dispatch invoice.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="EndOrderFlag" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Set to 'Y' if all lines have been presented, and the invoice is complete. The sales order line number will be zero when this flag is set. The value will be the total value of the invoice. set to 'F' when the first line of an invoice is presented.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="F"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TaxableFlag" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Set to 'Y' if item is taxable, else set to 'N'.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="TaxLevel" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Level at which tax is calculated - tax setup. 'I' - Invoice level, 'L' - line level.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="I"/>
+                    <xsd:enumeration value="L"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CalcType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This flag is only relevant when the calculation is done at invoice level, and lines are being passed for valuation purposes. A value of 'O' means that the line contains information on the outstanding order quantity of the line, whereas an empty tag indicates that the line is a normal line.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="O"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="TaxExemptNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Tax exempt number of customer from the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="CustomerPoNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Custoemr purchase order number from the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Salesperson" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Salesperson code from the sales order.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="UpdateTaxFlag" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Set to 'Y' if the calculation is being done for an update.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="InterfaceType" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Interface type from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="IdentificationType" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Identificaiton type, C- company, B - branch, U - user coded, N - none. Obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UserCompanyId" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Company code if identification type is user - obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UserDivision" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Division code if identification type is user - obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="LiveTaxCompany" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Set to 'Y' if this is a live SYSPRO company. Obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DefaultShipFromStreet" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship from street to be used for non-stocked. Obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DefaultShipFromCity" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship from city to be used for non-stocked. Obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DefaultShipFromState" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship from state to be used for non-stocked. Obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="DefaultShipFromZip" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Ship from zip code to be used for non-stocked. Obtained from ADMCTL tax record.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UserParameters" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Up to 200 characters passed from the user tax information field in the ADMCTL file, record type ADMCTLUT.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

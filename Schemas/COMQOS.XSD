@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for the COM Retrieve operator security details Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Action" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>Action "LO" = List Operators</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReturnContactDetail">
+    <xsd:annotation>
+      <xsd:documentation>Y - Return basic contact detail for each operator.  If the option is ommitted then no contact detail is returned.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="OperatorSelection">
+    <xsd:annotation>
+      <xsd:documentation>Operator to be selected (FilterType of A - All, R - Range, L = List, S = Single. For Single the FilterValue will just have the single operator code, for Range have the From and To codes seperated by a comma and for List have all the codes seperated by commas. If the Filter node is ommitted then all operators are returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Action"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReturnContactDetail"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="OperatorSelection"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

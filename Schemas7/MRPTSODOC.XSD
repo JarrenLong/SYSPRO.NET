@@ -1,0 +1,1008 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+	Schema for the MRP Requirements Planning Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="RequirementsPlanningSetupOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General1" minOccurs="0"/>
+				<xsd:element ref="General2" minOccurs="0"/>
+				<xsd:element ref="Planning1" minOccurs="0"/>
+				<xsd:element ref="Planning2" minOccurs="0"/>
+				<xsd:element ref="Scheduling" minOccurs="0"/>
+				<xsd:element ref="Warehouses" minOccurs="0"/>
+				<xsd:element ref="RequisitionUsers" minOccurs="0"/>
+				<xsd:element ref="ForecastDepletion" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DefPerSize">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the period size to set as the default for queries and reports. (S - Single day, D - Multiple day, W  - Week, M - Month.) If no value is supplied then the default value of S will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="S=Single day;D=Multiple days;W=Week;M=Month;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="M"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefPerSizeNoOfDays">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicate the number of days to view as a period. This is only applicable if 'DefPerSize' is D - Multiple days.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefPerSizeFirstDayOfWeek">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the first day of the week to be used as the default for the period. Only applicable if 'DefPerSize' is W - Weeks.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefPrMethodPoReview">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates which pricing method must be used as the default when reviewing suggested Purchase Orders. (C - Current inventory cost price, L - Last price paid, P - Purchase price). If no value is supplied then the default value of C will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="C=Current inventory cost price;L=Last price paid;P=Purchase price;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclConfJobsInReview">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include confirmed jobs which have not yet been started in the jobs review. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReqPlnLoadLevelReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include load levelling as part of the requirements planning calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BrwStkCodReqFile">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to browse only stock codes with requirements file. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NoOfDaysAfterStockArr">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the number of days after stock arrives that it can be used in the requirements calculation. This element is optional.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="9999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="General1">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DefPerSize"/>
+				<xsd:element ref="DefPerSizeNoOfDays"/>
+				<xsd:element ref="DefPerSizeFirstDayOfWeek"/>
+				<xsd:element ref="DefPrMethodPoReview"/>
+				<xsd:element ref="InclConfJobsInReview"/>
+				<xsd:element ref="ReqPlnLoadLevelReq"/>
+				<xsd:element ref="BrwStkCodReqFile"/>
+				<xsd:element ref="NoOfDaysAfterStockArr"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MaxDecInResQtyPer">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the maximum number of decimals that are required in the 'QuantityPer' in resource structures.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="9"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefTimePerLength">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the default number of days in each time bucket for resource planning.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastFreqAllow">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicate the forecast planning frequency allowance (usually days between MRP run).]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="9999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastVisibilityFactor">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicate the forecast planning visibility factor (days ahead covered by forecasts).]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastAmendJnlReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates if journals must be generated listing all additions, deletions or changes made to forecasts. (N - No,Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AmendJnlReqBuildSched">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates if facilities are required to monitor additions, deletions or changes made to build schedules.(N - No,Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="General2">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MaxDecInResQtyPer"/>
+				<xsd:element ref="DefTimePerLength"/>
+				<xsd:element ref="ForecastFreqAllow"/>
+				<xsd:element ref="ForecastVisibilityFactor"/>
+				<xsd:element ref="ForecastAmendJnlReq"/>
+				<xsd:element ref="AmendJnlReqBuildSched"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcStockOnHand">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include Stock on hand in the requirements calculation. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcSafetyStock">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether safety stock quantity must be used to create a demand in the prior period. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcPo">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include purchase orders in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcConfJobs">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include confirmed jobs in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcUnconfJobs">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include  unconfirmed jobs in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcJobsOnHold">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include  jobs on hold in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcFcasts">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include forecasts in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcSo">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include sales orders in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcQot">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include quotations in the requiremments calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcBuildSched">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include the build schedule in the requirements calculation. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcFwdOrd">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include forward orders in the requirements calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcOrdInSusp">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include orders in suspense in the requirements calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcSct">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include supply chain transfer orders in the requirements calculation. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclReqCalcGit">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include goods in transit in the requirements calculation. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ApplyGrossReqRulesIs">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether when calculating requirements for Non-MPS items, to apply the requirements rule applied against the stock item or to apply the sum of the forecasts and sales orders (Rule A). This option is for Items defined as Rule I or S. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ApplyGrossReqRulesHc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether when calculating requirements for Non-MPS items, to apply the requirements rule applied against the stock item or to apply the sum of the forecasts and sales orders (Rule A). This option is for Items defined as Rule H or C.  (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PerLenForRulesHc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the number of days to be used to calculate the period when 'ApplyGrossReqRulesHc' is Y - Yes.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ApplyDtfRule">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether when calculating requirements for Non-MPS items, to exclude forecasts within the time fence rule. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SafetyStockTimeFenceRule">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates which time fence rule to be applied for safety stock. (N - None, D - Demand, M - Manufacturing, P - Planning). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=None;D=Demand;M=Manufacturing;P=Planning;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Planning1">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InclReqCalcStockOnHand"/>
+				<xsd:element ref="InclReqCalcSafetyStock"/>
+				<xsd:element ref="InclReqCalcPo"/>
+				<xsd:element ref="InclReqCalcConfJobs"/>
+				<xsd:element ref="InclReqCalcUnconfJobs"/>
+				<xsd:element ref="InclReqCalcJobsOnHold"/>
+				<xsd:element ref="InclReqCalcFcasts"/>
+				<xsd:element ref="InclReqCalcSo"/>
+				<xsd:element ref="InclReqCalcQot"/>
+				<xsd:element ref="InclReqCalcBuildSched"/>
+				<xsd:element ref="InclReqCalcFwdOrd"/>
+				<xsd:element ref="InclReqCalcOrdInSusp"/>
+				<xsd:element ref="InclReqCalcSct"/>
+				<xsd:element ref="InclReqCalcGit"/>
+				<xsd:element ref="ApplyGrossReqRulesIs"/>
+				<xsd:element ref="ApplyGrossReqRulesHc"/>
+				<xsd:element ref="PerLenForRulesHc"/>
+				<xsd:element ref="ApplyDtfRule"/>
+				<xsd:element ref="SafetyStockTimeFenceRule"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OverrideBatchRuleWithA">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether when running the requirements calculation to use the 'Lot for lot' batching rules regardless of the rule held again each stock code. (Y - Overide, N - Do not overide; O - Only override Mps Rules).  If no value is supplied then a default of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Override;N=Do not override;O=Only override MPS rules;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SchedAccordingToDemand">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to schedule the order / delivery /start dates of existing jobs, suggested jobs and purchase orders according to when the demand is required. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SchedSpecificSupply">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to schedule a supply to the demand to which it is specifically linked. (N - No, Y - Yes). N - No may not be selected if supply is not scheduled according to demand. If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclAllStockInReqFile">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to include all stock codes and warehouses in the requirements file, regardless of whether there is demand/supply. (N - No, Y - Yes). If no value is supplied then the default of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RedQtyOnHandByAlloc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to reduce quantity on hand by allocated quantity. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MakeProvForLotExpiry">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to make provision for lot expiry in the requirements calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DoNotLockLiveFiles">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to lock live files while snapshot files are being created. (N - No, Y - Yes).  If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowAddReqUsers">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether requisitions created by users other than the standard system users are to be included in the requirements calculation. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SuppMrpNonCurrEccRevRel">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to suppress MRP ordering for non current ECC revision / releases. (N - No,Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowMrpReschedGit">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to allow MRP to reschedule goods in transit due dates. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="IgnoreOldStructure">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether requirements calculation will create past due suggested jobs using the current structure as of the calculation date or use the structure as of the suggested job start date. (N No, Y Yes). If no value is supplied then the default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="1"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclQuotPropGreatThan">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the value to include quotations where probabiity is greater than. This element is optional.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="9"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Planning2">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="OverrideBatchRuleWithA"/>
+				<xsd:element ref="SchedAccordingToDemand"/>
+				<xsd:element ref="SchedSpecificSupply"/>
+				<xsd:element ref="InclAllStockInReqFile"/>
+				<xsd:element ref="RedQtyOnHandByAlloc"/>
+				<xsd:element ref="MakeProvForLotExpiry"/>
+				<xsd:element ref="DoNotLockLiveFiles"/>
+				<xsd:element ref="AllowAddReqUsers"/>
+				<xsd:element ref="SuppMrpNonCurrEccRevRel"/>
+				<xsd:element ref="AllowMrpReschedGit"/>
+				<xsd:element ref="IgnoreOldStructure"/>
+				<xsd:element ref="InclQuotPropGreatThan"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AssignPriorityDatePriority">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates when forward Finite scheduling to assign high priority to start date of the job or to job priority. (S - Start, P - Priority). If no value is supplied then the default value of S will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="S=Start;P=Priority;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AssignPriorityJobQuote">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates when forward Finite scheduling to assign high priority to suggested jobs or to quotations. (S - Suggested, E - Estimate). If no value is supplied then the default value of S will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="S=Suggested;E=Estimate;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="E"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReqPlnMaxGenQueueTime">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates maximum generated queue time allowed when calculating forward finite capacity.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Scheduling">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AssignPriorityDatePriority"/>
+				<xsd:element ref="AssignPriorityJobQuote"/>
+				<xsd:element ref="ReqPlnMaxGenQueueTime"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="WhSelection">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates the type of warehouse selection to use. (A - All, R - Range, L - List, W - By warehouse). If no value is supplied then the default value of A will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="A=All;R=Range;L=List;W=By warehouse;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="W"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WhSelectionFrom">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This element only applies and is mandatory if the 'WhSelection' has been set to R (Range).]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WhSelectionTo">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This entry only applies and is mandatory if the 'WhSelection' has been set to R (Range).]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefineWhList">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This contains the warehouse list. This element is only applicable if 'WhSelection' is set to L. A maximum of 10 warehouse codes is allowed. The format alphanumeric per warehouse code, each separated by a comma.
+  ]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConsolSelWhs">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to consolidate all the information of the warehouses selected. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Warehouses">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="WhSelection"/>
+				<xsd:element ref="WhSelectionFrom"/>
+				<xsd:element ref="WhSelectionTo"/>
+				<xsd:element ref="DefineWhList"/>
+				<xsd:element ref="ConsolSelWhs"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReqUserSel">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This is the requisition user selection and indicates which user/s are to be included in the requirements calculations. (A - All, R - Range, U - User). If no value is supplied then the default value of A will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="A=All;R=Range;U=User;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="U"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReqUserSelFrom">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This is the requisition user selected range from. This element is only to be used if the 'ReqUserSel' is set to R (Range).]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReqUserSelTo">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ This is the requisition user selected range to. This element is only to be used if the 'ReqUserSel' is set to R (Range).]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReqUserOption">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether the requirements calculation is basedon the originator or on the current holder. (O - Originator, C - Current). If no value is supplied then the default value of O will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="O=Originator;C=Current;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RequisitionUsers">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReqUserSel"/>
+				<xsd:element ref="ReqUserSelFrom"/>
+				<xsd:element ref="ReqUserSelTo"/>
+				<xsd:element ref="ReqUserOption"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DepleteForecasts">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether forecasts are to be depleted by sales quantities. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExclForecastDeplGrrA">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether forecasts are to be depleted for stock items defined with gross requirements rule 'A'. (Y - Yes, N - No). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExclForecastDeplGrrI">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether forecasts are to be depleted for stock items defined with gross requirements rule 'I'. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExclForecastDeplNonMps">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to exclude forecast depletion for non-Mps items. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ExclForecastDeplNonStocked">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to exclude forecast depletion for non-stocked items. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastDeplPeriodType">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates what period type to use for forecast depletion. (N - None, L - Days, D - Demand, P - Planning time, H - Planning Horizon, F - Forecast). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=None;L=Days;D=Demand;P=Planning time;H=Planning horizon;F=Forecast calender;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="H"/>
+				<xsd:enumeration value="F"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastPeriodLength">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates what period length to use for forecast deplettion. This element is optional.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowPastDueDepletion">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether past period forecasts are allowed to be depleted. (Y - Yes, N - No, S - Days prior to ship date). If no value is supplied then the default value of Y will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;S=Days prior to ship days;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastPeriodLengthPrior">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates forecast period length prior to ship date. This element is only required if 'ForecastDeplPeriodType' is set to L (Days). If not, this element must contain a zero.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DepleteForecastsByCustomer">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether to deplete forecasts by customer. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowForecastDeplOutsidePer">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ Indicates whether forecasts are allowed to be depleted outside of period. Only applicable if using IO calendar. (N - No, Y - Yes). If no value is supplied then the default value of N will be assumed.
+  ]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForecastDepletion">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DepleteForecasts"/>
+				<xsd:element ref="ExclForecastDeplGrrA"/>
+				<xsd:element ref="ExclForecastDeplGrrI"/>
+				<xsd:element ref="ExclForecastDeplNonMps"/>
+				<xsd:element ref="ExclForecastDeplNonStocked"/>
+				<xsd:element ref="ForecastDeplPeriodType"/>
+				<xsd:element ref="ForecastPeriodLength"/>
+				<xsd:element ref="AllowPastDueDepletion"/>
+				<xsd:element ref="ForecastPeriodLengthPrior"/>
+				<xsd:element ref="DepleteForecastsByCustomer"/>
+				<xsd:element ref="AllowForecastDeplOutsidePer"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Asset Depreciation Maintenance Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="SetupApBranch">
+    <xsd:annotation>
+      <xsd:documentation>This is the top element for all data required for AP branch maintenance. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to AP branch.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="Key">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the key information required to maintain an AP branch.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:all>
+                    <xsd:element name="Branch">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the key to the AP branch being maintained. This is mandatory. If this AP branch is being added, it must not pre-exist. If this AP branch is being changed or deleted, it must be a valid Syspro AP branch.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="Description" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the name of the AP branch and is used primarily to identify the AP branch. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApBrnGlCode">
+                <xsd:annotation>
+                  <xsd:documentation>This is the AP branch control GL code and is mandatory when adding an AP Branch, it must be a valid Syspro GL code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ApBrnDscGlCode">
+                <xsd:annotation>
+                  <xsd:documentation>This is the AP branch discount GL code and is mandatory when adding an AP branch. It must be a valid Syspro GL code.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoPrefix" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the purchase order prefix to be applied for AP branch if the prefix is referenced per AP branch.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="PoNextNumber" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the next purchase order number for the AP branch and is numeric. The element has fewer digits if purchase orders are prefixed.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="GrnPrefix" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the goods received note prefix to be applied for AP branch if the prefix is referenced per AP branch.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GrnNextNumber" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the next goods received note number for the AP branch and is numeric. The element has fewer digits if purchase orders are prefixed.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Nationality" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Nationality code. If the EC tax system is installed (Tax Options Setup) then you assign a Nationality code to the AP branch. This is required by EC Vat regulations to generate various reports required for the proper administration of the EC tax system.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

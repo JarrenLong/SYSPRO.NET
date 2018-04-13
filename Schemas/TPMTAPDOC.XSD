@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     This is an example schema instance to demonstrate use of
+     the Trade Promotions for Sales Orders Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostTradePromotionsForSalesOrders">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="SalesOrderEntry">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="SalesOrder">
+                      <xsd:annotation>
+                        <xsd:documentation>The number of the sales order to which promotions must be applied. The order must exist in SYSPRO, and must be an active order for a trade promotions customer.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="1"/>
+                          <xsd:maxLength value="6"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SalesOrderPromoQualifyAction" default="W" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the action to be applied when qualifying trade promotions. This element is used in conjunction with the element 'SalesOrderPromoSelectAction'.
+
+
+
+If  'SalesOrderPromoQualifyAction' is 'W', then the whole order is taken, and all lines are submitted for checking, and all qualifying promotions will be applied, or reapplied to the order.
+
+
+
+If  'SalesOrderPromoQualifyAction' is 'S', then only  lines defined withing the 'SalesOrderLines' node are submitted for checking, and all qualifying promotions for them will be applied, or reapplied to the order.  
+
+'Sales OrderPromoSelectionAction' is only applicable when 'SalesOrderPromoQualityAction' is 'W'. If  'SalesOrderPromoSelectAction' is 'A' (all lines),  it has the same effect as selecting 'Requalify' in Sales Order Entry, with the TP setup options 'Automatically select line promotions' and 'Automatically select global promotions' set on. Any line or global promotion codes supplied will be ignored. 
+
+If 'SalesOrderPromoSelectAction' is 'S' (selected lines),  then only lines defined in the 'SalesOrderLines' node are considered for selection. 
+The specific promotions required may be provided for the relevant sales order lines. If no promotion codes are given for a selected line, then all promotions for that line are marked as selected. If the GlobalPromotions node is supplied, then global promotions codes may be supplied to indicate those to be selected. If the node is supplied, but no codes, then all global promotions for the order are marked as selected.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="W"/>
+                          <xsd:enumeration value="S"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SalesOrderPromoSelectAction" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the action to be applied when selecting trade promotions. This element is used in conjunction with the element 'SalesOrderPromoSelectAction', and is only applicable when 'SalesOrderPromoQualifyAction' is 'W'.
+
+If  'SalesOrderPromoSelectAction' is 'A' (all lines),  it has the same effect as selecting 'Requalify' in Sales Order Entry, with the TP setup options 'Automatically select line promotions' and 'Automatically select global promotions' set on.  Any line or global promotion codes supplied will be ignored. 
+
+If 'SalesOrderPromoSelectAction' is 'S' (selected lines),  then only lines defined in the 'SalesOrderLines' node are considered for selection. 
+The specific promotions required may be provided for the relevant sales order lines. If no promotion codes are given for a selected line, then all promotions for that line are marked as selected. If the GlobalPromotions node is supplied, then global promotions codes may be supplied to indicate those to be selected. If the node is supplied, but no codes, then all global promotions for the order are marked as selected.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="A"/>
+                          <xsd:enumeration value="S"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="SalesOrderLines" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>Provides the details for processing individual sales order lines. If the element SalesOrderAction is 'W', then this is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="LineTradePromotions" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>Provides the details for processing an individual sales order line. If the element SalesOrderAction is 'W', then this is ignored.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="SalesOrderLine" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>Sales order line number. This must be a valid merchandise line on the sales order selected. It cannot be a trade promotions free goods line.
+
+If the element SalesOrderAction is 'W', then this is ignored.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="1"/>
+                                <xsd:maxLength value="4"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="TradePromotionCodes" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This must be a list of qualified promotions for the line selected.  Each code is a maximum of 10 characters, separated by a comma.
+
+
+
+If the element SalesOrderAction is 'W', then this is ignored.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="500"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="GlobalTradePromotions" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Provides the details for processing global promotions. If the element SalesOrderAction is 'W', then this is ignored.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="GlobalTradePromotionCodes" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This must be a list of qualified global promotions for the order selected. Each code is a maximum of 10 characters, separated by a comma.
+
+
+
+If the element SalesOrderAction is 'W', then this is ignored.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="500"/>
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!--
+     Schema for the LCT Constant Code Setup Business Object 
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="Description" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Tool Set Description. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="ConstantValue" minOccurs="0"/>
+        <xsd:element name="eSignature" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>If required, this element must contain a GUID, in the format {36303032-3330-3031-3038-32343463433}, for the eSignature system to accept the transaction as having been authenticated. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained. The GUID would then be passed to the eSignature system where it is stored.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Constant"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ConstantValue" type="xsd:decimal">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Constant Value. It is optional.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SetupLCTConstant">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Constant" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Constant. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="eSignature">
+    <xsd:annotation>
+      <xsd:documentation>If required, this element must contain a GUID, in the format {36303032-3330-3031-3038-32343463433}, for the eSignature system to accept the transaction as having been authenticated. It is up to the developer to have requested a password to protect the transaction. An example is that a GUID associated with the act of entering a valid password could be obtained. The GUID would then be passed to the eSignature system where it is stored.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

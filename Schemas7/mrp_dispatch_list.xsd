@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the MRP Dispatch List Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CoProductSelection">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print the jobs by (N) Notional part or (C) Co-product part.  (N) Notional or (C) Co-product. if no selection is made then a default of (N) will be used.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;N=Notional;C=Co-product"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CompletedJobs">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether you want to include completed jobs in the report.  (I)Include, (E)Exclude or only print (O)Only print ocmpleted jobs. The default value of (E) is used if no value is submitted.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CostCenter">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single selection of cost centers to be returned. FilterType options - A(All), (S)Single. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=BomCostCentre;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Date">
+    <xsd:annotation>
+      <xsd:documentation>All, Single, Range of dates to be returned. FilterType options - A(All), S(Single), R(Range).  Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse={date};A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This is the Parent filter element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CostCenter"/>
+        <xsd:element ref="WorkCenter"/>
+        <xsd:element ref="Date"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="IncludeSuggestedJobs">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include suggested jobs from material requirements planning (Y-Yes, N-No), the default is set to (N).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="JobsOnHold">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include jobs on hold.  (E) Exclude, (I)Include or (O) to only include jobs on hold, the default is set to (E). The default is (E)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPagePerDay">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether you want to print a new page per day. This option is only available if you have selected Op start date, job priority, job or Op finish date, job priority, job sequences.  You cannot select this option as well as the New page per operation option. Default set to (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NewPagePerOperation">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether a new page per operation must be printed.  (Y -Yes, N - No). Default set to (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintManufacturingUMQuantities">
+    <xsd:annotation>
+      <xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default depends on your setup options.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NoOfNarrationLines">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the number of narration lines to be printed for operations.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OpCompletionOverdueByToday">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print all operations that have not yet been started (i.e. no labor transactions have been posted against them) but which have a planned start date prior to the run date  (Y -Yes, N - No). Default is (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OpStartedLateNotCompleted">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print all operations that were started late and which have not yet been completed as at the run date.  (Y-Yes, N-No). Default is (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OperationActive">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the list of operations that are active within the range of dates specified. An operation becomes active as soon as the job is started. Default set to (Y)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OperationCompleted">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the list of operations that were completed within the range of dates specified. Default set to (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OperationPlannedForQueue">
+    <xsd:annotation>
+      <xsd:documentation>Indicates the list of operations that are planned for queue within the range of dates specified. A Q is printed in the Status column. Default set to (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OpstartOverdueByToday">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to print all operations that have not yet been started (i.e. no labor transactions have been posted against them) but which have a planned start date prior to the run date. Default is (N).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>This is the parent Option element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportSequence" minOccurs="0"/>
+        <xsd:element ref="OpCompletionOverdueByToday" minOccurs="0"/>
+        <xsd:element ref="OpstartOverdueByToday" minOccurs="0"/>
+        <xsd:element ref="OpStartedLateNotCompleted" minOccurs="0"/>
+        <xsd:element ref="IncludeSuggestedJobs" minOccurs="0"/>
+        <xsd:element ref="JobsOnHold" minOccurs="0"/>
+        <xsd:element ref="CompletedJobs" minOccurs="0"/>
+        <xsd:element ref="UnconfirmedJobs" minOccurs="0"/>
+        <xsd:element ref="NoOfNarrationLines" minOccurs="0"/>
+        <xsd:element name="ReturnNotesInBlock" minOccurs="0">
+          <xsd:annotation>
+            <xsd:documentation>Indicates the format in which to print the report.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element ref="NewPagePerOperation" minOccurs="0"/>
+        <xsd:element ref="NewPagePerDay" minOccurs="0"/>
+        <xsd:element ref="OperationActive" minOccurs="0"/>
+        <xsd:element ref="OperationCompleted" minOccurs="0"/>
+        <xsd:element ref="OperationPlannedForQueue" minOccurs="0"/>
+        <xsd:element ref="SubTotalEachDay" minOccurs="0"/>
+        <xsd:element ref="CoProductSelection" minOccurs="0"/>
+        <xsd:element ref="PrintManufacturingUMQuantities" minOccurs="0"/>
+        <xsd:element ref="XslStylesheet" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>This is the Root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportSequence">
+    <xsd:annotation>
+      <xsd:documentation>The sequence that the report must be created in. Select (J) if you want to print the report in job number sequence, (S) if you want to print the report in job number within job priority within operation start date sequence, (F) if you want to print the report in job number within job priority within operation finish date sequence, (P) if you want to print the report in job number within job priority sequence, (T) if you want to print the report in job number within shortest time sequence, or (C) if you want to print the report in job number within job classification sequence. The default is (J)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;J=Job;S=Op start date, job priority, job;F=Op finish date, job priority, job;P=Job priority, job;T=Shortest time, job;C=Job classification, job"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="J"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReturnNotesinBlock" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the format in which the narrations will print</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SubTotalEachDay">
+    <xsd:annotation>
+      <xsd:documentation>You can access this option only if you selected to print the report in Op start date, job priority, job or Op finish date, job priority, job sequence. You cannot select this option together with the New page per operation option. (Y-Yes, N-No). Default set to (N)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnconfirmedJobs">
+    <xsd:annotation>
+      <xsd:documentation>Indicates whether to include unconfirmed jobs.  (E) Exclude, (I)Include or (O) to only include jobs on hold, the default is set to (E). The defalut is (E)</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;I=Include;E=Exclude;O=Only"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="WorkCenter">
+    <xsd:annotation>
+      <xsd:documentation>All,  Single selection of work centers to be returned. FilterType options - A(All), (R)Range,(S)Single. Default to A(All).</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=BomWorkCentre;A=All;R=Range;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="R"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>This is the StyleSheet that is used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     This is the schema for the XML instance returned by
+     the Extended Tax Calculation Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ExtendedTaxiInformation">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="TaxReturn">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TaxRate1" type="xsd:string"/>
+              <xsd:element name="TaxRate2" type="xsd:string"/>
+              <xsd:element name="TaxRate3" type="xsd:string"/>
+              <xsd:element name="BaseForTaxCalc" type="xsd:string"/>
+              <xsd:element name="TaxCalculated" type="xsd:string"/>
+              <xsd:element name="AmountExempt" type="xsd:string"/>
+              <xsd:element name="ExtendedTaxCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If this field is returned, it will contain a tax code that is used to change the current extended tax code on the sales order reprint information</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is used to return the status of the 3rd party calcualtion. If not used, or the entry is space, the process is deemed to be successful. If set to 'F', and the mode used was update, then any invoice in process will be rolled back. It is up to the third party developer to cater for any associated rollback required in the third pary database</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value=""/>
+                    <xsd:enumeration value="F"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnMessage" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the ReturnCode is 'F', and this element is not spaces, the contents will be returned to the user in a message box signifying that the tax calculation has failed</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ReturnMsgNumber" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If an error message is returned, the associated error message number may optionally be returned. If returned, it will be used in the XML out of any business object using the tax routines</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

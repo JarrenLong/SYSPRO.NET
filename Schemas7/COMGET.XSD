@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Generic Get File Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is Filter Node</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence minOccurs="0">
+				<xsd:element ref="HistoryGroup" minOccurs="0"/>
+				<xsd:element ref="HistoryOperator" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="HistoryGroup">
+		<xsd:annotation>
+			<xsd:documentation>Allows for filtering on Operator Group</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="HistoryOperator">
+		<xsd:annotation>
+			<xsd:documentation>Allows for filtering on Operator.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This is the Key Node</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Filetype"/>
+				<xsd:element ref="Filename" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root node</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Filter" minOccurs="0"/>
+				<xsd:element name="Option" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This is the Option Node</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence minOccurs="0">
+							<xsd:element name="BuildHierachy" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Returns the XML in a hierarchy only valid for the TL function</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Filename" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Contains the name of the file that must be retrieved.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Filetype">
+		<xsd:annotation>
+			<xsd:documentation>This should contain an enumeration of the File Type that must be returned. MF - Indicates Menu File 'filename' is optional. Returns a menu file. ML - Indicates Menu List 'filename' is optional. Returns a list of available menu files. RC - Indcates Report Control 'filename' is required. Returns the specified filename. RM - Indicates Report Form 'filename' is required. Returns the specifed filename. PR - Indicate Preference File 'filename' is not required. Returns the specifed filename for the operator logged on. TM - Indicates Report Template 'filename' is required. Returns the Report Template. TE - Indicates Template Exists. 'filename' is required. Returns information that a specific template exists. TS - Indicates Template Sample. 'filename' is required. Returns the sample template. SC - Indicate Schema file. 'filename' is required. Returns the schema file. XM - Indicates XML file. 'filename' is required. Returns the XML file. LT - Indicates List of Themes. Return a list of all the themes. SH - Indicates Selected History. Returns history based the Filter criteria. BO - Indicates list of query business objets. the file name is not required. XL - Indicates List of XML Out files IL - Indicates List of XML In Files. TL - Indicates list of templates. DL - Indicates list of Definition files. SC - Checks if the operator is allowed to run the program. RO - Return the report options if it does not exist one will be created and returned. XT - Returns a specific report template. File name is required. F7 - Returns information about the report selected. XD - return a list of Executive Dashboards with rtf information. XC - Returns a specified dashboard config file required by the dashboards. PG - Returns a file from the PG directory. RN - Returns report controls files from customized directory. GS - Returns the global search xml file. TT - Translated text routine. IM - Returns IMPLNK.IMP. WF - Checks for installed workflow module ER - Returns IMPSRE.IMP. DB-Returns the script update files from ReportingServices\Script folder, "filename" is required.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="MF"/>
+				<xsd:enumeration value="ML"/>
+				<xsd:enumeration value="RC"/>
+				<xsd:enumeration value="RF"/>
+				<xsd:enumeration value="RT"/>
+				<xsd:enumeration value="LT"/>
+				<xsd:enumeration value="PR"/>
+				<xsd:enumeration value="TM"/>
+				<xsd:enumeration value="TE"/>
+				<xsd:enumeration value="TS"/>
+				<xsd:enumeration value="SR"/>
+				<xsd:enumeration value="SC"/>
+				<xsd:enumeration value="XM"/>
+				<xsd:enumeration value="BO"/>
+				<xsd:enumeration value="IL"/>
+				<xsd:enumeration value="XL"/>
+				<xsd:enumeration value="TL"/>
+				<xsd:enumeration value="DL"/>
+				<xsd:enumeration value="DM"/>
+				<xsd:enumeration value="DC"/>
+				<xsd:enumeration value="DE"/>
+				<xsd:enumeration value="DT"/>
+				<xsd:enumeration value="SC"/>
+				<xsd:enumeration value="RO"/>
+				<xsd:enumeration value="XT"/>
+				<xsd:enumeration value="F7"/>
+				<xsd:enumeration value="XD"/>
+				<xsd:enumeration value="XC"/>
+				<xsd:enumeration value="SX"/>
+				<xsd:enumeration value="DB"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

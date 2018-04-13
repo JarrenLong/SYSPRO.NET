@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Options Phase
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:element name="Line">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the line you are currently processing for the configuration. The line could refer to the option line, component line or operation line.This element is mandatory. The format is a 3 character numeric field.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="3"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PostConfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:sequence>
+              <xsd:element name="Option">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the information about the option.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:choice maxOccurs="unbounded">
+                    <xsd:element ref="Line"/>
+                    <xsd:element name="Type" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether you are processing an operation or component. Possible values: O (operation) or C (component). Default to the option flag against the option table.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:minLength value="0"/>
+                          <xsd:maxLength value="1"/>
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="O"/>
+                          <xsd:enumeration value="C"/>
+                          <xsd:enumeration value=""/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Operation" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This element contains the information pertaining to operations.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element ref="Select"/>
+                          <xsd:element ref="Line"/>
+                          <xsd:element name="RunTime" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the run-time per of an internal operation. The run-time per is only applicable when the operation type is range. The run-time per will default to the run-time calculated according to the options setup against that component, i.e. using calculations or selection criteria factors or the minimum run-time required. When using block or rate method against a work center this value cannot be zero. The format is 5.4 numeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="10"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="ProductClass" minOccurs="0"/>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="Component" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>This element contains the information pertaining to a component.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:complexType mixed="false">
+                        <xsd:all>
+                          <xsd:element ref="Select"/>
+                          <xsd:element ref="Line"/>
+                          <xsd:element name="PhantomLine" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the phantom component line of a phantom parent exploded. This element is required when changing a component of a phantom part which has been exploded. This element is only applicable when the source of the configuration is sales orders or quotes. The format is a 5 character numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="5"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="StockCode" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the component stock code. This element will default to the stock code held against the component table. The format is 30 characters alphanumeric or 15 chararcters numeric depending on the configuration option for stock code within Syspro.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="30"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Description" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the description against the component. The description element is only applicable for non-stocked components or when the source of the configurations is sales orders or quotes. The format is a 30 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="30"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Warehouse" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the warehouse against the component. If the component is non-stocked the warehouse will be ignored. If the component is stocked and the option to override component warehouse is set then the warehouse will default to the warehouse supplied in the start phase, else if the option is not set then this element will default to the warehouse to use against the stock code. The format is a 2 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element ref="ProductClass" minOccurs="0"/>
+                          <xsd:element name="Quantity" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the quantity per of the component. This element will be ignored unless the component type is range. The quantity per will default to quantity calculated according to the options setup against that component, i.e. using calculations or selection criteria factors or the minimum quantity required. The format is a signed 7.3 numeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="12"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="UnitCost" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the cost of non-stocked components. The cost defaults to the cost held against the component. The format is 10.5 numeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceFlg" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates whether you are changing the price code of a component or the price itself. This element is only applicable when the source of the configuration is sales orders or quotes  This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created.This element will also be ignored when you have selected a non-stocked component or when the sales order setup option for pricing is set to manual. The possible values are C - (code) and P - (price). </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="C"/>
+                                <xsd:enumeration value="P"/>
+                                <xsd:enumeration value=""/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceCode" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price code against the component. The price code is only applicable when using the simple or extended pricing method which is set in sales order setup on the pricing tab within SYSPRO and when the component is stocked and when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created. This element will also be ignored when the priceflg is not set to C. The format is a 2 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Price" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price of the component. For stocked components the price will default to a calculated price according to pricing options within SYSPRO. For non-stocked components the price will default to the price against the component. This element is only applicable when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created. If you have selected a stocked component and are using the simple or extended pricing method then the priceflg element must be a P else this element will be ignored. The format is 10.5 numeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceUom" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the component price unit of measure. For stocked components this element defaults to the price unit of measure held against the stock code. For non-stocked components this element defaults to the price unit of measure held against the component. Alternatively a new price unit of measure can be calculated for you by supplying a price unit of measure factor and operand. This element is only applicable when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price. If you have selected a stocked component and are using the simple or extended pricing method then the priceflg element must be a P else this element will be ignored.The format is a 3 character alphanumeric field.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="3"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceUomMulDiv" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price unit of measure operand. Possible values: M (multiply) or D (divide). This element is only applicable when using a price unit of measure that does not exist and when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type 'K' parent is created or no parent is created.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="M"/>
+                                <xsd:enumeration value="D"/>
+                                <xsd:enumeration value=""/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="PriceUomFactor" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the price unit of measure factor. This element is only applicable when using a price unit of measure that does not exist and when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type 'K' parent is created or no parent is created. The format is 4.6 numeric.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="11"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="Commission" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates the commission for the component. The format is a 2 character alphanumeric field. This element is only applicable when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="2"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountFlag" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates if the discount value is unit or a total value. Possible value: U (unit) or V (total value). This element is only applicable when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="U"/>
+                                <xsd:enumeration value="V"/>
+                                <xsd:enumeration value=""/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPctPlusLess" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This element indicates whether the discount value should be added or subtracted from the component price value. This element is only applicable when the source of the configuration is sales orders or quotes and when using chain discount percentages. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created. Possible values: P (plus) or L (less).</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="1"/>
+                                <xsd:whiteSpace value="preserve"/>
+                                <xsd:enumeration value="P"/>
+                                <xsd:enumeration value="L"/>
+                                <xsd:enumeration value=""/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPct1" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the first discount percentage when using chain discount percentages that will be either subtracted or added to the component price value depending on the discount percentage plus less flag. The format is a 3.2 numeric field. This element is only applicable when the source of the configuration is sales orders or quotes and when the discount plus less flag is not spaces.  This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPct2" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the second discount percentage when using chain discount percentages that will be either subtracted or added to the component price value depending on the discount percentage plus less flag. The format is a signed 2.2 numeric field. This element is only applicable when the source of the configuration is sales orders or quotes and when the discount plus less flag is not spaces.  This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountPct3" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates the third discount percentage when using chain discount percentages that will be either subtracted or added to the component price value depending on the discount percentage plus less flag. The format is a signed 2.2 numeric field. This element is only applicable when the source of the configuration is sales orders or quotes and when the discount plus less flag is not spaces.  This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="6"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                          <xsd:element name="DiscountValue" minOccurs="0">
+                            <xsd:annotation>
+                              <xsd:documentation>This indicates either the total discount value or the unit discount value (depending on the discount flag) that will be added to the component price value. This element only applies when the component discount flag is either V or U.  The format is a signed 12.2 numeric field. This element is only applicable when the source of the configuration is sales orders or quotes. This element will be ignored when creating a parent part and the option against the component is to exclude the component price from the calculated parent price or a kit type "k" parent is created. </xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                              <xsd:restriction base="xsd:string">
+                                <xsd:minLength value="0"/>
+                                <xsd:maxLength value="16"/>
+                                <xsd:whiteSpace value="preserve"/>
+                              </xsd:restriction>
+                            </xsd:simpleType>
+                          </xsd:element>
+                        </xsd:all>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:choice>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates the product class of the component or operation. This element is only required when the source of the configuration is sales orders or quotes. For a stocked component this element will default to the product class held against the configuration maintenance, else if this is spaces, this element will default to the product class held against the stock code. When creating a sales order for a parent which is a kit type parent then the stocked component product class cannot be changed and the inventory master product class will be used. For a non-stocked component this element will default to the product class held against the configuration maintenance, else if this is spaces, this element will default to the product class held against the component. For an operation this element will default to the product class against the configuration maintenance, if this is spaces this element will default to the product class against the work centre, and if this is spaces it will default to _LAB. The format is a 4 character alphanumeric field. </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="4"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Select">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether you are selecting or deselecting a component/operation. You may also maintain a previously selected component/operation by supplying an S. Possible values: S (select) or D (deselect). This is a mandatory element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="1"/>
+        <xsd:maxLength value="1"/>
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

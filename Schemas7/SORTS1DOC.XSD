@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Dispatch Notes Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="DispatchNotesOptions">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element ref="General1" minOccurs="0"/>
+        <xsd:element ref="General2" minOccurs="0"/>
+        <xsd:element ref="Options" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DispNumMethod">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the Dispatch Note numbering method. (M - Manual, A - Automatic, O - Order automatic). If no value is supplied then a default value of M will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="M=Manual;A=Automatic;O=Order auotmatic;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="O"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="NxtDispNum">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the next sales dispatch number to use. This element only applies if DispNumMethod is set to  A - Automatic. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="999999999999999"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ApplyCredChkToDispNotes">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Credit checking for multiple dispatch notes is required. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DescDispUdf1">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the description for User defined field 1.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DescDispUdf2">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the description for User defined field 2.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AccPercToleranceDisp">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[This is the acceptable tolerance percentage when dispatching with theoretical units of measure. If this number is not supplied, 0 will be assumed.]]></xsd:documentation>
+      <xsd:appinfo/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:double">
+        <xsd:minInclusive value="0"/>
+        <xsd:maxInclusive value="99"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General1">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="DispNumMethod"/>
+        <xsd:element ref="NxtDispNum"/>
+        <xsd:element ref="ApplyCredChkToDispNotes"/>
+        <xsd:element ref="DescDispUdf1"/>
+        <xsd:element ref="DescDispUdf2"/>
+        <xsd:element ref="AccPercToleranceDisp"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FrtChgProc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Freight charges from the sales order needs to included on the dispatch notes. (Y - Include freight on all dispatch notes, N - Do not include freight on any dispatch notes, F - Include freight on first dispatch note, L - Include freight on last dispatch note). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Include freight on all dispatch notes;N=Do not include freight on any dispatch notes;F=Include freight on the first dispatch note;L=Include freight on the last dispatch note;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="MiscChgProc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Miscellaneous charges from the sales order needs to included on the dispatch notes. (Y - Include charge on all dispatch notes, N - Do not include charge on any dispatch notes, F - Include charge on first dispatch note, L - Include charge on last dispatch note). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Include charge on all dispatch notes;N=Do not include charge on any dispatch notes;F=Include charge on the first dispatch note;L=Include charge on the last dispatch note;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CommLnProc">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether Comments from the sales order needs to included on the dispatch notes. (Y - Include comment on all dispatch notes, N - Do not include comment on any dispatch notes, F - Include comment on first dispatch note, L - Include comment on last dispatch note). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Include comment on all dispatch notes;N=Do not include comment on any dispatch notes;F=Include comment on the first dispatch note;L=Include comment on the last dispatch note;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="F"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="DefDateDispNote">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether a default dispatch note date needs to be included. (T - Current company date, S - Sales order ship date, N - No default date). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="T=Current company date;S=Sales order ship date;N=No default date;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="General2">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FrtChgProc"/>
+        <xsd:element ref="MiscChgProc"/>
+        <xsd:element ref="CommLnProc"/>
+        <xsd:element ref="DefDateDispNote"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BasisForSOIncl">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates the quantity basis to use for a Dispatch note. (S - Ship quantity, B - Back order quantity, A - All outstanding both ship and back order). If no value is supplied then a default value of S will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="S=Ship quantity;B=Back order quantity;A=All outstanding both ship and back order;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OverDispAllow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether over dispatches are allowed. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="RetainOrgQty">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to retain original order quantity when over-dispatching.  (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UnderDispAllow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether under dispatches are allowed. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseDispNoteToConfDel">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to use invoice for confirming blanket sales order deliveries.  (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="AmendDispNotePrtReq">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether amended dispatch note reprint is required.  (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrintDispLnWithZeroDispQty">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to print dispatch note lines with a zero quantity for dispatch. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ManRelToInv">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether release for invoicing is required. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SaveCustomFrmForDispInv">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to save custom form for dispatch invoice reprint. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. (Option updated with '1' when Y, '0' when N)]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="OnlnPrtOps">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates online dispatch note printing options. (D - Dispatch, I - Invoice, B - Both, N - None). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="D=Dispatch;I=Invoice;B=Both;N=None;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="D"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="B"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="InvReprtAllow">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether online dispatch invoice reprints are required. (N - No, Y - Yes). If no value is supplied then a default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PrtDispLnsOnInv">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether to print individual dispatch note lines on invoice. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. (Option updated with '1' when Y, '0' when N)]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CanDispNoteLinesCan">
+    <xsd:annotation>
+      <xsd:documentation><![CDATA[Indicates whether the dispatch note header when all the dispatch note lines are cancelled. (Y - Yes, N - No). If no value is supplied then a default value of Y will be assumed.]]></xsd:documentation>
+      <xsd:appinfo source="Y=Yes;N=No;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="N"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="BasisForSOIncl"/>
+        <xsd:element ref="OverDispAllow"/>
+        <xsd:element ref="RetainOrgQty"/>
+        <xsd:element ref="UnderDispAllow"/>
+        <xsd:element ref="UseDispNoteToConfDel"/>
+        <xsd:element ref="AmendDispNotePrtReq"/>
+        <xsd:element ref="PrintDispLnWithZeroDispQty"/>
+        <xsd:element ref="ManRelToInv"/>
+        <xsd:element ref="SaveCustomFrmForDispInv"/>
+        <xsd:element ref="OnlnPrtOps"/>
+        <xsd:element ref="InvReprtAllow"/>
+        <xsd:element ref="PrtDispLnsOnInv"/>
+        <xsd:element ref="CanDispNoteLinesCan"/>
+        <xsd:element name="UseNonStkLedgerFrmBranch">
+          <xsd:annotation>
+            <xsd:documentation><![CDATA[Indicates whether to use non-stocked ledger control from branch. (Y - Yes, N - No). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:whiteSpace value="preserve"/>
+              <xsd:enumeration value="Y"/>
+              <xsd:enumeration value="N"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

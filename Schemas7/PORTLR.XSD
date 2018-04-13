@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2012 SYSPRO Ltd.-->
+<!-- 
+     Schema for the LCT Receipts Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostLandedCostReceipts">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Parameters">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="IgnoreWarnings" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether or not a transaction must be rejected if there are any warnings. If 'W' supplied, these errors will be reported as warnings. If it is not supplied, it defaults to 'N'. Valid values are 'N', 'W' and 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="W"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="NonStockedWhToUse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the default warehouse to be used when processing non-stocked items. If supplied, it overrides the non-stocked warehouse defined in operator defaults or company defaults in SYSPRO. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType/>
+              </xsd:element>
+              <xsd:element name="ValidateOnly" default="N">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates which processing phases are to be performed. If set to 'Y' all items are validated and an XML string is returned with the result of the validation. No updating will take place. If set to 'N', each item is validated and updating is performed. Default is 'N'. Valid values are 'N' and 'Y'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

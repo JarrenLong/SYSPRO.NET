@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the eSignatures Audit Log Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="CompanyId" type="xsd:boolean"/>
+  <xsd:element name="CompanyName" type="xsd:string"/>
+  <xsd:element name="CssStyle">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="DateFormat" type="xsd:byte"/>
+  <xsd:element name="DecFormat" type="xsd:boolean"/>
+  <xsd:element name="IncludeStatCancelled" type="xsd:string"/>
+  <xsd:element name="IncludeStatDenied" type="xsd:string"/>
+  <xsd:element name="IncludeStatIncomplete" type="xsd:string"/>
+  <xsd:element name="IncludeStatSuccessful" type="xsd:string"/>
+  <xsd:element name="Key" type="xsd:string"/>
+  <xsd:element name="Language" type="xsd:byte"/>
+  <xsd:element name="LocalCurrency" type="xsd:string"/>
+  <xsd:element name="LocalCurrencyDesc" type="xsd:string"/>
+  <xsd:element name="Operator" type="xsd:string"/>
+  <xsd:element name="OperatorCode" type="xsd:string"/>
+  <xsd:element name="OperatorEmailAddress">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="OperatorFilterType" type="xsd:string"/>
+  <xsd:element name="OperatorFilterValue">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="OperatorGroup" type="xsd:string"/>
+  <xsd:element name="OperatorLocation">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="OperatorName" type="xsd:string"/>
+  <xsd:element name="QueryOptions">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="TransactionidFilterType"/>
+        <xsd:element ref="TransactionidFilterValue"/>
+        <xsd:element ref="TransactionDateFilterType"/>
+        <xsd:element ref="TransactionDateFilterValue"/>
+        <xsd:element ref="OperatorFilterType"/>
+        <xsd:element ref="OperatorFilterValue"/>
+        <xsd:element name="VariableFilterType"/>
+        <xsd:element name="VariableFilterValue"/>
+        <xsd:element ref="IncludeStatIncomplete"/>
+        <xsd:element ref="IncludeStatSuccessful"/>
+        <xsd:element ref="IncludeStatCancelled"/>
+        <xsd:element ref="IncludeStatDenied"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportDate" type="xsd:string"/>
+  <xsd:element name="ReportType" type="xsd:string"/>
+  <xsd:element name="Role" type="xsd:byte"/>
+  <xsd:element name="SeparatorToUse" type="xsd:string"/>
+  <xsd:element name="SignatureDate" type="xsd:int"/>
+  <xsd:element name="SignatureTime" type="xsd:string"/>
+  <xsd:element name="Status" type="xsd:string"/>
+  <xsd:element name="StatusDescription" type="xsd:string"/>
+  <xsd:element name="SystemInformation">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="CssStyle"/>
+        <xsd:element ref="Language"/>
+        <xsd:element ref="DecFormat"/>
+        <xsd:element ref="DateFormat"/>
+        <xsd:element ref="Role"/>
+        <xsd:element ref="Version"/>
+        <xsd:element ref="CompanyId"/>
+        <xsd:element ref="CompanyName"/>
+        <xsd:element ref="OperatorCode"/>
+        <xsd:element ref="OperatorName"/>
+        <xsd:element ref="OperatorGroup"/>
+        <xsd:element ref="OperatorEmailAddress"/>
+        <xsd:element ref="OperatorLocation"/>
+        <xsd:element ref="LocalCurrency"/>
+        <xsd:element ref="LocalCurrencyDesc"/>
+        <xsd:element ref="ReportDate"/>
+        <xsd:element ref="UseSeparatorOnReports"/>
+        <xsd:element ref="SeparatorToUse"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionDateFilterType" type="xsd:string"/>
+  <xsd:element name="TransactionDateFilterValue">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="TransactionId">
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:byte">
+        <xsd:enumeration value="0000001"/>
+        <xsd:enumeration value="0000002"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TransactionItem">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="TransactionId"/>
+        <xsd:element name="TransactionDesc"/>
+        <xsd:element ref="SignatureDate"/>
+        <xsd:element ref="SignatureTime"/>
+        <xsd:element ref="Operator"/>
+        <xsd:element ref="Status"/>
+        <xsd:element name="StatusDesc"/>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="TransactionDet" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionidFilterType" type="xsd:string"/>
+  <xsd:element name="TransactionidFilterValue">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="UseSeparatorOnReports" type="xsd:string"/>
+  <xsd:element name="Version" type="xsd:string"/>
+  <xsd:element name="eSignatureLogReport">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="SystemInformation"/>
+        <xsd:element ref="QueryOptions"/>
+        <xsd:element ref="TransactionItem" maxOccurs="unbounded"/>
+        <xsd:element name="TranslatedText">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Text_Detail" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Summary" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_All" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Range" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Single" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Yes" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_No" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Electronic_Signature_verification_successful_but_transaction_not_yet_completed" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Operator_cancelled_from_the_Electronic_Signature_function" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Operator_denied_access_to_function" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="Text_Transaction_authorized_and_completed_successfully" type="xsd:string" minOccurs="0"/>              
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TransactionDet">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Variable"/>
+        <xsd:element name="VariableDesc"/>
+        <xsd:element ref="VariableValue"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Variable"/>
+  <xsd:element name="Description"/>
+  <xsd:element name="VariableValue"/>
+</xsd:schema>

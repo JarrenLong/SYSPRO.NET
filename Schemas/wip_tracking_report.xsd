@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the WIP Tracking Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="CompletedJobs">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether to include completed jobs, exlcude or to print only completed jobs.  FilterType options - O(Only), (I)Include, (E)Exclude. Default to E(Exclude).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;I=Include;O=Only;E=Exclude"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Filter">
+		<xsd:annotation>
+			<xsd:documentation>This is the parent element filter</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="JobSelection"/>
+				<xsd:element ref="JobClassificationSelection"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="JobClassificationSelection">
+		<xsd:annotation>
+			<xsd:documentation>All, Single, Range of job classifications to be returned. FilterType options - A(All), S(Single), R(Range).  Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=WipJobClass;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="JobSelection">
+		<xsd:annotation>
+			<xsd:documentation>All, Single, Range of jobs to be returned. FilterType options - A(All), S(Single), R(Range).  Default to A(All).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;browse=WipMaster;A=All;R=Range;S=Single"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="FilterType" use="optional" default="A">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="S"/>
+						<xsd:enumeration value="R"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="JobsOnHold">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether to include jobs on hold, exlcude or to print only  jobs on hold.  FilterType options - O(Only), (I)Include, (E)Exclude. Default to I(Include).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;I=Include;O=Only;E=Exclude"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Option">
+		<xsd:annotation>
+			<xsd:documentation>This is the parent element option</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ValuesBy" minOccurs="0"/>
+				<xsd:element ref="JobsOnHold" minOccurs="0"/>
+				<xsd:element ref="CompletedJobs" minOccurs="0"/>
+				<xsd:element ref="UnconfirmedJobs" minOccurs="0"/>
+				<xsd:element ref="PrintManufacturingUMQuantities" minOccurs="0"/>
+				<xsd:element ref="XslStylesheet" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Option"/>
+				<xsd:element ref="Filter"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UnconfirmedJobs">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether to include unconfirmed jobs, exlcude or to print only unconfirmed jobs.  FilterType options - O(Only), (I)Include, (E)Exclude. Default to E(Exclude).</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;I=Include;O=Only;E=Exclude"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValuesBy">
+		<xsd:annotation>
+			<xsd:documentation>Indicates how the values will be displayed in the report.  (N) Notional or (C) Co-product. if no selection is made then a default of (N) will be used.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;N=Notional;C=Co-product"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrintManufacturingUMQuantities">
+		<xsd:annotation>
+			<xsd:documentation>This is an option to print manufacturing unit of measure quantities instead of stocking unit of measure quantities. Valid entries are Y(Yes) or N(No). Default depends on your setup options.</xsd:documentation>
+			<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="XslStylesheet">
+		<xsd:annotation>
+			<xsd:documentation>This is the Stylesheet that will be used</xsd:documentation>
+			<xsd:appinfo source="screenItem=N"/>
+		</xsd:annotation>
+		<xsd:complexType/>
+	</xsd:element>
+</xsd:schema>

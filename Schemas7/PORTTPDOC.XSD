@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Requisition transfer Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostRequisitionCreatePo">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="User" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Requisition User authorised to transfer</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="UserPassword" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Requisition User password authorised to transfer (if required)</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="OrderHeader">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="OrderActionType" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>A = Add a new order
+U = Append to an existing order
+</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PurchaseOrder" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Entered when appending to an existing order
+Entered when adding a new order and numbering is manual</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ExchRateFixed" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element will only be relevant if processing an order for a foreign currency supplier and you selected the Allow entry/maintenance of exchange rate option (Purchase Orders Set-up) and the currency has not been flagged as Fixed on the currency conversion table (Accounts payable - Currency Setup).This element will indicate if the default fixed exchange rate is to be used when a foreign supplier is entered during order entry.  All foreign prices entered will be converted to local currency values using this fixed exchange rate. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ExchangeRate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>If processing an order for a foreign currency supplier and the currency has been flagged as fixed - an exchange rate to be applied to this order can be supplied instead of using the default fixed exchange rate</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Customer" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the customer code if the purchase order is to be processed for a customer. 
+Default from the requisition</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="TaxStatus" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the tax status of the P/order
+E = Exempt
+N = Non exempt</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PaymentTerms" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the payment terms for the order e.g. COD.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="InvoiceTerms" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the invoice terms for the purchase order. Will default to the supplier master invoice terms if not supplied when adding  </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="CustomerPoNumber" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the customer purchase order number to be used for cross-referencing purposes. 
+Default from the requisition</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ShippingInstrs" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Can be added/updated</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="OrderDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the order date to be applied for the purchase order. Must be in a CCYY-MM-DD format. Will default to current date if not supplied when adding an order</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DueDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the Due date for the purchase order. The due date defaults to the requisition due date or the current system date, if not supplied. This can be printed on the purchase order and used for selection purposes within the Purchase orders by order number report. Must be supplied in a CCYY-MM-DD format.
+Default from the requisition</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="MemoDate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the memo date to be applied to the order header. Must be entered in a CCYY-MM-DD format. The memo date defaults from the order date plus the default memo days supplied in the parameter Default Memo Days if the memo date has not been supplied when adding an order. The memo date can be set to a few days before the order due date, and when running the Purchase orders by order number report you will be able to check all the orders which are coming in on a specific date.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ApplyDueDateToLines" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates that when changing the Due date for the p/order header - the new Due date for the order header will be applied to all stocked and non-stocked detail lines for the order. Possible values  A - apply order header due date to all detail lines or L - apply order due date to all detail lines except lines that are confirmed in a LCT shipment or N - do not apply header due date to order lines.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="MemoCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the memo code to be applied to the order header. This memo code can be used as a means of identifying who raised the purchase order.  The default Memo code will be used for all new orders where a memo code has not been supplied in the Order Header. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Buyer" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the buyer responsible for purchasing the goods on the purchase order. Buyer will be validated according to the set-up options for buyer in the purchase order set-up - Options tab. If Mandatory - Buyer must be supplied and on file. If Entered - the supplied Buyer must be on file, if not entered, and not mandatory, there is no validation. 
+Default from the requisition</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryName" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the Delivery Name.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryAddr1" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the first line of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryAddr2" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the second line of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryAddr3" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the third line of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryAddrLoc" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the location in the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryAddr4" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the fourth line of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryAddr5" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the fifth line of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryGpsLat" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the GPS latitude of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryGpsLon" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the GPS longitude of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PostalCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the postal code of the Delivery address for the P/order. </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DeliveryTerms" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Intrastat delivery terms for non EU members </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ShippingLocation" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Intrastat shipping instruction for non EU members</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="AutoVoucher" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Only used if the Supplier Auto Vouchering flag is set to Y (Yes). This cannot be overriden for those Suppliers set to A (Always) or N (No).</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="LanguageCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Indicates the language code associated with the address. This is a 2 character, alphanumeric field</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DiscountLessPlus" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>You use the Order Discount elements to enter/change the discount percentages to be applied to the order. This element indicates if the discount should be added or subtracted from the order value. 
+L = Less
+P = Plus
+</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DiscPercent1" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>You use the Order Discount elements to enter/change the discount percentages to be applied to the order. This element indicates the first discount percentage. This is a signed 3 integer, 2 decimal field. If this element is not supplied, or is zero, then the elements DiscPercent2 and DiscPercent3 cannot contain a value</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DiscPercent2" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>You use the Order Discount elements to enter/change the discount percentages to be applied to the order. This element indicates the second discount percentage. This is a signed 2 integer, 2 decimal field. If this element is not supplied, or is zero, then the element DiscPercent3 cannot contain a value  </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DiscPercent3" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>You use the Order Discount elements to enter/change the discount percentages to be applied to the order. This element indicates the third discount percentage. This is a signed 2 integer, 2 decimal field.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ChgPOStatToReadyToPrint" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>If you selected the option: Set order status to ready to print after maintenance (Purchase Order Set-up), after maintaining an order (in status 4), the status will be reset to 1 if this element is set to Y (Yes). Only applicable when changing a P/order (action type = C). </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IncludeInMrp" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the flag at which a purchase order can be either included or excluded from the MRP calculation - at Header Level. Y = Yes (Default) N = No.</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="eSignature" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Password for e-signature</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="OrderDetails">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="RequisitionDetail">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Requisition">
+                            <xsd:annotation>
+                              <xsd:documentation>Indicates the requisition number to be included in the purchase order</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                          <xsd:element name="RequisitionLine">
+                            <xsd:annotation>
+                              <xsd:documentation>Indicates the requisition line to be included in the purchase order
+A valid requisition line must be entered and together with the requisition will indicate the requisition/line to be issued
+</xsd:documentation>
+                            </xsd:annotation>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

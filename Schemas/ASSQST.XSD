@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for Asset Capex Status Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Option">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ReportSequence" default="C">
+								<xsd:annotation>
+									<xsd:documentation>Defines the sequence in which the report will be printed. ( C - Capex item, B - Branch, G - Group, O - Branch/Cost center, L - Classification, T - Type). If no value is supplied a default of 'C' will be used. If a value of  'B' is passed there will be totalling by branch. If a value of "G" is passed, there will be totalling by group.If a value of "O" is passed, there will be totalling by both branch and cost center. If a value of "L" is passed, there will be totalling by classification. If a value of "T" is passed, there will be totalling by type.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;C=Capex item;B=Branch;O=Branch/cost center;L=Capex classification;T=Capex type"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="B"/>
+										<xsd:enumeration value="G"/>
+										<xsd:enumeration value="O"/>
+										<xsd:enumeration value="L"/>
+										<xsd:enumeration value="T"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="UseItemFields" default="Y">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to use the branch, cost center and group fields from the Capex item, or to use the branch, cost center and group from the individual capex lines. (Y - yes and N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeNoLines" default="N">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to include capex items which have no capex lines created for them. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeClosed" default="Y">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to include capex items with an approval status of "Closed". (Y - yes and N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeDenied" default="Y">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to include capex items with an approval status of "Denied". (Y - yes and N - No). If no value is supplied then a default value of 'Y' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PrintLines" default="Y">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether print all the capex lines included in the report.  (Y - yes and N - No). If no value is supplied then a default value of 'Y' will be used. The value "N" will serve to summarize the report.</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="Y"/>
+										<xsd:enumeration value="N"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludePos" default="N">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to include purchase orders for this capex line. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeReqs" default="N">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to include p/o requisitions for this capex line. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeJobs" default="N">
+								<xsd:annotation>
+									<xsd:documentation>Indicates whether to include wip jobs for this capex line. (N - No and Y - Yes). If no value is supplied then a default value of 'N' will be used. </xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;N=No;Y=Yes"/>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Filter">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="CapexItem">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of capex items to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetCapexItem;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CapexLine">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of capex lines to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Branch">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of asset branches to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetBranch;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AssetGroupCode">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of asset groups to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetGroup;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AssetCostCenter">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of cost centers to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetCostCenter;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CapexClass">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of capex classes to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetCapexClass;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="CapexType">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of capex types to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetCapexType;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AssetCode">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of asset codes to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All).</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;browse=AssetMaster;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Year">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of capex line start years to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All). It is important to note that this year will be combined with the period selection to form a period number to select</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Period">
+								<xsd:annotation>
+									<xsd:documentation>All,  Single, Range of capex line start periods to be returned.  FilterType options - A(All), (S)Single, (R)Range. Default to A(All). It is important to note that this period number will be combined with the year selection to form a period number to select</xsd:documentation>
+									<xsd:appinfo source="screenItem=Y;A=All;S=Single;R=Range"/>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:attribute name="FilterType" type="xsd:string" use="required"/>
+									<xsd:attribute name="FilterValue" type="xsd:string" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

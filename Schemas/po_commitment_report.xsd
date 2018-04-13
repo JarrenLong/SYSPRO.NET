@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--  
+     Schema for the Purchase Order Commitment Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="ConvertToLocalValue">
+    <xsd:annotation>
+      <xsd:documentation>These options are not available if you select to print values in a foreign currency.
+This is used to determine at which rate you want to value your figures. E - Entry time rate; C - Current rate</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;E=Entry time rate;C=Current rate"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="E"/>
+        <xsd:enumeration value="C"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="CurrencyValues">
+    <xsd:annotation>
+      <xsd:documentation>You use the Currency Options function to indicate whether you want to show order values in local or foreign currency. 
+Foreign currency orders can be shown in local currency at the current exchange rate, local currency at the exchange rate used during order entry or in the foreign currency itself. If foreign currency values are to be shown, then you must enter a single currency. L - Local currency; F - Foreign currency.  Only when select F - Foreign currency, will you be able to use the option  ForeignCurrency</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;L=Localcurrency;F=Foreign currency"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="F"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>List of Filters</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Supplier"/>
+        <xsd:element ref="PurchaseOrder"/>
+        <xsd:element ref="SupplierClass"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ForeignCurrency" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This option is available if you selected to print foreign currency orders in the CurrencyValues option. The currency selected must be a valid SYSPRO currency. Default - Blank.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=TblCurrency;A=All;S=Single"/>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>List of Options</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="ReportProjectionDays"/>
+        <xsd:element ref="CurrencyValues"/>
+        <xsd:element ref="ConvertToLocalValue"/>
+        <xsd:element ref="ForeignCurrency"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PurchaseOrder">
+    <xsd:annotation>
+      <xsd:documentation>Use this to print the report for all or certain purchase orders. A - All; R - Range; S - Single. Default - A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=PorMasterHdr;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root node</xsd:documentation>
+      <xsd:appinfo source="screenItem=N"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Option"/>
+        <xsd:element ref="Filter"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ReportProjectionDays">
+    <xsd:annotation>
+      <xsd:documentation>You use this field to enter the number of days required to represent each period. You my enter a value from 1 - 99.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType">
+    <xsd:annotation>
+      <xsd:documentation>This will determine if the report will be in summary or detail. S - Summary; D - Detail. Default S - Summary</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;S=Summary;D=Detail"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="S"/>
+        <xsd:enumeration value="D"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Supplier">
+    <xsd:annotation>
+      <xsd:documentation>Use this to print the report for all or certain suppliers. A - All; R - Range; S - Single. Default - A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Browse=ApSupplier;A=All;S=Single;R=Range"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SupplierClass">
+    <xsd:annotation>
+      <xsd:documentation>Use this to print the report for all or a single supplier class. A - All; S - Single. Default - A - All.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=All;S=Single"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

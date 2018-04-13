@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!--
+     Schema for the General Ledger Query Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="Query">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="Key">
+					<xsd:annotation>
+						<xsd:documentation>This element contains the key on which the query is to be performed.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="LedgerCode">
+								<xsd:annotation>
+									<xsd:documentation>This is a mandatory element and must contain a valid SYSPRO Ledger code. The format is fifteen characters, alphanumeric.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="15"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Option">
+					<xsd:annotation>
+						<xsd:documentation>This element contains optional parameters to increase / decrease the amount of information returned, or change the sequence of the data returned.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType mixed="false">
+						<xsd:sequence>
+							<xsd:element name="LedgerCodePassword" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element is only relevant if the 'LedgerCode' selected has a password. The password applicable to the selected 'LedgerCode' must be provided.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="30"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Currency" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to indicate the currency in which the data must be returned. The currency provided must be a valid SYSPRO currency. If this element is not provided, the SYSPRO local currency will be used.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="3"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GlYear" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to indicate the financial year for which the history must be returned. If this element is not provided, the current SYSPRO financial year will be used.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="4"/>
+										<xsd:whiteSpace value="preserve"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BudgetType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to indicate which set of budgets ( C- current financial year, N - Next financial year, 1 - Alternate currency 1, 2 - Alternate currency 2, 3- Alternate currency 3, 4 - Alternate currency 4, 5 - Alternate currency 5, 6 - Alternate currency 6, 7 - Alternate currency 7 , 8 - Alternate currency 8) must be returned. If this element is not provided, no budget will be returned.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="C"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="1"/>
+										<xsd:enumeration value="2"/>
+										<xsd:enumeration value="3"/>
+										<xsd:enumeration value="4"/>
+										<xsd:enumeration value="5"/>
+										<xsd:enumeration value="6"/>
+										<xsd:enumeration value="7"/>
+										<xsd:enumeration value="8"/>
+										<xsd:enumeration value=""/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AddSeparators" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to indicate if separator characters (defined in Structured G/L definition) are to be automatically inserted into the supplied ledger code. This option would only be used if the supplied ledger code does not already contain the separator characters. Y - Yes and N  - No.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="1"/>
+										<xsd:minLength value="0"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeCustomForms" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Do you wish to include fields from custom forms ? (N - No, Y - Yes,). Default is N - No.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="IncludeTransactions" default="N" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Used to Include or Exclude detailed ledger transactions in the returned data. (Y - Yes, N - No) If this element is not provided no detailed transactions will be returned. </xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="0"/>
+										<xsd:maxLength value="1"/>
+										<xsd:whiteSpace value="preserve"/>
+										<xsd:enumeration value="N"/>
+										<xsd:enumeration value="Y"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Transactions" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>This element contains the detailed transaction parameters to increase / decrease the amount of information returned, or change the sequence of the data returned.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType mixed="false">
+									<xsd:sequence>
+										<xsd:element name="MaxRowsToReturn" default="100" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Used to indicate the maximum number of  detailed transaction lines to  be returned. If the element is not provided and the 'IncludeTransactions' is a 'Y', not more than 100 lines will be returned. '999999' will return all detailed transaction lines for the selected 'LedgerCode'.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="6"/>
+													<xsd:whiteSpace value="preserve"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SourceCode" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Used to indicate the source code of the transactions to be returned. If the element is not provided and the 'IncludeTransactions' is a 'Y', all types of source codes will be returned. </xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="2"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value=""/>
+													<xsd:enumeration value="AP"/>
+													<xsd:enumeration value="AR"/>
+													<xsd:enumeration value="SA"/>
+													<xsd:enumeration value="CS"/>
+													<xsd:enumeration value="IN"/>
+													<xsd:enumeration value="GR"/>
+													<xsd:enumeration value="AS"/>
+													<xsd:enumeration value="PA"/>
+													<xsd:enumeration value="WP"/>
+													<xsd:enumeration value="JE"/>
+													<xsd:enumeration value="PV"/>
+													<xsd:enumeration value="RV"/>
+													<xsd:enumeration value="IC"/>
+													<xsd:enumeration value="PE"/>
+													<xsd:enumeration value="AV"/>
+													<xsd:enumeration value="YE"/>
+													<xsd:enumeration value="HM"/>
+													<xsd:enumeration value="ST"/>
+													<xsd:enumeration value="AC"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="StartAtKey" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>This element contains the key information to return detailed transactions from a certain point in the file.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:all>
+													<xsd:element name="Period" default="0" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Used to indicate from what SYSPRO period the first detailed transaction must be returned. If the element is not provided either the first or the last transaction will be returned, depending of the 'Direction' selected.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="2"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="Line" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Used to indicate from which SYSPRO line the first detailed transaction must be returned.The line number in SYSPRO is alphanumeric, so all numeric values must be zero padded. ie if you want to start on line number 5, a value of '00005' should be passed. If the element is not provided either the first or the last transaction will be returned, depending of the 'Direction' selected.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="0"/>
+																<xsd:maxLength value="5"/>
+																<xsd:whiteSpace value="preserve"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:all>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="Direction" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Indicates whether the previous or next detailed transaction lines should be returned. If the element is not provided the next set of detailed transaction lines will be provided.</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="8"/>
+													<xsd:whiteSpace value="preserve"/>
+													<xsd:enumeration value="pagedown"/>
+													<xsd:enumeration value="pageup"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Filter" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>The list of filters</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType mixed="false">
+												<xsd:all>
+													<xsd:element name="SelectPeriods" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Select Range of periods. Valid filter types are 'A' - All periods, 'R' - Range of periods and 'S' - single period. If no filter type is provided the filter type will default to 'A'. When the FilterType is 'A' all transactions will be selected and the FilterValue will be ignored. If the FilterType is 'S' and no FilterValue is provided, the program will default to the current SYSPRO period. If the FilterType is 'R' and no FilterValue is provided, the program will default the start and end period to the currency SYSPRO period.</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:simpleContent>
+																<xsd:extension base="xsd:string">
+																	<xsd:attribute name="FilterType" use="optional" default="A">
+																		<xsd:simpleType>
+																			<xsd:restriction base="xsd:string">
+																				<xsd:whiteSpace value="preserve"/>
+																			</xsd:restriction>
+																		</xsd:simpleType>
+																	</xsd:attribute>
+																	<xsd:attribute name="FilterValue" use="optional">
+																		<xsd:simpleType>
+																			<xsd:restriction base="xsd:string">
+																				<xsd:whiteSpace value="preserve"/>
+																			</xsd:restriction>
+																		</xsd:simpleType>
+																	</xsd:attribute>
+																</xsd:extension>
+															</xsd:simpleContent>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:all>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="XslStylesheet" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

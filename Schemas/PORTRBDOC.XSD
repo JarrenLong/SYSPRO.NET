@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2010 SYSPRO Ltd.-->
+<!-- 
+     Schema for the SO Invoice Calculation from Sales Order Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostRequisitionBudget">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>This element contains information to add or update a requisition budget entry</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="RequisitionGroup">
+                <xsd:annotation>
+                  <xsd:documentation>This must contain a valid Requisition Group</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="6"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProductClass" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the setup option to monitor budgets by product class is selected, then a valid product must be given</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="StockCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If the setup option to monitor budgets by stock code is selected, then a valid stock codemust be given. Either 30 characters alphabetic, or 15 characters numeric depending on comapny setup</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="30"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BudgetYear" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is the year the budget is effective. If not provided, the current calendar year will be used. If entered, the year must not be before the current SYSPRO year.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="4"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="GroupBudget1" minOccurs="0"/>
+              <xsd:element name="GroupBudget2" minOccurs="0"/>
+              <xsd:element name="GroupBudget3" minOccurs="0"/>
+              <xsd:element name="GroupBudget4" minOccurs="0"/>
+              <xsd:element name="GroupBudget5" minOccurs="0"/>
+              <xsd:element name="GroupBudget6" minOccurs="0"/>
+              <xsd:element name="GroupBudget7" minOccurs="0"/>
+              <xsd:element name="GroupBudget8" minOccurs="0"/>
+              <xsd:element name="GroupBudget9" minOccurs="0"/>
+              <xsd:element name="GroupBudget10" minOccurs="0"/>
+              <xsd:element name="GroupBudget11" minOccurs="0"/>
+              <xsd:element name="GroupBudget12" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="12"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SpreadAmount" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="13"/>
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SpreadType" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If this is 'M', then the contents of SpreadAmount' will be entered into each of the 12 budgets, ignoring any other entries in the budgets. If this is 'A', then the contents of SpreadAmount' will be apportioned equally into each of the 12 budgets, ignoring any other entries in the budgets. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="M"/>
+                    <xsd:enumeration value="A"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="NonStockedEntry" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This is only applicable if the budgets are to be checked at stock code level. Then an entry of 'Y' will denote that a product class is being entered for use with non-stocked requisitions.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="0"/>
+                    <xsd:maxLength value="1"/>
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value=""/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

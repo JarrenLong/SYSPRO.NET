@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2013 SYSPRO Ltd.-->
+<!-- 
+     This is an example XML instance to demonstrate
+     use of the SO Load planning Add Sales order Lines Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="DeliveryDate" type="xsd:date"/>
+	<xsd:element name="DeliveryRoute">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Route1"/>
+				<xsd:enumeration value="Route2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DeliverySequence" type="xsd:boolean"/>
+	<xsd:element name="Item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="eSignature" minOccurs="0"/>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="SOrderLine" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DeliveryRoute"/>
+				<xsd:element ref="DeliveryDate"/>
+				<xsd:element ref="DeliverySequence"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PostLPAddSalesOrderLines">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SOrderLine">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SalesOrder"/>
+				<xsd:element ref="SalesOrderLine"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SalesOrder">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:short">
+				<xsd:enumeration value="000123"/>
+				<xsd:enumeration value="000125"/>
+				<xsd:enumeration value="000129"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SalesOrderLine">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:byte">
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

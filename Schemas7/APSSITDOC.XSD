@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the AP Invoice Terms Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="TermsCode">
+		<xsd:annotation>
+			<xsd:documentation>This is the key to the AP Invoice Terms Code being maintained. This is mandatory. If this AP Invoice Terms Code is being added, it must not pre-exist. If this AP Invoice Terms Code is being changed or deleted, it must be a valid SYSPRO AP Invoice Terms Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Description">
+		<xsd:annotation>
+			<xsd:documentation>This is the name of the AP Invoice Terms Code and is used primarily to identify the AP Invoice Terms Code. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscPct" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the discount percentage for this AP Terms Code.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscFix">
+		<xsd:annotation>
+			<xsd:documentation>This reflects whether the discount is a fixed day of the month for this AP Terms Code. (Y - Yes, N - No) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DiscDays" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the days discount allowed for this AP Terms Code.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscDayOfMonth" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the day discount is allowed for this AP Terms Code when discount option is fixed day (DiscFix = "Y").</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DiscMonths" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the number of discount months for the AP Terms Code if fixed discount day of month.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DueFix">
+		<xsd:annotation>
+			<xsd:documentation>This reflects whether the due date is a fixed day of the month for this AP Terms Code. (Y - Yes, N - No) </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DueDays" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the days until due for this AP Terms Code.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DueDayOfMonth" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the day of the month the invoice is due for this AP Terms Code when invoice due option is fixed day (DueFix = "Y").</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DueMonths" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation>This reflects the number of due months for the AP Terms Code if fixed due day of month.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>Mandatory element.This is the top element for all data required for the transaction. This element can occur multiple times as the business object caters for the posting additions, changes and deletions to AP Invoice Terms Codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="Key"/>
+				<xsd:element name="Description">
+					<xsd:annotation>
+						<xsd:documentation>This is the name of the AP Invoice Terms Code and is used primarily to identify the AP Invoice Terms Code. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:whiteSpace value="preserve"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="DiscPct" minOccurs="0"/>
+				<xsd:element ref="DiscFix" minOccurs="0"/>
+				<xsd:element ref="DiscDays" minOccurs="0"/>
+				<xsd:element ref="DiscDayOfMonth" minOccurs="0"/>
+				<xsd:element ref="DiscMonths" minOccurs="0"/>
+				<xsd:element ref="DueFix" minOccurs="0"/>
+				<xsd:element ref="DueDays" minOccurs="0"/>
+				<xsd:element ref="DueDayOfMonth" minOccurs="0"/>
+				<xsd:element ref="DueMonths" minOccurs="0"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain a AP Invoice Terms Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element ref="TermsCode"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SetupApInvoiceTerms">
+		<xsd:annotation>
+			<xsd:documentation>This is the top element for all data required for Ap InvoiceTerms Code maintenance. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

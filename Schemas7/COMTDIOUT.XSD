@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Sample Schema out for the Generate SQL Script Transaction Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AddFKeySQLScript">
+    <xsd:annotation>
+      <xsd:documentation>Details for the Add Foreign key script. Only generated if GenerateAddFKey = "Y" and CreateSingleScript is not "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FileName"/>
+        <xsd:element ref="Script" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="AddKeySQLScript">
+    <xsd:annotation>
+      <xsd:documentation>Details for the Drop and Add key script. Only generated if GenerateIndexScript = "Y" and CreateSingleScript is not "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FileName"/>
+        <xsd:element ref="Script" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="DropFKeySQLScript">
+    <xsd:annotation>
+      <xsd:documentation>Details for the Drop foreign Key script. Only generated if GenerateDropFKey = "Y" and CreateSingleScript is not "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FileName"/>
+        <xsd:element ref="Script" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FileName" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>File name to the SQL script generated inthe application server Work folder.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FullSQLScript">
+    <xsd:annotation>
+      <xsd:documentation>Details for the single SQL script. Only generated if CreateSingleScript = "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FileName"/>
+        <xsd:element ref="Script" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Script">
+    <xsd:annotation>
+      <xsd:documentation>SQL script generated. Only returned if ReturnSqlScript = "Y".</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="postsqlscripts">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="FullSQLScript" minOccurs="0"/>
+        <xsd:element ref="DropFKeySQLScript" minOccurs="0"/>
+        <xsd:element ref="AddKeySQLScript" minOccurs="0"/>
+        <xsd:element ref="AddFKeySQLScript" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="Language" type="xsd:string" use="required"/>
+      <xsd:attribute name="Language2" type="xsd:string" use="required"/>
+      <xsd:attribute name="CssStyle" type="xsd:string" use="required"/>
+      <xsd:attribute name="DecFormat" type="xsd:string" use="required"/>
+      <xsd:attribute name="DateFormat" type="xsd:string" use="required"/>
+      <xsd:attribute name="Role" type="xsd:string" use="required"/>
+      <xsd:attribute name="Version" type="xsd:string" use="required"/>
+      <xsd:attribute name="OperatorPrimaryRole" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

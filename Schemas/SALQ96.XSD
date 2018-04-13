@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2011 SYSPRO Ltd.-->
+<!--
+     Schema for Sales Order Target Analysis Business Object
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="Query">
+    <xsd:annotation>
+      <xsd:documentation>The root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Option" minOccurs="0"/>
+        <xsd:element ref="Filter" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:annotation>
+      <xsd:documentation>The Sales Analysis Target Type key to use for this query.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:all>
+        <xsd:element ref="TargetType"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+ <xsd:element name="TargetType">
+    <xsd:annotation>
+      <xsd:documentation>The sales target type definition code. The specific definition of the target selected will determine which of the filter criteria are applicable.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalHistorySumCtl;key=true;SalHistorySumCtl=true"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Option">
+    <xsd:annotation>
+      <xsd:documentation>The list of options.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="TrnYear"/>
+        <xsd:element ref="ReportType"/>
+        <xsd:element ref="ZeroValues"/>
+        <xsd:element ref="SubTotals"/>
+        <xsd:element ref="SalesBranch"/>
+        <xsd:element ref="TargetMetric"/>
+        <xsd:element ref="PageBreakChange"/>
+        <xsd:element ref="Key1TopBottom"/>
+        <xsd:element ref="Key1NumberTopBottom"/>
+        <xsd:element ref="Key1BasedOnMeasure"/>
+        <xsd:element ref="Key2TopBottom"/>
+        <xsd:element ref="Key2NumberTopBottom"/>
+        <xsd:element ref="Key2BasedOnMeasure"/>
+        <xsd:element ref="Key3TopBottom"/>
+        <xsd:element ref="Key3NumberTopBottom"/>
+        <xsd:element ref="Key3BasedOnMeasure"/>
+        <xsd:element ref="XslStylesheet"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="TrnYear">
+    <xsd:annotation>
+      <xsd:documentation>The Financial year to run the report in. Will default to the current year if not specified.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"/>
+			<xsd:maxLength value="4"/>
+			<xsd:whiteSpace value="preserve"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ReportType" default="P">
+    <xsd:annotation>
+      <xsd:documentation>Report Type, either P)erformance, A)chievement or B)oth</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;A=Achievement;P=Performance;B=Both"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="A"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="ZeroValues" default="E">
+    <xsd:annotation>
+      <xsd:documentation>Zero value behaviour: I)nclude zeros, E)xclude zeros, O)nly show zeros.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;O=Only show zeros;I=Include zeros;E=Exclude zeros"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="O"/>
+        <xsd:enumeration value="I"/>
+        <xsd:enumeration value="E"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SubTotals" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Are subtotals per Key Area required.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="SalesBranch">
+      <xsd:annotation>
+      <xsd:documentation>The Sales Branch used to find the sales  representative's names. If none is given each branch will be tried in turn.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="TargetMetric" default="P">
+    <xsd:annotation>
+      <xsd:documentation>Print P)rofit, Q)uantity, M)ass, V)olume or A)ll figures and results.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;P=Profit;Q=Quantity;V=Volume;A=All"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="P"/>
+        <xsd:enumeration value="Q"/>
+        <xsd:enumeration value="M"/>
+        <xsd:enumeration value="V"/>
+        <xsd:enumeration value="A"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="PageBreakChange" default="N">
+    <xsd:annotation>
+      <xsd:documentation>Page break when key value changes.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key1TopBottom">
+    <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom key 1 items are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key1NumberTopBottom">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of key 1 items to include on the report. Default -3.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key1BasedOnMeasure">
+    <xsd:annotation>
+      <xsd:documentation>This indicates which measure key 1 items will be sequenced in. ASM1-ActualSalesMTD, ACM1-ActualCostMTD, ASY1-ActualSalesYTD, ACY1-ActualCostYTD, TSM1-TargetSalesMTD, TCM1-TargetCostMTD, TSY1-TargetSalesYTD, TCY1-TargetCostYTD, ASM2-ActualSalesProfitGrossMTD, ASY2-ActualSalesProfitGrossYTD, TSM2-TargetSalesProfitGrossMTD, TSY2-TargetSalesProfitGrossYTD, ASM3-ActualSalesProfitNettPercMTD, TSM3-TargetSalesProfitNettPercMTD, ASM4-ActualSalesToTargetRatioPercMTD, ASM5-ActualSalesGrossToTargetGrossRatioPercMTD, ASM6-ActualSalesGrossPercToTargetGrossPercRatioPercMTD, ASY3-ActualSalesProfitNettPercYTD, TSY3-TargetSalesProfitNettPercYTD, ASY4-ActualSalesToTargetRatioPercYTD, ASY5-ActualSalesGrossToTargetGrossRatioPercYTD, ASY6-ActualSalesGrossPercToTargetGrossPercRatioPercYTD, ASM7-ActualSalesToTargetVariancePercMTD, ASM8-ActualSalesGrossToTargetGrossVariancePercMTD, ASY7-ActualSalesGrossToTargetGrossVariancePercYTD, ASY8-ActualSalesToTargetVariancePercYTD,
+      ASMA-ActualSalesGrossVarPercToTargetGrossVarPercMTD, ASYA-ActualSalesGrossVarPercToTargetGrossVarPercYTD, ASM9-ActualSalesQuantityMTD, ASY9-ActualSalesQuantityYTD, TQM1-TargetQuantityMTD, TQY1-TargetQuantityYTD, XQM1-ActualSalesToTargetQuantityRatioPercMTD, XQY1-ActualSalesToTargetQuantityRatioPercYTD, XQY2-ActualSalesToTargetQuantityVariancePercYTD, XQM2-ActualSalesToTargetQuantityVariancePercMTD, AMM1-ActualSalesMassMTD, AMY1-ActualSalesMassYTD, TMM1-TargetMassMTD, TMY1-TargetMassYTD, XMM1-ActualSalesToTargetMassRatioPercMTD, XMY1-ActualSalesToTargetMassRatioPercYTD, XMM2-ActualSalesToTargetMassVariancePercMTD, XMY2-ActualSalesToTargetMassVariancePercYTD, AVM1-ActualSalesVolumeMTD, AVY1-ActualSalesVolumeYTD, TVM1-TargetVolumeMTD, TVY1-TargetVolumeYTD, XMM3-ActualSalesToTargetVolumeRatioPercMTD, XMY3-ActualSalesToTargetVolumeRatioPercYTD, XMM4-ActualSalesToTargetVolumeVariancePercMTD, XMY4-ActualSalesToTargetVolumeVariancePercYTD. Default -ASM1.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="ASM1"/>
+        <xsd:enumeration value="ACM1"/>
+        <xsd:enumeration value="ASY1"/>
+        <xsd:enumeration value="ACY1"/>
+        <xsd:enumeration value="TSM1"/>
+        <xsd:enumeration value="TCM1"/>
+        <xsd:enumeration value="TSY1"/>
+        <xsd:enumeration value="TCY1"/>
+        <xsd:enumeration value="ASM2"/>
+        <xsd:enumeration value="ASY2"/>
+        <xsd:enumeration value="TSM2"/>
+        <xsd:enumeration value="TSY2"/>
+        <xsd:enumeration value="ASM3"/>
+        <xsd:enumeration value="TSM3"/>
+        <xsd:enumeration value="ASM4"/>
+        <xsd:enumeration value="ASM5"/>
+        <xsd:enumeration value="ASM6"/>
+        <xsd:enumeration value="ASY3"/>
+        <xsd:enumeration value="TSY3"/>
+        <xsd:enumeration value="ASY4"/>
+        <xsd:enumeration value="ASY5"/>
+        <xsd:enumeration value="ASY6"/>
+        <xsd:enumeration value="ASM7"/>
+        <xsd:enumeration value="ASM8"/>
+        <xsd:enumeration value="ASY7"/>
+        <xsd:enumeration value="ASY8"/>
+        <xsd:enumeration value="ASMA"/>
+        <xsd:enumeration value="ASYA"/>
+        <xsd:enumeration value="ASM9"/>
+        <xsd:enumeration value="ASY9"/>
+        <xsd:enumeration value="TQM1"/>
+        <xsd:enumeration value="TQY1"/>
+        <xsd:enumeration value="XQM1"/>
+        <xsd:enumeration value="XQY1"/>
+        <xsd:enumeration value="XQY2"/>
+        <xsd:enumeration value="XQM2"/>
+        <xsd:enumeration value="AMM1"/>
+        <xsd:enumeration value="AMY1"/>
+        <xsd:enumeration value="TMM1"/>
+        <xsd:enumeration value="TMY1"/>
+        <xsd:enumeration value="XMM1"/>
+        <xsd:enumeration value="XMY1"/>
+        <xsd:enumeration value="XMM2"/>
+        <xsd:enumeration value="XMY2"/>
+        <xsd:enumeration value="AVM1"/>
+        <xsd:enumeration value="AVY1"/>
+        <xsd:enumeration value="TVM1"/>
+        <xsd:enumeration value="TVY1"/>
+        <xsd:enumeration value="XMM3"/>
+        <xsd:enumeration value="XMY3"/>
+        <xsd:enumeration value="XMM4"/>
+        <xsd:enumeration value="XMY4"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key2TopBottom">
+      <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom key 2 items are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key2NumberTopBottom">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of key 2 items to include on the report. Default -3.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key2BasedOnMeasure">
+      <xsd:annotation>
+      <xsd:documentation>This indicates which measure key 2 items will be sequenced in. ASM1-ActualSalesMTD, ACM1-ActualCostMTD, ASY1-ActualSalesYTD, ACY1-ActualCostYTD, TSM1-TargetSalesMTD, TCM1-TargetCostMTD, TSY1-TargetSalesYTD, TCY1-TargetCostYTD, ASM2-ActualSalesProfitGrossMTD, ASY2-ActualSalesProfitGrossYTD, TSM2-TargetSalesProfitGrossMTD, TSY2-TargetSalesProfitGrossYTD, ASM3-ActualSalesProfitNettPercMTD, TSM3-TargetSalesProfitNettPercMTD, ASM4-ActualSalesToTargetRatioPercMTD, ASM5-ActualSalesGrossToTargetGrossRatioPercMTD, ASM6-ActualSalesGrossPercToTargetGrossPercRatioPercMTD, ASY3-ActualSalesProfitNettPercYTD, TSY3-TargetSalesProfitNettPercYTD, ASY4-ActualSalesToTargetRatioPercYTD, ASY5-ActualSalesGrossToTargetGrossRatioPercYTD, ASY6-ActualSalesGrossPercToTargetGrossPercRatioPercYTD, ASM7-ActualSalesToTargetVariancePercMTD, ASM8-ActualSalesGrossToTargetGrossVariancePercMTD, ASY7-ActualSalesGrossToTargetGrossVariancePercYTD, ASY8-ActualSalesToTargetVariancePercYTD,
+      ASMA-ActualSalesGrossVarPercToTargetGrossVarPercMTD, ASYA-ActualSalesGrossVarPercToTargetGrossVarPercYTD, ASM9-ActualSalesQuantityMTD, ASY9-ActualSalesQuantityYTD, TQM1-TargetQuantityMTD, TQY1-TargetQuantityYTD, XQM1-ActualSalesToTargetQuantityRatioPercMTD, XQY1-ActualSalesToTargetQuantityRatioPercYTD, XQY2-ActualSalesToTargetQuantityVariancePercYTD, XQM2-ActualSalesToTargetQuantityVariancePercMTD, AMM1-ActualSalesMassMTD, AMY1-ActualSalesMassYTD, TMM1-TargetMassMTD, TMY1-TargetMassYTD, XMM1-ActualSalesToTargetMassRatioPercMTD, XMY1-ActualSalesToTargetMassRatioPercYTD, XMM2-ActualSalesToTargetMassVariancePercMTD, XMY2-ActualSalesToTargetMassVariancePercYTD, AVM1-ActualSalesVolumeMTD, AVY1-ActualSalesVolumeYTD, TVM1-TargetVolumeMTD, TVY1-TargetVolumeYTD, XMM3-ActualSalesToTargetVolumeRatioPercMTD, XMY3-ActualSalesToTargetVolumeRatioPercYTD, XMM4-ActualSalesToTargetVolumeVariancePercMTD, XMY4-ActualSalesToTargetVolumeVariancePercYTD. Default -ASM1.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="ASM1"/>
+        <xsd:enumeration value="ACM1"/>
+        <xsd:enumeration value="ASY1"/>
+        <xsd:enumeration value="ACY1"/>
+        <xsd:enumeration value="TSM1"/>
+        <xsd:enumeration value="TCM1"/>
+        <xsd:enumeration value="TSY1"/>
+        <xsd:enumeration value="TCY1"/>
+        <xsd:enumeration value="ASM2"/>
+        <xsd:enumeration value="ASY2"/>
+        <xsd:enumeration value="TSM2"/>
+        <xsd:enumeration value="TSY2"/>
+        <xsd:enumeration value="ASM3"/>
+        <xsd:enumeration value="TSM3"/>
+        <xsd:enumeration value="ASM4"/>
+        <xsd:enumeration value="ASM5"/>
+        <xsd:enumeration value="ASM6"/>
+        <xsd:enumeration value="ASY3"/>
+        <xsd:enumeration value="TSY3"/>
+        <xsd:enumeration value="ASY4"/>
+        <xsd:enumeration value="ASY5"/>
+        <xsd:enumeration value="ASY6"/>
+        <xsd:enumeration value="ASM7"/>
+        <xsd:enumeration value="ASM8"/>
+        <xsd:enumeration value="ASY7"/>
+        <xsd:enumeration value="ASY8"/>
+        <xsd:enumeration value="ASMA"/>
+        <xsd:enumeration value="ASYA"/>
+        <xsd:enumeration value="ASM9"/>
+        <xsd:enumeration value="ASY9"/>
+        <xsd:enumeration value="TQM1"/>
+        <xsd:enumeration value="TQY1"/>
+        <xsd:enumeration value="XQM1"/>
+        <xsd:enumeration value="XQY1"/>
+        <xsd:enumeration value="XQY2"/>
+        <xsd:enumeration value="XQM2"/>
+        <xsd:enumeration value="AMM1"/>
+        <xsd:enumeration value="AMY1"/>
+        <xsd:enumeration value="TMM1"/>
+        <xsd:enumeration value="TMY1"/>
+        <xsd:enumeration value="XMM1"/>
+        <xsd:enumeration value="XMY1"/>
+        <xsd:enumeration value="XMM2"/>
+        <xsd:enumeration value="XMY2"/>
+        <xsd:enumeration value="AVM1"/>
+        <xsd:enumeration value="AVY1"/>
+        <xsd:enumeration value="TVM1"/>
+        <xsd:enumeration value="TVY1"/>
+        <xsd:enumeration value="XMM3"/>
+        <xsd:enumeration value="XMY3"/>
+        <xsd:enumeration value="XMM4"/>
+        <xsd:enumeration value="XMY4"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key3TopBottom">
+      <xsd:annotation>
+      <xsd:documentation>This indicates whether the Top or Bottom key 3 items are required on the report. T-Top, B-Bottom. Default -T.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="B"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key3NumberTopBottom">
+    <xsd:annotation>
+      <xsd:documentation>This indicates the number of key 3 items to include on the report. Default -3.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:minLength value="0"/>
+        <xsd:maxLength value="2"/>
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Key3BasedOnMeasure">
+      <xsd:annotation>
+      <xsd:documentation>This indicates which measure key 3 items will be sequenced in. ASM1-ActualSalesMTD, ACM1-ActualCostMTD, ASY1-ActualSalesYTD, ACY1-ActualCostYTD, TSM1-TargetSalesMTD, TCM1-TargetCostMTD, TSY1-TargetSalesYTD, TCY1-TargetCostYTD, ASM2-ActualSalesProfitGrossMTD, ASY2-ActualSalesProfitGrossYTD, TSM2-TargetSalesProfitGrossMTD, TSY2-TargetSalesProfitGrossYTD, ASM3-ActualSalesProfitNettPercMTD, TSM3-TargetSalesProfitNettPercMTD, ASM4-ActualSalesToTargetRatioPercMTD, ASM5-ActualSalesGrossToTargetGrossRatioPercMTD, ASM6-ActualSalesGrossPercToTargetGrossPercRatioPercMTD, ASY3-ActualSalesProfitNettPercYTD, TSY3-TargetSalesProfitNettPercYTD, ASY4-ActualSalesToTargetRatioPercYTD, ASY5-ActualSalesGrossToTargetGrossRatioPercYTD, ASY6-ActualSalesGrossPercToTargetGrossPercRatioPercYTD, ASM7-ActualSalesToTargetVariancePercMTD, ASM8-ActualSalesGrossToTargetGrossVariancePercMTD, ASY7-ActualSalesGrossToTargetGrossVariancePercYTD, ASY8-ActualSalesToTargetVariancePercYTD,
+      ASMA-ActualSalesGrossVarPercToTargetGrossVarPercMTD, ASYA-ActualSalesGrossVarPercToTargetGrossVarPercYTD, ASM9-ActualSalesQuantityMTD, ASY9-ActualSalesQuantityYTD, TQM1-TargetQuantityMTD, TQY1-TargetQuantityYTD, XQM1-ActualSalesToTargetQuantityRatioPercMTD, XQY1-ActualSalesToTargetQuantityRatioPercYTD, XQY2-ActualSalesToTargetQuantityVariancePercYTD, XQM2-ActualSalesToTargetQuantityVariancePercMTD, AMM1-ActualSalesMassMTD, AMY1-ActualSalesMassYTD, TMM1-TargetMassMTD, TMY1-TargetMassYTD, XMM1-ActualSalesToTargetMassRatioPercMTD, XMY1-ActualSalesToTargetMassRatioPercYTD, XMM2-ActualSalesToTargetMassVariancePercMTD, XMY2-ActualSalesToTargetMassVariancePercYTD, AVM1-ActualSalesVolumeMTD, AVY1-ActualSalesVolumeYTD, TVM1-TargetVolumeMTD, TVY1-TargetVolumeYTD, XMM3-ActualSalesToTargetVolumeRatioPercMTD, XMY3-ActualSalesToTargetVolumeRatioPercYTD, XMM4-ActualSalesToTargetVolumeVariancePercMTD, XMY4-ActualSalesToTargetVolumeVariancePercYTD. Default -ASM1.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;Y=Yes;N=No"/>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="ASM1"/>
+        <xsd:enumeration value="ACM1"/>
+        <xsd:enumeration value="ASY1"/>
+        <xsd:enumeration value="ACY1"/>
+        <xsd:enumeration value="TSM1"/>
+        <xsd:enumeration value="TCM1"/>
+        <xsd:enumeration value="TSY1"/>
+        <xsd:enumeration value="TCY1"/>
+        <xsd:enumeration value="ASM2"/>
+        <xsd:enumeration value="ASY2"/>
+        <xsd:enumeration value="TSM2"/>
+        <xsd:enumeration value="TSY2"/>
+        <xsd:enumeration value="ASM3"/>
+        <xsd:enumeration value="TSM3"/>
+        <xsd:enumeration value="ASM4"/>
+        <xsd:enumeration value="ASM5"/>
+        <xsd:enumeration value="ASM6"/>
+        <xsd:enumeration value="ASY3"/>
+        <xsd:enumeration value="TSY3"/>
+        <xsd:enumeration value="ASY4"/>
+        <xsd:enumeration value="ASY5"/>
+        <xsd:enumeration value="ASY6"/>
+        <xsd:enumeration value="ASM7"/>
+        <xsd:enumeration value="ASM8"/>
+        <xsd:enumeration value="ASY7"/>
+        <xsd:enumeration value="ASY8"/>
+        <xsd:enumeration value="ASMA"/>
+        <xsd:enumeration value="ASYA"/>
+        <xsd:enumeration value="ASM9"/>
+        <xsd:enumeration value="ASY9"/>
+        <xsd:enumeration value="TQM1"/>
+        <xsd:enumeration value="TQY1"/>
+        <xsd:enumeration value="XQM1"/>
+        <xsd:enumeration value="XQY1"/>
+        <xsd:enumeration value="XQY2"/>
+        <xsd:enumeration value="XQM2"/>
+        <xsd:enumeration value="AMM1"/>
+        <xsd:enumeration value="AMY1"/>
+        <xsd:enumeration value="TMM1"/>
+        <xsd:enumeration value="TMY1"/>
+        <xsd:enumeration value="XMM1"/>
+        <xsd:enumeration value="XMY1"/>
+        <xsd:enumeration value="XMM2"/>
+        <xsd:enumeration value="XMY2"/>
+        <xsd:enumeration value="AVM1"/>
+        <xsd:enumeration value="AVY1"/>
+        <xsd:enumeration value="TVM1"/>
+        <xsd:enumeration value="TVY1"/>
+        <xsd:enumeration value="XMM3"/>
+        <xsd:enumeration value="XMY3"/>
+        <xsd:enumeration value="XMM4"/>
+        <xsd:enumeration value="XMY4"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="XslStylesheet">
+    <xsd:annotation>
+      <xsd:documentation>Enter the name of the XSL Stylesheet to use</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Filter">
+    <xsd:annotation>
+      <xsd:documentation>This contains one or more filters to restrict the information returned.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="true">
+      <xsd:all minOccurs="0">
+        <xsd:element ref="Key1Filter" minOccurs="0"/>
+        <xsd:element ref="Key2Filter" minOccurs="0"/>
+        <xsd:element ref="Key3Filter" minOccurs="0"/>
+        <xsd:element ref="Area" minOccurs="0"/>
+        <xsd:element ref="Branch" minOccurs="0"/>
+        <xsd:element ref="Customer" minOccurs="0"/>
+        <xsd:element ref="CustomerClass" minOccurs="0"/>
+        <xsd:element ref="Department" minOccurs="0"/>
+        <xsd:element ref="OrderType" minOccurs="0"/>
+        <xsd:element ref="ProductClass" minOccurs="0"/>
+        <xsd:element ref="Salesperson" minOccurs="0"/>
+        <xsd:element ref="StockCode" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key1Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter for Key Area 1 as defined by the Target Type. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key2Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter for Key Area 2 as defined by the Target Type. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key3Filter">
+    <xsd:annotation>
+      <xsd:documentation>Filter for Key Area 3 as defined by the Target Type. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+    <xsd:element name="Branch">
+    <xsd:annotation>
+      <xsd:documentation>Branches to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll. Not optional if a branch dependant Sales target has been selected.</xsd:documentation>
+      <xsd:appinfo source="screenItem=Y;browse=SalBranch"/>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Area">
+    <xsd:annotation>
+      <xsd:documentation>Geographic areas to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ProductClass">
+    <xsd:annotation>
+      <xsd:documentation>Product Class to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Salesperson">
+    <xsd:annotation>
+      <xsd:documentation>Salesperson to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerClass">
+    <xsd:annotation>
+      <xsd:documentation>Customer Class to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Department">
+    <xsd:annotation>
+      <xsd:documentation>Departments to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Customer">
+    <xsd:annotation>
+      <xsd:documentation>Customers to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Warehouse">
+    <xsd:annotation>
+      <xsd:documentation>Warehouses to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="StockCode">
+    <xsd:annotation>
+      <xsd:documentation>Stock codes to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="OrderType">
+    <xsd:annotation>
+      <xsd:documentation>Order Types to be returned. FilterType options - A)ll, S)ingle, R)ange. Default to A)ll.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:attribute name="FilterType" use="optional" default="A">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="A"/>
+            <xsd:enumeration value="S"/>
+            <xsd:enumeration value="R"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:attribute>
+      <xsd:attribute name="FilterValue" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+

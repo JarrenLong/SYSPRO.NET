@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2016 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Inventory Balance Post Business Object
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostGtrBalance">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Options" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Options">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="LockType" minOccurs="0"/>
+        <xsd:element ref="UseBalanceResults" minOccurs="0"/>
+        <xsd:element ref="BalanceRunDate" minOccurs="0"/>
+        <xsd:element ref="BalanceRunTime" minOccurs="0"/>
+        <xsd:element ref="Warehouse" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="LockType" default="H">
+    <xsd:annotation>
+      <xsd:documentation>
+This is the type of locking you wish to apply in SQL when correcting on hand imbalances The type of lock you select may improve the speed of the query but locking of the table is not recommended if used whilst operators are transacting.
+      The types of locking available are:
+        L – Acquire a shared lock on each row as it is processed.
+        H - Acquire a hold lock on each row as it is processed (HOLDLOCK). This is the default.
+        T – Acquire a shared lock on each table as it is processed (TABLOCK)
+        X – Exclusively lock the tables whilst processing (TABLOCKX)
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="L"/>
+        <xsd:enumeration value="H"/>
+        <xsd:enumeration value="T"/>
+        <xsd:enumeration value="X"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="UseBalanceResults" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This element indicates whether or not to use output from the Goods in Transit Balance HealthCheck. Valid values are 'Y' (Yes), 'N' (No) and 'L' (Last). Default is 'N'.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+        <xsd:enumeration value="N"/>
+        <xsd:enumeration value="Y"/>
+        <xsd:enumeration value="L"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BalanceRunDate" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If you choose to use the output from the Goods in Transit Balance Healthcheck then you can, if you wish enter the date and time of the run you wish to balance. If you leave it blank then it will process all entries.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="BalanceRunTime" default="N">
+    <xsd:annotation>
+      <xsd:documentation>This is the time portion of the key to indicate which entries to process from a run. If you leave it blank then it will process all entries for the date. This is ignored if you do not enter a date.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+  <xsd:element name="Warehouse" default="N">
+    <xsd:annotation>
+      <xsd:documentation>If you wish to run this function for a single warehouse. If you wish to run this for all warehouses then leave it blank</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:string">
+        <xsd:whiteSpace value="preserve"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:element>
+</xsd:schema>

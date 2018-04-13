@@ -1,0 +1,1422 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Accounts Receivable Setup Transaction Posting Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AccountsReceivableOptions">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="General" minOccurs="0"/>
+				<xsd:element ref="TermsDiscount" minOccurs="0"/>
+				<xsd:element ref="Tax" minOccurs="0"/>
+				<xsd:element ref="History" minOccurs="0"/>
+				<xsd:element ref="Numbering" minOccurs="0"/>
+				<xsd:element ref="Integration" minOccurs="0"/>
+				<xsd:element ref="UserDefined" minOccurs="0"/>
+				<xsd:element ref="PeriodCurrentYear" minOccurs="0"/>
+				<xsd:element ref="PeriodPreviousYear" minOccurs="0"/>
+				<xsd:element ref="CurrentMonth" minOccurs="0"/>
+				<xsd:element name="PaymentRun" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="PaymentsBySalesperson"/>
+							<xsd:element name="PaymentsByGeographicArea">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[Indicates whether to allow payments by geographic area (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CollectorRequired">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[Indicates whether a collector is required(N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="AuthorizationRequired">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[Indicates whether authorization is required(N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="AllocateInvoiceToPDCheck">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[Indicates whether to allocate an invoice to a PD check (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. This option will be forced a Y if collector required has a Y value.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PDCheckStatusRequired">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[Indicates whether PD Check status is required or not (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PaymentRunNumMethod">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[This is the payment run numbering method. (M - Manual, A - Automatic). If no value is supplied then the default value of M will be assumed. This element may only be A if the payment run key type is set up as numeric.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="NextPaymentRunNum">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[This is the next payment run number. Applies only if 'PaymentRunNumMethod' is A. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="CollectionRunNumMethod">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[This is the collection run numbering method. (M - Manual, A - Automatic). If no value is supplied then the default value of M will be assumed. This element may only be A if the payment run key type is set up as numeric.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="NextCollectionRunNum">
+								<xsd:annotation>
+									<xsd:documentation><![CDATA[This is the next collection run number. Applies only if 'CollectionRunNumMethod' is A. If no value is supplied then the default value of 1 will be assumed.]]></xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CustAmendJnlsReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether Customer amendment journals are required. (Y - Yes, N - No, A - Yes, including additions). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="Y=Yes;N=No;A=Yes, including additions;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="A"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InvoiceAgeingMethod">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates invoice ageing method. (S - Statement, (A - Aged statement, I - Invoice date, D - Invoice due date). If no value is supplied then a default value of I will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="S=Statement;A=Aged statement;I=Invoice;D=Invoice due date;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefFinChgTerms">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the invoice terms code to use for Finance charges. If no value is supplied then a default value of 9 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefCustBrowseToOpBr">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether default the customer browse to the operator's default branch codee displayed. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BankDepSlipReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether a bank deposit slip is required (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ForeignCurrSalesReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether foreign currency sales are required. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PermEntriesReprtReq">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether permanent entry invoice print is required. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConsolBrFwdCust">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to consolidate brought-forward customers at month end. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ValidateCustClass">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to validate the customer class on customer master. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="General">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="CustAmendJnlsReq"/>
+				<xsd:element ref="InvoiceAgeingMethod"/>
+				<xsd:element ref="DefFinChgTerms"/>
+				<xsd:element ref="DefCustBrowseToOpBr"/>
+				<xsd:element ref="BankDepSlipReq"/>
+				<xsd:element ref="ForeignCurrSalesReq"/>
+				<xsd:element ref="PermEntriesReprtReq"/>
+				<xsd:element ref="ConsolBrFwdCust"/>
+				<xsd:element ref="ValidateCustClass"/>
+				<xsd:element ref="AllowBranchOverwrite"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TrmsDiscInclTax">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to include tax in the calculation of terms discount. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrmsDiscInclFrt">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to include freight in the calculation of terms discount. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TrmsDiscInclOthChg">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to include other charges in the calculation of terms discount. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CalcTrmsDiscForCrDrNotes">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to calculate terms discount for credit and debit notes. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrtCrDrNotesForDisc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to print credit/debit notes for settlement discount. (A - Always, R - As required, N - Never). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="A=Always;R=As required;N=Never;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowMultInvPerCrDrNote">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to allow multiple invoices per credit/debit settlement note. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed. (Option updated with '1' when Y, '0' when N).]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TermsDiscount">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TrmsDiscInclTax"/>
+				<xsd:element ref="TrmsDiscInclFrt"/>
+				<xsd:element ref="TrmsDiscInclOthChg"/>
+				<xsd:element ref="CalcTrmsDiscForCrDrNotes"/>
+				<xsd:element ref="PrtCrDrNotesForDisc"/>
+				<xsd:element ref="AllowMultInvPerCrDrNote"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DefSalesTaxCode">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the default tax code to which the tax amount must be posted in the AR Invoice Posting program when no tax integration is selcted..]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReqTaxPortionAdjDisc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to request a tax portion for invoice adjustments and discounts. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DefTaxCodeArAdjDisc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the default tax codes for invoice adjustments and discounts. This element only needs to be entered if 'ReqTaxPortionAdjDisc'is selected. If entered, this element may only be in the  range of A - Z.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DisbTaxPortionGlTaxCode">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to disburse the tax portion of an adjustment to the GL code against the tax code. This element only needs to selected if 'ReqTaxPortionAdjDisc' has been selected. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Tax">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DefSalesTaxCode"/>
+				<xsd:element ref="ReqTaxPortionAdjDisc"/>
+				<xsd:element ref="DefTaxCodeArAdjDisc"/>
+				<xsd:element ref="DisbTaxPortionGlTaxCode"/>
+				<xsd:element ref="DefSalesGSTCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RetainPayDet">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to retain payment details. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PurgeCustMoveBy">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to purge customer sales details by date or number. (N - Number, D - Date). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=Number;D=Date;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AveNoDaysToPayCalc">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to include for the average number of days to pay calculation. (99 implies retain indefinitely). If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MaxNoCustMoveRecs">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the maximum number of movement records or age of transaction to retain before deletion. This element is based on either 'Date' or 'Number' from the 'PurgeCustMoveBy' element. If this number is not supplied, 99999 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetZeroInv">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain zero balance invoices. (99 implies retain indefinitely). If no value is supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetCashJnl">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain printed cash journals. (99 implies retain indefinitely). If no value is supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetPayHist">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain payment history. (99 implies retain indefinitely). If no value is supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetSlsTrnSumm">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain summary sales transactions. (99 implies retain indefinitely). If no value is supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetSlsTrnDet">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain detail sales transactions. (99 implies retain indefinitely). If no value is supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetDiscCrNote">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain discount credit notes. (99 implies retain indefinitely). If no value is supplied, 99 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetDiscDrNote">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain discount debit notes. (99 implies retain indefinitely). If no value is supplied, 99 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPerRetSlsDistr">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of GL periods to retain AR sales distribution. This only applies if GL integration for the AR module is linked to GL in summary or detail. (99 implies retain indefinitely). If no value is supplied, 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlPerRetPayDistr">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of GL periods to retain AR payment distribution. This only applies if GL integration for the AR module is linked to GL in summary or detail. (99 implies retain indefinitely). If no value is supplied, 0 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="History">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="RetainPayDet"/>
+				<xsd:element ref="PurgeCustMoveBy"/>
+				<xsd:element ref="AveNoDaysToPayCalc"/>
+				<xsd:element ref="MaxNoCustMoveRecs"/>
+				<xsd:element ref="MthsRetZeroInv"/>
+				<xsd:element ref="MthsRetCashJnl"/>
+				<xsd:element ref="MthsRetPayHist"/>
+				<xsd:element ref="MthsRetSlsTrnSumm"/>
+				<xsd:element ref="MthsRetSlsTrnDet"/>
+				<xsd:element ref="MthsRetDiscCrNote"/>
+				<xsd:element ref="MthsRetDiscDrNote"/>
+				<xsd:element ref="GlPerRetSlsDistr"/>
+				<xsd:element ref="GlPerRetPayDistr"/>
+				<xsd:element ref="MthsRetArPayRunNum"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="InvNumMethod">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the invoice numbering method. (C - Company, B - Branch). If no value is supplied then a default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Company;B=Branch;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowDupInv">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to allow the same invoice number for different customers. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextInvNum">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the next invoice number to use. This element only applies if InvNumMethod is set to C - Company.  If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999999999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextCrNoteNum">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the next credit note number to use. This element only applies if InvNumMethod is set to C - Company.  If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999999999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextDrNoteNum">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the next debit note number to use. This element only applies if InvNumMethod is set to C - Company.  If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999999999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextDiscCrNoteNum">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the next discount credit note number to use. This element only applies if InvNumMethod is set to C - Company.  If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999999999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextDiscDrNoteNum">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the next discount debit note number to use. This element only applies if InvNumMethod is set to C - Company. If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999999999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CustNumMethod">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the customer numbering method. (M - Manual A - Automatic, S - Scripted). If no value is supplied then a default value of M will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="M=Manual;A=Automatic;S=Scripted;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="NextCustNum">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the next customer number to use. This element only applies if CustNumMethod is set to A - Automatic.  If this number is not supplied, 1 will be assumed.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="0"/>
+				<xsd:maxInclusive value="999999999999999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="RebuildInvoiceIndex">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to clear or rebuild the AR invoice reference table based on the value of <AllowDupInv> and only if it has changed. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Numbering">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InvNumMethod"/>
+				<xsd:element ref="AllowDupInv"/>
+				<xsd:element ref="NextInvNum"/>
+				<xsd:element ref="NextCrNoteNum"/>
+				<xsd:element ref="NextDrNoteNum"/>
+				<xsd:element ref="NextDiscCrNoteNum"/>
+				<xsd:element ref="NextDiscDrNoteNum"/>
+				<xsd:element ref="CustNumMethod"/>
+				<xsd:element ref="NextCustNum"/>
+				<xsd:element ref="RebuildInvoiceIndex"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="LinkARToCB">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to link the Accounts Receivable module to Cash Book module and the method to use. (N - Payments not linked, D - Post in detail, B - Posted by bank, J - Posted by cash journal). If any option either than N is selected then element BankDepSlipReq must have a value of Y and the same GL integration method must be used. If no value supplied then default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=Payments not linked;D=Post in detail;B=Posted by bank;J=Posted by cash journal;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="J"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AllowOpOrideARPay">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether an operator is allowed to override AR to Cash Book integration. This option is only available if the element LinkARToCB has the option J - Posted by cash journal selected. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CashBookIntPerArsInt">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Input by user to modify Cash Book integration method to General Ledger to be identical to the Accounts Receivable method. This option is only required if the element LinkARToCB is used to link Accounts Receivable to General Ledger and Cash Book link has not been defined. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="N=No;Y=Yes;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Integration">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="LinkARToCB"/>
+				<xsd:element ref="AllowOpOrideARPay"/>
+				<xsd:element ref="CashBookIntPerArsInt"/>
+				<xsd:element ref="ConsolidatedPayments"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DescCustUdf1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the description for User defined field 1.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DescCustUdf2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the description for User defined field 2.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserDefined">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DescCustUdf1"/>
+				<xsd:element ref="DescCustUdf2"/>
+				<xsd:element ref="CustomFormFilter1"/>
+				<xsd:element ref="CustomFormFilter2"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the end date of the current period 1. This element is optional. The format is CCYY-MM-DD.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod1'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the previous period may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod2'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod3'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod4'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod5'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod6'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod7'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod8'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod9'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod10'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod11'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrDatePeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod12'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrFlagPeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the current period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C unless this is the current period, then it will be set to O. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PeriodCurrentYear">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ArCurrDatePeriod1"/>
+				<xsd:element ref="ArCurrFlagPeriod1"/>
+				<xsd:element ref="ArCurrDatePeriod2"/>
+				<xsd:element ref="ArCurrFlagPeriod2"/>
+				<xsd:element ref="ArCurrDatePeriod3"/>
+				<xsd:element ref="ArCurrFlagPeriod3"/>
+				<xsd:element ref="ArCurrDatePeriod4"/>
+				<xsd:element ref="ArCurrFlagPeriod4"/>
+				<xsd:element ref="ArCurrDatePeriod5"/>
+				<xsd:element ref="ArCurrFlagPeriod5"/>
+				<xsd:element ref="ArCurrDatePeriod6"/>
+				<xsd:element ref="ArCurrFlagPeriod6"/>
+				<xsd:element ref="ArCurrDatePeriod7"/>
+				<xsd:element ref="ArCurrFlagPeriod7"/>
+				<xsd:element ref="ArCurrDatePeriod8"/>
+				<xsd:element ref="ArCurrFlagPeriod8"/>
+				<xsd:element ref="ArCurrDatePeriod9"/>
+				<xsd:element ref="ArCurrFlagPeriod9"/>
+				<xsd:element ref="ArCurrDatePeriod10"/>
+				<xsd:element ref="ArCurrFlagPeriod10"/>
+				<xsd:element ref="ArCurrDatePeriod11"/>
+				<xsd:element ref="ArCurrFlagPeriod11"/>
+				<xsd:element ref="ArCurrDatePeriod12"/>
+				<xsd:element ref="ArCurrFlagPeriod12"/>
+				<xsd:element ref="ArCurrDatePeriod13"/>
+				<xsd:element ref="ArCurrFlagPeriod13"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 1 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArCurrDatePeriod13'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod1">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 1 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 2 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod1'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod2">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 2 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed. If the 'ArCurrentMonth' is modified this element will be reset to C. Only the current period and the two previous periods may be set to O.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 3 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod2'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod3">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 3 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 4 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod3'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod4">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 4 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 5 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod4'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod5">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 5 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 6 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod5'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod6">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 6 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 7 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod6'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod7">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 7 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 8 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod7'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod8">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 8 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 9 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod8'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod9">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 9 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 10 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod9'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod10">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 10 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 11 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod10'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod11">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 11 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 12 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod11'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod12">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 12 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevDatePeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 13 month end date. This element is optional. The format is CCYY-MM-DD. This date supplied may not precede 'ArPrevDatePeriod12'.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArPrevFlagPeriod13">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the previous period 13 status flag. (C - Closed, O - Open). If no value is supplied then the default value of C will be assumed.]]></xsd:documentation>
+			<xsd:appinfo source="C=Closed;O=Open;"/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="O"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PeriodPreviousYear">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ArPrevDatePeriod1"/>
+				<xsd:element ref="ArPrevFlagPeriod1"/>
+				<xsd:element ref="ArPrevDatePeriod2"/>
+				<xsd:element ref="ArPrevFlagPeriod2"/>
+				<xsd:element ref="ArPrevDatePeriod3"/>
+				<xsd:element ref="ArPrevFlagPeriod3"/>
+				<xsd:element ref="ArPrevDatePeriod4"/>
+				<xsd:element ref="ArPrevFlagPeriod4"/>
+				<xsd:element ref="ArPrevDatePeriod5"/>
+				<xsd:element ref="ArPrevFlagPeriod5"/>
+				<xsd:element ref="ArPrevDatePeriod6"/>
+				<xsd:element ref="ArPrevFlagPeriod6"/>
+				<xsd:element ref="ArPrevDatePeriod7"/>
+				<xsd:element ref="ArPrevFlagPeriod7"/>
+				<xsd:element ref="ArPrevDatePeriod8"/>
+				<xsd:element ref="ArPrevFlagPeriod8"/>
+				<xsd:element ref="ArPrevDatePeriod9"/>
+				<xsd:element ref="ArPrevFlagPeriod9"/>
+				<xsd:element ref="ArPrevDatePeriod10"/>
+				<xsd:element ref="ArPrevFlagPeriod10"/>
+				<xsd:element ref="ArPrevDatePeriod11"/>
+				<xsd:element ref="ArPrevFlagPeriod11"/>
+				<xsd:element ref="ArPrevDatePeriod12"/>
+				<xsd:element ref="ArPrevFlagPeriod12"/>
+				<xsd:element ref="ArPrevDatePeriod13"/>
+				<xsd:element ref="ArPrevFlagPeriod13"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ArCurrentYear">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the calendar year in which your current financial year ends. This element may only be altered if there are no records already in the Accounts Receivable Journal Control file.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="9999"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ArCurrentMonth">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the calendar month in which your company is running in relation to the start of your financial year. This element may only be altered if there are no records already in the Accounts Receivable Journal Control file.]]></xsd:documentation>
+			<xsd:appinfo/>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:double">
+				<xsd:minInclusive value="1"/>
+				<xsd:maxInclusive value="99"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CurrentMonth">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ArCurrentYear"/>
+				<xsd:element ref="ArCurrentMonth"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AllowBranchOverwrite">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to allow to overwrite branch in payment or adjustment transactions. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PaymentsBySalesperson">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates whether to allow payments by salesperson (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MthsRetArPayRunNum" type="xsd:double">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is the number of months to retain AR payment run number transactions. (99 implies retain indefinitely). If no value is supplied, 1 will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ConsolidatedPayments" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Group and post similar payment type
+invoices to CB when bank payment type set at line level
+. (N - No, Y - Yes). If no value is supplied then a default value of N will be assumed.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CustomFormFilter1" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is an additional selection field using a Customer custom form field. This element is optional and the default value of "None" will be assumed. If supplied, it must be a valid Customer custom form field name.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CustomFormFilter2" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[This is an additional selection field using a Customer custom form field. This element is optional and the default value of "None" will be assumed. If supplied, it must be a valid Customer custom form field name.]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DefSalesGSTCode">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[Indicates the default GST code to which the tax amount 
+must be posted in the AR Invoice Posting program when Company nationality is set to CAN and Canadian GST is required. 
+.]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

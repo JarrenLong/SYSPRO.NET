@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema for the Stock Code Setup Business Object
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="AbcAnalysisReq">
+		<xsd:annotation>
+			<xsd:documentation>ABC analysis flag indicates whether you want to include the stock item in the calculations performed by the ABC Analysis report program.
+The ABC Analysis report program is used to print a list of stock items in descending order of usage value, based on the value of stock used over the last 12 months. 
+The report indicates what your most used and least used items are, enabling you to determine what quantities of selected stock items should be included in your inventory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AbcCostingReq">
+		<xsd:annotation>
+			<xsd:documentation>Activity based costing flag indicates whether you want to more accurately accumulate overhead costs to specific products by applying these costs at the points of transition in the procurement, manufacturing and sales cycle (activity based costing).
+Note: You must indicate that the activity based costing system is required (Bill of Materials Setup) before you can enable this against a stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AlternateKey1">
+		<xsd:annotation>
+			<xsd:documentation>Additional information assigned to the stock item which can be used as selection criteria when browsing on stock codes. It can also be used to change the sequence in which items are displayed when browsing on stock codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AlternateKey2">
+		<xsd:annotation>
+			<xsd:documentation>Additional information assigned to the stock item which can be used as selection criteria when browsing on stock codes. It can also be used to change the sequence in which items are displayed when browsing on stock codes.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="AlternateUom">
+		<xsd:annotation>
+			<xsd:documentation>Alternate unit of measure is an alternative unit of measure for the sale or purchase quantity of an item and the pricing. A conversion factor (ConvFactAltUom and ConvMulDiv) enables you to convert the alternate unit of measure into the stocking unit of measure. 
+Note: The field is used by the Sales Order module if you have indicated that the unit of measure must be requested for order quantities (Sales Order Setup). In addition, it is used by the Purchase Order module if you have indicated that the alternate unit of measure must be used for order quantities (Purchase Order Setup).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Basis">
+		<xsd:annotation>
+			<xsd:documentation>This element defines the basis on which a price is calculated and is used by the TPM module. If entered, then it must be a valid TPM price basis, 'Q' - Quantity, 'V' - Volume, and 'M' - Mass / Weight.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Q"/>
+				<xsd:enumeration value="V"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BatchBill">
+		<xsd:annotation>
+			<xsd:documentation>Batch bill of materials flag indicates whether the stock item uses a percentage batch bill of materials. (N - No, Y - Yes)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BulkIssueFlag">
+		<xsd:annotation>
+			<xsd:documentation>Bulk issue flag indicates whether the stock item relates to an inexpensive production part held in the factory from which production workers can draw without requisitions. Settings are as follows:
+F - Floorstock item indicates that the stock item can be issued automatically to a job upon confirmation of the job. It is included in the costing process. 
+Y - Bulk issue item indicates that the stock item can be issued automatically as a material allocation to a job without affecting the on hand quantity of the item. The item is included as a component in the costing process.
+N - The item is neither a Floorstock or a Bulk issue item.
+Note: Serialized and traceable items cannot be defined as being either a Floorstock item or a Bulk issue item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Buyer">
+		<xsd:annotation>
+			<xsd:documentation>Buyer is the person responsible for purchasing the stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BuyingRule">
+		<xsd:annotation>
+			<xsd:documentation>Batching (or buying rule) for the stock item.
+This is used by the Requirements Planning module to indicate how you want to address quantity shortages encountered for the stock item. 
+This enables you to calculate correctly the order quantities that are required. 
+Batching rules are applied to MPS items when producing the Master Production Schedule and to non-MPS items when running the Requirements Calculation program.
+Settings are as follows:
+A - Lot for lot.
+B - Multiples of EBQ.
+C - Fixed time period.
+D - Order to maximum if shortage.
+E - Order to maximum if less than minimum.
+F - Multiples of pan.
+G - Multiple EBQ lots.
+H - Multiple pan lots.
+I - Minimum of EBQ.
+J - Minimum of pan.
+K - Multiples of EBQ (fixed time period).
+L - Multiples of pan (fixed time period).
+M - Multiple EBQ lots (fixed time period).
+N - Multiple pan lots (fixed time period).
+O - Minimum of EBQ thereafter multiples of pan.
+P - Suppress MRP ordering.
+Q - Apply warehouse order policy.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="H"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="J"/>
+				<xsd:enumeration value="K"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="Q"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ClearingFlag">
+		<xsd:annotation>
+			<xsd:documentation>Stock code status flag. Settings are as follows:
+N - Normal indicates that the stock code is a normal stock item.
+T - Temporary indicates that you require the stock item to be deleted automatically when you run the Month end function of the Period End Processing program (providing the item meets all the requirements for the deletion of a stock code). Note: Serialized or traceable items cannot be defined as temporary items.
+C - Clear indicates that the stock item must be sold or cleared as a matter of urgency. This option can also be used by the Superseded/Clearing Stock report as a criterion according to which stock items are selected for printing.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="T"/>
+				<xsd:enumeration value="C"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConvFactAltUom">
+		<xsd:annotation>
+			<xsd:documentation>Alternate conversion factor is the conversion factor between the stocking unit of measure (StockUom) and the alternate unit of measure (AlternateUom) and is used in conjunction with the conversion method (ConvMulDiv).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConvFactOthUom">
+		<xsd:annotation>
+			<xsd:documentation>Other conversion factor is the conversion factor between the stocking unit of measure (StockUom) and the other unit of measure (OtherUom) and is used in conjunction with the conversion method (MulDiv).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConvMulDiv">
+		<xsd:annotation>
+			<xsd:documentation>Alternate conversion method is the conversion method between the stocking unit of measure (StockUom) and the alternate unit of measure (AlternateUom) and is used in conjunction with the conversion factor (ConvFactAltUom). (M - Multiply, D - Divide),</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CostUom">
+		<xsd:annotation>
+			<xsd:documentation>Cost unit of measure is the unit of measure to be used for the inventory cost of the item.
+Note: A costing unit of measure can be assigned to the item only if you indicated that your inventory costs must be held in a unit of measure other than stocked (Inventory Setup). The cost unit of measure can only be set when adding a stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CountryOfOrigin">
+		<xsd:annotation>
+			<xsd:documentation>Country of origin is the nationality code assigned to the item. It is used for reporting purposes if the EC VAT system is installed.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CycleCount">
+		<xsd:annotation>
+			<xsd:documentation>Cycle count is the number of times that you want to count the stock item during the year.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Decimals">
+		<xsd:annotation>
+			<xsd:documentation>Number of decimals to which you want to store and print stock quantities. You can specify between 0 and 6 decimals</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="6"/>
+				<xsd:enumeration value="5"/>
+				<xsd:enumeration value="4"/>
+				<xsd:enumeration value="3"/>
+				<xsd:enumeration value="2"/>
+				<xsd:enumeration value="1"/>
+				<xsd:enumeration value="0"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DemandTimeFence">
+		<xsd:annotation>
+			<xsd:documentation>Demand time fence is the number of days from the time an order is placed until it can be fulfilled (demand time fence). 
+This is used in the calculations performed by the Master Production Schedule.
+It is ignored if an entry of 0 is assigned to the field, or you have not indicated that the stock code is a make-to-order item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Description">
+		<xsd:annotation>
+			<xsd:documentation>This is the description to appear against the stock code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DistWarehouseToUse">
+		<xsd:annotation>
+			<xsd:documentation>Distribution warehouse to use.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DockToStock">
+		<xsd:annotation>
+			<xsd:documentation>Dock to stock is the number of days that a bought out or made in stock item must be in stock prior to usage (dock to stock).
+This enables you to calculate an earlier due date for jobs or purchase orders and, from these, an earlier start date.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DrawOfficeNum">
+		<xsd:annotation>
+			<xsd:documentation>Drawing register number is documentary unless the item is ECC controlled in which case the item can be associated to the drawing register entered.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Ebq">
+		<xsd:annotation>
+			<xsd:documentation>Economic batch quantity is used to determine the costing of a bill of materials. It is also used within the Requirements Planning module together with batching rules B, G, I, K, M and O. 
+Note: This is used instead of the Pan size, depending on your selection at the Manufacturing basis field for the item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EbqPan">
+		<xsd:annotation>
+			<xsd:documentation>Manufacturing quantity basis is the basis of the elapsed time calculated against work centers or cost centers. Settings are as follows:
+E - Economic batch quantity
+P - Pan size</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EccFlag">
+		<xsd:annotation>
+			<xsd:documentation>ECC control flag indicates whether the stock item is regulated by the Engineering Change Control system (N - No, Y - Yes). 
+Configuring a stock item to be engineering change controlled means that any changes to that item within a bill of materials can only be made by means of an engineering change order.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="EccUser">
+		<xsd:annotation>
+			<xsd:documentation>Responsible ECC user is the engineering user assigned to the stock item. This enables you to notify the appropriate person(s) of changes to the status of stock codes under their control. If this field is left blank, then the default ECC user configured within the Bill of Materials Setup program is used.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FixOverhead">
+		<xsd:annotation>
+			<xsd:documentation>BOM fixed overhead is the total cost of all fixed overheads for items included in the stock item's structure.
+This is updated for all parent parts by the Bill of Materials Cost Implosion program.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FixTimePeriod">
+		<xsd:annotation>
+			<xsd:documentation>Fixed time period is the number of working days that represents a fixed time period.
+For example: A fixed time period of 1 day indicates that if a shortage is encountered, that the total shortage for today and the next working day is used as if the shortage falls today. 
+The entry made here is used for all time-based buying rules (i.e. C, K, L, M and N) within the Requirements Planning module.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SubContractCost">
+		<xsd:annotation>
+			<xsd:documentation>BOM subcontract cost is the total cost of all subcontract costs for items included in the stock item's structure. This is updated for all parent parts by the Bill of Materials Cost Implosion program.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GrossReqRule">
+		<xsd:annotation>
+			<xsd:documentation>Gross requirements rule for the stock item. This is used by the Master Production Schedule (Requirements Planning) to indicate how you want to calculate the demand for a component prior to the netting off of on hand inventory and scheduled receipts. It is used to calculate the projected available stock and the suggested build schedule. Settings are as follows:
+H - Highest of forecasts and sales orders indicates that you want to use either forecasts or sales orders (whichever is the highest figure) as the gross requirement.
+C - Cumulative highest of forecasts and s/orders indicates that you want to use the forecasts or sales orders (whichever is the cumulative highest figure) as the gross requirement. This is calculated as the cumulative highest figure less the cumulative gross requirement of the previous period.
+A - Sum of forecasts and sales orders indicates that you want to use both the forecasts and sales orders as the gross requirement.
+I - Forecasts only indicates that you want to use only forecasts as the gross requirement.
+S - Sales orders only indicates that you want to use only sales orders as the gross requirement.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="H"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GstTaxCode">
+		<xsd:annotation>
+			<xsd:documentation>This is the GST code that holds the GST percentage assigned to the stock item. 
+This is only required if your nationality code is defined as CAN (System Setup) and you indicated that the Canadian GST system is required (Tax Options Setup).
+Note: If you do not assign default tax codes to a stock item, then SYSPRO assumes that the item is exempt from tax. In addition, however, if you select the Canadian GST required and Tax by geographic area options (Tax Options Setup) SYSPRO disregards the tax code assigned to the geographic area when calculating tax for that item on a sales order.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InclInStrValid">
+		<xsd:annotation>
+			<xsd:documentation>Include in relationship validation flag indicates whether the stock item is included in the processing performed by the Relationship Validation program (Bill of Materials). (Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SetupInvMaster">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IssMultLotsFlag">
+		<xsd:annotation>
+			<xsd:documentation>Issue from multiple lots when processing a sales order for a traceable item and when issuing a traceable item to a job (Y - Yes, N - No). 
+Note: You will not be allowed to issue from multiple lots when making a single delivery.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Item">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information to maintain a stock item.
+NOTE: The information held within the key element is mandatory for all functions. Information held outside the key element is optional for Add/Update and is not required for Delete.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="Key"/>
+				<xsd:element ref="Description" minOccurs="0"/>
+				<xsd:element ref="LongDesc" minOccurs="0"/>
+				<xsd:element ref="AlternateKey1" minOccurs="0"/>
+				<xsd:element ref="AlternateKey2" minOccurs="0"/>
+				<xsd:element ref="EccUser" minOccurs="0"/>
+				<xsd:element ref="StockUom" minOccurs="0"/>
+				<xsd:element ref="AlternateUom" minOccurs="0"/>
+				<xsd:element ref="OtherUom" minOccurs="0"/>
+				<xsd:element ref="ConvFactAltUom" minOccurs="0"/>
+				<xsd:element ref="ConvMulDiv" minOccurs="0"/>
+				<xsd:element ref="ConvFactOthUom" minOccurs="0"/>
+				<xsd:element ref="MulDiv" minOccurs="0"/>
+				<xsd:element ref="Mass" minOccurs="0"/>
+				<xsd:element ref="Volume" minOccurs="0"/>
+				<xsd:element ref="Decimals" minOccurs="0"/>
+				<xsd:element ref="PriceCategory" minOccurs="0"/>
+				<xsd:element ref="PriceMethod" minOccurs="0"/>
+				<xsd:element ref="ReturnableItem" minOccurs="0"/>
+				<xsd:element ref="Supplier" minOccurs="0"/>
+				<xsd:element ref="CycleCount" minOccurs="0"/>
+				<xsd:element ref="ProductClass" minOccurs="0"/>
+				<xsd:element ref="TaxCode" minOccurs="0"/>
+				<xsd:element ref="OtherTaxCode" minOccurs="0"/>
+				<xsd:element name="AddListPrice" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Add price flag, Y - Yes. If Yes, the list price code entered, as well as the Selling price will be saved to the Price table.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element ref="ListPriceCode" minOccurs="0"/>
+				<xsd:element name="SellingPrice" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>If Add price flag is Y - Yes.  the list price code entered, as well as the Selling price will be saved.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="PriceBasis" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Unit of measure against which the selling price is based. Selections are as follows: 
+S - Stocking unit of measure
+A - Alternate unit of measure
+O - Other unit of measure</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="S"/>
+							<xsd:enumeration value="A"/>
+							<xsd:enumeration value="O"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="CommissionCode" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Commission code to be held against the price code. 
+Note: An entry of 0 (zero) indicates that you do not require a commission percentage to be assigned to the price code.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element ref="SerialMethod" minOccurs="0"/>
+				<xsd:element ref="SerialPrefix" minOccurs="0"/>
+				<xsd:element ref="SerialSuffix" minOccurs="0"/>
+				<xsd:element ref="KitType" minOccurs="0"/>
+				<xsd:element ref="Buyer" minOccurs="0"/>
+				<xsd:element ref="Planner" minOccurs="0"/>
+				<xsd:element ref="TraceableType" minOccurs="0"/>
+				<xsd:element ref="InspectionFlag" minOccurs="0"/>
+				<xsd:element ref="MpsFlag" minOccurs="0"/>
+				<xsd:element ref="BulkIssueFlag" minOccurs="0"/>
+				<xsd:element ref="LeadTime" minOccurs="0"/>
+				<xsd:element ref="StockMovementReq" minOccurs="0"/>
+				<xsd:element ref="ClearingFlag" minOccurs="0"/>
+				<xsd:element ref="SupercessionDate" minOccurs="0"/>
+				<xsd:element ref="AbcAnalysisReq" minOccurs="0"/>
+				<xsd:element ref="AbcCostingReq" minOccurs="0"/>
+				<xsd:element ref="ManualCostFlag" minOccurs="0"/>
+				<xsd:element ref="CostUom" minOccurs="0"/>
+				<xsd:element ref="MinPricePct" minOccurs="0"/>
+				<xsd:element ref="LabourCost" minOccurs="0"/>
+				<xsd:element ref="MaterialCost" minOccurs="0"/>
+				<xsd:element ref="FixOverhead" minOccurs="0"/>
+				<xsd:element ref="SubContractCost" minOccurs="0"/>
+				<xsd:element ref="VariableOverhead" minOccurs="0"/>
+				<xsd:element ref="PartCategory" minOccurs="0"/>
+				<xsd:element ref="DrawOfficeNum" minOccurs="0"/>
+				<xsd:element ref="WarehouseToUse" minOccurs="0"/>
+				<xsd:element ref="BuyingRule" minOccurs="0"/>
+				<xsd:element ref="SpecificGravity" minOccurs="0"/>
+				<xsd:element ref="Ebq" minOccurs="0"/>
+				<xsd:element ref="FixTimePeriod" minOccurs="0"/>
+				<xsd:element ref="PanSize" minOccurs="0"/>
+				<xsd:element ref="DockToStock" minOccurs="0"/>
+				<xsd:element ref="OutputMassFlag" minOccurs="0"/>
+				<xsd:element ref="ShelfLife" minOccurs="0"/>
+				<xsd:element ref="Version" minOccurs="0"/>
+				<xsd:element ref="Release" minOccurs="0"/>
+				<xsd:element ref="DemandTimeFence" minOccurs="0"/>
+				<xsd:element ref="MakeToOrderFlag" minOccurs="0"/>
+				<xsd:element ref="ManufLeadTime" minOccurs="0"/>
+				<xsd:element ref="GrossReqRule" minOccurs="0"/>
+				<xsd:element ref="PercentageYield" minOccurs="0"/>
+				<xsd:element ref="WipCtlGlCode" minOccurs="0"/>
+				<xsd:element ref="ResourceCode" minOccurs="0"/>
+				<xsd:element ref="GstTaxCode" minOccurs="0"/>
+				<xsd:element ref="PrcInclGst" minOccurs="0"/>
+				<xsd:element ref="SerEntryAtSale" minOccurs="0"/>
+				<xsd:element ref="UserField1" minOccurs="0"/>
+				<xsd:element ref="UserField2" minOccurs="0"/>
+				<xsd:element ref="UserField3" minOccurs="0"/>
+				<xsd:element ref="UserField4" minOccurs="0"/>
+				<xsd:element ref="UserField5" minOccurs="0"/>
+				<xsd:element ref="TariffCode" minOccurs="0"/>
+				<xsd:element ref="SupplementaryUnit" minOccurs="0"/>
+				<xsd:element ref="EbqPan" minOccurs="0"/>
+				<xsd:element ref="LctRequired" minOccurs="0"/>
+				<xsd:element ref="IssMultLotsFlag" minOccurs="0"/>
+				<xsd:element ref="InclInStrValid" minOccurs="0"/>
+				<xsd:element ref="CountryOfOrigin" minOccurs="0"/>
+				<xsd:element ref="StockOnHold" minOccurs="0"/>
+				<xsd:element ref="StockOnHoldReason" minOccurs="0"/>
+				<xsd:element ref="EccFlag" minOccurs="0"/>
+				<xsd:element ref="StockAndAltUm" minOccurs="0"/>
+				<xsd:element ref="BatchBill" minOccurs="0"/>
+				<xsd:element ref="DistWarehouseToUse" minOccurs="0"/>
+				<xsd:element ref="JobClassification" minOccurs="0"/>
+				<xsd:element ref="ProductGroup" minOccurs="0"/>
+				<xsd:element ref="PriceType" minOccurs="0"/>
+				<xsd:element ref="Basis" minOccurs="0"/>
+				<xsd:element ref="ManufactureUom" minOccurs="0"/>
+				<xsd:element ref="ConvFactMuM"/>
+				<xsd:element ref="ManMulDiv" minOccurs="0"/>
+				<xsd:element name="PhantomIfComp" type="xsd:string" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Treat this item as a phantom
+if defined as a component   
+and explode                 
+Y - Yes       </xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="AltMethodFlag" default="N" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Automatic apply alternate stock stock codes. If set to 'Y' then alternate stock code substitution will be done automatically.  Default value is 'N'. For future use</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AltSisoFlag" default="N" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Deplete oldest stock codes first. For option to be set to 'Y' - Yes a check is done to see if FIFO validation is on.  Will rely on FIFO bucket logic. If flag note set it will follow the priority.  Default value is 'N'.  If the AltMethod is 'N' this field will be set as 'N'. For future use</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="AltReductionFlag" default="N" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Reduce order quantity to alternate quantity available. If flag is 'Y' - Yes then the order quantity will be reduced and no lost sales will be recorded.  Default value 'N'
+.If the AltMethod is "N" this field will be set as 'N'. For future use</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N"/>
+							<xsd:enumeration value="Y"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="WithTaxExpenseType" default="G" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Indicates that the stock code is good or service.Default 'G'
+ If flag is 'G' – The stock code will be flagged as Good.
+If flag is 'S' – The stock code will be flagged as Service.This field is only available if Withholding tax is required (Tax Options)</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="G"/>
+							<xsd:enumeration value="S"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="eSignature">
+					<xsd:annotation>
+						<xsd:documentation>This is the esigniture element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>This element contains the key information required to maintain a stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element ref="StockCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="KitType">
+		<xsd:annotation>
+			<xsd:documentation>Kit type flag indicates whether, in Sales Orders, the stock item is sold using its bill of materials. Settings are as follows:
+N - None indicates that the stock item is not to be treated as a kit type.
+F - Finished type indicates that the stock item is a finished part. The cost, price and quantity is determined by the finished part, while components are treated as comment lines.
+K - Kit type indicates that first level components from the bill of material are automatically received into stock when this stock item is received into stock. The cost, price and quantity is determined by the components and the finished part is treated as a comment line.
+S - Sub type indicates that the price is determined by the finished part and the cost and quantity is determined by the components.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="K"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LabourCost">
+		<xsd:annotation>
+			<xsd:documentation>BOM operation cost is the total cost of all operations for items included in the stock item's structure. 
+This is updated for all parent parts by the Bill of Materials Cost Implosion program.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LctRequired">
+		<xsd:annotation>
+			<xsd:documentation>Landed cost tracking required for this item. (N - No, Y - Yes). 
+Note:This can only be selected for bought-out items and it cannot be turned off if a bill of landed costs is attached to the item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LeadTime">
+		<xsd:annotation>
+			<xsd:documentation>Lead time is the number of days in which to either buy out or manufacture the stock item. The former is maintained by the user while the latter is calculated by the Lead Time Calculation program. 
+It is also used in the calculation performed by the Minimum Quantity Calculation program to establish the minimum quantity required for each stock code and warehouse.
+The lead time is also used in the Requirements Planning and Bill of Materials modules.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ListPriceCode">
+		<xsd:annotation>
+			<xsd:documentation>List price code is the standard price code for the stock item on which discounts can be based during Sales Order Entry processing. This field can be blank if you selected the Allow blank list price codes option (Inventory Setup) and you have selected not to add the price code to the price table. (AddListPrice = N)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="LongDesc">
+		<xsd:annotation>
+			<xsd:documentation>This is an additional description to appear against the stock code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ManualCostFlag" default="N">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether the BOM Costs Roll-up must update the BOM costs or not. Valid values are 'Y' or 'N'. Default is 'N'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MakeToOrderFlag">
+		<xsd:annotation>
+			<xsd:documentation>Make to order flaq indicates whether the stock item must be manufactured only if an order for the item has been placed (make to order item)
+If this is not a make-to-order item, then it is manufactured according to the gross requirements rule, regardless of whether a sales order exists.
+(Y - Yes, N - No)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ManufLeadTime">
+		<xsd:annotation>
+			<xsd:documentation>Manufacturing lead time is the number of days it takes to build the stock item, assuming that all the raw materials are available (i.e. it is the longest cumulative manufacturing time, established from the sum of the elapsed time and inter-operation movement time). 
+It is calculated by the Lead Time Calculation program (Bill of Materials).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Mass">
+		<xsd:annotation>
+			<xsd:documentation>Mass per stocking unit is the weight of a single unit of the stock item in the stocking unit of measure. It is used for reporting purposes (Inventory and Sales Analysis) and can be printed on inventory and sales documents.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MaterialCost">
+		<xsd:annotation>
+			<xsd:documentation>BOM material cost is the total cost of all materials for items included in the stock item's structure .
+This is updated for all parent parts by the Bill of Materials Cost Implosion program.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MinPricePct">
+		<xsd:annotation>
+			<xsd:documentation>Minimum percentage by which the price of stocked order lines must exceed the cost of the item. If this is defined as zero against the stock item, then the minimum price percentage above cost defined within the Sales Order Setup program is used.
+The minimum % above cost defined against the item is used only if you indicated that the stock code margin (instead of the company margin) must be used (Sales Order Setup). 
+You can indicate whether the margin check is based on the gross or net value (Sales Order Setup) and you can override this margin if you have indicated that this override is allowed (Sales Order Setup).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MpsFlag">
+		<xsd:annotation>
+			<xsd:documentation>MPS flag indicates whether or not the stock item is used in the Master Production Schedule. Settings are as follows:
+Y - MPS item indicates that the stock item is used in the Master Production Schedule system.
+N - Non-MPS indicates that the item is a normal stock code that is included in the Requirements Calculation program.
+S - Statistical item indicates that the item is always in stock and its lead time is ignored when calculating the cumulative lead time and/or manufacturing lead time of its parent.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="S"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="MulDiv">
+		<xsd:annotation>
+			<xsd:documentation>Other conversion method is the conversion method between the stocking unit of measure (StockUom) and the other unit of measure (OtherUom) and is used in conjunction with the conversion factor (ConvFactOthUom). (M - Multiply, D - Divide)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="D"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OtherTaxCode">
+		<xsd:annotation>
+			<xsd:documentation>Other or alternative tax code for the stock item which is used only if the stock item is sold to a customer against whom you indicated that the Other tax code must be used (Customer Setup).When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OtherUom">
+		<xsd:annotation>
+			<xsd:documentation>Other unit of measure is an additional unit of measure for the sale or purchase quantity of an item and the pricing. A conversion factor (ConvFactOthUom and MulDiv) enables you to convert the alternate unit of measure into the stocking unit of measure.
+Note: The field is used by the Sales Order module if you have indicated that the unit of measure must be requested for order quantities (Sales Order Setup). In addition, it is used by the Purchase Order module if you have indicated that the alternate unit of measure must be used for order quantities (Purchase Order Setup).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="OutputMassFlag">
+		<xsd:annotation>
+			<xsd:documentation>Sales weight analysis flag. Settings are as follows:
+F - Fixed indicates that the item has a fixed weight.
+R - Random indicates that the item has a random weight and requires a manually entered conversion factor to be specified during Sales Order Entry. This facility caters for items that are sold in a certain unit of measure, but where the weight of each item sold differs from unit to unit.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="R"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PanSize">
+		<xsd:annotation>
+			<xsd:documentation>Pan size can be likened to a container size. Within the Bill of Materials module you can indicate whether the elapsed time against work centers or cost centers is based on the pan size or the economic batch quantity.
+Note: This is used instead of the Economic batch quantity, depending on your selection at the Manufacturing basis field for the item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PartCategory">
+		<xsd:annotation>
+			<xsd:documentation>Part category for the stock item. Settings are as follows:
+B - Bought-out indicates that the item is purchased from an external supplier.
+M - Made-in indicates that the item is manufactured internally.
+S - Subcontracted indicates that the item is a made-in part that has been assigned at least one subcontract operation.
+G - Phantom part indicates that the item is a parent part in a bill of material, but will typically not be booked into stock for issuing purposes.It can be used as a grouping mechanism to reflect the way in which a product is built, as well as to facilitate the use of common bills of material for engineering and manufacturing. It is used for subassemblies that are typically non-stocked, and permits MRP logic to drive requirements straight through the phantom item to its components. However, the MRP system usually retains its ability to net against any occasional inventories of the item (e.g. if you add an allocation to a phantom manually and then run a Requirements Calculation, existing stock of the phantom will be netted off and a job suggested for the net requirement).
+P - Planning bill indicates that the item is an artificial part used to assist in forecasting. It cannot be stocked, sold, or bought out and is used merely to allow the forecasting of a family of products as an entity. This allows you to generate gross requirements into the MPS or MRP (see the Requirements Planning module) independantly for each member of the family.
+K - Kit part indicates that the stock code represents one item from a group of items which together comprise one manufactured inventory item. Note: If selected here, then at the Kit type field of the Sales tab, you can only select the Kit type and Sub type options.
+C - Co-product. 
+Y - By-product. 
+N - Notional part. 
+Note: It is important that the correct part category is assigned to a stock item as it has different implications when used with other SYSPRO modules.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="K"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PercentageYield">
+		<xsd:annotation>
+			<xsd:documentation>Percentage yield is the percentage of the item that is lost in the manufacturing process so that a shortfall in actual production does not cause an unexpected inability to meet demand on time.
+For example: If a quantity of 10 is required to be manufactured for an item with a yield percentage of 50, then you must schedule 20 in order to meet the demand of 10. This field applies only to MPS items.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Planner">
+		<xsd:annotation>
+			<xsd:documentation>Planner is the person responsible for the production planning of the stock item. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PrcInclGst">
+		<xsd:annotation>
+			<xsd:documentation>GST included in price flag indicates whether the calculated tax amount must be included in the price of the item during sales order processing (Y - Yes, N - No). This is only required if your nationality code is defined as CAN (System Setup) and you indicated that the Canadian GST system is required (Tax Options Setup).
+Note: If you do not assign default tax codes to a stock item, then SYSPRO assumes that the item is exempt from tax. In addition, however, if you select the Canadian GST required and Tax by geographic area options (Tax Options Setup) SYSPRO disregards the tax code assigned to the geographic area when calculating tax for that item on a sales order.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value=" "/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceCategory">
+		<xsd:annotation>
+			<xsd:documentation>Pricing category is the price or discount entry associated with the item if extended pricing is in use.
+With extended pricing, the price of a stock item is established by matching the stock item's Price category to a position in the customer's Price category/code table (Customer Setup).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="A"/>
+				<xsd:enumeration value="B"/>
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="E"/>
+				<xsd:enumeration value="F"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value="H"/>
+				<xsd:enumeration value="I"/>
+				<xsd:enumeration value="J"/>
+				<xsd:enumeration value="K"/>
+				<xsd:enumeration value="L"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="O"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="Q"/>
+				<xsd:enumeration value="R"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="T"/>
+				<xsd:enumeration value="U"/>
+				<xsd:enumeration value="V"/>
+				<xsd:enumeration value="W"/>
+				<xsd:enumeration value="X"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="Z"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceMethod">
+		<xsd:annotation>
+			<xsd:documentation>Pricing method descibes how the customer's price code is to be used against this item. The options are as follows: 
+C - Coded means that the customer's price code must be used to determine the price code for the stock item.
+D - Discounted means that the customer's price code must be used to determine which entry in the discount table must be applied to the first selling price of the stock item.
+Q - Quantity discounted means that the customer's price code must be used according to the quantity discount breaks defined for the price code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="C"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="Q"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PriceType">
+		<xsd:annotation>
+			<xsd:documentation>This element defines the type of price grouping relevant to this item and is used by the TPM module. If entered, then it must be a valid TPM price type - 'S' - stock code, 'P' - Product class, 'D' - Department, 'G' - Product group.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="S"/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="D"/>
+				<xsd:enumeration value="G"/>
+				<xsd:enumeration value=""/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProductClass">
+		<xsd:annotation>
+			<xsd:documentation>Product class is the category to which the item is assigned. It is used for reporting purposes (Sales Analysis) and as a method of defining your integration to the General Ledger module.
+Note: Although a product class must be assigned to a stock item, your entry is validated only at the time of generating a sales order.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ProductGroup">
+		<xsd:annotation>
+			<xsd:documentation>This element defines the product group to which this item belongs, and is used by the TPM module. If entered, then it must be a valid TPM product group code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Release">
+		<xsd:annotation>
+			<xsd:documentation>Release indicates minor design changes to the stock item (Release).
+Note: You will be unable to access this field if the item is ECC controlled and engineering changes are being controlled at stock code or revision level (Bill of Materials Setup).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ResourceCode">
+		<xsd:annotation>
+			<xsd:documentation>Resource code is the parent of a resource structure of critical resources for the stock code. It is the default resource parent which can be changed within the Build Schedule Maintenance program. 
+This resource parent is applied only to new build schedules; existing build schedules must be maintained to reflect the resource parent.
+This is used by the Resource Planning system.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ReturnableItem" default="N">
+		<xsd:annotation>
+			<xsd:documentation>Returnable item flag. Set to 'Y' if this stock code is a returnable stock item. Defaults to 'N'. A stock code cannot be set to returnable if it is traceable, serialized, ECC-controlled, has Unit Quantity processing switched on, is part of a kit or has decimals. Valid values are 'N' or 'Y'.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value=" "/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SerEntryAtSale">
+		<xsd:annotation>
+			<xsd:documentation>Capture and record serial numbers at the time of placing an order for a serialized item, or at the time of receipting a serialized item into stock. (Y - Capture serials at time of placing order)
+Note: Serial numbers for traceable items are recorded only at the time of processing a receipt. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value=""/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SerialMethod">
+		<xsd:annotation>
+			<xsd:documentation>Serial tracking method flag indicates the serial tracking method to use for the stock item if serial tracking is installed. Settings are as follows: 
+N - No serial tracking.
+M - Manual indicates that a unique serial number must be allocated against each individual item.
+B - Batch indicates that a unique serial number is allocated to a batch of items.
+Note: Stock items cannot be serialized if it is flagged as one, or more, of the following: Temporary stock item (ClearingFlag = "T"), Kit type is "K" or "S" (KitType = K or S), Bulk issue or Floorstock (BulkIssueFlag = "Y" or "F") or Unit quantity processing is set (StockAndAltUm = "Y") and the serial tracking method is manual.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="M"/>
+				<xsd:enumeration value="B"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SerialPrefix">
+		<xsd:annotation>
+			<xsd:documentation>Serial Prefix may be used if stock code is manual serialized, serial key type is alphanumeric and serial suffix is defined at stock code level. Serial Prefix may not contain leading spaces.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SerialSuffix">
+		<xsd:annotation>
+			<xsd:documentation>Serial Suffix may be used if stock code is manual serialized, serial key type is alphanumeric and serial suffix is defined at stock code level. Serial suffix must only contain numeric characters.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ShelfLife">
+		<xsd:annotation>
+			<xsd:documentation>Shelf life (in days) of the stock item. It is used to calculate the expiry date of a traceable item and is used when performing a Two-stage Receipt of the item into stock.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SpecificGravity">
+		<xsd:annotation>
+			<xsd:documentation>Specific gravity of an item. It is for documentary purposes only.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockAndAltUm">
+		<xsd:annotation>
+			<xsd:documentation>Unit quantity processing flag indicates that the integer portion of the quantity of this item is always expressed as whole numbers of the stocking unit of measure, and the decimal portion as whole numbers of the alternate unit of measure. e.g 10.5 is 10/06. When there are 12 alternates to 1 stocking.
+ (N - No, Y - Yes).
+Note: If Yes then following must apply:
+1. The stocking unit of measure (StockUom)  must differ from the alternate unit of measure (AlternateUom), and  the conversion factor (ConvFactAltUom) must be a whole number and the conversion method (ConvMulDiv) must be divide.
+2. The stocking item must not be attached to any other item that is not a planning bill part.
+3. The item cannot be manual serialized.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockCode">
+		<xsd:annotation>
+			<xsd:documentation>Stock code being maintained.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockMovementReq">
+		<xsd:annotation>
+			<xsd:documentation>Stock movement required flag indicates whether you want to store on file all transaction movements processed against the stock item (Y - Yes, N - No).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockOnHold">
+		<xsd:annotation>
+			<xsd:documentation>Hold status flag indicates whether or not the stock item is on hold or not. 
+Settings are as follows:
+Space - No hold
+P - Partial hold limit the transactions that can be processed against a stock item to: moving it from back order to ship (Order Entry) or issuing the item (Inventory Movements).
+F - Full hold prevent any transactions from being processed against a stock item. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value=""/>
+				<xsd:enumeration value="P"/>
+				<xsd:enumeration value="F"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockOnHoldReason">
+		<xsd:annotation>
+			<xsd:documentation>Reason code for hold status is the reason for changing the hold status on a stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="StockUom">
+		<xsd:annotation>
+			<xsd:documentation>Stocking unit of measure is the unit of measure in which the stock item is held on file. Note: A stocking unit of measure entry must be assigned to a stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SupercessionDate">
+		<xsd:annotation>
+			<xsd:documentation>Date of supersession is the date on which the stock item should no longer be sold. Zero indicates no supersession date. The format is CCYY-MM-DD.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="SupplementaryUnit">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether supplementary units apply to the entry made at the Tariff code field and is printed on the Supplementary Declaration - Despatches report for items sold to an EC country (Y - Yes, N - No). 
+Note: This is only relevent if the EC VAT system is in use.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="Y"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Supplier">
+		<xsd:annotation>
+			<xsd:documentation>Supplier from whom you purchase the stock item if it is bought out.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TariffCode">
+		<xsd:annotation>
+			<xsd:documentation>Tariff code for the stock item. This is used in the Landed Cost Tracking system to determine the duty rate applicable to an imported item. 
+The tariff code is also used in the EC VAT system to determine the tax rates to be used for items sold across EC borders. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TaxCode">
+		<xsd:annotation>
+			<xsd:documentation>Tax code against which the tax percentage applicable to the stock item is held.When using Descriptive Tax Codes, a descriptive tax code must be provided.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TraceableType">
+		<xsd:annotation>
+			<xsd:documentation>Lot traceable flag indicates whether the stock item is traceable or not. Settings are as follows:
+N - Non traceable indicates that the stock item is neither traceable nor requires inspection.
+T - Traceable indicates that the item is traceable and also requires an inspection phase when processing a purchase order receipt for the item. 
+I - Inspection required indicates that an inspection phase is required when processing a purchase order receipt for the item.
+Note: Stock items cannot be traceable if Lot Traceability is not installed or if it is flagged as one, or more, of the following: 
+Temporary stock item (ClearingFlag = "T"), 
+Kit type is "K" or "S" (KitType = K or S), 
+Bulk issue or Floorstock (BulkIssueFlag = "Y" or "F").</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="T"/>
+				<xsd:enumeration value="I"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InspectionFlag">
+		<xsd:annotation>
+			<xsd:documentation>Inspection flag may be used if stock code is traceable. It indicates whether the stock code requires inspection, does not require inspection or requires inspection of a sample quantity only. Valid values are 'Y', 'N' or 'P' which will prompt the user for the sample quantity to be inspected. Default is 'Y' for traceable stock items..</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+				<xsd:enumeration value="Y"/>
+				<xsd:enumeration value="N"/>
+				<xsd:enumeration value="P"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField1">
+		<xsd:annotation>
+			<xsd:documentation>This is an alphanumeric user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField2">
+		<xsd:annotation>
+			<xsd:documentation>This is a positive or negative numeric user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField3">
+		<xsd:annotation>
+			<xsd:documentation>This is an alphanumeric user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField4">
+		<xsd:annotation>
+			<xsd:documentation>This is an alphanumeric user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UserField5">
+		<xsd:annotation>
+			<xsd:documentation>This is an alphanumeric user defined field.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="VariableOverhead">
+		<xsd:annotation>
+			<xsd:documentation>BOM variable overhead is the total cost of all variable overheads for items included in the stock item's structure.
+This is updated for all parent parts by the Bill of Materials Cost Implosion program.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Version">
+		<xsd:annotation>
+			<xsd:documentation>Revision indicates major design changes made to the stock item (Revision).
+Note: You will be unable to access this field if the item is ECC controlled and engineering changes are being controlled at stock code level (Bill of Materials Setup).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Volume">
+		<xsd:annotation>
+			<xsd:documentation>Volume per stocking unit is the volume of a single unit of the stock item in the stocking unit of measure. It is used for reporting and query purposes. In addition, the stock unit volume, the order line volume and total volume can be printed on delivery notes and invoices.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string"/>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WarehouseToUse">
+		<xsd:annotation>
+			<xsd:documentation>Warehouse to use is the warehouse that must be used to extract the quantities of stock required by the Bill of Materials module when performing functions such as a cost implosion and creating material allocations. 
+This is also the default warehouse used for the parent when adding a job and is used to calculate the new landed cost of an item. 
+Note: If you are using the full Goods in Transit transfers facility then the warehouse to use defaults to being the top level warehouse for the item. You will be unable to specify a warehouse to use if it is supplied by another warehouse.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="WipCtlGlCode">
+		<xsd:annotation>
+			<xsd:documentation>WIP ledger control account is the default account to which you want to post the value of work in progress when a job is created for this stock item. 
+If not defined against the stock item, then the Work in Progress GL control account (General Ledger Integration Setup) is used as the default instead. However, at the time of creating the job (Job Maintenance) the ledger code entered at the WIP ledger code field overrides these defaults.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="JobClassification">
+		<xsd:annotation>
+			<xsd:documentation>JobClassification is the default job class which you want to use in work in progress when maintaining jobs for this stock item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ManufactureUom">
+		<xsd:annotation>
+			<xsd:documentation>Manufacturing unit of measure</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ConvFactMuM">
+		<xsd:annotation>
+			<xsd:documentation>Manufacture to stocking factor</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="ManMulDiv">
+		<xsd:annotation>
+			<xsd:documentation>Manufacture to stocking factor code, D - Divide, M - Multiply</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:whiteSpace value="preserve"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+</xsd:schema>

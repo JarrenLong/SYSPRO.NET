@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2015 SYSPRO Ltd.-->
+<!-- 
+     Schema for the Counter Sales Payment Type Maintenance Business Object Setup
+-->
+<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="AllowChange" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Allow Change. It is mandatory. Y - Yes, N - No (Default) Can only be set to "Y" if credit card is set to "N"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="AllowOverpay" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Allow Overpay Invoice. It is mandatory. Y - Yes, N - No (Default). It can only be set to "Y" if Allow Change is set to "N".</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ArPayType" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the AR payment types. It is mandatory. CA - Cash (Default), CH - Check, OT - Other</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Bank" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Bank. It is mandatory. It is only mandatory if deposit in Bank is set to "Y".</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CommissionPct" type="xsd:byte">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Commision percentage. It is mandatory. 0 (Default) Will only store a higher number than 0 if Credit Card is set to "Y"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CreditCard" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Credit Card. It is mandatory. Y - Yes, N - No (Default)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Currency" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Currency. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DepositInBank" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Deposit in Bank. Y - Yes N - No (Default) It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Description" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Description of the Payment type. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="FullPayment" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Full payment. It is mandatory. Y - Yes, N - No (Default)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item">
+    <xsd:annotation>
+      <xsd:documentation>This is the sub root node,  it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Key"/>
+        <xsd:element ref="Description"/>
+        <xsd:element ref="Currency"/>
+        <xsd:element ref="DepositInBank"/>
+        <xsd:element ref="Bank"/>
+        <xsd:element ref="ArPayType"/>
+        <xsd:element ref="ReqDepositSlip"/>
+        <xsd:element ref="FullPayment"/>
+        <xsd:element ref="AllowChange"/>
+        <xsd:element ref="AllowOverpay"/>
+        <xsd:element ref="ReqReference"/>
+        <xsd:element ref="ReqNotation"/>
+        <xsd:element ref="CreditCard"/>
+        <xsd:element ref="CommissionPct"/>
+        <xsd:element ref="ReqCreditCard"/>
+        <xsd:element ref="MinValueAuth"/>
+        <xsd:element ref="ReqStartDate"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Key">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PaymentType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="MinValueAuth" type="xsd:boolean">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the minimum value for authorization. It is mandatory. 0 (Default) Will only store a higher number than 0 if Credit Card is set to "Y" and ReqCreditCard is set to "Y"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="PaymentType" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Payment type. It is the key. It is mandatory.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReqCreditCard" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Request Credit card number, expiry, authorization. It is mandatory. Y - Yes, N - No (Default) Can only be set to "Y" if Credit Card is set to "Y"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReqDepositSlip" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Request bank deposit slip details. Y - Yes, N - No (Default), It is mandatory. It can only be set to "Y" if AR payment types is set to CH.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReqNotation" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Request journal notaion. It is mandatory. Y - Yes, N - No (Default)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReqReference" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the Request statement refrence. It is mandatory. Y - Yes, N - No (Default)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ReqStartDate" type="xsd:string">
+    <xsd:annotation>
+      <xsd:documentation>This element contains information about the request start date. It is mandatory. Y - Yes, N - No (Default). can only be set to "Y" if Credit Card is set to "Y" and ReqCreditCard is set to "Y"</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SetupCounterSalesPayTypeMaint">
+    <xsd:annotation>
+      <xsd:documentation>This is the root node, it is mandatory.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Item"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

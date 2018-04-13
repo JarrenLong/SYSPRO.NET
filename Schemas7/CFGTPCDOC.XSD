@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- Copyright 1994-2014 SYSPRO Ltd.-->
+<!--
+     Schema used for the Product Configurator Start Phase
+-->
+<xsd:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="PostConfiguration">
+    <xsd:annotation>
+      <xsd:documentation>This is the root element.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType mixed="false">
+      <xsd:sequence>
+        <xsd:element name="Item">
+          <xsd:annotation>
+            <xsd:documentation>This is the top element for all data required for the transaction.</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType mixed="false">
+            <xsd:all>
+              <xsd:element name="CallSource">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the source from which you are accessing the configurator. The possible values are T- testmode which allows  you to test the configuration to make sure it is functioning correctly, S - (Sales orders) which allows to create/maintain a sales order for a configured product, Q- (Quotes) which allows you to create/maintain a quote for a configured product, B - (BOM) which allows you to create a structure parent for a configured product,  b - (BOM) which allows you to maintain an existing structure through a configuration, E - (Estimates) which allows you to created an estimate parent for a configured product, e - (Estimates) which allows you to maintain an existing estimate through a configuration, W - (WIP) which allows you to create a job for a configured item. In addition when the callsource is  S - (Sales Orders), If the option to create a stocked parent was selected when defining the configuration, you can create a job and/or bill of materials for the item. If the option to create a non-stocked parent was selected, you can create a job or estimate for the item.  When the call source is Q - (Quotes). If the option to create a stocked parent was selected when defining the configuration, you will create a bill of materials for the parent. If the option to create a non-stocked parent was selected, you will create an estimate for the parent.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="T"/>
+                    <xsd:enumeration value="S"/>
+                    <xsd:enumeration value="Q"/>
+                    <xsd:enumeration value="B"/>
+                    <xsd:enumeration value="b"/>
+                    <xsd:enumeration value="E"/>
+                    <xsd:enumeration value="e"/>
+                    <xsd:enumeration value="W"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="ProductCode">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the configuration you wish to run. This element is mandatory.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Password" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>If running a configuration and a password is required to allow this, this element must contain the relevant password.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Date" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Date of configuration. If not supplied, company date is assumed. This element is mandatory when the element ForceShipDate is Y and the callsource is S - (Sales Orders) and the order type is (SCH) or (FWD) or when the callsource is Q - (Quotes). </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Quantity" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the quantity of the product required. This quantity is used to calculate the component quantities and the time or value required for operations. This element is only applicable if you have selected the Ask quantity required option when defining the configuration.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="OverrideComponentWh" default="N" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates whether you want to be able to use a warehouse other than the default warehouse assigned to the component. This element is only applicable if you have selected the Ask warehouse option when defining the configuration. Possible values are N and Y. This element defaults to N.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                    <xsd:enumeration value="N"/>
+                    <xsd:enumeration value="Y"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Warehouse" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates the warehouse from which you want to draw the components for a product. This element will only be applicable if you have selected the Ask warehouse and Override components warehouse to use options when defining the configuration.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LibraryCode" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element indicates a library code of the configuration you wish to run. Configuration libraries enable you to store product configurations which are used repeatedly.This element is only applicable when retaining libraries.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:whiteSpace value="preserve"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="SalesOrdersAndQuotes" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element holds information for creating or maintaining a sales order/quote. This element is only applicable when the callsource is S - (Sales Orders) or Q - (Quotes). </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element name="NewSalesOrderQuote" default="Y" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether you are creating a new sales order or quote and is only applicable when the callsource is S - (Sales Orders) or Q - (Quotes)</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="Y"/>
+                          <xsd:enumeration value="N"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SalesOrder" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the sales order number you wish to maintain. This element is only applicable when the callsource is S - (Sales Orders) and you are maintaining an existing sales order or you are creating a new sales order and you are using manual sales order numbering.The format is alphanumeric or numeric field depending on the key configuration option for sales orders within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Quote" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the quotation number. The format is alphanumeric or numeric depending on the key configuration option for quotations within SYSPRO. The quote is only required when the source is Q  - (Quotes). The quotation number will be ignored when adding a new quotation and automatic numbering has been selected in the quotation set-up within SYSPRO. The quotation number is mandatory when maintaining an existing quote or manual quotation numbering is in use.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CustomerPoNumber" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the reference number assigned to an invoice produced for the customer.This element is required when the callsource is S - (Sales Orders) and a new sales order is being created or when the callsource is Q - (Quotes) and a new quote is being created.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="TypeOfOrder" default="ORD" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates which type of order to create. The possible values are ORD - normal order, FWD - forward order, SCH - scheduled order, IBT - inter branch transfer, BIL - billing, SCT - supply chaing transfer (only applicable when goods in transit is installed). The default is ORD. This element is only applicable when the callsource is S - (Sales Orders).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="ORD"/>
+                          <xsd:enumeration value="FWD"/>
+                          <xsd:enumeration value="SCH"/>
+                          <xsd:enumeration value="IBT"/>
+                          <xsd:enumeration value="BIL"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Customer" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the customer code. The customer code is required when the call source is S - (SalesOrders) and a new sales order is being created and is optional when the call source is Q- (Quotes) and a new quote is  being created. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="FixExchangeRate" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This option enables you to change the fixed exchange rate for a quotation. This is only applicable when a foreign currency has been specified and when the callsource is Q - (Quotes) and a new quote is being created.  The possible values are N and Y. This element defaults to N.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ExchangeRate" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the exchange rate. This is only applicable when the quotation has been flagged as using a fixed exchange rate and when the callsource is Q - (Quotes) and a new quote is being created.Default to exchange rate stored against the currency.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="WarnZeroPrice" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether a zero price warning message should be output when a component line has a zero price. This element is only applicable when the call source is S - (Sales Orders) or Q - (Quotes).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ForceShipDate" default="N" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates whether a configuration dates needs to be supplied or not. This is only applicable when the callsource is S - (Sales Orders) and the order type is (SCH) or (FWD) or when the callsource is Q - (Quotes). </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                          <xsd:enumeration value="N"/>
+                          <xsd:enumeration value="Y"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CurrentOrderValue" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the current value of an existing sales order which you are maintaining through a configuration.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="AlternateReference" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This is the alternate key to be used when creating a sales order or quote. It must comply with the type of default alternate key defined in Sales Orders Setup (i.e. Branch, Geographic Area or Warehouse). If Alternate Key is mandatory and this element is not supplied, the alternate key will be set to the default alternate key. If there is no default, it will be rejected. This element is only applicable when the call source is S - (Sales Orders) or Q - (Quotes).</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SourceWarehouse" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Source warehouse to be used when creating an SCT order.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="TargetWarehouse" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>Target warehouse to be used when creating an SCT.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="ShippingInstrs" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This contains any shipping instructions that are to be placed against the order. If the SYSPRO option to use coded shipping instructions is in use and the element contains one or two characters, then the table of Shipping Instructions in SYSPRO is read, and the description if found is added to the code.  This element is only applicable when creating an SCT.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SpecialInstrs" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This contains any special instructions that are to be placed against the order. This element is only applicable when creating an SCT.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="BillOfMaterialsAndEstimates" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>This element contains the information which needs to be supplied to enable you to attach components to a parent part when running the configurator from BOM/Estimates. This element is only valid when the callsource is b - bom details or e - estimate details</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType mixed="false">
+                  <xsd:all minOccurs="0">
+                    <xsd:element name="StockCode" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element indicates the parent of the structure/estimate you wish to maintain when running the configurator from BOM/Estimates ie when the call source is b - (bom details) or e - (estimate details). When the callsource is b - (bom details) the parent must be stocked and when the callsource is e - (estimate details) the parent must be non-stocked. The format is alphanumeric or numeric depending on the configuration option within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Route" minOccurs="0">
+                      <xsd:annotation>
+                        <xsd:documentation>This element enables you to select a specific routing for which you want to maintain structures/estimates.  This element is only applicable when the callsource is b - (bom details) or e -(estimate details). If from b - (bom details) the element is also only required when alternate routings has been selected which is set in the BOM setup program within SYSPRO.</xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:whiteSpace value="preserve"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                  </xsd:all>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:all>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
