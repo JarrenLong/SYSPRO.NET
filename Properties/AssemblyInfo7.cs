@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SYSPRO.NET")]
-[assembly: AssemblyCopyright("Copyright © Travis Pattern and Foundry 2015")]
+[assembly: AssemblyCopyright("Copyright © Cyanide Software, Inc. 2024. Books N' Bytes, Inc. 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
